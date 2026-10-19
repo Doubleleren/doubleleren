@@ -32,8 +32,13 @@ $geheim = Read-DlGeheim $geheimPad
 function Save-Geheim { Save-DlGeheim $geheimPad $script:geheim }
 function GenPrive { if (-not $geheim.generatorPrive) { throw 'Geen beheersleutel: draai eerst -Init' }; $geheim.generatorPrive }
 function Vertrouwd { $p = GenPrive; [pscustomobject]@{ kty = 'RSA'; n = $p.n; e = $p.e } }
+. (Join-Path $PSScriptRoot 'kloon.ps1')
+$script:kloon = $null
 function DataOpslag {
     if ($DataMap) { return (New-DlOpslag -Map $DataMap) }
+    # Voorkeur: lokale git-kopie met je git-inlog (geen beheertoken nodig); wijzigingen worden aan het eind gepusht
+    $k = Get-DlKloon $Thuis
+    if ($k) { Update-DlKloon $k; $script:kloon = $k; return (New-DlOpslag -Map $k) }
     if (-not $geheim.token) { throw 'Geen beheertoken: draai eerst -Init' }
     New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token
 }
@@ -240,3 +245,5 @@ if ($Controleer) {
         Write-Host ("{0,-30} {1,-20} {2,-22} {3}" -f (Naam $id), $rolTekst, $plek, ($kijkers -join ', '))
     }
 }
+
+if ($script:kloon) { Push-DlKloon $script:kloon }

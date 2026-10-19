@@ -10,7 +10,10 @@ if (-not $Thuis) { $Thuis = Join-Path (Get-DlThuis) 'beheer' }
 if (-not $Map) { $Map = Join-Path $Thuis 'generator' }
 try {
     $geheim = Read-DlGeheim (Join-Path $Thuis 'beheer.dpapi'); if (-not $geheim) { throw 'Geen beheergeheimen: draai beheer.ps1 -Init' }
-    $d = if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }
+    . (Join-Path $PSScriptRoot 'kloon.ps1')
+    $kloon = $null
+    if (-not $DataMap) { $kloon = Get-DlKloon $Thuis; if ($kloon) { Update-DlKloon $kloon; $DataMap = $kloon } }
+    $d =if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }
     $V = [pscustomobject]@{ kty = 'RSA'; n = $geheim.generatorPrive.n; e = $geheim.generatorPrive.e }
 
     # 1. Elke les controleren: verplichte velden, lengtes en alleen https-bronnen (lessen gaan naar alle laptops)
@@ -45,6 +48,7 @@ try {
         Write-DlVersleuteld $d $id 'wachtrij' $s $nieuw $(if ($b) { $b.sha }) 'generator' $geheim.generatorPrive | Out-Null
         Write-Host "  $id`: $($lijst.Count) les(sen) klaargezet"
     }
+    if ($kloon) { Push-DlKloon $kloon; Write-Host 'Wachtrijen verstuurd naar de data-repo.' }
     if ($Push) { Push-Location $App; try { git add -A lessen; git commit -q -m 'Lessen bijgewerkt' 2>$null; git push -q } finally { Pop-Location } }
 }
 finally {

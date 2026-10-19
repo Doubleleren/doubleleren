@@ -13,7 +13,9 @@ New-Item -ItemType Directory $Uit -Force | Out-Null
 $pad = Join-Path $Uit 'context.json'
 Remove-Item $pad -ErrorAction SilentlyContinue        # restant van een eerder afgebroken run
 $geheim = Read-DlGeheim (Join-Path $Thuis 'beheer.dpapi'); if (-not $geheim) { throw 'Geen beheergeheimen: draai beheer.ps1 -Init' }
-$d = if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }
+. (Join-Path $PSScriptRoot 'kloon.ps1')
+if (-not $DataMap) { $k = Get-DlKloon $Thuis; if ($k) { Update-DlKloon $k; $DataMap = $k } }
+$d =if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }
 $V = [pscustomobject]@{ kty = 'RSA'; n = $geheim.generatorPrive.n; e = $geheim.generatorPrive.e }
 $org = Read-DlBeheer $d 'organisatie.json' $V
 $pub = New-DlSleutelbron $d $V
