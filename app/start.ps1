@@ -23,5 +23,7 @@ if (Test-Path $doel) { Remove-Item $doel -Recurse -Force }
 Move-Item $tmp $doel
 Write-Host "$($paden.Count) bestanden opgehaald."
 if (Test-Path (Join-Path $thuis 'config.json')) { Write-Host 'Bijgewerkt naar de nieuwste versie.'; return }
-Start-Process powershell -ArgumentList "-NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$doel\app\installeer.ps1`""
 Write-Host 'Het installatievenster wordt geopend.'
+# In hetzelfde venster starten (sommige beveiliging blokkeert het openen van een nieuw PowerShell-proces)
+if ([Threading.Thread]::CurrentThread.ApartmentState -ne 'STA') { throw 'Open Windows PowerShell via het Startmenu en probeer het daar opnieuw.' }
+& (Join-Path $doel 'app\installeer.ps1')
