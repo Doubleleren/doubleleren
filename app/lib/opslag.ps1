@@ -5,7 +5,8 @@
 #   Write-DlOpslag $o 'pad' $bytes $b.sha              -> nieuwe sha; gooit 'conflict' als iemand anders er net tussen zat
 
 $script:DlUtf8 = New-Object System.Text.UTF8Encoding($false)
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+# Expliciet TLS 1.2 (+1.3): de standaard van Windows PowerShell 5.1 biedt ook oude protocollen aan, waarop GitHub de verbinding sluit
+try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor [Net.SecurityProtocolType]'Tls13' } catch { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 }
 
 function New-DlOpslag([string]$Eigenaar, [string]$Repo, [string]$Token, [string]$Map, [string]$Auteur = 'doubleleren', [string]$Tak = 'main', [switch]$Raw) {
     if ($Map) { if (-not (Test-Path $Map)) { New-Item -ItemType Directory $Map -Force | Out-Null }; return @{ soort = 'map'; map = (Resolve-Path $Map).Path } }

@@ -1,22 +1,27 @@
-﻿# Eén regel om DoubleLeren te installeren of bij te werken:
+# Een regel om DoubleLeren te installeren of bij te werken:
 #   powershell -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/thijsbol2004/doubleleren/main/app/start.ps1 | iex"
-# Downloadt de nieuwste versie naar %USERPROFILE%\.doubleleren\programma en start de installer.
-# (eigenaar/repo hieronder gelijk houden met instellingen.json)
+# Haalt de benodigde bestanden op via api.github.com (lijst) en raw.githubusercontent.com (inhoud),
+# zet ze in %USERPROFILE%\.doubleleren\programma en start de installer.
+# Bewust zonder BOM en alleen ASCII, zodat 'irm | iex' het goed leest. (eigenaar/repo gelijk houden met instellingen.json)
 $ErrorActionPreference = 'Stop'
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor [Net.SecurityProtocolType]'Tls13' } catch { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 }
 $eigenaar = 'thijsbol2004'; $repo = 'doubleleren'
 $thuis = Join-Path $env:USERPROFILE '.doubleleren'
 $doel = Join-Path $thuis 'programma'
-$zip = Join-Path $env:TEMP "doubleleren-$([guid]::NewGuid()).zip"
-$tmp = $zip -replace '\.zip$', ''
+$tmp = Join-Path $thuis ('download-' + [guid]::NewGuid().ToString('N'))
+$kop = @{ 'User-Agent' = 'DoubleLeren' }
 Write-Host 'DoubleLeren wordt gedownload...'
-Invoke-WebRequest "https://codeload.github.com/$eigenaar/$repo/zip/refs/heads/main" -OutFile $zip -UseBasicParsing
-Expand-Archive $zip $tmp
-$bron = Get-ChildItem $tmp -Directory | Select-Object -First 1
-New-Item -ItemType Directory $thuis -Force | Out-Null
+$boom = Invoke-RestMethod "https://api.github.com/repos/$eigenaar/$repo/git/trees/main?recursive=1" -Headers $kop -UseBasicParsing
+$paden = @($boom.tree | Where-Object { $_.type -eq 'blob' -and ($_.path -eq 'instellingen.json' -or $_.path -like 'app/*' -or $_.path -like 'sjablonen/*') } | ForEach-Object { $_.path })
+if ($paden.Count -lt 5) { throw 'Kon de lijst met bestanden niet ophalen.' }
+foreach ($p in $paden) {
+    $uit = Join-Path $tmp ($p -replace '/', '\')
+    New-Item -ItemType Directory (Split-Path $uit) -Force | Out-Null
+    Invoke-WebRequest "https://raw.githubusercontent.com/$eigenaar/$repo/main/$p" -OutFile $uit -Headers $kop -UseBasicParsing
+}
 if (Test-Path $doel) { Remove-Item $doel -Recurse -Force }
-Move-Item $bron.FullName $doel
-Get-ChildItem $doel -Recurse -File | Unblock-File
-Remove-Item $zip, $tmp -Recurse -Force -ErrorAction SilentlyContinue
+Move-Item $tmp $doel
+Write-Host "$($paden.Count) bestanden opgehaald."
 if (Test-Path (Join-Path $thuis 'config.json')) { Write-Host 'Bijgewerkt naar de nieuwste versie.'; return }
 Start-Process powershell -ArgumentList "-NoProfile -STA -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$doel\app\installeer.ps1`""
+Write-Host 'Het installatievenster wordt geopend.'
