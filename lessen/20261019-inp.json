@@ -1,0 +1,32 @@
+{
+  "id": "20261019-inp",
+  "type": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: INP",
+  "matrix": [
+    "5.2.4",
+    "5.2.5"
+  ],
+  "titel": "Welke Core Web Vital meet hoe snel je site reageert?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant zegt: \"Onze pagina laadt in 1,2 seconde, dus Core Web Vitals zijn prima.\" Klopt dat?",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke Core Web Vital meet de responsiviteit van een pagina op álle interacties tijdens een bezoek?",
+    "opties": [
+      "FID (First Input Delay)",
+      "INP (Interaction to Next Paint)",
+      "TBT (Total Blocking Time)",
+      "CLS (Cumulative Layout Shift)"
+    ],
+    "juist": 1
+  },
+  "uitleg": "Sinds **12 maart 2024** is **INP** de officiële Core Web Vital voor responsiviteit. Het verving FID. FID mat alleen de vertraging vóór de *eerste* interactie. INP kijkt naar (bijna) álle klikken, tikken en toetsaanslagen tijdens het hele bezoek en rapporteert grofweg de traagste.\n\nDe drempels (75e percentiel van echte gebruikersdata uit CrUX):\n- Goed: 200 ms of minder\n- Verbetering nodig: 200 tot 500 ms\n- Slecht: meer dan 500 ms\n\nEen snelle laadtijd zegt dus niets over INP. Een pagina kan in 1,2 seconde laden en toch traag reageren op een klik op 'In winkelwagen' door zware JavaScript, lange taken op de main thread of third-party scripts (chatwidgets, tag managers, A/B-testtools).\n\nTBT is een *lab*-metric in Lighthouse die vaak samenhangt met INP, maar het is geen Core Web Vital.",
+  "kernpunt": "INP (≤ 200 ms) meet hoe snel een pagina reageert op alle interacties, niet hoe snel hij laadt. Boosdoener is meestal JavaScript op de main thread.",
+  "toepassing": "Open PageSpeed Insights voor een productpagina van een klant en kijk naar het INP-blok onder 'Ontdek wat je echte gebruikers ervaren'. Zit het boven 200 ms? Dan heb je meteen een CRO- én SEO-gesprek.",
+  "bron": {
+    "titel": "web.dev: Interaction to Next Paint (INP)",
+    "url": "https://web.dev/articles/inp"
+  },
+  "niveau": "basis"
+}

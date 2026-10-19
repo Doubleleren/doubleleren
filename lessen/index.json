@@ -1,0 +1,114 @@
+{
+    "v":  1,
+    "bijgewerkt":  "2026-10-19T14:10:48",
+    "lessen":  [
+                   {
+                       "id":  "20261019-chatgpt-verkeer-als-direct",
+                       "titel":  "ChatGPT-verkeer −45%? Kijk eerst naar je Direct-kanaal",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "ChatGPT-verkeer verschijnt als Direct in GA4 (attributie AI-verkeer)",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "3.1.2",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "Daalt ChatGPT-verkeer terwijl Direct even hard stijgt, dan is het een trackingprobleem, geen verkeersverlies. Van 8 tot 15 oktober 2026 kwamen ChatGPT-klikken door een bug als Direct binnen in GA4.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: ChatGPT Traffic Drop Appears To Be A Tracking Problem",
+                                    "url":  "https://www.searchenginejournal.com/chatgpt-traffic-drop-appears-to-be-a-tracking-problem/593157/"
+                                },
+                       "soort":  "open"
+                   },
+                   {
+                       "id":  "20261019-inp",
+                       "titel":  "Welke Core Web Vital meet hoe snel je site reageert?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: INP",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.4",
+                                      "5.2.5"
+                                  ],
+                       "kernpunt":  "INP (≤ 200 ms) meet hoe snel een pagina reageert op alle interacties, niet hoe snel hij laadt. Boosdoener is meestal JavaScript op de main thread.",
+                       "bron":  {
+                                    "titel":  "web.dev: Interaction to Next Paint (INP)",
+                                    "url":  "https://web.dev/articles/inp"
+                                },
+                       "soort":  "meerkeuze"
+                   },
+                   {
+                       "id":  "20261019-nep-urgentie",
+                       "titel":  "De countdown-timer die bij elke pageload opnieuw begint",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Urgentie en schaarste: waar ligt de grens?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.3"
+                                  ],
+                       "kernpunt":  "Urgentie en schaarste alleen inzetten als ze echt zijn. Een nep-timer is misleiding: verboden in de EU en slecht voor vertrouwen.",
+                       "bron":  {
+                                    "titel":  "ACM spreekt webshops aan die misleidende countdowntimers gebruiken",
+                                    "url":  "https://www.acm.nl/nl/publicaties/acm-spreekt-webshops-aan-die-misleidende-countdowntimers-gebruiken"
+                                },
+                       "soort":  "open"
+                   },
+                   {
+                       "id":  "20261019-query-fan-out",
+                       "titel":  "Hoe \u0027denkt\u0027 Google AI Mode na over één zoekopdracht?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Query fan-out in AI Mode en AI Overviews",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.3",
+                                      "12.1.4"
+                                  ],
+                       "kernpunt":  "AI-search splitst één vraag op in tientallen deelvragen (fan-out). Win die deelvragen met heldere, zelfstandig leesbare passages.",
+                       "bron":  {
+                                    "titel":  "Google Blog: AI Mode in Search (I/O 2025)",
+                                    "url":  "https://blog.google/products/search/google-search-ai-mode-update/"
+                                },
+                       "soort":  "zoek-op"
+                   },
+                   {
+                       "id":  "20261019-srm",
+                       "titel":  "Sample Ratio Mismatch: de test die stiekem kapot is",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testen: Sample Ratio Mismatch",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.2.1",
+                                      "7.2.2"
+                                  ],
+                       "kernpunt":  "Controleer bij elke A/B-test eerst of de bezoekersverdeling klopt (SRM-check). Pas daarna kijk je naar de conversie.",
+                       "bron":  {
+                                    "titel":  "Lukas Vermeer: SRM Checker",
+                                    "url":  "https://www.lukasvermeer.nl/srm/"
+                                },
+                       "soort":  "meerkeuze"
+                   },
+                   {
+                       "id":  "20261019-striking-distance",
+                       "titel":  "Bouw je eigen \u0027laaghangend fruit\u0027-analyse met Claude",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Striking distance-zoekwoorden met AI vinden",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Striking distance = positie 8–20 met veel vertoningen. Leg criteria en outputformaat vast in een herbruikbare prompt of skill.",
+                       "bron":  {
+                                    "titel":  "Google Search Central: Search Console Performance-rapport",
+                                    "url":  "https://support.google.com/webmasters/answer/7576553"
+                                },
+                       "soort":  "maak-met-claude"
+                   }
+               ]
+}

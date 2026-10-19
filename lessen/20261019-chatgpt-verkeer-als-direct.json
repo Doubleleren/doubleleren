@@ -1,0 +1,29 @@
+{
+  "id": "20261019-chatgpt-verkeer-als-direct",
+  "type": "nieuws",
+  "vakgebied": "Analytics",
+  "onderwerp": "ChatGPT-verkeer verschijnt als Direct in GA4 (attributie AI-verkeer)",
+  "matrix": [
+    "12.1.6",
+    "3.1.2",
+    "3.1.4"
+  ],
+  "titel": "ChatGPT-verkeer −45%? Kijk eerst naar je Direct-kanaal",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een webshopklant mailt je: \"In GA4 is ons verkeer uit ChatGPT sinds 9 oktober bijna gehalveerd. Moeten we onze AI-strategie omgooien?\" Het totale aantal sessies is nauwelijks veranderd.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat is je eerste hypothese, hoe toets je die in GA4, en wat adviseer je de klant voor de rapportage van de komende maanden?",
+    "minTekens": 120,
+    "hint": "Als verkeer uit het ene kanaal verdwijnt, waar komt het dan terecht wanneer er geen referrer en geen UTM-tag meer meekomt?"
+  },
+  "modelantwoord": "Hypothese: geen echte daling maar een attributieprobleem. Als een link geen referrer en geen utm_source meer meestuurt, boekt GA4 het bezoek als Direct. Toetsen: zet ChatGPT-sessies en Direct-sessies per dag naast elkaar vanaf begin oktober, en filter op de landingspagina's die eerder veel ChatGPT-verkeer kregen (vaak de homepage). Stijgt Direct ongeveer evenveel als ChatGPT daalt, dan is het tracking. Advies: zet een annotatie op 8–15 oktober 2026, vergelijk AI-verkeer niet met die week, en rapporteer AI-verkeer voortaan als bandbreedte (ChatGPT-sessies plus een deel van de 'verdachte' Direct-groei), niet als hard getal.",
+  "uitleg": "Vanaf 8 oktober 2026, rond de uitrol van GPT-6, zette ChatGPT bij links in de antwoordtekst geen **utm_source=chatgpt.com** meer en stuurde het ook geen referrer mee. Links in het bronnenpaneel en shoppinglinks hielden hun tag wel. Gevolg: klikken uit ChatGPT kwamen in GA4 binnen als **Direct**.\n\nDe cijfers waren fors. Graphite zag 22 tot 57% minder ChatGPT-sessies, en Adobe zag op circa 500 pagina's zo'n 31.000 ChatGPT-bezoeken per dag verdwijnen terwijl Direct met ongeveer 26.000 per dag steeg. Volgens Adobe's Cedric Huesler bevestigde OpenAI hem op 14 oktober dat het een bug was; de fix rolde vanaf 15 oktober uit. OpenAI zelf heeft er publiekelijk niets over gezegd.\n\nDe les reikt verder dan deze ene bug:\n- AI-verkeer meten leunt op signalen die het platform zelf bepaalt. Eén productwijziging en je kanaal 'verdwijnt'.\n- Ook zonder bug mis je een deel: verkeer uit apps, gekopieerde URL's en links zonder tag belandt altijd al in Direct.\n- Een daling in één kanaal zonder daling in het totaal is bijna altijd eerst een attributievraag, geen prestatievraag.\n\nBekijk daarom AI-verkeer nooit los: zet het naast Direct, kijk naar landingspagina's (Rudzki van Peec AI zag dat 54% van de ongetagde links naar homepages wees) en annoteer bekende trackingstoringen.",
+  "kernpunt": "Daalt ChatGPT-verkeer terwijl Direct even hard stijgt, dan is het een trackingprobleem, geen verkeersverlies. Van 8 tot 15 oktober 2026 kwamen ChatGPT-klikken door een bug als Direct binnen in GA4.",
+  "toepassing": "Zet deze week bij je belangrijkste klanten een GA4-annotatie op 8–15 oktober 2026 en maak een verkenning met ChatGPT- en Direct-sessies per dag naast elkaar, zodat niemand die week als echte daling rapporteert.",
+  "bron": {
+    "titel": "Search Engine Journal: ChatGPT Traffic Drop Appears To Be A Tracking Problem",
+    "url": "https://www.searchenginejournal.com/chatgpt-traffic-drop-appears-to-be-a-tracking-problem/593157/"
+  },
+  "niveau": "basis"
+}

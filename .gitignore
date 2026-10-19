@@ -1,0 +1,12 @@
+# Nooit publiceren
+.claude/
+*.dpapi
+context.json
+wachtrijen.json
+uitnodigingen.md
+fouten.log
+status.json
+wachtend/
+*.xlsx
+lokaal/
+node_modules/

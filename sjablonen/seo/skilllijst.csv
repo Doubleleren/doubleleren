@@ -1,0 +1,145 @@
+id;hoofdgebied;onderwerp;context;vaardigheid;notitie
+1.1.1;Crawling & Indexation;Crawl Budget;Begrijpen hoe je inefficiënt gebruik van crawl budget kan inzien en verbeteren;met Search Console;
+1.1.2;Crawling & Indexation;Crawl Budget;Begrijpen hoe je inefficiënt gebruik van crawl budget kan inzien en verbeteren;met Screaming Frog;
+1.1.3;Crawling & Indexation;Crawl Budget;Begrijpen hoe je inefficiënt gebruik van crawl budget kan inzien en verbeteren;met server log-analyse;
+1.1.4;Crawling & Indexation;Crawl Budget;In staat zijn om mogelijke crawlability-problemen op te sporen, met;Screaming Frog;
+1.1.5;Crawling & Indexation;Crawl Budget;In staat zijn om mogelijke crawlability-problemen op te sporen, met;Google Search Console-rapporten;
+1.1.6;Crawling & Indexation;Crawl Budget;In staat zijn om mogelijke crawlability-problemen op te sporen, met;crawlen als Googlebot;
+1.1.7;Crawling & Indexation;Crawl Budget;In staat zijn om mogelijke crawlability-problemen op te sporen, met;robots.txt-controle (GSC);Let op: in GSC is dit nu het robots.txt-rapport (de oude tester is eind 2023 vervangen).
+1.1.8;Crawling & Indexation;Crawl Budget;Begrijpen hoe je een crawl beperkt/stuurt met;robots.txt-instructies (toevoegen/verwijderen van instructies);
+1.1.9;Crawling & Indexation;Crawl Budget;Begrijpen hoe je een crawl beperkt/stuurt met;links verbergen met JavaScript;
+1.1.10;Crawling & Indexation;Crawl Budget;Begrijpen hoe je een crawl beperkt/stuurt met;informatiearchitectuur & sitestructuur;
+1.1.11;Crawling & Indexation;Crawl Budget;Begrijpen hoe je een crawl beperkt/stuurt met;sitemaps;
+1.2.1;Crawling & Indexation;Information Architecture;Begrijpen hoe je het volgende herkent;orphaned pages;
+1.2.2;Crawling & Indexation;Information Architecture;Begrijpen hoe je het volgende herkent;de crawl depth van een site;
+1.2.3;Crawling & Indexation;Information Architecture;Begrijpen hoe je het volgende herkent;cannibaliserende pagina's;
+1.2.4;Crawling & Indexation;Information Architecture;In staat zijn om te controleren en advies te geven over;een site met faceted navigation;
+1.2.5;Crawling & Indexation;Information Architecture;In staat zijn om te controleren en advies te geven over;de navigatie van een site;
+1.2.6;Crawling & Indexation;Information Architecture;In staat zijn om te controleren en advies te geven over;de interne linkstructuur van een site;
+1.3.1;Crawling & Indexation;Indexation Directives;Begrijpen waarvoor het volgende wordt gebruikt;INDEX/noindex-tag;
+1.3.2;Crawling & Indexation;Indexation Directives;Begrijpen waarvoor het volgende wordt gebruikt;follow/nofollow-tag;
+1.3.3;Crawling & Indexation;Indexation Directives;Begrijpen waarvoor het volgende wordt gebruikt;rel=canonical;
+1.3.4;Crawling & Indexation;Indexation Directives;Begrijpen waarvoor het volgende wordt gebruikt;rel=next en =prev;Verouderd: Google gebruikt rel=prev/next niet meer (bevestigd maart 2019). Les: hoe Google paginering nu behandelt.
+1.3.5;Crawling & Indexation;Indexation Directives;Begrijpen waarvoor het volgende wordt gebruikt;hreflang-tags;
+1.3.6;Crawling & Indexation;Indexation Directives;Begrijpen waarvoor het volgende wordt gebruikt;robots.txt-directives;
+1.4.1;Crawling & Indexation;Sitemaps begrijpen;Begrip van sitemaps om;problemen met huidige sitemaps te identificeren;
+1.4.2;Crawling & Indexation;Sitemaps begrijpen;Begrip van sitemaps om;adviseren over het gebruik van sitemaps voor meer inzicht;
+1.4.3;Crawling & Indexation;Sitemaps begrijpen;Begrip van sitemaps om;weten hoe je 'speciale' sitemaps gebruikt: news, video, etc;
+1.4.4;Crawling & Indexation;Sitemaps begrijpen;Begrip van sitemaps om;het verschil in gebruik tussen HTML- en XML-sitemaps uitleggen;
+1.5.1;Crawling & Indexation;Search Console Crawl- en Index-rapporten en -tools;Begrijpen hoe je GSC Crawl- en Index-rapporten & -tools leest en er inzicht uit haalt;Index Status;Verouderd: Index Status heet nu het rapport Pagina-indexering.
+1.5.2;Crawling & Indexation;Search Console Crawl- en Index-rapporten en -tools;Begrijpen hoe je GSC Crawl- en Index-rapporten & -tools leest en er inzicht uit haalt;Remove URLs;Heet nu de tool Verwijderingen (Removals) in Search Console.
+1.5.3;Crawling & Indexation;Search Console Crawl- en Index-rapporten en -tools;Begrijpen hoe je GSC Crawl- en Index-rapporten & -tools leest en er inzicht uit haalt;crawl Errors;Verouderd: het oude Crawl Errors-rapport is opgegaan in het rapport Pagina-indexering.
+1.5.4;Crawling & Indexation;Search Console Crawl- en Index-rapporten en -tools;Begrijpen hoe je GSC Crawl- en Index-rapporten & -tools leest en er inzicht uit haalt;crawl Stats;
+1.5.5;Crawling & Indexation;Search Console Crawl- en Index-rapporten en -tools;Begrijpen hoe je GSC Crawl- en Index-rapporten & -tools leest en er inzicht uit haalt;robots.txt tester;Verouderd: de robots.txt-tester is eind 2023 vervangen door het robots.txt-rapport in Search Console.
+1.5.6;Crawling & Indexation;Search Console Crawl- en Index-rapporten en -tools;Begrijpen hoe je GSC Crawl- en Index-rapporten & -tools leest en er inzicht uit haalt;URL Parameters;Verouderd: de URL Parameters-tool in Search Console is in 2022 uitgefaseerd. Les: parameters sturen via canonicals, interne links en robots.txt.
+2.1.1;Optimalisatie & Ranking;On-page Optimisation;Begrijpen hoe je keyword research doet en die kunnen gebruiken om het volgende te bepalen;ranking-doelen;
+2.1.2;Optimalisatie & Ranking;On-page Optimisation;Begrijpen hoe je keyword research doet en die kunnen gebruiken om het volgende te bepalen;informatiearchitectuur van een site;
+2.1.3;Optimalisatie & Ranking;On-page Optimisation;Begrijpen hoe je keyword research doet en die kunnen gebruiken om het volgende te bepalen;indexatie/niet-indexatie van landingspagina's;
+2.1.4;Optimalisatie & Ranking;On-page Optimisation;Begrijpen hoe je keyword research doet en die kunnen gebruiken om het volgende te bepalen;aanmaken van landingspagina's;
+2.1.5;Optimalisatie & Ranking;On-page Optimisation;Begrijpen hoe je keyword research doet en die kunnen gebruiken om het volgende te bepalen;content maken voor de pagina (on-page);
+2.1.6;Optimalisatie & Ranking;On-page Optimisation;Begrijpen hoe je keyword research doet en die kunnen gebruiken om het volgende te bepalen;featured snippet-kansen;
+2.1.7;Optimalisatie & Ranking;On-page Optimisation;Begrijpen hoe je keyword research doet en die kunnen gebruiken om het volgende te bepalen;of een pagina te weinig of slechte content (thin/spammy) heeft en advies geven om dit te verbeteren;
+2.1.8;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;meta title;
+2.1.9;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;meta description;
+2.1.10;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;headers;
+2.1.11;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;OG/social-tags;
+2.1.12;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;paginastructuur;
+2.1.13;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;body copy;
+2.1.14;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;afbeeldingoptimalisatie;
+2.1.15;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;interne links;
+2.1.16;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;externe links;
+2.1.17;Optimalisatie & Ranking;On-page Optimisation;In staat zijn de belangrijke onderdelen van de pagina te herkennen die de ranking beïnvloeden, bijv;hreflang;
+2.2.1;Optimalisatie & Ranking;Structured data begrijpen;Bekend zijn met de meest voorkomende soorten structured data, waaronder;product markup;
+2.2.2;Optimalisatie & Ranking;Structured data begrijpen;Bekend zijn met de meest voorkomende soorten structured data, waaronder;video markup;
+2.2.3;Optimalisatie & Ranking;Structured data begrijpen;Bekend zijn met de meest voorkomende soorten structured data, waaronder;ratings markup;
+2.2.4;Optimalisatie & Ranking;Structured data begrijpen;Bekend zijn met de meest voorkomende soorten structured data, waaronder;FAQ markup;Let op: sinds augustus 2023 toont Google FAQ-rich results alleen nog voor bekende, gezaghebbende overheids- en zorgsites.
+2.2.5;Optimalisatie & Ranking;Structured data begrijpen;Bekend zijn met de meest voorkomende soorten structured data, waaronder;organization/brand markup;
+2.2.6;Optimalisatie & Ranking;Structured data begrijpen;Bekend zijn met de meest voorkomende soorten structured data, waaronder;afbeelding-markup;
+2.2.7;Optimalisatie & Ranking;Structured data begrijpen;Bekend zijn met de meest voorkomende soorten structured data, waaronder;article markup;
+2.2.8;Optimalisatie & Ranking;Structured data begrijpen;In staat zijn te adviseren over de volgende manieren om structured data toe te passen;Schema.org;
+2.2.9;Optimalisatie & Ranking;Structured data begrijpen;In staat zijn te adviseren over de volgende manieren om structured data toe te passen;JSON-LD;
+2.2.10;Optimalisatie & Ranking;Structured data begrijpen;In staat zijn te adviseren over de volgende manieren om structured data toe te passen;schema-plugins;
+2.2.11;Optimalisatie & Ranking;Structured data begrijpen;In staat zijn te adviseren over de volgende manieren om structured data toe te passen;bekend zijn met het gebruik van de Structured Data Testing Tool in Search Console;Verouderd: vervangen door de Rich Results Test (Google) en de Schema Markup Validator (schema.org).
+3.1.1;Analytics;Google Analytics 4;GA4-setup;in staat zijn een standaard GA4-implementatie te controleren op fouten;
+3.1.2;Analytics;Google Analytics 4;GA4-setup;in staat zijn een GA4-account te controleren en datafouten op te sporen;
+3.1.3;Analytics;Google Analytics 4;GA4-setup;in staat zijn GA4-data te gebruiken om mogelijke kansen op de site te ontdekken;
+3.1.4;Analytics;Google Analytics 4;GA4-setup;in staat zijn aanbevelingen te geven over een GA4-account;
+3.1.5;Analytics;Google Analytics 4;GA4 event- & conversiemodel;begrijpen hoe je cross-device tracking instelt;
+3.1.6;Analytics;Google Analytics 4;GA4 event- & conversiemodel;begrijpen hoe het event-based datamodel van GA4 werkt (events i.p.v. sessies);
+3.1.7;Analytics;Google Analytics 4;GAIQ;de GAIQ behalen;Heet nu de Google Analytics-certificering (GA4) via Skillshop.
+3.2.1;Analytics;GTM;GTM-setup;voordelen begrijpen van GTM voor het beheren van de analytics-implementatie;
+3.2.2;Analytics;GTM;GTM-setup;in staat zijn een basis GA-implementatie via GTM op te zetten;
+3.2.3;Analytics;GTM;GTM-setup;in staat zijn andere tools (bijv. Optimizely, CrazyEgg, etc) op te zetten via GTM;
+3.2.4;Analytics;GTM;GTM-setup;in staat zijn event tracking op te zetten in GTM;
+4.1.1;Rapportage;Hoe en waarover te rapporteren;Begrijpen en in staat zijn om;kiezen over welke cijfers (metrics) je rapporteert;
+4.1.2;Rapportage;Hoe en waarover te rapporteren;Begrijpen en in staat zijn om;GSC te gebruiken voor rapportagedoeleinden;
+4.1.3;Rapportage;Hoe en waarover te rapporteren;Begrijpen en in staat zijn om;GA te gebruiken voor rapportagedoeleinden;
+4.1.4;Rapportage;Hoe en waarover te rapporteren;Begrijpen en in staat zijn om;een rank tracker (STAT) te gebruiken voor rapportage;
+4.1.5;Rapportage;Hoe en waarover te rapporteren;In staat zijn rapportages duidelijk te presenteren;in staat zijn een Whatagraph-dashboard te maken;
+5.1.1;Technical SEO;Het internet;In staat zijn te begrijpen en uit te leggen;hoe het internet werkt;
+5.1.2;Technical SEO;Het internet;In staat zijn te begrijpen en uit te leggen;hoe websites werken;
+5.1.3;Technical SEO;Het internet;In staat zijn te begrijpen en uit te leggen;de basisfuncties van een CMS begrijpen;
+5.1.4;Technical SEO;Het internet;In staat zijn te begrijpen en uit te leggen;de basisfuncties van WordPress begrijpen;
+5.1.5;Technical SEO;Het internet;In staat zijn te begrijpen en uit te leggen;de basisfuncties van Lightspeed begrijpen;
+5.1.6;Technical SEO;Het internet;In staat zijn te begrijpen en uit te leggen;de basisfuncties van Shopify begrijpen;
+5.1.7;Technical SEO;Het internet;In staat zijn te begrijpen en uit te leggen;de basisfuncties van Magento begrijpen;
+5.2.1;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;wat Core Web Vitals zijn;
+5.2.2;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;de Largest Contentful Paint (LCP) controleren;
+5.2.3;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;uitleggen hoe je de Largest Contentful Paint (LCP) verbetert;
+5.2.4;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;de Interaction to Next Paint (INP) controleren;
+5.2.5;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;uitleggen hoe je de Interaction to Next Paint (INP) verbetert;
+5.2.6;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;de Cumulative Layout Shift (CLS) controleren;
+5.2.7;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;uitleggen hoe je de Cumulative Layout Shift (CLS) verbetert;
+5.2.8;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;de First Contentful Paint (FCP) controleren;
+5.2.9;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;uitleggen hoe je de First Contentful Paint (FCP) verbetert;
+5.2.10;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;de Time to First Byte (TTFB) controleren;
+5.2.11;Technical SEO;Core Web Vitals;In staat zijn te begrijpen en uit te leggen;uitleggen hoe je de Time to First Byte (TTFB) verbetert;
+5.3.1;Technical SEO;Programmeertalen;Basiskennis van hoe het volgende functioneert;SQL;
+5.3.2;Technical SEO;Programmeertalen;Basiskennis van hoe het volgende functioneert;HTML;
+5.3.3;Technical SEO;Programmeertalen;Basiskennis van hoe het volgende functioneert;JavaScript;
+5.3.4;Technical SEO;Programmeertalen;Basiskennis van hoe het volgende functioneert;JSON;
+5.3.5;Technical SEO;Programmeertalen;Basiskennis van hoe het volgende functioneert;Python;
+5.3.6;Technical SEO;Programmeertalen;Basiskennis van hoe het volgende functioneert;CSS;
+6.1.1;Consulting Skills;Communicatie;In staat zijn problemen te herkennen en mee te denken over;via e-mail;
+6.1.2;Consulting Skills;Communicatie;In staat zijn problemen te herkennen en mee te denken over;telefonisch;
+6.1.3;Consulting Skills;Communicatie;In staat zijn problemen te herkennen en mee te denken over;in persoon;
+6.2.1;Consulting Skills;Kritisch denken;In staat zijn te identificeren en input te geven op;uitbesteed werk overzien en van feedback voorzien;
+6.2.2;Consulting Skills;Kritisch denken;In staat zijn te identificeren en input te geven op;verwachtingen van klanten goed afstemmen;
+6.3.1;Consulting Skills;Delegeren & opleveren;Het vertrouwen en de vaardigheid hebben om;werk effectief te delegeren aan anderen;
+6.3.2;Consulting Skills;Delegeren & opleveren;Het vertrouwen en de vaardigheid hebben om;gedelegeerd werk te overzien, van Input en feedback te voorzien;
+6.3.3;Consulting Skills;Delegeren & opleveren;Het vertrouwen en de vaardigheid hebben om;verwachtingen van klanten te managen;
+6.3.4;Consulting Skills;Delegeren & opleveren;Het vertrouwen en de vaardigheid hebben om;werk duidelijk en op tijd op te leveren;
+7.1.1;UX & CRO;Relatie tussen UX, CRO en SEO;In staat zijn het verband tussen UX en SEO te begrijpen;in staat zijn lage conversieratio's op te sporen en te begrijpen;
+7.1.2;UX & CRO;Relatie tussen UX, CRO en SEO;In staat zijn het verband tussen UX en SEO te begrijpen;interne linking;
+7.1.3;UX & CRO;Relatie tussen UX, CRO en SEO;In staat zijn het verband tussen UX en SEO te begrijpen;de betrouwbaarheid van een site;
+7.1.4;UX & CRO;Relatie tussen UX, CRO en SEO;Tests met hypotheses begrijpen en kunnen uitvoeren;de impact van user signals begrijpen (positief of negatief);
+7.1.5;UX & CRO;Relatie tussen UX, CRO en SEO;Tests met hypotheses begrijpen en kunnen uitvoeren;in staat zijn bewijs te verzamelen met tools zoals Hotjar, Microsoft Clarity, surveys;
+7.2.1;UX & CRO;Testing;Hypothesetests begrijpen en kunnen uitvoeren;in staat zijn basis A/B-tests te plannen om CRO/UX/SEO-hypothesen te testen;
+7.2.2;UX & CRO;Testing;Hypothesetests begrijpen en kunnen uitvoeren;eerdere A/B-tests gelezen en begrepen hebben;
+8.1.1;Mobile SEO;Mobile First Indexing;In staat zijn mobile first indexing te begrijpen en uit te leggen;het verschil tussen desktop First en mobile First;
+8.1.2;Mobile SEO;Mobile First Indexing;In staat zijn mobile first indexing te begrijpen en uit te leggen;aanbevelingen geven om een site geschikt te maken voor mobile first indexing;
+8.1.3;Mobile SEO;Mobile First Indexing;In staat zijn mobile first indexing te begrijpen en uit te leggen;weten waar je kijkt om te zien of een site mobile First wordt geïndexeerd;
+8.2.1;Mobile SEO;Mobile Optimisation;Basis mobiele implementatie identificeren en aanbevelingen geven over best practices;hoe je een site crawlt als mobile user-agent;
+8.2.2;Mobile SEO;Mobile Optimisation;Basis mobiele implementatie identificeren en aanbevelingen geven over best practices;parallel mobile sites identificeren en aanbevelingen geven;
+9.1.1;Paid Activity;Social;De relatie tussen SEO en paid social begrijpen;hoe je basis paid social-campagnes implementeert;
+9.1.2;Paid Activity;Social;De relatie tussen SEO en paid social begrijpen;begrijpen waar en hoe paid social SEO-inspanningen kan ondersteunen;
+9.2.1;Paid Activity;PPC;De relatie tussen SEO en PPC-activiteit begrijpen;begrijpen en aan een klant kunnen uitleggen wat de relatie is tussen SEO en PPC;
+9.2.2;Paid Activity;PPC;De relatie tussen SEO en PPC-activiteit begrijpen;in staat zijn de relatie te identificeren met GSC en Google Ads;
+9.2.3;Paid Activity;PPC;De relatie tussen SEO en PPC-activiteit begrijpen;begrijpen hoe PPC en SEO moeten samenwerken;
+10.1.1;Algorithm Updates;Algoritmekennis;In staat zijn algoritme-updates te begrijpen en uit te leggen die impact hebben op huidige SEO-praktijken;weten wat het verschil is tussen een Core update en een Spam update;
+10.1.2;Algorithm Updates;Algoritmekennis;In staat zijn algoritme-updates te begrijpen en uit te leggen die impact hebben op huidige SEO-praktijken;Penguin update;Historisch: Penguin is sinds 2016 onderdeel van het kernalgoritme (realtime).
+10.1.3;Algorithm Updates;Algoritmekennis;In staat zijn algoritme-updates te begrijpen en uit te leggen die impact hebben op huidige SEO-praktijken;Panda update;Historisch: Panda is opgenomen in het kernalgoritme.
+10.1.4;Algorithm Updates;Algoritmekennis;In staat zijn algoritme-updates te begrijpen en uit te leggen die impact hebben op huidige SEO-praktijken;BERT update;
+10.1.5;Algorithm Updates;Algoritmekennis;In staat zijn algoritme-updates te begrijpen en uit te leggen die impact hebben op huidige SEO-praktijken;RankBrain;
+11.1.1;Google E-E-A-T;E-E-A-T;In staat zijn Google E-E-A-T te begrijpen, uit te leggen en toe te passen;weten wat Google E-E-A-T betekent en hoe het werkt;
+11.1.2;Google E-E-A-T;E-E-A-T;In staat zijn Google E-E-A-T te begrijpen, uit te leggen en toe te passen;weten waar de letters E-E-A-T voor staan (Experience, Expertise, Authoritativeness, Trustworthiness);
+11.1.3;Google E-E-A-T;E-E-A-T;In staat zijn Google E-E-A-T te begrijpen, uit te leggen en toe te passen;weten waarom E-E-A-T belangrijk is voor SEO en in welke sectoren het zwaarder weegt (YMYL);
+11.1.4;Google E-E-A-T;E-E-A-T;In staat zijn Google E-E-A-T te begrijpen, uit te leggen en toe te passen;in staat zijn de E-E-A-T van een website of pagina te beoordelen;
+11.1.5;Google E-E-A-T;E-E-A-T;In staat zijn Google E-E-A-T te begrijpen, uit te leggen en toe te passen;aanbevelingen geven om de E-E-A-T van een site te verbeteren;
+11.1.6;Google E-E-A-T;E-E-A-T;In staat zijn Google E-E-A-T te begrijpen, uit te leggen en toe te passen;de rol van auteursprofielen, bronnen en reviews bij E-E-A-T begrijpen;
+12.1.1;SEO voor AI;AI Search (GEO/AEO);In staat zijn AI-zoekresultaten te begrijpen en content daarvoor te optimaliseren;weten wat AI Overviews zijn (de AI-samenvattingen bovenaan Google) en hoe ze zoekresultaten beïnvloeden;
+12.1.2;SEO voor AI;AI Search (GEO/AEO);In staat zijn AI-zoekresultaten te begrijpen en content daarvoor te optimaliseren;het verschil begrijpen tussen klassieke SEO en GEO/AEO (optimaliseren om geciteerd te worden door AI-zoekmachines i.p.v. enkel te ranken);
+12.1.3;SEO voor AI;AI Search (GEO/AEO);In staat zijn AI-zoekresultaten te begrijpen en content daarvoor te optimaliseren;weten hoe AI-zoekmachines (zoals ChatGPT, Gemini, Perplexity) content ophalen en als bron citeren;
+12.1.4;SEO voor AI;AI Search (GEO/AEO);In staat zijn AI-zoekresultaten te begrijpen en content daarvoor te optimaliseren;content structureren zodat AI het makkelijk kan citeren (duidelijke antwoorden, kopstructuur, structured data, bronvermelding);
+12.1.5;SEO voor AI;AI Search (GEO/AEO);In staat zijn AI-zoekresultaten te begrijpen en content daarvoor te optimaliseren;de impact van AI-zoekresultaten op organisch verkeer kunnen uitleggen (zero-click: gebruikers krijgen hun antwoord zonder door te klikken);
+12.1.6;SEO voor AI;AI Search (GEO/AEO);In staat zijn AI-zoekresultaten te begrijpen en content daarvoor te optimaliseren;weten hoe je zichtbaarheid in AI-tools meet en hoe je AI-crawlers stuurt (bijv. Ahrefs, server logs, GA4, llms.txt);

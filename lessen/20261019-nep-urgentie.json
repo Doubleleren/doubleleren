@@ -1,0 +1,25 @@
+{
+  "id": "20261019-nep-urgentie",
+  "type": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Urgentie en schaarste: waar ligt de grens?",
+  "matrix": [
+    "7.1.3"
+  ],
+  "titel": "De countdown-timer die bij elke pageload opnieuw begint",
+  "volgorde": "opdracht-eerst",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Een webshopklant wil op elke productpagina een timer: \"Nog 10:00 minuten voor deze prijs!\" De timer begint bij elke pageload opnieuw. De verwachting is meer conversie. Wat is je advies aan de klant, en waarom?",
+    "minTekens": 100
+  },
+  "modelantwoord": "Afraden. Urgentie en schaarste werken alleen als ze **echt** zijn. Een timer die reset is misleidend:\n\n- **Juridisch:** de EU-richtlijn oneerlijke handelspraktijken verbiedt expliciet om valselijk te beweren dat een product maar heel kort beschikbaar is, om een snelle beslissing af te dwingen (bijlage I, punt 7). In Nederland heeft de ACM tientallen webshops aangesproken op precies deze resettende timers.\n- **Vertrouwen:** wie twee keer terugkomt en dezelfde timer ziet, vertrouwt de rest van de site ook niet meer.\n- **Meetbaarheid:** een korte conversiepiek kan je terugbetalen in retouren, klachten en reviews.\n\nAlternatief: echte urgentie (een actie die écht vrijdag 23:59 stopt, de werkelijke voorraad, 'voor 22:00 besteld, morgen in huis').",
+  "uitleg": "Schaarste en urgentie zijn sterke beïnvloedingsprincipes (Cialdini). Juist daarom zijn ze een favoriet **dark pattern**. In CRO wil je het verschil kunnen uitleggen tussen *een echte deadline zichtbaar maken* (goed: dat helpt de klant beslissen) en *een deadline verzinnen* (misleiding).\n\nEen goede test voor elk overtuigingselement: **is het waar, en zou de klant het nog steeds oké vinden als hij precies wist hoe het werkt?** Is het antwoord nee, dan bouw je conversie op geleend vertrouwen.\n\nDe ACM sprak tientallen webshops aan op misleidende countdowntimers, en ook SHEIN moest samen met Europese toezichthouders nep-urgentie en schaarsteclaims aanpassen. Let op: een timer zelf is niet verboden, zolang de actie ook echt stopt als de tijd om is. Een 'gewone' conversietweak kan dus een compliance-risico zijn.",
+  "kernpunt": "Urgentie en schaarste alleen inzetten als ze echt zijn. Een nep-timer is misleiding: verboden in de EU en slecht voor vertrouwen.",
+  "toepassing": "Loop de productpagina van één klant door: staan er urgentie- of schaarsteclaims op ('nog 2 op voorraad', 'X mensen bekijken dit')? Check of ze op echte data draaien.",
+  "bron": {
+    "titel": "ACM spreekt webshops aan die misleidende countdowntimers gebruiken",
+    "url": "https://www.acm.nl/nl/publicaties/acm-spreekt-webshops-aan-die-misleidende-countdowntimers-gebruiken"
+  },
+  "niveau": "basis"
+}

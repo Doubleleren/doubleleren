@@ -1,0 +1,28 @@
+{
+  "id": "20261019-striking-distance",
+  "type": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Striking distance-zoekwoorden met AI vinden",
+  "matrix": [
+    "2.1.1",
+    "4.1.2"
+  ],
+  "titel": "Bouw je eigen 'laaghangend fruit'-analyse met Claude",
+  "volgorde": "opdracht-eerst",
+  "intro": "Zoekwoorden op positie 8–20 met veel vertoningen heten **striking distance**. Ze staan nét niet bovenaan, en een paar plekken stijgen levert daar onevenredig veel klikken op.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Open Claude en maak een prompt die uit een Search Console-export (query, pagina, klikken, vertoningen, CTR, positie) de beste striking distance-kansen haalt én per kans een concrete actie voorstelt. Test hem op echte data en plak hieronder je uiteindelijke prompt.",
+    "hint": "Je hebt de GSC-koppeling in Claude: je kunt het ook live laten ophalen in plaats van een export te plakken.",
+    "minTekens": 150
+  },
+  "modelantwoord": "Een sterke prompt bevat:\n\n- **Rol en doel:** \"Je bent een SEO-analist. Vind de 10 queries met het meeste klikpotentieel.\"\n- **Harde criteria:** positie 8–20, minimaal X vertoningen, geen merknaam-queries.\n- **Een rekenregel voor potentieel:** bijv. vertoningen × (verwachte CTR op positie 3 − huidige CTR).\n- **Kannibalisatie-check:** ranken meerdere pagina's op dezelfde query?\n- **Outputformaat:** tabel met query | pagina | positie | vertoningen | potentiële extra klikken | actie.\n- **Acties uit een vaste set:** title/meta herschrijven, sectie toevoegen die de query beantwoordt, interne links toevoegen, content samenvoegen.",
+  "uitleg": "De CTR zakt hard per positie: positie 1 krijgt vaak een veelvoud van de klikken op positie 8. Door AI Overviews en andere SERP-features verschilt de exacte curve per zoekwoord, dus reken met een conservatieve schatting.\n\nDe winst van deze opdracht zit in **herbruikbaarheid**. Een prompt met vaste criteria en een vast outputformaat kun je elke maand voor elke klant draaien. Zo maak je van een losse analyse een standaardproduct. Wordt het een vast onderdeel van je werk? Zet het dan om in een Claude-skill, zodat je het met één opdracht start.",
+  "kernpunt": "Striking distance = positie 8–20 met veel vertoningen. Leg criteria en outputformaat vast in een herbruikbare prompt of skill.",
+  "toepassing": "Sla je prompt op en draai hem deze week voor één klant. Vond je iets bruikbaars? Overweeg er een skill van te maken.",
+  "bron": {
+    "titel": "Google Search Central: Search Console Performance-rapport",
+    "url": "https://support.google.com/webmasters/answer/7576553"
+  },
+  "niveau": "basis"
+}

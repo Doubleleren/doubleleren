@@ -1,0 +1,27 @@
+{
+  "id": "20261019-query-fan-out",
+  "type": "basis",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Query fan-out in AI Mode en AI Overviews",
+  "matrix": [
+    "12.1.3",
+    "12.1.4"
+  ],
+  "titel": "Hoe 'denkt' Google AI Mode na over één zoekopdracht?",
+  "volgorde": "opdracht-eerst",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek op wat Google bedoelt met **query fan-out** in AI Mode. Leg in 2–4 zinnen uit wat het is én wat het betekent voor hoe je content opbouwt.",
+    "hint": "Klik op 'Venster even weg' om te zoeken. Google noemde het voor het eerst bij de introductie van AI Mode (Google I/O, mei 2025).",
+    "minTekens": 120
+  },
+  "modelantwoord": "Bij query fan-out splitst Google één vraag op in een reeks deelvragen. Bij 'beste hardloopschoenen voor beginners met platvoeten' zijn dat bijvoorbeeld vragen over demping, pronatie, prijs en reviews. Voor elke deelvraag zoekt Google parallel en combineert de gevonden passages tot één antwoord.\n\nVoor content betekent dit: je concurreert niet alleen op de hoofdvraag, maar op alle deelvragen. Pagina's die de logische vervolgvragen helder beantwoorden, in losse, goed afgebakende passages, worden vaker geciteerd.",
+  "uitleg": "Klassieke SEO optimaliseert een pagina voor een zoekwoord. Bij AI-search wordt een **passage** de eenheid die gevonden en geciteerd wordt. Door fan-out kan je pagina ook als bron verschijnen voor een vraag waarop je nooit rankte, omdat een van de deelvragen bij jouw passage uitkomt.\n\nPraktische vertaling:\n- Breng per onderwerp de deelvragen in kaart (People Also Ask, Reddit, klantvragen, sales-gesprekken)\n- Geef elke deelvraag een eigen, duidelijk kopje met daaronder een direct antwoord in de eerste 1–2 zinnen\n- Gebruik concrete entiteiten, cijfers en vergelijkingen: die zijn makkelijk te citeren\n- Meet zichtbaarheid in AI-antwoorden apart (bijv. via Ahrefs Brand Radar), want die zie je niet in Search Console-posities",
+  "kernpunt": "AI-search splitst één vraag op in tientallen deelvragen (fan-out). Win die deelvragen met heldere, zelfstandig leesbare passages.",
+  "toepassing": "Neem één belangrijke pagina van een klant en schrijf 5 deelvragen op die Google daarvoor waarschijnlijk uitvoert. Hoeveel daarvan beantwoordt de pagina echt?",
+  "bron": {
+    "titel": "Google Blog: AI Mode in Search (I/O 2025)",
+    "url": "https://blog.google/products/search/google-search-ai-mode-update/"
+  },
+  "niveau": "basis"
+}

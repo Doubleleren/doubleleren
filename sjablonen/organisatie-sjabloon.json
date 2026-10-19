@@ -1,0 +1,57 @@
+{
+    "v":  1,
+    "vakgebied":  "seo",
+    "head":  null,
+    "beheerders":  [
+
+                   ],
+    "cellen":  [
+                   {
+                       "id":  "ecom",
+                       "naam":  "E-commerce",
+                       "leider":  null,
+                       "projecten":  [
+                                         {
+                                             "id":  "ecom-b2b",
+                                             "naam":  "Ecom B2B",
+                                             "leider":  null
+                                         },
+                                         {
+                                             "id":  "ecom-internationaal",
+                                             "naam":  "Ecom internationaal",
+                                             "leider":  null
+                                         },
+                                         {
+                                             "id":  "ecom-nationaal",
+                                             "naam":  "Ecom nationaal",
+                                             "leider":  null
+                                         }
+                                     ]
+                   },
+                   {
+                       "id":  "leadgen",
+                       "naam":  "Leadgen",
+                       "leider":  null,
+                       "projecten":  [
+                                         {
+                                             "id":  "leadgen-b2c",
+                                             "naam":  "Leadgen B2C",
+                                             "leider":  null
+                                         },
+                                         {
+                                             "id":  "leadgen-b2b-1",
+                                             "naam":  "Leadgen B2B 1",
+                                             "leider":  null
+                                         },
+                                         {
+                                             "id":  "leadgen-b2b-2",
+                                             "naam":  "Leadgen B2B 2",
+                                             "leider":  null
+                                         }
+                                     ]
+                   }
+               ],
+    "leden":  {
+
+              }
+}
