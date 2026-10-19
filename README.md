@@ -60,7 +60,7 @@ Elke dag een korte SEO-les, en een eigen dashboard met je voortgang. Leidinggeve
 - Alle gegevens worden geëscaped en gecontroleerd.
 
 **Laptop**
-- Privésleutel en token staan met Windows DPAPI in `%LOCALAPPDATA%\DoubleLeren`, buiten OneDrive.
+- Privésleutel en token staan met Windows DPAPI in `%USERPROFILE%\.doubleleren`, buiten OneDrive.
 - Lessen openen alleen `https:`-links.
 
 **Generator**
@@ -84,7 +84,7 @@ Een token-houder kan bestanden van anderen verwijderen of een oude versie terugz
 | `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1` |
 
 ## Beheerder: draaiboek
-De beheer-repo staat lokaal in `%LOCALAPPDATA%\DoubleLeren\beheer\repo`, als git-kopie van `doubleleren-beheer`.
+De beheer-repo staat lokaal in `%USERPROFILE%\.doubleleren\beheer\repo`, als git-kopie van `doubleleren-beheer`.
 
 ```
 beheer\beheer.ps1 -Init                               # eenmalig; vraagt je beheertoken verborgen

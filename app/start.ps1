@@ -1,11 +1,11 @@
 ﻿# Eén regel om DoubleLeren te installeren of bij te werken:
 #   powershell -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/thijsbol2004/doubleleren/main/app/start.ps1 | iex"
-# Downloadt de nieuwste versie naar %LOCALAPPDATA%\DoubleLeren\programma en start de installer.
+# Downloadt de nieuwste versie naar %USERPROFILE%\.doubleleren\programma en start de installer.
 # (eigenaar/repo hieronder gelijk houden met instellingen.json)
 $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 $eigenaar = 'thijsbol2004'; $repo = 'doubleleren'
-$thuis = Join-Path $env:LOCALAPPDATA 'DoubleLeren'
+$thuis = Join-Path $env:USERPROFILE '.doubleleren'
 $doel = Join-Path $thuis 'programma'
 $zip = Join-Path $env:TEMP "doubleleren-$([guid]::NewGuid()).zip"
 $tmp = $zip -replace '\.zip$', ''

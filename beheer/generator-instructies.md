@@ -3,11 +3,11 @@
 Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: SEO-professionals die dagelijks met Claude werken. Elke les kost 2–5 minuten. Je werkt in de app-repo (de map waarin dit bestand onder `beheer\` staat). Persoonsgegevens zijn versleuteld; jij krijgt alleen een ontsleutelde **context zonder namen en zonder antwoorden**. Spreek de lezer in de lessen aan met "je".
 
 ## Stap 0: Bijwerken en context ophalen
-1. `git pull --rebase` in de app-repo, en `git -C "%LOCALAPPDATA%\DoubleLeren\beheer\repo" pull --rebase` (privé beheer-repo met het organogram).
+1. `git pull --rebase` in de app-repo, en `git -C "%USERPROFILE%\.doubleleren\beheer\repo" pull --rebase` (privé beheer-repo met het organogram).
 2. `powershell -NoProfile -ExecutionPolicy Bypass -File beheer\generator-context.ps1`
    Meldt het script bestanden met een ongeldige handtekening, noem dat aantal dan in je eindrapport (zonder pseudoniemen).
    Lessen worden bij het publiceren gecontroleerd. Een `bron.url` moet een `https://`-adres zijn, anders wordt er niets gepubliceerd.
-3. Lees `%LOCALAPPDATA%\DoubleLeren\beheer\generator\context.json`. Per deelnemer (pseudoniem `lid-xxxxxx`):
+3. Lees `%USERPROFILE%\.doubleleren\beheer\generator\context.json`. Per deelnemer (pseudoniem `lid-xxxxxx`):
    - `scores`: laatste eigen score (1–5) per vaardigheid-id uit `sjablonen\seo\skilllijst.csv`
    - `resultaten`: lessen van de laatste 3 maanden met `resultaat` (goed / deels / fout), `matrix`, `niveau`
    - `wachtrij`: les-id's die al klaarstaan
@@ -84,7 +84,7 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
 - Nederlands, direct. Vaktermen in het Engels zijn prima. Liever een herkenbare klantsituatie dan theorie.
 
 ## Stap 4: Klaarzetten en publiceren
-1. Schrijf `%LOCALAPPDATA%\DoubleLeren\beheer\generator\wachtrijen.json` als `{ "lid-xxxxxx": ["les-id", "les-id", "les-id"], ... }` voor elke deelnemer (eerst wat nog openstaat, daarna je aanvullingen; een nieuwsles vooraan).
+1. Schrijf `%USERPROFILE%\.doubleleren\beheer\generator\wachtrijen.json` als `{ "lid-xxxxxx": ["les-id", "les-id", "les-id"], ... }` voor elke deelnemer (eerst wat nog openstaat, daarna je aanvullingen; een nieuwsles vooraan).
 2. Controleer elke nieuwe les op geldige JSON.
 3. Draai `powershell -NoProfile -ExecutionPolicy Bypass -File beheer\generator-publiceer.ps1 -Push`. Dat versleutelt de wachtrijen, werkt `lessen\index.json` bij, pusht de lessen en **verwijdert de ontsleutelde context**.
 

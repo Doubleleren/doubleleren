@@ -14,4 +14,6 @@ function Read-DlGeheim([string]$Pad) {
 }
 
 # Standaardmappen: buiten OneDrive, per Windows-gebruiker
-function Get-DlThuis { Join-Path $env:LOCALAPPDATA 'DoubleLeren' }
+# Bewust NIET in AppData: Windows leidt AppData-schrijfacties van pakket-apps (zoals de Claude-app) om naar
+# een eigen pakketmap, waardoor scripts uit verschillende bronnen elkaars bestanden niet zien.
+function Get-DlThuis { Join-Path $env:USERPROFILE '.doubleleren' }

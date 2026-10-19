@@ -1,6 +1,6 @@
 ﻿# Beheer van DoubleLeren (alleen voor de beheerder).
 # Werkt in de lokale kopie van de PRIVÉ beheer-repo (organisatie, sleutels, toegang), standaard
-# %LOCALAPPDATA%\DoubleLeren\beheer\repo (buiten OneDrive). -Push zet wijzigingen online.
+# %USERPROFILE%\.doubleleren\beheer\repo (buiten OneDrive). -Push zet wijzigingen online.
 #
 #   beheer.ps1 -Init                                             eenmalig: generatorsleutel; vraagt je beheertoken (niet zichtbaar)
 #   beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Optioneel] [-Beheerder]

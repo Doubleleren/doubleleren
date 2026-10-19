@@ -1,6 +1,6 @@
 ﻿# Voor de lesgenerator: ontsleutelt per deelnemer ALLEEN wat nodig is om lessen te kiezen
 # (profielfocus, skilllijst-scores, resultaten van de laatste 3 maanden, huidige wachtrij). Nooit antwoorden, nooit namen.
-# Schrijft naar %LOCALAPPDATA%\DoubleLeren\beheer\generator\context.json (buiten OneDrive en buiten de repo's).
+# Schrijft naar %USERPROFILE%\.doubleleren\beheer\generator\context.json (buiten OneDrive en buiten de repo's).
 # Bestanden met een ongeldige handtekening worden overgeslagen en gemeld.
 param([string]$DataMap, [string]$BeheerMap, [string]$Thuis, [string]$Uit)
 $ErrorActionPreference = 'Stop'
