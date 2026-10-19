@@ -1,11 +1,11 @@
-﻿# Installeert DoubleLeren op deze laptop. Wordt normaal gestart door start.ps1 (één regel uit de uitnodiging).
+﻿# Installeert de Windows-pop-up van DoubleLeren op deze laptop (optioneel: aanmelden kan ook gewoon op de website).
 # Met venster (standaard) of stil voor tests:
-#   installeer.ps1 -Stil -Uitnodiging lid-xxxxxx:<token> -Naam Alfa -Xlsx C:\...\skilllijst.xlsx [-Thuis map] [-AppMap map] [-BeheerMap map] [-DataMap map]
-#   installeer.ps1 -Stil -Uitnodiging lid-xxxxxx:<token> -Code "zes woorden"      (nieuwe laptop)
+#   installeer.ps1 -Stil -Uitnodiging lid-xxxxxx:<token> -Naam Alfa -Xlsx C:\...\skilllijst.xlsx [-Thuis map] [-AppMap map] [-DataMap map]
+#   installeer.ps1 -Stil -Uitnodiging lid-xxxxxx:<token> -Code "zes woorden"      (al aangemeld: alleen de pop-up op deze laptop)
 #   installeer.ps1 -Stil -Uitnodiging lid-xxxxxx:<token> -Herstel -Naam Alfa      (code kwijt: nieuwe sleutel, scores blijven)
 param(
     [switch]$Stil, [string]$Uitnodiging, [string]$Naam, [string]$Xlsx, [string]$Code, [switch]$Herstel, [switch]$GeenLessen,
-    [string]$Thuis, [string]$AppMap, [string]$BeheerMap, [string]$DataMap, [switch]$GeenTaak
+    [string]$Thuis, [string]$AppMap, [string]$DataMap, [switch]$GeenTaak
 )
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
@@ -20,25 +20,26 @@ function Split-Uitnodiging([string]$U) {
 }
 function Get-Opslagen($u) {
     $app = if ($AppMap) { New-DlOpslag -Map $AppMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.appRepo -Raw }
-    $beheer = if ($BeheerMap) { New-DlOpslag -Map $BeheerMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.beheerRepo -Token $u.token }
     $data = if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $u.token }
-    @{ app = $app; beheer = $beheer; data = $data }
+    $v = Read-DlJson $app 'vertrouwd.json'
+    if (-not $v -or -not $v.beheer) { throw 'De beheerder heeft DoubleLeren nog niet ingericht (geen vertrouwd.json).' }
+    @{ app = $app; data = $data; vertrouwd = $v.beheer }
 }
-function Save-Lokaal($u, $prive, [bool]$lessen = $true) {
-    $cfg = [ordered]@{ v = 1; id = $u.id; eigenaar = $inst.eigenaar; appRepo = $inst.appRepo; beheerRepo = $inst.beheerRepo; dataRepo = $inst.dataRepo; lessen = $lessen }
+function Save-Lokaal($u, $o, $prive, [bool]$lessen = $true) {
+    $cfg = [ordered]@{ v = 2; id = $u.id; eigenaar = $inst.eigenaar; appRepo = $inst.appRepo; dataRepo = $inst.dataRepo; lessen = $lessen; vertrouwd = $o.vertrouwd }
     if ($AppMap) { $cfg.appMap = (Resolve-Path $AppMap).Path }
-    if ($BeheerMap) { $cfg.beheerMap = (Resolve-Path $BeheerMap).Path }
     if ($DataMap) { $cfg.dataMap = (Resolve-Path $DataMap).Path }
     Save-DlClient $Thuis $cfg $u.id $prive $u.token
 }
 
 function Get-Leren($u) {
-    $org = Read-DlJson (Get-Opslagen $u).beheer 'organisatie.json'
+    $o = Get-Opslagen $u
+    $org = Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd
     if (-not $org -or -not $org.leden.($u.id)) { throw 'Deze uitnodiging is (nog) niet bekend. Controleer de code of vraag de beheerder.' }
     if ($org.leden.($u.id).leren -eq 'optioneel') { 'optioneel' } else { 'verplicht' }
 }
 
-# Skilllijst importeren en versleuteld + ondertekend opslaan (ook later toe te voegen via 'Nieuwe laptop')
+# Skilllijst importeren en versleuteld + ondertekend opslaan
 function Save-Skilllijst($o, $u, $s, $prive, [string]$xlsx) {
     $import = Import-DlSkilllijst -Xlsx $xlsx -Sjabloon (Join-Path $App "sjablonen\$($inst.vakgebied)\skilllijst.csv")
     $b = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'matrix')
@@ -51,10 +52,8 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
     $o = Get-Opslagen $u
     $leren = Get-Leren $u
     if ($leren -eq 'verplicht') { $lessen = $true }
-    $gen = Read-DlJson $o.beheer 'sleutels/generator.json'
-    if (-not $gen) { throw 'De beheerder heeft DoubleLeren nog niet ingericht (geen generatorsleutel).' }
-    $bestaand = Read-DlJson $o.beheer "sleutels/$($u.id).json"
-    if ($bestaand -and -not $herstel) { throw 'Je bent al goedgekeurd. Kies "Nieuwe laptop" (met je code) of "Code kwijt".' }
+    $bestaand = Read-DlBeheer $o.data "sleutels/$($u.id).json" $o.vertrouwd
+    if ($bestaand -and -not $herstel) { throw 'Je bent al aangemeld. Kies "Nieuwe laptop" (met je code) of "Code kwijt".' }
     if ($herstel -and -not $bestaand) { throw 'Er is nog niets te herstellen: kies "Ik begin voor het eerst".' }
 
     $kp = New-DlSleutelpaar 3072
@@ -65,7 +64,6 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
     $gekoppeld = $null
 
     if ($herstel) {
-        # De beheerder maakt na goedkeuring een nieuwe datasleutel; je scores blijven. Oude antwoorden zijn niet te redden.
         $aanvraag.herstel = $true
         $p = Read-DlOpslag $o.data "data/$($u.id)/prive.enc"; if ($p) { Remove-DlOpslag $o.data "data/$($u.id)/prive.enc" $p.sha }
     } else {
@@ -74,32 +72,32 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
         $bp = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'profiel')
         Write-DlVersleuteld $o.data $u.id 'profiel' $s ([ordered]@{ v = 1; naam = $naam; sinds = (Get-Date).ToString('yyyy-MM-dd'); lessen = $lessen }) $(if ($bp) { $bp.sha }) $u.id $kp.prive | Out-Null
         if ($xlsx) { $gekoppeld = Save-Skilllijst $o $u $s $kp.prive $xlsx }
-        $aanvraag.toegang = [ordered]@{ $u.id = (ConvertTo-B64u (Protect-DlRsa $kp.publiek $dk)); generator = (ConvertTo-B64u (Protect-DlRsa $gen.publiek $dk)) }
+        $aanvraag.toegang = [ordered]@{ $u.id = (ConvertTo-B64u (Protect-DlRsa $kp.publiek $dk)); generator = (ConvertTo-B64u (Protect-DlRsa $o.vertrouwd $dk)) }
     }
     $oud = Read-DlOpslag $o.data "aanvragen/$($u.id).json"
     Write-DlJson $o.data "aanvragen/$($u.id).json" $aanvraag $(if ($oud) { $oud.sha }) | Out-Null
-    Save-Lokaal $u $kp.prive $lessen
+    Save-Lokaal $u $o $kp.prive $lessen
     [pscustomobject]@{ id = $u.id; code = $code; controlewoorden = (Get-DlControlewoorden $aanvraag); gekoppeld = $gekoppeld; lessen = $lessen }
 }
 
-# --- Kern: nieuwe laptop met bestaande code --------------------------------------
+# --- Kern: al aangemeld (bijv. via de website): alleen deze laptop koppelen --------
 function Install-Bestaand($u, [string]$code, [string]$xlsx, $lessen = $null) {
     $o = Get-Opslagen $u
-    $s = Read-DlJson $o.beheer "sleutels/$($u.id).json"
+    $s = Read-DlBeheer $o.data "sleutels/$($u.id).json" $o.vertrouwd
     if (-not $s) { $s = Read-DlJson $o.data "aanvragen/$($u.id).json" }
     if (-not $s) { throw "Geen account gevonden voor $($u.id)." }
     try { $prive = Unlock-DlKluis $u.id $s.kluis (ConvertTo-DlCode $code) } catch { throw 'Deze code klopt niet. Let op de spelling, of kies "Code kwijt".' }
     if ($prive.n -ne $s.publiek.n) { throw 'De sleutel past niet bij dit account.' }
     $gekoppeld = $null
     try {
-        $sl = Get-DlSleutelsUitDk (Get-DlDk $o.beheer $u.id $u.id $prive)
-        $pub = New-DlSleutelbron $o.beheer $u.id $prive
+        $sl = Get-DlSleutelsUitDk (Get-DlDk $o.data $u.id $u.id $prive $o.vertrouwd)
+        $pub = New-DlSleutelbron $o.data $o.vertrouwd $u.id $prive
         $pr = Read-DlVersleuteld $o.data $u.id 'profiel' $sl $pub
         if ($null -eq $lessen) { $lessen = -not ($pr -and $pr.obj.lessen -eq $false) }
         elseif ($pr) { $pr.obj | Add-Member -NotePropertyName lessen -NotePropertyValue ([bool]$lessen) -Force; Write-DlVersleuteld $o.data $u.id 'profiel' $sl $pr.obj $pr.sha $u.id $prive | Out-Null }
         if ($xlsx) { $gekoppeld = Save-Skilllijst $o $u $sl $prive $xlsx }
     } catch { if ($null -eq $lessen) { $lessen = $true } }
-    Save-Lokaal $u $prive ([bool]$lessen)
+    Save-Lokaal $u $o $prive ([bool]$lessen)
     [pscustomobject]@{ id = $u.id; code = $null; controlewoorden = $null; gekoppeld = $gekoppeld; lessen = [bool]$lessen }
 }
 

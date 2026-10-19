@@ -1,10 +1,10 @@
 ﻿# Vult de e2e-testomgeving met voorbeeldactiviteit (ondertekend door elk testlid zelf) en maakt bestandslijsten
 # voor de lokale website. Eerst test\e2e.ps1 draaien. Daarna een lokale server op de testmap en open:
-#   http://localhost:8765/app/docs/?app=/app&beheer=/beheer&data=/data
+#   http://localhost:8765/app/docs/?app=/app&data=/data
 param([string]$Werk = (Join-Path $env:TEMP 'doubleleren-e2e'))
 $ErrorActionPreference = 'Stop'
 $Werk = (Get-Item -LiteralPath $Werk).FullName
-$A = Join-Path $Werk 'app'; $B = Join-Path $Werk 'beheer'; $D = Join-Path $Werk 'data'; $T = Join-Path $Werk 'thuis'
+$A = Join-Path $Werk 'app'; $D = Join-Path $Werk 'data'; $T = Join-Path $Werk 'thuis'
 foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'client') { . "$A\app\lib\$l.ps1" }
 $codes = Get-Content "$Werk\codes.json" -Raw | ConvertFrom-Json
 $lessen = @((Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen)
@@ -40,9 +40,9 @@ foreach ($p in $codes.ids.PSObject.Properties) {
 }
 
 # Bestandslijsten (lokaal vervangen deze de GitHub-API)
-foreach ($map in $A, $B, $D) {
+foreach ($map in $A, $D) {
     $paden = @(Get-ChildItem -LiteralPath $map -Recurse | Where-Object { -not $_.PSIsContainer -and $_.FullName -notmatch '\\\.git\\' } | ForEach-Object { $_.FullName.Substring($map.Length + 1).Replace('\', '/') })
     [IO.File]::WriteAllText("$map\.lijst.json", ($paden | ConvertTo-Json))
 }
 Write-Host "`nTestcodes en testtoken staan in $Werk\codes.json (alleen testomgeving)."
-Write-Host "Open: http://localhost:8765/app/docs/?app=/app&beheer=/beheer&data=/data"
+Write-Host "Open: http://localhost:8765/app/docs/?app=/app&data=/data"

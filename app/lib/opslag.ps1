@@ -1,5 +1,5 @@
 ﻿# Opslag voor DoubleLeren: GitHub (via de contents-API, geen git nodig) of een gewone map (voor tests).
-#   $o = New-DlOpslag -Eigenaar thijsbol2004 -Repo doubleleren-data -Token $t -Auteur lid-7f3a
+#   $o = New-DlOpslag -Eigenaar doubleleren -Repo doubleleren-data -Token $t -Auteur lid-7f3a
 #   $o = New-DlOpslag -Map C:\test\data
 #   $b = Read-DlOpslag $o 'data/lid-7f3a/matrix.enc'   -> @{ bytes; sha } of $null
 #   Write-DlOpslag $o 'pad' $bytes $b.sha              -> nieuwe sha; gooit 'conflict' als iemand anders er net tussen zat

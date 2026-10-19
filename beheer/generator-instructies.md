@@ -3,7 +3,7 @@
 Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: SEO-professionals die dagelijks met Claude werken. Elke les kost 2–5 minuten. Je werkt in de app-repo (de map waarin dit bestand onder `beheer\` staat). Persoonsgegevens zijn versleuteld; jij krijgt alleen een ontsleutelde **context zonder namen en zonder antwoorden**. Spreek de lezer in de lessen aan met "je".
 
 ## Stap 0: Bijwerken en context ophalen
-1. `git pull --rebase` in de app-repo, en `git -C "%USERPROFILE%\.doubleleren\beheer\repo" pull --rebase` (privé beheer-repo met het organogram).
+1. `git pull --rebase` in de app-repo. (Organogram en sleutels haalt het contextscript zelf uit de privé data-repo, met controle van de handtekening.)
 2. `powershell -NoProfile -ExecutionPolicy Bypass -File beheer\generator-context.ps1`
    Meldt het script bestanden met een ongeldige handtekening, noem dat aantal dan in je eindrapport (zonder pseudoniemen).
    Lessen worden bij het publiceren gecontroleerd. Een `bron.url` moet een `https://`-adres zijn, anders wordt er niets gepubliceerd.

@@ -87,7 +87,7 @@ try {
     $script:vrijblijvend = $false
     if ($c) {
         $leren = 'verplicht'
-        try { $org = Read-DlJson $c.beheer 'organisatie.json'; if ($org.leden.($c.id).leren -eq 'optioneel') { $leren = 'optioneel' } } catch {}
+        try { $org = Read-DlBeheer $c.data 'organisatie.json' $c.vertrouwd; if ($org.leden.($c.id).leren -eq 'optioneel') { $leren = 'optioneel' } } catch {}
         if ($leren -eq 'optioneel') {
             if ($c.cfg.lessen -eq $false -and -not $Test -and -not $Snapshot) { exit }     # koos geen lessen
             $script:vrijblijvend = $true

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com/repos/thijsbol2004/ https://raw.githubusercontent.com/thijsbol2004/; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com/repos/doubleleren/ https://raw.githubusercontent.com/doubleleren/; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
 <title>DoubleLeren</title>
 <style>
 :root {
@@ -119,6 +119,40 @@ td.r, th.r { text-align: right; }
 .login { max-width: 460px; margin: 40px auto 0; }
 .login .paneel { display: grid; gap: 14px; }
 .fout { color: #B42318; font-size: 14px; }
+.fout:empty { display: none; }
+.stappen { display: grid; gap: 14px; }
+.code-groot { margin: 0; padding: 16px; background: var(--fun-50); border-radius: var(--r-sm); font-size: 22px; font-weight: 700; letter-spacing: .01em; line-height: 1.4; overflow-wrap: anywhere; }
+.controle { display: block; margin: 6px 0; padding: 8px 12px; background: var(--open-50); border-radius: 8px; font-weight: 700; }
+.stappen-lijst { margin: 0; padding-left: 20px; display: grid; gap: 10px; font-size: 14px; }
+kbd, code { font: 600 13px/1.4 ui-monospace, Consolas, monospace; background: var(--cool-50); border: 1px solid var(--cool); border-radius: 6px; padding: 1px 6px; }
+.les-kaart { max-width: 820px; }
+.les-kaart h2 { font-size: 26px; margin-top: 10px; }
+.les-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.les-meta .pill { text-transform: none; letter-spacing: 0; }
+.les-tekst { margin-top: 18px; font-size: 16px; line-height: 1.6; max-width: 72ch; }
+.les-tekst p { margin: 0 0 12px; }
+.les-tekst ul { margin: 0 0 12px; padding-left: 22px; }
+.les-label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--smart-ink); margin: 18px 0 6px; }
+.les-label:first-child { margin-top: 0; }
+.zacht { color: var(--ink-soft); }
+.vraag { font-weight: 600; }
+.kader { border-left: 3px solid var(--cool); background: var(--cool-50); border-radius: 8px; padding: 12px 16px 2px; margin: 6px 0 14px; }
+.kader-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.kader.goed { background: var(--fun-50); border-color: var(--goed); }
+.kader.fout { background: var(--cosy-50); border-color: var(--fout); }
+.kader.model { background: var(--smart-20); border-color: var(--smart-ink); }
+.kader.onthoud { background: #FFF6E0; border-color: var(--deels); }
+.kader.probeer { background: var(--open-50); border-color: #5B8DB8; }
+.opties { display: grid; gap: 8px; margin-top: 8px; }
+.optie { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 14px; border: 1.6px solid var(--cool); border-radius: var(--r-sm); cursor: pointer; }
+.optie:has(input:checked) { border-color: var(--ink); background: var(--smart-20); }
+.optie input { margin-top: 5px; }
+.antwoord { width: 100%; font: inherit; font-size: 15px; padding: 12px 14px; border: 1.6px solid var(--cool); border-radius: var(--r-sm); resize: vertical; margin-top: 8px; }
+.zelf { display: flex; gap: 8px; flex-wrap: wrap; }
+.zelf .knop { background: var(--cool-50); }
+.zelf .knop[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.les-knoppen { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
+.les-knoppen .knop { padding: 10px 20px; font-size: 15px; }
 .legenda { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); margin-top: 12px; }
 .legenda span { display: inline-flex; gap: 6px; align-items: center; }
 .sw { width: 16px; height: 8px; border-radius: 4px; background: var(--smart-ink); display: inline-block; }
@@ -138,6 +172,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <div class="wie" id="wie" hidden><span id="wie-naam"></span><button class="knop" id="uitloggen" type="button">Uitloggen</button></div>
     </div>
     <div class="tabs" id="tabs" role="tablist" hidden>
+      <button type="button" role="tab" data-tab="vandaag" aria-selected="false" id="tab-vandaag" hidden>Les van vandaag</button>
       <button type="button" role="tab" data-tab="mij" aria-selected="true">Mijn voortgang</button>
       <button type="button" role="tab" data-tab="team" aria-selected="false" id="tab-team" hidden>Mijn team</button>
       <button type="button" role="tab" data-tab="kennisbank" aria-selected="false">Kennisbank</button>
@@ -161,7 +196,100 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <button class="knop zwart" type="submit" id="login-knop">Inloggen</button>
       <p class="fout" id="login-fout" role="alert"></p>
       <p class="sub" style="margin:0">Je gegevens staan versleuteld en ondertekend in privé-opslag. Je code ontgrendelt ze alleen hier in je browser; hij wordt nergens naartoe gestuurd en nergens bewaard.</p>
+      <p class="sub" style="margin:0">Nieuw of code kwijt? <a href="#welkom" id="naar-welkom">Aanmelden</a></p>
     </form>
+  </div>
+
+  <div class="login" id="welkom" hidden>
+    <div class="paneel">
+      <div id="w-stap1" class="stappen">
+        <h2>Aanmelden bij DoubleLeren</h2>
+        <p class="sub" style="margin:0">Je hebt van de beheerder een uitnodigingscode gekregen in Teams. Plak die hieronder.</p>
+        <label for="w-uitnodiging" class="sub" style="margin:0">Uitnodigingscode</label>
+        <input id="w-uitnodiging" class="veld" type="password" autocomplete="off" spellcheck="false" placeholder="lid-xxxxxx:github_pat_…">
+        <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="w-onthoud" checked> Onthoud de uitnodigingscode op deze computer (niet op een gedeelde computer)</label>
+        <button class="knop zwart" type="button" id="w-verder">Verder</button>
+        <p class="sub" style="margin:0"><a href="#" id="w-terug">Terug naar inloggen</a></p>
+      </div>
+
+      <div id="w-stap2" class="stappen" hidden>
+        <h2 id="w-hallo">Welkom!</h2>
+        <p class="sub" style="margin:0" id="w-uitleg"></p>
+        <div id="w-naam-rij" class="stappen">
+          <label for="w-naam" class="sub" style="margin:0">Je naam</label>
+          <input id="w-naam" class="veld" type="text" autocomplete="name" maxlength="80">
+        </div>
+        <div id="w-xlsx-rij" class="stappen">
+          <label for="w-xlsx" class="sub" style="margin:0">Je ingevulde skilllijst (Excel, .xlsx)</label>
+          <input id="w-xlsx" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          <p class="sub" style="margin:0" id="w-xlsx-info"></p>
+          <p class="sub" style="margin:0">Het bestand wordt hier in je browser gelezen en versleuteld; het onversleutelde bestand gaat nergens naartoe.</p>
+        </div>
+        <label id="w-lessen-rij" style="display:flex;gap:8px;align-items:center;font-size:14px" hidden><input type="checkbox" id="w-lessen"> Ik wil ook dagelijkse lessen krijgen (vrijblijvend)</label>
+        <button class="knop zwart" type="button" id="w-maak">Account aanmaken</button>
+      </div>
+
+      <div id="w-stap3" class="stappen" hidden>
+        <h2>Je persoonlijke code</h2>
+        <p class="code-groot num" id="w-code"></p>
+        <button class="knop" type="button" id="w-kopieer" style="justify-self:start;background:var(--cool-50)">Kopieer code</button>
+        <ol class="stappen-lijst">
+          <li><strong>Zet deze code nu in je wachtwoordkluis.</strong> Hij wordt maar één keer getoond. Niemand anders heeft hem, ook de beheerder niet.</li>
+          <li><strong>Stuur deze zes controlewoorden in Teams naar de beheerder:</strong><span class="controle" id="w-controle"></span>Daarmee controleert de beheerder dat jouw aanmelding onderweg niet is aangepast.</li>
+          <li>Na goedkeuring log je in met je uitnodigingscode en deze code.</li>
+        </ol>
+        <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="w-bewaard"> Ik heb mijn code veilig bewaard</label>
+        <button class="knop zwart" type="button" id="w-klaar" disabled>Klaar</button>
+      </div>
+
+      <div id="w-bestaand" class="stappen" hidden>
+        <h2>Je bent al aangemeld</h2>
+        <p class="sub" style="margin:0">Log in met je code van zes woorden. Ben je je code kwijt? Maak dan een nieuwe aan. Je scores en voortgang blijven bewaard; je eigen antwoorden op open vragen niet.</p>
+        <button class="knop zwart" type="button" id="w-naar-login">Naar inloggen</button>
+        <button class="knop" type="button" id="w-herstel" style="background:var(--cool-50)">Code kwijt: nieuwe code aanmaken</button>
+      </div>
+
+      <div id="w-wacht" class="stappen" hidden>
+        <h2>Wacht op goedkeuring</h2>
+        <p class="sub" style="margin:0">Je aanmelding staat klaar. Heb je de controlewoorden al in Teams naar de beheerder gestuurd? Ze zijn:</p>
+        <span class="controle" id="w-wacht-woorden"></span>
+        <p class="sub" style="margin:0">Code kwijt voordat je bent goedgekeurd? Begin dan gewoon opnieuw; de oude aanmelding wordt vervangen.</p>
+        <button class="knop" type="button" id="w-opnieuw" style="background:var(--cool-50)">Opnieuw beginnen</button>
+      </div>
+
+      <p class="fout" id="w-fout" role="alert"></p>
+    </div>
+  </div>
+
+  <div id="vandaag" hidden>
+    <section class="paneel les-kaart" style="margin-top:0">
+      <div id="les-kop"></div>
+      <div id="les-inhoud" class="les-tekst"></div>
+      <div id="les-knoppen" class="les-knoppen"></div>
+      <p class="fout" id="les-fout" role="alert"></p>
+    </section>
+    <section class="paneel" id="snelkoppeling" hidden>
+      <div class="paneel-kop"><div><h2>Elke ochtend vanzelf je les</h2><p class="sub">Laat je computer DoubleLeren openen zodra je inlogt. Eenmalig instellen, ongeveer een minuut.</p></div></div>
+      <div class="twee">
+        <div>
+          <h3 style="font-size:15px;margin-bottom:8px">Windows</h3>
+          <ol class="stappen-lijst">
+            <li><button type="button" class="knop zwart" data-actie="snel-win">Download de snelkoppeling</button></li>
+            <li>Druk op <kbd>Windows</kbd> + <kbd>R</kbd>, typ <code>shell:startup</code> en druk op Enter. De map <em>Opstarten</em> gaat open.</li>
+            <li>Sleep <code>DoubleLeren.url</code> uit je Downloads naar die map.</li>
+          </ol>
+        </div>
+        <div>
+          <h3 style="font-size:15px;margin-bottom:8px">Mac</h3>
+          <ol class="stappen-lijst">
+            <li><button type="button" class="knop zwart" data-actie="snel-mac">Download de snelkoppeling</button></li>
+            <li>Open <em>Systeeminstellingen → Algemeen → Inlogonderdelen</em>.</li>
+            <li>Klik op <strong>+</strong> en kies <code>DoubleLeren.webloc</code> uit je Downloads.</li>
+          </ol>
+        </div>
+      </div>
+      <p class="sub">De snelkoppeling opent alleen deze pagina; je logt daarna zoals altijd in met je code.</p>
+    </section>
   </div>
 
   <div id="mij" hidden>

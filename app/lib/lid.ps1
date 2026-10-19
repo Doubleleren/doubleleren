@@ -1,12 +1,12 @@
 ﻿# Versleutelde, ondertekende bestanden per deelnemer. Vereist krypto.ps1 en opslag.ps1.
 #
-# Drie repo's:
-#   doubleleren          (openbaar)  code, website, lessen, sjablonen
-#   doubleleren-beheer   (privé; deelnemers alleen lezen, beheerder schrijft)
-#       organisatie.json            namen, cellen, projecten, leidinggevenden
-#       sleutels/<id>.json          publieke sleutel + kluis (privésleutel achter de inlogcode)
-#       toegang/<id>.json           datasleutel (DK) van <id>, verpakt per kijker + vingerafdruk van die kijker
-#   doubleleren-data     (privé; deelnemers schrijven)
+# Twee repo's:
+#   doubleleren          (openbaar; alleen de beheerder schrijft)  code, website, lessen, sjablonen,
+#       vertrouwd.json              publieke beheersleutel: daarmee wordt alles onder beheer/ gecontroleerd
+#   doubleleren-data     (privé; deelnemers schrijven met een token)
+#       beheer/organisatie.json     namen, cellen, projecten, leidinggevenden            } ondertekend door de beheerder;
+#       beheer/sleutels/<id>.json   publieke sleutel + kluis                              } een token-houder kan ze niet
+#       beheer/toegang/<id>.json    DK van <id>, verpakt per kijker + vingerafdrukken      } vervalsen, alleen verwijderen
 #       data/<id>/profiel.enc, matrix.enc, log-JJJJ-MM.enc   versleuteld met DK, ondertekend door <id>
 #       data/<id>/wachtrij.enc                                 versleuteld met DK, ondertekend door de generator
 #       data/<id>/prive.enc                                    eigen antwoorden, versleuteld met AK (afgeleid uit de eigen privésleutel)
@@ -62,23 +62,42 @@ function Update-DlVersleuteld($O, [string]$Id, [string]$Soort, [hashtable]$Sleut
     throw "Opslaan van $Soort lukt niet: blijft botsen met een andere wijziging"
 }
 
-# Datasleutel van <LidId> zoals <MijnId> die mag openen: ALLEEN uit de beheer-repo (pas na goedkeuring)
-function Get-DlDk($BeheerOpslag, [string]$LidId, [string]$MijnId, $PriveJwk) {
-    $t = Read-DlJson $BeheerOpslag "toegang/$LidId.json"
+# --- Beheerbestanden: leesbaar (privé repo) maar ondertekend met de beheersleutel uit vertrouwd.json ---
+function Read-DlBeheer($O, [string]$Pad, $Vertrouwd) {
+    $r = Read-DlOpslag $O "beheer/$Pad"
+    if (-not $r) { return $null }
+    $env = $script:DlUtf8.GetString($r.bytes).Trim() | ConvertFrom-Json
+    if ([int]$env.v -ne 2 -or $env.door -ne 'beheer' -or -not (Test-DlHandtekening $Vertrouwd "beheer|$Pad" 'beheer' $env.inhoud $env.sig)) {
+        throw "Beheerbestand $Pad heeft geen geldige handtekening van de beheerder"
+    }
+    $env.inhoud | ConvertFrom-Json
+}
+function Write-DlBeheer($O, [string]$Pad, $Obj, $BeheerPrive) {
+    $inhoud = ConvertTo-Json -InputObject $Obj -Depth 12 -Compress
+    $env = [ordered]@{ v = 2; door = 'beheer'; inhoud = $inhoud; sig = (New-DlHandtekening $BeheerPrive "beheer|$Pad" 'beheer' $inhoud) }
+    $b = Read-DlOpslag $O "beheer/$Pad"
+    Write-DlOpslag $O "beheer/$Pad" ($script:DlUtf8.GetBytes(($env | ConvertTo-Json -Compress))) $(if ($b) { $b.sha }) | Out-Null
+}
+
+# Datasleutel van <LidId> zoals <MijnId> die mag openen: ALLEEN uit de ondertekende toegang (pas na goedkeuring)
+function Get-DlDk($O, [string]$LidId, [string]$MijnId, $PriveJwk, $Vertrouwd) {
+    $t = Read-DlBeheer $O "toegang/$LidId.json" $Vertrouwd
     $kopie = if ($t) { $t.kopieen.$MijnId } else { $null }
     if (-not $kopie) { throw "Geen sleutelkopie van $LidId voor $MijnId (nog niet goedgekeurd?)" }
     , (Unprotect-DlRsa $PriveJwk (ConvertFrom-B64u $kopie))
 }
 
-# Publieke sleutels uit de beheer-repo (huidige + eerdere), met cache. De eigen sleutel telt altijd mee.
-function New-DlSleutelbron($BeheerOpslag, [string]$EigenId, $EigenPrive) {
+# Publieke sleutels (huidige + eerdere) uit de ondertekende beheerbestanden, met cache.
+# 'generator' is de beheersleutel uit vertrouwd.json. De eigen sleutel telt altijd mee.
+function New-DlSleutelbron($O, $Vertrouwd, [string]$EigenId, $EigenPrive) {
     $cache = @{}
     $eigen = if ($EigenId -and $EigenPrive) { [pscustomobject]@{ kty = 'RSA'; n = $EigenPrive.n; e = $EigenPrive.e } } else { $null }
     {
         param($id)
         if (-not $cache.ContainsKey($id)) {
-            $s = Read-DlJson $BeheerOpslag "sleutels/$id.json"
             $lijst = @(); if ($id -eq $EigenId -and $eigen) { $lijst += $eigen }
+            if ($id -eq 'generator') { $cache[$id] = @($Vertrouwd); return $cache[$id] }
+            $s = $null; try { $s = Read-DlBeheer $O "sleutels/$id.json" $Vertrouwd } catch {}
             if ($s) { $lijst += $s.publiek; $lijst += @($s.eerdere | Where-Object { $_ }) }
             $cache[$id] = $lijst
         }

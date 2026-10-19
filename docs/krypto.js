@@ -132,8 +132,10 @@ export function sleutelVorm(pub) {
 // --- Handtekeningen ----------------------------------------------------------------
 const PSS = { name: 'RSA-PSS', hash: 'SHA-256' };
 const tekenBytes = (context, door, inhoud) => E.encode(`DLSIG1|${context}|${door}|${inhoud}`);
-export async function onderteken(priveJwk, context, door, inhoud) {
-  const k = await S.importKey('jwk', { ...kaal(priveJwk, PRIV_VELDEN), alg: 'PS256', ext: false }, PSS, false, ['sign']);
+/** Privésleutel als niet-exporteerbare ondertekensleutel (CryptoKey). */
+export const tekenSleutel = (priveJwk) => S.importKey('jwk', { ...kaal(priveJwk, PRIV_VELDEN), alg: 'PS256', ext: false }, PSS, false, ['sign']);
+export async function onderteken(prive, context, door, inhoud) {
+  const k = prive instanceof CryptoKey ? prive : await tekenSleutel(prive);
   return b64u.enc(await S.sign({ name: 'RSA-PSS', saltLength: 32 }, k, tekenBytes(context, door, inhoud)));
 }
 export async function verifieer(publiekJwk, context, door, inhoud, sig) {

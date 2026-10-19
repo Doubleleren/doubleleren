@@ -3,14 +3,18 @@
 Elke dag een korte SEO-les, en een eigen dashboard met je voortgang. Leidinggevenden zien alleen de mensen die onder hen vallen. Alles draait gratis op GitHub. Persoonsgegevens staan **versleuteld, ondertekend en in privé-repo's**.
 
 ## Voor deelnemers
-1. Je krijgt via Teams een regel om in PowerShell te plakken en een **uitnodigingscode**.
-2. De installer vraagt je naam en je ingevulde **skilllijst (Excel)**. Daarna krijg je je **code van zes woorden**: bewaar die in je wachtwoordkluis.
-3. Stuur de **zes controlewoorden** die je ziet naar de beheerder.
-4. Na goedkeuring krijg je elke werkdag een pop-up met een les van 2–5 minuten. Op de website (snelkoppeling **DoubleLeren**) log je in met je uitnodigingscode en je code.
+Alles gaat in de browser; je hoeft niets te installeren.
+1. Je krijgt via Teams een link (`https://doubleleren.github.io/doubleleren/#welkom`) en een **uitnodigingscode**.
+2. Plak de uitnodigingscode, vul je naam in en kies je ingevulde **skilllijst (Excel)**. Je browser maakt je **code van zes woorden**: bewaar die in je wachtwoordkluis.
+3. Stuur de **zes controlewoorden** die je ziet via Teams naar de beheerder.
+4. Na goedkeuring log je in met je uitnodigingscode en je code. Onder **Les van vandaag** staat elke werkdag een les van 2–5 minuten.
+5. Wil je dat DoubleLeren elke ochtend vanzelf opent? Na je les staat er een knop voor een opstart-snelkoppeling (Windows en Mac).
 
-**Nieuwe laptop?** Draai dezelfde regel en kies "Nieuwe laptop".
+**Andere computer?** Gewoon inloggen op de website.
 
-**Code kwijt?** Kies "Ik ben mijn code kwijt". Je scores blijven bewaard; alleen je privé-antwoorden gaan verloren.
+**Code kwijt?** Kies op de website *Aanmelden* en daarna *Code kwijt*. Je scores blijven bewaard; alleen je privé-antwoorden gaan verloren.
+
+**Liever een pop-up die je tot de les dwingt (Windows)?** Dat kan nog steeds, optioneel, via `app\start.ps1`.
 
 ## Wie ziet wat
 | | Eigen scores en resultaten | Eigen antwoorden | Anderen |
@@ -23,10 +27,12 @@ Elke dag een korte SEO-les, en een eigen dashboard met je voortgang. Leidinggeve
 
 ## Hoe het veilig is
 
-**Drie repo's**
-- `doubleleren` (**openbaar**): code, website, lessen en sjablonen. Niets persoonlijks.
-- `doubleleren-beheer` (**privé**): organogram met namen, publieke sleutels plus de kluis met de privésleutel, en de verpakte datasleutels. Alleen de beheerder schrijft hier; deelnemers kunnen alleen lezen.
+**Twee repo's**, in de GitHub-organisatie `doubleleren`, zodat de website een eigen domein heeft:
+- `doubleleren` (**openbaar**): code, website, lessen en sjablonen, plus `vertrouwd.json` met de publieke beheersleutel. Niets persoonlijks. Alleen de beheerder schrijft hier.
 - `doubleleren-data` (**privé**): versleutelde, ondertekende persoonsbestanden en aanvragen. Deelnemers schrijven hier met een eigen token.
+  - In `beheer/` staan het organogram met namen, de publieke sleutels plus de kluis met de privésleutel, en de verpakte datasleutels.
+  - Al die bestanden zijn **ondertekend met de beheersleutel**. Een collega met een token kan ze overschrijven, maar niet vervalsen.
+  - Website, pop-up en generator weigeren alles zonder geldige handtekening die past bij `vertrouwd.json`.
 
 **Versleuteling (DL1)**
 - AES-256-CBC met HMAC-SHA256 (encrypt-then-MAC), gebonden aan lid en soort bestand.
@@ -41,7 +47,8 @@ Elke dag een korte SEO-les, en een eigen dashboard met je voortgang. Leidinggeve
 - De **antwoordensleutel** wordt afgeleid uit je eigen privésleutel en staat nergens als bestand.
 
 **Inlogcode**
-- Zes willekeurige woorden uit 1024 (60 bits), gemaakt op je eigen laptop.
+- Zes willekeurige woorden uit 1024 (60 bits), gemaakt in je eigen browser (of op je laptop bij de pop-up).
+- De skilllijst wordt in de browser gelezen en versleuteld. Het Excel-bestand zelf gaat nergens naartoe.
 - De kluis gebruikt PBKDF2-SHA256 met 600.000 rondes.
 - De beheerder kent geen codes.
 
@@ -76,39 +83,35 @@ Een token-houder kan bestanden van anderen verwijderen of een oude versie terugz
 ## Structuur van deze (openbare) repo
 | Pad | Wat |
 |---|---|
-| `docs/` | Website (GitHub Pages): `index.html`, `app.js`, `krypto.js`, `woorden.js` |
+| `docs/` | Website (GitHub Pages): `index.html`, `app.js` (inloggen, aanmelden, les van vandaag, dashboard), `krypto.js`, `xlsx.js`, `woorden.js` |
 | `app/` | Windows-client: `start.ps1`, `installeer.ps1`, `dagelijkse-les.ps1`, `importeer-logboek.ps1`, `lib/` |
 | `beheer/` | `beheer.ps1`, `generator-context.ps1`, `generator-publiceer.ps1`, `lessen-index.ps1`, `generator-instructies.md` |
 | `lessen/` | Gedeelde lessenpool en `index.json` (niet persoonlijk) |
 | `sjablonen/` | `seo/skilllijst.csv`, `seo/curriculum.md`, `organisatie-sjabloon.json` (leeg) |
-| `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1` |
+| `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1`, `lokale-server.py` |
 
 ## Beheerder: draaiboek
-De beheer-repo staat lokaal in `%USERPROFILE%\.doubleleren\beheer\repo`, als git-kopie van `doubleleren-beheer`.
+De beheersleutel en je beheertoken staan met DPAPI in `%USERPROFILE%\.doubleleren\beheer\beheer.dpapi`. Wijzigingen gaan direct en ondertekend naar `doubleleren-data/beheer/`.
 
 ```
-beheer\beheer.ps1 -Init                               # eenmalig; vraagt je beheertoken verborgen
-beheer\beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Optioneel] -Push
+beheer\beheer.ps1 -Init                               # eenmalig; vraagt je beheertoken verborgen; daarna vertrouwd.json committen en pushen
+beheer\beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Optioneel]
 beheer\beheer.ps1 -Aanvragen
-beheer\beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f" -Push
-beheer\beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht -Push
+beheer\beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f"
+beheer\beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal
+beheer\beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht
 beheer\beheer.ps1 -Controleer
 ```
-Na een wijziging in het organogram: `-Bijwerken -Push`.
 
-**Tokens** (fine-grained, maak je aan op github.com/settings/personal-access-tokens/new; zonder vervaldatum, of het maximum als dat niet kan; trek een token in bij vertrek of een verloren laptop):
-- **Per deelnemer:**
-  - `doubleleren-data`: *Contents: Read and write*
-  - `doubleleren-beheer`: *Contents: Read-only*
-- **Beheertoken:** dezelfde rechten.
+**Tokens:** fine-grained, met *Resource owner* `doubleleren` en zonder vervaldatum. `-Uitnodigen` geeft een vooraf ingevulde link. Trek een token in bij vertrek of bij een verloren laptop.
+- **Per deelnemer en voor de beheerder:** alleen `doubleleren-data`, met *Contents: Read and write*.
 
-Vraag deelnemers het Teams-bericht met hun uitnodigingscode na het installeren te verwijderen.
+Vraag deelnemers het Teams-bericht met hun uitnodigingscode na het aanmelden te verwijderen.
 
 **Aanbevolen:**
 - 2FA op het GitHub-account.
-- Branch protection op `main` van alle drie de repo's.
-- Pages nooit aanzetten op de privé-repo's.
-- Liefst een eigen GitHub-organisatie, zodat de website een eigen domein heeft, los van andere Pages-sites.
+- Branch protection op `main` van de app-repo.
+- Pages nooit aanzetten op de data-repo.
 
 ## Testen
 ```
@@ -116,4 +119,4 @@ powershell -ExecutionPolicy Bypass -File test\kruistest.ps1
 powershell -ExecutionPolicy Bypass -File test\e2e.ps1 -Xlsx <skilllijst.xlsx>
 powershell -ExecutionPolicy Bypass -File test\site-demo.ps1
 ```
-Daarna start je een lokale server op `%TEMP%\doubleleren-e2e` en open je `http://localhost:8765/app/docs/?app=/app&beheer=/beheer&data=/data`.
+Start daarna `python test\lokale-server.py 8765 %TEMP%\doubleleren-e2e` en open `http://localhost:8765/app/docs/?app=/app&data=/data`. Met `#welkom` test je het aanmelden; de testserver laat de website in `data/` schrijven.

@@ -5,23 +5,25 @@ param([Parameter(Mandatory)][string]$Xlsx, [string]$Werk = (Join-Path $env:TEMP 
 $ErrorActionPreference = 'Stop'
 $bron = Split-Path $PSScriptRoot -Parent
 Remove-Item $Werk -Recurse -Force -ErrorAction SilentlyContinue
-$A = Join-Path $Werk 'app'; $B = Join-Path $Werk 'beheer'; $D = Join-Path $Werk 'data'; $T = Join-Path $Werk 'thuis'
-New-Item -ItemType Directory $A, $B, $D, $T -Force | Out-Null
+$A = Join-Path $Werk 'app'; $D = Join-Path $Werk 'data'; $T = Join-Path $Werk 'thuis'
+New-Item -ItemType Directory $A, $D, $T -Force | Out-Null
 Copy-Item (Join-Path $bron '*') $A -Recurse -Exclude '.git', 'test'
 $TOKEN = 'github_pat_TESTTOKEN_alleen_lokaal_0000'
 $fouten = 0
 function Controleer([bool]$ok, [string]$wat) { if ($ok) { Write-Host "  OK    $wat" } else { Write-Host "  FOUT  $wat" -ForegroundColor Red; $script:fouten++ } }
-function Beheer { $ErrorActionPreference = 'Continue'; & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\beheer.ps1" @args -DataMap $D -BeheerMap $B -Thuis "$T\beheer" 2>&1 | ForEach-Object { "$_" } }
+function Beheer { $ErrorActionPreference = 'Continue'; & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\beheer.ps1" @args -DataMap $D -Thuis "$T\beheer" 2>&1 | ForEach-Object { "$_" } }
 function Installeer($id, $naam, [string[]]$extra) {
-    $json = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\app\installeer.ps1" -Stil -Uitnodiging "${id}:$TOKEN" -Naam $naam -Thuis "$T\$naam" -AppMap $A -BeheerMap $B -DataMap $D -GeenTaak @extra
+    $json = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\app\installeer.ps1" -Stil -Uitnodiging "${id}:$TOKEN" -Naam $naam -Thuis "$T\$naam" -AppMap $A -DataMap $D -GeenTaak @extra
     $json | Select-Object -Last 1 | ConvertFrom-Json
 }
 foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'client', 'organisatie') { . "$A\app\lib\$l.ps1" }
-$dO = New-DlOpslag -Map $D; $bO = New-DlOpslag -Map $B
+$dO = New-DlOpslag -Map $D
 $maand = (Get-Date).ToString('yyyy-MM')
 
 Write-Host '1. Inrichten en uitnodigen'
 Beheer -Init | Out-Null
+$V = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer
+Controleer ([bool]$V.n) 'vertrouwd.json met de publieke beheersleutel staat in de app-repo'
 $personen = [ordered]@{
     Alfa = @('-Rol', 'head'); Bravo = @('-Rol', 'celleider', '-Cel', 'ecom'); Charlie = @('-Rol', 'celleider', '-Cel', 'leadgen')
     Delta = @('-Rol', 'projectleider', '-Project', 'ecom-b2b'); Echo = @('-Rol', 'projectleider', '-Project', 'leadgen-b2c')
@@ -30,7 +32,7 @@ $personen = [ordered]@{
 $ids = @{}
 foreach ($n in $personen.Keys) { $uit = Beheer -Uitnodigen -Naam $n @($personen[$n]); $ids[$n] = ([regex]::Match(($uit -join "`n"), 'lid-[0-9a-f]{6}')).Value }
 Controleer (@($ids.Values | Where-Object { $_ }).Count -eq 7) '7 uitnodigingen'
-Controleer (-not (Test-Path "$A\organisatie.json") -and (Test-Path "$B\organisatie.json")) 'Organogram staat in de (privé) beheer-repo, niet in de app-repo'
+Controleer (-not (Test-Path "$A\organisatie.json") -and [bool](Read-DlBeheer $dO 'organisatie.json' $V)) 'Organogram staat ondertekend in de privé data-repo, niet in de app-repo'
 
 Write-Host '2. Installeren (leden vóór leidinggevenden)'
 $res = @{}
@@ -43,15 +45,15 @@ $aPad = "$D\aanvragen\$($ids.Foxtrot).json"
 $origineel = [IO.File]::ReadAllText($aPad)
 $aanv = $origineel | ConvertFrom-Json
 $dkAanvaller = Get-DlWillekeurig 32
-$gen = (Read-DlJson $bO 'sleutels/generator.json').publiek
+$gen = $V
 $aanv.toegang.($ids.Foxtrot) = ConvertTo-B64u (Protect-DlRsa $aanv.publiek $dkAanvaller)
 $aanv.toegang.generator = ConvertTo-B64u (Protect-DlRsa $gen $dkAanvaller)
 [IO.File]::WriteAllText($aPad, ($aanv | ConvertTo-Json -Depth 6))
 $uit = Beheer -Goedkeuren $ids.Foxtrot -Controlewoorden $res.Foxtrot.controlewoorden 2>&1
-Controleer ((Test-Path $aPad) -and -not (Test-Path "$B\toegang\$($ids.Foxtrot).json")) 'Goedkeuren geweigerd: controlewoorden passen niet meer bij de gewijzigde aanvraag'
+Controleer ((Test-Path $aPad) -and -not (Test-Path "$D\beheer\toegang\$($ids.Foxtrot).json")) 'Goedkeuren geweigerd: controlewoorden passen niet meer bij de gewijzigde aanvraag'
 [IO.File]::WriteAllText($aPad, $origineel)
 $uit = Beheer -Goedkeuren $ids.Golf -Controlewoorden 'aap noot mies wim zus jet' 2>&1
-Controleer (-not (Test-Path "$B\toegang\$($ids.Golf).json")) 'Verkeerde controlewoorden: niet goedgekeurd'
+Controleer (-not (Test-Path "$D\beheer\toegang\$($ids.Golf).json")) 'Verkeerde controlewoorden: niet goedgekeurd'
 
 Write-Host '4. Goedkeuren'
 foreach ($n in 'Foxtrot', 'Golf', 'Delta', 'Bravo', 'Alfa', 'Echo', 'Charlie') { Beheer -Goedkeuren $ids[$n] -Controlewoorden $res[$n].controlewoorden | Out-Null }
@@ -62,7 +64,7 @@ Write-Host '5. Wie kan wat openen'
 function KanOpenen($kijker, $lid, $soort = 'matrix') {
     $c = Get-DlClient -Thuis "$T\$kijker"
     try {
-        if ($soort -eq 'prive') { $s = Get-DlAk $c.prive } else { $s = Get-DlSleutelsUitDk (Get-DlDk $c.beheer $ids[$lid] $c.id $c.prive) }
+        if ($soort -eq 'prive') { $s = Get-DlAk $c.prive } else { $s = Get-DlSleutelsUitDk (Get-DlDk $c.data $ids[$lid] $c.id $c.prive $c.vertrouwd) }
         [bool](Read-DlVersleuteld $c.data $ids[$lid] $soort $s $c.publiek)
     } catch { $false }
 }
@@ -77,12 +79,12 @@ foreach ($lid in $alle) {
 }
 
 Write-Host '6. Dagcyclus: generator zet lessen klaar, pop-up rondt af'
-& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -BeheerMap $B -Thuis "$T\beheer" | Out-Null
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 $ctx = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
 Controleer (@($ctx.leden.PSObject.Properties).Count -eq 7 -and @($ctx.leden.($ids.Foxtrot).scores.PSObject.Properties).Count -eq 144) 'Generatorcontext: 7 deelnemers met scores'
 Controleer (-not ((Get-Content "$T\beheer\generator\context.json" -Raw) -match 'Alfa|Bravo|Foxtrot|antwoord')) 'Context bevat geen namen en geen antwoorden'
 [IO.File]::WriteAllText("$T\beheer\generator\wachtrijen.json", (@{ $ids.Foxtrot = @('20261019-srm', '20261019-query-fan-out') } | ConvertTo-Json))
-& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -BeheerMap $B -Thuis "$T\beheer" | Out-Null
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 Controleer (-not (Test-Path "$T\beheer\generator\context.json")) 'Ontsleutelde context is opgeruimd'
 foreach ($i in 1, 2) { & powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap$i" -Opslaan -Thuis "$T\Foxtrot" }
 if (Test-Path "$T\Foxtrot\fouten.log") { Get-Content "$T\Foxtrot\fouten.log" }
@@ -96,13 +98,21 @@ $groottes = @(Get-ChildItem "$D\data" -Recurse -Filter *.enc | ForEach-Object { 
 Controleer (-not ($groottes -contains $false)) 'Alle versleutelde bestanden opgevuld tot vaste blokgroottes'
 
 Write-Host '7. Aanval: leidinggevende vervalst een logboek, collega zet een oude versie terug'
-$cb = Get-DlClient -Thuis "$T\Bravo"; $sf = Get-DlSleutelsUitDk (Get-DlDk $cb.beheer $ids.Foxtrot $cb.id $cb.prive)
+$cb = Get-DlClient -Thuis "$T\Bravo"; $sf = Get-DlSleutelsUitDk (Get-DlDk $cb.data $ids.Foxtrot $cb.id $cb.prive $cb.vertrouwd)
 $vals = [ordered]@{ v = 1; regels = @([ordered]@{ datum = (Get-Date).ToString('s'); id = 'vals'; resultaat = 'fout' }) }
 $cur = Read-DlOpslag $dO "data/$($ids.Foxtrot)/log-$maand.enc"
 Write-DlVersleuteld $dO $ids.Foxtrot "log-$maand" $sf $vals $cur.sha $cb.id $cb.prive | Out-Null      # Bravo ondertekent als zichzelf
 $ok = $true; try { Read-DlVersleuteld $c.data $c.id "log-$maand" $s $c.publiek | Out-Null } catch { $ok = $false }
 Controleer (-not $ok) 'Logboek ondertekend door een ander dan het lid wordt geweigerd'
 Write-DlOpslag $dO "data/$($ids.Foxtrot)/log-$maand.enc" $cur.bytes (Read-DlOpslag $dO "data/$($ids.Foxtrot)/log-$maand.enc").sha | Out-Null   # herstel
+# Aanval: een collega met token geeft zichzelf toegang tot Foxtrot door de toegang (beheerbestand) te overschrijven
+$tPad = "$D\beheer\toegang\$($ids.Foxtrot).json"; $origT = [IO.File]::ReadAllText($tPad)
+$cg = Get-DlClient -Thuis "$T\Golf"
+$nep = [ordered]@{ v = 2; door = 'beheer'; inhoud = ([ordered]@{ v = 2; versie = 9; kopieen = @{ $cg.id = 'x' } } | ConvertTo-Json -Compress); sig = (New-DlHandtekening $cg.prive "beheer|toegang/$($ids.Foxtrot).json" 'beheer' 'x') }
+[IO.File]::WriteAllText($tPad, ($nep | ConvertTo-Json -Compress))
+$ok = $true; try { Read-DlBeheer $dO "toegang/$($ids.Foxtrot).json" $V | Out-Null } catch { $ok = $false }
+Controleer (-not $ok) 'Vervalst beheerbestand (toegang) wordt geweigerd: alleen de beheersleutel is geldig'
+[IO.File]::WriteAllText($tPad, $origT)
 
 Write-Host '8. Code kwijt: nieuwe sleutel en nieuwe datasleutel'
 $oudeC = Get-DlClient -Thuis "$T\Golf"
@@ -110,18 +120,15 @@ $h = Installeer $ids.Golf 'Golf' @('-Herstel')
 Beheer -Goedkeuren $ids.Golf -Controlewoorden $h.controlewoorden | Out-Null
 Controleer (KanOpenen 'Golf' 'Golf') 'Golf leest de eigen scores weer'
 Controleer (KanOpenen 'Echo' 'Golf') 'Echo (projectleider) ziet Golf nog steeds'
-$ok = $true; try { $dk = Get-DlDk $oudeC.beheer $ids.Golf $ids.Golf $oudeC.prive; Read-DlVersleuteld $oudeC.data $ids.Golf 'matrix' (Get-DlSleutelsUitDk $dk) $oudeC.publiek | Out-Null } catch { $ok = $false }
+$ok = $true; try { $dk = Get-DlDk $oudeC.data $ids.Golf $ids.Golf $oudeC.prive $oudeC.vertrouwd; Read-DlVersleuteld $oudeC.data $ids.Golf 'matrix' (Get-DlSleutelsUitDk $dk) $oudeC.publiek | Out-Null } catch { $ok = $false }
 Controleer (-not $ok) 'De oude sleutel (oude code/laptop) opent niets meer'
 
 Write-Host '9. Nieuwe laptop met dezelfde code'
-$r = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\app\installeer.ps1" -Stil -Uitnodiging "$($ids.Foxtrot):$TOKEN" -Code ($res.Foxtrot.code.ToUpper() -replace '-', ' ') -Thuis "$T\Foxtrot-2" -AppMap $A -BeheerMap $B -DataMap $D -GeenTaak | Select-Object -Last 1 | ConvertFrom-Json
+$r = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\app\installeer.ps1" -Stil -Uitnodiging "$($ids.Foxtrot):$TOKEN" -Code ($res.Foxtrot.code.ToUpper() -replace '-', ' ') -Thuis "$T\Foxtrot-2" -AppMap $A -DataMap $D -GeenTaak | Select-Object -Last 1 | ConvertFrom-Json
 $c2 = Get-DlClient -Thuis "$T\Foxtrot-2"; Controleer ([bool](Read-DlVersleuteld $c2.data $c2.id 'matrix' (Get-DlEigenSleutels $c2) $c2.publiek)) 'Tweede laptop leest dezelfde gegevens (code in hoofdletters en met spaties)'
 
 Write-Host '10. Organogram wijzigt: Golf verhuist naar Ecom B2B'
-$org = Get-Content "$B\organisatie.json" -Raw | ConvertFrom-Json
-$org.leden.($ids.Golf).project = 'ecom-b2b'
-[IO.File]::WriteAllText("$B\organisatie.json", ($org | ConvertTo-Json -Depth 10))
-Beheer -Bijwerken | Out-Null
+Beheer -Verplaats $ids.Golf -Project ecom-b2b | Out-Null
 Controleer ((KanOpenen 'Delta' 'Golf') -and (KanOpenen 'Bravo' 'Golf')) 'Nieuwe leidinggevenden zien Golf'
 Controleer (-not (KanOpenen 'Echo' 'Golf') -and -not (KanOpenen 'Charlie' 'Golf')) 'Oude leidinggevenden niet meer (datasleutel vernieuwd)'
 Controleer (KanOpenen 'Golf' 'Golf') 'Golf leest de eigen gegevens na de wissel'
@@ -132,18 +139,20 @@ $ids.Hotel = ([regex]::Match(($uit -join "`n"), 'lid-[0-9a-f]{6}')).Value
 $res.Hotel = Installeer $ids.Hotel 'Hotel' @('-GeenLessen')
 Controleer ($res.Hotel.code -and $res.Hotel.lessen -eq $false) 'Hotel installeert zonder Excel en zonder lessen'
 Beheer -Goedkeuren $ids.Hotel -Controlewoorden $res.Hotel.controlewoorden | Out-Null
-& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -BeheerMap $B -Thuis "$T\beheer" | Out-Null
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 Controleer (-not (Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json).leden.($ids.Hotel)) 'Generator slaat Hotel over'
 $sw = [Diagnostics.Stopwatch]::StartNew(); & powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Thuis "$T\Hotel" -AutoSluit 8
 Controleer ($sw.ElapsedMilliseconds -lt 7500) "Pop-up van Hotel toont geen venster ($($sw.ElapsedMilliseconds) ms)"
 Beheer -Wijzig $ids.Hotel -Leren verplicht | Out-Null
-& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -BeheerMap $B -Thuis "$T\beheer" | Out-Null
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 Controleer ([bool](Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json).leden.($ids.Hotel)) 'Na -Wijzig verplicht: generator neemt Hotel mee'
 Remove-Item "$T\beheer\generator\context.json"
 
 Write-Host '12. Wat staat er in de repo''s'
-$rauwD = (Get-ChildItem $D -Recurse -File | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join ''
-Controleer (-not ($rauwD -match 'Voorbeeldantwoord|Sample Ratio|Alfa|Bravo|Foxtrot|"naam"')) 'Data-repo: geen leesbare antwoorden, lestitels of namen'
+$rauwD = (Get-ChildItem $D -Recurse -File | Where-Object { $_.FullName -notmatch '\\data\\beheer\\' } | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join ''
+Controleer (-not ($rauwD -match 'Voorbeeldantwoord|Sample Ratio|Alfa|Bravo|Foxtrot|"naam"')) 'Data-repo (buiten beheer/): geen leesbare antwoorden, lestitels of namen'
+$rauwB = (Get-ChildItem "$D\beheer" -Recurse -File | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join ''
+Controleer (-not ($rauwB -match 'Voorbeeldantwoord|Sample Ratio')) 'Beheerbestanden (privé repo): alleen organogram en sleutels, geen antwoorden of lestitels'
 $rauwA = (Get-ChildItem $A -Recurse -File -Include *.json, *.ps1, *.js, *.md | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join ''
 $sj = Get-Content "$A\sjablonen\organisatie-sjabloon.json" -Raw | ConvertFrom-Json
 Controleer (-not ($rauwA -match 'lid-[0-9a-f]{6}') -and -not @($sj.leden.PSObject.Properties).Count ) 'App-repo (openbaar): geen leden-id''s en geen namen'
