@@ -350,7 +350,7 @@ function toonKennisbank() {
   const alle = Object.values(S.lessen);
   const res = alle.filter((l) => !q || [l.titel, l.kernpunt, l.onderwerp, l.vakgebied, l.bron?.titel].join(' ').toLowerCase().includes(q));
   $('kb-teller').textContent = q ? `${res.length} van ${alle.length} lessen` : `${alle.length} lessen`;
-  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(l.niveau || 'basis')}</div><div><h3>${esc(l.titel)}</h3><div class="meta"><span class="tag">${esc(l.vakgebied)}</span>${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
+  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(l.niveau || 'basis')}</div><div><h3>${esc(l.titel)}</h3><div class="meta"><span class="tag">${esc(l.vakgebied)}</span>${l.herkomst === 'team' ? '<span class="tag" style="background:var(--fun-50)">Van het team</span>' : ''}${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
 }
 
 // ---------------------------------------------------------------- versleuteld schrijven
@@ -637,9 +637,68 @@ $('vandaag').addEventListener('input', (e) => {
   $('les-knoppen').querySelector('button').disabled = n < min;
 });
 
+// ---------------------------------------------------------------- les toevoegen (head of SEO en lesmakers)
+// De les gaat ondertekend naar doubleleren-data/voorstellen/. De volgende generatorrun controleert de handtekening en
+// de les (beheer/voorstellen-opnemen.ps1) en zet hem in de kennisbank; daarna kan hij in wachtrijen komen.
+const magLesMaken = () => !!S.mij && !!S.teken && (S.org?.head === S.mij || (Array.isArray(S.org?.lesmakers) && S.org.lesmakers.includes(S.mij)));
+const slug = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50).replace(/-+$/, '') || 'les';
+function verzamelLes() {
+  const v = (id) => $(id).value.trim();
+  const soort = v('m-soort'), fouten = [];
+  const les = {
+    id: `${dagKey(new Date()).replace(/-/g, '')}-${slug(v('m-titel'))}`, herkomst: 'team',
+    type: v('m-type'), niveau: v('m-niveau'), vakgebied: v('m-vakgebied'), onderwerp: v('m-onderwerp'),
+    matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'), volgorde: v('m-volgorde'),
+    opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt')
+  };
+  for (const [veld, id] of [['intro', 'm-intro'], ['toelichting', 'm-toelichting'], ['modelantwoord', 'm-model'], ['toepassing', 'm-toepassing']]) if (v(id)) les[veld] = v(id);
+  if (v('m-hint')) les.opdracht.hint = v('m-hint');
+  if (soort === 'meerkeuze') {
+    les.opdracht.opties = [0, 1, 2, 3].map((i) => v('m-optie' + i));
+    les.opdracht.juist = Number(document.querySelector('input[name="m-juist"]:checked')?.value ?? -1);
+    if (les.opdracht.opties.some((o) => !o)) fouten.push('Vul alle vier de antwoordopties in.');
+    if (!(les.opdracht.juist >= 0 && les.opdracht.juist <= 3)) fouten.push('Kies welk antwoord juist is.');
+  } else {
+    les.opdracht.minTekens = Math.min(1000, Math.max(20, Number(v('m-min')) || 80));
+    if (!les.modelantwoord) fouten.push('Geef een modelantwoord: zo zou een expert het doen.');
+  }
+  if (v('m-bron-url')) {
+    if (!veiligeLink(v('m-bron-url'))) fouten.push('De bron moet een https://-adres zijn.');
+    les.bron = { titel: v('m-bron-titel') || v('m-bron-url'), url: v('m-bron-url') };
+  }
+  if (!les.titel) fouten.push('Geef de les een titel.');
+  if (!les.opdracht.vraag) fouten.push('Vul de vraag of opdracht in.');
+  if (!les.uitleg) fouten.push('Vul de uitleg in.');
+  if (!les.kernpunt) fouten.push('Vul het kernpunt in.');
+  const onbekend = les.matrix.filter((m) => !S.sjabloon.has(m));
+  if (onbekend.length) fouten.push(`Onbekende vaardigheid-id's: ${onbekend.join(', ')} (zie de skilllijst, bijv. 1.3.3).`);
+  if (JSON.stringify(les).length > 20000) fouten.push('De les is te lang.');
+  return { les, fouten };
+}
+function toonMaakSoort() {
+  const mk = $('m-soort').value === 'meerkeuze';
+  $('m-mk').hidden = !mk; $('m-open').hidden = mk;
+}
+async function stuurLesIn() {
+  const { les, fouten } = verzamelLes();
+  if (fouten.length) throw new Error(fouten.join(' '));
+  const inhoud = JSON.stringify(les);
+  const env = { v: 2, door: S.mij, inhoud, sig: await K.onderteken(S.teken, `voorstel|${les.id}`, S.mij, inhoud) };
+  try { await S.data.schrijf(`voorstellen/${les.id}.json`, K.tekst.naarBytes(JSON.stringify(env, null, 2))); }
+  catch (e) { if (e.message === 'conflict') throw new Error('Er staat vandaag al een les met deze titel klaar. Kies een andere titel.'); throw e; }
+  $('maak-form').reset(); toonMaakSoort();
+  $('maak-status').textContent = `Ingediend: "${les.titel}". Bij de volgende generatorrun (elke ochtend) komt hij in de kennisbank en kan hij in wachtrijen komen.`;
+}
+$('m-soort').addEventListener('change', toonMaakSoort);
+$('maak-form').addEventListener('submit', (e) => e.preventDefault());
+$('maak-knop').addEventListener('click', async () => {
+  const k = $('maak-knop'); k.disabled = true; $('maak-fout').textContent = ''; $('maak-status').textContent = '';
+  try { await stuurLesIn(); } catch (e) { $('maak-fout').textContent = e.message; } finally { k.disabled = false; }
+});
+
 // ---------------------------------------------------------------- navigatie en start
 function tab(naam) {
-  for (const t of ['vandaag', 'mij', 'team', 'kennisbank']) $(t).hidden = t !== naam;
+  for (const t of ['vandaag', 'mij', 'team', 'kennisbank', 'maken']) $(t).hidden = t !== naam;
   document.querySelectorAll('#tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === naam)));
   if (location.hash !== '#' + naam) history.replaceState(null, '', location.pathname + location.search + '#' + naam);
 }
@@ -658,10 +717,11 @@ async function naInloggen() {
   toonKennisbank();
   const lessen = magLessen();
   $('tab-vandaag').hidden = !lessen;
+  $('tab-maken').hidden = !magLesMaken();
   if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
   const voorkeur = location.hash.slice(1);
   const open = lessen && L.status?.les;
-  tab(voorkeur === 'kennisbank' || (voorkeur === 'team' && teamLeden().length) || (voorkeur === 'vandaag' && lessen) || (voorkeur === 'mij') ? voorkeur
+  tab(voorkeur === 'kennisbank' || (voorkeur === 'team' && teamLeden().length) || (voorkeur === 'vandaag' && lessen) || (voorkeur === 'maken' && magLesMaken()) || (voorkeur === 'mij') ? voorkeur
     : open ? 'vandaag' : (!ik?.matrix && teamLeden().length ? 'team' : 'mij'));
   const n = Object.keys(S.leden).length;
   $('voet').textContent = `Gegevens ontsleuteld en gecontroleerd in je browser · ${n} ${n === 1 ? 'persoon' : 'personen'} zichtbaar voor jou${S.ongeldig ? ` · ${S.ongeldig} bestand(en) genegeerd: ongeldige handtekening` : ''}. Antwoorden zijn alleen zichtbaar voor de persoon zelf.`;

@@ -13,6 +13,8 @@ New-Item -ItemType Directory $Uit -Force | Out-Null
 $pad = Join-Path $Uit 'context.json'
 Remove-Item $pad -ErrorAction SilentlyContinue        # restant van een eerder afgebroken run
 $geheim = Read-DlGeheim (Join-Path $Thuis 'beheer.dpapi'); if (-not $geheim) { throw 'Geen beheergeheimen: draai beheer.ps1 -Init' }
+# Eerst lessen die de head of SEO op de website maakte opnemen in de kennisbank
+& (Join-Path $PSScriptRoot 'voorstellen-opnemen.ps1') -DataMap $DataMap -Thuis $Thuis
 . (Join-Path $PSScriptRoot 'kloon.ps1')
 if (-not $DataMap) { $k = Get-DlKloon $Thuis; if ($k) { Update-DlKloon $k; $DataMap = $k } }
 $d =if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }

@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-19T14:10:48",
+    "bijgewerkt":  "2026-10-19T17:35:36",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -19,7 +19,8 @@
                                     "titel":  "Search Engine Journal: ChatGPT Traffic Drop Appears To Be A Tracking Problem",
                                     "url":  "https://www.searchenginejournal.com/chatgpt-traffic-drop-appears-to-be-a-tracking-problem/593157/"
                                 },
-                       "soort":  "open"
+                       "soort":  "open",
+                       "herkomst":  "generator"
                    },
                    {
                        "id":  "20261019-inp",
@@ -37,7 +38,8 @@
                                     "titel":  "web.dev: Interaction to Next Paint (INP)",
                                     "url":  "https://web.dev/articles/inp"
                                 },
-                       "soort":  "meerkeuze"
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
                    },
                    {
                        "id":  "20261019-nep-urgentie",
@@ -54,7 +56,8 @@
                                     "titel":  "ACM spreekt webshops aan die misleidende countdowntimers gebruiken",
                                     "url":  "https://www.acm.nl/nl/publicaties/acm-spreekt-webshops-aan-die-misleidende-countdowntimers-gebruiken"
                                 },
-                       "soort":  "open"
+                       "soort":  "open",
+                       "herkomst":  "generator"
                    },
                    {
                        "id":  "20261019-query-fan-out",
@@ -72,7 +75,8 @@
                                     "titel":  "Google Blog: AI Mode in Search (I/O 2025)",
                                     "url":  "https://blog.google/products/search/google-search-ai-mode-update/"
                                 },
-                       "soort":  "zoek-op"
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
                    },
                    {
                        "id":  "20261019-srm",
@@ -90,7 +94,8 @@
                                     "titel":  "Lukas Vermeer: SRM Checker",
                                     "url":  "https://www.lukasvermeer.nl/srm/"
                                 },
-                       "soort":  "meerkeuze"
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
                    },
                    {
                        "id":  "20261019-striking-distance",
@@ -108,7 +113,8 @@
                                     "titel":  "Google Search Central: Search Console Performance-rapport",
                                     "url":  "https://support.google.com/webmasters/answer/7576553"
                                 },
-                       "soort":  "maak-met-claude"
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
                    }
                ]
 }

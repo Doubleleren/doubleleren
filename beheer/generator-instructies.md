@@ -27,7 +27,11 @@ Haal de RSS-feeds op van de afgelopen ~4 dagen:
 Maak maximaal 1 **nieuwsles** per dag, alleen bij écht relevant nieuws (een Google-update, een nieuwe feature of nieuw beleid in Search, AI-search, belangrijk onderzoek of een wetswijziging). Een nieuwsles gaat **naar iedereen** en staat vooraan in ieders wachtrij. Check eerst in `lessen\index.json` of het nieuws al behandeld is.
 
 ## Stap 2: Per deelnemer de wachtrij bepalen
-Doel: **elke deelnemer heeft 3 lessen klaar** die hij of zij nog niet deed (niet in `resultaten`). Werk zo:
+Doel: **elke deelnemer heeft 3 lessen klaar** die hij of zij nog niet deed (niet in `resultaten`).
+
+**Lessen van het team** (`"herkomst": "team"` in `lessen\index.json`) zijn gemaakt door de head of SEO via de website en zijn bij het ophalen van de context al in de kennisbank gezet. Pas ze nooit aan. Geef ze voorrang: zet een nieuwe teamles in de eerstvolgende wachtrij van iedereen voor wie het niveau en onderwerp passen (een teamles van het type `nieuws` bij iedereen vooraan).
+
+Werk verder zo:
 1. **Hergebruik eerst de pool.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. Zo bouwt het team één gedeelde kennisbank op.
 2. **Herhaling:** een vaardigheid met `fout` of `deels` van 3, 7 of 30 dagen geleden krijgt een herhalingsles (`type: "herhaling"`) met een **nieuwe** vraag of invalshoek. Maximaal 1 per deelnemer per dag.
 3. **Weging naar scores:**

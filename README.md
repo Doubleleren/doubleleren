@@ -12,6 +12,8 @@ Alles gaat in de browser; je hoeft niets te installeren.
 
 **Andere computer?** Gewoon inloggen op de website.
 
+**Head of SEO:** onder *Les toevoegen* maak je zelf een les. Die gaat ondertekend naar de data-repo. De generator controleert je handtekening en de les, zet hem de volgende ochtend in de kennisbank (gemarkeerd als *Van het team*) en plant hem met voorrang in. Meer lesmakers kan de beheerder toevoegen via `lesmakers` in het organogram.
+
 **Code kwijt?** Kies op de website *Aanmelden* en daarna *Code kwijt*. Je scores blijven bewaard; alleen je privé-antwoorden gaan verloren.
 
 **Liever een pop-up die je tot de les dwingt (Windows)?** Dat kan nog steeds, optioneel, via `app\start.ps1`.
@@ -85,7 +87,7 @@ Een token-houder kan bestanden van anderen verwijderen of een oude versie terugz
 |---|---|
 | `docs/` | Website (GitHub Pages): `index.html`, `app.js` (inloggen, aanmelden, les van vandaag, dashboard), `krypto.js`, `xlsx.js`, `woorden.js` |
 | `app/` | Windows-client: `start.ps1`, `installeer.ps1`, `dagelijkse-les.ps1`, `importeer-logboek.ps1`, `lib/` |
-| `beheer/` | `beheer.ps1`, `generator-context.ps1`, `generator-publiceer.ps1`, `lessen-index.ps1`, `generator-instructies.md` |
+| `beheer/` | `beheer.ps1`, `generator-context.ps1`, `generator-publiceer.ps1`, `voorstellen-opnemen.ps1` (lessen van de head), `lescontrole.ps1`, `kloon.ps1` (data-repo via git), `lessen-index.ps1`, `generator-instructies.md` |
 | `lessen/` | Gedeelde lessenpool en `index.json` (niet persoonlijk) |
 | `sjablonen/` | `seo/skilllijst.csv`, `seo/curriculum.md`, `organisatie-sjabloon.json` (leeg) |
 | `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1`, `lokale-server.py` |

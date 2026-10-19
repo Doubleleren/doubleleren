@@ -5,6 +5,7 @@ param([string]$DataMap, [string]$Thuis, [string]$Map, [switch]$Push)
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
 foreach ($l in 'krypto', 'opslag', 'lid', 'geheim') { . (Join-Path $App "app\lib\$l.ps1") }
+. (Join-Path $PSScriptRoot 'lescontrole.ps1')
 $inst = Get-Content (Join-Path $App 'instellingen.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if (-not $Thuis) { $Thuis = Join-Path (Get-DlThuis) 'beheer' }
 if (-not $Map) { $Map = Join-Path $Thuis 'generator' }
@@ -20,15 +21,7 @@ try {
     $fouten = @()
     foreach ($f in Get-ChildItem (Join-Path $App 'lessen') -Filter *.json | Where-Object Name -ne 'index.json') {
         try { $l = [IO.File]::ReadAllText($f.FullName, [Text.Encoding]::UTF8) | ConvertFrom-Json } catch { $fouten += "$($f.Name): geen geldige JSON"; continue }
-        if ($l.id -ne $f.BaseName -or $l.id -notmatch '^[0-9a-z][0-9a-z\-]{2,80}$') { $fouten += "$($f.Name): id moet gelijk zijn aan de bestandsnaam (a-z, 0-9, -)" }
-        foreach ($veld in 'titel', 'uitleg', 'vakgebied') { if (-not $l.$veld) { $fouten += "$($f.Name): $veld ontbreekt" } }
-        if ($l.opdracht.soort -notin 'meerkeuze', 'open', 'zoek-op', 'maak-met-claude') { $fouten += "$($f.Name): onbekende opdrachtsoort" }
-        if ($l.opdracht.soort -eq 'meerkeuze' -and (@($l.opdracht.opties).Count -ne 4 -or [int]$l.opdracht.juist -notin 0..3)) { $fouten += "$($f.Name): meerkeuze heeft 4 opties en juist 0-3 nodig" }
-        if ($l.bron -and $l.bron.url) {
-            $u = $null
-            if (-not ([Uri]::TryCreate([string]$l.bron.url, [UriKind]::Absolute, [ref]$u) -and $u.Scheme -eq 'https' -and -not $u.IsUnc -and ([string]$l.bron.url).Length -le 500)) { $fouten += "$($f.Name): bron.url moet een https-adres zijn" }
-        }
-        if (([IO.File]::ReadAllText($f.FullName)).Length -gt 20000) { $fouten += "$($f.Name): te groot" }
+        foreach ($fout in (Test-DlLes $l $f.BaseName ([IO.File]::ReadAllText($f.FullName)).Length)) { $fouten += "$($f.Name): $fout" }
     }
     if ($fouten.Count) { throw "Lessen afgekeurd, niets gepubliceerd:`n  $($fouten -join "`n  ")" }
 
