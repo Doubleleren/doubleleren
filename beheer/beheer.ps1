@@ -128,7 +128,7 @@ elseif ($Uitnodigen) {
     [IO.File]::AppendAllText($uitPad, "| $Naam | $Rol | $plekTekst | $(if ($Optioneel) { 'optioneel' } else { 'verplicht' }) | $id |`n", $Utf8)
     Write-Host "Uitnodiging voor $Naam ($id, $Rol$(if ($Optioneel) { ', lessen optioneel' }))" -ForegroundColor Green
     Write-Host "Maak een token (github.com/settings/personal-access-tokens/new): repo's $($inst.dataRepo) (Contents: Read and write)"
-    Write-Host "en $($inst.beheerRepo) (Contents: Read-only), 90 dagen geldig. Uitnodigingscode: $id`:<token>"
+    Write-Host "en $($inst.beheerRepo) (Contents: Read-only), zonder vervaldatum (intrekken bij vertrek). Uitnodigingscode: $id`:<token>"
 }
 
 elseif ($Wijzig) {

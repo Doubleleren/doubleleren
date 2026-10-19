@@ -96,7 +96,7 @@ beheer\beheer.ps1 -Controleer
 ```
 Na een wijziging in het organogram: `-Bijwerken -Push`.
 
-**Tokens** (fine-grained, maak je aan op github.com/settings/personal-access-tokens/new; 90 dagen geldig, daarna vernieuwen):
+**Tokens** (fine-grained, maak je aan op github.com/settings/personal-access-tokens/new; zonder vervaldatum, of het maximum als dat niet kan; trek een token in bij vertrek of een verloren laptop):
 - **Per deelnemer:**
   - `doubleleren-data`: *Contents: Read and write*
   - `doubleleren-beheer`: *Contents: Read-only*
