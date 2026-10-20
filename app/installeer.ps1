@@ -173,11 +173,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
         <TextBlock FontSize="13" Foreground="#5c5c5c">Je code van zes woorden</TextBlock>
         <TextBox x:Name="Code" FontSize="16" Padding="8" Margin="0,4,0,12"/>
         <CheckBox x:Name="Lessen2" FontSize="14" Margin="0,0,0,10" Visibility="Collapsed">Ik wil (ook) de dagelijkse lessen</CheckBox>
-        <TextBlock FontSize="13" Foreground="#5c5c5c">Skilllijst toevoegen of vervangen (Excel, optioneel)</TextBlock>
-        <DockPanel Margin="0,4,0,0">
-          <Button x:Name="Kies2" DockPanel.Dock="Right" Padding="14,6" Margin="8,0,0,0">Kies bestand</Button>
-          <TextBox x:Name="Xlsx2" FontSize="13" Padding="8" IsReadOnly="True"/>
-        </DockPanel>
+        <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="#5c5c5c">Je skilllijst en voortgang staan al in je account; die hoef je hier niet opnieuw te kiezen.</TextBlock>
       </StackPanel>
 
       <StackPanel x:Name="P3" Visibility="Collapsed">
@@ -204,7 +200,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
 </Window>
 '@
 $win = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $xaml))
-$e = @{}; foreach ($n in 'Stap', 'P1', 'P2', 'P2b', 'P3', 'Uitn', 'KNieuw', 'KLaptop', 'KKwijt', 'Naam', 'XlsxRij', 'Lessen', 'XlsxLabel', 'Lessen2', 'Kies2', 'Xlsx2', 'Kies', 'Xlsx', 'Code', 'CodeToon', 'Kopieer', 'Bewaard', 'Controle', 'Info', 'Fout', 'Bezig', 'Volgende') { $e[$n] = $win.FindName($n) }
+$e = @{}; foreach ($n in 'Stap', 'P1', 'P2', 'P2b', 'P3', 'Uitn', 'KNieuw', 'KLaptop', 'KKwijt', 'Naam', 'XlsxRij', 'Lessen', 'XlsxLabel', 'Lessen2', 'Kies', 'Xlsx', 'Code', 'CodeToon', 'Kopieer', 'Bewaard', 'Controle', 'Info', 'Fout', 'Bezig', 'Volgende') { $e[$n] = $win.FindName($n) }
 $script:fase = 1; $script:u = $null
 $e.Stap.Text = 'Stap 1 van 3'
 function Toon([string]$p) { foreach ($x in 'P1', 'P2', 'P2b', 'P3') { $e[$x].Visibility = $(if ($x -eq $p) { 'Visible' } else { 'Collapsed' }) } }
@@ -214,10 +210,6 @@ function Klaar { $e.Bezig.Text = ''; $e.Volgende.IsEnabled = $true }
 $e.Kies.Add_Click({
     $d = New-Object Microsoft.Win32.OpenFileDialog; $d.Filter = 'Excel (*.xlsx)|*.xlsx'
     if ($d.ShowDialog()) { $e.Xlsx.Text = $d.FileName }
-})
-$e.Kies2.Add_Click({
-    $d = New-Object Microsoft.Win32.OpenFileDialog; $d.Filter = 'Excel (*.xlsx)|*.xlsx'
-    if ($d.ShowDialog()) { $e.Xlsx2.Text = $d.FileName }
 })
 $e.Kopieer.Add_Click({ try { [Windows.Clipboard]::SetText($e.CodeToon.Text) } catch {} })
 $e.Bewaard.Add_Checked({ $e.Volgende.IsEnabled = $true }); $e.Bewaard.Add_Unchecked({ $e.Volgende.IsEnabled = $false })
@@ -249,7 +241,7 @@ $e.Volgende.Add_Click({
             }
             21 {
                 Werk 'Je code wordt gecontroleerd…'
-                $r = Install-Bestaand $script:u $e.Code.Text $(if ($e.Xlsx2.Text -and (Test-Path $e.Xlsx2.Text)) { $e.Xlsx2.Text } else { '' }) $(if ($script:leren -eq 'optioneel') { [bool]$e.Lessen2.IsChecked } else { $null })
+                $r = Install-Bestaand $script:u $e.Code.Text '' $(if ($script:leren -eq 'optioneel') { [bool]$e.Lessen2.IsChecked } else { $null })
                 Register-DlTaak; Klaar
                 [void][Windows.MessageBox]::Show('Gelukt. De pop-up staat op deze laptop en verschijnt bij je volgende les.', 'DoubleLeren'); $win.Close()
             }
