@@ -38,7 +38,9 @@ function Save-Lokaal($u, $o, $prive, [bool]$lessen = $true) {
 function Get-Leren($u) {
     $o = Get-Opslagen $u
     $org = Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd
-    if (-not $org -or -not $org.leden.($u.id)) { throw 'Deze uitnodiging is (nog) niet bekend. Controleer de code of vraag de beheerder.' }
+    # Het organogram bestaat altijd; ontbreekt het, dan geeft GitHub 'niet gevonden' omdat de token geen toegang heeft
+    if (-not $org) { throw 'Deze uitnodigingscode heeft geen toegang tot de gegevens. Gebruik je de nieuwste token? Die moet als Resource owner "Doubleleren" hebben en toegang tot doubleleren-data (Contents: Read and write). Anders: vraag de beheerder om een nieuwe.' }
+    if (-not $org.leden.($u.id)) { throw 'Dit lidnummer is niet bekend. Controleer het deel vóór de dubbele punt (lid-......) of vraag de beheerder.' }
     if ($org.leden.($u.id).leren -eq 'optioneel') { 'optioneel' } else { 'verplicht' }
 }
 
