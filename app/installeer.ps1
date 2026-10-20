@@ -9,7 +9,10 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
-foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'client', 'skilllijst') { . (Join-Path $PSScriptRoot "lib\$l.ps1") }
+foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'client') { . (Join-Path $PSScriptRoot "lib\$l.ps1") }
+# Excel-inleesscript is optioneel: sommige webfilters blokkeren het; de skilllijst kan ook via de website
+$skilllijstScript = Join-Path $PSScriptRoot 'lib\skilllijst.ps1'
+if (Test-Path $skilllijstScript) { . $skilllijstScript }
 $inst = Get-Content (Join-Path $App 'instellingen.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if (-not $Thuis) { $Thuis = Get-DlThuis }
 
@@ -41,6 +44,7 @@ function Get-Leren($u) {
 
 # Skilllijst importeren en versleuteld + ondertekend opslaan
 function Save-Skilllijst($o, $u, $s, $prive, [string]$xlsx) {
+    if (-not (Get-Command Import-DlSkilllijst -ErrorAction SilentlyContinue)) { throw 'Excel inlezen kan hier niet (geblokkeerd door een webfilter). Meld je aan via de website; daarna kun je hier de pop-up toevoegen.' }
     $import = Import-DlSkilllijst -Xlsx $xlsx -Sjabloon (Join-Path $App "sjablonen\$($inst.vakgebied)\skilllijst.csv")
     $b = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'matrix')
     Write-DlVersleuteld $o.data $u.id 'matrix' $s $import.matrix $(if ($b) { $b.sha }) $u.id $prive | Out-Null
@@ -142,11 +146,11 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
       <TextBlock x:Name="Stap" Foreground="#5c5c5c" FontSize="13" Margin="0,2,0,16"/>
 
       <StackPanel x:Name="P1">
-        <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,0,0,12">Elke dag een korte SEO-les, en een dashboard met je voortgang. Plak hieronder de uitnodigingscode die je via Teams kreeg.</TextBlock>
+        <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,0,0,12">De pop-up zet elke werkdag je les op je scherm en gaat pas weg als je hem hebt gedaan. Plak hieronder de uitnodigingscode die je via Teams kreeg.</TextBlock>
         <TextBox x:Name="Uitn" FontSize="14" Padding="8"/>
         <TextBlock FontSize="13" Foreground="#5c5c5c" Margin="0,14,0,4">Wat wil je doen?</TextBlock>
-        <RadioButton x:Name="KNieuw" IsChecked="True" Margin="0,4" FontSize="14">Ik begin voor het eerst</RadioButton>
-        <RadioButton x:Name="KLaptop" Margin="0,4" FontSize="14">Nieuwe laptop: ik heb mijn code van zes woorden</RadioButton>
+        <RadioButton x:Name="KLaptop" IsChecked="True" Margin="0,4" FontSize="14">Ik heb al een account (code van zes woorden): pop-up op deze laptop</RadioButton>
+        <RadioButton x:Name="KNieuw" Margin="0,4" FontSize="14">Ik begin voor het eerst (kan ook op de website)</RadioButton>
         <RadioButton x:Name="KKwijt" Margin="0,4" FontSize="14">Ik ben mijn code kwijt</RadioButton>
       </StackPanel>
 
@@ -183,7 +187,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
           </DockPanel>
         </Border>
         <CheckBox x:Name="Bewaard" FontSize="14">Ik heb mijn code veilig bewaard</CheckBox>
-        <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,18,0,6">Stuur deze vier controlewoorden via Teams naar je beheerder. Daarmee wordt gecontroleerd dat jouw aanmelding echt van jou komt:</TextBlock>
+        <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,18,0,6">Stuur deze zes controlewoorden via Teams naar je beheerder. Daarmee wordt gecontroleerd dat jouw aanmelding echt van jou komt:</TextBlock>
         <Border Background="#E2EDF6" CornerRadius="10" Padding="16,10"><TextBlock x:Name="Controle" FontSize="18" FontWeight="SemiBold"/></Border>
         <TextBlock x:Name="Info" TextWrapping="Wrap" FontSize="13" Foreground="#5c5c5c" Margin="0,12,0,0"/>
       </StackPanel>
@@ -245,7 +249,7 @@ $e.Volgende.Add_Click({
                 Werk 'Je code wordt gecontroleerd…'
                 $r = Install-Bestaand $script:u $e.Code.Text $(if ($e.Xlsx2.Text -and (Test-Path $e.Xlsx2.Text)) { $e.Xlsx2.Text } else { '' }) $(if ($script:leren -eq 'optioneel') { [bool]$e.Lessen2.IsChecked } else { $null })
                 Register-DlTaak; Klaar
-                [void][Windows.MessageBox]::Show('Gelukt. DoubleLeren staat weer op deze laptop.', 'DoubleLeren'); $win.Close()
+                [void][Windows.MessageBox]::Show('Gelukt. De pop-up staat op deze laptop en verschijnt bij je volgende les.', 'DoubleLeren'); $win.Close()
             }
             3 { $win.Close() }
         }

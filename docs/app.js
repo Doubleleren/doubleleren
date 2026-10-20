@@ -675,6 +675,10 @@ $('vandaag').addEventListener('click', async (e) => {
   else if (actie === 'naar-mij') tab('mij');
   else if (actie === 'snel-win') { try { await navigator.clipboard.writeText(lesAdres()); b.textContent = 'Link gekopieerd'; } catch { b.textContent = lesAdres(); } }
   else if (actie === 'snel-mac') downloadSnelkoppeling();
+  else if (actie === 'kopieer-popup') {
+    const regel = `Set-ExecutionPolicy -Scope Process Bypass -Force; irm https://raw.githubusercontent.com/${S.eigenaar || 'doubleleren'}/${S.appRepo || 'doubleleren'}/main/app/start.ps1 | iex`;
+    try { await navigator.clipboard.writeText(regel); b.textContent = 'Regel gekopieerd'; } catch { b.textContent = regel; }
+  }
   else if (actie === 'afronden') {
     b.disabled = true; b.textContent = 'Versleuteld opslaan…'; $('les-fout').textContent = '';
     try { await lesOpslaan(); } catch (err) { $('les-fout').textContent = 'Opslaan mislukt: ' + err.message; b.disabled = false; b.textContent = 'Opnieuw proberen'; }

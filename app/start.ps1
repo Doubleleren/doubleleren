@@ -14,15 +14,24 @@ Write-Host 'DoubleLeren wordt gedownload...'
 $boom = Invoke-RestMethod "https://api.github.com/repos/$eigenaar/$repo/git/trees/main?recursive=1" -Headers $kop -UseBasicParsing
 $paden = @($boom.tree | Where-Object { $_.type -eq 'blob' -and ($_.path -eq 'instellingen.json' -or $_.path -like 'app/*' -or $_.path -like 'sjablonen/*') } | ForEach-Object { $_.path })
 if ($paden.Count -lt 5) { throw 'Kon de lijst met bestanden niet ophalen.' }
+# Een webfilter (bijv. Cisco Umbrella) kan losse bestanden vervangen door een HTML-blokkeerpagina. Het Excel-inleesscript
+# is optioneel (de skilllijst gaat via de website); elk ander geblokkeerd bestand stopt de installatie.
+$optioneel = @('app/lib/skilllijst.ps1')
 foreach ($p in $paden) {
     $uit = Join-Path $tmp ($p -replace '/', '\')
     New-Item -ItemType Directory (Split-Path $uit) -Force | Out-Null
     Invoke-WebRequest "https://raw.githubusercontent.com/$eigenaar/$repo/main/$p" -OutFile $uit -Headers $kop -UseBasicParsing
+    if ([IO.File]::ReadAllText($uit) -match '^\s*<(!doctype|html)') {
+        Remove-Item $uit
+        if ($optioneel -notcontains $p) { Remove-Item $tmp -Recurse -Force; throw "Een webfilter blokkeert $p. Vraag IT om raw.githubusercontent.com/doubleleren toe te staan, of gebruik alleen de website." }
+        Write-Host "Overgeslagen (webfilter): $p - niet nodig voor de pop-up."
+    }
 }
 if (Test-Path $doel) { Remove-Item $doel -Recurse -Force }
 Move-Item $tmp $doel
 Write-Host "$($paden.Count) bestanden opgehaald."
-if (Test-Path (Join-Path $thuis 'config.json')) { Write-Host 'Bijgewerkt naar de nieuwste versie.'; return }
+$cfgPad = Join-Path $thuis 'config.json'
+if ((Test-Path $cfgPad) -and (Get-Content $cfgPad -Raw | ConvertFrom-Json).vertrouwd) { Write-Host 'Bijgewerkt naar de nieuwste versie.'; return }
 Write-Host 'Het installatievenster wordt geopend.'
 # In hetzelfde venster starten (sommige beveiliging blokkeert het openen van een nieuw PowerShell-proces)
 if ([Threading.Thread]::CurrentThread.ApartmentState -ne 'STA') { throw 'Open Windows PowerShell via het Startmenu en probeer het daar opnieuw.' }
