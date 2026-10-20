@@ -1,0 +1,32 @@
+{
+  "id": "20261020-seo-ppc-relatie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "SEO en PPC: hoe hangen ze samen?",
+  "matrix": [
+    "9.2.1"
+  ],
+  "titel": "Helpt adverteren in Google Ads je organische posities?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant zegt in een overleg: \"We geven elke maand flink uit aan Google Ads. Dat helpt toch ook onze organische posities?\"",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het juiste antwoord aan de klant?",
+    "opties": [
+      "Ja: adverteerders met een hoog budget krijgen een kleine boost in de organische resultaten.",
+      "Indirect wel: Google gebruikt de Quality Score van je advertenties ook als organisch rankingsignaal.",
+      "Nee: adverteren heeft geen effect op je organische posities, maar SEO en PPC delen wel dezelfde zoekresultatenpagina, dezelfde zoekers en dezelfde zoekwoorddata.",
+      "Nee, en het werkt zelfs andersom: wie op een zoekwoord adverteert, wordt daar organisch lager getoond om dubbele vermeldingen te voorkomen."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google zegt het zelf letterlijk: adverteren bij Google heeft geen effect op je aanwezigheid in de zoekresultaten, en Google accepteert nooit geld om sites op te nemen of hoger te ranken. Quality Score is een begrip uit Google Ads en speelt geen rol in de organische ranking. De vierde optie is verzonnen: je kunt prima tegelijk een advertentie en een organisch resultaat hebben.",
+  "uitleg": "SEO en PPC (in Nederland meestal SEA genoemd) staan op dezelfde zoekresultatenpagina, maar werken via **twee gescheiden systemen**:\n\n- **Organisch:** de volgorde wordt programmatisch bepaald door de rankingsystemen van Google. Je kunt er niet voor betalen. Een klik kost niets, maar resultaat opbouwen kost tijd.\n- **Betaald:** een veiling in Google Ads. Je bent direct zichtbaar, maar het verkeer stopt zodra het budget stopt.\n\nDe relatie zit dus niet in de ranking, maar in alles eromheen:\n\n- **Dezelfde zoeker, dezelfde zoekvraag.** Zoektermen die in Ads goed converteren, zijn waardevolle input voor je SEO-prioriteiten. Omgekeerd laat Search Console zoekwoorden zien waar je organisch al vertoningen hebt.\n- **Dezelfde pagina.** Een sterke landingspagina helpt allebei: betere conversie voor Ads en een beter antwoord voor organisch.\n- **Samen meer ruimte in de SERP.** Met een advertentie én een organisch resultaat ben je vaker zichtbaar voor dezelfde zoekopdracht.\n\nDe korte uitleg voor een klant: *Ads koopt zichtbaarheid nu, SEO bouwt zichtbaarheid voor later. Ze beïnvloeden elkaars ranking niet, maar ze maken elkaar wel slimmer.*",
+  "kernpunt": "Betalen voor Google Ads heeft geen invloed op je organische ranking. SEO en PPC versterken elkaar via gedeelde zoekwoorddata, landingspagina's en zichtbaarheid in dezelfde SERP.",
+  "toepassing": "Kijk deze week bij één klant met Google Ads welke zoektermen in Ads het best converteren, en check in Search Console hoe de klant daar organisch op staat. Gebruik die vergelijking om de relatie aan de klant uit te leggen met zijn eigen cijfers.",
+  "bron": {
+    "titel": "Do You Need an SEO? Tips for Hiring an SEO | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/do-i-need-seo"
+  }
+}

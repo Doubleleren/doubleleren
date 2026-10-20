@@ -1,0 +1,27 @@
+{
+  "id": "20261020-video-markup-basis",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Video structured data",
+  "matrix": [
+    "2.2.2"
+  ],
+  "titel": "Video-markup: drie verplichte velden en de 'key moments'",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant in de installatiebranche zet uitlegvideo's ('Zo ontlucht je je radiator') op de eigen site, in een embedded player. Hij wil dat die video's beter zichtbaar worden in Google, liefst met tijdstempels naar de belangrijkste stappen.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Google Search Central op: welke drie eigenschappen zijn **verplicht** in VideoObject-markup, en met welke twee soorten markup kun je Google helpen om *key moments* (tijdstempels) te tonen? Wat is het verschil tussen die twee?",
+    "minTekens": 120,
+    "hint": "Zoek op 'Video (VideoObject, Clip, BroadcastEvent) structured data' op developers.google.com."
+  },
+  "modelantwoord": "Verplicht in VideoObject: **name** (titel), **thumbnailUrl** (een eigen thumbnail) en **uploadDate** (in ISO 8601-formaat, bijvoorbeeld 2026-10-20T08:00:00+02:00).\n\nVoor key moments:\n\n- **Clip**: je geeft zelf per fragment een naam, een startOffset en een URL die naar dat tijdstip springt (optioneel een endOffset). Jij bepaalt dus de momenten.\n- **SeekToAction**: je vertelt Google hoe je URL-structuur voor tijdstempels werkt (bijvoorbeeld ?t=), zodat Google zelf de belangrijke momenten kan bepalen.",
+  "uitleg": "Met **VideoObject**-structured data geef je Google expliciete informatie over een video: titel, thumbnail, uploaddatum, beschrijving, duur en waar het bestand of de player staat. Dat maakt het makkelijker om de video te vinden en te tonen in de gewone zoekresultaten, de Video-modus, Google Afbeeldingen en Discover.\n\nVerplicht zijn alleen **name**, **thumbnailUrl** en **uploadDate**. Aanbevolen zijn onder meer **description**, **duration**, **contentUrl** (het videobestand zelf) en **embedUrl** (de player). Met contentUrl kan Google het bestand ophalen en bijvoorbeeld zelf key moments en previews maken.\n\nTwee extra's die je moet kennen:\n\n- **Clip** en **SeekToAction** voor *key moments*: zelf de fragmenten opgeven of Google vertellen hoe je tijdstempel-URL's werken.\n- **BroadcastEvent** voor een **LIVE**-badge bij livestreams, met isLiveBroadcast, startDate en endDate.\n\nEen belangrijke voorwaarde: de markup hoort op een pagina waar de gebruiker de video **echt kan bekijken**. Een pagina die alleen naar de video linkt, zonder dat je hem daar kunt afspelen, is geen goede kandidaat: Google noemt het een slechte gebruikerservaring om mensen naar zo'n pagina te sturen.",
+  "kernpunt": "VideoObject vraagt minimaal name, thumbnailUrl en uploadDate, op een pagina waar de video echt te bekijken is. Voor tijdstempels in Google gebruik je Clip (zelf fragmenten opgeven) of SeekToAction (Google bepaalt ze).",
+  "toepassing": "Zoek bij een klant één pagina met een embedded video en test hem in de Rich Results Test van Google. Ontbreekt VideoObject of mist er een verplicht veld, zet het dan op de verbeterlijst, samen met een beschrijving en duration.",
+  "bron": {
+    "titel": "Video (VideoObject, Clip, BroadcastEvent) Schema Markup | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/video"
+  }
+}

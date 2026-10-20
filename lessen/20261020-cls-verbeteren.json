@@ -1,0 +1,27 @@
+{
+  "id": "20261020-cls-verbeteren",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Core Web Vitals: CLS verbeteren",
+  "matrix": [
+    "5.2.7"
+  ],
+  "titel": "Van rode CLS naar een fixlijst voor de developer, met Claude",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een webshop heeft op mobiel een CLS van 0,31 op de categoriepagina's. De developer vraagt: \"Wat moet ik precies aanpassen?\" Jij moet het vertalen naar concrete fixes.",
+  "uitleg": "Layout shifts ontstaan bijna altijd doordat de browser **niet weet hoeveel ruimte iets nodig heeft** voordat het geladen is. De bekende oorzaken en fixes (web.dev):\n- **Afbeeldingen en video zonder afmetingen**: geef width- en height-attributen mee, of gebruik CSS aspect-ratio. Zo reserveert de browser vooraf de juiste ruimte.\n- **Advertenties, embeds en iframes**: reserveer ruimte met min-height of aspect-ratio, en plaats laat ladende elementen liever lager op de pagina.\n- **Dynamisch ingevoegde content** (banners, 'ook interessant'-blokken): voeg niets boven bestaande content in zonder dat de gebruiker erom vraagt. Werk met een vaste container of een knop zoals 'Meer laden'.\n- **Webfonts**: een fallbackfont met andere afmetingen laat tekst verspringen. Gebruik font-display: optional, preload belangrijke fonts, of stem het fallbackfont af met size-adjust.\n- **Animaties**: animeer met transform in plaats van eigenschappen als top of left. Die veroorzaken layoutwerk.\n- **bfcache**: pagina's die uit de back/forward cache komen, worden direct volledig hersteld, zonder shifts tijdens het laden.\n\n**Zo zet je Claude in:** laat Claude de Lighthouse-gegevens ophalen via de DataForSEO-koppeling, of plak de PageSpeed Insights-diagnose en de HTML/CSS van de template. Vraag Claude welke elementen verschuiven, wat de waarschijnlijke oorzaak is en welke fix daarbij hoort, met de grootste winst eerst.\n\nControleer na de fix eerst in het lab (Lighthouse, DevTools). Velddata in Search Console lopen een paar weken achter, omdat CrUX over de afgelopen 28 dagen rapporteert.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt die je aan Claude geeft om voor deze categoriepagina een fixlijst voor de developer te maken. Laat Claude de Lighthouse-data ophalen (DataForSEO) of plak de PSI-diagnose en de HTML van de template. Noteer daarna de drie belangrijkste fixes die je in Claudes antwoord verwacht, en hoe je controleert of het gewerkt heeft.",
+    "hint": "Vraag Claude per verschuivend element om oorzaak, fix en verwachte impact, gesorteerd op impact. Denk aan productafbeeldingen, bannerslots en webfonts.",
+    "minTekens": 180
+  },
+  "modelantwoord": "**Prompt:** \"Haal via DataForSEO de mobiele Lighthouse-data op voor [URL]. Hieronder staat ook de HTML/CSS van de categorietemplate. Benoem per element dat verschuift de oorzaak en de concrete fix (met codevoorbeeld), en sorteer op impact op CLS. Schrijf het als ticket voor de developer, zonder SEO-jargon.\"\n\n**Verwachte fixes:**\n- Productafbeeldingen en de categoriebanner krijgen width/height of aspect-ratio, zodat de ruimte vooraf gereserveerd is.\n- Het promo- of advertentieslot boven de productlijst krijgt een vaste min-height, of wordt een overlay in plaats van content die alles naar beneden duwt.\n- Webfonts: preload van het hoofdfont en font-display: optional, of een fallbackfont afgestemd met size-adjust.\n\n**Controle:** na livegang Lighthouse en DevTools (spoor Layout shifts) op dezelfde URL. Na enkele weken het Core Web Vitals-rapport in Search Console, waar je de fix kunt laten valideren (Validate fix).",
+  "kernpunt": "CLS los je op door vooraf ruimte te reserveren (afmetingen, aspect-ratio, min-height), niets boven bestaande content te injecteren, fonts te stabiliseren en met transform te animeren.",
+  "toepassing": "Kies één template van een klant met een matige CLS en laat Claude met de DataForSEO-Lighthouse-data een fixlijst opstellen. Leg die lijst deze week als ticket bij de developer neer.",
+  "bron": {
+    "titel": "Optimize Cumulative Layout Shift | Articles | web.dev",
+    "url": "https://web.dev/articles/optimize-cls"
+  }
+}

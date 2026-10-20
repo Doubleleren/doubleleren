@@ -1,0 +1,32 @@
+{
+  "id": "20261020-cls-controleren",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: CLS controleren",
+  "matrix": [
+    "5.2.6"
+  ],
+  "titel": "Lighthouse zegt CLS 0,02, Search Console zegt 0,28. Wie heeft gelijk?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant met een nieuwsblog stuurt een screenshot van Lighthouse: CLS 0,02, groen. Toch markeert het Core Web Vitals-rapport in Search Console dezelfde artikelpagina's op mobiel als 'Slecht' met een CLS van 0,28.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke verklaring voor het verschil?",
+    "opties": [
+      "Lighthouse is onbetrouwbaar voor CLS; alleen Search Console meet het echt, dus de Lighthouse-score kun je negeren.",
+      "Search Console telt alle layout shifts van het hele bezoek bij elkaar op, Lighthouse alleen de grootste.",
+      "Search Console rapporteert alleen desktopdata; op mobiel is de CLS dus waarschijnlijk wel goed.",
+      "Lighthouse meet in het lab alleen tijdens het laden, terwijl de velddata ook shifts verderop in het bezoek meetellen, zoals advertenties die bij het scrollen inladen."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Labtools zoals Lighthouse meten alleen layout shifts tijdens het laden. Velddata (CrUX, die Search Console en PageSpeed Insights gebruiken) meten de hele levensduur van de pagina, inclusief shifts tijdens het scrollen. CLS telt niet alles op: het is de grootste 'burst' (session window) van shifts. Search Console rapporteert mobiel en desktop apart.",
+  "uitleg": "**Cumulative Layout Shift (CLS)** meet hoeveel zichtbare content onverwacht verspringt. De drempels, gemeten op het **75e percentiel** van echte bezoeken:\n- Goed: **0,1 of lager**\n- Verbetering nodig: tussen 0,1 en 0,25\n- Slecht: **hoger dan 0,25**\n\nZo wordt het berekend:\n- Elke shift krijgt een score: **impact fraction × distance fraction**. Dat is hoeveel van de viewport geraakt wordt, maal hoe ver het element verschuift.\n- Shifts die elkaar binnen 1 seconde opvolgen, vormen samen een *session window* van maximaal 5 seconden. **CLS is het window met de hoogste score**, niet de som van alles.\n- Shifts binnen 500 ms na een klik, tik of toetsaanslag tellen niet mee: die verwacht de gebruiker. Scrollen geldt hierbij niet als interactie.\n\n**Zo controleer je het:**\n- **Velddata** (wat telt voor Core Web Vitals): het Core Web Vitals-rapport in Search Console en het bovenste blok in PageSpeed Insights, beide op basis van CrUX\n- **Labdata** (om te debuggen): Lighthouse en het Performance-paneel in Chrome DevTools, waar het spoor *Layout shifts* laat zien welk element verschuift\n\nGroen in het lab en rood in het veld wijst bijna altijd op shifts ná het laden: lazy geladen advertenties, embeds of banners die tijdens het scrollen verschijnen.",
+  "kernpunt": "CLS is goed bij ≤ 0,1 (75e percentiel, velddata). Lighthouse ziet alleen shifts tijdens het laden; velddata zien het hele bezoek. Beoordeel dus op velddata en debug in het lab.",
+  "toepassing": "Open bij een klant PageSpeed Insights voor een lange contentpagina op mobiel en vergelijk de CLS in het veldblok met die in de Lighthouse-diagnose. Wijken ze af? Scroll dan zelf met DevTools > Performance aan en zoek de shift.",
+  "bron": {
+    "titel": "Cumulative Layout Shift (CLS) | Articles | web.dev",
+    "url": "https://web.dev/articles/cls"
+  }
+}

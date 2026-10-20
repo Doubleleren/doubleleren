@@ -1,0 +1,32 @@
+{
+  "id": "20261020-rel-canonical",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "rel=canonical",
+  "matrix": [
+    "1.3.3"
+  ],
+  "titel": "Eén product, drie URL's: wat doet rel=canonical eigenlijk?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een sneaker is op een webshop bereikbaar via /schoenen/sneaker-x, /sale/sneaker-x en /sneaker-x?utm_source=nieuwsbrief. Alle drie de URL's hebben in de head: <link rel=\"canonical\" href=\"https://www.shop.nl/sneaker-x\" />.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doet deze rel=canonical voor Google?",
+    "opties": [
+      "Hij verbiedt Googlebot om de twee andere URL's nog te crawlen.",
+      "Hij werkt als een noindex: de andere URL's verdwijnen direct uit de index.",
+      "Hij stuurt bezoekers en Googlebot automatisch door naar /sneaker-x.",
+      "Hij is een sterk signaal welke URL de voorkeur heeft, zodat Google signalen daarop bundelt."
+    ],
+    "juist": 3
+  },
+  "toelichting": "rel=canonical is een **sterk signaal**, geen bevel. Google bundelt signalen (zoals links) van de duplicaten op de URL die je opgeeft, maar kan zelf een andere canonical kiezen als andere signalen ergens anders naar wijzen. Crawlen blokkeren doe je met robots.txt, uit de index halen met noindex en doorsturen met een redirect: dat zijn drie andere middelen met een ander doel.",
+  "uitleg": "Als dezelfde of bijna dezelfde content op meerdere URL's staat, kiest Google er één als **canonical**: de versie die in de zoekresultaten verschijnt. De rest zijn duplicaten. Met rel=\"canonical\" geef je aan welke URL jouw voorkeur heeft. Dat helpt om:\n- te bepalen welke URL zoekers zien\n- signalen zoals links naar de duplicaten te bundelen op één URL\n- minder crawltijd aan duplicaten te besteden\n\nGoogle noemt drie manieren met verschillende sterkte: **redirects** (sterk signaal), **rel=canonical** (sterk signaal) en **opname in de sitemap** (zwak signaal). Geef je niets op, dan kiest Google zelf.\n\nBest practices uit Google's documentatie:\n- zet de link-tag in de **head**; in de body wordt hij niet geaccepteerd\n- gebruik **absolute URL's**\n- geef ook de canonical pagina zelf een **self-referencing canonical**\n- link intern naar de canonical URL, niet naar duplicaten\n- geef geen tegenstrijdige signalen (bijv. de sitemap noemt URL A, de canonical-tag URL B)\n- gebruik geen robots.txt of noindex om de canonical te sturen\n\nOf Google je voorkeur volgt, check je met de **URL-inspectietool** in Search Console: die toont de 'Door gebruiker aangegeven canonieke URL' en de 'Door Google geselecteerde canonieke URL'. Wijken die af, zoek dan naar tegenstrijdige signalen.",
+  "kernpunt": "rel=canonical is een sterk signaal (geen bevel) voor welke van meerdere dubbele URL's in Google moet verschijnen. Het blokkeert geen crawl, is geen noindex en geen redirect.",
+  "toepassing": "Inspecteer bij een klant een productpagina met filter- of UTM-varianten in de URL-inspectietool en vergelijk de opgegeven canonical met de door Google gekozen canonical.",
+  "bron": {
+    "titel": "How to specify a canonical URL with rel=\"canonical\" and other methods",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+  }
+}

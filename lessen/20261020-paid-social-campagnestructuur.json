@@ -1,0 +1,32 @@
+{
+  "id": "20261020-paid-social-campagnestructuur",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Paid social: basiscampagne opzetten in Meta",
+  "matrix": [
+    "9.1.1"
+  ],
+  "titel": "Campagne, ad set of advertentie: waar kies je de doelgroep?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Je hebt een sterke gids geschreven voor een klant. De klant wil hem promoten op Facebook en Instagram en vraagt jou om de opzet: verkeer naar de gids, getest bij twee doelgroepen (starters en ervaren ondernemers).",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe zet je dit het meest logisch op in Meta Ads Manager?",
+    "opties": [
+      "Eén campagne met het doel 'verkeer', met twee ad sets: één per doelgroep, elk met eigen advertenties",
+      "Twee campagnes met elk een ander doel, zodat Meta per doelgroep zelf het beste doel kiest",
+      "Eén campagne en één ad set, met twee advertenties die elk op een andere doelgroep zijn gericht",
+      "Eén campagne waarin je naast het doel ook beide doelgroepen instelt, met één ad set voor alle advertenties"
+    ],
+    "juist": 0
+  },
+  "toelichting": "De doelgroep stel je in op **ad set-niveau**, niet op campagne- of advertentieniveau. Alle advertenties binnen één ad set delen dezelfde doelgroep. Wil je twee doelgroepen vergelijken bij hetzelfde doel, dan maak je dus één campagne met twee ad sets.",
+  "uitleg": "Meta Ads Manager (voor Facebook, Instagram, Messenger, WhatsApp en Audience Network) werkt met **drie niveaus**:\n\n- **Campagne:** hier kies je het **doel** (*objective*), zoals websiteverkeer, leads of naamsbekendheid, en het *buying type* (meestal Auction).\n- **Ad set:** hier bepaal je **doelgroep** (demografie, interesses, gedrag, custom audiences), **plaatsingen** (bijvoorbeeld Facebook Feed of Instagram Stories), **budget** (dagelijks of totaal) en **planning** (start, einde, tijdstippen).\n- **Advertentie:** hier maak je de advertentie zelf: het **format** (enkele afbeelding of video, carrousel, collectie), de **creative** (beeld, tekst, kop, link) en de **identiteit** (welke Facebook-pagina en welk Instagram-account).\n\nEén campagne bevat één of meer ad sets, en elke ad set één of meer advertenties. Dankzij die hiërarchie kun je binnen één doel verschillende doelgroepen, budgetten en creatives tegen elkaar testen.\n\nVoor SEO'ers is dit handig om te kennen: je spreekt de taal van de paid-collega, en je kunt sterke organische content (een gids, een tool, een onderzoek) gericht bij de juiste mensen krijgen.",
+  "kernpunt": "Meta werkt met drie niveaus: campagne (doel), ad set (doelgroep, plaatsing, budget, planning) en advertentie (format en creative). Doelgroepen test je met aparte ad sets.",
+  "toepassing": "Kies deze week één stuk content van een klant dat organisch goed presteert en schets de opzet: welk campagnedoel, welke twee ad sets en welke twee creatives per ad set.",
+  "bron": {
+    "titel": "What are the advertising levels in Meta Ads Manager? | Meta Business Help Center",
+    "url": "https://www.facebook.com/business/help/621956575422138"
+  }
+}

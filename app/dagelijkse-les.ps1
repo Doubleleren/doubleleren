@@ -123,7 +123,14 @@ try {
     # --- Les kiezen: eerste uit je wachtrij die je nog niet deed, anders uit de gedeelde lessenpool ---
     if ($LesBestand) { $les = Lees-Json (Resolve-Path $LesBestand).Path }
     else {
+        # Een les komt nooit twee keer: ook oudere maanden van het logboek meetellen
         $gedaan = @($logs | ForEach-Object { $_.id })
+        $geladen = @((Get-LogSoort (Get-Date)), (Get-LogSoort (Get-Date).AddMonths(-1)))
+        foreach ($b in @(Get-DlOpslagLijst $c.data "data/$($c.id)" | Where-Object { $_ -match '^log-\d{4}-\d{2}\.enc$' })) {
+            $soort = $b -replace '\.enc$', ''
+            if ($geladen -contains $soort) { continue }
+            try { $r = Read-DlVersleuteld $c.data $c.id $soort $s $c.publiek; if ($r) { $gedaan += @($r.obj.regels | ForEach-Object { $_.id }) } } catch {}
+        }
         $w = Read-DlVersleuteld $c.data $c.id 'wachtrij' $s $c.publiek
         $lesId = @($(if ($w) { @($w.obj.lessen) }) | Where-Object { $_ -and $gedaan -notcontains $_ }) | Select-Object -First 1
         if (-not $lesId) {

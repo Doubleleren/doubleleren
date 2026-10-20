@@ -1,0 +1,25 @@
+{
+  "id": "20261020-penguin-realtime",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Penguin en linkspam",
+  "matrix": [
+    "10.1.2"
+  ],
+  "titel": "Wachten op de volgende Penguin-update? Die komt niet meer",
+  "volgorde": "opdracht-eerst",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Een nieuwe klant heeft jaren geleden honderden betaalde links gekocht. Zijn vorige bureau zei: \"Jullie zijn door Penguin geraakt. Ruim de links op en wacht dan op de volgende Penguin-update, dan herstellen jullie.\" Wat klopt daar niet meer aan, en hoe werkt het nu?",
+    "minTekens": 120
+  },
+  "modelantwoord": "Er komt geen 'volgende Penguin-update' meer. Sinds september 2016 is Penguin onderdeel van het kernalgoritme en werkt het **realtime**: de data wordt doorlopend ververst, dus veranderingen zijn zichtbaar kort nadat Google de pagina's opnieuw heeft gecrawld en geïndexeerd. Google kondigt geen Penguin-refreshes meer aan.\n\nPenguin is ook **gedetailleerder** geworden: het *devalueert* spam door de ranking aan te passen op basis van spamsignalen, in plaats van de hele site te raken. Gekochte links tellen dan vooral niet (meer) mee.\n\nWat je wel doet:\n- Check in Search Console het rapport **Handmatige acties**. Staat daar een actie voor onnatuurlijke links, dan heeft een medewerker van Google ingegrepen. Dan moet je links laten verwijderen of disavowen en een heroverwegingsverzoek indienen.\n- Stop met links kopen: dat is linkspam volgens het spambeleid van Google.\n- Investeer in links die je verdient met goede content en echte relaties.",
+  "uitleg": "**Penguin** werd in 2012 gelanceerd om **linkspam** te bestrijden: links die je koopt, ruilt of op grote schaal plaatst om je ranking te manipuleren.\n\nTot 2016 werkte Penguin met periodieke refreshes. Ruimde een site zijn links op, dan moest hij soms maanden wachten op de volgende refresh voordat het herstel zichtbaar werd. Op **23 september 2016** kondigde Google twee grote veranderingen aan:\n\n- **Realtime:** Penguin werd onderdeel van het kernalgoritme. Veranderingen worden zichtbaar kort na het opnieuw crawlen en indexeren, en Google geeft geen commentaar meer op refreshes.\n- **Gedetailleerder:** Penguin *devalueert* spam door de ranking aan te passen op basis van spamsignalen, in plaats van de ranking van de hele site te raken.\n\n**Wat geldt nu?** In Googles overzicht van rankingsystemen staat Penguin bij de *retired systems*: het is in 2016 opgenomen in de kernsystemen. Linkspam wordt vandaag aangepakt door SpamBrain en andere spamsystemen, plus handmatige acties door medewerkers van Google. Hoor je iemand over \"een Penguin-penalty\" praten, dan bedoelt hij meestal een van die twee: een algoritmische devaluatie van spamlinks (geen melding, geen verzoek nodig) of een handmatige actie (wel een melding in Search Console).",
+  "kernpunt": "Penguin is sinds 2016 een realtime onderdeel van het kernalgoritme en devalueert spamlinks in plaats van hele sites te straffen. Er komen geen Penguin-updates meer om op te wachten.",
+  "toepassing": "Open bij een klant met een linkbuilding-verleden in Search Console het rapport Handmatige acties. Leeg? Dan weet je dat eventuele spamlinks hooguit niet meetellen, en focus je op links die je verdient.",
+  "bron": {
+    "titel": "Penguin is now part of our core algorithm",
+    "url": "https://developers.google.com/search/blog/2016/09/penguin-is-now-part-of-our-core"
+  }
+}

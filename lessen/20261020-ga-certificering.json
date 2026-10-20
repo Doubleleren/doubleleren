@@ -1,0 +1,27 @@
+{
+  "id": "20261020-ga-certificering",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Google Analytics-certificering (opvolger van de GAIQ)",
+  "matrix": [
+    "3.1.7"
+  ],
+  "titel": "De GAIQ bestaat niet meer: zo haal je nu je GA-certificaat",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een nieuwe collega vraagt: \"Moet ik nog de GAIQ halen?\" Op veel cv's en vacatures staat die afkorting nog, maar het examen heet inmiddels anders.",
+  "uitleg": "**De GAIQ (Google Analytics Individual Qualification) hoorde bij Universal Analytics.** Universal Analytics verwerkt sinds 1 juli 2023 geen nieuwe data meer, en de GAIQ is opgevolgd door de **Google Analytics Certification**, gebaseerd op GA4. Je haalt die gratis via **Skillshop**, het leerplatform van Google.\n\nDe voorbereiding loopt via **Analytics Academy op Skillshop**:\n- 101: Get started using Google Analytics (beginner)\n- 102: Manage GA data and learn to read reports (beginner)\n- 201: Dive deeper into GA data and reports (gevorderd)\n- 301: Use GA with other tools and data sources (expert)\n- daarna het examen: Google Analytics Certification\n\nWat je moet weten over het examen (Skillshop Help voor Google Ads, GMP en GA):\n- Je slaagt met **80% of hoger**.\n- Gezakt? Dan wacht je **24 uur** voor je het opnieuw mag proberen. Het aantal pogingen is onbeperkt.\n- Het certificaat is **één jaar geldig**. Daarna is je badge verlopen. Hercertificeren kan vanaf 30 dagen vóór de vervaldatum.\n\nEen certificaat bewijst vooral dat je de begrippen en rapporten kent. Voor klantwerk telt daarnaast dat je zelf een property kunt inrichten en events kunt testen. Zie het examen dus als sluitstuk van oefenen in een echte property, bijvoorbeeld de demo-account van Google.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de Analytics Help en op Skillshop op hoe jij de Google Analytics Certification haalt. Schrijf in een paar zinnen je plan: welke cursussen je eerst doet, welke score je nodig hebt, wat er gebeurt als je zakt en hoe lang het certificaat geldig is.",
+    "hint": "Zoek in de Analytics Help op 'Analytics Academy Skillshop' en in de Skillshop Help op 'FAQs for Skillshop Google: Ads/GMP/GA'.",
+    "minTekens": 120
+  },
+  "modelantwoord": "Ik haal de **Google Analytics Certification** (de opvolger van de GAIQ) gratis via Skillshop. Eerst doe ik de Analytics Academy-cursussen 101 en 102, daarna 201 en 301. Voor het examen heb ik minimaal 80% nodig. Zak ik, dan kan ik het na 24 uur opnieuw proberen, onbeperkt vaak. Het certificaat is een jaar geldig; ik zet een herinnering om binnen 30 dagen vóór de vervaldatum te hercertificeren.",
+  "kernpunt": "De GAIQ is vervangen door de Google Analytics Certification (GA4) op Skillshop: gratis, 80% om te slagen, 24 uur wachten na zakken en één jaar geldig.",
+  "toepassing": "Check deze week je eigen Skillshop-profiel: heb je een geldig GA-certificaat, en wanneer verloopt het? Zet de hercertificeringsdatum in je agenda en werk 'GAIQ' op je LinkedIn of cv bij naar 'Google Analytics Certification'.",
+  "bron": {
+    "titel": "Enroll in Analytics Academy courses on Skillshop",
+    "url": "https://support.google.com/analytics/answer/15068052"
+  }
+}

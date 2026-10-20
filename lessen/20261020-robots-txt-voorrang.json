@@ -1,0 +1,32 @@
+{
+  "id": "20261020-robots-txt-voorrang",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "robots.txt-instructies: Allow, Disallow en voorrang",
+  "matrix": [
+    "1.1.8"
+  ],
+  "titel": "Allow of Disallow: welke robots.txt-regel wint?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een webshop wil het accountgedeelte en sorteer-URL's uit de crawl houden, maar de inlogpagina moet bereikbaar blijven. De developer zet deze regels in robots.txt:\n\n- User-agent: *\n- Disallow: /account/\n- Disallow: /*?sort=\n- Allow: /account/inloggen",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke van deze URL's mag Googlebot volgens deze robots.txt wél crawlen?",
+    "opties": [
+      "/account/bestellingen",
+      "/schoenen?sort=prijs-laag",
+      "/account/inloggen",
+      "/tassen?sort=nieuw"
+    ],
+    "juist": 2
+  },
+  "toelichting": "/account/inloggen valt onder zowel 'Disallow: /account/' als 'Allow: /account/inloggen'. Google kiest de **meest specifieke** regel, dus de regel met het langste pad: de Allow-regel wint. De volgorde van de regels in het bestand maakt niet uit. /account/bestellingen valt alleen onder de Disallow, en beide sorteer-URL's matchen /*?sort=.",
+  "uitleg": "Bij het toevoegen of verwijderen van robots.txt-instructies moet je weten hoe Google regels leest:\n\n- **Langste match wint.** Matchen een Allow- en een Disallow-regel dezelfde URL, dan geldt de regel met het langste pad. Zijn ze even specifiek, dan kiest Google de **minst beperkende** regel (Allow).\n- **Wildcards:** * staat voor nul of meer tekens, $ voor het einde van de URL. Disallow: /*.pdf$ blokkeert dus alleen URL's die op .pdf eindigen.\n- **Hoofdlettergevoelig:** /account/ matcht niet /Account/.\n- **Eén groep per crawler:** Googlebot volgt alleen de meest specifieke User-agent-groep. Staat er een aparte groep voor Googlebot, dan negeert hij de regels onder User-agent: *.\n\nLet op valkuilen in de praktijk. Disallow: /*?sort= blokkeert /tassen?kleur=rood&sort=prijs níet, want daar staat &sort= en geen ?sort=. En robots.txt regelt crawlen, niet indexeren: een geblokkeerde URL kan zonder snippet in Google verschijnen als er links naar wijzen. Wil je een pagina uit de index, gebruik dan noindex en blokkeer hem juist níet, anders ziet Google die noindex nooit.\n\nGoogle cachet robots.txt meestal tot 24 uur, dus een wijziging werkt niet direct. Content na 500 KiB wordt genegeerd.",
+  "kernpunt": "In robots.txt wint de meest specifieke (langste) regel, ongeacht de volgorde; bij gelijke lengte wint Allow. robots.txt stuurt het crawlen, niet het indexeren.",
+  "toepassing": "Open de robots.txt van een klant met filters of zoekpagina's en controleer of parameterregels ook de variant met & afvangen. Test twijfelgevallen met de URL-inspectietool in Search Console.",
+  "bron": {
+    "titel": "How Google interprets the robots.txt specification",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
+  }
+}

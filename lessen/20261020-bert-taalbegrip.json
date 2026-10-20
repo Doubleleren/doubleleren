@@ -1,0 +1,27 @@
+{
+  "id": "20261020-bert-taalbegrip",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "BERT en taalbegrip",
+  "matrix": [
+    "10.1.4"
+  ],
+  "titel": "BERT: waarom kleine woorden als 'naar' en 'voor' ertoe doen",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een copywriter vraagt je: \"Moet ik mijn teksten nu speciaal optimaliseren voor BERT?\"",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek de aankondiging van BERT op de blog van Google (oktober 2019) op. Welk voorbeeld met een reis naar de VS gebruikt Google, wat ging er vóór BERT mis, en wat zegt dat over hoe je teksten moet schrijven?",
+    "minTekens": 120,
+    "hint": "Zoek op de titel 'Understanding searches better than ever before' op blog.google."
+  },
+  "modelantwoord": "Google gebruikt de zoekopdracht **\"2019 brazil traveler to usa need a visa\"**. Het woordje *to* bepaalt de betekenis: het gaat om een Braziliaan die naar de VS reist. Vóór BERT begreep Google dat verband niet en toonde het resultaten over Amerikanen die naar Brazilië reizen. Met BERT snapt Google dat dit kleine woord juist veel uitmaakt.\n\nVoor teksten betekent dit: er is geen speciale BERT-optimalisatie. BERT helpt Google begrijpen wat er werkelijk gevraagd en geschreven wordt. Schrijf dus natuurlijke, volledige zinnen die precies de vraag van de zoeker beantwoorden, inclusief de nuance (voor wie, waarheen, wanneer), in plaats van losse zoekwoorden te herhalen.",
+  "uitleg": "**BERT** staat voor *Bidirectional Encoder Representations from Transformers*. Google kondigde op **25 oktober 2019** aan dat het BERT gebruikt in Search, en noemde het een van de grootste sprongen in de geschiedenis van Search.\n\nHet bijzondere: BERT verwerkt woorden **in relatie tot alle andere woorden** in een zin, en kijkt naar de woorden ervóór én erna. Eerdere systemen lazen een zoekopdracht meer als een rijtje losse woorden en lieten kleine woorden soms weg.\n\nDe belangrijkste feiten uit de aankondiging:\n- Bij de lancering hielp BERT Google **1 op de 10 zoekopdrachten** in het Engels in de VS beter te begrijpen, met uitbreiding naar meer talen in het vooruitzicht.\n- Het helpt vooral bij **langere, conversationele zoekopdrachten** en zoekopdrachten waarin voorzetsels zoals *for* en *to* de betekenis bepalen.\n- Google zette BERT in voor zowel **ranking** als **featured snippets**.\n\nVoor SEO is de les vooral wat je *niet* hoeft te doen. Je kunt BERT niet bedienen met een trucje. Het systeem beloont tekst die helder en volledig antwoord geeft op wat iemand echt vraagt. Bij een zoekopdracht als \"medicijnen ophalen voor iemand anders\" wint dus de pagina die precies dát uitlegt, niet de pagina die het vaakst \"medicijnen ophalen\" noemt.",
+  "kernpunt": "BERT (2019) laat Google de context van woorden begrijpen, ook van kleine woorden als 'naar' en 'voor'. Optimaliseren voor BERT betekent: helder antwoord geven op de echte vraag.",
+  "toepassing": "Kies bij een klant één pagina en bekijk in Search Console de langste zoekopdrachten waarop hij vertoningen heeft. Beantwoordt de pagina die vragen echt, met de juiste nuance? Zo niet, vul dat aan.",
+  "bron": {
+    "titel": "Understanding searches better than ever before",
+    "url": "https://blog.google/products/search/search-language-understanding-bert/"
+  }
+}

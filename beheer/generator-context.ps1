@@ -31,17 +31,21 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     if ($org.leden.$id.leren -eq 'optioneel' -and -not ($profiel -and $profiel.obj.lessen)) { continue }   # koos (nog) geen lessen
     $matrix = & $lees 'matrix'
     $wachtrij = & $lees 'wachtrij'
-    $resultaten = @()
-    foreach ($m in 0, -1, -2) {
-        $r = & $lees ('log-' + (Get-Date).AddMonths($m).ToString('yyyy-MM'))
-        if ($r) { $resultaten += @($r.obj.regels | ForEach-Object { [ordered]@{ datum = $_.datum; les = $_.id; resultaat = $_.resultaat; matrix = $_.matrix; niveau = $_.niveau; soort = $_.soort } }) }
+    # Alle maanden: 'gedaan' (ooit gedane les-id's, die komen nooit terug); details alleen van de laatste 3 maanden
+    $resultaten = @(); $gedaan = @()
+    $grens = (Get-Date).AddMonths(-2).ToString('yyyy-MM')
+    foreach ($bestand in @(Get-DlOpslagLijst $d "data/$id" | Where-Object { $_ -match '^log-(\d{4}-\d{2})\.enc$' } | Sort-Object)) {
+        $maand = $bestand.Substring(4, 7)
+        $r = & $lees "log-$maand"; if (-not $r) { continue }
+        $gedaan += @($r.obj.regels | ForEach-Object { $_.id })
+        if ($maand -ge $grens) { $resultaten += @($r.obj.regels | ForEach-Object { [ordered]@{ datum = $_.datum; les = $_.id; resultaat = $_.resultaat; matrix = $_.matrix; niveau = $_.niveau; soort = $_.soort } }) }
     }
     $scores = [ordered]@{}
     if ($matrix) { foreach ($p in $matrix.obj.scores.PSObject.Properties) { $laatste = @($p.Value.PSObject.Properties | Sort-Object Name)[-1]; if ($laatste) { $scores[$p.Name] = [int]$laatste.Value } } }
     $leden[$id] = [ordered]@{
         project = $org.leden.$id.project; cel = $org.leden.$id.cel
         focus = $(if ($profiel) { $profiel.obj.focus }); leerdoelen = $(if ($profiel) { $profiel.obj.leerdoelen })
-        scores = $scores; resultaten = $resultaten; wachtrij = @($(if ($wachtrij) { $wachtrij.obj.lessen }))
+        scores = $scores; resultaten = $resultaten; gedaan = @($gedaan | Sort-Object -Unique); wachtrij = @($(if ($wachtrij) { $wachtrij.obj.lessen }))
     }
 }
 [IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; leden = $leden } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))

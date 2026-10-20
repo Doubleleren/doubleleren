@@ -1,0 +1,32 @@
+{
+  "id": "20261020-og-tags-deelpreview",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Open Graph- en social-tags",
+  "matrix": [
+    "2.1.11"
+  ],
+  "titel": "Waarom toont LinkedIn het logo in plaats van je blogfoto?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant deelt een nieuwe blog op LinkedIn. In de preview staat het logo uit de header als afbeelding en de titel is \"Home | Bedrijfsnaam\". De blog zelf heeft een mooie headerfoto en een goede H1.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak, en wat los je dus als eerste op?",
+    "opties": [
+      "De H1 is te lang: LinkedIn pakt dan automatisch de eerste afbeelding en de sitenaam.",
+      "De blog mist Article-structured data; zonder JSON-LD kan LinkedIn geen preview maken.",
+      "De Open Graph-tags ontbreken of zijn sitebreed hetzelfde: zet per pagina een eigen og:title, og:image (met og:image:alt) en og:url.",
+      "De afbeelding heeft geen alt-tekst in de HTML, waardoor LinkedIn hem overslaat."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Platforms die een link omzetten in een preview, zoals Facebook, LinkedIn en WhatsApp, lezen vooral de Open Graph-tags in de head. Staan die er niet (of staat er sitebreed dezelfde homepage-waarde in, wat bij sommige thema's en plug-ins gebeurt), dan gokt het platform of valt het terug op de verkeerde titel en afbeelding. Structured data en de alt-tekst in de body bepalen die preview niet.",
+  "uitleg": "**Open Graph** (OG) is een protocol dat oorspronkelijk door Facebook is bedacht. Met een paar meta-tags in de <head> vertel je hoe een pagina eruitziet als iemand hem deelt. Volgens de specificatie op ogp.me zijn er vier verplichte eigenschappen:\n\n- **og:title**: de titel zoals die in de preview moet verschijnen\n- **og:type**: het soort object, bijvoorbeeld article; zonder opgave geldt website\n- **og:image**: de URL van de afbeelding die de pagina vertegenwoordigt\n- **og:url**: de canonieke URL van de pagina\n\nVeelgebruikte aanvullingen zijn **og:description** (één à twee zinnen), **og:site_name**, **og:locale** en bij de afbeelding **og:image:width**, **og:image:height** en **og:image:alt** (een beschrijving van wat er op de afbeelding staat, geen bijschrift).\n\nOG-tags bepalen vooral hoe aantrekkelijk je link is op social en in chatapps, en dus hoeveel mensen erop klikken. Voor Google zijn ze geen vervanging van een goede <title>. Google neemt og:site_name wel mee als een van de signalen voor de **sitenaam** in de zoekresultaten, maar daarvoor weegt WebSite-structured data het zwaarst.\n\nLet op: platforms cachen previews. Pas je de tags aan, dan moet je de preview vaak opnieuw laten ophalen.",
+  "kernpunt": "De deelpreview komt uit de Open Graph-tags: og:title, og:type, og:image en og:url zijn verplicht, en ze moeten per pagina kloppen, niet sitebreed hetzelfde zijn.",
+  "toepassing": "Plak de URL van een recente blog van een klant in de Sharing Debugger van Meta of de Post Inspector van LinkedIn. Klopt de afbeelding, titel en beschrijving niet? Check in de bron welke og:-tags er staan en of de SEO-plug-in per pagina eigen waarden invult.",
+  "bron": {
+    "titel": "The Open Graph protocol",
+    "url": "https://ogp.me/"
+  }
+}

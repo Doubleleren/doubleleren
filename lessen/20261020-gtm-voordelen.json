@@ -1,0 +1,26 @@
+{
+  "id": "20261020-gtm-voordelen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Waarom Google Tag Manager",
+  "matrix": [
+    "3.2.1"
+  ],
+  "titel": "\"Waarom GTM? Ik plak de GA-code toch gewoon in de header\"",
+  "volgorde": "opdracht-eerst",
+  "intro": "De developer van een klant vindt Google Tag Manager een overbodige extra laag. Hij zet de GA4-code liever hardcoded in de header, net als het Meta-pixel en de Google Ads-tag. De marketeer van de klant wil volgende maand drie nieuwe conversies gaan meten.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Geef drie concrete argumenten waarom het voor deze klant slim is om de analytics-implementatie via Google Tag Manager te beheren. Noem ook één nuance: wat lost GTM níet voor je op?",
+    "minTekens": 150
+  },
+  "modelantwoord": "**Argumenten:**\n- **Geen codewijziging per tag:** na het eenmalig plaatsen van de twee GTM-snippets voeg je tags (GA4-events, Google Ads, Meta) toe in de GTM-interface. De drie nieuwe conversies hoeven niet in een developmentsprint.\n- **Testen vóór livegang:** met Preview (Tag Assistant) zie je welke tags op welke trigger afgaan, voordat je publiceert.\n- **Versiebeheer en samenwerken:** elke publicatie is een versie die je kunt terugzetten; met workspaces en gebruikersrechten bepaal je wie wat mag publiceren.\n- **Alles op één plek:** één container met tags, triggers en variabelen in plaats van losse scripts verspreid over templates.\n\n**Nuance:** GTM kan alleen meten wat er op de pagina beschikbaar is. Voor betrouwbare data zoals orderwaarde of product-id's heb je nog steeds een developer nodig die die gegevens in de dataLayer zet. En meer tags betekent meer JavaScript: houd de container opgeruimd.",
+  "uitleg": "**Google Tag Manager (GTM)** is een tag management system: je plaatst één keer twee codesnippets op de site, en daarna beheer je alle tracking via een webinterface in plaats van in de broncode.\n\nDe bouwstenen:\n- **Tags**: de tracking zelf, zoals de Google-tag voor GA4, een Google Ads-conversie of een tag van een derde partij\n- **Triggers**: wanneer een tag afgaat, bijvoorbeeld bij elke pagina of een klik op een knop\n- **Variabelen**: dynamische waarden die je hergebruikt, zoals een measurement ID of de tekst van een knop\n- Samen vormen ze een **container** per website of app\n\nDe voordelen voor analytics-beheer:\n- **Snelheid**: nieuwe metingen zonder dat de site opnieuw gedeployed hoeft te worden\n- **Kwaliteit**: met Preview test je eerst, en pas daarna publiceer je\n- **Controle**: versies met naam en beschrijving, zodat je ziet wat er wanneer veranderde en kunt terugrollen\n- **Samenwerken**: meerdere mensen werken in eigen workspaces, met rechten per gebruiker\n\nGTM vervangt de developer dus niet helemaal. Voor ecommerce-data en andere gegevens uit het CMS heb je een goede dataLayer nodig. Wel zorgt GTM ervoor dat je voor elke nieuwe meting niet meer in de rij voor de sprint hoeft te staan.",
+  "kernpunt": "GTM scheidt tracking van de websitecode: tags, triggers en variabelen beheer je in één container, met Preview om te testen en versies om terug te rollen.",
+  "toepassing": "Kies een klant met hardcoded tracking en maak een lijstje van alle scripts in de broncode (GA4, Ads, Meta, chat, heatmaps). Dat lijstje is je businesscase voor een migratie naar GTM.",
+  "bron": {
+    "titel": "Introduction to Tag Manager - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/6102821"
+  }
+}

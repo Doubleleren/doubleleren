@@ -1,0 +1,32 @@
+{
+  "id": "20261020-rankbrain",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "RankBrain",
+  "matrix": [
+    "10.1.5"
+  ],
+  "titel": "RankBrain: Googles eerste AI-systeem in Search, en wat het níet is",
+  "volgorde": "uitleg-eerst",
+  "intro": "In de pitch van een ander bureau leest een klant: \"Wij optimaliseren speciaal voor RankBrain.\" Hij vraagt jou wat RankBrain eigenlijk is.",
+  "uitleg": "**RankBrain** werd in **2015** gelanceerd en was het **eerste deep learning-systeem** dat Google in Search inzette. Het helpt Google begrijpen hoe **woorden samenhangen met concepten**.\n\nGoogle geeft zelf dit voorbeeld: iemand zoekt *\"what's the title of the consumer at the highest level of a food chain\"*. RankBrain leert uit hoe die woorden op pagina's voorkomen dat het om dieren gaat en niet om consumenten in een winkel, en begrijpt dat de zoeker een **apex predator** (toppredator) bedoelt. Zo kan Google relevante pagina's tonen, ook als die niet alle exacte woorden uit de zoekopdracht bevatten.\n\nZoals de naam al zegt, helpt RankBrain bij het **rangschikken** van de beste resultaten. Het werkt samen met latere AI-systemen:\n- **Neural matching** (2018): koppelt concepten in zoekopdrachten aan pagina's, vooral bij het ophalen van relevante documenten.\n- **BERT** (2019): begrijpt hoe combinaties van woorden samen een betekenis vormen.\n\nGoogle noemde RankBrain in 2022 nog steeds een van de belangrijkste AI-systemen in Search.\n\nWat betekent dit voor SEO? Je hoeft niet elke formulering van een zoekwoord letterlijk op een pagina te zetten. Schrijf een pagina die een onderwerp en de bijbehorende begrippen goed en volledig behandelt. \"Optimaliseren voor RankBrain\" is daarom vooral een mooi verkoopverhaal: het komt neer op goede, relevante content.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke omschrijving van RankBrain komt overeen met hoe Google het systeem zelf beschrijft?",
+    "opties": [
+      "Een spamfilter uit 2012 dat pagina's met gekochte links en keyword stuffing lager zet.",
+      "Een AI-systeem uit 2015 dat begrijpt hoe woorden samenhangen met concepten, zodat Google relevante pagina's kan rangschikken die niet alle exacte zoekwoorden bevatten.",
+      "Een taalmodel uit 2019 dat vooral kleine woorden zoals voorzetsels in lange zoekopdrachten beter begrijpt.",
+      "Een systeem dat meet hoe lang bezoekers op je pagina blijven en de volgorde van de resultaten daarop baseert."
+    ],
+    "juist": 1
+  },
+  "toelichting": "De eerste optie beschrijft Penguin (2012, linkspam). De derde beschrijft BERT (2019). De vierde is een hardnekkig verhaal uit de SEO-wereld, maar zo beschrijft Google RankBrain nergens. Google omschrijft RankBrain als een AI-systeem dat begrijpt hoe woorden met concepten samenhangen.",
+  "kernpunt": "RankBrain (2015) was Googles eerste deep learning-systeem in Search en helpt woorden aan concepten te koppelen. Je 'optimaliseert' ervoor door een onderwerp volledig en natuurlijk te behandelen.",
+  "toepassing": "Bekijk in Search Console voor één belangrijke pagina van een klant de zoekopdrachten zonder het hoofdzoekwoord erin. Zie je daar veel synoniemen of omschrijvingen? Dan zie je dit soort conceptbegrip in de praktijk.",
+  "bron": {
+    "titel": "How AI powers great search results",
+    "url": "https://blog.google/products/search/how-ai-powers-great-search-results/"
+  }
+}

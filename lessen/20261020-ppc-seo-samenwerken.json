@@ -1,0 +1,28 @@
+{
+  "id": "20261020-ppc-seo-samenwerken",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "SEO en PPC laten samenwerken",
+  "matrix": [
+    "9.2.3",
+    "9.2.1"
+  ],
+  "titel": "Ads stoppen omdat je organisch op 1 staat? Eerst meten",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een webshopklant staat organisch op positie 1 voor zijn merknaam en een paar productzoekwoorden. De financieel directeur wil op die zoekwoorden de advertenties stoppen: \"Die klikken krijgen we toch gratis.\"",
+  "uitleg": "Het klinkt logisch, maar het is een aanname. Google onderzocht dit met **Search Ads Pause-studies**: wat gebeurt er met het totale verkeer als een adverteerder zijn zoekadvertenties pauzeert?\n\n- In 2011 bleek gemiddeld **89%** van de advertentieklikken *incrementeel*: dat verkeer werd níet opgevangen door extra organische klikken toen de ads uit stonden.\n- Een vervolganalyse van 390 van die studies keek naar de organische positie. Stond de adverteerder organisch op **1**, dan was gemiddeld **50%** van de advertentieklikken incrementeel. Bij positie **2 tot 4** was dat **82%**, bij positie **5 of lager 96%**.\n\nWat betekent dat voor de samenwerking tussen SEO en PPC?\n\n- **Organisch op 1:** een deel van de advertentieklikken had je ook gratis gekregen, maar zeker niet alles. Test het in plaats van blind te stoppen.\n- **Organisch lager of niet zichtbaar:** ads leveren vrijwel volledig extra verkeer op. Laat ze draaien terwijl SEO de positie opbouwt.\n- **Ads converteren, maar je rankt nergens:** een duidelijke SEO-kans.\n\nKanttekeningen: het onderzoek komt van Google zelf, gaat over **klikken en niet over conversies**, en het zijn gemiddelden. Google raadt zelf aan om de echte impact per adverteerder te meten met een gerandomiseerd experiment, bijvoorbeeld een geo-experiment.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Laat Claude een overzicht maken waarmee je per zoekwoord kunt beslissen hoe SEO en Ads samenwerken. Gebruik de Search Console-koppeling voor de organische posities en een export van het zoektermenrapport uit Google Ads. Schrijf de prompt die je aan Claude geeft en beschrijf in welke groepen je de zoekwoorden laat indelen en wat je per groep adviseert.",
+    "minTekens": 150,
+    "hint": "Denk aan de vier combinaties van 'wel of geen advertentie' en 'hoge of lage organische positie'."
+  },
+  "modelantwoord": "**Prompt:** \"Haal via Search Console de zoekopdrachten van de afgelopen 3 maanden op met gemiddelde positie, klikken en vertoningen. Combineer die met de bijgevoegde export van het Google Ads-zoektermenrapport (kosten, klikken, conversies). Maak één tabel per zoekwoord en deel ze in vier groepen in.\"\n\n**Groepen en advies:**\n- **Ads + organisch positie 1:** kandidaat voor een test (bijvoorbeeld een geo-experiment of tijdelijk pauzeren in een deel van de regio's). Niet blind stoppen: ook hier is gemiddeld nog ongeveer de helft van de advertentieklikken extra verkeer.\n- **Ads + organisch positie 2 of lager:** ads laten draaien, advertentieklikken zijn grotendeels incrementeel. Tegelijk de pagina organisch verbeteren.\n- **Ads converteert, organisch niet zichtbaar:** SEO-kans: een goede landingspagina of content maken.\n- **Organisch sterk, geen ads:** prima zo, eventueel testen of ads extra opleveren.\n\nClaude helpt met het combineren en sorteren; of ads echt incrementeel zijn, bewijs je alleen met een experiment.",
+  "kernpunt": "Hoe hoger je organische positie, hoe meer advertentieklikken je ook gratis had gekregen, maar zelfs op positie 1 is gemiddeld de helft nog extra. Beslis per zoekwoord en meet met een experiment.",
+  "toepassing": "Koppel bij één klant Google Ads aan Search Console en open in Google Ads het rapport over betaalde en organische zoekresultaten (*paid and organic report*). Kijk welke zoekopdrachten alleen organisch, alleen betaald of allebei verkeer opleveren.",
+  "bron": {
+    "titel": "Impact of Organic Ranking on Ad Click Incrementality",
+    "url": "https://research.google/blog/impact-of-organic-ranking-on-ad-click-incrementality/"
+  }
+}

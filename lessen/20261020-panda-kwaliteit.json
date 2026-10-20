@@ -1,0 +1,32 @@
+{
+  "id": "20261020-panda-kwaliteit",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Panda en contentkwaliteit",
+  "matrix": [
+    "10.1.3"
+  ],
+  "titel": "Van Panda naar kernalgoritme: zo beoordeelt Google contentkwaliteit nu",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een klant met een affiliatesite verloor na een core update veel organisch verkeer. In een oud blogartikel leest hij dat hij \"een Panda-straf\" heeft.",
+  "uitleg": "**Panda** werd in 2011 aangekondigd. Het systeem moest ervoor zorgen dat kwalitatief goede en originele content beter zichtbaar werd, en dunne, gekopieerde of massaal geproduceerde content minder. In het begin kwam Panda in losse updates.\n\nVolgens Google zelf is Panda in **2015** opgegaan in de **kernsystemen** (core ranking systems). Hetzelfde gebeurde later met het **helpful content system** (aangekondigd in 2022): dat werd in **maart 2024** onderdeel van de kernsystemen. Google noemt beide inmiddels *retired systems*.\n\nWat betekent dat voor jou?\n\n- Er bestaat geen losse \"Panda-update\" of \"Panda-straf\" meer. Kwaliteit wordt beoordeeld door de kernsystemen, en grote verschuivingen zie je vooral rond **core updates**.\n- Een algoritmische daling is **geen handmatige actie**: er is geen melding in Search Console en geen heroverwegingsverzoek mogelijk.\n- Herstel vraagt om echte verbetering. Google geeft daarvoor zelfbeoordelingsvragen, zoals: biedt de content originele informatie of analyse? Voegt hij wezenlijk iets toe ten opzichte van andere pagina's in de zoekresultaten? Is hij massaal geproduceerd zonder aandacht per pagina?\n\nDe gedachte achter Panda leeft dus nog steeds, alleen niet meer als apart filter.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het beste advies aan deze klant?",
+    "opties": [
+      "Wacht op de volgende Panda-refresh; daarna wordt de straf automatisch opgeheven.",
+      "Dien een heroverwegingsverzoek in via Search Console, want een kwaliteitsdaling is een handmatige actie.",
+      "Verwijder in één keer de helft van de oudste artikelen, zodat de site er voor Google 'verser' uitziet.",
+      "Beoordeel de getroffen pagina's eerlijk op originaliteit en toegevoegde waarde ten opzichte van andere zoekresultaten, en verbeter of herschrijf ze."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Panda-refreshes bestaan niet meer: Panda zit sinds 2015 in de kernsystemen. Een heroverwegingsverzoek kan alleen bij een handmatige actie, en een algoritmische daling is dat niet. Massaal oude content verwijderen om 'vers' te lijken helpt volgens Google niet. Wat wel werkt: de getroffen pagina's eerlijk beoordelen en echt beter maken.",
+  "kernpunt": "Panda is sinds 2015 onderdeel van Googles kernsystemen, het helpful content system sinds maart 2024. Een kwaliteitsdaling los je niet op met wachten of een verzoek, maar met betere content.",
+  "toepassing": "Neem bij een klant met een daling na een core update de vijf pagina's die het meest verloren. Leg ze naast de top 3 in de zoekresultaten en noteer per pagina wat de concurrent beter of origineler doet.",
+  "bron": {
+    "titel": "A guide to Google Search ranking systems",
+    "url": "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
+  }
+}

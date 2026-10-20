@@ -1,0 +1,27 @@
+{
+  "id": "20261020-paid-social-steunt-seo",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Hoe paid social SEO kan ondersteunen",
+  "matrix": [
+    "9.1.2"
+  ],
+  "titel": "Koop je met Meta-ads betere rankings in Google?",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een klant wil 'iets met social ads doen voor de SEO'. Zijn verwachting: hoe meer likes en shares, hoe hoger hij in Google komt.",
+  "uitleg": "Eerst de verwachting rechtzetten: met een advertentie op Facebook of Instagram koop je **geen positie in Google**. Paid social is geen rankingknop. Wel kan het SEO **indirect** ondersteunen, en dat is precies wat Google zelf over promotie zegt.\n\nIn de SEO Starter Guide schrijft Google dat het effectief promoten van nieuwe content leidt tot **snellere ontdekking**: door mensen die in het onderwerp geïnteresseerd zijn, en ook door zoekmachines. Social media en advertenties worden daarbij genoemd. Daarnaast vindt Google het overgrote deel van nieuwe pagina's via **links**.\n\nWaar paid social SEO dus kan helpen:\n- **Content zichtbaar maken bij de juiste mensen.** Een nieuwe gids of een onderzoek bereikt via een ad set gericht op journalisten, vakgenoten of je doelgroep meer mensen dan organisch.\n- **Kans op links en vermeldingen.** Wie de content ziet en hem goed vindt, kan erover schrijven of ernaar linken. Dat is het effect dat je wilt, niet de klik op de ad zelf.\n- **Merkbekendheid.** Wie je merk kent, klikt eerder op je resultaat of zoekt later op je merknaam.\n- **Boodschappen testen.** Welke kop of invalshoek het beste werkt in een ad, geeft inspiratie voor titles en intro's.\n\nWaar het níét helpt: dunne content oppompen met betaald bereik. Paid social versterkt wat al goed is.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Leg de klant in een paar zinnen uit hoe paid social zijn SEO wél kan ondersteunen. Noem minstens twee concrete manieren en zeg eerlijk wat het níét doet.",
+    "minTekens": 120,
+    "hint": "Denk aan ontdekking, links en merkbekendheid, en aan de verwachting die je moet bijstellen."
+  },
+  "modelantwoord": "Met social ads koop je geen hogere positie in Google: betalen voor bereik op Meta is iets anders dan ranken. Paid social kan wel indirect helpen:\n\n- Je brengt sterke content (een gids, onderzoek of tool) snel bij precies de mensen die erover kunnen schrijven of ernaar linken. Google zegt zelf dat promotie zorgt voor snellere ontdekking door geïnteresseerden én zoekmachines, en Google vindt de meeste nieuwe pagina's via links.\n- Meer merkbekendheid: mensen die je merk kennen, klikken eerder op je zoekresultaat of zoeken op je merknaam.\n- Je kunt koppen en invalshoeken testen en de winnaar gebruiken voor titles en intro's.\n\nVoorwaarde: de content moet goed genoeg zijn om links te verdienen. Betaald bereik op zwakke content levert niets op voor SEO.",
+  "kernpunt": "Paid social verhoogt rankings niet direct, maar versnelt ontdekking van goede content door mensen en zoekmachines, en vergroot de kans op links en merkbekendheid.",
+  "toepassing": "Kies bij een klant één linkwaardig stuk content (onderzoek, tool, uitgebreide gids) en bedenk welke doelgroep het via een kleine Meta-campagne moet zien om er kans op links of vermeldingen uit te halen.",
+  "bron": {
+    "titel": "Search Engine Optimization (SEO) Starter Guide",
+    "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+  }
+}

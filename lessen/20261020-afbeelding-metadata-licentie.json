@@ -1,0 +1,27 @@
+{
+  "id": "20261020-afbeelding-metadata-licentie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Afbeelding-markup (ImageObject en licentie)",
+  "matrix": [
+    "2.2.6"
+  ],
+  "titel": "Laat Claude ImageObject-markup schrijven voor de Licensable-badge",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een fotograaf verkoopt licenties op zijn natuurfoto's. Zijn foto's verschijnen wel in Google Afbeeldingen, maar zonder vermelding van de maker of hoe je een licentie koopt. Andere sites gebruiken ze daardoor zonder te betalen.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Vraag Claude om JSON-LD-markup voor één foto van deze fotograaf (verzin zelf een realistische afbeeldings-URL, licentiepagina en naam). Laat Claude uitleggen welke eigenschappen verplicht zijn en welke nodig zijn voor de *Licensable*-badge in Google Afbeeldingen. Controleer het resultaat met de documentatie van Google en plak hier de markup plus wat je hebt moeten corrigeren.",
+    "minTekens": 150,
+    "hint": "Vraag expliciet naar het type ImageObject en naar het verschil tussen license en acquireLicensePage."
+  },
+  "modelantwoord": "Voorbeeld:\n\n{\"@context\": \"https://schema.org/\", \"@type\": \"ImageObject\", \"contentUrl\": \"https://fotograaf.example/foto/ijsvogel.jpg\", \"license\": \"https://fotograaf.example/licentievoorwaarden\", \"acquireLicensePage\": \"https://fotograaf.example/licentie-kopen\", \"creditText\": \"Studio Veldwerk\", \"creator\": {\"@type\": \"Person\", \"name\": \"Jan de Vries\"}, \"copyrightNotice\": \"© Jan de Vries\"}\n\n- **Verplicht:** contentUrl (de afbeelding waar de metadata bij hoort) plus minstens één van creator, creditText, copyrightNotice of license.\n- **Licensable-badge:** daarvoor is **license** nodig (de pagina met de licentievoorwaarden); acquireLicensePage (waar je een licentie kunt krijgen) wordt aanbevolen.\n\nVoorbeeld van een correctie: Claude zette eerst de URL van de webpagina in contentUrl in plaats van de URL van het afbeeldingsbestand. Daarna getest in de Rich Results Test.",
+  "uitleg": "Met **afbeelding-metadata** geef je Google Afbeeldingen extra informatie over een foto: wie hem maakte, hoe je de maker vermeldt en onder welke licentie je hem mag gebruiken. Google kan dan de maker, de credit en een **Licensable**-badge tonen, met een link naar de licentie-informatie.\n\nJe doet dat met het schema.org-type **ImageObject**:\n\n- **contentUrl** (verplicht): de URL van het afbeeldingsbestand zelf. Daarmee bepaalt Google bij welke afbeelding de metadata hoort.\n- Plus minstens één van: **creator** (meestal de fotograaf, kan ook een organisatie zijn), **creditText** (de naam die bij publicatie vermeld wordt), **copyrightNotice** of **license**. Zodra je er één hebt, zijn de andere drie aanbevolen.\n- **license**: een URL naar de pagina met de licentievoorwaarden. Nodig voor de Licensable-badge.\n- **acquireLicensePage**: een URL naar een pagina waar je leest hoe je een licentie krijgt (aanbevolen).\n\nIn plaats van structured data kun je ook **IPTC-fotometadata** in het bestand zelf zetten. Gebruik je allebei en spreken ze elkaar tegen, dan kiest Google de structured data.\n\nClaude is handig om de JSON-LD snel op te zetten, maar check altijd zelf of contentUrl naar het beeldbestand wijst en test met de Rich Results Test.",
+  "kernpunt": "ImageObject-markup vraagt contentUrl plus minstens één van creator, creditText, copyrightNotice of license. Voor de Licensable-badge heb je license nodig; bij conflict met IPTC wint de structured data.",
+  "toepassing": "Heeft een klant eigen beeldmateriaal dat vaak gekopieerd wordt (fotograaf, illustrator, stockbeeld)? Zoek één afbeelding op in Google Afbeeldingen, kijk of er een maker of Licensable-badge staat, en stel anders ImageObject-markup voor.",
+  "bron": {
+    "titel": "Image metadata in Google Images",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"
+  }
+}

@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-20T08:27:47",
+    "bijgewerkt":  "2026-10-20T09:02:35",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -114,6 +114,548 @@
                                     "url":  "https://support.google.com/webmasters/answer/7576553"
                                 },
                        "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-afbeelding-metadata-licentie",
+                       "titel":  "Laat Claude ImageObject-markup schrijven voor de Licensable-badge",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Afbeelding-markup (ImageObject en licentie)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.6"
+                                  ],
+                       "kernpunt":  "ImageObject-markup vraagt contentUrl plus minstens één van creator, creditText, copyrightNotice of license. Voor de Licensable-badge heb je license nodig; bij conflict met IPTC wint de structured data.",
+                       "bron":  {
+                                    "titel":  "Image metadata in Google Images",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"
+                                },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-bert-taalbegrip",
+                       "titel":  "BERT: waarom kleine woorden als \u0027naar\u0027 en \u0027voor\u0027 ertoe doen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "BERT en taalbegrip",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.4"
+                                  ],
+                       "kernpunt":  "BERT (2019) laat Google de context van woorden begrijpen, ook van kleine woorden als \u0027naar\u0027 en \u0027voor\u0027. Optimaliseren voor BERT betekent: helder antwoord geven op de echte vraag.",
+                       "bron":  {
+                                    "titel":  "Understanding searches better than ever before",
+                                    "url":  "https://blog.google/products/search/search-language-understanding-bert/"
+                                },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-clarity-bewijs-verzamelen",
+                       "titel":  "Van rage clicks in Clarity naar een testbare hypothese",
+                       "vakgebied":  "CRO × Claude",
+                       "onderwerp":  "Bewijs verzamelen met Clarity, Hotjar en surveys",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.5"
+                                  ],
+                       "kernpunt":  "Gedragstools (Clarity, Hotjar) laten zien wát bezoekers doen, surveys vertellen waarom. Samen leveren ze het bewijs voor een testbare hypothese.",
+                       "bron":  {
+                                    "titel":  "Semantic metrics | Microsoft Learn",
+                                    "url":  "https://learn.microsoft.com/en-us/clarity/insights/semantic-metrics"
+                                },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-cls-controleren",
+                       "titel":  "Lighthouse zegt CLS 0,02, Search Console zegt 0,28. Wie heeft gelijk?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: CLS controleren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.6"
+                                  ],
+                       "kernpunt":  "CLS is goed bij ≤ 0,1 (75e percentiel, velddata). Lighthouse ziet alleen shifts tijdens het laden; velddata zien het hele bezoek. Beoordeel dus op velddata en debug in het lab.",
+                       "bron":  {
+                                    "titel":  "Cumulative Layout Shift (CLS) | Articles | web.dev",
+                                    "url":  "https://web.dev/articles/cls"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-cls-verbeteren",
+                       "titel":  "Van rode CLS naar een fixlijst voor de developer, met Claude",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Core Web Vitals: CLS verbeteren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.7"
+                                  ],
+                       "kernpunt":  "CLS los je op door vooraf ruimte te reserveren (afmetingen, aspect-ratio, min-height), niets boven bestaande content te injecteren, fonts te stabiliseren en met transform te animeren.",
+                       "bron":  {
+                                    "titel":  "Optimize Cumulative Layout Shift | Articles | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-cls"
+                                },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-faceted-navigatie",
+                       "titel":  "Filters op een webshop: welke URL\u0027s laat je crawlen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Faceted navigation controleren en adviseren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.4"
+                                  ],
+                       "kernpunt":  "Bepaal per filter of er zoekvraag is. Filters zonder zoekvraag houd je uit de crawl (robots.txt of #-fragmenten), filters met zoekvraag maak je tot schone, consistente landingspagina\u0027s. Lege combinaties geven een 404.",
+                       "bron":  {
+                                    "titel":  "Managing crawling of faceted navigation URLs",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-ga4-cross-device-user-id",
+                       "titel":  "Eén klant, drie apparaten: zo telt GA4 hem als één gebruiker",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: cross-device meten met User-ID",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.5"
+                                  ],
+                       "kernpunt":  "Cross-device meten in GA4 doe je met een User-ID: een eigen niet-herleidbare klant-ID na inloggen, null bij uitloggen, en de rapportage-identiteit op Blended of Observed.",
+                       "bron":  {
+                                    "titel":  "Send user IDs | Google Analytics",
+                                    "url":  "https://developers.google.com/analytics/devguides/collection/ga4/user-id"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-ga4-eventmodel",
+                       "titel":  "Waar is mijn Event Category gebleven in GA4?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: het event-based datamodel",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.6"
+                                  ],
+                       "kernpunt":  "GA4 kent geen hit types en geen Category/Action/Label meer: alles is een event met parameters, en sessies worden afgeleid uit events (session_start).",
+                       "bron":  {
+                                    "titel":  "About events - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/9322688"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-ga4-via-gtm",
+                       "titel":  "GA4 via GTM in vijf stappen, zonder dubbele metingen",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4 installeren via Google Tag Manager",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.2"
+                                  ],
+                       "kernpunt":  "Basis-GA4 via GTM = Google-tag met de G-ID op Initialization - All Pages, enhanced measurement voor standaardevents, GA4 Event-tags voor de rest, en altijd eerst Preview/DebugView.",
+                       "bron":  {
+                                    "titel":  "Set up Google Analytics in Tag Manager",
+                                    "url":  "https://support.google.com/tagmanager/answer/9442095"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-ga-certificering",
+                       "titel":  "De GAIQ bestaat niet meer: zo haal je nu je GA-certificaat",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Google Analytics-certificering (opvolger van de GAIQ)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.7"
+                                  ],
+                       "kernpunt":  "De GAIQ is vervangen door de Google Analytics Certification (GA4) op Skillshop: gratis, 80% om te slagen, 24 uur wachten na zakken en één jaar geldig.",
+                       "bron":  {
+                                    "titel":  "Enroll in Analytics Academy courses on Skillshop",
+                                    "url":  "https://support.google.com/analytics/answer/15068052"
+                                },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-gtm-voordelen",
+                       "titel":  "\"Waarom GTM? Ik plak de GA-code toch gewoon in de header\"",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Waarom Google Tag Manager",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.1"
+                                  ],
+                       "kernpunt":  "GTM scheidt tracking van de websitecode: tags, triggers en variabelen beheer je in één container, met Preview om te testen en versies om terug te rollen.",
+                       "bron":  {
+                                    "titel":  "Introduction to Tag Manager - Tag Manager Help",
+                                    "url":  "https://support.google.com/tagmanager/answer/6102821"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-hreflang-nl-be",
+                       "titel":  "Nederland en Vlaanderen: waarom Google je hreflang negeert",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "hreflang",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.17"
+                                  ],
+                       "kernpunt":  "hreflang werkt alleen als elke versie zichzelf en alle andere versies noemt, met een taalcode voorop (nl-BE, nooit alleen be). Ontbreekt de terugverwijzing, dan negeert Google de tags.",
+                       "bron":  {
+                                    "titel":  "Tell Google about Localized Versions of Your Page",
+                                    "url":  "https://developers.google.com/search/docs/specialty/international/localized-versions"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-logs-crawlbudget",
+                       "titel":  "Wat Googlebot écht doet op je site: log-analyse met Claude",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Crawl budget: server log-analyse",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.3"
+                                  ],
+                       "kernpunt":  "Server logs laten zien waar Googlebot zijn tijd écht aan besteedt. Verifieer eerst of het echt Googlebot is en zoek dan naar parameter-URL\u0027s, redirects en 404\u0027s die tijd opslokken, en naar belangrijke pagina\u0027s die niet langskomen.",
+                       "bron":  {
+                                    "titel":  "Optimize your crawl budget",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget"
+                                },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-m-dot-site",
+                       "titel":  "Een klant met m.voorbeeld.nl: wat check je als eerste?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Parallelle mobiele sites (m-dot)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "8.2.2"
+                                  ],
+                       "kernpunt":  "Bij een m-dot-site wijst de desktoppagina met rel=alternate naar mobiel en de mobiele pagina met rel=canonical naar desktop. Door mobile-first indexing moet de mobiele versie minstens even compleet zijn; responsive is de aanbevolen oplossing.",
+                       "bron":  {
+                                    "titel":  "Mobile site and mobile-first indexing best practices",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+                                },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-og-tags-deelpreview",
+                       "titel":  "Waarom toont LinkedIn het logo in plaats van je blogfoto?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Open Graph- en social-tags",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.11"
+                                  ],
+                       "kernpunt":  "De deelpreview komt uit de Open Graph-tags: og:title, og:type, og:image en og:url zijn verplicht, en ze moeten per pagina kloppen, niet sitebreed hetzelfde zijn.",
+                       "bron":  {
+                                    "titel":  "The Open Graph protocol",
+                                    "url":  "https://ogp.me/"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-paginering-zonder-prev-next",
+                       "titel":  "rel=prev/next doet niets meer: zo pak je paginering nu aan",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Paginering na rel=next/prev",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.3.4",
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "Google gebruikt rel=prev/next niet meer (bevestigd maart 2019). Geef elke gepagineerde pagina een eigen URL, een eigen canonical en gewone links naar de volgende pagina.",
+                       "bron":  {
+                                    "titel":  "Pagination, incremental page loading, and their impact on Google Search",
+                                    "url":  "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-paid-social-campagnestructuur",
+                       "titel":  "Campagne, ad set of advertentie: waar kies je de doelgroep?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Paid social: basiscampagne opzetten in Meta",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "9.1.1"
+                                  ],
+                       "kernpunt":  "Meta werkt met drie niveaus: campagne (doel), ad set (doelgroep, plaatsing, budget, planning) en advertentie (format en creative). Doelgroepen test je met aparte ad sets.",
+                       "bron":  {
+                                    "titel":  "What are the advertising levels in Meta Ads Manager? | Meta Business Help Center",
+                                    "url":  "https://www.facebook.com/business/help/621956575422138"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-paid-social-steunt-seo",
+                       "titel":  "Koop je met Meta-ads betere rankings in Google?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Hoe paid social SEO kan ondersteunen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "9.1.2"
+                                  ],
+                       "kernpunt":  "Paid social verhoogt rankings niet direct, maar versnelt ontdekking van goede content door mensen en zoekmachines, en vergroot de kans op links en merkbekendheid.",
+                       "bron":  {
+                                    "titel":  "Search Engine Optimization (SEO) Starter Guide",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-panda-kwaliteit",
+                       "titel":  "Van Panda naar kernalgoritme: zo beoordeelt Google contentkwaliteit nu",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Panda en contentkwaliteit",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.3"
+                                  ],
+                       "kernpunt":  "Panda is sinds 2015 onderdeel van Googles kernsystemen, het helpful content system sinds maart 2024. Een kwaliteitsdaling los je niet op met wachten of een verzoek, maar met betere content.",
+                       "bron":  {
+                                    "titel":  "A guide to Google Search ranking systems",
+                                    "url":  "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-penguin-realtime",
+                       "titel":  "Wachten op de volgende Penguin-update? Die komt niet meer",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Penguin en linkspam",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.2"
+                                  ],
+                       "kernpunt":  "Penguin is sinds 2016 een realtime onderdeel van het kernalgoritme en devalueert spamlinks in plaats van hele sites te straffen. Er komen geen Penguin-updates meer om op te wachten.",
+                       "bron":  {
+                                    "titel":  "Penguin is now part of our core algorithm",
+                                    "url":  "https://developers.google.com/search/blog/2016/09/penguin-is-now-part-of-our-core"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-ppc-seo-samenwerken",
+                       "titel":  "Ads stoppen omdat je organisch op 1 staat? Eerst meten",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "SEO en PPC laten samenwerken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "9.2.3",
+                                      "9.2.1"
+                                  ],
+                       "kernpunt":  "Hoe hoger je organische positie, hoe meer advertentieklikken je ook gratis had gekregen, maar zelfs op positie 1 is gemiddeld de helft nog extra. Beslis per zoekwoord en meet met een experiment.",
+                       "bron":  {
+                                    "titel":  "Impact of Organic Ranking on Ad Click Incrementality",
+                                    "url":  "https://research.google/blog/impact-of-organic-ranking-on-ad-click-incrementality/"
+                                },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-rankbrain",
+                       "titel":  "RankBrain: Googles eerste AI-systeem in Search, en wat het níet is",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "RankBrain",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.5"
+                                  ],
+                       "kernpunt":  "RankBrain (2015) was Googles eerste deep learning-systeem in Search en helpt woorden aan concepten te koppelen. Je \u0027optimaliseert\u0027 ervoor door een onderwerp volledig en natuurlijk te behandelen.",
+                       "bron":  {
+                                    "titel":  "How AI powers great search results",
+                                    "url":  "https://blog.google/products/search/how-ai-powers-great-search-results/"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-ratings-eigen-reviews",
+                       "titel":  "Sterren in Google: wanneer kom je er wel en niet voor in aanmerking?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Ratings markup (Review en AggregateRating)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.3"
+                                  ],
+                       "kernpunt":  "Sterren via Review- of AggregateRating-markup krijg je niet voor reviews over je eigen bedrijf op je eigen site (LocalBusiness/Organization), ook niet via een widget. Wel voor bijvoorbeeld producten, met zichtbare reviews van echte gebruikers.",
+                       "bron":  {
+                                    "titel":  "Review Snippet (Review, AggregateRating) Structured Data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/review-snippet"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-rel-canonical",
+                       "titel":  "Eén product, drie URL\u0027s: wat doet rel=canonical eigenlijk?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "rel=canonical",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "rel=canonical is een sterk signaal (geen bevel) voor welke van meerdere dubbele URL\u0027s in Google moet verschijnen. Het blokkeert geen crawl, is geen noindex en geen redirect.",
+                       "bron":  {
+                                    "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-robots-txt-rapport",
+                       "titel":  "De robots.txt-tester is weg: zo controleer je robots.txt nu in GSC",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "robots.txt controleren in Search Console",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.7"
+                                  ],
+                       "kernpunt":  "robots.txt controleer je nu met het robots.txt-rapport (welk bestand, status, problemen) en test je per URL met de URL-inspectietool. Een 404 op robots.txt betekent \u0027alles mag\u0027, een 5xx kan het crawlen juist stilleggen.",
+                       "bron":  {
+                                    "titel":  "robots.txt-rapport",
+                                    "url":  "https://support.google.com/webmasters/answer/6062598?hl=nl"
+                                },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-robots-txt-voorrang",
+                       "titel":  "Allow of Disallow: welke robots.txt-regel wint?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "robots.txt-instructies: Allow, Disallow en voorrang",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.8"
+                                  ],
+                       "kernpunt":  "In robots.txt wint de meest specifieke (langste) regel, ongeacht de volgorde; bij gelijke lengte wint Allow. robots.txt stuurt het crawlen, niet het indexeren.",
+                       "bron":  {
+                                    "titel":  "How Google interprets the robots.txt specification",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-seo-ppc-relatie",
+                       "titel":  "Helpt adverteren in Google Ads je organische posities?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "SEO en PPC: hoe hangen ze samen?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "9.2.1"
+                                  ],
+                       "kernpunt":  "Betalen voor Google Ads heeft geen invloed op je organische ranking. SEO en PPC versterken elkaar via gedeelde zoekwoorddata, landingspagina\u0027s en zichtbaarheid in dezelfde SERP.",
+                       "bron":  {
+                                    "titel":  "Do You Need an SEO? Tips for Hiring an SEO | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/do-i-need-seo"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-ttfb-verbeteren",
+                       "titel":  "TTFB van 2,4 seconde: waar begin je met verbeteren?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Time to First Byte (TTFB)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.11"
+                                  ],
+                       "kernpunt":  "TTFB (goed is ≤ 0,8 s) gaat over hoe snel de server de eerste byte HTML levert. Je verbetert hem met hosting, CDN, caching en minder redirects, niet met beeld- of CSS-optimalisatie.",
+                       "bron":  {
+                                    "titel":  "Optimize Time to First Byte",
+                                    "url":  "https://web.dev/articles/optimize-ttfb"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-user-signals-bounce-rate",
+                       "titel":  "\"Onze bounce rate is 70%, dat kost ons rankings\": klopt dat?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "User signals en SEO",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.4"
+                                  ],
+                       "kernpunt":  "Google gebruikt geaggregeerde interactiedata om relevantie te beoordelen, maar noemt bounce rate en GA niet als signaal. Optimaliseer voor een tevreden bezoeker, niet voor één metric.",
+                       "bron":  {
+                                    "titel":  "How Does Google Determine Ranking Results - Google Search",
+                                    "url":  "https://www.google.com/search/howsearchworks/how-search-works/ranking-results/"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261020-video-markup-basis",
+                       "titel":  "Video-markup: drie verplichte velden en de \u0027key moments\u0027",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Video structured data",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.2"
+                                  ],
+                       "kernpunt":  "VideoObject vraagt minimaal name, thumbnailUrl en uploadDate, op een pagina waar de video echt te bekijken is. Voor tijdstempels in Google gebruik je Clip (zelf fragmenten opgeven) of SeekToAction (Google bepaalt ze).",
+                       "bron":  {
+                                    "titel":  "Video (VideoObject, Clip, BroadcastEvent) Schema Markup | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/video"
+                                },
+                       "soort":  "zoek-op",
                        "herkomst":  "generator"
                    }
                ]

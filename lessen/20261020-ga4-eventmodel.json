@@ -1,0 +1,32 @@
+{
+  "id": "20261020-ga4-eventmodel",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: het event-based datamodel",
+  "matrix": [
+    "3.1.6"
+  ],
+  "titel": "Waar is mijn Event Category gebleven in GA4?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant mailt: \"In het oude Analytics hadden we een event met Category 'Formulier' en Action 'Verzenden'. Waar vind ik die category nu terug in GA4?\" Om dat goed te beantwoorden moet je snappen hoe GA4 data opslaat.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke uitspraak over het datamodel van GA4 klopt?",
+    "opties": [
+      "GA4 werkt net als Universal Analytics met hit types: pageviews, events en transacties zijn aparte soorten hits.",
+      "In GA4 is de sessie de basiseenheid; events hangen onder een sessie en hebben altijd een Category, Action en Label.",
+      "Elke interactie is een event met een naam en parameters; zelfs het begin van een sessie is een event (session_start).",
+      "GA4 meet alleen events die je zelf aanmaakt; paginaweergaven en scrolls moet je altijd handmatig instellen."
+    ],
+    "juist": 2
+  },
+  "toelichting": "In GA4 is álles een event: een paginaweergave (page_view), een scroll, een aankoop en ook de start van een sessie (session_start). Category, Action en Label bestaan niet meer; context geef je mee via parameters. Paginaweergaven en scrolls komen standaard binnen via enhanced measurement.",
+  "uitleg": "Universal Analytics (UA) was gebouwd rond **sessies en hit types**: een pageview-hit, een event-hit, een ecommerce-hit. Een event had altijd *Category, Action en Label*.\n\nGA4 draait dat om: **elke interactie is een event**, met een naam en parameters voor de context. Google onderscheidt vier soorten:\n- **Automatisch verzamelde events**, zoals session_start en first_visit\n- **Enhanced measurement**: page_view, scroll (bij 90% scrolldiepte), outbound click, file_download, form_start/form_submit en video-events, aan te zetten per datastream\n- **Aanbevolen events**: vaste namen met voorgeschreven parameters, zoals generate_lead, sign_up en purchase\n- **Custom events**: zelf bedacht, alleen als er geen andere optie past\n\nSessies bestaan nog wel, maar ze worden **afgeleid uit events**. Bij de start van een sessie verstuurt GA4 een session_start-event en krijgt de sessie een ga_session_id. Een sessie eindigt standaard na 30 minuten inactiviteit. Anders dan in UA begint er in GA4 geen nieuwe sessie als de campagnebron halverwege verandert. Sessieaantallen van UA en GA4 zijn daarom niet één-op-één te vergelijken.\n\nHet antwoord aan de klant: de oude Category wordt in GA4 een **eventnaam** (bijvoorbeeld generate_lead) plus **parameters** (bijvoorbeeld form_name). Wil je zo'n parameter in rapporten zien, registreer hem dan als custom dimension.",
+  "kernpunt": "GA4 kent geen hit types en geen Category/Action/Label meer: alles is een event met parameters, en sessies worden afgeleid uit events (session_start).",
+  "toepassing": "Open bij een klant in GA4 Reports > Engagement > Events. Kijk welke events er binnenkomen en markeer welke automatisch of via enhanced measurement komen, welke aanbevolen events zijn en welke custom. Staan er custom events tussen die een aanbevolen naam hadden kunnen krijgen?",
+  "bron": {
+    "titel": "About events - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/9322688"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "20261020-paginering-zonder-prev-next",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Paginering na rel=next/prev",
+  "matrix": [
+    "1.3.4",
+    "1.3.3"
+  ],
+  "titel": "rel=prev/next doet niets meer: zo pak je paginering nu aan",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een categoriepagina van een webshop telt 12 pagina's met producten. De developer stelt voor: 'We zetten rel=prev/next op alle pagina's en laten pagina 2 tot en met 12 canonicaliseren naar pagina 1.'",
+  "uitleg": "**rel=\"next\" en rel=\"prev\"** waren lang Google's advies om een reeks pagina's als geheel te markeren. In **maart 2019** bevestigde Google dat het deze tags al jaren niet meer gebruikte. In de huidige documentatie staat het expliciet: Google gebruikt ze niet, al kunnen andere zoekmachines ze nog wel gebruiken. Ze staan laten kan dus geen kwaad, maar je moet er voor Google niet op rekenen.\n\nGoogle behandelt elke pagina in een gepagineerde reeks als een **losse pagina**. Wat nu telt:\n- **Elke pagina een eigen URL**, bijvoorbeeld met ?page=2.\n- **Gewone links** met <a href> van elke pagina naar de volgende, zodat Googlebot de hele reeks kan vinden. Google raadt ook aan om vanaf alle pagina's terug te linken naar pagina 1, om het begin van de reeks te benadrukken.\n- **Elke pagina een eigen canonical** (self-referencing). Gebruik pagina 1 níet als canonical voor de hele reeks: dan geef je aan dat de producten op pagina 2 en verder duplicaten zijn.\n- **Geen URL-fragmenten** (#page=2) voor paginanummers: Google negeert alles na de #.\n- Bij **'Meer laden'** of **infinite scroll**: die werken meestal met JavaScript, dus volg de JavaScript SEO-richtlijnen en help Google met een sitemap om alle producten te vinden.\n\nWil je gefilterde of gesorteerde varianten van dezelfde lijst uit de index houden, dan gebruik je noindex of beperk je het crawlen via robots.txt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de developer uit het voorbeeld?",
+    "opties": [
+      "Geef elke pagina een eigen URL (?page=2) met een eigen canonical en gewone <a href>-links naar de volgende pagina.",
+      "Voer het voorstel uit: met canonicals naar pagina 1 vindt Google alle producten via één pagina.",
+      "Voeg alleen rel=prev/next toe; daarmee ziet Google de 12 pagina's als één geheel.",
+      "Laad pagina 2 tot en met 12 via #page=2, zodat er geen dubbele URL's ontstaan."
+    ],
+    "juist": 0
+  },
+  "toelichting": "Google gebruikt rel=prev/next niet meer en ziet elke pagina als een losse pagina. Canonicals naar pagina 1 vertellen Google dat pagina 2–12 duplicaten zijn, waardoor producten die alleen daar gelinkt staan slechter gevonden worden. Fragmenten (#) worden genegeerd, dus pagina 2+ bestaat dan voor Google niet.",
+  "kernpunt": "Google gebruikt rel=prev/next niet meer (bevestigd maart 2019). Geef elke gepagineerde pagina een eigen URL, een eigen canonical en gewone links naar de volgende pagina.",
+  "toepassing": "Bekijk bij een webshopklant de broncode van pagina 2 van een categorie: wijst de canonical naar zichzelf, en staat er een <a href>-link naar pagina 3?",
+  "bron": {
+    "titel": "Pagination, incremental page loading, and their impact on Google Search",
+    "url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+  }
+}

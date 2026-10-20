@@ -1,0 +1,27 @@
+{
+  "id": "20261020-robots-txt-rapport",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "robots.txt controleren in Search Console",
+  "matrix": [
+    "1.1.7"
+  ],
+  "titel": "De robots.txt-tester is weg: zo controleer je robots.txt nu in GSC",
+  "volgorde": "opdracht-eerst",
+  "intro": "Na een livegang van een nieuwe site daalt het aantal gecrawlde pagina's opvallend. De klant vraagt: 'Kun je even in de robots.txt-tester kijken?' Die tool bestaat niet meer.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Open in Search Console bij een klant (domeinproperty of URL-voorvoegsel zonder pad) het **robots.txt-rapport**. Noteer: welke robots.txt-bestanden (hosts) Google vond, de status van ophalen, wanneer ze voor het laatst zijn gecheckt en of er problemen worden gemeld. Zoek daarna op hoe je controleert of één specifieke URL door robots.txt wordt geblokkeerd.",
+    "minTekens": 120,
+    "hint": "Je vindt het rapport via Instellingen. Voor één URL heb je een ander hulpmiddel in Search Console nodig."
+  },
+  "modelantwoord": "Bij de klant vond Google twee bestanden: https://www.klant.nl/robots.txt (status 'Opgehaald', gecheckt gisteren, 0 problemen) en https://klant.nl/robots.txt ('Niet opgehaald - Niet gevonden (404)'). Een 404 betekent voor Google: geen beperkingen, dus dat is geen fout.\n\nVoor één specifieke URL gebruik je de **URL-inspectietool**: bij 'Crawl toegestaan?' zie je of crawlen is toegestaan of geblokkeerd door een robots.txt-regel, en met een live test controleer je de huidige situatie. Heb je robots.txt aangepast om belangrijke URL's te deblokkeren, dan vraag je in het rapport via het menu naast het bestand een nieuwe crawl van robots.txt aan.",
+  "uitleg": "De oude **robots.txt-tester** in Search Console is eind 2023 vervangen door het **robots.txt-rapport** (Instellingen > robots.txt). Dat rapport laat voor de top 20 hosts van je site zien:\n- **Bestandspad**: waar Google naar robots.txt zocht\n- **Status van ophalen**: 'Opgehaald', 'Niet opgehaald - Niet gevonden (404)' of 'Niet opgehaald - Elke andere reden'\n- **Gecheckt op**, **grootte** en het aantal **problemen** (parsefouten)\n\nHet rapport is alleen beschikbaar voor properties op domeinniveau: een domeinproperty of een URL-voorvoegsel zonder pad, dus https://example.com/ en niet https://example.com/blog/.\n\nWat het rapport níet meer doet: een willekeurige URL testen tegen je regels. Daarvoor gebruik je nu de **URL-inspectietool**, die aangeeft of crawlen is toegestaan of geblokkeerd door een robots.txt-regel.\n\nHoe Google statuscodes leest is belangrijk bij het interpreteren:\n- **404 (of een andere 4xx, behalve 429)**: Google doet alsof er geen robots.txt is en mag alles crawlen.\n- **5xx**: Google stopt de eerste 12 uur met crawlen van de site en gebruikt daarna tot 30 dagen de laatst bekende goede versie.\n\nGoogle cachet robots.txt meestal tot 24 uur. Heb je per ongeluk belangrijke pagina's geblokkeerd en dat hersteld? Dan kun je in het rapport een nieuwe crawl van het bestand aanvragen.",
+  "kernpunt": "robots.txt controleer je nu met het robots.txt-rapport (welk bestand, status, problemen) en test je per URL met de URL-inspectietool. Een 404 op robots.txt betekent 'alles mag', een 5xx kan het crawlen juist stilleggen.",
+  "toepassing": "Check deze week bij elke klant met een recente migratie of livegang het robots.txt-rapport: staat de status op 'Opgehaald' en zijn er 0 problemen?",
+  "bron": {
+    "titel": "robots.txt-rapport",
+    "url": "https://support.google.com/webmasters/answer/6062598?hl=nl"
+  }
+}

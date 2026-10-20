@@ -1,0 +1,32 @@
+{
+  "id": "20261020-ttfb-verbeteren",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Time to First Byte (TTFB)",
+  "matrix": [
+    "5.2.11"
+  ],
+  "titel": "TTFB van 2,4 seconde: waar begin je met verbeteren?",
+  "volgorde": "opdracht-eerst",
+  "intro": "PageSpeed Insights laat voor de categoriepagina's van een webshopklant een TTFB van 2,4 seconde zien bij echte gebruikers. De developer stelt voor om eerst de afbeeldingen te comprimeren.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke maatregel pakt de TTFB van deze pagina's het meest direct aan?",
+    "opties": [
+      "Afbeeldingen comprimeren en lazy-loading toevoegen",
+      "JavaScript met defer laden zodat het de rendering niet blokkeert",
+      "Server- en CDN-caching inrichten, zodat de HTML niet bij elk verzoek opnieuw wordt opgebouwd",
+      "CSS minificeren en ongebruikte CSS verwijderen"
+    ],
+    "juist": 2
+  },
+  "toelichting": "Afbeeldingen, JavaScript en CSS worden pas opgehaald *nadat* de eerste byte van de HTML binnen is. Ze beïnvloeden LCP en INP, maar niet de TTFB. Caching (op de server en via een CDN) zorgt dat de HTML sneller wordt uitgeleverd, en dat is precies wat TTFB meet.",
+  "uitleg": "**TTFB** meet de tijd tussen het starten van de navigatie en het moment dat de eerste byte van het antwoord binnenkomt. Daarin zitten: redirects, het opstarten van een service worker (als die er is), DNS-lookup, het opzetten van de verbinding en TLS, en de request tot de eerste byte.\n\nDrempels volgens web.dev:\n- Goed: 0,8 seconde of minder\n- Verbetering nodig: 0,8 tot 1,8 seconde\n- Slecht: meer dan 1,8 seconde\n\nTTFB is **geen Core Web Vital**, maar wel een voorwaarde: alles wat erna komt (FCP, LCP) begint later als de server traag is.\n\nDe belangrijkste knoppen om aan te draaien:\n- **Hosting:** genoeg geheugen, een actuele backend-stack en capaciteit voor je verkeer\n- **CDN:** servers dichter bij de bezoeker\n- **Caching:** goede Cache-Control-headers en caching aan de rand van het CDN\n- **Redirects vermijden:** geen onnodige redirects op hetzelfde domein, en HSTS om de http-naar-https-redirect over te slaan\n- **Markup streamen**, zodat de browser al kan beginnen voordat de hele pagina klaar is\n- **103 Early Hints** om kritieke bestanden al aan te kondigen terwijl de server nog rekent\n\nLet op: de Lighthouse-audit 'server response time' telt DNS en redirects niet mee, dus die geeft maar een deel van de TTFB.",
+  "kernpunt": "TTFB (goed is ≤ 0,8 s) gaat over hoe snel de server de eerste byte HTML levert. Je verbetert hem met hosting, CDN, caching en minder redirects, niet met beeld- of CSS-optimalisatie.",
+  "toepassing": "Check in PageSpeed Insights de TTFB van de drie belangrijkste templates van een klant. Zit één boven 0,8 seconde? Vraag de developer of die pagina's uit een cache of CDN komen en of er redirects vóór zitten.",
+  "bron": {
+    "titel": "Optimize Time to First Byte",
+    "url": "https://web.dev/articles/optimize-ttfb"
+  }
+}

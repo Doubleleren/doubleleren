@@ -1,0 +1,27 @@
+{
+  "id": "20261020-clarity-bewijs-verzamelen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO × Claude",
+  "onderwerp": "Bewijs verzamelen met Clarity, Hotjar en surveys",
+  "matrix": [
+    "7.1.5"
+  ],
+  "titel": "Van rage clicks in Clarity naar een testbare hypothese",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant wil de checkout 'gewoon opnieuw laten ontwerpen'. In Microsoft Clarity zie je op de winkelwagenpagina veel **rage clicks** op de knop 'Kortingscode toepassen' en **dead clicks** op de productfoto's. Je hebt nog geen idee waarom.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Beschrijf deze Clarity-observaties aan Claude en laat Claude (1) twee mogelijke verklaringen geven, (2) per verklaring een hypothese opstellen in de vorm 'Omdat we zien dat..., verwachten we dat..., wat we meten aan...' en (3) één korte on-site surveyvraag voorstellen om de verklaringen te onderscheiden. Plak je prompt en vat in je eigen woorden samen welke hypothese je als eerste zou testen en waarom.",
+    "minTekens": 150,
+    "hint": "Geef Claude context: om welke pagina het gaat, wat rage clicks en dead clicks precies betekenen en wat het doel van de pagina is. Vraag om verklaringen die je met opnames of een survey kunt controleren."
+  },
+  "modelantwoord": "Prompt: \"Je bent CRO-specialist. Op de winkelwagenpagina van een webshop zien we in Microsoft Clarity veel rage clicks (herhaald snel klikken in hetzelfde gebied) op de knop 'Kortingscode toepassen' en dead clicks (klik zonder reactie) op de productfoto's. Doel van de pagina: door naar de checkout. Geef twee mogelijke verklaringen, per verklaring een hypothese (Omdat we zien dat..., verwachten we dat..., wat we meten aan...) en één surveyvraag om ze te onderscheiden.\"\n\nSamenvatting: de rage clicks wijzen op een knop die niet (zichtbaar) reageert, bijvoorbeeld een foutmelding die niet verschijnt of een trage request. De dead clicks op foto's suggereren dat mensen een vergroting of productdetails verwachten. Ik test eerst de kortingscode, omdat die direct in de checkoutflow zit: ik bekijk eerst 10 opnames met die rage clicks en check de JavaScript-errors in Clarity. Surveyvraag: \"Wat hield je tegen om af te rekenen?\"",
+  "uitleg": "Een redesign op gevoel is gokken. Met tools als **Microsoft Clarity** en **Hotjar** verzamel je eerst **bewijs**: wat doen bezoekers echt?\n\nClarity (gratis, zonder sampling) geeft onder meer:\n- **Session recordings** en **heatmaps**: zien waar mensen klikken en scrollen\n- **Rage clicks**: meerdere snelle klikken in hetzelfde gebied, een sterk signaal van frustratie\n- **Dead clicks**: een klik zonder zichtbare reactie; kan wijzen op kapotte elementen, trage requests of iets dat klikbaar *lijkt*\n- **Excessive scrolling** en **quick backs**: tekenen dat mensen niet vinden wat ze zoeken\n- **JavaScript-errors**, inclusief errors direct na een klik\n\nGedragsdata vertelt je *wat* er gebeurt, niet *waarom*. Daarvoor gebruik je een **survey** (bijvoorbeeld een on-site poll in Hotjar of een korte vraag na aankoop). De combinatie levert een hypothese op die je kunt testen.\n\nClaude helpt bij de vertaalslag: van ruwe observaties naar verklaringen, hypotheses en surveyvragen. Controleer de verklaringen daarna wel zelf in de opnames: Claude ziet je site niet.",
+  "kernpunt": "Gedragstools (Clarity, Hotjar) laten zien wát bezoekers doen, surveys vertellen waarom. Samen leveren ze het bewijs voor een testbare hypothese.",
+  "toepassing": "Open Clarity bij een klant, filter de opnames op rage clicks op de belangrijkste conversiepagina en bekijk er vijf. Noteer per opname wat de bezoeker probeerde te doen.",
+  "bron": {
+    "titel": "Semantic metrics | Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/clarity/insights/semantic-metrics"
+  }
+}

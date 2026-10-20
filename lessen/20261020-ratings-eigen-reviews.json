@@ -1,0 +1,32 @@
+{
+  "id": "20261020-ratings-eigen-reviews",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Ratings markup (Review en AggregateRating)",
+  "matrix": [
+    "2.2.3"
+  ],
+  "titel": "Sterren in Google: wanneer kom je er wel en niet voor in aanmerking?",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een tandartspraktijk wil sterren in de zoekresultaten. De webbouwer heeft een reviewwidget van een extern platform op de homepage gezet en daaromheen LocalBusiness-markup met een AggregateRating van 4,8 uit 312 reviews.",
+  "uitleg": "Met **Review**- en **AggregateRating**-markup kan Google een *review snippet* tonen: sterren en een score onder je zoekresultaat. Dat valt op en kan de CTR verhogen. Maar er zijn strikte regels.\n\n**Wat moet erin?** Voor een AggregateRating zijn verplicht: een **ratingValue**, minstens één van **ratingCount** of **reviewCount**, en **itemReviewed** (tenzij de rating genest staat in bijvoorbeeld een Product). Laat je bestRating en worstRating weg, dan gaat Google uit van een schaal van 1 tot 5.\n\n**Voor welke dingen?** Onder meer Product, Recipe, Book, Course, Event, Movie, Software App en Local Business.\n\n**De regels die het vaakst misgaan:**\n\n- **Self-serving reviews.** Als een bedrijf zelf bepaalt welke reviews er over hem op zijn eigen site staan, komen pagina's met LocalBusiness- of andere Organization-markup *niet* in aanmerking voor sterren. Google noemt expliciet ook reviews die via een **embedded widget van een derde partij** op de eigen site staan.\n- **Niet aggregeren van andere sites.** Je mag geen reviews of scores van andere websites overnemen in je markup.\n- **Zichtbaar en van echte gebruikers.** De gemarkeerde reviews moeten op de pagina zelf te zien zijn en direct van gebruikers komen.\n\nVoor een webshop met eigen productreviews van kopers op de productpagina is Product-markup met AggregateRating dus wél een prima route.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Gaat de tandartspraktijk met deze opzet sterren krijgen in Google?",
+    "opties": [
+      "Ja, omdat de reviews van een onafhankelijk extern platform komen en niet door de praktijk zelf zijn geschreven.",
+      "Ja, zolang ratingValue en reviewCount precies overeenkomen met wat de widget op de pagina laat zien.",
+      "Alleen als de webbouwer ook bestRating en worstRating toevoegt; zonder schaal kan Google de 4,8 niet tonen.",
+      "Nee: reviews over de eigen organisatie op de eigen site, ook via een widget van een derde partij, maken LocalBusiness-pagina's ongeschikt voor sterren."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Dit is het klassieke *self-serving reviews*-geval. Google sluit pagina's met LocalBusiness- of Organization-markup uit van sterren als het bedrijf de reviews over zichzelf op de eigen site toont, en noemt daarbij uitdrukkelijk embedded widgets van derden. Daarnaast mag je geen scores van andere sites aggregeren. bestRating en worstRating zijn niet nodig: zonder opgave geldt 1 tot 5. Wil de praktijk reviews laten zien in Google, stuur patiënten dan naar het Google-bedrijfsprofiel.",
+  "kernpunt": "Sterren via Review- of AggregateRating-markup krijg je niet voor reviews over je eigen bedrijf op je eigen site (LocalBusiness/Organization), ook niet via een widget. Wel voor bijvoorbeeld producten, met zichtbare reviews van echte gebruikers.",
+  "toepassing": "Check bij één klant met een reviewwidget of er AggregateRating op LocalBusiness of Organization staat. Zo ja: bespreek dat die markup geen sterren oplevert, en zet de energie op productreviews of het bedrijfsprofiel.",
+  "bron": {
+    "titel": "Review Snippet (Review, AggregateRating) Structured Data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/review-snippet"
+  }
+}

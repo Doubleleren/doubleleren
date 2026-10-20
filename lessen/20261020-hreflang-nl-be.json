@@ -1,0 +1,27 @@
+{
+  "id": "20261020-hreflang-nl-be",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "hreflang",
+  "matrix": [
+    "2.1.17"
+  ],
+  "titel": "Nederland en Vlaanderen: waarom Google je hreflang negeert",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een webshop heeft een Nederlandse en een Belgische (Vlaamse) versie op /nl-nl/ en /nl-be/. Belgische bezoekers komen in Google steeds op de Nederlandse pagina's uit, met euro-prijzen en verzendkosten voor Nederland.",
+  "uitleg": "Met **hreflang** vertel je Google welke versies van een pagina er zijn voor andere talen of regio's, zodat Google de juiste versie aan de juiste zoeker kan tonen. Dat kan op drie gelijkwaardige manieren: met <link rel=\"alternate\" hreflang=\"...\"> in de head, met een HTTP-header (handig voor pdf's) of in de XML-sitemap.\n\nDe regels die het vaakst misgaan:\n\n- **Elke versie noemt zichzelf én alle andere versies.** Linkt pagina A naar B maar B niet terug naar A, dan worden de tags genegeerd.\n- **Eerst de taal, dan eventueel de regio.** Taal volgens ISO 639-1, regio volgens ISO 3166-1 Alpha-2, met een streepje: nl, nl-NL, nl-BE. Alleen een land opgeven kan niet: de eerste code is altijd de taal. hreflang=\"be\" betekent dus *Wit-Russisch*, niet België.\n- **Gebruik bestaande codes.** UK is geen geldige regiocode (het Verenigd Koninkrijk is GB), en EU of UN ook niet.\n- **x-default** gebruik je voor de pagina die geldt als geen enkele taal of regio past, bijvoorbeeld een landkeuzepagina.\n\nhreflang bepaalt niet welke taal Google herkent: dat doet Google met eigen algoritmes, niet met hreflang of het lang-attribuut. hreflang koppelt alleen de versies aan elkaar.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Je bekijkt de broncode. Op /nl-nl/schoenen/ staat:\n\n<link rel=\"alternate\" hreflang=\"nl-NL\" href=\"https://shop.example/nl-nl/schoenen/\">\n<link rel=\"alternate\" hreflang=\"be\" href=\"https://shop.example/nl-be/schoenen/\">\n\nOp /nl-be/schoenen/ staat helemaal geen hreflang. Welke fouten zie je, en hoe zou de correcte set tags er op beide pagina's uit moeten zien?",
+    "minTekens": 120,
+    "hint": "Kijk naar de code voor België én naar wat de Belgische pagina zelf moet bevatten."
+  },
+  "modelantwoord": "Twee fouten:\n\n- **hreflang=\"be\" is fout.** De eerste code is altijd de taal; be is Wit-Russisch. Voor Nederlandstalig in België moet het nl-BE zijn.\n- **Er zijn geen terugverwijzingen.** De Belgische pagina noemt zichzelf en de Nederlandse versie niet, dus Google negeert de koppeling.\n\nCorrect: op **beide** pagina's dezelfde set, met zichzelf erbij:\n\n<link rel=\"alternate\" hreflang=\"nl-NL\" href=\"https://shop.example/nl-nl/schoenen/\">\n<link rel=\"alternate\" hreflang=\"nl-BE\" href=\"https://shop.example/nl-be/schoenen/\">\n\nOptioneel een x-default naar bijvoorbeeld een landkeuzepagina, voor bezoekers die bij geen van beide versies passen.",
+  "kernpunt": "hreflang werkt alleen als elke versie zichzelf en alle andere versies noemt, met een taalcode voorop (nl-BE, nooit alleen be). Ontbreekt de terugverwijzing, dan negeert Google de tags.",
+  "toepassing": "Kies bij een klant met meerdere landen of talen één pagina en controleer in de broncode van élke versie of de hreflang-set compleet en identiek is, en of alle codes met een geldige taalcode beginnen.",
+  "bron": {
+    "titel": "Tell Google about Localized Versions of Your Page",
+    "url": "https://developers.google.com/search/docs/specialty/international/localized-versions"
+  }
+}

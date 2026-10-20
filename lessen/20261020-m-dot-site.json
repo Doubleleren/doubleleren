@@ -1,0 +1,27 @@
+{
+  "id": "20261020-m-dot-site",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Parallelle mobiele sites (m-dot)",
+  "matrix": [
+    "8.2.2"
+  ],
+  "titel": "Een klant met m.voorbeeld.nl: wat check je als eerste?",
+  "volgorde": "uitleg-eerst",
+  "intro": "Je opent de site van een nieuwe klant op je telefoon en belandt op m.voorbeeld.nl. Op desktop is het www.voorbeeld.nl. De klant heeft dus een **parallelle mobiele site**.",
+  "uitleg": "Er zijn drie manieren om een site mobiel te bedienen:\n- **Responsive design:** dezelfde URL en dezelfde HTML, de opmaak past zich aan. Google raadt dit aan, omdat het het makkelijkst te bouwen en te onderhouden is.\n- **Dynamic serving:** dezelfde URL, maar andere HTML per apparaat (met de header Vary: User-Agent).\n- **Separate URLs:** een aparte mobiele site, vaak op een m-subdomein.\n\nHerkennen doe je zo: open de site op je telefoon of in Chrome DevTools met een smartphone-emulatie en kijk of je wordt doorgestuurd naar een andere host. Bekijk ook de broncode van de desktoppagina op een rel=\"alternate\"-link naar een mobiele URL.\n\nWaarom is dit belangrijk? Google indexeert met **mobile-first indexing**: de mobiele versie, gecrawld met de smartphone-crawler, is de basis voor indexering en ranking. Staat op m-dot minder content, minder structured data of een slechtere title, dan is dát wat Google ziet.\n\nAanbevelingen bij een m-dot-site:\n- dezelfde content, structured data, titles en meta descriptions op beide versies\n- dezelfde robots.txt-regels, en dezelfde foutstatus op beide versies\n- geen redirects van allerlei URL's naar de mobiele homepage\n- genoeg servercapaciteit op de mobiele site\n- beide versies verifiëren in Search Console\n- op lange termijn: migreren naar responsive design",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Google Search Central op hoe je bij separate URLs de desktop- en mobiele pagina aan elkaar koppelt. Welk link-element staat op de desktoppagina, welk op de mobiele pagina, en welke van de twee is de canonical? Hoe gaat dat bij hreflang?",
+    "minTekens": 120,
+    "hint": "Zoek op 'mobile-first indexing best practices' en kijk bij de aanvullende best practices voor separate URLs."
+  },
+  "modelantwoord": "Volgens Google gebruik je rel=\"canonical\" en rel=\"alternate\", en **de desktop-URL is altijd de canonical**:\n\n- Op de **desktoppagina** staat een link rel=\"alternate\" met een media-attribuut (bijvoorbeeld only screen and (max-width: 640px)) die naar de mobiele URL wijst.\n- Op de **mobiele pagina** staat een link rel=\"canonical\" naar de bijbehorende desktop-URL.\n\nBij **hreflang** link je de versies apart: mobiele URL's verwijzen met hreflang naar mobiele URL's, desktop-URL's naar desktop-URL's.",
+  "kernpunt": "Bij een m-dot-site wijst de desktoppagina met rel=alternate naar mobiel en de mobiele pagina met rel=canonical naar desktop. Door mobile-first indexing moet de mobiele versie minstens even compleet zijn; responsive is de aanbevolen oplossing.",
+  "toepassing": "Heeft een klant nog een m-dot-site? Vergelijk voor één belangrijke pagina de title, de hoofdcontent en de structured data van desktop en mobiel naast elkaar en noteer de verschillen voor je advies.",
+  "bron": {
+    "titel": "Mobile site and mobile-first indexing best practices",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+  }
+}

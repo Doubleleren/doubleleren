@@ -1,0 +1,32 @@
+{
+  "id": "20261020-ga4-via-gtm",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4 installeren via Google Tag Manager",
+  "matrix": [
+    "3.2.2"
+  ],
+  "titel": "GA4 via GTM in vijf stappen, zonder dubbele metingen",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een nieuwe klant heeft een lege GTM-container op de site staan en een verse GA4-property. Jij mag de basismeting inrichten.",
+  "uitleg": "Een basisimplementatie van GA4 via GTM bestaat uit vijf stappen:\n\n1. **Zoek je ID op.** In GA4 ga je naar Admin > Data collection and modification > Data streams > je webstream. De **measurement ID** begint met **G-** (bijvoorbeeld G-PSW1MY7HB4) en is ook je Google-tag-ID.\n2. **Maak de Google-tag.** In GTM: Tags > New > tagtype **Google Tag**, vul de Tag ID (G-…) in en kies de trigger **Initialization - All Pages**. Die trigger gaat af vóór de andere triggers (alleen Consent Initialization gaat nog eerder), zodat GA4 vroeg geladen is.\n3. **Gebruik enhanced measurement.** page_view, scroll, outbound clicks, downloads en formulierinteracties komen dan automatisch binnen. Maak hiervoor dus geen extra event-tags aan.\n4. **Voeg eigen events toe.** Gebruik het tagtype **Google Analytics: GA4 Event** met je measurement ID, een eventnaam in snake_case (bijv. signup_newsletter) en eventuele parameters, plus een trigger zoals een klik op de inschrijfknop.\n5. **Test en publiceer.** Klik op **Preview**: Tag Assistant laat zien welke tags afgaan, en zet automatisch debug mode aan zodat je de events in GA4 **DebugView** ziet. Klaar? Kies Submit > Publish and Create Version, met een duidelijke versienaam.\n\nStaat er nog hardcoded GA-code (gtag.js) in de site, haal die dan weg zodra de GTM-versie live is. Anders meet je alles dubbel.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpak is de juiste basis voor deze klant?",
+    "opties": [
+      "Een Google-tag met de G-ID uit de webdatastream op de trigger Initialization - All Pages; testen in Preview en DebugView, en daarna publiceren als benoemde versie.",
+      "Een 'Google Analytics: GA4 Event'-tag met eventnaam page_view op de trigger All Pages, zodat elke paginaweergave zeker gemeten wordt.",
+      "De gtag.js-code in een Custom HTML-tag plakken en de hardcoded GA-code in de header laten staan als back-up.",
+      "Een Google-tag met de container-ID (GTM-…) als Tag ID, en direct publiceren: Preview is alleen nodig voor event-tags."
+    ],
+    "juist": 0
+  },
+  "toelichting": "De Google-tag met de G-ID op Initialization - All Pages is de basis; daarna test je in Preview en DebugView en publiceer je een benoemde versie. Een losse page_view-eventtag zorgt naast de Google-tag en enhanced measurement voor dubbele paginaweergaven. Een back-up met hardcoded code meet ook dubbel. En de GTM-container-ID is geen GA4-tag-ID.",
+  "kernpunt": "Basis-GA4 via GTM = Google-tag met de G-ID op Initialization - All Pages, enhanced measurement voor standaardevents, GA4 Event-tags voor de rest, en altijd eerst Preview/DebugView.",
+  "toepassing": "Open de GTM-container van een klant in Preview en controleer in Tag Assistant op welke trigger de Google-tag afgaat. Check daarna in de paginabron of er niet óók nog een hardcoded gtag.js met dezelfde G-ID staat.",
+  "bron": {
+    "titel": "Set up Google Analytics in Tag Manager",
+    "url": "https://support.google.com/tagmanager/answer/9442095"
+  }
+}

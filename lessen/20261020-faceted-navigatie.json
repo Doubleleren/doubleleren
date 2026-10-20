@@ -1,0 +1,26 @@
+{
+  "id": "20261020-faceted-navigatie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Faceted navigation controleren en adviseren",
+  "matrix": [
+    "1.2.4"
+  ],
+  "titel": "Filters op een webshop: welke URL's laat je crawlen?",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een kledingwebshop heeft filters op kleur, maat, merk, prijs en sortering. Elke klik maakt een nieuwe URL, zoals /jassen?kleur=rood&maat=m&sort=prijs. In Search Console staan tienduizenden van die URL's als niet geïndexeerd.",
+  "uitleg": "**Faceted navigation** zijn de filters op een categorie- of zoekpagina. Voor bezoekers handig, voor crawlers een probleem: elke combinatie van filters is een nieuwe URL, en een crawler weet pas of zo'n URL nuttig is als hij hem gecrawld heeft. Google noemt twee gevolgen:\n- **Overcrawling**: Googlebot besteedt veel tijd aan (bijna) dubbele filter-URL's.\n- **Tragere ontdekking**: die tijd gaat niet naar nieuwe, waardevolle pagina's.\n\nHet advies begint met één vraag per filter: **is er zoekvraag naar deze ingang?** 'Rode jassen' of 'Jassen van merk X' kunnen een eigen landingspagina verdienen. 'Maat M, gesorteerd op prijs' of een prijsslider meestal niet.\n\nFilter-URL's die **niet** geïndexeerd hoeven te worden:\n- blokkeer ze met robots.txt (bijv. op de parameter), of\n- laat filters werken met URL-fragmenten (#), die hebben geen invloed op crawlen.\n\nFilter-URL's die je **wel** wilt laten indexeren:\n- gebruik het standaard scheidingsteken & tussen parameters\n- houd een vaste volgorde van filters aan en voorkom dubbele filters\n- geef een **404** als een filtercombinatie geen resultaten heeft\n\nrel=\"canonical\" naar de ongefilterde pagina of rel=\"nofollow\" op filterlinks kunnen helpen, maar Google noemt die op de lange termijn minder effectief dan robots.txt of fragmenten. En noindex alleen bespaart geen crawltijd: Google moet de pagina eerst opvragen om de noindex te zien.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Geef de webshop uit het voorbeeld een advies in maximaal vijf punten: welke filter-URL's laat je crawlen en indexeren, welke niet, en met welk middel regel je dat?",
+    "minTekens": 150
+  },
+  "modelantwoord": "1. **Bepaal per filter de zoekvraag** (zoekwoordonderzoek). Kleur en merk hebben vaak volume ('rode jassen', 'merk X jassen'); maat, prijs en sortering bijna nooit.\n2. **Indexeerbare filters** (bijv. één kleur of één merk) krijgen een vaste, schone URL met een vaste volgorde van parameters, eigen title/H1, interne links en een plek in de sitemap.\n3. **Niet-indexeerbare filters en combinaties** (maat, prijs, sortering, meerdere filters tegelijk) blokkeer je in robots.txt op die parameters, of je laat ze via een fragment (#) werken.\n4. **Lege combinaties** geven een 404 in plaats van een lege pagina met status 200.\n5. **Controle**: check na de aanpassing in de logs of de Crawl Stats in Search Console of Googlebot minder filter-URL's opvraagt, en of de gewenste landingspagina's geïndexeerd worden. Niet alleen noindex gebruiken: dat bespaart geen crawltijd.",
+  "kernpunt": "Bepaal per filter of er zoekvraag is. Filters zonder zoekvraag houd je uit de crawl (robots.txt of #-fragmenten), filters met zoekvraag maak je tot schone, consistente landingspagina's. Lege combinaties geven een 404.",
+  "toepassing": "Klik bij een webshopklant drie filters aan op een categoriepagina en bekijk de URL: verandert de URL, en staat die combinatie open voor crawlers? Check daarna de robots.txt op regels voor die parameters.",
+  "bron": {
+    "titel": "Managing crawling of faceted navigation URLs",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+  }
+}

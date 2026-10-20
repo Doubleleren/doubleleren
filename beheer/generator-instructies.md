@@ -10,6 +10,7 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: SEO-professio
 3. Lees `%USERPROFILE%\.doubleleren\beheer\generator\context.json`. Per deelnemer (pseudoniem `lid-xxxxxx`):
    - `scores`: laatste eigen score (1–5) per vaardigheid-id uit `sjablonen\seo\skilllijst.csv`
    - `resultaten`: lessen van de laatste 3 maanden met `resultaat` (goed / deels / fout), `matrix`, `niveau`
+   - `gedaan`: alle les-id's die de deelnemer ooit deed (ook ouder dan 3 maanden); die komen nooit meer in de wachtrij
    - `wachtrij`: les-id's die al klaarstaan
    - `focus` en `leerdoelen` als die er zijn
    Deze context is vertrouwelijk: kopieer er niets van naar lessen, commits of rapportages, en noem nooit een pseudoniem in een les.
@@ -42,6 +43,10 @@ Doel: **elke deelnemer heeft 3 lessen klaar** die hij of zij nog niet deed (niet
 
 **Onvoorspelbaar plannen (herhaling en verdieping).** Een deelnemer mag niet kunnen verwachten wanneer een herhaling of verdieping komt. Nooit eerder dan 14 dagen na het resultaat waar hij op voortbouwt. Daarna bepaal je per vaardigheid of hij vandaag aan de beurt is met een echte loting: draai bijvoorbeeld `python -c "import random; print(random.random())"` en plan hem in als de uitkomst onder (dagen sinds het resultaat − 13) / 22 ligt. Na 35 dagen is hij dus altijd aan de beurt. Gebruik geen vaste dagen en geen vaste weekdagen.
 
+**Een les komt nooit twee keer.** Een les die een deelnemer ooit deed (goed, deels of fout) zet je nooit meer in diens wachtrij; `gedaan` in de context bevat alle les-id's die ooit gedaan zijn. Opnieuw toetsen gaat altijd met een andere les: een `herhaling` of `verdieping` met een nieuwe situatie.
+
+**Spreiding:** heb je voor een vaardigheid meerdere passende lessen, kies dan voor verschillende deelnemers verschillende lessen, zodat collega's niet allemaal dezelfde vraag op dezelfde dag krijgen.
+
 Werk verder zo:
 1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
 2. **Per deelnemer per dag maximaal 1 `herhaling` en 1 `verdieping`.** De rest is `basis` (en eventueel nieuws).
@@ -55,10 +60,16 @@ Werk verder zo:
 4. Een vaardigheid waarop een deelnemer zich hoog scoort maar recent fout antwoordde, is een goede kandidaat voor `basis` of `herhaling`: zo wordt de skilllijst organisch bijgesteld.
 
 ## Stap 3: Nieuwe lessen schrijven
-Schrijf eerst wat de wachtrijen uit stap 2 nodig hebben. Vul daarna **de kennisbank aan met 5 extra lessen per run** (voorraad), zodat er altijd genoeg klaarstaat voor nieuwe collega's:
-- eerst `basis`-lessen voor vaardigheden uit `skilllijst.csv` die nog **geen enkele les** hebben (kijk naar de `matrix`-velden in `lessen\index.json`), te beginnen met de vaardigheden waarop het team gemiddeld het laagst scoort;
-- als elke vaardigheid een basisles heeft: een `verdieping` per vaardigheid, daarna een tweede basisles met een andere invalshoek.
-Ook voorraadlessen zijn feitelijk geverifieerd en hebben een bestaande bron. Liever 3 goede dan 5 matige.
+Schrijf eerst wat de wachtrijen uit stap 2 nodig hebben. Vul daarna **de kennisbank aan met 10 extra lessen per run** (voorraad). Het doel is een flinke kennisbank met meerdere lessen per onderwerp, zodat collega's niet allemaal dezelfde vragen krijgen en de app maandenlang relevant blijft.
+
+Welke onderwerpen eerst:
+1. Vaardigheden uit `skilllijst.csv` die nog **geen enkele les** hebben (kijk naar de `matrix`-velden in `lessen\index.json`).
+2. Daarna onderwerpen met de meeste vraag: waar **veel deelnemers** laag scoren (1–2) of recent fout/deels antwoordden, en waar per deelnemer de minste nog-niet-gedane lessen over over zijn. Bij één deelnemer zijn dat gewoon diens laagste scores.
+3. Daarna gelijkmatig over alle vaardigheden: een tweede en derde basisles met een andere situatie, `verdieping`-lessen op een hoger niveau.
+
+Meerdere lessen over hetzelfde onderwerp zijn juist goed, maar **elke les is een nieuwe situatie**: een andere klantcase, een andere vraag, andere antwoordopties. Kijk vóór het schrijven welke lessen er al over die vaardigheid zijn (titel en kernpunt in `lessen\index.json`, en zo nodig het lesbestand) en maak nooit een variant die alleen anders verwoord is.
+
+Ook voorraadlessen zijn feitelijk geverifieerd en hebben een bestaande bron. Liever 7 goede dan 10 matige.
 
 Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoonlijk**: schrijf hem zo dat hij voor iedereen op dat niveau bruikbaar is. Schema:
 
