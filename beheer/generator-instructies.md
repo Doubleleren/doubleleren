@@ -31,26 +31,39 @@ Doel: **elke deelnemer heeft 3 lessen klaar** die hij of zij nog niet deed (niet
 
 **Lessen van het team** (`"herkomst": "team"` in `lessen\index.json`) zijn gemaakt door de head of SEO via de website en zijn bij het ophalen van de context al in de kennisbank gezet. Pas ze nooit aan. Geef ze voorrang: zet een nieuwe teamles in de eerstvolgende wachtrij van iedereen voor wie het niveau en onderwerp passen (een teamles van het type `nieuws` bij iedereen vooraan).
 
+**De vier soorten lessen** (`type`):
+
+| Type | Wat | Voor wie en wanneer |
+|---|---|---|
+| `basis` | Een basisvraag over één vaardigheid uit de skilllijst | Vooral vaardigheden waarop de deelnemer laag scoort |
+| `verdieping` | Een moeilijkere vraag over een vaardigheid die de deelnemer eerder **goed** had: een praktijkcase, randgeval, afweging of misvatting, op een hoger `niveau` dan de les die goed ging | Minstens 7 dagen na dat goede resultaat |
+| `herhaling` | Toetst of de deelnemer het nu wél (of nog steeds) weet. **Altijd een andere vraagstelling:** een nieuwe klantsituatie, andere antwoordopties en bij voorkeur een ander soort opdracht (was het meerkeuze, maak er dan een open vraag of een zoek-op van). Nooit dezelfde vraag, ook niet licht herschreven. Hetzelfde kernbegrip mag wel. | Vaardigheid met `fout` of `deels` van 3, 7 of 30 dagen geleden |
+| `nieuws` | Relevant nieuws voor het vak (zie stap 1) | Iedereen, vooraan in de wachtrij |
+
 Werk verder zo:
-1. **Hergebruik eerst de pool.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. Zo bouwt het team één gedeelde kennisbank op.
-2. **Herhaling:** een vaardigheid met `fout` of `deels` van 3, 7 of 30 dagen geleden krijgt een herhalingsles (`type: "herhaling"`) met een **nieuwe** vraag of invalshoek. Maximaal 1 per deelnemer per dag.
-3. **Weging naar scores:**
-   - vaardigheden met score 1–2: ongeveer de helft van de basislessen, met de fundamenten (`niveau: "basis"`)
+1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
+2. **Per deelnemer per dag maximaal 1 `herhaling` en 1 `verdieping`.** De rest is `basis` (en eventueel nieuws).
+3. **Welke vaardigheid en welk niveau** (bij `basis`):
+   - score 1–2: de fundamenten (`niveau: "basis"`); ongeveer de helft van de basislessen
    - score 3: praktijkcases (`niveau: "gevorderd"`)
-   - score 4–5: af en toe, en alleen randgevallen, misvattingen of nieuw onderzoek (`niveau: "expert"`)
-   - vaardigheden met een `notitie` in de skilllijst (verouderd): een les over wat ervoor in de plaats kwam
+   - score 4–5: alleen af en toe, en dan randgevallen of nieuw onderzoek (`niveau: "expert"`)
+   - vaardigheden met een `notitie` in de skilllijst (verouderd): wat ervoor in de plaats kwam
    - CRO en werken met Claude: ongeveer een derde, uit `curriculum.md`
    - wissel af tussen hoofdgebieden
-4. Mix over de laatste ~10 lessen: ~60% basis/verdieping, ~40% nieuws. Geen nieuws? Dan aanvullen met basis.
-5. Een vaardigheid waarop een deelnemer zich hoog scoort maar recent fout antwoordde, is een goede kandidaat: daarmee wordt de skilllijst organisch bijgesteld.
+4. Een vaardigheid waarop een deelnemer zich hoog scoort maar recent fout antwoordde, is een goede kandidaat voor `basis` of `herhaling`: zo wordt de skilllijst organisch bijgesteld.
 
-## Stap 3: Nieuwe lessen schrijven (alleen wat de pool mist)
+## Stap 3: Nieuwe lessen schrijven
+Schrijf eerst wat de wachtrijen uit stap 2 nodig hebben. Vul daarna **de kennisbank aan met 5 extra lessen per run** (voorraad), zodat er altijd genoeg klaarstaat voor nieuwe collega's:
+- eerst `basis`-lessen voor vaardigheden uit `skilllijst.csv` die nog **geen enkele les** hebben (kijk naar de `matrix`-velden in `lessen\index.json`), te beginnen met de vaardigheden waarop het team gemiddeld het laagst scoort;
+- als elke vaardigheid een basisles heeft: een `verdieping` per vaardigheid, daarna een tweede basisles met een andere invalshoek.
+Ook voorraadlessen zijn feitelijk geverifieerd en hebben een bestaande bron. Liever 3 goede dan 5 matige.
+
 Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoonlijk**: schrijf hem zo dat hij voor iedereen op dat niveau bruikbaar is. Schema:
 
 ```json
 {
   "id": "YYYYMMDD-korte-slug",
-  "type": "basis | nieuws | herhaling",
+  "type": "basis | verdieping | herhaling | nieuws",
   "niveau": "basis | gevorderd | expert",
   "vakgebied": "SEO | CRO | SEO / AI-search | SEO × Claude | CRO × Claude | Analytics",
   "onderwerp": "korte onderwerpnaam",

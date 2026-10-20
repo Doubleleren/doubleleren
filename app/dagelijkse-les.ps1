@@ -189,7 +189,7 @@ try {
     $scroll       = $win.FindName('Scroll')
     $scroll.MaxHeight = [Windows.SystemParameters]::PrimaryScreenHeight - 330
 
-    $typeNaam = @{ basis = 'Basis'; nieuws = 'Nieuws'; herhaling = 'Herhaling' }[[string]$les.type]
+    $typeNaam = @{ basis = 'Basis'; verdieping = 'Verdieping'; herhaling = 'Herhaling'; nieuws = 'Nieuws' }[[string]$les.type]
     if (-not $typeNaam) { $typeNaam = $les.type }
     $win.FindName('Badge').Text = ('{0}  ·  {1}' -f $les.vakgebied, $typeNaam)
     $win.FindName('Reeks').Text = ('Reeks: {0} {1}  ·  deze maand {2} {3}' -f $reeks, $(if ($reeks -eq 1) { 'dag' } else { 'dagen' }), $dezeMaand, $(if ($dezeMaand -eq 1) { 'les' } else { 'lessen' }))

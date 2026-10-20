@@ -399,12 +399,16 @@ function toonProfiel(id) {
 }
 
 // ---------------------------------------------------------------- kennisbank
+// Alleen lessen die je zelf al gehad hebt: je eigen naslag, die groeit met elke les (en niets verklapt van lessen die nog komen)
 function toonKennisbank() {
   const q = $('kb-zoek').value.trim().toLowerCase();
-  const alle = Object.values(S.lessen);
+  const gehad = new Map();
+  for (const r of S.leden[S.mij]?.logs || []) if (!gehad.has(r.id)) gehad.set(r.id, r);   // logs staan nieuwste eerst
+  const alle = [...gehad.values()].map((r) => ({ ...(S.lessen[r.id] || { titel: r.titel, vakgebied: r.vakgebied, niveau: r.niveau, matrix: r.matrix }), log: r }));
   const res = alle.filter((l) => !q || [l.titel, l.kernpunt, l.onderwerp, l.vakgebied, l.bron?.titel].join(' ').toLowerCase().includes(q));
-  $('kb-teller').textContent = q ? `${res.length} van ${alle.length} lessen` : `${alle.length} lessen`;
-  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(l.niveau || 'basis')}</div><div><h3>${esc(l.titel)}</h3><div class="meta"><span class="tag">${esc(l.vakgebied)}</span>${l.herkomst === 'team' ? '<span class="tag" style="background:var(--fun-50)">Van het team</span>' : ''}${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
+  $('kb-teller').textContent = q ? `${res.length} van ${alle.length} lessen` : `${alle.length} ${alle.length === 1 ? 'les' : 'lessen'} die je gehad hebt`;
+  if (!alle.length) { $('kb-lijst').innerHTML = '<p class="leeg">Hier verschijnt elke les die je hebt gedaan, met het kernpunt en de bron. Zo bouw je je eigen naslag op.</p>'; return; }
+  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(fmtDatum(l.log.datum))}</div><div><h3>${esc(l.titel)}</h3><div class="meta">${chip(l.log.resultaat)}<span class="tag">${esc(l.vakgebied)}</span>${TYPE[l.type] ? `<span class="tag" style="background:var(--cool-50)">${esc(TYPE[l.type])}</span>` : ''}${l.herkomst === 'team' ? '<span class="tag" style="background:var(--fun-50)">Van het team</span>' : ''}${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
 }
 
 // ---------------------------------------------------------------- versleuteld schrijven
@@ -517,7 +521,7 @@ function toonWelkom() { $('login').hidden = true; $('welkom').hidden = false; we
 // privébestand, versleuteld met een sleutel die alleen uit jouw eigen code volgt.
 const L = { les: null, keuze: -1, antwoord: '', resultaat: '', uitlegGetoond: false, status: null };
 const SOORTEN = ['meerkeuze', 'open', 'zoek-op', 'maak-met-claude'];
-const TYPE = { basis: 'Basis', nieuws: 'Nieuws', herhaling: 'Herhaling' };
+const TYPE = { basis: 'Basis', verdieping: 'Verdieping', herhaling: 'Herhaling', nieuws: 'Nieuws' };
 
 function tekstHtml(t) {
   const inline = (s) => esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*\s][^*]*)\*/g, '<em>$1</em>');
@@ -646,6 +650,7 @@ async function lesOpslaan() {
   }
   const nieuw = await laadLid(S.mij); if (nieuw) S.leden[S.mij] = nieuw;
   if (S.leden[S.mij].matrix) toonMij();
+  toonKennisbank();
   L.status = { klaar: true }; toonLesStatus();
 }
 
