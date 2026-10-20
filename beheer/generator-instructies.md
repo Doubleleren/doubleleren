@@ -36,9 +36,11 @@ Doel: **elke deelnemer heeft 3 lessen klaar** die hij of zij nog niet deed (niet
 | Type | Wat | Voor wie en wanneer |
 |---|---|---|
 | `basis` | Een basisvraag over één vaardigheid uit de skilllijst | Vooral vaardigheden waarop de deelnemer laag scoort |
-| `verdieping` | Een moeilijkere vraag over een vaardigheid die de deelnemer eerder **goed** had: een praktijkcase, randgeval, afweging of misvatting, op een hoger `niveau` dan de les die goed ging | Minstens 7 dagen na dat goede resultaat |
-| `herhaling` | Toetst of de deelnemer het nu wél (of nog steeds) weet. **Altijd een andere vraagstelling:** een nieuwe klantsituatie, andere antwoordopties en bij voorkeur een ander soort opdracht (was het meerkeuze, maak er dan een open vraag of een zoek-op van). Nooit dezelfde vraag, ook niet licht herschreven. Hetzelfde kernbegrip mag wel. | Vaardigheid met `fout` of `deels` van 3, 7 of 30 dagen geleden |
+| `verdieping` | Een moeilijkere vraag over een vaardigheid die de deelnemer eerder **goed** had: een praktijkcase, randgeval, afweging of misvatting, op een hoger `niveau` dan de les die goed ging | Op een **willekeurig** moment tussen 14 en 35 dagen na dat goede resultaat (zie hieronder) |
+| `herhaling` | Toetst of de deelnemer het nu wél (of nog steeds) weet. **Altijd een andere vraagstelling:** een nieuwe klantsituatie, andere antwoordopties en bij voorkeur een ander soort opdracht (was het meerkeuze, maak er dan een open vraag of een zoek-op van). Nooit dezelfde vraag, ook niet licht herschreven. Hetzelfde kernbegrip mag wel. | Vaardigheid met `fout` of `deels`, op een **willekeurig** moment tussen 14 en 35 dagen erna (zie hieronder). Ging de herhaling weer fout of deels, dan volgt later een nieuwe herhaling, weer minstens 14 dagen erna |
 | `nieuws` | Relevant nieuws voor het vak (zie stap 1) | Iedereen, vooraan in de wachtrij |
+
+**Onvoorspelbaar plannen (herhaling en verdieping).** Een deelnemer mag niet kunnen verwachten wanneer een herhaling of verdieping komt. Nooit eerder dan 14 dagen na het resultaat waar hij op voortbouwt. Daarna bepaal je per vaardigheid of hij vandaag aan de beurt is met een echte loting: draai bijvoorbeeld `python -c "import random; print(random.random())"` en plan hem in als de uitkomst onder (dagen sinds het resultaat − 13) / 22 ligt. Na 35 dagen is hij dus altijd aan de beurt. Gebruik geen vaste dagen en geen vaste weekdagen.
 
 Werk verder zo:
 1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
