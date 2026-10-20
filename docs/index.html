@@ -193,14 +193,14 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <div id="uitnodiging-rij" style="display:grid;gap:8px">
         <label for="uitnodiging" class="sub" style="margin:0">Uitnodigingscode</label>
         <input id="uitnodiging" class="veld" type="password" autocomplete="off" spellcheck="false" placeholder="lid-xxxxxx:github_pat_…">
-        <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="onthoud"> Onthoud de uitnodigingscode op deze computer (niet op een gedeelde computer)</label>
       </div>
       <p id="vergeet-rij" class="sub" style="margin:0" hidden>Uitnodigingscode is onthouden op deze computer. <button type="button" id="vergeet" class="knop" style="padding:2px 10px;font-size:13px;background:var(--cool-50)">Vergeten</button></p>
       <label for="code" class="sub" style="margin:0">Je code van zes woorden</label>
       <input id="code" class="veld" type="password" autocomplete="off" spellcheck="false" placeholder="woord-woord-woord-woord-woord-woord">
+      <label style="display:flex;gap:8px;align-items:flex-start;font-size:14px"><input type="checkbox" id="onthoud" style="margin-top:4px"> <span>Onthoud mij 30 dagen op deze computer, zodat DoubleLeren elke ochtend meteen opent (niet op een gedeelde computer)</span></label>
       <button class="knop zwart" type="submit" id="login-knop">Inloggen</button>
       <p class="fout" id="login-fout" role="alert"></p>
-      <p class="sub" style="margin:0">Je gegevens staan versleuteld en ondertekend in privé-opslag. Je code ontgrendelt ze alleen hier in je browser; hij wordt nergens naartoe gestuurd en nergens bewaard.</p>
+      <p class="sub" style="margin:0">Je gegevens staan versleuteld en ondertekend in privé-opslag. Je code ontgrendelt ze alleen hier in je browser; hij wordt nergens naartoe gestuurd en nergens bewaard. Met "Onthoud mij" bewaart deze browser je sleutel afgeschermd, tot je uitlogt.</p>
       <p class="sub" style="margin:0">Nieuw of code kwijt? <a href="#welkom" id="naar-welkom">Aanmelden</a></p>
     </form>
   </div>
@@ -279,9 +279,9 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
         <div>
           <h3 style="font-size:15px;margin-bottom:8px">Windows</h3>
           <ol class="stappen-lijst">
-            <li><button type="button" class="knop zwart" data-actie="snel-win">Download de snelkoppeling</button></li>
+            <li><button type="button" class="knop zwart" data-actie="snel-win">Kopieer de link</button></li>
             <li>Druk op <kbd>Windows</kbd> + <kbd>R</kbd>, typ <code>shell:startup</code> en druk op Enter. De map <em>Opstarten</em> gaat open.</li>
-            <li>Sleep <code>DoubleLeren.url</code> uit je Downloads naar die map.</li>
+            <li>Klik met rechts in die map → <strong>Nieuw</strong> → <strong>Snelkoppeling</strong>, plak de link, klik op <strong>Volgende</strong>, noem hem <code>DoubleLeren</code> en klik op <strong>Voltooien</strong>.</li>
           </ol>
         </div>
         <div>
@@ -293,7 +293,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
           </ol>
         </div>
       </div>
-      <p class="sub">De snelkoppeling opent alleen deze pagina; je logt daarna zoals altijd in met je code.</p>
+      <p class="sub">De snelkoppeling opent alleen deze pagina. Vink bij het inloggen "Onthoud mij" aan, dan sta je meteen in je les.</p>
     </section>
   </div>
 

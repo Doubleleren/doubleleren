@@ -136,7 +136,61 @@ async function inloggen(id, code) {
   let jwk;
   try { jwk = await K.openKluis(id, s.kluis, code); } catch { throw new Error('Deze code klopt niet. Controleer de spelling; elk woord telt.'); }
   if (jwk.n !== s.publiek.n) throw new Error('De sleutel past niet bij je account.');
+  await gebruikSleutel(id, jwk);
+  return jwk;
+}
+async function gebruikSleutel(id, jwk) {
   S.mij = id; S.ak = await K.akUitJwk(jwk); S.prive = await K.priveSleutel(jwk); S.teken = await K.tekenSleutel(jwk);
+}
+
+// ---------------------------------------------------------------- onthoud mij (alleen als je dat aanvinkt)
+// Je sleutel en uitnodigingscode worden versleuteld met een apparaatsleutel die de browser zelf maakt en die niet
+// uitleesbaar is (WebCrypto, niet-exporteerbaar), en samen in IndexedDB van deze site bewaard. Je code van zes woorden
+// wordt nooit bewaard. Na 30 dagen, bij Uitloggen of als je sleutel is vervangen (code kwijt) vraagt de site hem weer.
+const SESSIE_DAGEN = 30;
+function idb(mode, fn) {
+  return new Promise((ok, nee) => {
+    const open = indexedDB.open('doubleleren', 1);
+    open.onupgradeneeded = () => open.result.createObjectStore('kv');
+    open.onerror = () => nee(open.error);
+    open.onsuccess = () => {
+      const db = open.result, tx = db.transaction('kv', mode), req = fn(tx.objectStore('kv'));
+      tx.oncomplete = () => { db.close(); ok(req.result); };
+      tx.onerror = () => { db.close(); nee(tx.error); };
+    };
+  });
+}
+const vergeetSessie = () => idb('readwrite', (s) => s.delete('sessie')).catch(() => {});
+async function bewaarSessie(id, jwk, uitnodiging) {
+  try {
+    const apparaat = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    const iv = K.willekeurig(12);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: K.tekst.naarBytes('doubleleren-sessie|' + id) }, apparaat, K.tekst.naarBytes(JSON.stringify({ id, jwk, uitnodiging }))));
+    await idb('readwrite', (s) => s.put({ v: 1, id, apparaat, iv, ct, tot: Date.now() + SESSIE_DAGEN * 864e5 }, 'sessie'));
+  } catch { /* geen opslag beschikbaar (bijv. privévenster): gewoon zonder onthouden */ }
+}
+// Geeft true als er automatisch is ingelogd
+async function probeerSessie() {
+  let s = null; try { s = await idb('readonly', (st) => st.get('sessie')); } catch { return false; }
+  if (!s) return false;
+  if (!(s.tot > Date.now()) || s.v !== 1) { await vergeetSessie(); return false; }
+  let inhoud;
+  try { inhoud = JSON.parse(K.tekst.uitBytes(new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: s.iv, additionalData: K.tekst.naarBytes('doubleleren-sessie|' + s.id) }, s.apparaat, s.ct)))); }
+  catch { await vergeetSessie(); return false; }
+  $('login').hidden = true; $('voet').textContent = 'Automatisch inloggen…';
+  try {
+    if (await verbind(inhoud.uitnodiging) !== inhoud.id) throw new Error('sleutel');
+    const sl = await beheerJson(`sleutels/${inhoud.id}.json`);
+    if (!sl || sl.publiek?.n !== inhoud.jwk.n) throw new Error('sleutel');   // vervangen na 'code kwijt'
+    await gebruikSleutel(inhoud.id, inhoud.jwk);
+    await naInloggen();
+    return true;
+  } catch (e) {
+    if (e.message === 'sleutel' || /uitnodigingscode/.test(e.message)) await vergeetSessie();
+    $('login').hidden = false; $('voet').textContent = '';
+    $('login-fout').textContent = e.message === 'sleutel' ? 'Log opnieuw in met je code.' : 'Automatisch inloggen lukte niet: ' + e.message;
+    return false;
+  }
 }
 
 // Publieke sleutels (huidig + eerdere) voor het controleren van handtekeningen
@@ -602,9 +656,8 @@ function downloadTekst(naam, tekst, type) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 const lesAdres = () => `${location.origin}${location.pathname}${LOKAAL ? location.search : ''}#vandaag`;
-function downloadSnelkoppeling(mac) {
-  if (mac) downloadTekst('DoubleLeren.webloc', `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0"><dict><key>URL</key><string>${esc(lesAdres())}</string></dict></plist>\n`, 'application/xml');
-  else downloadTekst('DoubleLeren.url', `[InternetShortcut]\r\nURL=${lesAdres()}\r\n`, 'application/octet-stream');
+function downloadSnelkoppeling() {
+  downloadTekst('DoubleLeren.webloc', `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0"><dict><key>URL</key><string>${esc(lesAdres())}</string></dict></plist>\n`, 'application/xml');
 }
 
 $('vandaag').addEventListener('click', async (e) => {
@@ -620,8 +673,8 @@ $('vandaag').addEventListener('click', async (e) => {
   else if (actie === 'controleer') lesAfronding();
   else if (actie === 'indienen') { L.antwoord = $('les-antwoord').value.trim(); lesAfronding(); }
   else if (actie === 'naar-mij') tab('mij');
-  else if (actie === 'snel-win') downloadSnelkoppeling(false);
-  else if (actie === 'snel-mac') downloadSnelkoppeling(true);
+  else if (actie === 'snel-win') { try { await navigator.clipboard.writeText(lesAdres()); b.textContent = 'Link gekopieerd'; } catch { b.textContent = lesAdres(); } }
+  else if (actie === 'snel-mac') downloadSnelkoppeling();
   else if (actie === 'afronden') {
     b.disabled = true; b.textContent = 'Versleuteld opslaan…'; $('les-fout').textContent = '';
     try { await lesOpslaan(); } catch (err) { $('les-fout').textContent = 'Opslaan mislukt: ' + err.message; b.disabled = false; b.textContent = 'Opnieuw proberen'; }
@@ -733,8 +786,8 @@ $('tabs').addEventListener('click', (e) => { const b = e.target.closest('button[
 $('heatmap').addEventListener('click', (e) => { const b = e.target.closest('button[data-lid]'); if (b) toonProfiel(b.dataset.lid); });
 $('expert').addEventListener('input', zoekExperts);
 $('kb-zoek').addEventListener('input', toonKennisbank);
-$('uitloggen').addEventListener('click', () => { location.replace(location.pathname + location.search); });
-$('vergeet').addEventListener('click', () => { try { localStorage.removeItem('dl-uitnodiging'); } catch {} $('uitnodiging-rij').hidden = false; $('vergeet-rij').hidden = true; });
+$('uitloggen').addEventListener('click', async () => { await vergeetSessie(); location.replace(location.pathname + location.search); });
+$('vergeet').addEventListener('click', async () => { try { localStorage.removeItem('dl-uitnodiging'); } catch {} await vergeetSessie(); $('uitnodiging-rij').hidden = false; $('vergeet-rij').hidden = true; });
 for (const id of ['code', 'uitnodiging']) $(id).addEventListener('input', () => { $('login-fout').textContent = ''; });
 
 let bewaard = null; try { bewaard = localStorage.getItem('dl-uitnodiging'); } catch { /* geen opslag */ }
@@ -748,8 +801,11 @@ $('login-form').addEventListener('submit', async (e) => {
   $('login-knop').disabled = true; $('login-knop').textContent = 'Controleren…';
   try {
     const id = await verbind(uitnodiging);
-    await inloggen(id, $('code').value);
-    if (!$('uitnodiging-rij').hidden && $('onthoud').checked) { try { localStorage.setItem('dl-uitnodiging', uitnodiging.trim()); } catch {} }
+    const jwk = await inloggen(id, $('code').value);
+    if ($('onthoud').checked) {
+      try { localStorage.setItem('dl-uitnodiging', uitnodiging.trim()); } catch {}
+      await bewaarSessie(id, jwk, uitnodiging.trim());
+    }
     $('code').value = ''; $('uitnodiging').value = '';
     await naInloggen();
   } catch (err) { $('login').hidden = false; $('voet').textContent = ''; $('login-fout').textContent = err.message; }
@@ -775,5 +831,5 @@ $('w-opnieuw').addEventListener('click', () => welkomFormulier(false));
 $('naar-welkom').addEventListener('click', (e) => { e.preventDefault(); history.replaceState(null, '', location.pathname + location.search + '#welkom'); toonWelkom(); });
 $('w-terug').addEventListener('click', (e) => { e.preventDefault(); naarInloggen(); });
 
-laadOpenbaar().then(() => { if (location.hash === '#welkom') toonWelkom(); })
+laadOpenbaar().then(async () => { if (location.hash === '#welkom') toonWelkom(); else await probeerSessie(); })
   .catch((e) => { $('login-fout').textContent = 'DoubleLeren kon niet laden: ' + e.message; });

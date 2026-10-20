@@ -8,7 +8,7 @@ Alles gaat in de browser; je hoeft niets te installeren.
 2. Plak de uitnodigingscode, vul je naam in en kies je ingevulde **skilllijst (Excel)**. Je browser maakt je **code van zes woorden**: bewaar die in je wachtwoordkluis.
 3. Stuur de **zes controlewoorden** die je ziet via Teams naar de beheerder.
 4. Na goedkeuring log je in met je uitnodigingscode en je code. Onder **Les van vandaag** staat elke werkdag een les van 2–5 minuten.
-5. Wil je dat DoubleLeren elke ochtend vanzelf opent? Na je les staat er een knop voor een opstart-snelkoppeling (Windows en Mac).
+5. Wil je dat DoubleLeren elke ochtend vanzelf opent? Na je les staat hoe je een opstart-snelkoppeling maakt (Windows en Mac). Vink bij het inloggen **Onthoud mij** aan, dan opent hij meteen in je les zonder code (30 dagen, tot je uitlogt).
 
 **Andere computer?** Gewoon inloggen op de website.
 
@@ -64,7 +64,7 @@ Alles gaat in de browser; je hoeft niets te installeren.
 
 **Website**
 - Strikte CSP en geen framing.
-- De code wordt nooit bewaard. De uitnodigingscode alleen als je dat aanvinkt.
+- De code wordt nooit bewaard. Met *Onthoud mij* bewaart de browser je sleutel en uitnodigingscode in IndexedDB, versleuteld met een niet-exporteerbare AES-GCM-apparaatsleutel; na 30 dagen, bij Uitloggen of na *Code kwijt* is die sessie weg.
 - Alleen `https:`-links.
 - Alle gegevens worden geëscaped en gecontroleerd.
 
