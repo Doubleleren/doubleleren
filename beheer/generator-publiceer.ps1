@@ -39,7 +39,14 @@ try {
         $s = Get-DlSleutelsUitDk (Unprotect-DlRsa $geheim.generatorPrive (ConvertFrom-B64u $t.kopieen.generator))
         $nieuw = [ordered]@{ v = 1; bijgewerkt = (Get-Date).ToString('s'); lessen = $lijst }
         $b = Read-DlOpslag $d (Get-DlLidPad $id 'wachtrij')      # wordt volledig vervangen
-        if ($Proef) { Protect-Dl $s "$id|wachtrij" (ConvertTo-DlEnvelop $id 'wachtrij' $nieuw 'generator' $geheim.generatorPrive) | Out-Null; $script:proefTel++; continue }
+        if ($Proef) {
+            Protect-Dl $s "$id|wachtrij" (ConvertTo-DlEnvelop $id 'wachtrij' $nieuw 'generator' $geheim.generatorPrive) | Out-Null; $script:proefTel++
+            # Ter controle: de geplande lessen per wachtrij, met een korte hash in plaats van het pseudoniem (de beheerder koppelt die lokaal)
+            $hash = (-join ((Get-DlSha256 $script:DlUtf8.GetBytes("doubleleren-proef|$id"))[0..2] | ForEach-Object { $_.ToString('x2') }))
+            $idx = @((Get-Content (Join-Path $App 'lessen\index.json') -Raw -Encoding UTF8 | ConvertFrom-Json).lessen)
+            Write-Host "  PROEF-WACHTRIJ $hash`: $(($lijst | ForEach-Object { $l = $idx | Where-Object id -eq $_ | Select-Object -First 1; "[$($l.type)/$($l.niveau)] $($l.titel)" }) -join ' || ')"
+            continue
+        }
         Write-DlVersleuteld $d $id 'wachtrij' $s $nieuw $(if ($b) { $b.sha }) 'generator' $geheim.generatorPrive | Out-Null
         Write-Host "  $id`: $($lijst.Count) les(sen) klaargezet"
     }

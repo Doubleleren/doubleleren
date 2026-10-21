@@ -40,7 +40,7 @@ Doel: **elke deelnemer heeft 3 lessen klaar** die hij of zij nog niet deed (niet
 | Type | Wat | Voor wie en wanneer |
 |---|---|---|
 | `basis` | Een basisvraag over één vaardigheid uit de skilllijst | Vooral vaardigheden waarop de deelnemer laag scoort |
-| `verdieping` | Een moeilijkere vraag over een vaardigheid die de deelnemer eerder **goed** had: een praktijkcase, randgeval, afweging of misvatting, op een hoger `niveau` dan de les die goed ging | Op een **willekeurig** moment tussen 14 en 35 dagen na dat goede resultaat (zie hieronder) |
+| `verdieping` | Een moeilijkere vraag over een vaardigheid die de deelnemer eerder **goed** had: een praktijkcase, randgeval, afweging of misvatting, op een hoger `niveau` dan de les die goed ging | Op een **willekeurig** moment tussen 14 en 35 dagen na dat goede resultaat (zie hieronder). Óók meteen, zonder wachttijd, bij een vaardigheid waarop de deelnemer zich **4 of 5** geeft: die wil je niet eerst een basisvraag laten maken |
 | `herhaling` | Toetst of de deelnemer het nu wél (of nog steeds) weet. **Altijd een andere vraagstelling:** een nieuwe klantsituatie, andere antwoordopties en bij voorkeur een ander soort opdracht (was het meerkeuze, maak er dan een open vraag of een zoek-op van). Nooit dezelfde vraag, ook niet licht herschreven. Hetzelfde kernbegrip mag wel. | Vaardigheid met `fout` of `deels`, op een **willekeurig** moment tussen 14 en 35 dagen erna (zie hieronder). Ging de herhaling weer fout of deels, dan volgt later een nieuwe herhaling, weer minstens 14 dagen erna |
 | `nieuws` | Relevant nieuws voor het vak (zie stap 1) | Iedereen, vooraan in de wachtrij |
 
@@ -50,8 +50,16 @@ Doel: **elke deelnemer heeft 3 lessen klaar** die hij of zij nog niet deed (niet
 
 **Spreiding:** heb je voor een vaardigheid meerdere passende lessen, kies dan voor verschillende deelnemers verschillende lessen, zodat collega's niet allemaal dezelfde vraag op dezelfde dag krijgen.
 
+**Niveau past bij de persoon.** Kijk eerst naar het gemiddelde van iemands `scores`:
+- Gemiddeld ongeveer **3,5 of hoger** (ervaren, bijv. leidinggevenden): de meeste lessen zijn `gevorderd` of `expert`. Denk aan praktijkcases, randgevallen, afwegingen, misvattingen en nieuw onderzoek, en `verdieping` waar dat kan. Een `basis`-niveau alleen nog bij een echte uitschieter naar beneden (score 1–2).
+- Gemiddeld **lager**: volg het schema hieronder.
+
+Een ervaren collega die een basisvraag krijgt over iets wat hij al jaren doet, haakt af. Een te moeilijke vraag corrigeert zichzelf via de resultaten. Ging een verdieping fout of deels, dan volgt later een `herhaling`, en de vaardigheid telt als mogelijk overschat.
+
+**Wachtrij vervangen mag.** Staan er in iemands `wachtrij` lessen die duidelijk te makkelijk zijn voor dit niveau, dan mag je ze vervangen in plaats van alleen aanvullen. Nieuws- en teamlessen blijf je vooraan zetten.
+
 Werk verder zo:
-1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
+1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. "Past" betekent ook: het `niveau` sluit aan bij de persoon. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
 2. **Per deelnemer per dag maximaal 1 `herhaling` en 1 `verdieping`.** De rest is `basis` (en eventueel nieuws).
 3. **Welke vaardigheid en welk niveau** (bij `basis`):
    - score 1–2: de fundamenten (`niveau: "basis"`); ongeveer de helft van de basislessen
