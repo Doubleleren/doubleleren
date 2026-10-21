@@ -23,5 +23,10 @@
   "bron": {
     "titel": "Semantic metrics | Microsoft Learn",
     "url": "https://learn.microsoft.com/en-us/clarity/insights/semantic-metrics"
+  },
+  "video": {
+    "titel": "Navigating the Microsoft Clarity Dashboard",
+    "kanaal": "Microsoft Clarity",
+    "url": "https://www.youtube.com/watch?v=7YyFnEQjmtM"
   }
 }

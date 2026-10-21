@@ -23,5 +23,10 @@
   "bron": {
     "titel": "Optimize Cumulative Layout Shift | Articles | web.dev",
     "url": "https://web.dev/articles/optimize-cls"
+  },
+  "video": {
+    "titel": "The ultimate guide to web performance",
+    "kanaal": "Beyond Fireship",
+    "url": "https://www.youtube.com/watch?v=0fONene3OIA"
   }
 }

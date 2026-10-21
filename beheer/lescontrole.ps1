@@ -10,6 +10,11 @@ function Test-DlLes($l, [string]$Id, [int]$Lengte) {
         $u = $null
         if (-not ([Uri]::TryCreate([string]$l.bron.url, [UriKind]::Absolute, [ref]$u) -and $u.Scheme -eq 'https' -and -not $u.IsUnc -and ([string]$l.bron.url).Length -le 500)) { $fouten += 'bron.url moet een https-adres zijn' }
     }
+    # Optionele kennisvideo: alleen een YouTube-video (zie sjablonen/<vakgebied>/videos.json), met titel
+    if ($l.video) {
+        if ([string]$l.video.url -notmatch '^https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}$') { $fouten += 'video.url moet een YouTube-video zijn (https://www.youtube.com/watch?v=...)' }
+        if (-not $l.video.titel -or ([string]$l.video.titel).Length -gt 200) { $fouten += 'video.titel ontbreekt of is te lang' }
+    }
     if ($Lengte -gt 20000) { $fouten += 'te groot' }
     , $fouten
 }

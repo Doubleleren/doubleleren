@@ -496,12 +496,18 @@ function toonRonde() {
   b.hidden = false;
 }
 
+// Kennisvideo onder de bron: alleen een echte YouTube-video (zelfde regel als beheer/lescontrole.ps1)
+function videoHtml(v) {
+  const u = veiligeLink(v?.url);
+  if (!u || !/^https:\/\/www\.youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}$/.test(u)) return '';
+  return `<div class="bron video">Wil je er meer over weten? Kijk deze video: <a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(v.titel || 'video')}</a>${v.kanaal ? ` <span class="sub">(${esc(v.kanaal)})</span>` : ''}</div>`;
+}
 function bronHtml(bron) { const u = veiligeLink(bron?.url); return u ? `<div class="bron">Bron: <a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(bron.titel || u)}</a></div>` : ''; }
 const titelVan = (l) => S.lessen[l.id]?.titel || l.titel || l.id;
 const lesKnop = (id, datum, tekst) => `<button type="button" class="leslink" data-les="${esc(id)}"${datum ? ` data-datum="${esc(datum)}"` : ''}>${esc(tekst)}</button>`;
 function lesHtml(l, antwoord) {
   const les = S.lessen[l.id] || {};
-  return `<article class="les"><div class="datum num">${esc(fmtDatum(l.datum))}</div><div><h3>${lesKnop(l.id, l.datum, les.titel || l.titel || l.id)}</h3><div class="meta"><span class="tag">${esc(les.vakgebied || l.vakgebied)}</span>${chip(l.resultaat)}</div>${les.kernpunt ? `<p>${esc(les.kernpunt)}</p>` : ''}${bronHtml(les.bron)}${antwoord ? `<details><summary>Jouw antwoord</summary><blockquote>${esc(antwoord)}</blockquote></details>` : ''}</div></article>`;
+  return `<article class="les"><div class="datum num">${esc(fmtDatum(l.datum))}</div><div><h3>${lesKnop(l.id, l.datum, les.titel || l.titel || l.id)}</h3><div class="meta"><span class="tag">${esc(les.vakgebied || l.vakgebied)}</span>${chip(l.resultaat)}</div>${les.kernpunt ? `<p>${esc(les.kernpunt)}</p>` : ''}${bronHtml(les.bron) + videoHtml(les.video)}${antwoord ? `<details><summary>Jouw antwoord</summary><blockquote>${esc(antwoord)}</blockquote></details>` : ''}</div></article>`;
 }
 
 // ---------------------------------------------------------------- weergave: team
@@ -566,7 +572,7 @@ function toonKennisbank() {
   const res = alle.filter((l) => !q || [l.titel, l.kernpunt, l.onderwerp, l.vakgebied, l.bron?.titel].join(' ').toLowerCase().includes(q));
   $('kb-teller').textContent = q ? `${res.length} van ${alle.length} lessen` : `${alle.length} ${alle.length === 1 ? 'les' : 'lessen'} die je gehad hebt`;
   if (!alle.length) { $('kb-lijst').innerHTML = '<p class="leeg">Hier verschijnt elke les die je hebt gedaan, met het kernpunt en de bron. Zo bouw je je eigen naslag op.</p>'; return; }
-  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(fmtDatum(l.log.datum))}</div><div><h3>${lesKnop(l.log.id, l.log.datum, l.titel || l.log.id)}</h3><div class="meta">${chip(l.log.resultaat)}<span class="tag">${esc(l.vakgebied)}</span>${TYPE[l.type] ? `<span class="tag" style="background:var(--cool-50)">${esc(TYPE[l.type])}</span>` : ''}${l.herkomst === 'team' ? '<span class="tag" style="background:var(--fun-50)">Van het team</span>' : ''}${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
+  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(fmtDatum(l.log.datum))}</div><div><h3>${lesKnop(l.log.id, l.log.datum, l.titel || l.log.id)}</h3><div class="meta">${chip(l.log.resultaat)}<span class="tag">${esc(l.vakgebied)}</span>${TYPE[l.type] ? `<span class="tag" style="background:var(--cool-50)">${esc(TYPE[l.type])}</span>` : ''}${l.herkomst === 'team' ? '<span class="tag" style="background:var(--fun-50)">Van het team</span>' : ''}${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron) + videoHtml(l.video)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
 }
 
 // ---------------------------------------------------------------- lesdetail (#les/<id>)
@@ -597,7 +603,7 @@ async function toonLesDetail(id, datum) {
   let h = (les.intro ? `<div class="zacht">${tekstHtml(les.intro)}</div>` : '') + lesLabel(label) + `<div class="vraag">${tekstHtml(o.vraag)}</div>`;
   // Een les die je zelf nog niet had (bijv. vanuit een teamprofiel): antwoord en uitleg pas na een klik
   const opties = (markeer) => `<div class="opties">${o.opties.map((t, i) => { const j = markeer && i === juist; return `<div class="optie stil${j ? ' juist' : ''}"><span aria-hidden="true">${j ? '✓' : '·'}</span><span>${esc(t)}${j ? ' <span class="sub">(juist)</span>' : ''}</span></div>`; }).join('')}</div>`;
-  const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + tekstHtml(les.toelichting) + lesLabel('Uitleg') + tekstHtml(les.uitleg) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron);
+  const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + tekstHtml(les.toelichting) + lesLabel('Uitleg') + tekstHtml(les.uitleg) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron) + videoHtml(les.video);
   if (o.soort === 'meerkeuze') h += opties(!!log);
   h += log ? uitleg : `<details class="spoiler"><summary>Toon antwoord en uitleg <span class="sub">(je hebt deze les zelf nog niet gehad)</span></summary>${uitleg}</details>`;
   const dag = log?.datum.slice(0, 10), ook = dag ? (S.leden[S.mij]?.logs || []).filter((l) => l.datum.startsWith(dag) && l.id !== id) : [];
@@ -997,7 +1003,7 @@ function lesAfronding() {
   }
   h += tekstHtml(les.toelichting);
   if (!L.uitlegGetoond) h += lesLabel('Uitleg') + tekstHtml(les.uitleg);
-  h += kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer vandaag') + bronHtml(les.bron);
+  h += kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer vandaag') + bronHtml(les.bron) + videoHtml(les.video);
   if (o.soort !== 'meerkeuze') {
     h += lesLabel('Hoe ging het?') + `<div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
   }

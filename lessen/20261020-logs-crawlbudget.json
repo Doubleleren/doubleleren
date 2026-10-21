@@ -23,5 +23,10 @@
   "bron": {
     "titel": "Optimize your crawl budget",
     "url": "https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget"
+  },
+  "video": {
+    "titel": "Screaming Frog Log File Analyser - 6.0",
+    "kanaal": "Screaming Frog",
+    "url": "https://www.youtube.com/watch?v=-Qgly4DRWeE"
   }
 }

@@ -1,0 +1,293 @@
+{
+  "v": 1,
+  "toelichting": "Kennisvideo's die bij een les mogen als 'Wil je er meer over weten?'. Titel en kanaal zoals YouTube ze toont (gecontroleerd 21 okt 2026). Alleen koppelen als de video echt over het onderwerp van de les gaat.",
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=K5qOuoj_dwA",
+      "titel": "SEO Basics: Crawling, Indexing, and Ranking | Lesson 2/31",
+      "kanaal": "Semrush",
+      "categorie": "Crawling & Indexation",
+      "focus": "De Basis: Hoe werkt de Googlebot?"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=S5hcOZmslBw",
+      "titel": "[Solved] Discovered / Crawled - Currently Not Indexed Issue in Google Search Console",
+      "kanaal": "Rank Math SEO",
+      "categorie": "Crawling & Indexation",
+      "focus": "GSC Indexeringsfouten Oplossen"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=O9xkp0X0eJY",
+      "titel": "Google Search Console Indexing Report - How To Understand How Google Indexes Your Website",
+      "kanaal": "Patrick Rice",
+      "categorie": "Crawling & Indexation",
+      "focus": "GSC Indexeringsrapporten pluisvrij maken"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=jTPNZFj7s4M",
+      "titel": "Screaming Frog SEO Spider Tutorial - How To Do An SEO Audit In 2025",
+      "kanaal": "Patrick Rice",
+      "categorie": "Crawling & Indexation",
+      "focus": "Tooling: Valideren met de Frog"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nwGY-9lwTF4",
+      "titel": "Essential JavaScript SEO tips - JavaScript SEO",
+      "kanaal": "Google Search Central",
+      "categorie": "Crawling & Indexation",
+      "focus": "Advanced: JavaScript SEO"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=KjK5-L-wDVg",
+      "titel": "Keyword Research Tutorial for Google and AI SEO",
+      "kanaal": "Ahrefs",
+      "categorie": "Optimalisatie & Ranking",
+      "focus": "Zoekwoorden & Search Intent"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=XfO6lmlxh0M",
+      "titel": "Keyword Research for 2026: 3-Step Tutorial To Research Like A Pro",
+      "kanaal": "Ahrefs Tutorials",
+      "categorie": "Optimalisatie & Ranking",
+      "focus": "Search Intent Deep Dive"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=IrFAeQgzE7w",
+      "titel": "On-Page SEO Pt 2: How to Optimize a Page for a Keyword - 2.2. SEO Course by Ahrefs",
+      "kanaal": "Ahrefs",
+      "categorie": "Optimalisatie & Ranking",
+      "focus": "On-Page SEO Checklist"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=psjpUs8d7vw",
+      "titel": "What Is On-Page SEO? Everything You Need to Know In 2025",
+      "kanaal": "Semrush",
+      "categorie": "Optimalisatie & Ranking",
+      "focus": "On-Page Optimalisatie Stappenplan"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1HDX5M2TTUY",
+      "titel": "Content Audit: How to Uncover Hidden Gems & Boost Visibility",
+      "kanaal": "Rank Math SEO",
+      "categorie": "Optimalisatie & Ranking",
+      "focus": "Content Audits & Pruning"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=aKoZSzvVu6k",
+      "titel": "Acquisition Report in GA4 | How to Use & Get Insights in Google Analytics 4",
+      "kanaal": "Clicks Don't Lie",
+      "categorie": "Analytics",
+      "focus": "GA4 Verkeersanalyse Basis"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=9TpyYFcAhmk",
+      "titel": "How to Track AI Traffic in GA4 and Ahrefs Web Analytics (ChatGPT & More)",
+      "kanaal": "Ahrefs",
+      "categorie": "Analytics",
+      "focus": "SEO Verkeer Beoordelen"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UW3FIbNIgek",
+      "titel": "SEO Reports in Google Analytics 4 - Measure Organic Performance",
+      "kanaal": "Analyzify",
+      "categorie": "Analytics",
+      "focus": "GA4 Organic Search Deep Dive"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=iB7_i4giItw",
+      "titel": "Google Search Console Tutorial 2025 - How To Scale Traffic with GSC SEO",
+      "kanaal": "Patrick Rice",
+      "categorie": "Analytics",
+      "focus": "Advanced GSC Data-analyse"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HyFZhvPZUNM",
+      "titel": "Track custom events with Google Analytics 4",
+      "kanaal": "Analytics Mania",
+      "categorie": "Analytics",
+      "focus": "Custom Tracking & GTM"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0fONene3OIA",
+      "titel": "The ultimate guide to web performance",
+      "kanaal": "Beyond Fireship",
+      "categorie": "Technical SEO",
+      "focus": "Core Web Vitals & Snelheid"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_FpAvQkjlco",
+      "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+      "kanaal": "Matt Diggity",
+      "categorie": "Technical SEO",
+      "focus": "Lab data vs. Field data"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=vJEygBWs80A",
+      "titel": "What Is Schema Markup And Why You Need It For SEO",
+      "kanaal": "Dominate Marketing",
+      "categorie": "Technical SEO",
+      "focus": "Schema Markup (JSON-LD)"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-Qgly4DRWeE",
+      "titel": "Screaming Frog Log File Analyser - 6.0",
+      "kanaal": "Screaming Frog",
+      "categorie": "Technical SEO",
+      "focus": "Server Logfile-analyse"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZOiZHalue0U",
+      "titel": "The Importance of UX in Conversion Rate Optimization (CRO)",
+      "kanaal": "Thrive Themes",
+      "categorie": "UX & CRO",
+      "focus": "Basispsychologie van CRO"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7YyFnEQjmtM",
+      "titel": "Navigating the Microsoft Clarity Dashboard",
+      "kanaal": "Microsoft Clarity",
+      "categorie": "UX & CRO",
+      "focus": "Gedragsanalyse via Tooling"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=YkxGTwbRQ9w",
+      "titel": "How To Increase Conversions With Design",
+      "kanaal": "Flux Academy",
+      "categorie": "UX & CRO",
+      "focus": "Conversie-ontwerp & Frictie"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hcPxMuxh5Tc",
+      "titel": "The Anatomy Of A High Converting Landing Page | Conversion Rate Optimization Tips",
+      "kanaal": "Neil Patel",
+      "categorie": "UX & CRO",
+      "focus": "Leadgen & Landing Pages"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=eWWOJL1y8Qw",
+      "titel": "The BEST Conversion Rate Optimization Tutorial for Ecommerce in 2025",
+      "kanaal": "ThrillX",
+      "categorie": "UX & CRO",
+      "focus": "E-commerce Funnel Audit"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=TTUzxHdx2jY",
+      "titel": "Mobile-First Indexing",
+      "kanaal": "Google Search Central",
+      "categorie": "Mobile SEO",
+      "focus": "Mobile-First Indexing Basis"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=OYdEimv9-wU",
+      "titel": "Google's Mobile First Indexing | Lesson 34/34 | SEMrush Academy",
+      "kanaal": "Semrush Academy",
+      "categorie": "Mobile SEO",
+      "focus": "Google Mobile First Indexing Explained"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-zqFRBH024Q",
+      "titel": "Is your website is mobile friendly? (Test it in 5 mins)",
+      "kanaal": "Martin Baun",
+      "categorie": "Mobile SEO",
+      "focus": "Mobiele Usability Fixes"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hLFYOS_lGOE",
+      "titel": "The Absolute Beginner's Guide to Google Ads 2025",
+      "kanaal": "Aaron Young",
+      "categorie": "Paid Activity",
+      "focus": "Google Ads Veiling & Ad Rank"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6NFei1FbytM",
+      "titel": "The Google Update That's Changing SEO (and No One Noticed)",
+      "kanaal": "Ahrefs",
+      "categorie": "Algorithm Updates",
+      "focus": "Core Updates Begrijpen"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Qcd_2W5na60",
+      "titel": "Recover From ANY Google Algorithm Update",
+      "kanaal": "Rank Math SEO",
+      "categorie": "Algorithm Updates",
+      "focus": "Update Recovery & Analyse"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wYAa4BHXUPA",
+      "titel": "How To Recover From Google's Helpful Content Update",
+      "kanaal": "Rank Math SEO",
+      "categorie": "Algorithm Updates",
+      "focus": "Helpful Content Systemen"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=4YhJH5VOF3w",
+      "titel": "EEAT Explained: What Google Actually Uses to Judge Trust & Quality",
+      "kanaal": "Edward Sturm",
+      "categorie": "Google E-E-A-T",
+      "focus": "Het E-E-A-T Framework"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=fzH-P1feVz8",
+      "titel": "7 Proven E-E-A-T Strategies to Rank Higher",
+      "kanaal": "Rank Math SEO",
+      "categorie": "Google E-E-A-T",
+      "focus": "YMYL Betrouwbaarheidssignalen"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rMfCmqKIqJg",
+      "titel": "YMYL SEO Guide ft. Papa Penguin: What You Need to Know",
+      "kanaal": "LinkBuilding HQ",
+      "categorie": "Google E-E-A-T",
+      "focus": "Auteursprofielen & Schema"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=D9hyyjQ-t90",
+      "titel": "Author SEO: Optimize Your Site for Google E-E-A-T",
+      "kanaal": "Rank Math SEO",
+      "categorie": "Google E-E-A-T",
+      "focus": "Expertise-signalen Inrichten"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=xUyGAbwuTas",
+      "titel": "Google AI Overviews & SEO: What's gonna change?",
+      "kanaal": "GetResponse",
+      "categorie": "SEO voor AI",
+      "focus": "AI Overviews & Zero-Click"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rtrLA42XRog",
+      "titel": "How to RANK in Google's AI Overviews (Complete 2026 SEO Guide)",
+      "kanaal": "Surfer Academy",
+      "categorie": "SEO voor AI",
+      "focus": "AI Search Updates & Verkeer"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=TrAVBTFiDQ0",
+      "titel": "What Is GEO and Why It Is Important in 2026",
+      "kanaal": "Hostinger Academy",
+      "categorie": "SEO voor AI",
+      "focus": "GEO Framework & LLMs"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=FoIc8LkSETo",
+      "titel": "Why Generative Engine Optimisation (GEO) is the FUTURE of SEO",
+      "kanaal": "Exposure Ninja",
+      "categorie": "SEO voor AI",
+      "focus": "GEO vs. SEO Richtlijnen"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=bhTo8fDmr5I",
+      "titel": "How to Dominate AI Search Results in 2026 (ChatGPT, AI Overviews & More)",
+      "kanaal": "Surfer Academy",
+      "categorie": "SEO voor AI",
+      "focus": "Contentoptimalisatie voor AI"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DnRCo2vvKvY",
+      "titel": "How to Rank in AI Search in 2026 (ChatGPT, AI Overviews, and more)",
+      "kanaal": "Ahrefs Tutorials",
+      "categorie": "SEO voor AI",
+      "focus": "GEO On-Page Checklist"
+    }
+  ]
+}

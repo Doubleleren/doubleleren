@@ -28,5 +28,10 @@
   "bron": {
     "titel": "Cumulative Layout Shift (CLS) | Articles | web.dev",
     "url": "https://web.dev/articles/cls"
+  },
+  "video": {
+    "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+    "kanaal": "Matt Diggity",
+    "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
   }
 }

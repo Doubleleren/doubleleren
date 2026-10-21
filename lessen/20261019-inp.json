@@ -28,5 +28,10 @@
     "titel": "web.dev: Interaction to Next Paint (INP)",
     "url": "https://web.dev/articles/inp"
   },
+  "video": {
+    "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+    "kanaal": "Matt Diggity",
+    "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
+  },
   "niveau": "basis"
 }

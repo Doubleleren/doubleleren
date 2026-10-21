@@ -22,5 +22,10 @@
   "bron": {
     "titel": "Set up events - Tag Manager Help",
     "url": "https://support.google.com/tagmanager/answer/13034206"
+  },
+  "video": {
+    "titel": "Track custom events with Google Analytics 4",
+    "kanaal": "Analytics Mania",
+    "url": "https://www.youtube.com/watch?v=HyFZhvPZUNM"
   }
 }

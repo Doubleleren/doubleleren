@@ -83,6 +83,8 @@ Meerdere lessen over hetzelfde onderwerp zijn juist goed, maar **elke les is een
 
 Ook voorraadlessen zijn feitelijk geverifieerd en hebben een bestaande bron. Liever 7 goede dan 10 matige.
 
+**Kennisvideo (optioneel).** `sjablonen\seo\videos.json` bevat gecontroleerde YouTube-video's per categorie en focus. Voeg `video` (titel, kanaal en url precies overgenomen uit die lijst) alleen toe als de video **echt over het onderwerp van de les gaat**, niet alleen over hetzelfde vakgebied. Twijfel je, laat het weg. Een les zonder video is prima. Gebruik nooit een video die niet in de lijst staat. Onder de bron verschijnt dan: "Wil je er meer over weten? Kijk deze video".
+
 Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoonlijk**: schrijf hem zo dat hij voor iedereen op dat niveau bruikbaar is. Schema:
 
 ```json
@@ -102,7 +104,8 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
   "uitleg": "de kern van de les, 120–250 woorden",
   "kernpunt": "1–2 zinnen om te onthouden",
   "toepassing": "1 concrete actie voor deze week bij een klant",
-  "bron": { "titel": "...", "url": "https://..." }
+  "bron": { "titel": "...", "url": "https://..." },
+  "video": { "titel": "...", "kanaal": "...", "url": "https://www.youtube.com/watch?v=..." }
 }
 ```
 

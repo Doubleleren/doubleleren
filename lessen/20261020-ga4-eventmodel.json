@@ -28,5 +28,10 @@
   "bron": {
     "titel": "About events - Analytics Help",
     "url": "https://support.google.com/analytics/answer/9322688"
+  },
+  "video": {
+    "titel": "Track custom events with Google Analytics 4",
+    "kanaal": "Analytics Mania",
+    "url": "https://www.youtube.com/watch?v=HyFZhvPZUNM"
   }
 }

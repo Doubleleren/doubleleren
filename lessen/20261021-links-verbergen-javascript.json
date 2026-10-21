@@ -28,5 +28,10 @@
   "bron": {
     "titel": "Link best practices for Google | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+  },
+  "video": {
+    "titel": "Essential JavaScript SEO tips - JavaScript SEO",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=nwGY-9lwTF4"
   }
 }

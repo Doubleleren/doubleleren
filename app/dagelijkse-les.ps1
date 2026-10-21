@@ -412,6 +412,19 @@ try {
             $tb.Inlines.Add($h)
             [void]$inhoud.Children.Add($tb)
         }
+        # Kennisvideo: alleen een echte YouTube-video (zelfde regel als beheer/lescontrole.ps1)
+        if ($les.video -and [string]$les.video.url -match '^https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}$' -and (Test-WebAdres $les.video.url)) {
+            $tb = New-Object Windows.Controls.TextBlock
+            $tb.FontSize = 13; $tb.Margin = Rand 0 2 0 4; $tb.TextWrapping = 'Wrap'
+            $tb.Inlines.Add('Wil je er meer over weten? Kijk deze video: ')
+            $h = New-Object Windows.Documents.Hyperlink
+            $h.Inlines.Add([string]$les.video.titel)
+            $h.NavigateUri = [uri]$les.video.url
+            $h.Add_Click({ if (Test-WebAdres $this.NavigateUri.AbsoluteUri) { Start-Process $this.NavigateUri.AbsoluteUri; $win.WindowState = 'Minimized' } })
+            $tb.Inlines.Add($h)
+            if ($les.video.kanaal) { $tb.Inlines.Add(" ($($les.video.kanaal))") }
+            [void]$inhoud.Children.Add($tb)
+        }
 
         $script:afrondKnop = Nieuw-Knop 'Afronden' { Sla-Op } -Primair
         $script:afrondDashKnop = Nieuw-Knop 'Afronden en voortgang bekijken' { $script:openDashboard = $true; Sla-Op }

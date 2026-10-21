@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-21T07:56:24",
+    "bijgewerkt":  "2026-10-21T12:00:48",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -19,6 +19,11 @@
                                     "titel":  "Search Engine Journal: ChatGPT Traffic Drop Appears To Be A Tracking Problem",
                                     "url":  "https://www.searchenginejournal.com/chatgpt-traffic-drop-appears-to-be-a-tracking-problem/593157/"
                                 },
+                       "video":  {
+                                     "titel":  "How to Track AI Traffic in GA4 and Ahrefs Web Analytics (ChatGPT \u0026 More)",
+                                     "kanaal":  "Ahrefs",
+                                     "url":  "https://www.youtube.com/watch?v=9TpyYFcAhmk"
+                                 },
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -38,6 +43,11 @@
                                     "titel":  "web.dev: Interaction to Next Paint (INP)",
                                     "url":  "https://web.dev/articles/inp"
                                 },
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -56,6 +66,7 @@
                                     "titel":  "ACM spreekt webshops aan die misleidende countdowntimers gebruiken",
                                     "url":  "https://www.acm.nl/nl/publicaties/acm-spreekt-webshops-aan-die-misleidende-countdowntimers-gebruiken"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -75,6 +86,11 @@
                                     "titel":  "Google Blog: AI Mode in Search (I/O 2025)",
                                     "url":  "https://blog.google/products/search/google-search-ai-mode-update/"
                                 },
+                       "video":  {
+                                     "titel":  "How to RANK in Google\u0027s AI Overviews (Complete 2026 SEO Guide)",
+                                     "kanaal":  "Surfer Academy",
+                                     "url":  "https://www.youtube.com/watch?v=rtrLA42XRog"
+                                 },
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
@@ -94,6 +110,7 @@
                                     "titel":  "Lukas Vermeer: SRM Checker",
                                     "url":  "https://www.lukasvermeer.nl/srm/"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -113,6 +130,11 @@
                                     "titel":  "Google Search Central: Search Console Performance-rapport",
                                     "url":  "https://support.google.com/webmasters/answer/7576553"
                                 },
+                       "video":  {
+                                     "titel":  "Google Search Console Tutorial 2025 - How To Scale Traffic with GSC SEO",
+                                     "kanaal":  "Patrick Rice",
+                                     "url":  "https://www.youtube.com/watch?v=iB7_i4giItw"
+                                 },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -131,6 +153,7 @@
                                     "titel":  "Image metadata in Google Images",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"
                                 },
+                       "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -149,6 +172,7 @@
                                     "titel":  "Understanding searches better than ever before",
                                     "url":  "https://blog.google/products/search/search-language-understanding-bert/"
                                 },
+                       "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
@@ -167,6 +191,11 @@
                                     "titel":  "Semantic metrics | Microsoft Learn",
                                     "url":  "https://learn.microsoft.com/en-us/clarity/insights/semantic-metrics"
                                 },
+                       "video":  {
+                                     "titel":  "Navigating the Microsoft Clarity Dashboard",
+                                     "kanaal":  "Microsoft Clarity",
+                                     "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
+                                 },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -185,6 +214,11 @@
                                     "titel":  "Cumulative Layout Shift (CLS) | Articles | web.dev",
                                     "url":  "https://web.dev/articles/cls"
                                 },
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -203,6 +237,11 @@
                                     "titel":  "Optimize Cumulative Layout Shift | Articles | web.dev",
                                     "url":  "https://web.dev/articles/optimize-cls"
                                 },
+                       "video":  {
+                                     "titel":  "The ultimate guide to web performance",
+                                     "kanaal":  "Beyond Fireship",
+                                     "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
+                                 },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -221,6 +260,7 @@
                                     "titel":  "Managing crawling of faceted navigation URLs",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -239,6 +279,7 @@
                                     "titel":  "Send user IDs | Google Analytics",
                                     "url":  "https://developers.google.com/analytics/devguides/collection/ga4/user-id"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -257,6 +298,11 @@
                                     "titel":  "About events - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/9322688"
                                 },
+                       "video":  {
+                                     "titel":  "Track custom events with Google Analytics 4",
+                                     "kanaal":  "Analytics Mania",
+                                     "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -275,6 +321,7 @@
                                     "titel":  "Set up Google Analytics in Tag Manager",
                                     "url":  "https://support.google.com/tagmanager/answer/9442095"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -293,6 +340,7 @@
                                     "titel":  "Enroll in Analytics Academy courses on Skillshop",
                                     "url":  "https://support.google.com/analytics/answer/15068052"
                                 },
+                       "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
@@ -311,6 +359,7 @@
                                     "titel":  "Introduction to Tag Manager - Tag Manager Help",
                                     "url":  "https://support.google.com/tagmanager/answer/6102821"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -329,6 +378,7 @@
                                     "titel":  "Tell Google about Localized Versions of Your Page",
                                     "url":  "https://developers.google.com/search/docs/specialty/international/localized-versions"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -347,6 +397,11 @@
                                     "titel":  "Optimize your crawl budget",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget"
                                 },
+                       "video":  {
+                                     "titel":  "Screaming Frog Log File Analyser - 6.0",
+                                     "kanaal":  "Screaming Frog",
+                                     "url":  "https://www.youtube.com/watch?v=-Qgly4DRWeE"
+                                 },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -365,6 +420,11 @@
                                     "titel":  "Mobile site and mobile-first indexing best practices",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
                                 },
+                       "video":  {
+                                     "titel":  "Mobile-First Indexing",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+                                 },
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
@@ -383,6 +443,7 @@
                                     "titel":  "The Open Graph protocol",
                                     "url":  "https://ogp.me/"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -402,6 +463,7 @@
                                     "titel":  "Pagination, incremental page loading, and their impact on Google Search",
                                     "url":  "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -420,6 +482,7 @@
                                     "titel":  "What are the advertising levels in Meta Ads Manager? | Meta Business Help Center",
                                     "url":  "https://www.facebook.com/business/help/621956575422138"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -438,6 +501,7 @@
                                     "titel":  "Search Engine Optimization (SEO) Starter Guide",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -456,6 +520,11 @@
                                     "titel":  "A guide to Google Search ranking systems",
                                     "url":  "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
                                 },
+                       "video":  {
+                                     "titel":  "How To Recover From Google\u0027s Helpful Content Update",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=wYAa4BHXUPA"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -474,6 +543,7 @@
                                     "titel":  "Penguin is now part of our core algorithm",
                                     "url":  "https://developers.google.com/search/blog/2016/09/penguin-is-now-part-of-our-core"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -493,6 +563,7 @@
                                     "titel":  "Impact of Organic Ranking on Ad Click Incrementality",
                                     "url":  "https://research.google/blog/impact-of-organic-ranking-on-ad-click-incrementality/"
                                 },
+                       "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -511,6 +582,7 @@
                                     "titel":  "How AI powers great search results",
                                     "url":  "https://blog.google/products/search/how-ai-powers-great-search-results/"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -529,6 +601,7 @@
                                     "titel":  "Review Snippet (Review, AggregateRating) Structured Data | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/review-snippet"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -547,6 +620,7 @@
                                     "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -565,6 +639,7 @@
                                     "titel":  "robots.txt-rapport",
                                     "url":  "https://support.google.com/webmasters/answer/6062598?hl=nl"
                                 },
+                       "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
@@ -583,6 +658,7 @@
                                     "titel":  "How Google interprets the robots.txt specification",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -601,6 +677,11 @@
                                     "titel":  "Do You Need an SEO? Tips for Hiring an SEO | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/do-i-need-seo"
                                 },
+                       "video":  {
+                                     "titel":  "The Absolute Beginner\u0027s Guide to Google Ads 2025",
+                                     "kanaal":  "Aaron Young",
+                                     "url":  "https://www.youtube.com/watch?v=hLFYOS_lGOE"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -619,6 +700,11 @@
                                     "titel":  "Optimize Time to First Byte",
                                     "url":  "https://web.dev/articles/optimize-ttfb"
                                 },
+                       "video":  {
+                                     "titel":  "The ultimate guide to web performance",
+                                     "kanaal":  "Beyond Fireship",
+                                     "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -637,6 +723,7 @@
                                     "titel":  "How Does Google Determine Ranking Results - Google Search",
                                     "url":  "https://www.google.com/search/howsearchworks/how-search-works/ranking-results/"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -655,6 +742,7 @@
                                     "titel":  "Video (VideoObject, Clip, BroadcastEvent) Schema Markup | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/video"
                                 },
+                       "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
@@ -674,6 +762,11 @@
                                     "titel":  "How to install Clarity on Google Tag Manager? | Microsoft Learn",
                                     "url":  "https://learn.microsoft.com/en-us/clarity/third-party-integrations/google-tag-manager"
                                 },
+                       "video":  {
+                                     "titel":  "Navigating the Microsoft Clarity Dashboard",
+                                     "kanaal":  "Microsoft Clarity",
+                                     "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
+                                 },
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
@@ -692,6 +785,11 @@
                                     "titel":  "Google Search spam updates and your site | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/spam-updates"
                                 },
+                       "video":  {
+                                     "titel":  "Recover From ANY Google Algorithm Update",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -711,6 +809,11 @@
                                     "titel":  "[GA4] Funnel exploration - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/9327974"
                                 },
+                       "video":  {
+                                     "titel":  "The BEST Conversion Rate Optimization Tutorial for Ecommerce in 2025",
+                                     "kanaal":  "ThrillX",
+                                     "url":  "https://www.youtube.com/watch?v=eWWOJL1y8Qw"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -729,6 +832,7 @@
                                     "titel":  "Monitor events in DebugView - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/7201382"
                                 },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -748,6 +852,7 @@
                                     "titel":  "Table guidelines and reference - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/12917991"
                                 },
+                       "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -766,6 +871,11 @@
                                     "titel":  "Set up events - Tag Manager Help",
                                     "url":  "https://support.google.com/tagmanager/answer/13034206"
                                 },
+                       "video":  {
+                                     "titel":  "Track custom events with Google Analytics 4",
+                                     "kanaal":  "Analytics Mania",
+                                     "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
+                                 },
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -785,6 +895,7 @@
                                     "titel":  "Build and Submit a Sitemap | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
                                 },
+                       "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -804,6 +915,11 @@
                                     "titel":  "Optimize Largest Contentful Paint | web.dev",
                                     "url":  "https://web.dev/articles/optimize-lcp"
                                 },
+                       "video":  {
+                                     "titel":  "The ultimate guide to web performance",
+                                     "kanaal":  "Beyond Fireship",
+                                     "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
+                                 },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },
@@ -822,6 +938,11 @@
                                     "titel":  "Link best practices for Google | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
                                 },
+                       "video":  {
+                                     "titel":  "Essential JavaScript SEO tips - JavaScript SEO",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=nwGY-9lwTF4"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -841,6 +962,11 @@
                                     "titel":  "Pew Research Center: Google users are less likely to click on links when an AI summary appears in the results",
                                     "url":  "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
                                 },
+                       "video":  {
+                                     "titel":  "Google AI Overviews \u0026 SEO: What\u0027s gonna change?",
+                                     "kanaal":  "GetResponse",
+                                     "url":  "https://www.youtube.com/watch?v=xUyGAbwuTas"
+                                 },
                        "soort":  "zoek-op",
                        "herkomst":  "generator"
                    }

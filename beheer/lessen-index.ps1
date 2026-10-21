@@ -6,7 +6,7 @@ $lessen = foreach ($f in Get-ChildItem (Join-Path $App 'lessen') -Filter *.json 
     [ordered]@{
         id = $l.id; titel = $l.titel; vakgebied = $l.vakgebied; onderwerp = $l.onderwerp; type = $l.type
         niveau = $(if ($l.niveau) { $l.niveau } else { 'basis' }); matrix = @($l.matrix | Where-Object { $_ })
-        kernpunt = $l.kernpunt; bron = $l.bron; soort = $l.opdracht.soort
+        kernpunt = $l.kernpunt; bron = $l.bron; video = $l.video; soort = $l.opdracht.soort
         herkomst = $(if ($l.herkomst -eq 'team') { 'team' } else { 'generator' })
     }
 }

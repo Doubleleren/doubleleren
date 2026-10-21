@@ -24,5 +24,10 @@
   "bron": {
     "titel": "Optimize Largest Contentful Paint | web.dev",
     "url": "https://web.dev/articles/optimize-lcp"
+  },
+  "video": {
+    "titel": "The ultimate guide to web performance",
+    "kanaal": "Beyond Fireship",
+    "url": "https://www.youtube.com/watch?v=0fONene3OIA"
   }
 }
