@@ -22,11 +22,13 @@ $V = (Get-Content (Join-Path $App 'vertrouwd.json') -Raw -Encoding UTF8 | Conver
 $org = Read-DlBeheer $d 'organisatie.json' $V
 $pub = New-DlSleutelbron $d $V
 
-$leden = [ordered]@{}; $script:ongeldig = 0
+$leden = [ordered]@{}; $script:ongeldig = 0; $script:lidOvergeslagen = 0
 foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     $t = Read-DlBeheer $d "toegang/$id.json" $V; if (-not $t) { continue }    # nog niet goedgekeurd
     $s = Get-DlSleutelsUitDk (Unprotect-DlRsa $geheim.generatorPrive (ConvertFrom-B64u $t.kopieen.generator))
-    $lees = { param($soort) try { Read-DlVersleuteld $d $id $soort $s $pub } catch { $script:ongeldig++; Write-Host "  overgeslagen: $id|$soort ($($_.Exception.Message))"; $null } }
+    # Een bestand dat niet te controleren is: tellen en de deelnemer vandaag overslaan (zijn bestaande wachtrij blijft staan)
+    $script:lidOngeldig = 0
+    $lees = { param($soort) try { Read-DlVersleuteld $d $id $soort $s $pub } catch { $script:ongeldig++; $script:lidOngeldig++; Write-Host "  overgeslagen: $(if ($env:GITHUB_ACTIONS) { 'deelnemer' } else { $id })|$soort ($($_.Exception.Message -replace 'lid-[0-9a-f]{6}', 'lid-…'))"; $null } }
     $profiel = & $lees 'profiel'
     if ($org.leden.$id.leren -eq 'optioneel' -and -not ($profiel -and $profiel.obj.lessen)) { continue }   # koos (nog) geen lessen
     $matrix = & $lees 'matrix'
@@ -45,6 +47,7 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     # Eigen prioriteit per hoofdgebied (eerste cijfer van de vaardigheid-id): 1 hoog, 2 normaal (standaard), 3 laag
     $prioriteit = [ordered]@{}
     if ($matrix -and $matrix.obj.prioriteit) { foreach ($p in $matrix.obj.prioriteit.PSObject.Properties) { if ($p.Name -match '^\d{1,2}$' -and @(1, 2, 3) -contains [int]$p.Value) { $prioriteit[$p.Name] = [int]$p.Value } } }
+    if ($script:lidOngeldig) { $script:lidOvergeslagen++; continue }
     $leden[$id] = [ordered]@{
         project = $org.leden.$id.project; cel = $org.leden.$id.cel
         focus = $(if ($profiel) { $profiel.obj.focus }); leerdoelen = $(if ($profiel) { $profiel.obj.leerdoelen })
@@ -52,4 +55,4 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     }
 }
 [IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; leden = $leden } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
-Write-Host "Context voor $($leden.Count) deelnemer(s): $pad$(if ($script:ongeldig) { " · $($script:ongeldig) bestand(en) met ongeldige handtekening overgeslagen" })"
+Write-Host "Context voor $($leden.Count) deelnemer(s): $pad$(if ($script:ongeldig) { " · $($script:ongeldig) bestand(en) niet te controleren, $($script:lidOvergeslagen) deelnemer(s) vandaag overgeslagen" })"
