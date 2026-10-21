@@ -343,7 +343,7 @@ function toonMij() {
   $('kal-sub').textContent = `${n26} ${n26 === 1 ? 'les' : 'lessen'} in de afgelopen 26 weken`;
 
   const antw = new Map((lid.antwoorden || []).map((a) => [String(a.id) + String(a.datum), a.antwoord]));
-  $('recent').innerHTML = logs.length ? logs.slice(0, 8).map((l) => lesHtml(l, antw.get(l.id + l.datum))).join('') : '<p class="leeg">Nog geen lessen afgerond. Je eerste les verschijnt vanzelf op je laptop.</p>';
+  $('recent').innerHTML = logs.length ? logs.slice(0, 3).map((l) => lesHtml(l, antw.get(l.id + l.datum))).join('') : '<p class="leeg">Nog geen lessen afgerond. Je eerste les verschijnt vanzelf op je laptop.</p>';
   $('sb-instelling').hidden = !magLessen();
   $('sb-zichtbaar').checked = SB.zichtbaar;
 }
