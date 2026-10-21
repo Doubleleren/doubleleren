@@ -18,7 +18,7 @@ Alles gaat in de browser; je hoeft niets te installeren.
 
 **Scorebord:** elke maand een kleine competitie. Je ziet van collega's alleen hun naam, het aantal goede antwoorden en hun reeks (punten = goed + langste reeks van de maand). Eerdere maanden en de jaarstand blijven bewaard. Niet meedoen? Zet in *Mijn voortgang* "Toon mij op het scorebord" uit; dan zie je het bord zelf ook niet.
 
-**Geef feedback:** met de knop bovenaan (of onder een les) meld je een bug, een fout of onvolledig antwoord, iets wat je nog wilt leren, of wat goed gaat. Alleen de beheerder kan het lezen, met je naam erbij.
+**Geef feedback:** met de knop bovenaan (of onder een les) meld je een bug, een fout of onvolledig antwoord, iets wat je nog wilt leren, of wat goed gaat. De beheerder leest het met je naam erbij. De lesgenerator leest het zonder naam, om lessen te verbeteren en onderwerpen te kiezen.
 
 **Head of SEO:** onder *Les toevoegen* maak je zelf een les. Die gaat ondertekend naar de data-repo. De generator controleert je handtekening en de les, zet hem de volgende ochtend in de kennisbank (gemarkeerd als *Van het team*) en plant hem met voorrang in. Meer lesmakers kan de beheerder toevoegen via `lesmakers` in het organogram.
 
@@ -33,7 +33,7 @@ Alles gaat in de browser; je hoeft niets te installeren.
 | Projectleider | ja | alleen eigen | scorebord + scores en resultaten van het eigen project |
 | Celleider | ja | alleen eigen | scorebord + scores en resultaten van de eigen cel |
 | Head of SEO | ja | alleen eigen | scorebord + scores en resultaten van heel SEO |
-| Beheerder en generator | via sleutelbeheer: scores en resultaten (de generator krijgt geen namen) | nee | de beheerder leest ook de feedback, met naam |
+| Beheerder en generator | via sleutelbeheer: scores en resultaten (de generator krijgt geen namen) | nee | de beheerder leest ook de feedback, met naam; de generator zonder naam |
 
 ## Hoe het veilig is
 
@@ -85,12 +85,13 @@ Alles gaat in de browser; je hoeft niets te installeren.
 - Lessen openen alleen `https:`-links.
 
 **Generator**
-- Krijgt scores zonder namen en antwoorden. De context wordt na elke run gewist.
+- Krijgt scores zonder namen en antwoorden, resultaten per les over het hele team en de feedback van de laatste 60 dagen zonder afzender. De context wordt na elke run gewist.
+- Leert van feedback en resultaten: verbetert eigen lessen of haalt ze uit de roulatie (met datum en reden, zichtbaar in de les), stelt niveaus bij en geeft gevraagde onderwerpen voorrang. Teamlessen past hij nooit aan; het publicatiescript keurt dat af. Wat hij leert, komt in zijn geheugen via een pull request die de beheerder of de head of SEO goedkeurt.
 - Lessen worden gecontroleerd voordat ze worden gepubliceerd.
 
 **Scorebord en feedback**
 - Scorebord: `scorebord/<maand>/<id>.json`, ondertekend door het lid zelf en bewust **niet versleuteld** (het hele team leest mee). Er staan alleen het aantal goed en de reeks in, geen naam (die komt uit het ondertekende organogram), geen skilllijst en geen antwoorden. Net als de rest van de voortgang berust het op vertrouwen: een lid kan zijn eigen logboek verzinnen, maar niet dat van een ander.
-- Feedback: `feedback/<tijd>-<willekeurig>.json`, versleuteld met een eigen datasleutel die alleen voor de beheersleutel is verpakt, en binnenin ondertekend door het lid. De buitenkant verraadt geen naam, soort of tekst. De beheerder leest het met `beheer\feedback.ps1`; de vrije tekst wordt daar als gegevens getoond, nooit als opdracht.
+- Feedback: `feedback/<tijd>-<willekeurig>.json`, versleuteld met een eigen datasleutel die alleen voor de beheersleutel en de generatorsleutel is verpakt, en binnenin ondertekend door het lid. De buitenkant verraadt geen naam, soort of tekst. De beheerder leest het met `beheer\feedback.ps1`; de vrije tekst wordt daar als gegevens getoond, nooit als opdracht.
 
 **Wat binnen het team zichtbaar blijft** (voor wie een token heeft):
 - wanneer bestanden veranderen

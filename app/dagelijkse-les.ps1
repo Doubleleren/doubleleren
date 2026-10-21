@@ -157,14 +157,19 @@ try {
         # Een les komt nooit twee keer: alle maanden van het logboek tellen mee
         $gedaan = @($logs | ForEach-Object { $_.id })
         $w = Read-DlVersleuteld $c.data $c.id 'wachtrij' $s $c.publiek
-        $lesId = @($(if ($w) { @($w.obj.lessen) }) | Where-Object { $_ -and $gedaan -notcontains $_ }) | Select-Object -First 1
-        if (-not $lesId) {
-            $idx = Read-DlJson $c.app 'lessen/index.json'
-            if ($idx) { $lesId = @($idx.lessen | Where-Object { $gedaan -notcontains $_.id }) | Select-Object -First 1 -ExpandProperty id }
+        # Lessen die na feedback uit de roulatie zijn gehaald ('actief': false) worden overgeslagen
+        $les = $null
+        foreach ($lesId in @(@($(if ($w) { @($w.obj.lessen) }) | Where-Object { $_ -and $gedaan -notcontains $_ }) | Select-Object -First 5)) {
+            $l = Read-DlJson $c.app "lessen/$lesId.json"
+            if (-not $l) { Log-Fout "Les $lesId staat niet in de lessenpool"; continue }
+            if ($l.actief -ne $false) { $les = $l; break }
         }
-        if (-not $lesId) { Log-Fout 'Geen les beschikbaar: wachtrij en lessenpool zijn op. De generator vult ze aan.'; exit }
-        $les = Read-DlJson $c.app "lessen/$lesId.json"
-        if (-not $les) { Log-Fout "Les $lesId staat niet in de lessenpool"; exit }
+        if (-not $les) {
+            $idx = Read-DlJson $c.app 'lessen/index.json'
+            $lesId = if ($idx) { @($idx.lessen | Where-Object { $gedaan -notcontains $_.id -and $_.actief -ne $false }) | Select-Object -First 1 -ExpandProperty id }
+            if ($lesId) { $les = Read-DlJson $c.app "lessen/$lesId.json" }
+        }
+        if (-not $les) { Log-Fout 'Geen les beschikbaar: wachtrij en lessenpool zijn op. De generator vult ze aan.'; exit }
     }
     $o = $les.opdracht
 

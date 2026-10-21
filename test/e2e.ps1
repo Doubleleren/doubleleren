@@ -286,6 +286,58 @@ try {
     Controleer ($wD.obj.lessen -contains '20261019-query-fan-out' -and -not (Test-Path "$D\voorstellen\proef-test.json") -and -not (Get-ChildItem $C -Recurse -Filter *.dpapi)) 'Echte run in cloudmodus: wachtrij geplaatst, voorstellen verwerkt, nergens een DPAPI-bestand nodig'
 } finally { Remove-Item Env:\DL_GENERATOR_SLEUTEL -ErrorAction SilentlyContinue }
 
+Write-Host '16. Leren van feedback: context, lessen herzien en uit de roulatie, bescherming van teamlessen'
+. "$A\beheer\lescontrole.ps1"
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
+$ctx = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
+$fbC = @($ctx.feedback)
+Controleer ($ctx.lesstatistiek.'20261019-srm'.n -ge 1 -and $ctx.lesstatistiek.'20261019-srm'.fout -ge 1) 'Context: resultaten per les over het hele team'
+Controleer (@($fbC | Where-Object tekst -eq 'Na de omzetting').Count -eq 1 -and -not ($fbC | Where-Object { $_.PSObject.Properties.Name -contains 'door' }) -and -not ((ConvertTo-Json $fbC -Depth 4) -match 'lid-[0-9a-f]{6}')) 'Context: feedback zonder afzender en zonder pseudoniemen'
+Controleer (-not ($fbC | Where-Object tekst -eq 'Vals namens Foxtrot') -and -not ($fbC | Where-Object tekst -match 'Afronden reageert')) 'Context: vervalste feedback en feedback zonder generatorkopie overgeslagen'
+Remove-Item "$T\beheer\generator\context.json"
+# Controle van herzien-velden
+$basis = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+$l1 = $basis.PSObject.Copy(); $l1 | Add-Member actief $false -Force
+$l2 = $basis.PSObject.Copy(); $l2 | Add-Member herzien '2026-10-21' -Force; $l2 | Add-Member wijziging "Gemeld door $($ids.Delta)" -Force
+$l3 = $basis.PSObject.Copy(); $l3 | Add-Member actief $false -Force; $l3 | Add-Member herzien '2026-10-21' -Force; $l3 | Add-Member wijziging 'Verouderd' -Force
+Controleer ((Test-DlLes $l1 $basis.id 1000).Count -gt 0 -and (Test-DlLes $l2 $basis.id 1000).Count -gt 0 -and (Test-DlLes $l3 $basis.id 1000).Count -eq 0) 'Lescontrole: uit roulatie alleen met datum, geen pseudoniem in de reden'
+# Publiceren met een git-kopie van de app-repo, zoals in de cloud
+$teamLes = $basis.PSObject.Copy(); $teamLes.id = '20261020-teamles'; $teamLes | Add-Member herkomst 'team' -Force
+[IO.File]::WriteAllText("$A\lessen\20261020-teamles.json", ($teamLes | ConvertTo-Json -Depth 6), (New-Object Text.UTF8Encoding($false)))
+function G { $ErrorActionPreference = 'Continue'; git -C $A @args 2>&1 | Out-Null }
+G init -q; G config user.email test@test.invalid; G config user.name test; G config core.autocrlf false; G add -A; G commit -q -m basis
+function Publiceer($wachtrij) {
+    $ErrorActionPreference = 'Continue'
+    [IO.File]::WriteAllText("$T\beheer\generator\wachtrijen.json", (@{ $ids.Delta = $wachtrij } | ConvertTo-Json))
+    $o = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -Thuis "$T\beheer" 2>&1 | ForEach-Object { "$_" }) -join ' '
+    [pscustomobject]@{ ok = $LASTEXITCODE -eq 0; uit = $o }
+}
+function ZetLes($id, [hashtable]$velden) { $l = Get-Content "$A\lessen\$id.json" -Raw -Encoding UTF8 | ConvertFrom-Json; foreach ($k in $velden.Keys) { $l | Add-Member $k $velden[$k] -Force }; [IO.File]::WriteAllText("$A\lessen\$id.json", ($l | ConvertTo-Json -Depth 6), (New-Object Text.UTF8Encoding($false))) }
+function Titel($id) { (Get-Content "$A\lessen\$id.json" -Raw -Encoding UTF8 | ConvertFrom-Json).titel }
+$tTeam = Titel '20261020-teamles'; $tSrm = Titel '20261019-srm'
+ZetLes '20261020-teamles' @{ titel = 'Aangepast door de generator'; herzien = '2026-10-21' }
+$p1 = Publiceer @('20261019-srm')
+Controleer ($p1.ok -and $p1.uit -match 'teruggedraaid: 20261020-teamles.json \(een teamles wordt nooit' -and (Titel '20261020-teamles') -eq $tTeam) 'Teamles aangepast: teruggedraaid, de rest wordt gewoon gepubliceerd'
+ZetLes '20261019-srm' @{ titel = 'Stil aangepast' }
+$p2 = Publiceer @('20261019-srm')
+$ok2 = $p2.ok -and $p2.uit -match 'herzien-datum' -and (Titel '20261019-srm') -eq $tSrm
+ZetLes '20261019-srm' @{ herkomst = 'team'; herzien = '2026-10-21' }
+$p3 = Publiceer @('20261019-srm')
+$ok3 = $p3.ok -and $p3.uit -match 'herkomst' -and -not (Get-Content "$A\lessen\20261019-srm.json" -Raw | ConvertFrom-Json).herkomst
+Remove-Item "$A\lessen\20261019-srm.json"
+$p4 = Publiceer @('20261019-query-fan-out')
+$ok4 = $p4.ok -and $p4.uit -match 'nooit verwijderd' -and (Test-Path "$A\lessen\20261019-srm.json")
+ZetLes '20261019-srm' @{ actief = $false }
+$p6 = Publiceer @('20261019-query-fan-out')
+$ok6 = $p6.ok -and $p6.uit -match 'herzien-datum nodig' -and (Get-Content "$A\lessen\20261019-srm.json" -Raw | ConvertFrom-Json).actief -ne $false
+Controleer ($ok2 -and $ok3 -and $ok4 -and $ok6) 'Eigen les zonder herzien-datum, met andere herkomst, verwijderd of ongeldig: teruggedraaid, run gaat door'
+ZetLes '20261019-srm' @{ actief = $false; herzien = '2026-10-21'; wijziging = 'Vraag was dubbelzinnig; vervangen door een nieuwe les.' }
+$p5 = Publiceer @('20261019-srm', '20261019-query-fan-out')
+$idxA = Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+$wD = Read-DlVersleuteld $cd.data $cd.id 'wachtrij' $sD $cd.publiek
+Controleer ($p5.ok -and $p5.uit -match 'uit de roulatie' -and ($idxA.lessen | Where-Object id -eq '20261019-srm').actief -eq $false -and $wD.obj.lessen -notcontains '20261019-srm' -and $wD.obj.lessen -contains '20261019-query-fan-out') 'Les uit de roulatie: in de index gemarkeerd en uit de wachtrij gehaald'
+Remove-Item "$A\.git" -Recurse -Force
+
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h
 $testcodes = @{}; foreach ($k in $res.Keys) { if ($res[$k].code) { $testcodes[$k] = $res[$k].code } }

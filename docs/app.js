@@ -607,6 +607,8 @@ async function toonLesDetail(id, datum) {
   // Een les die je zelf nog niet had (bijv. vanuit een teamprofiel): antwoord en uitleg pas na een klik
   const opties = (markeer) => `<div class="opties">${o.opties.map((t, i) => { const j = markeer && i === juist; return `<div class="optie stil${j ? ' juist' : ''}"><span aria-hidden="true">${j ? '✓' : '·'}</span><span>${esc(t)}${j ? ' <span class="sub">(juist)</span>' : ''}</span></div>`; }).join('')}</div>`;
   const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + tekstHtml(les.toelichting) + lesLabel('Uitleg') + tekstHtml(les.uitleg) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron) + videoHtml(les.video);
+  // Bijgewerkt na feedback of resultaten (door de generator): laat zien wanneer en waarom
+  if (/^\d{4}-\d{2}-\d{2}$/.test(String(les.herzien || ''))) h = `<p class="sub">${les.actief === false ? 'Uit de roulatie gehaald' : 'Bijgewerkt'} op ${esc(fmtDatum(les.herzien))}${typeof les.wijziging === 'string' && les.wijziging ? ': ' + esc(les.wijziging.slice(0, 300)) : ''}</p>` + h;
   if (o.soort === 'meerkeuze') h += opties(!!log);
   h += log ? uitleg : `<details class="spoiler"><summary>Toon antwoord en uitleg <span class="sub">(je hebt deze les zelf nog niet gehad)</span></summary>${uitleg}</details>`;
   const dag = log?.datum.slice(0, 10), ook = dag ? (S.leden[S.mij]?.logs || []).filter((l) => l.datum.startsWith(dag) && l.id !== id) : [];
@@ -749,7 +751,7 @@ async function zetZichtbaar(aan) {
 // ---------------------------------------------------------------- feedback
 // Versleuteld naar de beheerder: feedback/<tijd>-<willekeurig>.json met een eigen DK, verpakt voor de beheersleutel
 // (kopieen is een map: later komt de generator erbij). Binnenin de bekende envelop, ondertekend door het lid.
-// De buitenkant verraadt niets (geen naam, geen soort); alleen de beheerder kan lezen wie wat schreef.
+// De buitenkant verraadt niets (geen naam, geen soort); alleen de beheerder kan lezen wie wat schreef (de generator leest het zonder naam).
 const FB_SOORTEN = ['bug', 'fout', 'toevoeging', 'goed'];
 let fbTerug = null;
 function openFeedback(lesId) {
@@ -935,9 +937,9 @@ async function kiesLes() {
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
   const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen)];
   for (const id of kandidaten) {
-    if (!id || gedaan.has(id) || !LES_ID.test(id)) continue;
+    if (!id || gedaan.has(id) || !LES_ID.test(id) || S.lessen[id]?.actief === false) continue;
     const les = await haalLes(id);
-    if (les) return { les };
+    if (les && les.actief !== false) return { les };   // uit de roulatie gehaald: overslaan
   }
   return { leeg: true };
 }

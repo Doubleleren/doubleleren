@@ -15,6 +15,11 @@ function Test-DlLes($l, [string]$Id, [int]$Lengte) {
         if ([string]$l.video.url -notmatch '^https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}$') { $fouten += 'video.url moet een YouTube-video zijn (https://www.youtube.com/watch?v=...)' }
         if (-not $l.video.titel -or ([string]$l.video.titel).Length -gt 200) { $fouten += 'video.titel ontbreekt of is te lang' }
     }
+    # Herzien na feedback of resultaten: datum en korte reden; 'actief: false' haalt een les uit de roulatie
+    if ($null -ne $l.actief -and $l.actief -isnot [bool]) { $fouten += 'actief moet true of false zijn' }
+    if ($null -ne $l.herzien -and "$($l.herzien)" -notmatch '^\d{4}-\d{2}-\d{2}$') { $fouten += 'herzien moet een datum zijn (JJJJ-MM-DD)' }
+    if ($l.actief -eq $false -and -not $l.herzien) { $fouten += 'een les uit de roulatie heeft een herzien-datum nodig' }
+    if ($null -ne $l.wijziging -and (([string]$l.wijziging).Length -gt 300 -or [string]$l.wijziging -match 'lid-[0-9a-f]{6}')) { $fouten += 'wijziging is te lang of noemt een pseudoniem' }
     if ($Lengte -gt 20000) { $fouten += 'te groot' }
     , $fouten
 }
