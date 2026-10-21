@@ -9,11 +9,12 @@
 #   beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht|optioneel
 #   beheer.ps1 -Bijwerken                                        toegang opnieuw berekenen
 #   beheer.ps1 -Controleer                                       overzicht: wie ziet wie
+#   beheer.ps1 -NieuweGeneratorsleutel                           aparte sleutel voor de lesgenerator (hervatbaar)
 #   beheer.ps1 -Migreer -VanMap <map>                            eenmalig: oude beheer-repo (onondertekend) overzetten
 # Rollen: lid (met -Project of -Cel), projectleider (-Project), celleider (-Cel), head.
 param(
     [switch]$Init, [switch]$Uitnodigen, [switch]$Aanvragen, [string]$Goedkeuren, [switch]$Bijwerken, [switch]$Controleer,
-    [string]$Wijzig, [string]$Verplaats, [switch]$Migreer, [string]$VanMap,
+    [string]$Wijzig, [string]$Verplaats, [switch]$Migreer, [string]$VanMap, [switch]$NieuweGeneratorsleutel,
     [string]$Naam, [ValidateSet('lid', 'projectleider', 'celleider', 'head')][string]$Rol = 'lid', [string]$Project, [string]$Cel,
     [string]$Controlewoorden, [switch]$Optioneel, [switch]$Beheerder,
     [ValidateSet('', 'verplicht', 'optioneel')][string]$Leren = '',
@@ -30,8 +31,18 @@ $geheimPad = Join-Path $Thuis 'beheer.dpapi'
 $geheim = Read-DlGeheim $geheimPad
 
 function Save-Geheim { Save-DlGeheim $geheimPad $script:geheim }
-function GenPrive { if (-not $geheim.generatorPrive) { throw 'Geen beheersleutel: draai eerst -Init' }; $geheim.generatorPrive }
-function Vertrouwd { $p = GenPrive; [pscustomobject]@{ kty = 'RSA'; n = $p.n; e = $p.e } }
+# Twee sleutels: de beheersleutel (beheerPrive) ondertekent alles onder beheer/; de generatorsleutel (generatorPrive)
+# ontsleutelt de generatorkopieën en ondertekent wachtrijen en scorebord. De beheerder heeft beide (voor goedkeuren en
+# sleutelwissels); de generator (straks in de cloud) alleen de zijne. Zonder beheerPrive is het nog één gedeelde sleutel.
+function BeheerPrive { $p = if ($geheim.beheerPrive) { $geheim.beheerPrive } else { $geheim.generatorPrive }; if (-not $p) { throw 'Geen beheersleutel: draai eerst -Init' }; $p }
+function GenPrive { if (-not $geheim.generatorPrive) { throw 'Geen generatorsleutel: draai eerst -Init' }; $geheim.generatorPrive }
+function Pub($p) { [pscustomobject]@{ kty = 'RSA'; n = $p.n; e = $p.e } }
+function Vertrouwd { Pub (BeheerPrive) }
+# Generatorkopie van een datasleutel openen; een kopie van vóór de aparte generatorsleutel opent met de beheersleutel
+function Open-GeneratorKopie([string]$Kopie) {
+    try { , (Unprotect-DlRsa (GenPrive) (ConvertFrom-B64u $Kopie)) }
+    catch { if (-not $geheim.beheerPrive) { throw }; , (Unprotect-DlRsa $geheim.beheerPrive (ConvertFrom-B64u $Kopie)) }
+}
 . (Join-Path $PSScriptRoot 'kloon.ps1')
 $script:kloon = $null
 function DataOpslag {
@@ -44,7 +55,7 @@ function DataOpslag {
 }
 
 if ($Init) {
-    if ($geheim -and $geheim.generatorPrive) { Write-Host 'Beheersleutel bestaat al.' }
+    if ($geheim -and ($geheim.generatorPrive -or $geheim.beheerPrive)) { Write-Host 'Beheersleutel bestaat al.' }
     else {
         $kp = New-DlSleutelpaar 3072
         $script:geheim = [pscustomobject]@{ generatorPrive = $kp.prive; token = $null; rotaties = [pscustomobject]@{} }
@@ -68,9 +79,9 @@ $V = Vertrouwd
 $org = Read-DlBeheer $d 'organisatie.json' $V
 if (-not $org -and -not $Migreer) { $org = Get-Content (Join-Path $App 'sjablonen\organisatie-sjabloon.json') -Raw -Encoding UTF8 | ConvertFrom-Json }
 
-function Save-Org { Write-DlBeheer $d 'organisatie.json' $script:org (GenPrive) }
+function Save-Org { Write-DlBeheer $d 'organisatie.json' $script:org (BeheerPrive) }
 function Naam($id) { if ($id -eq 'generator') { return 'generator' }; $n = $org.leden.$id.naam; if ($n) { "$n ($id)" } else { $id } }
-function PubVan($id) { if ($id -eq 'generator') { return $V }; $s = Read-DlBeheer $d "sleutels/$id.json" $V; if ($s) { $s.publiek } }
+function PubVan($id) { if ($id -eq 'generator') { return (Pub (GenPrive)) }; $s = Read-DlBeheer $d "sleutels/$id.json" $V; if ($s) { $s.publiek } }
 
 # Toegang: de DK verpakt voor elke kijker met een goedgekeurde sleutel, plus de vingerafdruk van die sleutel
 function New-Toegang([string]$id, [byte[]]$dk, [int]$versie) {
@@ -81,7 +92,7 @@ function New-Toegang([string]$id, [byte[]]$dk, [int]$versie) {
     }
     [ordered]@{ v = 2; versie = $versie; kopieen = $kop; vingerafdrukken = $vf }
 }
-function Write-Toegang([string]$id, $t) { Write-DlBeheer $d "toegang/$id.json" $t (GenPrive) }
+function Write-Toegang([string]$id, $t) { Write-DlBeheer $d "toegang/$id.json" $t (BeheerPrive) }
 
 # Sleutelwissel, hervatbaar: de nieuwe DK staat eerst veilig in de beheergeheimen, daarna wordt alles omgezet
 function Start-Rotatie([string]$id, [byte[]]$oudDk) {
@@ -114,11 +125,39 @@ if ($Migreer) {
     Save-Org
     foreach ($soort in 'sleutels', 'toegang') {
         foreach ($f in Get-ChildItem (Join-Path $VanMap $soort) -Filter 'lid-*.json' -ErrorAction SilentlyContinue) {
-            Write-DlBeheer $d "$soort/$($f.Name)" ([IO.File]::ReadAllText($f.FullName, [Text.Encoding]::UTF8) | ConvertFrom-Json) (GenPrive)
+            Write-DlBeheer $d "$soort/$($f.Name)" ([IO.File]::ReadAllText($f.FullName, [Text.Encoding]::UTF8) | ConvertFrom-Json) (BeheerPrive)
             Write-Host "  $soort/$($f.Name) overgezet en ondertekend"
         }
     }
     Write-Host "Organogram met $(@($org.leden.PSObject.Properties).Count) leden overgezet."
+}
+
+elseif ($NieuweGeneratorsleutel) {
+    # Hervatbaar: de nieuwe sleutel staat eerst veilig in de beheergeheimen; daarna per lid alleen de generatorkopie van
+    # de datasleutel opnieuw verpakt (de oude generatorsleutel was de beheersleutel zelf, dus geen datasleutel-wissel nodig).
+    if (-not $geheim.beheerPrive) { $geheim | Add-Member -NotePropertyName beheerPrive -NotePropertyValue $geheim.generatorPrive -Force; Save-Geheim }
+    $actief = $geheim.generatorPrive.n -ne $geheim.beheerPrive.n -and -not $geheim.generatorNieuw
+    if ($actief) { Write-Host 'De aparte generatorsleutel is al actief; er is niets veranderd.' }
+}
+if ($NieuweGeneratorsleutel -and -not $actief) {
+    if (-not $geheim.generatorNieuw) {
+        $kp = New-DlSleutelpaar 3072; while (-not (Test-DlSleutelVorm $kp.publiek)) { $kp = New-DlSleutelpaar 3072 }
+        $geheim | Add-Member -NotePropertyName generatorNieuw -NotePropertyValue $kp.prive -Force; Save-Geheim
+    }
+    $nieuwPub = Pub $geheim.generatorNieuw; $vf = Get-DlVingerafdrukHex $nieuwPub
+    foreach ($id in @($org.leden.PSObject.Properties.Name)) {
+        $t = Read-DlBeheer $d "toegang/$id.json" $V; if (-not $t -or -not $t.kopieen.generator) { continue }
+        if ($t.vingerafdrukken.generator -eq $vf) { continue }                       # al omgezet
+        $dk = Open-GeneratorKopie $t.kopieen.generator
+        $kop = [ordered]@{}; foreach ($p in $t.kopieen.PSObject.Properties) { $kop[$p.Name] = $p.Value }
+        $vfs = [ordered]@{}; foreach ($p in $t.vingerafdrukken.PSObject.Properties) { $vfs[$p.Name] = $p.Value }
+        $kop.generator = ConvertTo-B64u (Protect-DlRsa $nieuwPub $dk); $vfs.generator = $vf
+        Write-Toegang $id ([ordered]@{ v = 2; versie = $t.versie; kopieen = $kop; vingerafdrukken = $vfs })
+        Write-Host "  $(Naam $id): generatorkopie omgezet"
+    }
+    Write-DlBeheer $d 'generator.json' ([ordered]@{ v = 1; publiek = $nieuwPub; sinds = (Get-Date).ToString('s') }) (BeheerPrive)
+    $geheim.generatorPrive = $geheim.generatorNieuw; $geheim.PSObject.Properties.Remove('generatorNieuw'); Save-Geheim
+    Write-Host "Aparte generatorsleutel actief (vingerafdruk $($vf.Substring(0, 16))…). De beheersleutel en vertrouwd.json blijven gelijk." -ForegroundColor Green
 }
 
 elseif ($Uitnodigen) {
@@ -198,14 +237,14 @@ elseif ($Goedkeuren) {
     $oudS = Read-DlBeheer $d "sleutels/$id.json" $V
     if ($aanvraag.herstel) {
         $oudT = Read-DlBeheer $d "toegang/$id.json" $V; if (-not $oudT) { throw "Herstel kan niet: $id had nog geen toegang" }
-        $oudDk = Unprotect-DlRsa (GenPrive) (ConvertFrom-B64u $oudT.kopieen.generator)
+        $oudDk = Open-GeneratorKopie $oudT.kopieen.generator
         $sleutelsObj.eerdere = @(@($oudS.publiek) + @($oudS.eerdere) | Where-Object { $_ })
-        Write-DlBeheer $d "sleutels/$id.json" $sleutelsObj (GenPrive)
+        Write-DlBeheer $d "sleutels/$id.json" $sleutelsObj (BeheerPrive)
         Start-Rotatie $id $oudDk; Complete-Rotatie $id
     } else {
         if ($oudS) { throw "$id is al goedgekeurd; gebruik herstel" }
-        $dk = Unprotect-DlRsa (GenPrive) (ConvertFrom-B64u $aanvraag.toegang.generator)
-        Write-DlBeheer $d "sleutels/$id.json" $sleutelsObj (GenPrive)
+        $dk = Open-GeneratorKopie $aanvraag.toegang.generator
+        Write-DlBeheer $d "sleutels/$id.json" $sleutelsObj (BeheerPrive)
         Write-Toegang $id (New-Toegang $id $dk 1)
     }
     Remove-DlOpslag $d "aanvragen/$id.json" $a.sha
@@ -218,7 +257,7 @@ if ($Bijwerken) {
     foreach ($p in @($(if ($geheim.rotaties) { $geheim.rotaties.PSObject.Properties.Name }) | Where-Object { $_ })) { Write-Host "Afgebroken sleutelwissel hervatten: $(Naam $p)"; Complete-Rotatie $p }
     foreach ($id in @($org.leden.PSObject.Properties.Name)) {
         $t = Read-DlBeheer $d "toegang/$id.json" $V; if (-not $t) { continue }
-        $dk = Unprotect-DlRsa (GenPrive) (ConvertFrom-B64u $t.kopieen.generator)
+        $dk = Open-GeneratorKopie $t.kopieen.generator
         $moet = @(Get-DlKijkers $org $id | Where-Object { PubVan $_ })
         $heeft = @($t.kopieen.PSObject.Properties.Name)
         $weg = @($heeft | Where-Object { $moet -notcontains $_ })

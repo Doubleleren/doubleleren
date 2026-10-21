@@ -1,4 +1,4 @@
-# Lessen die de head of SEO (of een lesmaker uit organisatie.json) op de website maakte, opnemen in de kennisbank.
+﻿# Lessen die de head of SEO (of een lesmaker uit organisatie.json) op de website maakte, opnemen in de kennisbank.
 # Een voorstel staat in doubleleren-data/voorstellen/<les-id>.json als {"v":2,"door":<id>,"inhoud":<les als JSON-tekst>,"sig"}.
 # Alleen opgenomen met een geldige handtekening van een lesmaker en als de les de controle doorstaat; daarna verwijderd.
 # Draait automatisch aan het begin van generator-context.ps1. De nieuwe lessen gaan mee met generator-publiceer.ps1 -Push.
@@ -13,7 +13,7 @@ $geheim = Read-DlGeheim (Join-Path $Thuis 'beheer.dpapi'); if (-not $geheim) { t
 $kloon = $null
 if (-not $DataMap) { $kloon = Get-DlKloon $Thuis; if ($kloon) { Update-DlKloon $kloon; $DataMap = $kloon } }
 $d = if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }
-$V = [pscustomobject]@{ kty = 'RSA'; n = $geheim.generatorPrive.n; e = $geheim.generatorPrive.e }
+$V = (Get-Content (Join-Path $App 'vertrouwd.json') -Raw -Encoding UTF8 | ConvertFrom-Json).beheer   # beheersleutel: controleert alles onder beheer/
 $org = Read-DlBeheer $d 'organisatie.json' $V
 $makers = @(@($org.head) + @($org.lesmakers) | Where-Object { $_ })
 

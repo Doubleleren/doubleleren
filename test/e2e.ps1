@@ -220,6 +220,53 @@ $rD = Get-DlRonde ([pscustomobject]@{ scores = [pscustomobject]@{ '1.1.1' = [psc
 $rN = Get-DlRonde $null '2026-12-01' ([datetime]'2027-02-03')
 Controleer ($rD.voldaan -and -not $rD.teLaat -and $rN.vrij -and -not $rN.teLaat) 'Bijgewerkt in januari of pas in december aangemeld: niet geblokkeerd'
 
+Write-Host '14. Aparte generatorsleutel (omzetting op een draaiend systeem)'
+$wFox = Read-DlOpslag $dO "data/$($ids.Foxtrot)/wachtrij.enc"            # nog ondertekend met de oude (gedeelde) sleutel
+Beheer -NieuweGeneratorsleutel | Out-Null
+$G = Get-DlGeneratorPubliek $dO $V
+$vNa = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer
+Controleer ($G -and $G.n -ne $V.n -and $vNa.n -eq $V.n) 'Nieuwe generatorsleutel ondertekend gepubliceerd; beheersleutel en vertrouwd.json ongewijzigd'
+$gvf = Get-DlVingerafdrukHex $G
+$alleT = @($ids.Keys | ForEach-Object { Read-DlBeheer $dO "toegang/$($ids[$_]).json" $V } | Where-Object { $_ })
+Controleer (@($alleT | Where-Object { $_.vingerafdrukken.generator -ne $gvf }).Count -eq 0) "Generatorkopie van alle $($alleT.Count) deelnemers omgezet"
+$alle = @($personen.Keys)
+$okZicht = $true; foreach ($lid in 'Foxtrot', 'Delta', 'Alfa') { $kan = @($alle | Where-Object { KanOpenen $_ $lid }); if ((($kan | Sort-Object) -join ',') -ne (($verwacht[$lid] | Sort-Object) -join ',') -and $lid -ne 'Golf') { $okZicht = $false } }
+Controleer $okZicht 'Wie wat kan openen is onveranderd'
+$cf = Get-DlClient -Thuis "$T\Foxtrot"; $sF = Get-DlEigenSleutels $cf
+$ok = $true; try { Read-DlVersleuteld $cf.data $cf.id 'wachtrij' $sF $cf.publiek | Out-Null } catch { $ok = $false }
+Controleer $ok 'Oude wachtrij (oude sleutel) wordt nog geaccepteerd'
+$uitB = Beheer -NieuweGeneratorsleutel
+Controleer (-not (($uitB -join ' ') -match 'omgezet')) 'Opnieuw draaien verandert niets (hervatbaar)'
+# Dagcyclus met de nieuwe sleutel
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
+$ctx = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
+[IO.File]::WriteAllText("$T\beheer\generator\wachtrijen.json", (@{ $ids.Delta = @('20261019-srm') } | ConvertTo-Json))
+$sbOud = Read-DlScore $dO $maand $ids.Delta $null $V                        # door de generator met de oude sleutel: blijft geldig
+Remove-Item "$D\scorebord\$maand\$($ids.Delta).json"                       # zodat de generator hem nu met de nieuwe sleutel schrijft
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
+$cd = Get-DlClient -Thuis "$T\Delta"; $sD = Get-DlEigenSleutels $cd
+$wD = Read-DlVersleuteld $cd.data $cd.id 'wachtrij' $sD $cd.publiek
+$envD = $script:DlUtf8.GetString((Unprotect-Dl $sD "$($cd.id)|wachtrij" (Read-DlOpslag $dO "data/$($cd.id)/wachtrij.enc").bytes)).Trim() | ConvertFrom-Json
+Controleer (@($ctx.leden.PSObject.Properties).Count -ge 7 -and $wD.obj.lessen -contains '20261019-srm' -and (Test-DlHandtekening $G "$($cd.id)|wachtrij" 'generator' $envD.inhoud $envD.sig)) 'Generator draait met de nieuwe sleutel; wachtrij ondertekend met de nieuwe sleutel en geaccepteerd'
+$sbD = Read-DlScore $dO $maand $ids.Delta $null $G
+Controleer ($sbOud -and $sbD -and $sbD.obj.zichtbaar) 'Scorebord: oude handtekening bleef geldig, nieuw bestand ondertekend met de nieuwe generatorsleutel'
+# Nieuwe deelnemer na de omzetting
+$uit = Beheer -Uitnodigen -Naam India -Rol lid -Project ecom-b2b
+$ids.India = ([regex]::Match(($uit -join "`n"), 'lid-[0-9a-f]{6}')).Value
+$res.India = Installeer $ids.India 'India' @('-Xlsx', $Xlsx)
+$aI = Read-DlJson $dO "aanvragen/$($ids.India).json"
+$ok = $true; try { Unprotect-DlRsa (Read-DlGeheim "$T\beheer\beheer.dpapi").generatorPrive (ConvertFrom-B64u $aI.toegang.generator) | Out-Null } catch { $ok = $false }
+Beheer -Goedkeuren $ids.India -Controlewoorden $res.India.controlewoorden | Out-Null
+$tI = Read-DlBeheer $dO "toegang/$($ids.India).json" $V
+Controleer ($ok -and $tI -and $tI.vingerafdrukken.generator -eq $gvf -and (KanOpenen 'India' 'India') -and (KanOpenen 'Delta' 'India')) 'Nieuwe aanmelding: kopie voor de nieuwe generatorsleutel, goedgekeurd, leidinggevende ziet India'
+# Feedback na de omzetting: beheerder én generator kunnen hem lezen
+$fbN = New-DlFeedback $dO $ids.Delta $cd.prive @{ beheer = $V; generator = $G } 'toevoeging' 'Na de omzetting' ''
+$gh = Read-DlGeheim "$T\beheer\beheer.dpapi"
+$fG = Read-DlFeedback $dO "$fbN.json" 'generator' $gh.generatorPrive $cd.publiek; $fB = Read-DlFeedback $dO "$fbN.json" 'beheer' $gh.beheerPrive $cd.publiek
+$fbUit = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
+Controleer ($fG.tekst -eq 'Na de omzetting' -and $fB.tekst -eq 'Na de omzetting' -and $fbUit -match 'Na de omzetting') 'Feedback leesbaar voor beheerder en generator'
+Controleer ($gh.beheerPrive.n -eq $V.n -and $gh.generatorPrive.n -eq $G.n -and -not $gh.generatorNieuw) 'Beheergeheimen: beheersleutel en generatorsleutel apart bewaard'
+
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h
 $testcodes = @{}; foreach ($k in $res.Keys) { if ($res[$k].code) { $testcodes[$k] = $res[$k].code } }

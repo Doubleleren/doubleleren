@@ -7,6 +7,7 @@
 #       beheer/organisatie.json     namen, cellen, projecten, leidinggevenden            } ondertekend door de beheerder;
 #       beheer/sleutels/<id>.json   publieke sleutel + kluis                              } een token-houder kan ze niet
 #       beheer/toegang/<id>.json    DK van <id>, verpakt per kijker + vingerafdrukken      } vervalsen, alleen verwijderen
+#       beheer/generator.json       publieke generatorsleutel (wachtrijen, scorebord)      }
 #       data/<id>/profiel.enc, matrix.enc, log-JJJJ-MM.enc   versleuteld met DK, ondertekend door <id>
 #       data/<id>/wachtrij.enc                                 versleuteld met DK, ondertekend door de generator
 #       data/<id>/prive.enc                                    eigen antwoorden, versleuteld met AK (afgeleid uit de eigen privésleutel)
@@ -92,7 +93,12 @@ function Get-DlDk($O, [string]$LidId, [string]$MijnId, $PriveJwk, $Vertrouwd) {
 }
 
 # Publieke sleutels (huidige + eerdere) uit de ondertekende beheerbestanden, met cache.
-# 'generator' is de beheersleutel uit vertrouwd.json. De eigen sleutel telt altijd mee.
+# 'generator': de generatorsleutel uit beheer/generator.json (ondertekend door de beheerder) en de beheersleutel zelf
+# (van vóór de aparte generatorsleutel). De eigen sleutel telt altijd mee.
+function Get-DlGeneratorPubliek($O, $Vertrouwd) {
+    $g = $null; try { $g = (Read-DlBeheer $O 'generator.json' $Vertrouwd).publiek } catch {}
+    if ($g -and (Test-DlSleutelVorm $g)) { $g } else { $null }
+}
 function New-DlSleutelbron($O, $Vertrouwd, [string]$EigenId, $EigenPrive) {
     $cache = @{}
     $eigen = if ($EigenId -and $EigenPrive) { [pscustomobject]@{ kty = 'RSA'; n = $EigenPrive.n; e = $EigenPrive.e } } else { $null }
@@ -100,7 +106,7 @@ function New-DlSleutelbron($O, $Vertrouwd, [string]$EigenId, $EigenPrive) {
         param($id)
         if (-not $cache.ContainsKey($id)) {
             $lijst = @(); if ($id -eq $EigenId -and $eigen) { $lijst += $eigen }
-            if ($id -eq 'generator') { $cache[$id] = @($Vertrouwd); return $cache[$id] }
+            if ($id -eq 'generator') { $cache[$id] = @(@(Get-DlGeneratorPubliek $O $Vertrouwd) + @($Vertrouwd) | Where-Object { $_ }); return $cache[$id] }
             $s = $null; try { $s = Read-DlBeheer $O "sleutels/$id.json" $Vertrouwd } catch {}
             if ($s) { $lijst += $s.publiek; $lijst += @($s.eerdere | Where-Object { $_ }) }
             $cache[$id] = $lijst

@@ -78,7 +78,8 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
         $bp = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'profiel')
         Write-DlVersleuteld $o.data $u.id 'profiel' $s ([ordered]@{ v = 1; naam = $naam; sinds = (Get-Date).ToString('yyyy-MM-dd'); lessen = $lessen }) $(if ($bp) { $bp.sha }) $u.id $kp.prive | Out-Null
         if ($xlsx) { $gekoppeld = Save-Skilllijst $o $u $s $kp.prive $xlsx }
-        $aanvraag.toegang = [ordered]@{ $u.id = (ConvertTo-B64u (Protect-DlRsa $kp.publiek $dk)); generator = (ConvertTo-B64u (Protect-DlRsa $o.vertrouwd $dk)) }
+        $gen = Get-DlGeneratorPubliek $o.data $o.vertrouwd; if (-not $gen) { $gen = $o.vertrouwd }     # vóór de aparte generatorsleutel: de beheersleutel
+        $aanvraag.toegang = [ordered]@{ $u.id = (ConvertTo-B64u (Protect-DlRsa $kp.publiek $dk)); generator = (ConvertTo-B64u (Protect-DlRsa $gen $dk)) }
     }
     $oud = Read-DlOpslag $o.data "aanvragen/$($u.id).json"
     Write-DlJson $o.data "aanvragen/$($u.id).json" $aanvraag $(if ($oud) { $oud.sha }) | Out-Null

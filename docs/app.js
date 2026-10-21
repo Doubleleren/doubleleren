@@ -197,8 +197,13 @@ async function probeerSessie() {
 }
 
 // Publieke sleutels (huidig + eerdere) voor het controleren van handtekeningen
+// Generatorsleutel uit beheer/generator.json (ondertekend door de beheerder); null = nog geen aparte generatorsleutel
+async function generatorSleutel() {
+  if (S.generator === undefined) { const g = await beheerJson('generator.json').catch(() => null); S.generator = K.sleutelVorm(g?.publiek) ? g.publiek : null; }
+  return S.generator;
+}
 async function sleutelsVan(id) {
-  if (id === 'generator') return [S.vertrouwd];
+  if (id === 'generator') return [await generatorSleutel(), S.vertrouwd].filter(Boolean);   // beheersleutel: van vóór de aparte generatorsleutel
   if (!S.sleutels.has(id)) { const s = await beheerJson(`sleutels/${id}.json`).catch(() => null); S.sleutels.set(id, s ? [s.publiek, ...(Array.isArray(s.eerdere) ? s.eerdere : [])].filter(Boolean) : []); }
   return S.sleutels.get(id);
 }
@@ -757,7 +762,9 @@ async function verstuurFeedback() {
   const inhoud = JSON.stringify({ v: 1, soort, ...(les ? { les } : {}), tekst, datum: lokaleTijd() });
   const env = { v: 2, door: S.mij, inhoud, sig: await K.onderteken(S.teken, ctx, S.mij, inhoud) };
   const dk = K.willekeurig(32), sl = await K.sleutelsUitDk(dk);
-  const bestand = { v: 1, kopieen: { beheer: K.b64u.enc(await K.verpak(S.vertrouwd, dk)) }, blob: K.b64u.enc(await K.versleutel(sl, ctx, vulOp(K.tekst.naarBytes(JSON.stringify(env))))) };
+  const kopieen = { beheer: K.b64u.enc(await K.verpak(S.vertrouwd, dk)) }, gen = await generatorSleutel();
+  if (gen) kopieen.generator = K.b64u.enc(await K.verpak(gen, dk));   // de lesgenerator leert van feedback
+  const bestand = { v: 1, kopieen, blob: K.b64u.enc(await K.versleutel(sl, ctx, vulOp(K.tekst.naarBytes(JSON.stringify(env))))) };
   await S.data.schrijf(`feedback/${naam}.json`, K.tekst.naarBytes(JSON.stringify(bestand)));
   $('fb-form').reset();
   $('fb-status').textContent = 'Bedankt! Je feedback is versleuteld verstuurd naar de beheerder.';
@@ -848,7 +855,7 @@ async function welkomMaak() {
     const lessen = W.leren === 'verplicht' || $('w-lessen').checked;
     await schrijfEnc(W.id, 'profiel', sl, { v: 1, naam, sinds: dagKey(nu()), lessen }, W.id, teken);
     if (W.matrix) await schrijfEnc(W.id, 'matrix', sl, W.matrix, W.id, teken);
-    aanvraag.toegang = { [W.id]: K.b64u.enc(await K.verpak(kp.publiek, dk)), generator: K.b64u.enc(await K.verpak(S.vertrouwd, dk)) };
+    aanvraag.toegang = { [W.id]: K.b64u.enc(await K.verpak(kp.publiek, dk)), generator: K.b64u.enc(await K.verpak((await generatorSleutel()) || S.vertrouwd, dk)) };
   }
   await S.data.schrijf(`aanvragen/${W.id}.json`, K.tekst.naarBytes(JSON.stringify(aanvraag, null, 2)));
   $('w-code').textContent = code.replace(/-/g, ' ');

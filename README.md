@@ -55,6 +55,10 @@ Alles gaat in de browser; je hoeft niets te installeren.
 **Sleutels**
 - Per deelnemer één datasleutel. Die wordt per toegestane kijker verpakt met RSA-OAEP-SHA256 (3072 bit), met de vingerafdruk van de sleutel van die kijker erbij.
 - De **antwoordensleutel** wordt afgeleid uit je eigen privésleutel en staat nergens als bestand.
+- **Twee beheersleutels.**
+  - De **beheersleutel** ondertekent alles onder `beheer/` (organogram, sleutels, toegang). De publieke helft staat in `vertrouwd.json`. Hij blijft alleen op de laptop van de beheerder.
+  - De **generatorsleutel** opent alleen de generatorkopie van de datasleutels en ondertekent wachtrijen en scorebordstanden. De publieke helft staat in `beheer/generator.json`, ondertekend met de beheersleutel. Hij kan dus straks in de cloud draaien zonder dat daarmee het organogram of de rechten te vervalsen zijn.
+  - Een handtekening "generator" is geldig met de generatorsleutel of met de beheersleutel (die tekende vóór de splitsing).
 
 **Inlogcode**
 - Zes willekeurige woorden uit 1024 (60 bits), gemaakt in je eigen browser (of op je laptop bij de pop-up).
@@ -115,6 +119,8 @@ beheer\beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f"
 beheer\beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal
 beheer\beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht
 beheer\beheer.ps1 -Controleer
+beheer\beheer.ps1 -NieuweGeneratorsleutel             # eenmalig: aparte generatorsleutel (hervatbaar; beheersleutel blijft gelijk)
+beheer\scorebord-bijwerken.ps1 -Push                  # ieders scorebordstand (draait ook elke ochtend met de generator)
 beheer\feedback.ps1 -Nieuw                            # nieuwe feedback (draait ook bij elke Claude-chat via een SessionStart-hook)
 beheer\feedback.ps1 -Lijst                            # alle feedback met status
 beheer\feedback.ps1 -Afhandelen <bestand>
