@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-20T09:02:35",
+    "bijgewerkt":  "2026-10-21T07:56:24",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -654,6 +654,192 @@
                        "bron":  {
                                     "titel":  "Video (VideoObject, Clip, BroadcastEvent) Schema Markup | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/video"
+                                },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-clarity-via-gtm",
+                       "titel":  "Clarity installeren zonder developer: welke route kies je in GTM?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Andere tools via GTM installeren (Microsoft Clarity)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.3",
+                                      "7.1.5"
+                                  ],
+                       "kernpunt":  "Andere tools zet je via GTM bij voorkeur met een officiële template of ingebouwde integratie, niet met losse Custom HTML. Trigger: All Pages, maar pas vuren na toestemming.",
+                       "bron":  {
+                                    "titel":  "How to install Clarity on Google Tag Manager? | Microsoft Learn",
+                                    "url":  "https://learn.microsoft.com/en-us/clarity/third-party-integrations/google-tag-manager"
+                                },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-core-vs-spam-update",
+                       "titel":  "Verkeer gekelderd na een spam update: wat zeg je tegen de klant?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core update vs. spam update",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.1"
+                                  ],
+                       "kernpunt":  "Een core update herbeoordeelt kwaliteit (geen \u0027fout\u0027 om te herstellen); een spam update straft overtredingen. Waarde van spamlinks die door een link spam update is geneutraliseerd, komt nooit terug.",
+                       "bron":  {
+                                    "titel":  "Google Search spam updates and your site | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/spam-updates"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-funnel-dropoff-ga4",
+                       "titel":  "Conversie 0,9%: in welke stap haken bezoekers af?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Lage conversieratio\u0027s opsporen met een funnel",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1",
+                                      "3.1.3"
+                                  ],
+                       "kernpunt":  "Zoek eerst wáár bezoekers afhaken (funnelverkenning, uitgesplitst naar apparaat of kanaal), daarna waarom (kwalitatieve data), en pas dan wat je verandert.",
+                       "bron":  {
+                                    "titel":  "[GA4] Funnel exploration - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/9327974"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-ga4-debugview-controle",
+                       "titel":  "Het formulier werkt, maar GA4 ziet geen lead: hoe test je dat?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4-implementatie controleren met DebugView",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.1"
+                                  ],
+                       "kernpunt":  "Controleer een GA4-implementatie live met DebugView via Tag Assistant of GTM Preview. Debug-events vervuilen je rapporten niet; zie je niets, check dan ook de consent.",
+                       "bron":  {
+                                    "titel":  "Monitor events in DebugView - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/7201382"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-gsc-bigquery-sql",
+                       "titel":  "Je eerste SQL-query op Search Console-data, samen met Claude",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "SQL: Search Console-data in BigQuery",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "SQL op de Search Console-export in BigQuery haalt je voorbij de limiet van 1.000 rijen. Gemiddelde positie = SUM(sum_top_position) / SUM(impressions) + 1, nooit een simpel gemiddelde.",
+                       "bron":  {
+                                    "titel":  "Table guidelines and reference - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/12917991"
+                                },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-gtm-event-tracking",
+                       "titel":  "Klikken op \u0027Download brochure\u0027 meten: tag, trigger en event",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Event tracking opzetten in GTM",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.4"
+                                  ],
+                       "kernpunt":  "Event tracking in GTM = GA4 Event-tag (wat) + trigger (wanneer) + variabelen (welke info). Check eerst of enhanced measurement het al meet, en test altijd in Preview voor je publiceert.",
+                       "bron":  {
+                                    "titel":  "Set up events - Tag Manager Help",
+                                    "url":  "https://support.google.com/tagmanager/answer/13034206"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-html-vs-xml-sitemap",
+                       "titel":  "\"We hebben al een sitemap in de footer\": is dat genoeg?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "HTML- vs. XML-sitemaps",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.4.4",
+                                      "1.4.2"
+                                  ],
+                       "kernpunt":  "Een HTML-sitemap is voor bezoekers, een XML-sitemap voor zoekmachines. Grote sites hebben een XML-sitemap nodig, opgesplitst per paginatype, zodat je in Search Console ziet welke belangrijke URL\u0027s niet geïndexeerd zijn.",
+                       "bron":  {
+                                    "titel":  "Build and Submit a Sitemap | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+                                },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-lcp-deeltijden-claude",
+                       "titel":  "LCP van 4,1 seconde: laat Claude de vier deeltijden ontleden",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Core Web Vitals: LCP verbeteren",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.3",
+                                      "5.2.2"
+                                  ],
+                       "kernpunt":  "Ontleed LCP in vier deeltijden (TTFB, load delay, load duration, render delay) en los de grootste afwijking op. Nooit loading=\"lazy\" op het LCP-element; wel fetchpriority=\"high\".",
+                       "bron":  {
+                                    "titel":  "Optimize Largest Contentful Paint | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-lcp"
+                                },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-links-verbergen-javascript",
+                       "titel":  "Filterknoppen zonder href: ziet Googlebot die links wel?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Links verbergen met JavaScript",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.9"
+                                  ],
+                       "kernpunt":  "Google volgt alleen \u003ca href=\"echte-url\"\u003e. Links zonder href of met javascript: zie je als bezoeker wel, maar Googlebot niet betrouwbaar: handig voor filters, rampzalig voor je menu.",
+                       "bron":  {
+                                    "titel":  "Link best practices for Google | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+                                },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261021-zero-click-ai-samenvatting",
+                       "titel":  "Hoeveel minder wordt er geklikt als er een AI-samenvatting staat?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Zero-click: impact van AI Overviews op klikken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.5",
+                                      "12.1.1"
+                                  ],
+                       "kernpunt":  "Met een AI-samenvatting klikte men in het Pew-onderzoek bijna de helft minder op gewone resultaten (8% tegen 15%), en op de bronlinks in de samenvatting maar 1%. Stijgende vertoningen met dalende CTR is bij informatieve zoekwoorden dus te verwachten.",
+                       "bron":  {
+                                    "titel":  "Pew Research Center: Google users are less likely to click on links when an AI summary appears in the results",
+                                    "url":  "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
                                 },
                        "soort":  "zoek-op",
                        "herkomst":  "generator"

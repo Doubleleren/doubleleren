@@ -1,0 +1,28 @@
+{
+  "id": "20261021-zero-click-ai-samenvatting",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Zero-click: impact van AI Overviews op klikken",
+  "matrix": [
+    "12.1.5",
+    "12.1.1"
+  ],
+  "titel": "Hoeveel minder wordt er geklikt als er een AI-samenvatting staat?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant ziet in Search Console dat de vertoningen van zijn informatieve blogs stijgen, maar de CTR daalt. Hij vraagt of dat door de AI-samenvattingen komt en wil een cijfer horen in plaats van een gevoel.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek het onderzoek van Pew Research Center (juli 2025) over klikgedrag bij Google-zoekopdrachten met en zonder AI-samenvatting. Noteer: hoe vaak klikten gebruikers op een gewoon zoekresultaat mét en zónder AI-samenvatting, hoe vaak klikten ze op een link ín de samenvatting, en wat is een belangrijke beperking van het onderzoek als je het aan een Nederlandse klant voorlegt?",
+    "minTekens": 120,
+    "hint": "Zoek op pewresearch.org naar 'Google users are less likely to click on links when an AI summary appears'."
+  },
+  "modelantwoord": "Bij zoekopdrachten met een AI-samenvatting klikten gebruikers in 8% van de bezoeken op een gewoon zoekresultaat, zonder samenvatting in 15%. Op een link in de samenvatting zelf werd maar in 1% van de bezoeken geklikt. Ook stopten mensen vaker met browsen na een pagina met samenvatting (26% tegen 16%). Beperking: het gaat om 900 Amerikaanse volwassenen in maart 2025, dus andere markt, andere periode en een gemiddelde over alle soorten zoekopdrachten. Het zegt niets over een specifieke niche of zoekwoord van de klant.",
+  "uitleg": "**Zero-click** betekent dat iemand zijn antwoord in de zoekresultaten krijgt en niet doorklikt. AI Overviews versterken dat effect.\n\nPew Research Center volgde in maart 2025 het browsegedrag van **900 Amerikaanse volwassenen** (68.879 zoekopdrachten). Ongeveer een op de vijf zoekopdrachten toonde een AI-samenvatting. De uitkomsten:\n- **8%** klikte op een gewoon resultaat als er een AI-samenvatting stond, tegen **15%** zonder\n- maar **1%** klikte op een link in de samenvatting zelf\n- na een pagina met samenvatting stopte **26%** met browsen, tegen 16% zonder\n\nWat betekent dit voor je klant?\n- **Vertoningen omhoog, CTR omlaag** is bij informatieve zoekwoorden een logisch patroon en niet per se een rankingprobleem.\n- Meet daarom niet alleen klikken, maar ook zichtbaarheid: word je geciteerd in de AI-samenvatting?\n- Kijk naar je zoekwoordmix: commerciële en transactionele zoekopdrachten raken minder klikken kwijt dan simpele vraag-antwoordzoekopdrachten.\n\nGebruik zulke cijfers als **indicatie**, niet als voorspelling: het is één onderzoek, in de VS, over alle soorten zoekopdrachten heen.",
+  "kernpunt": "Met een AI-samenvatting klikte men in het Pew-onderzoek bijna de helft minder op gewone resultaten (8% tegen 15%), en op de bronlinks in de samenvatting maar 1%. Stijgende vertoningen met dalende CTR is bij informatieve zoekwoorden dus te verwachten.",
+  "toepassing": "Filter in Search Console de informatieve zoekwoorden van een klant (bijvoorbeeld met de regex wat|hoe|waarom) en vergelijk CTR en vertoningen met dezelfde periode vorig jaar. Leg het verschil met commerciële zoekwoorden ernaast.",
+  "bron": {
+    "titel": "Pew Research Center: Google users are less likely to click on links when an AI summary appears in the results",
+    "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
+  }
+}

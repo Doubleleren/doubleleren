@@ -1,0 +1,32 @@
+{
+  "id": "20261021-ga4-debugview-controle",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4-implementatie controleren met DebugView",
+  "matrix": [
+    "3.1.1"
+  ],
+  "titel": "Het formulier werkt, maar GA4 ziet geen lead: hoe test je dat?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant heeft een nieuw contactformulier en een event generate_lead laten inbouwen. Na twee dagen staat er nog niets in de rapporten. Je wilt nu, live, controleren of het event wel binnenkomt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de snelste juiste manier om dat te controleren?",
+    "opties": [
+      "Een testformulier invullen en wachten tot het event in het rapport Events verschijnt",
+      "In de GTM-container debug_mode op false zetten, zodat alle events direct in de rapporten komen",
+      "Een realtime-rapport openen en kijken of het aantal gebruikers stijgt",
+      "Tag Assistant of GTM Preview starten, het formulier invullen en in DebugView kijken of generate_lead met de juiste parameters binnenkomt"
+    ],
+    "juist": 3
+  },
+  "toelichting": "DebugView laat events van apparaten in debugmodus binnen seconden zien, inclusief parameters. Standaardrapporten lopen achter. debug_mode op false zetten werkt niet: om debugmodus uit te zetten laat je de parameter weg.",
+  "uitleg": "Met **DebugView** (Beheer > Gegevensweergave > DebugView) controleer je een GA4-implementatie terwijl je de site gebruikt. Je ziet per seconde welke events binnenkomen en met welke parameters.\n\nDebugmodus zet je aan met:\n- **Google Tag Assistant** (tagassistant.google.com)\n- **GTM Preview**\n- de parameter **debug_mode** in de Google-tag of in een event\n\nWat je ziet:\n- een stroom per seconde met events en parameters\n- een overzicht per minuut van de laatste 30 minuten\n- de meest voorkomende events en user properties\n\nTwee dingen om te onthouden:\n- Debug-events komen **niet** in de standaardrapporten, dus je vervuilt je data niet.\n- Zie je niets terwijl de tag wel vuurt? Check **consent**. Zonder toestemming voor analytics-cookies (bij Consent Mode) verschijnen events ook niet in DebugView.\n\nEen vaste checklist bij een implementatiecontrole: komt page_view één keer binnen (niet dubbel), hebben key events de juiste naam en parameters, en klopt de consent-instelling?",
+  "kernpunt": "Controleer een GA4-implementatie live met DebugView via Tag Assistant of GTM Preview. Debug-events vervuilen je rapporten niet; zie je niets, check dan ook de consent.",
+  "toepassing": "Doorloop bij een klant met Tag Assistant de belangrijkste conversie en check in DebugView of het key event één keer binnenkomt, met de juiste naam en parameters.",
+  "bron": {
+    "titel": "Monitor events in DebugView - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/7201382"
+  }
+}

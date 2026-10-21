@@ -1,0 +1,33 @@
+{
+  "id": "20261021-funnel-dropoff-ga4",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Lage conversieratio's opsporen met een funnel",
+  "matrix": [
+    "7.1.1",
+    "3.1.3"
+  ],
+  "titel": "Conversie 0,9%: in welke stap haken bezoekers af?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een webshop heeft een conversieratio van 0,9%. De klant wil 'een nieuwe homepage'. Jij bouwt eerst in GA4 een funnelverkenning met de stappen view_item, add_to_cart, begin_checkout en purchase, uitgesplitst naar apparaat.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "De funnel laat zien: op mobiel gaat 62% van begin_checkout naar purchase verloren, op desktop 28%. De andere stappen zijn vergelijkbaar. Wat is de beste volgende stap?",
+    "opties": [
+      "Toch de homepage vernieuwen, want daar beginnen de meeste bezoekers",
+      "De mobiele checkout onderzoeken, bijvoorbeeld met session recordings en een test van het mobiele afrekenproces",
+      "Meer mobiel verkeer inkopen, zodat er absoluut meer verkopen komen",
+      "De funnel omzetten naar een open funnel, zodat het verschil kleiner wordt"
+    ],
+    "juist": 1
+  },
+  "toelichting": "Het grote verschil zit in één stap op één apparaattype. Daar ligt de kans. Een open funnel verandert alleen hoe gebruikers instromen, niet het probleem. Meer verkeer naar een lekkende checkout vergroot vooral het lek.",
+  "uitleg": "Een lage conversieratio zegt weinig zolang je niet weet **waar** bezoekers afhaken. Met de **funnelverkenning** in GA4 (Verkennen > Funnelverkenning) zie je per stap hoeveel gebruikers doorgaan en hoeveel afhaken.\n\nHandige instellingen:\n- **Gesloten funnel:** gebruikers moeten in stap 1 instromen. **Open funnel:** ze mogen in elke stap instromen. Voor een checkout gebruik je meestal een gesloten funnel.\n- **Uitsplitsing:** zet bijvoorbeeld apparaatcategorie of kanaal ernaast. Een gebruiker telt mee bij de eerste waarde die op hem van toepassing is.\n- **Verstreken tijd:** de gemiddelde tijd tussen stappen. Lang twijfelen voor de betaling zegt ook iets.\n- **Volgende actie:** wat doen mensen direct na een stap? Zo zie je bijvoorbeeld dat ze na begin_checkout naar de verzendkostenpagina gaan.\n\nDe werkwijze: vind de stap met de **grootste afwijking** (tussen apparaten, kanalen of ten opzichte van een benchmark), onderzoek daar met kwalitatieve data (recordings, heatmaps, surveys) **waarom** mensen afhaken, en formuleer pas dan een hypothese. Begin dus niet bij wat de klant het mooiste vindt om te veranderen.",
+  "kernpunt": "Zoek eerst wáár bezoekers afhaken (funnelverkenning, uitgesplitst naar apparaat of kanaal), daarna waarom (kwalitatieve data), en pas dan wat je verandert.",
+  "toepassing": "Bouw voor een webshopklant een gesloten funnelverkenning van view_item tot purchase, uitgesplitst naar apparaatcategorie, en noteer de stap met het grootste verschil tussen mobiel en desktop.",
+  "bron": {
+    "titel": "[GA4] Funnel exploration - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/9327974"
+  }
+}

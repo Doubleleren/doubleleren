@@ -1,0 +1,28 @@
+{
+  "id": "20261021-clarity-via-gtm",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Andere tools via GTM installeren (Microsoft Clarity)",
+  "matrix": [
+    "3.2.3",
+    "7.1.5"
+  ],
+  "titel": "Clarity installeren zonder developer: welke route kies je in GTM?",
+  "volgorde": "uitleg-eerst",
+  "intro": "Je wilt voor een CRO-traject heatmaps en session recordings van een klantsite. De developer heeft pas over drie weken tijd, maar je hebt wel toegang tot de GTM-container van de klant.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Microsoft Clarity op welke drie manieren je Clarity via Google Tag Manager kunt installeren. Welke trigger gebruik je, welk ID heb je nodig en waar vind je dat? En wat regel je nog voordat je publiceert, gezien de AVG?",
+    "minTekens": 120,
+    "hint": "Zoek op learn.microsoft.com naar 'How to install Clarity on Google Tag Manager'."
+  },
+  "modelantwoord": "Drie routes: 1) de aanbevolen integratie vanuit Clarity zelf (Settings > Setup > Google Tag Manager, inloggen en een container kiezen, Clarity maakt en publiceert de tag), 2) de officiële template 'Microsoft Clarity - Official' uit de Community Template Gallery, 3) handmatig via een Custom HTML-tag met de trackingcode. Trigger: All Pages. Nodig: het Clarity project-ID, te vinden in de URL van je project. Voor publiceren: zorgen dat Clarity alleen laadt na toestemming via de cookiebanner/consent-instellingen, en daarna testen met GTM Preview.",
+  "uitleg": "Met Google Tag Manager installeer je niet alleen GA4, maar ook andere tools: heatmaps, testtools, chatwidgets of advertentiepixels. Zo hoef je niet bij elke tool op een developer te wachten.\n\nVoor **Microsoft Clarity** noemt Microsoft drie routes:\n- **Integratie vanuit Clarity** (aanbevolen): in Clarity bij Setup voor Google Tag Manager kiezen, inloggen met je Google-account, account en container kiezen en 'Create and publish'.\n- **Officiële template**: in GTM een nieuwe tag maken via de Community Template Gallery, zoeken op 'Microsoft Clarity - Official', je project-ID invullen.\n- **Handmatig**: een **Custom HTML**-tag met de trackingcode uit Clarity.\n\nIn alle gevallen gebruik je de trigger **All Pages**. Het project-ID staat in de URL van je Clarity-project.\n\nVoorkeur in de praktijk: een officiële template boven Custom HTML. Templates zijn overzichtelijker te beheren en kennen minder risico op foute code.\n\nVergeet de **toestemming** niet. Clarity zet cookies en neemt sessies op. Zorg dat de tag in Nederland pas vuurt als de bezoeker daar via de cookiebanner toestemming voor gaf, en test met GTM Preview voordat je publiceert.",
+  "kernpunt": "Andere tools zet je via GTM bij voorkeur met een officiële template of ingebouwde integratie, niet met losse Custom HTML. Trigger: All Pages, maar pas vuren na toestemming.",
+  "toepassing": "Bekijk in de GTM-container van een klant welke tools als Custom HTML zijn ingeladen en check of er een officiële template voor bestaat en of ze pas na toestemming vuren.",
+  "bron": {
+    "titel": "How to install Clarity on Google Tag Manager? | Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/clarity/third-party-integrations/google-tag-manager"
+  }
+}

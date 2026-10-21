@@ -1,0 +1,28 @@
+{
+  "id": "20261021-lcp-deeltijden-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Core Web Vitals: LCP verbeteren",
+  "matrix": [
+    "5.2.3",
+    "5.2.2"
+  ],
+  "titel": "LCP van 4,1 seconde: laat Claude de vier deeltijden ontleden",
+  "volgorde": "uitleg-eerst",
+  "intro": "De productpagina's van een klant hebben bij echte gebruikers een LCP van 4,1 seconde. Het LCP-element is de hoofdfoto van het product. De developer wil 'alles een beetje sneller maken'. Jij wilt weten wáár de tijd zit.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf een prompt waarmee Claude een LCP-probleem ontleedt in de vier deeltijden en per deeltijd een concrete fix voorstelt. Geef Claude als input de PageSpeed Insights-uitkomst (LCP-element en de LCP-breakdown) en de HTML van de <head> en het productblok. Leg in je prompt vast wat de streefverhoudingen zijn en in welk format je de output wilt (bijvoorbeeld een tabel voor de developer). Plak je prompt hieronder.",
+    "minTekens": 150,
+    "hint": "Noem de vier deeltijden bij naam en vraag Claude expliciet te controleren op loading=\"lazy\" en fetchpriority bij de hoofdfoto."
+  },
+  "modelantwoord": "Je bent een technisch SEO-specialist. Hieronder staan de LCP-breakdown uit PageSpeed Insights en de HTML van de <head> en het productblok van een productpagina (LCP 4,1 s, LCP-element is de hoofdfoto).\n\nOpdracht:\n1. Zet de vier deeltijden (TTFB, resource load delay, resource load duration, element render delay) in een tabel met hun aandeel in procenten, naast de streefwaarden van web.dev (~40% / <10% / ~40% / <10%).\n2. Wijs de deeltijd aan die het meest afwijkt.\n3. Controleer in de HTML: staat loading=\"lazy\" op de hoofdfoto, heeft hij fetchpriority=\"high\", is hij vindbaar in de HTML of pas via JS/CSS, en blokkeren scripts of CSS de rendering?\n4. Geef per gevonden probleem één concrete fix met de codewijziging.\nOutput: een tabel (probleem, deeltijd, fix, verwachte impact) die ik zo naar de developer kan sturen. Verzin niets wat niet in de input staat.",
+  "uitleg": "**LCP** (Largest Contentful Paint) is goed bij **2,5 seconde of minder** voor minstens 75% van de bezoeken. 'De site sneller maken' is te vaag: web.dev deelt LCP op in vier deeltijden, en elk heeft een eigen oplossing.\n\n- **TTFB:** tot de eerste byte HTML binnen is. Oplossing: server, caching, CDN.\n- **Resource load delay:** de tijd tussen TTFB en het moment dat de browser begint met het laden van de LCP-afbeelding. Oplossing: maak de afbeelding vindbaar in de HTML, gebruik fetchpriority=\"high\" en preload als hij alleen via CSS of JS wordt geladen.\n- **Resource load duration:** het downloaden van de afbeelding zelf. Oplossing: kleiner bestand, modern formaat, CDN.\n- **Element render delay:** de tijd tussen geladen en getoond. Oplossing: minder render-blokkerende CSS en JavaScript.\n\nDe streefverhouding is ongeveer 40% TTFB, minder dan 10% load delay, ongeveer 40% load duration en minder dan 10% render delay. Zit veel tijd in de twee 'delay'-delen, dan wacht de browser onnodig.\n\nDe klassieke fout: **loading=\"lazy\" op de hoofdfoto**. Dat vertraagt juist het belangrijkste element. Lazy loading is voor afbeeldingen onder de vouw.\n\nMet Claude maak je hier een herbruikbare check van: de breakdown en de HTML erin, een fixlijst voor de developer eruit.",
+  "kernpunt": "Ontleed LCP in vier deeltijden (TTFB, load delay, load duration, render delay) en los de grootste afwijking op. Nooit loading=\"lazy\" op het LCP-element; wel fetchpriority=\"high\".",
+  "toepassing": "Open PageSpeed Insights voor de belangrijkste productpagina van een klant, bekijk de LCP-breakdown en check in de broncode of de hoofdfoto loading=\"lazy\" heeft.",
+  "bron": {
+    "titel": "Optimize Largest Contentful Paint | web.dev",
+    "url": "https://web.dev/articles/optimize-lcp"
+  }
+}

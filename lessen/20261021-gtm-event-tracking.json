@@ -1,0 +1,26 @@
+{
+  "id": "20261021-gtm-event-tracking",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Event tracking opzetten in GTM",
+  "matrix": [
+    "3.2.4"
+  ],
+  "titel": "Klikken op 'Download brochure' meten: tag, trigger en event",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een B2B-klant wil weten hoeveel bezoekers de productbrochure (pdf) downloaden via de knop 'Download brochure'. GA4 staat al via Google Tag Manager op de site.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Beschrijf stap voor stap hoe je dit event in GTM opzet: welk type tag, welke eventnaam en parameter(s), welke trigger, en hoe je test voor je publiceert.",
+    "minTekens": 120
+  },
+  "modelantwoord": "Eerst de ingebouwde klikvariabelen (Click Text, Click URL) aanzetten. Dan een trigger 'Klik - Alleen links' die vuurt als Click URL eindigt op .pdf (of Click Text bevat 'Download brochure'). Daarna een tag 'Google Analytics: GA4 Event' met de Measurement ID, eventnaam bijvoorbeeld download_brochure en een parameter file_name met de Click URL. Testen met Preview / Tag Assistant: klikken op de knop en controleren of de tag vuurt en in DebugView het event met parameter binnenkomt. Pas dan publiceren met een duidelijke versienaam. Let op: enhanced measurement meet pdf-downloads al als file_download, dus check eerst of dat niet volstaat om dubbel meten te voorkomen.",
+  "uitleg": "Event tracking in GTM bestaat altijd uit drie onderdelen:\n\n- **Tag:** wát je verstuurt. Voor GA4 is dat het tagtype **Google Analytics: GA4 Event**, met je Measurement ID, een **eventnaam** (zoals download_brochure) en optioneel **eventparameters** voor extra context.\n- **Trigger:** wánneer de tag vuurt, bijvoorbeeld bij een klik waarvan de Click Text 'Download brochure' bevat, of bij een paginaweergave van een bedankpagina.\n- **Variabelen:** de informatie die je gebruikt in triggers en parameters, zoals Click URL of Click Text. Ingebouwde klikvariabelen moet je eerst aanzetten.\n\nVuistregels:\n- Gebruik een eventnaam in kleine letters met underscores en houd hem consistent.\n- Kies een trigger die niet breekt bij een tekstwijziging: een URL-patroon of een vast CSS-id is robuuster dan knoptekst.\n- Check **enhanced measurement**: GA4 meet clicks op uitgaande links en downloads van bestanden zoals pdf al standaard (file_download). Maak dan niet nog een eigen event, anders meet je dubbel.\n- Test altijd met **Preview** en Tag Assistant voor je publiceert.",
+  "kernpunt": "Event tracking in GTM = GA4 Event-tag (wat) + trigger (wanneer) + variabelen (welke info). Check eerst of enhanced measurement het al meet, en test altijd in Preview voor je publiceert.",
+  "toepassing": "Open de GTM-container van een klant en zoek een GA4 Event-tag die op knoptekst triggert. Kun je de trigger robuuster maken met een URL-patroon of id?",
+  "bron": {
+    "titel": "Set up events - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/13034206"
+  }
+}

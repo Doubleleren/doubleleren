@@ -1,0 +1,32 @@
+{
+  "id": "20261021-links-verbergen-javascript",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Links verbergen met JavaScript",
+  "matrix": [
+    "1.1.9"
+  ],
+  "titel": "Filterknoppen zonder href: ziet Googlebot die links wel?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een webshopklant wil dat Google de duizenden filtercombinaties niet meer crawlt. De developer heeft de filterlinks omgebouwd naar elementen die alleen via JavaScript navigeren. Tegelijk is per ongeluk ook het hoofdmenu omgebouwd.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke van deze links kan Google betrouwbaar volgen?",
+    "opties": [
+      "<span href=\"/schoenen\">Schoenen</span>",
+      "<a onclick=\"goto('/schoenen')\">Schoenen</a>",
+      "<a href=\"javascript:goTo('schoenen')\">Schoenen</a>",
+      "<a href=\"/schoenen\" onclick=\"goTo('schoenen')\">Schoenen</a>"
+    ],
+    "juist": 3
+  },
+  "toelichting": "Google volgt alleen een <a>-element met een echt URL in het href-attribuut. Een onclick erbij is geen probleem, zolang het href er ook staat. Een span met href, een <a> zonder href en een javascript:-URL kan Google niet betrouwbaar uitlezen.",
+  "uitleg": "Google haalt links uit de HTML door te zoeken naar **<a>-elementen met een href** dat naar een echte URL wijst. Dat werkt ook als JavaScript de link later in de pagina zet, zolang het eindresultaat die vorm heeft.\n\nWat Google volgens de documentatie **niet** betrouwbaar volgt:\n- een <a> zonder href, alleen met onclick\n- een href met javascript: erin\n- andere elementen (span, div, button) die via script navigeren\n- framework-attributen zoals routerLink zonder href\n\nDat is een **mes dat aan twee kanten snijdt**:\n- Gebruik je het bewust, dan kun je links waarvan je niet wilt dat ze gecrawld worden (zoals eindeloze filtercombinaties) als knop met JavaScript bouwen. Google ontdekt die URL's dan veel minder snel.\n- Gebeurt het per ongeluk, bijvoorbeeld in het hoofdmenu of de paginering, dan vindt Google belangrijke pagina's niet meer via interne links en stroomt er geen linkwaarde naartoe.\n\nLet op: dit is geen waterdichte blokkade. Staat een URL ook in de sitemap of linkt een andere site ernaar, dan kan Google hem toch vinden. Wil je crawlen echt tegenhouden, combineer het dan met robots.txt.",
+  "kernpunt": "Google volgt alleen <a href=\"echte-url\">. Links zonder href of met javascript: zie je als bezoeker wel, maar Googlebot niet betrouwbaar: handig voor filters, rampzalig voor je menu.",
+  "toepassing": "Crawl een klantsite met Screaming Frog met JavaScript-rendering aan en vergelijk het aantal gevonden interne links met een crawl zonder rendering. Check daarna of menu en paginering echte <a href>-links zijn.",
+  "bron": {
+    "titel": "Link best practices for Google | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+  }
+}

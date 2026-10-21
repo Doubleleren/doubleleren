@@ -1,0 +1,27 @@
+{
+  "id": "20261021-html-vs-xml-sitemap",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "HTML- vs. XML-sitemaps",
+  "matrix": [
+    "1.4.4",
+    "1.4.2"
+  ],
+  "titel": "\"We hebben al een sitemap in de footer\": is dat genoeg?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant met een webshop van 30.000 producten zegt bij de kick-off: \"Een XML-sitemap hebben we niet nodig, er staat al een sitemap-pagina in de footer met links naar alle categorieën.\"",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Leg de klant in een paar zinnen uit wat het verschil is tussen een HTML-sitemap en een XML-sitemap, voor wie elk bedoeld is, en wat jouw advies is voor deze webshop.",
+    "minTekens": 120
+  },
+  "modelantwoord": "Een HTML-sitemap is een gewone pagina voor bezoekers (en indirect voor crawlers, via interne links), meestal met de hoofdcategorieën. Een XML-sitemap is een bestand alleen voor zoekmachines met een lijst van alle URL's die je geïndexeerd wilt hebben, eventueel met lastmod. Voor een shop van 30.000 producten is een XML-sitemap sterk aan te raden: de footerpagina linkt alleen naar categorieën, niet naar elk product. De XML-sitemap helpt Google alle productpagina's te ontdekken en geeft je in Search Console inzicht in welke ingediende URL's wel en niet geïndexeerd zijn. Splits hem op per type (categorieën, producten) en bundel ze in een sitemap-index.",
+  "uitleg": "**HTML-sitemap**\n- Een gewone webpagina met links, bedoeld voor **bezoekers**.\n- Helpt crawlers alleen indirect: het zijn interne links.\n- Bevat in de praktijk vaak alleen de hoofdstructuur.\n\n**XML-sitemap**\n- Een bestand voor **zoekmachines** met de URL's die je geïndexeerd wilt hebben.\n- Maximaal **50.000 URL's of 50 MB** (ongecomprimeerd) per bestand; daarboven splits je en bundel je in een sitemap-index.\n- Google gebruikt lastmod als die consistent klopt, en negeert priority en changefreq.\n- Garandeert **geen** indexering, maar helpt bij het ontdekken.\n\nVolgens Google heb je een XML-sitemap vooral nodig bij een **grote site**, een **nieuwe site** met weinig externe links of veel rich media. Een kleine site (ongeveer 500 pagina's of minder) die goed intern gelinkt is, kan zonder.\n\nHet grootste voordeel voor jou als SEO: dien je de XML-sitemap in via Search Console, dan kun je in het rapport Pagina-indexering filteren op ingediende URL's. Zo zie je precies welke pagina's die je belangrijk vindt níet geïndexeerd zijn. Splits daarom per paginatype, zodat je problemen per type ziet.",
+  "kernpunt": "Een HTML-sitemap is voor bezoekers, een XML-sitemap voor zoekmachines. Grote sites hebben een XML-sitemap nodig, opgesplitst per paginatype, zodat je in Search Console ziet welke belangrijke URL's niet geïndexeerd zijn.",
+  "toepassing": "Kijk bij een klant in Search Console onder Sitemaps hoeveel sitemaps er zijn ingediend en filter Pagina-indexering op 'Alle ingediende pagina's'. Is er maar één grote sitemap? Stel een opsplitsing per paginatype voor.",
+  "bron": {
+    "titel": "Build and Submit a Sitemap | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+  }
+}

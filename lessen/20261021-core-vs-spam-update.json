@@ -1,0 +1,32 @@
+{
+  "id": "20261021-core-vs-spam-update",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core update vs. spam update",
+  "matrix": [
+    "10.1.1"
+  ],
+  "titel": "Verkeer gekelderd na een spam update: wat zeg je tegen de klant?",
+  "volgorde": "opdracht-eerst",
+  "intro": "Een klant kocht vorig jaar tientallen links op linkfarms. Tijdens een link spam update zakken de rankings flink. De klant vraagt: \"Als we die links nu disavowen, krijgen we onze posities dan terug?\"",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welk antwoord klopt volgens Google?",
+    "opties": [
+      "Ja, na een disavow herstelt de ranking bij de eerstvolgende core update volledig.",
+      "Nee, de waarde die die links gaven is verdwenen en komt niet terug. Herstel komt van nieuwe, verdiende signalen, en dat kan maanden duren.",
+      "Ja, als je een heroverwegingsverzoek indient in Search Console, worden de posities binnen een week hersteld.",
+      "Nee, want een spam update raakt alleen sites met AI-content, dus de links zijn niet de oorzaak."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Google schrijft dat de rankingvoordelen van spamlinks die door een link spam update zijn geneutraliseerd, niet terug te winnen zijn. Een heroverwegingsverzoek is alleen voor handmatige acties, niet voor algoritmische updates.",
+  "uitleg": "Google noemt twee soorten updates die je moet kunnen onderscheiden:\n\n**Core update**\n- Een brede wijziging in hoe Google relevantie en kwaliteit beoordeelt, **meerdere keren per jaar**.\n- Er is meestal niets 'kapot'. Andere pagina's worden simpelweg beter beoordeeld.\n- Advies: wacht minstens **een week na afronding** voor je analyseert, vermijd quick fixes en kijk kritisch of je content behulpzaam, betrouwbaar en people-first is.\n- Herstel kan dagen duren, maar ook maanden.\n\n**Spam update**\n- Een verbetering van de automatische spamdetectie (onder andere **SpamBrain**).\n- Raakt sites die het spambeleid overtreden, bijvoorbeeld met linkspam, scaled content abuse of cloaking.\n- Advies: zorg dat je aan het spambeleid voldoet. Systemen moeten dan **over een periode van maanden** leren dat je site in orde is.\n- Bij een **link spam update** is de waarde van de geneutraliseerde links definitief weg.\n\nDe eerste vraag bij een daling is dus: welk type update was het? Check dat in het Google Search Status Dashboard en leg de datums naast je verkeerscurve.",
+  "kernpunt": "Een core update herbeoordeelt kwaliteit (geen 'fout' om te herstellen); een spam update straft overtredingen. Waarde van spamlinks die door een link spam update is geneutraliseerd, komt nooit terug.",
+  "toepassing": "Zet bij een klant de datums van de laatste core- en spamupdates uit het Google Search Status Dashboard als annotaties in je rapportage, zodat je bij een daling direct ziet welk type update erbij hoort.",
+  "bron": {
+    "titel": "Google Search spam updates and your site | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/spam-updates"
+  }
+}

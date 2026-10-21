@@ -1,0 +1,28 @@
+{
+  "id": "20261021-gsc-bigquery-sql",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "SQL: Search Console-data in BigQuery",
+  "matrix": [
+    "5.3.1",
+    "4.1.2"
+  ],
+  "titel": "Je eerste SQL-query op Search Console-data, samen met Claude",
+  "volgorde": "uitleg-eerst",
+  "intro": "Een grote klant heeft de bulk data export van Search Console naar BigQuery aanstaan. Jij wilt per maand de klikken en de gemiddelde positie van alle zoekwoorden met 'offerte' erin, zonder de limiet van 1.000 rijen in de interface.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Laat Claude een SQL-query schrijven voor de tabel searchdata_site_impression die per maand de klikken, vertoningen en de juiste gemiddelde positie geeft voor zoekwoorden die 'offerte' bevatten. Geef Claude de tabelnaam en de relevante kolommen mee en vraag om uitleg per regel. Plak je prompt én de query die eruit kwam, en noem één ding dat je hebt gecontroleerd.",
+    "minTekens": 150,
+    "hint": "De positiekolom is nul-gebaseerd en opgeteld: je moet hem delen door de vertoningen en er 1 bij optellen."
+  },
+  "modelantwoord": "Prompt: 'Schrijf een BigQuery SQL-query op `project.searchconsole.searchdata_site_impression` (kolommen: data_date, query, is_anonymized_query, impressions, clicks, sum_top_position). Ik wil per maand: totaal klikken, totaal vertoningen en gemiddelde positie, alleen voor queries die offerte bevatten, zonder geanonimiseerde queries. Leg elke regel kort uit.'\n\nQuery:\nSELECT DATE_TRUNC(data_date, MONTH) AS maand, SUM(clicks) AS klikken, SUM(impressions) AS vertoningen, SUM(sum_top_position) / SUM(impressions) + 1 AS gem_positie FROM `project.searchconsole.searchdata_site_impression` WHERE is_anonymized_query = FALSE AND LOWER(query) LIKE '%offerte%' GROUP BY maand ORDER BY maand\n\nGecontroleerd: dat de positie berekend wordt als SUM(sum_top_position)/SUM(impressions) + 1 en niet als gemiddelde van een kolom.",
+  "uitleg": "Met de **bulk data export** zet Search Console elke dag de prestatiedata van een property in **BigQuery**. Je zit dan niet meer vast aan de 1.000 rijen in de interface en kunt data koppelen aan andere bronnen. Belangrijk: de export bevat geen data van vóór het moment dat je hem aanzet (daarvoor blijf je aangewezen op de rapporten of de API, met hun limieten). Zet hem dus vroeg aan.\n\nDe export maakt drie tabellen: **searchdata_site_impression** (data per property), **searchdata_url_impression** (data per URL) en **ExportLog**.\n\n**SQL** is de taal waarmee je die tabellen bevraagt. De basis:\n- SELECT: welke kolommen of berekeningen\n- FROM: welke tabel\n- WHERE: welke rijen (filter)\n- GROUP BY: waarover je optelt\n- ORDER BY: sortering\n\nDe valkuil zit in de positie. De kolom **sum_top_position** is een optelsom en nul-gebaseerd. De gemiddelde positie is daarom SUM(sum_top_position) / SUM(impressions) + 1. In de URL-tabel heet die kolom sum_position.\n\nClaude schrijft zulke queries snel, maar controleer altijd drie dingen: de juiste tabel, de positieformule en of geanonimiseerde queries (een lege query met is_anonymized_query = true) er bewust in of uit zijn gelaten.",
+  "kernpunt": "SQL op de Search Console-export in BigQuery haalt je voorbij de limiet van 1.000 rijen. Gemiddelde positie = SUM(sum_top_position) / SUM(impressions) + 1, nooit een simpel gemiddelde.",
+  "toepassing": "Check bij je grootste klant of de bulk data export al aanstaat. Zo niet: zet hem nu aan, want de export begint pas vanaf het moment van instellen.",
+  "bron": {
+    "titel": "Table guidelines and reference - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/12917991"
+  }
+}
