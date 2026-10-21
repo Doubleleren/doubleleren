@@ -135,12 +135,14 @@ function Get-DlMaandStand($Logs, [string]$Maand, [datetime]$Nu = (Get-Date)) {
     $laatste = @($dagen.Keys | Sort-Object) | Select-Object -Last 1
     [pscustomobject]@{ goed = @($inM | Where-Object { $_.resultaat -eq 'goed' }).Count; langsteReeks = $lang; reeksAanEind = $cur; laatsteDag = $laatste; lessen = $inM.Count }
 }
-function Read-DlScore($O, [string]$Maand, [string]$Id, $Publiek) {
+# Geldig als ondertekend door het lid zelf ($Publiek) of door de generator ($Generator)
+function Read-DlScore($O, [string]$Maand, [string]$Id, $Publiek, $Generator) {
     $r = Read-DlOpslag $O "scorebord/$Maand/$Id.json"
     if (-not $r) { return $null }
     $env = $script:DlUtf8.GetString($r.bytes).Trim() | ConvertFrom-Json
-    $geldig = [int]$env.v -eq 2 -and $env.door -eq $Id
-    if ($geldig) { $geldig = $false; foreach ($pub in @($Publiek)) { if ($pub -and (Test-DlHandtekening $pub "scorebord|$Maand|$Id" $Id $env.inhoud $env.sig)) { $geldig = $true; break } } }
+    $sleutels = if ($env.door -eq $Id) { @($Publiek) } elseif ($env.door -eq 'generator' -and $Generator) { @($Generator) } else { @() }
+    $geldig = $false
+    if ([int]$env.v -eq 2) { foreach ($pub in $sleutels) { if ($pub -and (Test-DlHandtekening $pub "scorebord|$Maand|$Id" $env.door $env.inhoud $env.sig)) { $geldig = $true; break } } }
     if (-not $geldig) { throw "Scorebord $Maand/$Id heeft geen geldige handtekening" }
     @{ obj = ($env.inhoud | ConvertFrom-Json); sha = $r.sha }
 }
@@ -150,9 +152,12 @@ function Get-DlScorebordZichtbaar($C, [hashtable]$Sleutels) {
     $p = Read-DlVersleuteld $C.data $C.id 'profiel' $Sleutels $C.publiek
     -not ($p -and $p.obj.scorebord -eq $false)
 }
-# Eigen stand bijwerken voor deze maand en (als daar lessen in zaten) de vorige. Schrijft alleen als er iets veranderde.
-function Write-DlScorebord($C, $Logs, [bool]$Zichtbaar = $true, [datetime]$Nu = (Get-Date)) {
+# Stand bijwerken voor deze maand en (als daar lessen in zaten) de vorige. Schrijft alleen als er iets veranderde.
+# Normaal ondertekent het lid zelf; de generator (-Door generator) werkt elke ochtend ieders stand bij, zodat ook wie de
+# website niet opende of een oude pop-up heeft op het bord staat.
+function Write-DlScorebord($C, $Logs, [bool]$Zichtbaar = $true, [datetime]$Nu = (Get-Date), [string]$Door, $DoorPrive) {
     $id = $C.id; $zichtbaar = $Zichtbaar
+    if (-not $Door) { $Door = $id; $DoorPrive = $C.prive }
     $nuM = $Nu.ToString('yyyy-MM')
     foreach ($maand in @($Nu.AddMonths(-1).ToString('yyyy-MM'), $nuM)) {
         $pad = "scorebord/$maand/$id.json"
@@ -170,7 +175,7 @@ function Write-DlScorebord($C, $Logs, [bool]$Zichtbaar = $true, [datetime]$Nu = 
             }
             $obj.bijgewerkt = $Nu.ToString('s')
             $inhoud = ConvertTo-Json -InputObject $obj -Compress
-            $env = [ordered]@{ v = 2; door = $id; inhoud = $inhoud; sig = (New-DlHandtekening $C.prive "scorebord|$maand|$id" $id $inhoud) } | ConvertTo-Json -Compress
+            $env = [ordered]@{ v = 2; door = $Door; inhoud = $inhoud; sig = (New-DlHandtekening $DoorPrive "scorebord|$maand|$id" $Door $inhoud) } | ConvertTo-Json -Compress
             try { Write-DlOpslag $C.data $pad ($script:DlUtf8.GetBytes($env)) $(if ($oud) { $oud.sha }) | Out-Null; break }
             catch { if ("$_" -ne 'conflict' -or $poging -eq 3) { throw }; Start-Sleep -Milliseconds 400 }
         }

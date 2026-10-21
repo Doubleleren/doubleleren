@@ -42,10 +42,13 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     }
     $scores = [ordered]@{}
     if ($matrix) { foreach ($p in $matrix.obj.scores.PSObject.Properties) { $laatste = @($p.Value.PSObject.Properties | Sort-Object Name)[-1]; if ($laatste) { $scores[$p.Name] = [int]$laatste.Value } } }
+    # Eigen prioriteit per hoofdgebied (eerste cijfer van de vaardigheid-id): 1 hoog, 2 normaal (standaard), 3 laag
+    $prioriteit = [ordered]@{}
+    if ($matrix -and $matrix.obj.prioriteit) { foreach ($p in $matrix.obj.prioriteit.PSObject.Properties) { if ($p.Name -match '^\d{1,2}$' -and @(1, 2, 3) -contains [int]$p.Value) { $prioriteit[$p.Name] = [int]$p.Value } } }
     $leden[$id] = [ordered]@{
         project = $org.leden.$id.project; cel = $org.leden.$id.cel
         focus = $(if ($profiel) { $profiel.obj.focus }); leerdoelen = $(if ($profiel) { $profiel.obj.leerdoelen })
-        scores = $scores; resultaten = $resultaten; gedaan = @($gedaan | Sort-Object -Unique); wachtrij = @($(if ($wachtrij) { $wachtrij.obj.lessen }))
+        scores = $scores; prioriteit = $prioriteit; resultaten = $resultaten; gedaan = @($gedaan | Sort-Object -Unique); wachtrij = @($(if ($wachtrij) { $wachtrij.obj.lessen }))
     }
 }
 [IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; leden = $leden } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))

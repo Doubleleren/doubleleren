@@ -41,7 +41,9 @@ try {
         Write-DlVersleuteld $d $id 'wachtrij' $s $nieuw $(if ($b) { $b.sha }) 'generator' $geheim.generatorPrive | Out-Null
         Write-Host "  $id`: $($lijst.Count) les(sen) klaargezet"
     }
-    if ($kloon) { Push-DlKloon $kloon; Write-Host 'Wachtrijen verstuurd naar de data-repo.' }
+    # 3. Scorebord van iedereen bijwerken (ook wie de website niet opende); een fout hier houdt de lessen niet tegen
+    try { & (Join-Path $PSScriptRoot 'scorebord-bijwerken.ps1') -DataMap $DataMap -Thuis $Thuis } catch { Write-Host "  Scorebord bijwerken mislukt: $($_.Exception.Message)" }
+    if ($kloon) { Push-DlKloon $kloon; Write-Host 'Wachtrijen en scorebord verstuurd naar de data-repo.' }
     if ($Push) { Push-Location $App; try { git add -A lessen; git commit -q -m 'Lessen bijgewerkt' 2>$null; git push -q } finally { Pop-Location } }
 }
 finally {

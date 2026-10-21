@@ -228,6 +228,9 @@ function schoonMatrix(m) {
   }
   return uit;
 }
+// Eigen prioriteit per hoofdgebied (sleutel = eerste cijfer van de vaardigheid-id): 1 hoog, 2 normaal, 3 laag
+const schoonPrioriteit = (p) => Object.fromEntries(Object.entries(p && typeof p === 'object' ? p : {}).filter(([k, v]) => /^\d{1,2}$/.test(k) && [1, 2, 3].includes(v)));
+function hoofdgebieden() { const m = new Map(); for (const it of S.sjabloon.values()) { const n = it.id.split('.')[0]; if (!m.has(n)) m.set(n, it.hoofdgebied); } return m; }
 function schoonLog(r) {
   if (!r || typeof r !== 'object' || !/^\d{4}-\d{2}-\d{2}T/.test(String(r.datum))) return null;
   return { datum: String(r.datum), id: String(r.id || ''), resultaat: RES[r.resultaat] ? r.resultaat : null, niveau: ['basis', 'gevorderd', 'expert'].includes(r.niveau) ? r.niveau : 'basis',
@@ -245,7 +248,7 @@ async function laadLid(id) {
   const sl = await K.sleutelsUitDk(await K.pakUit(S.prive, K.b64u.dec(kopie)));
   const profiel = await leesEnc(id, 'profiel', sl);
   const lid = { id, naam: String(S.org.leden[id]?.naam || profiel?.naam || id), sinds: typeof profiel?.sinds === 'string' ? profiel.sinds : null, matrix: null, logs: [] };
-  const m = await leesEnc(id, 'matrix', sl); if (m) lid.matrix = schoonMatrix(m);
+  const m = await leesEnc(id, 'matrix', sl); if (m) { lid.matrix = schoonMatrix(m); lid.prioriteit = schoonPrioriteit(m.prioriteit); }
   for (const mnd of await Promise.all(logMaanden(id).map((x) => leesEnc(id, `log-${x}`, sl)))) for (const r of mnd?.regels || []) { const s = schoonLog(r); if (s) lid.logs.push(s); }
   lid.logs.sort((a, b) => (a.datum < b.datum ? 1 : -1));
   if (id === S.mij) { lid.sl = sl; lid.profiel = profiel; }
@@ -351,6 +354,7 @@ function toonMij() {
 // ---------------------------------------------------------------- weergave: skilllijst
 function toonSkilllijst() {
   const lid = S.leden[S.mij]; if (!lid) return;
+  toonPrioriteit();
   const maanden = maandenVan(lid), totaal = S.sjabloon.size, r = ronde(lid);
   $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
   $('mx-ronde').textContent = r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
@@ -423,7 +427,8 @@ async function slaSkilllijstOp() {
     const scores = {};
     for (const [id, sc] of Object.entries(h?.scores || {})) if (sc && typeof sc === 'object') scores[id] = { ...sc };
     for (const [id, n] of Object.entries(keuze)) scores[id] = { ...(scores[id] || {}), [maand]: n };
-    return { v: 1, sjabloon: S.inst.vakgebied, scores };
+    const prioriteit = schoonPrioriteit(h?.prioriteit);
+    return { v: 1, sjabloon: S.inst.vakgebied, scores, ...(Object.keys(prioriteit).length ? { prioriteit } : {}) };
   });
   const nieuw = await laadLid(S.mij); if (nieuw) S.leden[S.mij] = nieuw;
   $('mx-form-paneel').hidden = true;
@@ -432,6 +437,26 @@ async function slaSkilllijstOp() {
   if (L.status?.geblokkeerd) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// ---------------------------------------------------------------- eigen prioriteit per hoofdgebied
+const PRIO = { 1: 'Hoog', 2: 'Normaal', 3: 'Laag' };
+function toonPrioriteit() {
+  const lid = S.leden[S.mij], p = lid?.prioriteit || {};
+  $('prio').innerHTML = lid?.matrix
+    ? [...hoofdgebieden()].map(([n, naam]) => `<div class="rij"><span>${esc(naam)}</span><span class="prio-keuze" role="group" aria-label="${esc(`Prioriteit ${naam}`)}">${[1, 2, 3].map((k) => `<button type="button" class="knop" data-prio="${esc(n)}" data-waarde="${k}" aria-pressed="${(p[n] || 2) === k}">${PRIO[k]}</button>`).join('')}</span></div>`).join('')
+    : '<p class="leeg">Vul eerst je skilllijst in; daarna kies je hier waar je je op wilt richten.</p>';
+}
+async function zetPrioriteit(n, k) {
+  const ik = S.leden[S.mij];
+  $('prio').querySelectorAll('button').forEach((b) => { b.disabled = true; }); $('prio-status').textContent = 'Opslaan…';
+  try {
+    await werkBij(S.mij, 'matrix', ik.sl, (h) => { if (!h) throw new Error('Vul eerst je skilllijst in.'); return { ...h, prioriteit: { ...schoonPrioriteit(h.prioriteit), [n]: k } }; });
+    ik.prioriteit = { ...(ik.prioriteit || {}), [n]: k };
+    $('prio-status').textContent = `Opgeslagen: ${hoofdgebieden().get(n)} heeft nu prioriteit ${PRIO[k].toLowerCase()}. De generator houdt er vanaf de volgende ochtend rekening mee.`;
+  } catch (e) { $('prio-status').textContent = 'Opslaan mislukt: ' + e.message; }
+  toonPrioriteit();
+}
+$('prio').addEventListener('click', (e) => { const b = e.target.closest('button[data-prio]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetPrioriteit(b.dataset.prio, Number(b.dataset.waarde)); });
 
 // ---------------------------------------------------------------- halfjaarlijkse check van de skilllijst
 // Twee rondes per jaar: januari (deadline 31 januari) en juli (deadline 31 juli). Gedaan = een score uit dat halfjaar.
@@ -509,7 +534,7 @@ function toonProfiel(id) {
   const sig = signalen(l), p = $('profiel');
   const ond = [...groepeer(l)].flatMap(([hg, os]) => [...os].map(([o, its]) => ({ hg, o, v: gem(its.map((i) => laatste(i.scores)?.s)) }))).sort((a, b) => a.v - b.v);
   p.hidden = false;
-  p.innerHTML = `<div class="paneel-kop"><div><h2>${esc(l.naam)}</h2><p class="sub">${esc(plekVan(id))} · ${l.logs.length} lessen · reeks ${reeks(l.logs)} · scores en resultaten, geen antwoorden</p></div><button class="knop" type="button" id="profiel-sluit" style="background:var(--cool-50)">Sluiten</button></div>
+  p.innerHTML = `<div class="paneel-kop"><div><h2>${esc(l.naam)}</h2><p class="sub">${esc(plekVan(id))} · ${l.logs.length} lessen · reeks ${reeks(l.logs)} · scores en resultaten, geen antwoorden</p>${(() => { const hg = hoofdgebieden(), p = l.prioriteit || {}; const t = (k) => Object.keys(p).filter((n) => p[n] === k && hg.has(n)).map((n) => esc(hg.get(n))).join(', '); return t(1) || t(3) ? `<p class="sub">${t(1) ? `Wil zich richten op: <b>${t(1)}</b>` : ''}${t(1) && t(3) ? ' · ' : ''}${t(3) ? `Minder prioriteit: ${t(3)}` : ''}</p>` : ''; })()}</div><button class="knop" type="button" id="profiel-sluit" style="background:var(--cool-50)">Sluiten</button></div>
   <div class="twee"><div><h3 style="font-size:15px;margin-bottom:6px">Laagste onderwerpen</h3>${ond.slice(0, 6).map((x) => `<div class="rij"><span>${esc(x.o)}<br><span class="sub">${esc(x.hg)}</span></span><b class="num">${komma(x.v)}</b></div>`).join('')}
   <h3 style="font-size:15px;margin:16px 0 6px">Sterkste onderwerpen</h3>${ond.slice(-4).reverse().map((x) => `<div class="rij"><span>${esc(x.o)}</span><b class="num">${komma(x.v)}</b></div>`).join('')}</div>
   <div><h3 style="font-size:15px;margin-bottom:6px">Signalen</h3>${sig.length ? sig.slice(0, 6).map((x) => `<div class="rij"><span>${esc(S.sjabloon.get(x.id)?.vaardigheid || x.id)}</span>${sigChip(x.s)}</div>`).join('') : '<p class="leeg">Nog geen signalen.</p>'}
@@ -607,8 +632,9 @@ async function leesScore(pad) {
     const env = maand ? await json(S.data, pad) : null;
     if (env) {
       let s = null;
-      if (env.v === 2 && env.door === id && typeof env.inhoud === 'string') {
-        for (const pub of await sleutelsVan(id)) if (await K.verifieer(pub, `scorebord|${maand}|${id}`, id, env.inhoud, env.sig)) { s = JSON.parse(env.inhoud); break; }
+      // Ondertekend door het lid zelf of door de generator (die elke ochtend ieders stand bijwerkt)
+      if (env.v === 2 && (env.door === id || env.door === 'generator') && typeof env.inhoud === 'string') {
+        for (const pub of await sleutelsVan(env.door)) if (await K.verifieer(pub, `scorebord|${maand}|${id}`, env.door, env.inhoud, env.sig)) { s = JSON.parse(env.inhoud); break; }
       }
       if (s?.v === 1 && s.maand === maand && s.zichtbaar === false) uit = { id, maand, zichtbaar: false };
       else if (s?.v === 1 && s.maand === maand && s.zichtbaar === true && telBaar(s.goed, 5000) && telBaar(s.langsteReeks, 31) && telBaar(s.huidigeReeks, 3650) && (s.laatsteDag === null || /^\d{4}-\d{2}-\d{2}$/.test(s.laatsteDag)))

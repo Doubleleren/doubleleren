@@ -185,6 +185,21 @@ Controleer ((-not (Get-DlScorebordZichtbaar $cf $sF)) -and $sb.obj.zichtbaar -eq
 Update-DlVersleuteld $cf.data $cf.id 'profiel' $sF { param($h) $o = [ordered]@{}; foreach ($p in $h.PSObject.Properties) { if ($p.Name -ne 'scorebord') { $o[$p.Name] = $p.Value } }; $o } $cf.id $cf.prive $cf.publiek | Out-Null
 [IO.File]::WriteAllText($sbPad, $echt)
 
+# De generator werkt ieders stand bij (ook wie nooit de nieuwe website opende), en respecteert verbergen
+$ce = Get-DlClient -Thuis "$T\Echo"; $sE = Get-DlEigenSleutels $ce
+Update-DlVersleuteld $ce.data $ce.id 'profiel' $sE { param($h) $o = [ordered]@{}; foreach ($p in $h.PSObject.Properties) { $o[$p.Name] = $p.Value }; $o.scorebord = $false; $o } $ce.id $ce.prive $ce.publiek | Out-Null
+$sbUit = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\scorebord-bijwerken.ps1" -DataMap $D -Thuis "$T\beheer"
+$sbD = Read-DlScore $dO $maand $ids.Delta $null $V; $sbE = Read-DlScore $dO $maand $ids.Echo $null $V
+Controleer ($sbD -and $sbD.obj.zichtbaar -and $sbD.obj.goed -eq 0 -and $sbE -and $sbE.obj.zichtbaar -eq $false -and -not $sbE.obj.PSObject.Properties['goed']) "Generator zet iedereen op het scorebord, verborgen blijft verborgen ($(@($sbUit) -join ' '))"
+$ok = $true; try { Read-DlScore $dO $maand $ids.Delta $null ([pscustomobject]@{ kty = 'RSA'; n = $cg.prive.n; e = $cg.prive.e }) | Out-Null } catch { $ok = $false }
+Controleer (-not $ok) 'Scorebord namens de generator met een andere sleutel wordt geweigerd'
+
+# Eigen prioriteit per hoofdgebied (zoals de website hem in de skilllijst zet) komt mee in de generatorcontext
+Update-DlVersleuteld $cf.data $cf.id 'matrix' $sF { param($h) $o = [ordered]@{}; foreach ($p in $h.PSObject.Properties) { $o[$p.Name] = $p.Value }; $o.prioriteit = [ordered]@{ '9' = 3; '2' = 1; 'x' = 1; '4' = 7 }; $o } $cf.id $cf.prive $cf.publiek | Out-Null
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
+$prioF = (Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json).leden.($ids.Foxtrot).prioriteit; Remove-Item "$T\beheer\generator\context.json"
+Controleer ($prioF.'9' -eq 3 -and $prioF.'2' -eq 1 -and -not $prioF.x -and -not $prioF.'4') 'Eigen prioriteit per hoofdgebied komt mee in de generatorcontext (ongeldige waarden niet)'
+
 # Feedback: versleuteld naar de beheerder, met naam alleen voor de beheerder
 $cd = Get-DlClient -Thuis "$T\Delta"
 $fb1 = New-DlFeedback $dO $ids.Delta $cd.prive @{ beheer = $V } 'bug' 'De knop Afronden reageert niet op mijn laptop' ''

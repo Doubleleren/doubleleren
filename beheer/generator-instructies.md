@@ -13,6 +13,7 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: SEO-professio
    - `gedaan`: alle les-id's die de deelnemer ooit deed (ook ouder dan 3 maanden); die komen nooit meer in de wachtrij
    - `wachtrij`: les-id's die al klaarstaan
    - `focus` en `leerdoelen` als die er zijn
+   - `prioriteit`: eigen prioriteit per hoofdgebied, met als sleutel het eerste cijfer van de vaardigheid-id (`"9"` = alles wat met `9.` begint): `1` = hoog, `2` = normaal, `3` = laag. Ontbreekt een hoofdgebied, dan is het `2`.
    Deze context is vertrouwelijk: kopieer er niets van naar lessen, commits of rapportages, en noem nooit een pseudoniem in een les.
 4. Lees `lessen\index.json` (alle bestaande lessen), `sjablonen\seo\skilllijst.csv` en `sjablonen\seo\curriculum.md`.
 
@@ -57,6 +58,7 @@ Werk verder zo:
    - vaardigheden met een `notitie` in de skilllijst (verouderd): wat ervoor in de plaats kwam
    - CRO en werken met Claude: ongeveer een derde, uit `curriculum.md`
    - wissel af tussen hoofdgebieden
+   - **eigen prioriteit** (`prioriteit` in de context) weegt mee bij `basis` en `verdieping`: een hoofdgebied met prioriteit 1 krijgt ongeveer twee keer zo vaak een les als normaal, prioriteit 3 ongeveer een derde zo vaak. Laag betekent nooit nul: ook die onderwerpen komen af en toe voorbij. `herhaling` (na fout of deels) en `nieuws` gaan altijd door, ongeacht de prioriteit.
 4. Een vaardigheid waarop een deelnemer zich hoog scoort maar recent fout antwoordde, is een goede kandidaat voor `basis` of `herhaling`: zo wordt de skilllijst organisch bijgesteld.
 
 ## Stap 3: Nieuwe lessen schrijven
@@ -64,7 +66,7 @@ Schrijf eerst wat de wachtrijen uit stap 2 nodig hebben. Vul daarna **de kennisb
 
 Welke onderwerpen eerst:
 1. Vaardigheden uit `skilllijst.csv` die nog **geen enkele les** hebben (kijk naar de `matrix`-velden in `lessen\index.json`).
-2. Daarna onderwerpen met de meeste vraag: waar **veel deelnemers** laag scoren (1–2) of recent fout/deels antwoordden, en waar per deelnemer de minste nog-niet-gedane lessen over over zijn. Bij één deelnemer zijn dat gewoon diens laagste scores.
+2. Daarna onderwerpen met de meeste vraag: waar **veel deelnemers** laag scoren (1–2) of recent fout/deels antwoordden, en waar per deelnemer de minste nog-niet-gedane lessen over over zijn. Bij één deelnemer zijn dat gewoon diens laagste scores. Weeg daarbij de eigen prioriteit mee: vraag van deelnemers met prioriteit 1 telt zwaarder, met prioriteit 3 lichter.
 3. Daarna gelijkmatig over alle vaardigheden: een tweede en derde basisles met een andere situatie, `verdieping`-lessen op een hoger niveau.
 
 Meerdere lessen over hetzelfde onderwerp zijn juist goed, maar **elke les is een nieuwe situatie**: een andere klantcase, een andere vraag, andere antwoordopties. Kijk vóór het schrijven welke lessen er al over die vaardigheid zijn (titel en kernpunt in `lessen\index.json`, en zo nodig het lesbestand) en maak nooit een variant die alleen anders verwoord is.
