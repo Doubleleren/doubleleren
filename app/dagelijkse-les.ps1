@@ -4,13 +4,15 @@
 #   -Snapshot map  : elke fase als PNG renderen en stoppen (voor controle)
 #   -Opslaan       : met -Snapshot: de les ook echt afronden en opslaan (test van het opslaan)
 #   -Thuis map     : andere map met config en geheim (tests)
+#   -Datum         : alleen voor tests: doe alsof het deze dag is bij de halfjaarlijkse check van de skilllijst
 param(
     [switch]$Test,
     [string]$LesBestand,
     [string]$Snapshot,
     [switch]$Opslaan,
     [int]$AutoSluit = 0,
-    [string]$Thuis
+    [string]$Thuis,
+    [string]$Datum
 )
 
 $ErrorActionPreference = 'Stop'
@@ -102,14 +104,14 @@ try {
         }
     }
 
-    # --- Logboek van deze en vorige maand: gedaan vandaag, reeks, al gemaakte lessen ---
+    # --- Het hele logboek (alle maanden): gedaan vandaag, reeks, scorebord, al gemaakte lessen ---
     $logs = @()
     if ($c) {
         try {
             $s = Get-DlEigenSleutels $c
-            foreach ($m in @((Get-Date), (Get-Date).AddMonths(-1))) {
-                $r = Read-DlVersleuteld $c.data $c.id (Get-LogSoort $m) $s $c.publiek
-                if ($r) { $logs += @($r.obj.regels) }
+            foreach ($b in @(Get-DlOpslagLijst $c.data "data/$($c.id)" | Where-Object { $_ -match '^log-\d{4}-\d{2}\.enc$' })) {
+                try { $r = Read-DlVersleuteld $c.data $c.id ($b -replace '\.enc$', '') $s $c.publiek; if ($r) { $logs += @($r.obj.regels) } }
+                catch { Log-Fout "Logboek $b overgeslagen: $($_.Exception.Message)" }
             }
         } catch {
             Log-Fout "Logboek lezen mislukt (offline of nog niet goedgekeurd?): $($_.Exception.Message)"
@@ -120,17 +122,23 @@ try {
         Schrijf-Status $vandaag $status.uitstelDatum $status.uitstelTot; exit     # al gedaan op een andere laptop
     }
 
+    # --- Halfjaarlijkse check: na 31 januari / 31 juli eerst de skilllijst bijwerken (op de website) ---
+    $script:skilllijstEerst = $null
+    if ($c -and -not $Test -and -not $LesBestand) {
+        try {
+            $mx = Read-DlVersleuteld $c.data $c.id 'matrix' $s $c.publiek
+            $pf = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek
+            $ronde = Get-DlRonde $(if ($mx) { $mx.obj }) $(if ($pf) { [string]$pf.obj.sinds }) $(if ($Datum) { [datetime]$Datum } else { Get-Date })
+            if ($ronde.teLaat) { $script:skilllijstEerst = $ronde }
+        } catch { Log-Fout "Halfjaarlijkse check overgeslagen: $($_.Exception.Message)" }
+    }
+
     # --- Les kiezen: eerste uit je wachtrij die je nog niet deed, anders uit de gedeelde lessenpool ---
     if ($LesBestand) { $les = Lees-Json (Resolve-Path $LesBestand).Path }
+    elseif ($script:skilllijstEerst) { $les = [pscustomobject]@{ titel = 'Eerst je skilllijst bijwerken'; vakgebied = 'DoubleLeren'; type = 'Halfjaarlijkse check'; opdracht = [pscustomobject]@{ soort = 'skilllijst' } } }
     else {
-        # Een les komt nooit twee keer: ook oudere maanden van het logboek meetellen
+        # Een les komt nooit twee keer: alle maanden van het logboek tellen mee
         $gedaan = @($logs | ForEach-Object { $_.id })
-        $geladen = @((Get-LogSoort (Get-Date)), (Get-LogSoort (Get-Date).AddMonths(-1)))
-        foreach ($b in @(Get-DlOpslagLijst $c.data "data/$($c.id)" | Where-Object { $_ -match '^log-\d{4}-\d{2}\.enc$' })) {
-            $soort = $b -replace '\.enc$', ''
-            if ($geladen -contains $soort) { continue }
-            try { $r = Read-DlVersleuteld $c.data $c.id $soort $s $c.publiek; if ($r) { $gedaan += @($r.obj.regels | ForEach-Object { $_.id }) } } catch {}
-        }
         $w = Read-DlVersleuteld $c.data $c.id 'wachtrij' $s $c.publiek
         $lesId = @($(if ($w) { @($w.obj.lessen) }) | Where-Object { $_ -and $gedaan -notcontains $_ }) | Select-Object -First 1
         if (-not $lesId) {
@@ -284,6 +292,20 @@ try {
         $script:magSluiten = $true; $win.Close()
     }
 
+    # Na de deadline van de halfjaarlijkse check: geen les, alleen de weg naar de skilllijst (telt niet als gedaan)
+    function Fase-Skilllijst {
+        Leeg
+        Toon-Label 'Halfjaarlijkse check'
+        Toon-Tekst ("Twee keer per jaar geef je opnieuw aan hoe je ervoor staat op de vaardigheden uit de skilllijst. De deadline van $($script:skilllijstEerst.tekst) is voorbij, dus eerst even je skilllijst bijwerken. Dat duurt een paar minuten en gaat op de website, onder **Skilllijst**.")
+        Toon-Tekst 'Daarna staat je les van vandaag weer voor je klaar.' 15 '#334155'
+        Voeg-UitstelKnop
+        [void]$knoppen.Children.Add((Nieuw-Knop 'Skilllijst bijwerken op de website' {
+            $url = "https://$($c.cfg.eigenaar).github.io/$($c.cfg.appRepo)/#skilllijst"
+            if (Test-WebAdres $url) { Start-Process $url }
+            $script:magSluiten = $true; $win.Close()
+        } -Primair))
+    }
+
     # --- Fasen ---------------------------------------------------------------
     $script:uitlegGetoond = $false
     $script:keuze = -1
@@ -430,7 +452,11 @@ try {
         catch {
             Log-Fout "Opslaan mislukt, wordt later opnieuw geprobeerd: $($_.Exception.Message)"
             Save-DlGeheim (Join-Path $WachtMap ((Get-Date).ToString('yyyyMMdd-HHmmss') + '.dpapi')) ([pscustomobject]$script:teBewaren)
+            return
         }
+        # Scorebord: alleen goed en reeks, ondertekend; lukt het niet, dan werkt de website het later bij
+        try { Write-DlScorebord $c (@($logs) + @([pscustomobject]$script:teBewaren.regel)) (Get-DlScorebordZichtbaar $c (Get-DlEigenSleutels $c)) }
+        catch { Log-Fout "Scorebord bijwerken mislukt: $($_.Exception.Message)" }
     }
 
     # --- Snapshot-modus (controle zonder venster) ----------------------------
@@ -449,6 +475,7 @@ try {
             $fs = [IO.File]::Create((Join-Path $Snapshot "$naam.png")); $enc.Save($fs); $fs.Close()
         }
         $kaart.Margin = Rand 0 0 0 0
+        if ($script:skilllijstEerst) { Fase-Skilllijst; Maak-Snapshot '0-skilllijst'; $script:magSluiten = $true; $win.Close(); exit }
         if ($les.volgorde -eq 'uitleg-eerst') { Fase-Uitleg; Maak-Snapshot '1-uitleg' }
         Fase-Opdracht; Maak-Snapshot '2-opdracht'
         if ($o.soort -eq 'meerkeuze') { $script:keuze = ([int]$o.juist + 1) % @($o.opties).Count }
@@ -471,7 +498,7 @@ try {
         $timer.Start()
     }
 
-    if ($les.volgorde -eq 'uitleg-eerst') { Fase-Uitleg } else { Fase-Opdracht }
+    if ($script:skilllijstEerst) { Fase-Skilllijst } elseif ($les.volgorde -eq 'uitleg-eerst') { Fase-Uitleg } else { Fase-Opdracht }
 
     $app = New-Object Windows.Application
     $app.ShutdownMode = 'OnMainWindowClose'

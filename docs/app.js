@@ -28,6 +28,9 @@ const UITNODIGING = /^(lid-[0-9a-f]{6}):([A-Za-z0-9_]{20,255})$/;
 // Lokaal testen alleen op localhost: ?app=/pad&data=/pad (relatieve paden, met .lijst.json).
 const params = new URLSearchParams(location.search);
 const LOKAAL = ['localhost', '127.0.0.1'].includes(location.hostname) && ['app', 'data'].every((k) => /^\/[\w\-/.]+$/.test(params.get(k) || ''));
+// Alleen lokaal testen: ?vandaag=JJJJ-MM-DD doet alsof het die dag is (deadlines, reeks, scorebord)
+const NU = LOKAAL && /^\d{4}-\d{2}-\d{2}$/.test(params.get('vandaag') || '') ? params.get('vandaag').split('-').map(Number) : null;
+const nu = () => { const d = new Date(); if (NU) d.setFullYear(NU[0], NU[1] - 1, NU[2]); return d; };
 
 // Lokaal schrijven gaat naar test/lokale-server.py (alleen localhost, alleen de testmap).
 function lokaleBron(basis) {
@@ -233,7 +236,7 @@ function schoonLog(r) {
 const logMaanden = (id) => {
   const p = S.data.paden;
   if (p) return p.filter((x) => x.startsWith(`data/${id}/log-`)).map((x) => x.slice(-11, -4)).filter((m) => /^\d{4}-\d{2}$/.test(m));
-  const m = []; const d = new Date(); for (let i = 0; i < 12; i++) { m.push(dagKey(d).slice(0, 7)); d.setMonth(d.getMonth() - 1); } return m;
+  const m = []; const d = nu(); for (let i = 0; i < 12; i++) { m.push(dagKey(d).slice(0, 7)); d.setMonth(d.getMonth() - 1); } return m;
 };
 async function laadLid(id) {
   const t = await beheerJson(`toegang/${id}.json`);
@@ -241,7 +244,7 @@ async function laadLid(id) {
   if (!kopie) return null;
   const sl = await K.sleutelsUitDk(await K.pakUit(S.prive, K.b64u.dec(kopie)));
   const profiel = await leesEnc(id, 'profiel', sl);
-  const lid = { id, naam: String(S.org.leden[id]?.naam || profiel?.naam || id), matrix: null, logs: [] };
+  const lid = { id, naam: String(S.org.leden[id]?.naam || profiel?.naam || id), sinds: typeof profiel?.sinds === 'string' ? profiel.sinds : null, matrix: null, logs: [] };
   const m = await leesEnc(id, 'matrix', sl); if (m) lid.matrix = schoonMatrix(m);
   for (const mnd of await Promise.all(logMaanden(id).map((x) => leesEnc(id, `log-${x}`, sl)))) for (const r of mnd?.regels || []) { const s = schoonLog(r); if (s) lid.logs.push(s); }
   lid.logs.sort((a, b) => (a.datum < b.datum ? 1 : -1));
@@ -256,16 +259,16 @@ function laatste(scores) { const m = Object.keys(scores).sort(); return m.length
 function eerste(scores) { const m = Object.keys(scores).sort(); return m.length ? scores[m[0]] : null; }
 function maandenVan(lid) { const s = new Set(); for (const v of lid.matrix?.values() || []) Object.keys(v).forEach((m) => s.add(m)); return [...s].sort(); }
 function reeks(logs) {
-  const dagen = new Set(logs.map((l) => l.datum.slice(0, 10))); const d = new Date(); let n = 0;
+  const dagen = new Set(logs.map((l) => l.datum.slice(0, 10))); const d = nu(); let n = 0;
   if (!dagen.has(dagKey(d))) d.setDate(d.getDate() - 1);
   for (let i = 0; i < 3650; i++) { const w = d.getDay(); if (dagen.has(dagKey(d))) n++; else if (w !== 0 && w !== 6) break; d.setDate(d.getDate() - 1); }
   return n;
 }
 // Bewijs per vaardigheid: goed +1, deels 0, fout -1; gevorderd x1,5, expert x2; recenter weegt zwaarder (halfwaarde 60 dagen)
 function bewijs(lid) {
-  const per = new Map(), nu = Date.now();
+  const per = new Map(), nuMs = Date.now();
   for (const l of lid.logs) {
-    const w = (l.niveau === 'expert' ? 2 : l.niveau === 'gevorderd' ? 1.5 : 1) * Math.pow(0.5, (nu - new Date(l.datum)) / (60 * 864e5));
+    const w = (l.niveau === 'expert' ? 2 : l.niveau === 'gevorderd' ? 1.5 : 1) * Math.pow(0.5, (nuMs - new Date(l.datum)) / (60 * 864e5));
     const v = l.resultaat === 'goed' ? 1 : l.resultaat === 'fout' ? -1 : 0;
     for (const id of l.matrix) { if (!per.has(id)) per.set(id, { som: 0, n: 0, gevorderdGoed: 0 }); const p = per.get(id); p.som += v * w; p.n++; if (v > 0 && l.niveau !== 'basis') p.gevorderdGoed++; }
   }
@@ -303,35 +306,37 @@ function toonMij() {
   const tel = { goed: 0, deels: 0, fout: 0 }; logs.forEach((l) => { if (l.resultaat) tel[l.resultaat]++; });
   const beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = S.sjabloon.size;
   const items = [...(lid.matrix?.values() || [])];
-  const nu = items.filter((s) => (laatste(s)?.s || 0) >= 3).length, start = items.filter((s) => (eerste(s) || 0) >= 3).length;
-  const delta = pct(nu, totaal) - pct(start, totaal), rk = reeks(logs);
+  const opNiveau = items.filter((s) => (laatste(s)?.s || 0) >= 3).length, start = items.filter((s) => (eerste(s) || 0) >= 3).length;
+  const delta = pct(opNiveau, totaal) - pct(start, totaal), rk = reeks(logs);
   $('kpis').innerHTML =
-    `<div class="kpi accent"><span class="label">Lessen afgerond</span><span class="waarde num">${logs.length}</span><span class="toel">${logs.filter((l) => l.datum.startsWith(dagKey(new Date()).slice(0, 7))).length} deze maand</span></div>` +
+    `<div class="kpi accent"><span class="label">Lessen afgerond</span><span class="waarde num">${logs.length}</span><span class="toel">${logs.filter((l) => l.datum.startsWith(dagKey(nu()).slice(0, 7))).length} deze maand</span></div>` +
     `<div class="kpi"><span class="label">Reeks</span><span class="waarde num">${rk}<small> ${rk === 1 ? 'dag' : 'dagen'}</small></span><span class="toel">Weekenden tellen niet als onderbreking</span></div>` +
     `<div class="kpi"><span class="label">Goed beantwoord</span><span class="waarde num">${pct(tel.goed, beoordeeld)}<small>%</small></span><span class="toel num">${tel.goed} goed · ${tel.deels} deels · ${tel.fout} fout</span></div>` +
-    `<div class="kpi"><span class="label">Skilllijst op niveau</span><span class="waarde num">${pct(nu, totaal)}<small>%</small></span><span class="toel num">${nu} van ${totaal} op 3–5${maanden.length > 1 ? ` · ${delta >= 0 ? '+' : ''}${delta} pt sinds ${esc(fmtMaand(maanden[0]))}` : maanden.length ? ` · meting ${esc(fmtMaand(maanden[0]))}` : ''}</span></div>`;
+    (lid.matrix
+      ? `<div class="kpi"><span class="label">Skilllijst op niveau</span><span class="waarde num">${pct(opNiveau, totaal)}<small>%</small></span><span class="toel num">${opNiveau} van ${totaal} op 3–5${maanden.length > 1 ? ` · ${delta >= 0 ? '+' : ''}${delta} pt sinds ${esc(fmtMaand(maanden[0]))}` : maanden.length ? ` · meting ${esc(fmtMaand(maanden[0]))}` : ''}</span></div>`
+      : '<div class="kpi"><span class="label">Skilllijst</span><span class="waarde num">–</span><span class="toel">Nog geen skilllijst. <button type="button" class="leslink" data-naar="skilllijst" data-formulier="1">Vul hem in</button></span></div>');
 
   const sig = signalen(lid);
-  $('signalen').innerHTML = sig.length ? sig.slice(0, 8).map((x) => { const it = S.sjabloon.get(x.id) || {}; return `<div class="rij"><span><b>${esc(it.vaardigheid || x.id)}</b><br><span class="sub">${esc(it.onderwerp)} · jij ${Number(x.zelf)}${x.van ? ` (was ${Number(x.van)})` : ''}${x.n ? ` · ${Number(x.n)} les${x.n === 1 ? '' : 'sen'}` : ''}</span></span>${sigChip(x.s)}</div>`; }).join('')
+  $('signalen').innerHTML = sig.length ? sig.slice(0, 8).map((x) => {
+    const it = S.sjabloon.get(x.id) || {}, over = logs.filter((l) => l.matrix.includes(x.id));
+    return `<details class="sig"><summary class="rij"><span><b>${esc(it.vaardigheid || x.id)}</b><br><span class="sub">${esc(it.onderwerp)} · jij ${Number(x.zelf)}${x.van ? ` (was ${Number(x.van)})` : ''}${over.length ? ` · ${over.length} les${over.length === 1 ? '' : 'sen'}` : ''}</span></span>${sigChip(x.s)}</summary>`
+      + `<div class="sig-lessen">${over.length ? over.map((l) => `<div class="sig-les"><span class="sub num datum-k">${esc(fmtDatum(l.datum))}</span><span>${lesKnop(l.id, l.datum, titelVan(l))}</span>${chip(l.resultaat)}</div>`).join('') : '<p class="leeg">Nog geen lessen over deze vaardigheid.</p>'}</div></details>`;
+  }).join('')
     : '<p class="leeg">Nog te weinig lessen om iets over te zeggen. Na een paar weken zie je hier waar je eigen score en je resultaten uit elkaar lopen.</p>';
 
-  $('mx-sub').textContent = maanden.length ? `${totaal} vaardigheden · laatste meting ${fmtMaand(maanden[maanden.length - 1])}. Klik op een onderwerp voor details.` : 'Nog geen scores.';
-  const b = bewijs(lid), sigPer = new Map(sig.map((x) => [x.id, x.s]));
-  $('matrix').innerHTML = [...groepeer(lid)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
-    const nuG = gem(its.map((i) => laatste(i.scores)?.s)), startG = gem(its.map((i) => eerste(i.scores)));
-    return `<details class="mx"><summary><span class="mx-naam"><i class="pijl"></i>${esc(o)}</span><span class="balk" data-tip="${esc(`${o}: ${komma(nuG)}${maanden.length > 1 ? ` (eerste meting ${komma(startG)})` : ''}`)}"><i style="width:${((nuG / 5) * 100).toFixed(1)}%"></i>${maanden.length > 1 ? `<b style="left:calc(${((startG / 5) * 100).toFixed(1)}% - 1px)"></b>` : ''}</span><span class="mx-score num">${komma(nuG)}</span></summary><div class="mx-items">${its.map((i) => {
-      const hist = Object.keys(i.scores).sort().map((m) => Number(i.scores[m])).join(' → '); const bi = b.get(i.id);
-      return `<div class="mx-item"><span class="id num">${esc(i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
-    }).join('')}</div></details>`;
-  }).join('')}</div>`).join('');
-
-  const gedaan = new Map(logs.map((l) => [l.datum.slice(0, 10), l]));
-  const vandaag = new Date(); vandaag.setHours(12, 0, 0, 0);
+  // Per dag alle lessen (oudste eerst); een vakje opent de eerste, de les toont de rest onder "Ook die dag"
+  const gedaan = new Map();
+  for (const l of [...logs].reverse()) { const k = l.datum.slice(0, 10); if (!gedaan.has(k)) gedaan.set(k, []); gedaan.get(k).push(l); }
+  const vandaag = nu(); vandaag.setHours(12, 0, 0, 0);
   const d = new Date(vandaag); d.setDate(d.getDate() - 7 * 25 - ((d.getDay() + 6) % 7));
   const cellen = []; let n26 = 0;
   while (d <= vandaag || (d.getDay() + 6) % 7 !== 0) {
-    const k = dagKey(d), l = gedaan.get(k), toekomst = d > vandaag; if (l && !toekomst) n26++;
-    cellen.push(`<div class="${toekomst ? 'buiten' : l ? 'gedaan' : ''}${k === dagKey(vandaag) ? ' vandaag' : ''}"${toekomst ? '' : ` data-tip="${esc(fmtDatum(k) + (l ? `: ${S.lessen[l.id]?.titel || l.titel || l.id}` : ': geen les'))}"`}></div>`);
+    const k = dagKey(d), ls = gedaan.get(k), toekomst = d > vandaag, isVandaag = k === dagKey(vandaag);
+    if (toekomst) cellen.push('<div class="buiten"></div>');
+    else if (ls) {
+      n26++; const tip = `${fmtDatum(k)}: ${ls.map(titelVan).join(' · ')}`;
+      cellen.push(`<button type="button" class="gedaan${isVandaag ? ' vandaag' : ''}" data-les="${esc(ls[0].id)}" data-datum="${esc(ls[0].datum)}" data-tip="${esc(tip)}" aria-label="${esc(tip)}"></button>`);
+    } else cellen.push(`<div${isVandaag ? ' class="vandaag"' : ''} data-tip="${esc(fmtDatum(k) + ': geen les')}"></div>`);
     d.setDate(d.getDate() + 1);
   }
   $('kal').innerHTML = cellen.join(''); $('kal').parentNode.scrollLeft = 1e6;
@@ -339,12 +344,126 @@ function toonMij() {
 
   const antw = new Map((lid.antwoorden || []).map((a) => [String(a.id) + String(a.datum), a.antwoord]));
   $('recent').innerHTML = logs.length ? logs.slice(0, 8).map((l) => lesHtml(l, antw.get(l.id + l.datum))).join('') : '<p class="leeg">Nog geen lessen afgerond. Je eerste les verschijnt vanzelf op je laptop.</p>';
+  $('sb-instelling').hidden = !magLessen();
+  $('sb-zichtbaar').checked = SB.zichtbaar;
+}
+
+// ---------------------------------------------------------------- weergave: skilllijst
+function toonSkilllijst() {
+  const lid = S.leden[S.mij]; if (!lid) return;
+  const maanden = maandenVan(lid), totaal = S.sjabloon.size, r = ronde(lid);
+  $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
+  $('mx-ronde').textContent = r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
+    : r.vrij ? `Je skilllijst is nog vers; de eerste halfjaarlijkse check is vóór ${r.volgende}.`
+    : `Halfjaarlijkse check: werk je skilllijst bij vóór ${r.tekst}${r.teLaat ? '. De deadline is voorbij: tot je hem bijwerkt, kun je geen lessen doen' : ''}.`;
+  if (!lid.matrix) {
+    $('mx-sub').textContent = `${totaal} vaardigheden`;
+    $('matrix').innerHTML = '<p class="leeg">Je hebt nog geen skilllijst. Klik op <b>Skilllijst invullen</b> en geef per vaardigheid aan hoe goed je hem nu beheerst.</p>';
+    return;
+  }
+  $('mx-sub').textContent = maanden.length ? `${totaal} vaardigheden · laatste meting ${fmtMaand(maanden[maanden.length - 1])}. Klik op een onderwerp voor details.` : 'Nog geen scores.';
+  const sig = signalen(lid), b = bewijs(lid), sigPer = new Map(sig.map((x) => [x.id, x.s]));
+  $('matrix').innerHTML = [...groepeer(lid)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
+    const nuG = gem(its.map((i) => laatste(i.scores)?.s)), startG = gem(its.map((i) => eerste(i.scores)));
+    return `<details class="mx"><summary><span class="mx-naam"><i class="pijl"></i>${esc(o)}</span><span class="balk" data-tip="${esc(`${o}: ${komma(nuG)}${maanden.length > 1 ? ` (eerste meting ${komma(startG)})` : ''}`)}"><i style="width:${((nuG / 5) * 100).toFixed(1)}%"></i>${maanden.length > 1 ? `<b style="left:calc(${((startG / 5) * 100).toFixed(1)}% - 1px)"></b>` : ''}</span><span class="mx-score num">${komma(nuG)}</span></summary><div class="mx-items">${its.map((i) => {
+      const hist = Object.keys(i.scores).sort().map((m) => Number(i.scores[m])).join(' → '); const bi = b.get(i.id);
+      return `<div class="mx-item"><span class="id num">${esc(i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
+    }).join('')}</div></details>`;
+  }).join('')}</div>`).join('');
+}
+// Bewust leeg: je eerdere score staat er niet bij, zodat je echt opnieuw inschat. Typ 1–5 en je springt naar de volgende.
+function toonSkillFormulier() {
+  const lid = S.leden[S.mij]; if (!lid?.sl) return;
+  $('mx-velden').innerHTML = [...groepeer(lid)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
+    let context = '';
+    const rijen = its.map((i) => {
+      const kop = i.context && i.context !== context ? `<div class="mx-context">${esc(i.context)}</div>` : ''; context = i.context;
+      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.id)}</span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
+    }).join('');
+    return `<div class="mx-onderwerp"><h4>${esc(o)}</h4>${rijen}</div>`;
+  }).join('')}</div>`).join('');
+  $('mx-fout').textContent = ''; $('mx-klaar').textContent = '';
+  telSkillVelden();
+  $('mx-form-paneel').hidden = false;
+  $('mx-form-paneel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => $('mx-velden').querySelector('.score-veld')?.focus({ preventScroll: true }), 400);
+}
+const skillVelden = () => [...$('mx-velden').querySelectorAll('.score-veld')];
+function telSkillVelden() {
+  const v = skillVelden(), n = v.filter((x) => /^[1-5]$/.test(x.value)).length;
+  $('mx-voortgang').textContent = `${n} van ${v.length} ingevuld`;
+}
+function springSkillVeld(veld, stap) {
+  const v = skillVelden(), doel = v[v.indexOf(veld) + stap];
+  if (doel) { doel.focus(); doel.select(); } else if (stap > 0) $('mx-opslaan').focus();
+}
+$('mx-velden').addEventListener('input', (e) => {
+  const veld = e.target.closest('.score-veld'); if (!veld) return;
+  veld.value = veld.value.replace(/[^1-5]/g, '').slice(-1);
+  veld.classList.remove('mist'); telSkillVelden();
+  if (veld.value) springSkillVeld(veld, 1);
+});
+$('mx-velden').addEventListener('keydown', (e) => {
+  const veld = e.target.closest('.score-veld'); if (!veld) return;
+  if (e.key === 'ArrowDown' || e.key === 'Enter') { e.preventDefault(); springSkillVeld(veld, 1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); springSkillVeld(veld, -1); }
+  else if (e.key === 'Backspace' && !veld.value) { e.preventDefault(); springSkillVeld(veld, -1); }
+  else if (e.key.length === 1 && !/[1-5]/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) e.preventDefault();   // ander teken: negeren, score blijft staan
+});
+$('mx-velden').addEventListener('focusin', (e) => { if (e.target.classList?.contains('score-veld')) e.target.select(); });
+// Schrijft de huidige maand voor élke vaardigheid: zo telt het als je halfjaarlijkse inschatting
+async function slaSkilllijstOp() {
+  const ik = S.leden[S.mij], maand = dagKey(nu()).slice(0, 7), keuze = {}, missend = [];
+  for (const veld of skillVelden()) { const v = Number(veld.value); if (S.sjabloon.has(veld.dataset.id) && v >= 1 && v <= 5) keuze[veld.dataset.id] = v; else { missend.push(veld); veld.classList.add('mist'); } }
+  if (missend.length) {
+    missend[0].focus();
+    throw new Error(`Vul nog ${missend.length} ${missend.length === 1 ? 'vaardigheid' : 'vaardigheden'} in (rood gemarkeerd).`);
+  }
+  await werkBij(S.mij, 'matrix', ik.sl, (h) => {
+    const scores = {};
+    for (const [id, sc] of Object.entries(h?.scores || {})) if (sc && typeof sc === 'object') scores[id] = { ...sc };
+    for (const [id, n] of Object.entries(keuze)) scores[id] = { ...(scores[id] || {}), [maand]: n };
+    return { v: 1, sjabloon: S.inst.vakgebied, scores };
+  });
+  const nieuw = await laadLid(S.mij); if (nieuw) S.leden[S.mij] = nieuw;
+  $('mx-form-paneel').hidden = true;
+  toonMij(); toonSkilllijst(); toonRonde();
+  $('mx-klaar').textContent = `Opgeslagen: je inschatting van ${fmtMaand(maand)} staat erin.`;
+  if (L.status?.geblokkeerd) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---------------------------------------------------------------- halfjaarlijkse check van de skilllijst
+// Twee rondes per jaar: januari (deadline 31 januari) en juli (deadline 31 juli). Gedaan = een score uit dat halfjaar.
+// Wie zijn eerste meting of zijn aanmelding minder dan ~3 maanden voor de deadline deed, slaat die ronde over.
+// Na de deadline: geen lessen tot de skilllijst is bijgewerkt.
+const MAANDLANG = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+function ronde(lid, d = nu()) {
+  const j = d.getFullYear(), h2 = d.getMonth() >= 6, start = `${j}-${h2 ? '07' : '01'}`, eind = `${j}-${h2 ? '12' : '06'}`;
+  const maanden = [...new Set([...(lid?.matrix?.values() || [])].flatMap((s) => Object.keys(s)))].sort();
+  const voldaan = maanden.some((m) => m >= start && m <= eind);
+  const sinds = /^\d{4}-\d{2}/.test(String(lid?.sinds)) ? String(lid.sinds).slice(0, 7) : null, grens = dagKey(new Date(j, (h2 ? 6 : 0) - 2, 1)).slice(0, 7);
+  const vrij = !voldaan && ((!!maanden[0] && maanden[0] >= grens) || (!!sinds && sinds >= grens));
+  const deadline = new Date(j, h2 ? 6 : 0, 31, 23, 59, 59);
+  return { naam: `${MAANDLANG[h2 ? 6 : 0]} ${j}`, tekst: `31 ${MAANDLANG[h2 ? 6 : 0]}`, volgende: `31 ${MAANDLANG[h2 ? 0 : 6]}${h2 ? ` ${j + 1}` : ''}`,
+    voldaan, vrij, nodig: !voldaan && !vrij, teLaat: !voldaan && !vrij && d > deadline };
+}
+function toonRonde() {
+  const b = $('ronde-banner'), ik = S.leden[S.mij];
+  const r = ik && magLessen() ? ronde(ik) : null;
+  if (!r?.nodig) { b.hidden = true; return; }
+  b.className = 'banner' + (r.teLaat ? ' laat' : '');
+  b.innerHTML = `<span>${r.teLaat ? `<b>De deadline van ${esc(r.tekst)} is voorbij.</b> Werk eerst je skilllijst bij; daarna kun je weer lessen doen.` : `<b>Halfjaarlijkse check:</b> hoe sta je er nu voor? Werk je skilllijst bij vóór ${esc(r.tekst)}.`}</span>`
+    + '<button type="button" class="knop zwart" data-naar="skilllijst" data-formulier="1">Skilllijst bijwerken</button>';
+  b.hidden = false;
 }
 
 function bronHtml(bron) { const u = veiligeLink(bron?.url); return u ? `<div class="bron">Bron: <a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(bron.titel || u)}</a></div>` : ''; }
+const titelVan = (l) => S.lessen[l.id]?.titel || l.titel || l.id;
+const lesKnop = (id, datum, tekst) => `<button type="button" class="leslink" data-les="${esc(id)}"${datum ? ` data-datum="${esc(datum)}"` : ''}>${esc(tekst)}</button>`;
 function lesHtml(l, antwoord) {
   const les = S.lessen[l.id] || {};
-  return `<article class="les"><div class="datum num">${esc(fmtDatum(l.datum))}</div><div><h3>${esc(les.titel || l.titel || l.id)}</h3><div class="meta"><span class="tag">${esc(les.vakgebied || l.vakgebied)}</span>${chip(l.resultaat)}</div>${les.kernpunt ? `<p>${esc(les.kernpunt)}</p>` : ''}${bronHtml(les.bron)}${antwoord ? `<details><summary>Jouw antwoord</summary><blockquote>${esc(antwoord)}</blockquote></details>` : ''}</div></article>`;
+  return `<article class="les"><div class="datum num">${esc(fmtDatum(l.datum))}</div><div><h3>${lesKnop(l.id, l.datum, les.titel || l.titel || l.id)}</h3><div class="meta"><span class="tag">${esc(les.vakgebied || l.vakgebied)}</span>${chip(l.resultaat)}</div>${les.kernpunt ? `<p>${esc(les.kernpunt)}</p>` : ''}${bronHtml(les.bron)}${antwoord ? `<details><summary>Jouw antwoord</summary><blockquote>${esc(antwoord)}</blockquote></details>` : ''}</div></article>`;
 }
 
 // ---------------------------------------------------------------- weergave: team
@@ -372,8 +491,9 @@ function toonTeam() {
   const aandacht = hgs.map((h) => ({ h, v: gem(leden.map((l) => gemHg(l, h)).filter((x) => x)), sterk: leden.filter((l) => gemHg(l, h) >= 3.5) })).filter((x) => x.v && x.v < 2.5).sort((a, b) => a.v - b.v);
   $('aandacht').innerHTML = aandacht.length ? aandacht.map((x) => `<div class="rij"><span><b>${esc(x.h)}</b> · gemiddeld ${komma(x.v)}<br><span class="sub">${x.sterk.length ? `Sterk: ${x.sterk.map((l) => esc(l.naam)).join(', ')} (kennis delen?)` : 'Niemand scoort hier hoog: training of kennissessie?'}</span></span><span class="chip deels">Aandacht</span></div>`).join('') : '<p class="leeg">Geen hoofdgebieden onder de 2,5. Mooi.</p>';
 
-  const maand = dagKey(new Date()).slice(0, 7);
-  $('activiteit').innerHTML = `<thead><tr><th>Naam</th><th>Plek</th><th class="r">Deze maand</th><th class="r">Reeks</th><th class="r">Goed</th><th>Laatste les</th></tr></thead><tbody>${leden.map((l) => { const t = l.logs.filter((x) => x.resultaat); return `<tr><td>${esc(l.naam)}</td><td>${esc(plekVan(l.id))}</td><td class="r num">${l.logs.filter((x) => x.datum.startsWith(maand)).length}</td><td class="r num">${reeks(l.logs)}</td><td class="r num">${t.length ? pct(t.filter((x) => x.resultaat === 'goed').length, t.length) + '%' : '–'}</td><td class="num">${l.logs[0] ? esc(fmtDatum(l.logs[0].datum)) : '–'}</td></tr>`; }).join('')}</tbody>`;
+  const maand = dagKey(nu()).slice(0, 7);
+  const skillChip = (l) => { const r = ronde(l); return r.voldaan ? '<span class="chip goed"><i></i>Bijgewerkt</span>' : r.vrij ? '<span class="sub">Nieuw</span>' : `<span class="chip ${r.teLaat ? 'fout' : 'deels'}" data-tip="${esc(`Deadline ${r.tekst}`)}"><i></i>${r.teLaat ? 'Te laat' : 'Nog doen'}</span>`; };
+  $('activiteit').innerHTML = `<thead><tr><th>Naam</th><th>Plek</th><th class="r">Deze maand</th><th class="r">Reeks</th><th class="r">Goed</th><th>Laatste les</th><th>Skilllijst</th></tr></thead><tbody>${leden.map((l) => { const t = l.logs.filter((x) => x.resultaat); return `<tr><td><button type="button" class="leslink" data-lid="${esc(l.id)}">${esc(l.naam)}</button></td><td>${esc(plekVan(l.id))}</td><td class="r num">${l.logs.filter((x) => x.datum.startsWith(maand)).length}</td><td class="r num">${reeks(l.logs)}</td><td class="r num">${t.length ? pct(t.filter((x) => x.resultaat === 'goed').length, t.length) + '%' : '–'}</td><td class="num">${l.logs[0] ? esc(fmtDatum(l.logs[0].datum)) : '–'}</td><td>${skillChip(l)}</td></tr>`; }).join('')}</tbody>`;
   zoekExperts();
 }
 function zoekExperts() {
@@ -393,7 +513,7 @@ function toonProfiel(id) {
   <div class="twee"><div><h3 style="font-size:15px;margin-bottom:6px">Laagste onderwerpen</h3>${ond.slice(0, 6).map((x) => `<div class="rij"><span>${esc(x.o)}<br><span class="sub">${esc(x.hg)}</span></span><b class="num">${komma(x.v)}</b></div>`).join('')}
   <h3 style="font-size:15px;margin:16px 0 6px">Sterkste onderwerpen</h3>${ond.slice(-4).reverse().map((x) => `<div class="rij"><span>${esc(x.o)}</span><b class="num">${komma(x.v)}</b></div>`).join('')}</div>
   <div><h3 style="font-size:15px;margin-bottom:6px">Signalen</h3>${sig.length ? sig.slice(0, 6).map((x) => `<div class="rij"><span>${esc(S.sjabloon.get(x.id)?.vaardigheid || x.id)}</span>${sigChip(x.s)}</div>`).join('') : '<p class="leeg">Nog geen signalen.</p>'}
-  <h3 style="font-size:15px;margin:16px 0 6px">Recente lessen</h3>${l.logs.slice(0, 6).map((x) => `<div class="rij"><span>${esc(S.lessen[x.id]?.titel || x.titel || x.id)}<br><span class="sub">${esc(fmtDatum(x.datum))}</span></span>${chip(x.resultaat)}</div>`).join('') || '<p class="leeg">Nog geen lessen.</p>'}</div></div>`;
+  <h3 style="font-size:15px;margin:16px 0 6px">Recente lessen</h3>${l.logs.slice(0, 6).map((x) => `<div class="rij"><span>${lesKnop(x.id, id === S.mij ? x.datum : null, titelVan(x))}<br><span class="sub">${esc(fmtDatum(x.datum))}</span></span>${chip(x.resultaat)}</div>`).join('') || '<p class="leeg">Nog geen lessen.</p>'}</div></div>`;
   $('profiel-sluit').onclick = () => { p.hidden = true; };
   p.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -408,7 +528,213 @@ function toonKennisbank() {
   const res = alle.filter((l) => !q || [l.titel, l.kernpunt, l.onderwerp, l.vakgebied, l.bron?.titel].join(' ').toLowerCase().includes(q));
   $('kb-teller').textContent = q ? `${res.length} van ${alle.length} lessen` : `${alle.length} ${alle.length === 1 ? 'les' : 'lessen'} die je gehad hebt`;
   if (!alle.length) { $('kb-lijst').innerHTML = '<p class="leeg">Hier verschijnt elke les die je hebt gedaan, met het kernpunt en de bron. Zo bouw je je eigen naslag op.</p>'; return; }
-  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(fmtDatum(l.log.datum))}</div><div><h3>${esc(l.titel)}</h3><div class="meta">${chip(l.log.resultaat)}<span class="tag">${esc(l.vakgebied)}</span>${TYPE[l.type] ? `<span class="tag" style="background:var(--cool-50)">${esc(TYPE[l.type])}</span>` : ''}${l.herkomst === 'team' ? '<span class="tag" style="background:var(--fun-50)">Van het team</span>' : ''}${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
+  $('kb-lijst').innerHTML = res.map((l) => `<article class="les"><div class="datum">${esc(fmtDatum(l.log.datum))}</div><div><h3>${lesKnop(l.log.id, l.log.datum, l.titel || l.log.id)}</h3><div class="meta">${chip(l.log.resultaat)}<span class="tag">${esc(l.vakgebied)}</span>${TYPE[l.type] ? `<span class="tag" style="background:var(--cool-50)">${esc(TYPE[l.type])}</span>` : ''}${l.herkomst === 'team' ? '<span class="tag" style="background:var(--fun-50)">Van het team</span>' : ''}${Array.isArray(l.matrix) && l.matrix.length ? `<span class="tag" style="background:var(--smart-50)">${esc(l.matrix.join(', '))}</span>` : ''}</div>${l.kernpunt ? `<p>${esc(l.kernpunt)}</p>` : ''}${bronHtml(l.bron)}</div></article>`).join('') || `<p class="leeg">Niets gevonden voor "${esc(q)}".</p>`;
+}
+
+// ---------------------------------------------------------------- lesdetail (#les/<id>)
+// De volledige les terug lezen: vraag, uitleg, kernpunt en bron. Niet je eigen antwoord en niet het modelantwoord.
+const LESSEN = new Map();
+const LES_ID = /^[0-9a-z][0-9a-z-]{0,80}$/;
+function haalLes(id) {
+  if (!LES_ID.test(id)) return Promise.resolve(null);
+  if (!LESSEN.has(id)) LESSEN.set(id, json(S.app, `lessen/${id}.json`).then((l) => (geldigeLes(l, id) ? l : null)).catch(() => null));
+  return LESSEN.get(id);
+}
+const NAV = { huidig: 'mij', vorige: 'mij', les: null, geduwd: false };
+function openLes(id, datum) {
+  if (!['lesdetail', 'feedback'].includes(NAV.huidig)) NAV.vorige = NAV.huidig;
+  history.pushState({ dl: 1 }, '', `${location.pathname}${location.search}#les/${encodeURIComponent(id)}`); NAV.geduwd = true;
+  toonLesDetail(id, datum);
+}
+async function toonLesDetail(id, datum) {
+  NAV.huidig = 'lesdetail'; NAV.les = id; toonView('lesdetail'); window.scrollTo({ top: 0 });
+  $('ld-kop').innerHTML = '<p class="sub">Les laden…</p>'; $('ld-inhoud').innerHTML = ''; $('ld-knoppen').innerHTML = knop('terug', '← Terug', 'zwart');
+  const les = await haalLes(id);
+  if (NAV.huidig !== 'lesdetail' || NAV.les !== id) return;
+  if (!les) { $('ld-kop').innerHTML = '<h2>Les niet gevonden</h2>'; $('ld-inhoud').innerHTML = '<p>Deze les staat (nog) niet in de kennisbank.</p>'; return; }
+  const mijn = (S.leden[S.mij]?.logs || []).filter((l) => l.id === id), log = mijn.find((l) => l.datum === datum) || mijn[0];
+  const o = les.opdracht, juist = Number(o.juist);
+  const label = { meerkeuze: 'Vraag', open: 'Denk na', 'zoek-op': 'Zoek het op', 'maak-met-claude': 'Maak het met Claude' }[o.soort];
+  $('ld-kop').innerHTML = `<div class="les-meta"><span class="pill">${esc(les.vakgebied || '')}${les.type ? ' · ' + esc(TYPE[les.type] || les.type) : ''}</span>${log ? `<span class="sub">Gedaan op ${esc(fmtDatum(log.datum))}</span>${chip(log.resultaat)}` : ''}</div><h2>${esc(les.titel)}</h2>`;
+  let h = (les.intro ? `<div class="zacht">${tekstHtml(les.intro)}</div>` : '') + lesLabel(label) + `<div class="vraag">${tekstHtml(o.vraag)}</div>`;
+  // Een les die je zelf nog niet had (bijv. vanuit een teamprofiel): antwoord en uitleg pas na een klik
+  const opties = (markeer) => `<div class="opties">${o.opties.map((t, i) => { const j = markeer && i === juist; return `<div class="optie stil${j ? ' juist' : ''}"><span aria-hidden="true">${j ? '✓' : '·'}</span><span>${esc(t)}${j ? ' <span class="sub">(juist)</span>' : ''}</span></div>`; }).join('')}</div>`;
+  const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + tekstHtml(les.toelichting) + lesLabel('Uitleg') + tekstHtml(les.uitleg) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron);
+  if (o.soort === 'meerkeuze') h += opties(!!log);
+  h += log ? uitleg : `<details class="spoiler"><summary>Toon antwoord en uitleg <span class="sub">(je hebt deze les zelf nog niet gehad)</span></summary>${uitleg}</details>`;
+  const dag = log?.datum.slice(0, 10), ook = dag ? (S.leden[S.mij]?.logs || []).filter((l) => l.datum.startsWith(dag) && l.id !== id) : [];
+  if (ook.length) h += lesLabel('Ook die dag') + ook.map((l) => `<p>${lesKnop(l.id, l.datum, titelVan(l))}</p>`).join('');
+  $('ld-inhoud').innerHTML = h;
+  $('ld-knoppen').innerHTML = knop('feedback-les', 'Feedback over deze les') + knop('terug', '← Terug', 'zwart');
+}
+function terugUitDetail() {
+  if (NAV.geduwd && history.state?.dl) { NAV.geduwd = false; history.back(); return; }
+  tab(magTab(NAV.vorige) ? NAV.vorige : standaardTab());
+}
+
+// ---------------------------------------------------------------- scorebord
+// Per lid per maand scorebord/<JJJJ-MM>/<lid>.json in de data-repo: ondertekend door het lid zelf, NIET versleuteld (het
+// hele team leest mee) en zonder naam (die komt uit het ondertekende organogram). Alleen aantal goed en reeks; nooit
+// skilllijst, vragen of antwoorden. Punten = goed + langste reeks in die maand. Wie zich verbergt, ziet het bord zelf ook niet.
+const SB_PAD = /^scorebord\/(\d{4}-(?:0[1-9]|1[0-2]))\/(lid-[0-9a-f]{6})\.json$/;
+const SB = { cache: new Map(), zichtbaar: true };
+const sbPad = (maand, id) => `scorebord/${maand}/${id}.json`;
+const sbPaden = () => (S.data.paden || []).filter((p) => SB_PAD.test(p));
+const telBaar = (x, max) => Number.isInteger(x) && x >= 0 && x <= max;
+const isWerkdag = (d) => d.getDay() !== 0 && d.getDay() !== 6;
+// Goed en langste reeks binnen één maand (zelfde weekendregel als reeks()); reeksAanEind = de reeks op de laatste dag
+function maandStand(logs, maand) {
+  const inM = logs.filter((l) => l.datum.startsWith(maand)), dagen = new Set(inM.map((l) => l.datum.slice(0, 10)));
+  const [j, m] = maand.split('-').map(Number), d = new Date(j, m - 1, 1, 12), tot = dagKey(nu());
+  let lang = 0, cur = 0;
+  while (d.getMonth() === m - 1 && dagKey(d) <= tot) {
+    if (dagen.has(dagKey(d))) { cur++; lang = Math.max(lang, cur); } else if (isWerkdag(d) && dagKey(d) !== tot) cur = 0;
+    d.setDate(d.getDate() + 1);
+  }
+  return { goed: inM.filter((l) => l.resultaat === 'goed').length, langsteReeks: lang, reeksAanEind: cur, laatsteDag: [...dagen].sort().pop() || null, lessen: inM.length };
+}
+// De opgeslagen huidige reeks is 0 als er sinds de laatste lesdag een werkdag zonder les was (tot en met gisteren)
+function actueleReeks(s) {
+  if (!s.laatsteDag) return 0;
+  const d = new Date(s.laatsteDag + 'T12:00:00'), vandaag = dagKey(nu());
+  for (d.setDate(d.getDate() + 1); dagKey(d) < vandaag; d.setDate(d.getDate() + 1)) if (isWerkdag(d)) return 0;
+  return s.huidigeReeks;
+}
+async function leesScore(pad) {
+  if (SB.cache.has(pad)) return SB.cache.get(pad);
+  const [, maand, id] = SB_PAD.exec(pad) || []; let uit = null;
+  try {
+    const env = maand ? await json(S.data, pad) : null;
+    if (env) {
+      let s = null;
+      if (env.v === 2 && env.door === id && typeof env.inhoud === 'string') {
+        for (const pub of await sleutelsVan(id)) if (await K.verifieer(pub, `scorebord|${maand}|${id}`, id, env.inhoud, env.sig)) { s = JSON.parse(env.inhoud); break; }
+      }
+      if (s?.v === 1 && s.maand === maand && s.zichtbaar === false) uit = { id, maand, zichtbaar: false };
+      else if (s?.v === 1 && s.maand === maand && s.zichtbaar === true && telBaar(s.goed, 5000) && telBaar(s.langsteReeks, 31) && telBaar(s.huidigeReeks, 3650) && (s.laatsteDag === null || /^\d{4}-\d{2}-\d{2}$/.test(s.laatsteDag)))
+        uit = { id, maand, zichtbaar: true, goed: s.goed, langsteReeks: s.langsteReeks, huidigeReeks: s.huidigeReeks, laatsteDag: s.laatsteDag };
+      else S.ongeldig++;
+    }
+  } catch { S.ongeldig++; }
+  SB.cache.set(pad, uit); return uit;
+}
+// Wie zich verborg: per lid telt het nieuwste GELDIGE bestand (maanden na deze maand tellen niet mee). Bij verbergen
+// overschrijft het lid al zijn maanden, dus een verwijderd of vervalst bestand maakt iemand niet zichtbaar.
+async function sbVerborgen() {
+  const nuM = dagKey(nu()).slice(0, 7), per = new Map();
+  for (const p of sbPaden()) { const [, m, id] = SB_PAD.exec(p); if (m > nuM) continue; if (!per.has(id)) per.set(id, []); per.get(id).push(m); }
+  const uit = new Set();
+  await Promise.all([...per].map(async ([id, ms]) => {
+    for (const m of ms.sort().reverse()) { const s = await leesScore(sbPad(m, id)); if (s) { if (!s.zichtbaar) uit.add(id); return; } }
+  }));
+  return uit;
+}
+async function schrijfOndertekend(pad, context, obj) {
+  const inhoud = JSON.stringify(obj);
+  const b = K.tekst.naarBytes(JSON.stringify({ v: 2, door: S.mij, inhoud, sig: await K.onderteken(S.teken, context, S.mij, inhoud) }));
+  for (let poging = 1; poging <= 4; poging++) {
+    try { await S.data.schrijf(pad, b); return; }
+    catch (e) { if (e.message !== 'conflict') throw e; await S.data.ververs(pad); await new Promise((r) => setTimeout(r, 400 * poging)); }
+  }
+  throw new Error('Opslaan lukt niet: het bestand werd steeds tegelijk gewijzigd.');
+}
+// Eigen stand bijwerken voor deze en (als daar lessen in zaten) de vorige maand; alleen schrijven als er iets veranderde.
+// Na het aan- of uitzetten (alleMaanden): elke maand met een eigen bestand of lessen, zodat verbergen nergens cijfers laat staan.
+async function werkScorebordBij(alleMaanden = false) {
+  const ik = S.leden[S.mij]; if (!ik?.sl || !S.teken || !magLessen()) return;
+  const nuM = dagKey(nu()).slice(0, 7), v = nu(); v.setDate(1); v.setMonth(v.getMonth() - 1);
+  const maanden = alleMaanden
+    ? [...new Set([...sbPaden().map((p) => SB_PAD.exec(p)).filter((m) => m[2] === S.mij).map((m) => m[1]), ...ik.logs.map((l) => l.datum.slice(0, 7)), nuM])].filter((m) => m <= nuM).sort()
+    : [dagKey(v).slice(0, 7), nuM];
+  for (const maand of maanden) {
+    const pad = sbPad(maand, S.mij), st = maandStand(ik.logs, maand), bestaat = (S.data.paden || []).includes(pad);
+    if (maand !== nuM && !st.lessen && !bestaat) continue;
+    if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(maand)) continue;
+    const obj = SB.zichtbaar
+      ? { v: 1, maand, zichtbaar: true, goed: st.goed, langsteReeks: st.langsteReeks, huidigeReeks: maand === nuM ? reeks(ik.logs) : st.reeksAanEind, laatsteDag: st.laatsteDag }
+      : { v: 1, maand, zichtbaar: false };
+    const oud = bestaat ? await leesScore(pad) : null;
+    if (oud && ['zichtbaar', 'goed', 'langsteReeks', 'huidigeReeks', 'laatsteDag'].every((k) => oud[k] === obj[k])) continue;
+    await schrijfOndertekend(pad, `scorebord|${maand}|${S.mij}`, { ...obj, bijgewerkt: lokaleTijd() });
+    SB.cache.set(pad, { id: S.mij, ...obj });
+  }
+}
+async function toonScorebord() {
+  const nuM = dagKey(nu()).slice(0, 7), sel = $('sb-keuze');
+  const maanden = [...new Set([nuM, ...sbPaden().map((p) => SB_PAD.exec(p)[1])])].sort().reverse();
+  const opties = [...maanden.map((m) => [`m:${m}`, `${MAANDLANG[+m.slice(5) - 1]} ${m.slice(0, 4)}`]), ...[...new Set(maanden.map((m) => m.slice(0, 4)))].map((j) => [`j:${j}`, `Heel ${j}`])];
+  const gekozen = opties.some(([w]) => w === sel.value) ? sel.value : `m:${nuM}`;
+  sel.innerHTML = opties.map(([w, t]) => `<option value="${esc(w)}"${w === gekozen ? ' selected' : ''}>${esc(t)}</option>`).join('');
+  const [soort, w] = gekozen.split(':'), ms = soort === 'm' ? [w] : maanden.filter((m) => m.startsWith(w)), huidig = soort === 'm' && w === nuM;
+  $('sb-tabel').innerHTML = '<tbody><tr><td class="sub">Laden…</td></tr></tbody>';
+  const [standen, verborgen] = await Promise.all([Promise.all(sbPaden().filter((p) => ms.includes(SB_PAD.exec(p)[1])).map(leesScore)), sbVerborgen()]);
+  if (sel.value !== gekozen) return;
+  const per = new Map();
+  for (const s of standen) {
+    if (!s?.zichtbaar || verborgen.has(s.id) || !S.org.leden[s.id]) continue;
+    const t = per.get(s.id) || { id: s.id, goed: 0, punten: 0, reeks: 0, nu: 0 };
+    t.goed += s.goed; t.punten += s.goed + s.langsteReeks; t.reeks = Math.max(t.reeks, s.langsteReeks); if (s.maand === nuM) t.nu = actueleReeks(s);
+    per.set(s.id, t);
+  }
+  const rij = [...per.values()].sort((a, b) => b.punten - a.punten || b.goed - a.goed || String(S.org.leden[a.id].naam).localeCompare(String(S.org.leden[b.id].naam)));
+  let plek = 0;
+  $('sb-tabel').innerHTML = rij.length ? `<thead><tr><th class="r">#</th><th>Naam</th><th class="r">Goed</th><th class="r">Langste reeks</th>${huidig ? '<th class="r">Reeks nu</th>' : ''}<th class="r">Punten</th></tr></thead><tbody>${rij.map((t, i) => {
+    if (i === 0 || t.punten !== rij[i - 1].punten || t.goed !== rij[i - 1].goed) plek = i + 1;
+    return `<tr${t.id === S.mij ? ' class="ik"' : ''}><td class="r num">${plek}</td><td>${esc(S.org.leden[t.id].naam || t.id)}${t.id === S.mij ? ' <span class="sub">(jij)</span>' : ''}</td><td class="r num">${t.goed}</td><td class="r num">${t.reeks}</td>${huidig ? `<td class="r num">${t.nu}</td>` : ''}<td class="r num"><b>${t.punten}</b></td></tr>`;
+  }).join('')}</tbody>` : '<tbody><tr><td class="leeg">Nog niemand op het scorebord in deze periode.</td></tr></tbody>';
+  $('sb-sub').textContent = soort === 'j' ? `Jaarstand ${w}: punten en goed opgeteld over de maanden, langste reeks = de beste maand.` : huidig ? 'Deze maand loopt nog. Je stand wordt bijgewerkt zodra je een les afrondt.' : '';
+}
+// De keuze staat in je eigen profiel (versleuteld en door jou ondertekend), niet in de openbare scorebordbestanden
+async function zetZichtbaar(aan) {
+  $('sb-zichtbaar').disabled = true; $('sb-zichtbaar-status').textContent = 'Opslaan…';
+  try {
+    const ik = S.leden[S.mij];
+    await werkBij(S.mij, 'profiel', ik.sl, (h) => ({ ...(h && typeof h === 'object' ? h : { v: 1 }), scorebord: aan }));
+    ik.profiel = { ...(ik.profiel || {}), scorebord: aan }; SB.zichtbaar = aan;
+    await werkScorebordBij(true);
+    $('sb-zichtbaar-status').textContent = aan ? 'Je staat op het scorebord.' : 'Je staat niet meer op het scorebord en ziet het zelf ook niet. Eerder getoonde standen kunnen nog in de geschiedenis van de (privé) opslag staan.';
+    $('tab-scorebord').hidden = !magTab('scorebord');
+  } catch (e) { $('sb-zichtbaar').checked = !aan; SB.zichtbaar = !aan; $('sb-zichtbaar-status').textContent = 'Opslaan mislukt: ' + e.message; }
+  finally { $('sb-zichtbaar').disabled = false; }
+}
+
+// ---------------------------------------------------------------- feedback
+// Versleuteld naar de beheerder: feedback/<tijd>-<willekeurig>.json met een eigen DK, verpakt voor de beheersleutel
+// (kopieen is een map: later komt de generator erbij). Binnenin de bekende envelop, ondertekend door het lid.
+// De buitenkant verraadt niets (geen naam, geen soort); alleen de beheerder kan lezen wie wat schreef.
+const FB_SOORTEN = ['bug', 'fout', 'toevoeging', 'goed'];
+let fbTerug = null;
+function openFeedback(lesId) {
+  const terugNaar = NAV.huidig === 'lesdetail' ? { les: NAV.les } : { tab: NAV.huidig === 'feedback' ? NAV.vorige : NAV.huidig };
+  if (NAV.huidig !== 'feedback') fbTerug = terugNaar;
+  const gehad = new Map(); for (const l of S.leden[S.mij]?.logs || []) if (!gehad.has(l.id)) gehad.set(l.id, l);
+  $('fb-les').innerHTML = '<option value="">Geen specifieke les</option>' + [...gehad.values()].map((l) => `<option value="${esc(l.id)}">${esc(`${fmtDatum(l.datum)}: ${titelVan(l)}`)}</option>`).join('');
+  if (lesId && !gehad.has(lesId) && LES_ID.test(lesId)) $('fb-les').insertAdjacentHTML('beforeend', `<option value="${esc(lesId)}">${esc(S.lessen[lesId]?.titel || lesId)}</option>`);
+  $('fb-les').value = lesId && LES_ID.test(lesId) ? lesId : '';
+  $('fb-fout').textContent = ''; $('fb-status').textContent = '';
+  if (NAV.huidig !== 'lesdetail' && NAV.huidig !== 'feedback') NAV.vorige = NAV.huidig;
+  NAV.huidig = 'feedback'; toonView('feedback'); history.replaceState(null, '', `${location.pathname}${location.search}#feedback`);
+  window.scrollTo({ top: 0 });
+}
+function sluitFeedback() {
+  const t = fbTerug; fbTerug = null;
+  if (t?.les) { history.replaceState({ dl: 1 }, '', `${location.pathname}${location.search}#les/${encodeURIComponent(t.les)}`); toonLesDetail(t.les); }
+  else tab(t?.tab && magTab(t.tab) ? t.tab : standaardTab());
+}
+async function verstuurFeedback() {
+  const soort = document.querySelector('input[name="fb-soort"]:checked')?.value, tekst = $('fb-tekst').value.trim().slice(0, 2000), les = $('fb-les').value;
+  if (!FB_SOORTEN.includes(soort)) throw new Error('Kies wat voor feedback het is.');
+  if (tekst.length < 5) throw new Error('Schrijf kort wat je bedoelt.');
+  if (soort === 'fout' && !les) throw new Error('Kies over welke les het gaat.');
+  if (les && !LES_ID.test(les)) throw new Error('Onbekende les.');
+  const naam = `${lokaleTijd().replace(/[-:]/g, '')}-${[...K.willekeurig(4)].map((b) => b.toString(16).padStart(2, '0')).join('')}`, ctx = `feedback|${naam}`;
+  const inhoud = JSON.stringify({ v: 1, soort, ...(les ? { les } : {}), tekst, datum: lokaleTijd() });
+  const env = { v: 2, door: S.mij, inhoud, sig: await K.onderteken(S.teken, ctx, S.mij, inhoud) };
+  const dk = K.willekeurig(32), sl = await K.sleutelsUitDk(dk);
+  const bestand = { v: 1, kopieen: { beheer: K.b64u.enc(await K.verpak(S.vertrouwd, dk)) }, blob: K.b64u.enc(await K.versleutel(sl, ctx, vulOp(K.tekst.naarBytes(JSON.stringify(env))))) };
+  await S.data.schrijf(`feedback/${naam}.json`, K.tekst.naarBytes(JSON.stringify(bestand)));
+  $('fb-form').reset();
+  $('fb-status').textContent = 'Bedankt! Je feedback is versleuteld verstuurd naar de beheerder.';
 }
 
 // ---------------------------------------------------------------- versleuteld schrijven
@@ -423,7 +749,7 @@ async function schrijfEnc(id, soort, sl, obj, door, teken) {
   const env = { v: 2, door, inhoud, sig: await K.onderteken(teken, `${id}|${soort}`, door, inhoud) };
   await S.data.schrijf(`data/${id}/${soort}.enc`, await K.versleutel(sl, `${id}|${soort}`, vulOp(K.tekst.naarBytes(JSON.stringify(env)))));
 }
-const lokaleTijd = (d = new Date()) => `${dagKey(d)}T${[d.getHours(), d.getMinutes(), d.getSeconds()].map((x) => String(x).padStart(2, '0')).join(':')}`;
+const lokaleTijd = (d = nu()) => `${dagKey(d)}T${[d.getHours(), d.getMinutes(), d.getSeconds()].map((x) => String(x).padStart(2, '0')).join(':')}`;
 
 // ---------------------------------------------------------------- aanmelden (#welkom)
 // Alles gebeurt in deze browser: sleutelpaar, code van zes woorden, kluis, datasleutel, versleuteld profiel en
@@ -494,7 +820,7 @@ async function welkomMaak() {
   } else {
     const dk = K.willekeurig(32), sl = await K.sleutelsUitDk(dk), teken = await K.tekenSleutel(kp.prive);
     const lessen = W.leren === 'verplicht' || $('w-lessen').checked;
-    await schrijfEnc(W.id, 'profiel', sl, { v: 1, naam, sinds: dagKey(new Date()), lessen }, W.id, teken);
+    await schrijfEnc(W.id, 'profiel', sl, { v: 1, naam, sinds: dagKey(nu()), lessen }, W.id, teken);
     if (W.matrix) await schrijfEnc(W.id, 'matrix', sl, W.matrix, W.id, teken);
     aanvraag.toegang = { [W.id]: K.b64u.enc(await K.verpak(kp.publiek, dk)), generator: K.b64u.enc(await K.verpak(S.vertrouwd, dk)) };
   }
@@ -548,14 +874,15 @@ function geldigeLes(l, id) {
 }
 async function kiesLes() {
   const ik = S.leden[S.mij];
-  if (ik.logs.some((l) => l.datum.startsWith(dagKey(new Date())))) return { klaar: true };
+  if (ik.logs.some((l) => l.datum.startsWith(dagKey(nu())))) return { klaar: true };
+  if (ronde(ik).teLaat) return { geblokkeerd: true };
   const gedaan = new Set(ik.logs.map((l) => l.id));
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
   const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen)];
   for (const id of kandidaten) {
-    if (!id || gedaan.has(id) || !/^[0-9a-z][0-9a-z-]{0,80}$/.test(id)) continue;
-    const les = await json(S.app, `lessen/${id}.json`).catch(() => null);
-    if (geldigeLes(les, id)) return { les };
+    if (!id || gedaan.has(id) || !LES_ID.test(id)) continue;
+    const les = await haalLes(id);
+    if (les) return { les };
   }
   return { leeg: true };
 }
@@ -564,10 +891,17 @@ function toonLesStatus() {
   const ik = S.leden[S.mij], rk = reeks(ik.logs);
   const reeksTekst = `Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'} · ${ik.logs.length} ${ik.logs.length === 1 ? 'les' : 'lessen'} afgerond`;
   if (L.status?.les) return startLes(L.status.les);
+  if (L.status?.geblokkeerd) {
+    const r = ronde(ik);
+    $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div><h2>Eerst je skilllijst bijwerken</h2>`;
+    $('les-inhoud').innerHTML = `<p>De halfjaarlijkse check had vóór ${esc(r.tekst)} gedaan moeten zijn. Geef in een paar minuten per vaardigheid aan hoe je er nu voor staat; daarna staat je les meteen klaar.</p>`;
+    $('les-knoppen').innerHTML = knop('naar-skilllijst', 'Skilllijst bijwerken', 'zwart');
+    $('snelkoppeling').hidden = true; return;
+  }
   $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div>
     <h2>${L.status?.klaar ? 'Je les van vandaag is klaar' : 'Er staat nu geen nieuwe les klaar'}</h2>`;
   $('les-inhoud').innerHTML = `<p>${L.status?.klaar ? 'Goed bezig. Morgen staat er een nieuwe les voor je klaar.' : 'Je hebt alle beschikbare lessen gedaan. De generator vult ze aan; kijk morgen weer.'}</p>`;
-  $('les-knoppen').innerHTML = knop('naar-mij', 'Bekijk je voortgang', 'zwart');
+  $('les-knoppen').innerHTML = knop('naar-mij', 'Bekijk je voortgang', 'zwart') + (L.status?.klaar && L.les ? knop('feedback-les', 'Feedback over deze les') : '');
   $('snelkoppeling').hidden = false;
 }
 function startLes(les) {
@@ -617,7 +951,7 @@ function lesAfronding() {
     h += lesLabel('Hoe ging het?') + `<div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
   }
   $('les-inhoud').innerHTML = h;
-  $('les-knoppen').innerHTML = knop('afronden', 'Afronden', 'zwart');
+  $('les-knoppen').innerHTML = knop('afronden', 'Afronden', 'zwart') + knop('feedback-les', 'Feedback over deze les');
   $('les-knoppen').querySelector('button').disabled = o.soort !== 'meerkeuze';
   $('les-inhoud').scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
@@ -649,9 +983,10 @@ async function lesOpslaan() {
     });
   }
   const nieuw = await laadLid(S.mij); if (nieuw) S.leden[S.mij] = nieuw;
-  if (S.leden[S.mij].matrix) toonMij();
+  toonMij(); toonSkilllijst();
   toonKennisbank();
   L.status = { klaar: true }; toonLesStatus();
+  werkScorebordBij().catch(() => {});   // het scorebord loopt bij de volgende keer inloggen alsnog bij
 }
 
 // Snelkoppeling om DoubleLeren elke ochtend te openen (Windows: map Opstarten; Mac: Inlogonderdelen)
@@ -678,6 +1013,8 @@ $('vandaag').addEventListener('click', async (e) => {
   else if (actie === 'controleer') lesAfronding();
   else if (actie === 'indienen') { L.antwoord = $('les-antwoord').value.trim(); lesAfronding(); }
   else if (actie === 'naar-mij') tab('mij');
+  else if (actie === 'naar-skilllijst') { tab('skilllijst'); toonSkillFormulier(); }
+  else if (actie === 'feedback-les') openFeedback(L.les?.id);
   else if (actie === 'snel-win') { try { await navigator.clipboard.writeText(lesAdres()); b.textContent = 'Link gekopieerd'; } catch { b.textContent = lesAdres(); } }
   else if (actie === 'snel-mac') downloadSnelkoppeling();
   else if (actie === 'kopieer-popup') {
@@ -708,7 +1045,7 @@ function verzamelLes() {
   const v = (id) => $(id).value.trim();
   const soort = v('m-soort'), fouten = [];
   const les = {
-    id: `${dagKey(new Date()).replace(/-/g, '')}-${slug(v('m-titel'))}`, herkomst: 'team',
+    id: `${dagKey(nu()).replace(/-/g, '')}-${slug(v('m-titel'))}`, herkomst: 'team',
     type: v('m-type'), niveau: v('m-niveau'), vakgebied: v('m-vakgebied'), onderwerp: v('m-onderwerp'),
     matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'), volgorde: v('m-volgorde'),
     opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt')
@@ -759,10 +1096,29 @@ $('maak-knop').addEventListener('click', async () => {
 });
 
 // ---------------------------------------------------------------- navigatie en start
-function tab(naam) {
-  for (const t of ['vandaag', 'mij', 'team', 'kennisbank', 'maken']) $(t).hidden = t !== naam;
+const TABS = ['vandaag', 'mij', 'skilllijst', 'scorebord', 'team', 'kennisbank', 'maken'];
+const VIEWS = [...TABS, 'lesdetail', 'feedback'];
+function toonView(naam) {
+  for (const v of VIEWS) $(v).hidden = v !== naam;
   document.querySelectorAll('#tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === naam)));
+}
+function magTab(t) {
+  const ik = S.leden[S.mij];
+  return t === 'mij' || t === 'kennisbank' || (t === 'skilllijst' && !!ik?.sl) || (t === 'vandaag' && magLessen())
+    || (t === 'scorebord' && magLessen() && SB.zichtbaar) || (t === 'team' && teamLeden().length > 0) || (t === 'maken' && magLesMaken());
+}
+const standaardTab = () => (magLessen() && (L.status?.les || L.status?.geblokkeerd) ? 'vandaag' : !S.leden[S.mij]?.matrix && teamLeden().length ? 'team' : 'mij');
+function tab(naam) {
+  NAV.huidig = naam; NAV.geduwd = false; toonView(naam);
   if (location.hash !== '#' + naam) history.replaceState(null, '', location.pathname + location.search + '#' + naam);
+  if (naam === 'scorebord') toonScorebord().catch((e) => { $('sb-tabel').innerHTML = `<tbody><tr><td class="fout">Scorebord laden mislukt: ${esc(e.message)}</td></tr></tbody>`; });
+}
+// Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback of een tab
+function route() {
+  let h = ''; try { h = decodeURIComponent(location.hash.slice(1)); } catch { /* kapot adres: standaardtab */ }
+  if (h.startsWith('les/') && LES_ID.test(h.slice(4))) { if (NAV.huidig !== 'lesdetail' && NAV.huidig !== 'feedback') NAV.vorige = NAV.huidig; toonLesDetail(h.slice(4)); }
+  else if (h === 'feedback') openFeedback();
+  else tab(magTab(h) ? h : standaardTab());
 }
 async function naInloggen() {
   $('login').hidden = true; $('voet').textContent = 'Gegevens worden ontsleuteld en gecontroleerd…';
@@ -770,29 +1126,60 @@ async function naInloggen() {
   const geladen = await Promise.all(Object.keys(S.org.leden || {}).map((id) => laadLid(id).catch(() => null)));
   S.leden = Object.fromEntries(geladen.filter(Boolean).map((l) => [l.id, l]));
   const ik = S.leden[S.mij];
+  SB.zichtbaar = ik?.profiel?.scorebord !== false;
   $('wie').hidden = false; $('tabs').hidden = false;
   $('wie-naam').textContent = `Ingelogd als ${ik?.naam || S.mij}`;
-  $('tab-team').hidden = teamLeden().length === 0;
-  if (ik?.matrix) toonMij();
-  else $('kpis').innerHTML = '<div class="kpi" style="grid-column:1/-1"><span class="label">Geen eigen skilllijst</span><span class="toel">Je hebt (nog) geen skilllijst toegevoegd. Wil je je eigen voortgang zien of lessen volgen? Neem contact op met de beheerder.</span></div>';
+  $('feedback-knop').hidden = !S.teken;
+  $('tab-team').hidden = !magTab('team');
+  if (ik) { toonMij(); toonSkilllijst(); }
+  else $('kpis').innerHTML = '<div class="kpi" style="grid-column:1/-1"><span class="label">Geen eigen gegevens</span><span class="toel">Je account is nog niet volledig ingericht. Neem contact op met de beheerder.</span></div>';
   if (teamLeden().length) toonTeam();
   toonKennisbank();
   const lessen = magLessen();
-  $('tab-vandaag').hidden = !lessen;
-  $('tab-maken').hidden = !magLesMaken();
+  for (const t of ['vandaag', 'skilllijst', 'scorebord', 'maken']) $('tab-' + t).hidden = !magTab(t);
   if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
-  const voorkeur = location.hash.slice(1);
-  const open = lessen && L.status?.les;
-  tab(voorkeur === 'kennisbank' || (voorkeur === 'team' && teamLeden().length) || (voorkeur === 'vandaag' && lessen) || (voorkeur === 'maken' && magLesMaken()) || (voorkeur === 'mij') ? voorkeur
-    : open ? 'vandaag' : (!ik?.matrix && teamLeden().length ? 'team' : 'mij'));
+  toonRonde();
+  route();
   const n = Object.keys(S.leden).length;
   $('voet').textContent = `Gegevens ontsleuteld en gecontroleerd in je browser · ${n} ${n === 1 ? 'persoon' : 'personen'} zichtbaar voor jou${S.ongeldig ? ` · ${S.ongeldig} bestand(en) genegeerd: ongeldige handtekening` : ''}. Antwoorden zijn alleen zichtbaar voor de persoon zelf.`;
+  werkScorebordBij().catch(() => {});   // eigen stand bijwerken (bijv. na een les in de pop-up of op een andere laptop)
 }
 
 document.addEventListener('mouseover', (e) => { const t = e.target.closest('[data-tip]'), tip = $('tip'); if (!t) { tip.hidden = true; return; } tip.textContent = t.dataset.tip; tip.hidden = false; });
 document.addEventListener('mousemove', (e) => { const tip = $('tip'); if (tip.hidden) return; tip.style.left = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8) + 'px'; tip.style.top = e.clientY + 16 + 'px'; });
+// Overal: [data-les] opent de les, [data-naar] gaat naar een tab (met data-formulier: meteen het skilllijstformulier)
+document.addEventListener('click', (e) => {
+  if (!S.org) return;
+  const les = e.target.closest('[data-les]');
+  if (les) { e.preventDefault(); $('tip').hidden = true; openLes(les.dataset.les, les.dataset.datum); return; }
+  const naar = e.target.closest('[data-naar]');
+  if (naar && magTab(naar.dataset.naar)) { tab(naar.dataset.naar); if (naar.dataset.formulier && naar.dataset.naar === 'skilllijst') toonSkillFormulier(); }
+});
+window.addEventListener('popstate', () => { if (S.org) route(); });
 $('tabs').addEventListener('click', (e) => { const b = e.target.closest('button[data-tab]'); if (b) tab(b.dataset.tab); });
 $('heatmap').addEventListener('click', (e) => { const b = e.target.closest('button[data-lid]'); if (b) toonProfiel(b.dataset.lid); });
+$('activiteit').addEventListener('click', (e) => { const b = e.target.closest('button[data-lid]'); if (b) toonProfiel(b.dataset.lid); });
+$('ld-knoppen').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-actie]'); if (!b) return;
+  if (b.dataset.actie === 'terug') terugUitDetail(); else if (b.dataset.actie === 'feedback-les') openFeedback(NAV.les);
+});
+$('mx-bijwerken').addEventListener('click', toonSkillFormulier);
+$('mx-annuleer').addEventListener('click', () => { $('mx-form-paneel').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); });
+$('mx-form').addEventListener('submit', (e) => e.preventDefault());
+$('mx-opslaan').addEventListener('click', async () => {
+  const k = $('mx-opslaan'); k.disabled = true; k.textContent = 'Versleuteld opslaan…'; $('mx-fout').textContent = '';
+  try { await slaSkilllijstOp(); } catch (e) { $('mx-fout').textContent = e.message; } finally { k.disabled = false; k.textContent = 'Opslaan'; }
+});
+$('sb-keuze').addEventListener('change', () => toonScorebord().catch(() => {}));
+$('sb-zichtbaar').addEventListener('change', (e) => zetZichtbaar(e.target.checked));
+$('feedback-knop').addEventListener('click', () => openFeedback(NAV.huidig === 'lesdetail' ? NAV.les : undefined));
+$('fb-form').addEventListener('submit', (e) => e.preventDefault());
+$('fb-form').addEventListener('change', (e) => { if (e.target.name === 'fb-soort') $('fb-les-uitleg').textContent = e.target.value === 'fout' ? '(verplicht)' : '(optioneel)'; });
+$('fb-terug').addEventListener('click', sluitFeedback);
+$('fb-verstuur').addEventListener('click', async () => {
+  const k = $('fb-verstuur'); k.disabled = true; $('fb-fout').textContent = ''; $('fb-status').textContent = '';
+  try { await verstuurFeedback(); } catch (e) { $('fb-fout').textContent = e.message === 'conflict' ? 'Er ging iets mis bij het versturen. Probeer het opnieuw.' : e.message; } finally { k.disabled = false; }
+});
 $('expert').addEventListener('input', zoekExperts);
 $('kb-zoek').addEventListener('input', toonKennisbank);
 $('uitloggen').addEventListener('click', async () => { await vergeetSessie(); location.replace(location.pathname + location.search); });

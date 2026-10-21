@@ -88,10 +88,43 @@ details[open] .pijl { transform: rotate(45deg); }
 
 .kal-box { overflow-x: auto; }
 .kal { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 13px); gap: 3px; width: max-content; }
-.kal div { width: 13px; height: 13px; border-radius: 3px; background: var(--cool-50); }
-.kal div.gedaan { background: var(--smart-ink); }
-.kal div.vandaag { outline: 2px solid var(--ink); outline-offset: -1px; }
+.kal div, .kal button { display: block; width: 13px; height: 13px; border-radius: 3px; background: var(--cool-50); border: 0; padding: 0; }
+.kal .gedaan { background: var(--smart-ink); cursor: pointer; }
+.kal button.gedaan:hover { outline: 2px solid var(--ink); outline-offset: 0; }
+.kal .vandaag { outline: 2px solid var(--ink); outline-offset: -1px; }
 .kal div.buiten { visibility: hidden; }
+.leslink { border: 0; background: none; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: var(--smart); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.leslink:hover { text-decoration-color: var(--ink); }
+details.sig { border-top: 1px solid var(--cool); }
+details.sig:first-child { border-top: 0; }
+details.sig > summary { list-style: none; cursor: pointer; border-top: 0; }
+details.sig > summary::-webkit-details-marker { display: none; }
+details.sig > summary:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.sig-lessen { padding: 0 0 12px 12px; display: grid; gap: 6px; font-size: 14px; }
+.sig-les { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; }
+.banner { display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; background: var(--fun-50); border: 1.6px solid var(--fun); border-radius: var(--r-sm); padding: 12px 16px; font-size: 15px; }
+.banner.laat { background: var(--cosy-50); border-color: var(--fout); }
+.mx-rij { display: grid; grid-template-columns: 50px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--cool); font-size: 14px; }
+.mx-rij:first-child { border-top: 0; }
+.mx-rij .id { color: var(--muted); font-size: 12px; }
+.mx-rij .noot { display: block; color: var(--muted); font-size: 12.5px; }
+.mx-context { font-size: 12.5px; color: var(--muted); padding-top: 8px; }
+.mx-onderwerp { margin: 10px 0 14px; }
+.mx-onderwerp h4 { font-size: 15px; font-weight: 700; margin: 0 0 2px; padding-top: 8px; border-top: 1.6px solid var(--cool); }
+.score-veld { width: 46px; height: 38px; text-align: center; font: 700 18px var(--font); border: 1.6px solid var(--cool); border-radius: 8px; background: var(--white); }
+.score-veld:focus { outline: none; border-color: var(--ink); background: var(--fun-50); }
+.score-veld.mist { border-color: var(--fout); background: var(--cosy-50); }
+.mx-sticky { position: sticky; bottom: 0; background: var(--white); border-top: 1.6px solid var(--cool); padding: 10px 0 2px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.mx-sticky .les-knoppen { margin-top: 0; }
+.optie.stil { cursor: default; }
+#ld-inhoud .opties { margin-bottom: 14px; }
+details.spoiler { margin-top: 12px; }
+details.spoiler > summary { cursor: pointer; color: var(--smart-ink); font-weight: 600; margin-bottom: 10px; }
+.optie.juist { border-color: var(--goed); background: var(--fun-50); }
+.schakel { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+tr.ik td { background: var(--fun-50); }
+.sb-kies { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.sb-kies .veld { width: auto; padding: 8px 14px; font-size: 15px; }
 
 .les { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-top: 1px solid var(--cool); }
 .les:first-child { border-top: 0; padding-top: 0; }
@@ -164,7 +197,7 @@ kbd, code { font: 600 13px/1.4 ui-monospace, Consolas, monospace; background: va
 #tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--white); font-size: 13px; padding: 6px 10px; border-radius: 8px; max-width: 300px; z-index: 10; }
 footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
 @media (max-width: 900px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .twee { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 520px) { .wrap { padding-inline: 16px; } .kpi .waarde { font-size: 30px; } .les { grid-template-columns: minmax(0, 1fr); gap: 4px; } details.mx summary { grid-template-columns: minmax(0, 1fr) 70px 36px; } }
+@media (max-width: 520px) { .wrap { padding-inline: 16px; } .kpi .waarde { font-size: 30px; } .les { grid-template-columns: minmax(0, 1fr); gap: 4px; } details.mx summary { grid-template-columns: minmax(0, 1fr) 70px 36px; } .mx-rij { grid-template-columns: 34px minmax(0, 1fr) auto; } .sig-les { grid-template-columns: minmax(0, 1fr) auto; } .sig-les .datum-k { grid-column: 1 / -1; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -173,15 +206,18 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   <div class="wrap">
     <div class="merk">
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><h1>double<span>leren</span></h1><span class="pill" id="vak">SEO</span></div>
-      <div class="wie" id="wie" hidden><span id="wie-naam"></span><button class="knop" id="uitloggen" type="button">Uitloggen</button></div>
+      <div class="wie" id="wie" hidden><span id="wie-naam"></span><button class="knop fun" id="feedback-knop" type="button">Geef feedback</button><button class="knop" id="uitloggen" type="button">Uitloggen</button></div>
     </div>
     <div class="tabs" id="tabs" role="tablist" hidden>
       <button type="button" role="tab" data-tab="vandaag" aria-selected="false" id="tab-vandaag" hidden>Les van vandaag</button>
       <button type="button" role="tab" data-tab="mij" aria-selected="true">Mijn voortgang</button>
+      <button type="button" role="tab" data-tab="skilllijst" aria-selected="false" id="tab-skilllijst" hidden>Skilllijst</button>
+      <button type="button" role="tab" data-tab="scorebord" aria-selected="false" id="tab-scorebord" hidden>Scorebord</button>
       <button type="button" role="tab" data-tab="team" aria-selected="false" id="tab-team" hidden>Mijn team</button>
       <button type="button" role="tab" data-tab="kennisbank" aria-selected="false">Kennisbank</button>
       <button type="button" role="tab" data-tab="maken" aria-selected="false" id="tab-maken" hidden>Les toevoegen</button>
     </div>
+    <div class="banner" id="ronde-banner" role="status" hidden></div>
   </div>
 </header>
 
@@ -310,17 +346,70 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
     <div class="kpis" id="kpis"></div>
     <section class="twee">
       <div class="stapel">
-        <div class="paneel"><div class="paneel-kop"><div><h2>Wat gaat goed, wat minder</h2><p class="sub">Je eigen score naast je resultaten op de lessen die erover gingen.</p></div></div><div id="signalen"></div></div>
-        <div class="paneel">
-          <div class="paneel-kop"><div><h2>Skilllijst</h2><p class="sub" id="mx-sub"></p></div></div>
-          <div id="matrix"></div>
-          <div class="legenda"><span><i class="sw"></i>Laatste score (gemiddeld, 1–5)</span><span><i class="sw tick"></i>Eerste meting</span></div>
-        </div>
+        <div class="paneel"><div class="paneel-kop"><div><h2>Wat gaat goed, wat minder</h2><p class="sub">Je eigen score naast je resultaten op de lessen die erover gingen. Klik op een vaardigheid voor de lessen.</p></div></div><div id="signalen"></div></div>
+        <div class="paneel"><div class="paneel-kop"><div><h2>Activiteit</h2><p class="sub" id="kal-sub"></p></div></div><div class="kal-box"><div class="kal" id="kal"></div></div><p class="sub">Klik op een gekleurd vakje om de les van die dag terug te lezen.</p></div>
       </div>
       <div class="stapel">
-        <div class="paneel"><div class="paneel-kop"><div><h2>Activiteit</h2><p class="sub" id="kal-sub"></p></div></div><div class="kal-box"><div class="kal" id="kal"></div></div></div>
-        <div class="paneel"><div class="paneel-kop"><div><h2>Recent geleerd</h2><p class="sub">Met het kernpunt en je eigen antwoord (alleen voor jou).</p></div></div><div id="recent"></div></div>
+        <div class="paneel"><div class="paneel-kop"><div><h2>Recent geleerd</h2><p class="sub">Met het kernpunt en je eigen antwoord (alleen voor jou). Klik op een les voor de volledige uitleg.</p></div></div><div id="recent"></div></div>
+        <div class="paneel" id="sb-instelling" hidden><div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Op het scorebord ziet het team alleen je naam, je aantal goed en je reeks. Nooit je skilllijst, vragen of antwoorden.</p></div></div>
+          <label class="schakel"><input type="checkbox" id="sb-zichtbaar" checked> Toon mij op het scorebord</label>
+          <p class="sub" id="sb-zichtbaar-status" role="status"></p>
+        </div>
       </div>
+    </section>
+  </div>
+
+  <div id="skilllijst" hidden>
+    <section class="paneel" style="margin-top:0">
+      <div class="paneel-kop"><div><h2>Skilllijst</h2><p class="sub" id="mx-sub"></p></div><button class="knop zwart" type="button" id="mx-bijwerken">Skilllijst bijwerken</button></div>
+      <p class="sub" id="mx-ronde" style="margin:0 0 12px"></p>
+      <p class="sub" id="mx-klaar" role="status"></p>
+      <div id="matrix"></div>
+      <div class="legenda"><span><i class="sw"></i>Laatste score (gemiddeld, 1–5)</span><span><i class="sw tick"></i>Eerste meting</span></div>
+    </section>
+    <section class="paneel" id="mx-form-paneel" hidden>
+      <div class="paneel-kop"><div><h2>Skilllijst bijwerken</h2><p class="sub">Geef per vaardigheid je inschatting van nu, zonder naar vroeger te kijken: <b>1</b> = nieuw voor mij, <b>3</b> = ik kan het zelfstandig, <b>5</b> = ik kan het anderen leren. Typ een cijfer en je springt vanzelf naar de volgende; met de pijltjes ga je omhoog en omlaag.</p></div></div>
+      <form id="mx-form" autocomplete="off">
+        <div id="mx-velden"></div>
+        <div class="mx-sticky"><span class="sub num" id="mx-voortgang" role="status"></span><div class="les-knoppen"><button type="button" class="knop" id="mx-annuleer" style="background:var(--cool-50)">Annuleren</button><button type="button" class="knop zwart" id="mx-opslaan">Opslaan</button></div></div>
+        <p class="fout" id="mx-fout" role="alert"></p>
+      </form>
+    </section>
+  </div>
+
+  <div id="scorebord" hidden>
+    <section class="paneel" style="margin-top:0">
+      <div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Elke maand een nieuwe ronde. Punten = aantal goed + je langste reeks van die maand (weekenden onderbreken een reeks niet).</p></div>
+        <div class="sb-kies"><label for="sb-keuze" class="sub" style="margin:0">Periode</label><select id="sb-keuze" class="veld"></select></div></div>
+      <div class="tabel"><table id="sb-tabel"></table></div>
+      <p class="sub" id="sb-sub"></p>
+    </section>
+  </div>
+
+  <div id="lesdetail" hidden>
+    <section class="paneel les-kaart" style="margin-top:0">
+      <div id="ld-kop"></div>
+      <div id="ld-inhoud" class="les-tekst"></div>
+      <div id="ld-knoppen" class="les-knoppen"></div>
+    </section>
+  </div>
+
+  <div id="feedback" hidden>
+    <section class="paneel les-kaart" style="margin-top:0">
+      <div class="paneel-kop"><div><h2>Geef feedback</h2><p class="sub">Alleen de beheerder kan dit lezen, met je naam erbij, zodat hij kan navragen of laten weten dat het is opgelost. Het wordt versleuteld verstuurd.</p></div></div>
+      <form id="fb-form" class="stappen" autocomplete="off">
+        <div class="opties" role="radiogroup" aria-label="Soort feedback">
+          <label class="optie"><input type="radio" name="fb-soort" value="bug"><span><b>Bug</b><br><span class="sub">Iets werkt niet of ziet er vreemd uit</span></span></label>
+          <label class="optie"><input type="radio" name="fb-soort" value="fout"><span><b>Fout of onvolledig antwoord</b><br><span class="sub">Een les klopt niet of mist iets belangrijks</span></span></label>
+          <label class="optie"><input type="radio" name="fb-soort" value="toevoeging"><span><b>Toevoeging</b><br><span class="sub">Dit wil ik graag nog zien of leren</span></span></label>
+          <label class="optie"><input type="radio" name="fb-soort" value="goed"><span><b>Dit gaat goed</b><br><span class="sub">Wat werkt er goed en moet vooral zo blijven?</span></span></label>
+        </div>
+        <label class="veld-label">Over welke les? <span id="fb-les-uitleg">(optioneel)</span><select id="fb-les" class="veld"><option value="">Geen specifieke les</option></select></label>
+        <label class="veld-label">Je feedback<textarea id="fb-tekst" class="antwoord" rows="5" maxlength="2000" placeholder="Wat zag je, wat had je verwacht, of wat zou je graag nog zien?"></textarea></label>
+        <div class="les-knoppen"><button type="button" class="knop" id="fb-terug" style="background:var(--cool-50)">Terug</button><button type="button" class="knop zwart" id="fb-verstuur">Versturen</button></div>
+        <p class="fout" id="fb-fout" role="alert"></p>
+        <p class="sub" id="fb-status" role="status"></p>
+      </form>
     </section>
   </div>
 
@@ -339,13 +428,13 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
         <div id="experts" style="margin-top:10px"></div>
       </div>
     </section>
-    <section class="paneel"><div class="paneel-kop"><div><h2>Activiteit per persoon</h2></div></div><div class="tabel"><table id="activiteit"></table></div></section>
+    <section class="paneel"><div class="paneel-kop"><div><h2>Activiteit per persoon</h2><p class="sub">Klik op een naam voor het profiel. "Skilllijst" laat zien of iemand de halfjaarlijkse check (31 januari en 31 juli) heeft gedaan.</p></div></div><div class="tabel"><table id="activiteit"></table></div></section>
     <section class="paneel" id="profiel" hidden></section>
   </div>
 
   <div id="kennisbank" hidden>
     <section class="paneel" style="margin-top:0">
-      <div class="paneel-kop"><div><h2>Kennisbank</h2><p class="sub">Je eigen naslag: elke les die je hebt gedaan, met het kernpunt en de bron. Zoek op onderwerp, term of bron.</p></div></div>
+      <div class="paneel-kop"><div><h2>Kennisbank</h2><p class="sub">Je eigen naslag: elke les die je hebt gedaan, met het kernpunt en de bron. Zoek op onderwerp, term of bron, en klik op een les om de uitleg terug te lezen.</p></div></div>
       <label for="kb-zoek" class="sub" style="display:block;margin:0 0 6px">Zoeken</label>
       <input id="kb-zoek" class="veld" type="search" placeholder="bijv. canonical, INP, A/B-test" autocomplete="off">
       <p class="sub" id="kb-teller"></p>

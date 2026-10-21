@@ -36,7 +36,16 @@ foreach ($p in $codes.ids.PSObject.Properties) {
         $nieuw = @($regels[$mk])
         Update-DlVersleuteld $c.data $id "log-$mk" $s { param($h) [ordered]@{ v = 1; regels = @($nieuw) + @($(if ($h) { $h.regels })) } }.GetNewClosure() $id $c.prive $c.publiek | Out-Null
     }
+    # Scorebord (deze en vorige maand), zoals de pop-up en de website dat na een les doen
+    $alle = @(); foreach ($b in @(Get-DlOpslagLijst $c.data "data/$id" | Where-Object { $_ -match '^log-\d{4}-\d{2}\.enc$' })) { $r = Read-DlVersleuteld $c.data $id ($b -replace '\.enc$', '') $s $c.publiek; if ($r) { $alle += @($r.obj.regels) } }
+    Write-DlScorebord $c $alle
     Write-Host "  $naam`: $(@($regels.Values | ForEach-Object { $_ }).Count) lessen"
+}
+
+# Twee voorbeeldberichten via "Geef feedback" (versleuteld naar de beheersleutel)
+$V = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer
+foreach ($f in @(@('Delta', 'toevoeging', 'Graag meer lessen over GA4-rapportages voor klanten.'), @('Golf', 'goed', 'De korte lessen met een klantcase werken heel goed.'))) {
+    $c = Get-DlClient -Thuis "$T\$($f[0])"; if ($c) { New-DlFeedback $c.data $c.id $c.prive @{ beheer = $V } $f[1] $f[2] '' | Out-Null }
 }
 
 # Bestandslijsten (lokaal vervangen deze de GitHub-API)

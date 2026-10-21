@@ -47,6 +47,17 @@ for (const p of ps.paren) {
 }
 controleer(ok === ps.paren.length, `PowerShell-sleutels in WebCrypto geopend: ${ok}/${ps.paren.length} (waarvan ${nul} met voorloopnullen)`);
 
+// Feedback en scorebord van PowerShell (New-DlFeedback, scorebordhandtekening) lezen zoals de beheerder/website dat doet
+{
+  const f = JSON.parse(ps.feedback.bestand), ctx = `feedback|${ps.feedback.naam}`;
+  const fsl = await K.sleutelsUitDk(await K.pakUit(await K.priveSleutel(ps.paren[1].prive), K.b64u.dec(f.kopieen.beheer)));
+  const env = JSON.parse(K.tekst.uitBytes(await K.ontsleutel(fsl, ctx, K.b64u.dec(f.blob))).trim());
+  const i = JSON.parse(env.inhoud);
+  controleer(await K.verifieer(ps.paren[0].publiek, ctx, 'lid-7f3a00', env.inhoud, env.sig) && i.soort === 'toevoeging' && i.tekst === 'Meer over hreflang graag. Ë ✓ <b>', 'PowerShell-feedback ontsleutelt en klopt in WebCrypto');
+  controleer(await K.verifieer(ps.paren[0].publiek, 'scorebord|2026-10|lid-7f3a00', 'lid-7f3a00', ps.scorebord.inhoud, ps.scorebord.sig), 'PowerShell-scorebord: handtekening klopt in WebCrypto');
+  controleer(!(await K.verifieer(ps.paren[0].publiek, 'scorebord|2026-11|lid-7f3a00', 'lid-7f3a00', ps.scorebord.inhoud, ps.scorebord.sig)), 'Scorebord naar een andere maand verplaatst: ongeldig');
+}
+
 // Eigen gegevens voor de controle in PowerShell
 const paren = []; let metNullen = 0;
 while ((metNullen < 3 || paren.length < 8) && paren.length < 120) {
@@ -71,5 +82,18 @@ const uitvoer = {
   ak: hex((await K.akUitJwk(paren[0].prive)).enc)
 };
 uitvoer.controlewoorden = await K.controlewoorden(uitvoer.aanvraag, WOORDEN);
+// Feedback precies zoals verstuurFeedback() in docs/app.js hem maakt (versleuteld naar PowerShell-sleutel paren[1] als 'beheer')
+{
+  const vulOp = (b) => { const doel = Math.max(1024, Math.ceil(b.length / 1024) * 1024); if (doel === b.length) return b; const o = new Uint8Array(doel).fill(0x20); o.set(b); return o; };
+  const naam = `20261021T101500-${hex(K.willekeurig(4))}`, ctx = `feedback|${naam}`, door = 'lid-abcdef';
+  const tekst = 'Het antwoord klopt niet helemaal: "zie bron" <script>alert(1)</script> ✓';
+  const inhoud = JSON.stringify({ v: 1, soort: 'fout', les: '20261019-query-fan-out', tekst, datum: '2026-10-21T10:15:00' });
+  const env = { v: 2, door, inhoud, sig: await K.onderteken(await K.tekenSleutel(paren[0].prive), ctx, door, inhoud) };
+  const dk = K.willekeurig(32), fsl = await K.sleutelsUitDk(dk);
+  const bestand = { v: 1, kopieen: { beheer: K.b64u.enc(await K.verpak(ps.paren[1].publiek, dk)) }, blob: K.b64u.enc(await K.versleutel(fsl, ctx, vulOp(K.tekst.naarBytes(JSON.stringify(env))))) };
+  uitvoer.feedback = { naam, tekst, bestand: JSON.stringify(bestand) };
+  const sb = JSON.stringify({ v: 1, maand: '2026-10', zichtbaar: true, goed: 5, langsteReeks: 3, huidigeReeks: 1, laatsteDag: '2026-10-21', bijgewerkt: '2026-10-21T10:00:00' });
+  uitvoer.scorebord = JSON.stringify({ v: 2, door, inhoud: sb, sig: await K.onderteken(await K.tekenSleutel(paren[0].prive), `scorebord|2026-10|${door}`, door, sb) });
+}
 writeFileSync(join(map, 'node-vectoren.json'), JSON.stringify(uitvoer));
 process.exit(fouten ? 1 : 0);

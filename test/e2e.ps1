@@ -157,6 +157,54 @@ $rauwA = (Get-ChildItem $A -Recurse -File -Include *.json, *.ps1, *.js, *.md | F
 $sj = Get-Content "$A\sjablonen\organisatie-sjabloon.json" -Raw | ConvertFrom-Json
 Controleer (-not ($rauwA -match 'lid-[0-9a-f]{6}') -and -not @($sj.leden.PSObject.Properties).Count ) 'App-repo (openbaar): geen leden-id''s en geen namen'
 
+Write-Host '13. Scorebord, feedback en halfjaarlijkse check'
+$cf = Get-DlClient -Thuis "$T\Foxtrot"; $pubF = & $cf.publiek $ids.Foxtrot
+$sbPad = "$D\scorebord\$maand\$($ids.Foxtrot).json"
+$sb = Read-DlScore $dO $maand $ids.Foxtrot $pubF
+Controleer ($sb -and $sb.obj.zichtbaar -and $sb.obj.goed -eq 0 -and $sb.obj.langsteReeks -eq 1) "Pop-up schreef bij het afronden het scorebord (goed $($sb.obj.goed), langste reeks $($sb.obj.langsteReeks))"
+Controleer (-not ([IO.File]::ReadAllText($sbPad) -match 'Foxtrot|"naam"|antwoord|titel')) 'Scorebord bevat geen naam, lestitels of antwoorden'
+$voor = Get-DlSha1 ([IO.File]::ReadAllBytes($sbPad)); $logVoor = Get-DlSha1 ([IO.File]::ReadAllBytes("$D\data\$($ids.Foxtrot)\log-$maand.enc"))
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Test -LesBestand "$bron\test\testles.json" -AutoSluit 3 -Thuis "$T\Foxtrot"
+Controleer ((Get-DlSha1 ([IO.File]::ReadAllBytes($sbPad))) -eq $voor -and (Get-DlSha1 ([IO.File]::ReadAllBytes("$D\data\$($ids.Foxtrot)\log-$maand.enc"))) -eq $logVoor) 'Test-pop-up verandert scorebord en logboek niet'
+# Aanval: Golf zet een vals scorebord neer namens Foxtrot
+$cg = Get-DlClient -Thuis "$T\Golf"; $echt = [IO.File]::ReadAllText($sbPad)
+$valsIn = "{`"v`":1,`"maand`":`"$maand`",`"zichtbaar`":true,`"goed`":99,`"langsteReeks`":20,`"huidigeReeks`":20,`"laatsteDag`":null}"
+[IO.File]::WriteAllText($sbPad, ([ordered]@{ v = 2; door = $ids.Foxtrot; inhoud = $valsIn; sig = (New-DlHandtekening $cg.prive "scorebord|$maand|$($ids.Foxtrot)" $ids.Foxtrot $valsIn) } | ConvertTo-Json -Compress))
+$ok = $true; try { Read-DlScore $dO $maand $ids.Foxtrot $pubF | Out-Null } catch { $ok = $false }
+Controleer (-not $ok) 'Scorebord ondertekend door een ander dan het lid wordt geweigerd'
+# Verbergen (zoals de schakelaar op de website): de keuze staat in het eigen, versleutelde profiel; daarna houdt ook de
+# pop-up de cijfers weg, ook als een collega de openbare scorebordbestanden verwijdert
+[IO.File]::WriteAllText($sbPad, $echt)
+$sF = Get-DlEigenSleutels $cf
+Update-DlVersleuteld $cf.data $cf.id 'profiel' $sF { param($h) $o = [ordered]@{}; foreach ($p in $h.PSObject.Properties) { $o[$p.Name] = $p.Value }; $o.scorebord = $false; $o } $cf.id $cf.prive $cf.publiek | Out-Null
+Remove-Item "$D\scorebord" -Recurse -Force
+$logsF = @((Read-DlVersleuteld $cf.data $cf.id "log-$maand" $sF $cf.publiek).obj.regels)
+Write-DlScorebord $cf $logsF (Get-DlScorebordZichtbaar $cf $sF)
+$sb = Read-DlScore $dO $maand $ids.Foxtrot $pubF
+Controleer ((-not (Get-DlScorebordZichtbaar $cf $sF)) -and $sb.obj.zichtbaar -eq $false -and -not $sb.obj.PSObject.Properties['goed']) 'Verborgen blijft verborgen (keuze in het eigen profiel): geen cijfers in het bestand'
+Update-DlVersleuteld $cf.data $cf.id 'profiel' $sF { param($h) $o = [ordered]@{}; foreach ($p in $h.PSObject.Properties) { if ($p.Name -ne 'scorebord') { $o[$p.Name] = $p.Value } }; $o } $cf.id $cf.prive $cf.publiek | Out-Null
+[IO.File]::WriteAllText($sbPad, $echt)
+
+# Feedback: versleuteld naar de beheerder, met naam alleen voor de beheerder
+$cd = Get-DlClient -Thuis "$T\Delta"
+$fb1 = New-DlFeedback $dO $ids.Delta $cd.prive @{ beheer = $V } 'bug' 'De knop Afronden reageert niet op mijn laptop' ''
+Controleer (-not ([IO.File]::ReadAllText("$D\feedback\$fb1.json") -match 'Afronden|Delta|bug')) 'Feedbackbestand verraadt geen naam, soort of tekst'
+$fbUit1 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
+$fbUit2 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
+Controleer ($fbUit1 -match '1 nieuw' -and $fbUit1 -match 'Delta' -and $fbUit1 -match 'Afronden reageert niet' -and $fbUit2 -match 'niets nieuws') 'Beheerder ziet nieuwe feedback met naam, één keer'
+New-DlFeedback $dO $ids.Foxtrot $cg.prive @{ beheer = $V } 'goed' 'Vals namens Foxtrot' '' | Out-Null
+$fbUit3 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
+Controleer ($fbUit3 -match '1 overgeslagen' -and -not ($fbUit3 -match 'Vals namens')) 'Feedback met een valse handtekening wordt overgeslagen en gemeld'
+
+# Halfjaarlijkse check: na de deadline toont de pop-up geen les maar de weg naar de skilllijst, en telt niets mee
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde" -Opslaan -Datum '2027-02-03' -Thuis "$T\Echo"
+Controleer ((Test-Path "$Werk\snap-ronde\0-skilllijst.png") -and -not (Test-Path "$Werk\snap-ronde\2-opdracht.png") -and -not (Test-Path "$D\data\$($ids.Echo)\log-$maand.enc")) 'Na 31 januari zonder bijgewerkte skilllijst: geen les, niets opgeslagen'
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde2" -Datum '2027-01-15' -Thuis "$T\Echo"
+Controleer ((Test-Path "$Werk\snap-ronde2\2-opdracht.png") -and -not (Test-Path "$Werk\snap-ronde2\0-skilllijst.png")) 'Vóór de deadline: gewoon de les (de website toont een melding)'
+$rD = Get-DlRonde ([pscustomobject]@{ scores = [pscustomobject]@{ '1.1.1' = [pscustomobject]@{ '2027-01' = 3 } } }) '2026-10-19' ([datetime]'2027-02-03')
+$rN = Get-DlRonde $null '2026-12-01' ([datetime]'2027-02-03')
+Controleer ($rD.voldaan -and -not $rD.teLaat -and $rN.vrij -and -not $rN.teLaat) 'Bijgewerkt in januari of pas in december aangemeld: niet geblokkeerd'
+
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h
 $testcodes = @{}; foreach ($k in $res.Keys) { if ($res[$k].code) { $testcodes[$k] = $res[$k].code } }

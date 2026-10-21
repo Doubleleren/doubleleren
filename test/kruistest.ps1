@@ -50,6 +50,13 @@ $ps = [ordered]@{
     vorm = @((Test-DlSleutelVorm $paren[0].publiek), (Test-DlSleutelVorm ([ordered]@{ kty = 'RSA'; e = 'AQAB'; n = 'AA' + $paren[0].publiek.n })), (Test-DlSleutelVorm ([ordered]@{ kty = 'RSA'; e = 'Aw'; n = $paren[0].publiek.n })))
     paren = $paren
 }
+# Feedback (versleuteld naar de 'beheer'-sleutel = paren[1]) en een scorebordbestand, zoals de website ze maakt
+. (Join-Path $PSScriptRoot '..\app\lib\opslag.ps1'); . (Join-Path $PSScriptRoot '..\app\lib\lid.ps1')
+$fbMap = Join-Path $uit 'opslag'; Remove-Item $fbMap -Recurse -Force -ErrorAction SilentlyContinue; $fbO = New-DlOpslag -Map $fbMap
+$fbNaam = New-DlFeedback $fbO 'lid-7f3a00' $paren[0].prive @{ beheer = $paren[1].publiek } 'toevoeging' 'Meer over hreflang graag. Ë ✓ <b>' '' ([datetime]'2026-10-21T09:15:00')
+$ps.feedback = [ordered]@{ naam = $fbNaam; bestand = [IO.File]::ReadAllText("$fbMap\feedback\$fbNaam.json") }
+$sbInhoud = '{"v":1,"maand":"2026-10","zichtbaar":true,"goed":3,"langsteReeks":4,"huidigeReeks":2,"laatsteDag":"2026-10-20","bijgewerkt":"2026-10-21T09:00:00"}'
+$ps.scorebord = [ordered]@{ inhoud = $sbInhoud; sig = (New-DlHandtekening $paren[0].prive 'scorebord|2026-10|lid-7f3a00' 'lid-7f3a00' $sbInhoud) }
 [IO.File]::WriteAllText("$uit\ps-vectoren.json", ($ps | ConvertTo-Json -Depth 6), (New-Object Text.UTF8Encoding($false)))
 
 Write-Host "2. Node controleert (WebCrypto)"
@@ -87,5 +94,19 @@ try { Unlock-DlKluis 'lid-node' $nv.kluis ($nv.code + 'x') | Out-Null; Controlee
 $knoei = ConvertFrom-B64u $nv.blob; $knoei[30] = $knoei[30] -bxor 1
 try { Unprotect-Dl $nsl $nv.context $knoei | Out-Null; Controleer $false 'Aangepast bestand wordt geweigerd' } catch { Controleer $true 'Aangepast bestand wordt geweigerd' }
 try { Unprotect-Dl $nsl 'lid-andere|scores' (ConvertFrom-B64u $nv.blob) | Out-Null; Controleer $false 'Verwisseld lid wordt geweigerd' } catch { Controleer $true 'Verwisseld lid wordt geweigerd' }
+
+# Feedback en scorebord in het formaat van de website (docs/app.js), gelezen met de beheerfuncties
+New-Item -ItemType Directory "$fbMap\feedback", "$fbMap\scorebord\2026-10" -Force | Out-Null
+[IO.File]::WriteAllText("$fbMap\feedback\$($nv.feedback.naam).json", $nv.feedback.bestand)
+$nodePub = { param($id) if ($id -eq 'lid-abcdef') { $nv.paren[0].publiek } }.GetNewClosure()
+$f = Read-DlFeedback $fbO "$($nv.feedback.naam).json" 'beheer' $paren[1].prive $nodePub
+Controleer ($f.door -eq 'lid-abcdef' -and $f.soort -eq 'fout' -and $f.les -eq '20261019-query-fan-out' -and $f.tekst -eq $nv.feedback.tekst) 'Feedback van de website ontsleutelt en klopt in PowerShell'
+$ander = { param($id) $paren[2].publiek }.GetNewClosure()
+try { Read-DlFeedback $fbO "$($nv.feedback.naam).json" 'beheer' $paren[1].prive $ander | Out-Null; Controleer $false 'Feedback met handtekening van een ander wordt geweigerd' } catch { Controleer $true 'Feedback met handtekening van een ander wordt geweigerd' }
+try { Read-DlFeedback $fbO "$($nv.feedback.naam).json" 'generator' $paren[1].prive $nodePub | Out-Null; Controleer $false 'Zonder kopie voor deze kijker: geweigerd' } catch { Controleer $true 'Zonder kopie voor deze kijker: geweigerd' }
+[IO.File]::WriteAllText("$fbMap\scorebord\2026-10\lid-abcdef.json", $nv.scorebord)
+$sb = Read-DlScore $fbO '2026-10' 'lid-abcdef' $nv.paren[0].publiek
+Controleer ($sb.obj.goed -eq 5 -and $sb.obj.langsteReeks -eq 3) 'Scorebord van de website: handtekening klopt in PowerShell'
+try { Read-DlScore $fbO '2026-10' 'lid-abcdef' $paren[0].publiek | Out-Null; Controleer $false 'Scorebord met verkeerde sleutel wordt geweigerd' } catch { Controleer $true 'Scorebord met verkeerde sleutel wordt geweigerd' }
 
 if ($fouten) { Write-Host "`n$fouten fout(en)" -ForegroundColor Red; exit 1 } else { Write-Host "`nAlle kruistests geslaagd" -ForegroundColor Green }
