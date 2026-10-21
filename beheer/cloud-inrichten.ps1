@@ -56,4 +56,6 @@ if (-not $ZonderApiSleutel) {
     if ($LASTEXITCODE) { throw 'API-sleutel zetten mislukt.' }
 }
 
-Write-Host "`nKlaar. Proefrun starten:  gh workflow run generator.yml --repo $Repo -f proef=true" -ForegroundColor Green
+& $gh workflow enable generator.yml --repo $Repo 2>$null | Out-Null
+Write-Host "`nKlaar. De workflow staat aan (proefruns op werkdagen). Meteen een proefrun starten:" -ForegroundColor Green
+Write-Host "  gh workflow run generator.yml --repo $Repo -f proef=true"
