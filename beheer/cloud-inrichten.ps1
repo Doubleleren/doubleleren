@@ -18,6 +18,8 @@ $OutputEncoding = New-Object Text.UTF8Encoding($false)
 
 $g = Read-DlGeheim (Join-Path (Get-DlThuis) 'beheer\beheer.dpapi')
 if (-not $g -or -not $g.beheerPrive -or $g.beheerPrive.n -eq $g.generatorPrive.n) { throw 'Eerst beheer.ps1 -NieuweGeneratorsleutel: de beheersleutel mag nooit naar de cloud.' }
+& $gh auth status 2>$null | Out-Null
+if ($LASTEXITCODE) { throw "De GitHub CLI is in dit venster nog niet ingelogd. Draai eerst:  & '$gh' auth login --web --scopes repo,workflow  en daarna dit script opnieuw." }
 & $gh repo view $Repo --json name | Out-Null; if ($LASTEXITCODE) { throw "Repo $Repo niet gevonden of geen toegang." }
 
 function Zet-Secret([string]$Naam, [string]$Waarde) {
