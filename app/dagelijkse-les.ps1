@@ -28,8 +28,10 @@ function Schrijf-Tekst($pad, $tekst) { [IO.File]::WriteAllText($pad, $tekst, $Ut
 function Log-Fout($tekst) {
     try { [IO.File]::AppendAllText($FoutPad, ("{0}  {1}`r`n" -f (Get-Date).ToString('s'), $tekst), $Utf8) } catch {}
 }
-function Schrijf-Status($voltooid, $uDatum, $uTot) {
-    Schrijf-Tekst $StatusPad ([pscustomobject]@{ laatstVoltooid = $voltooid; uitstelDatum = $uDatum; uitstelTot = $uTot } | ConvertTo-Json)
+# Status van vandaag op deze laptop: hoeveel lessen gedaan en (per dagdeel) of er is uitgesteld
+function Schrijf-Status([int]$Aantal, [string]$UitstelSlot, [string]$UitstelTot) {
+    $script:aantal = $Aantal
+    Schrijf-Tekst $StatusPad ([pscustomobject]@{ datum = $vandaag; aantal = $Aantal; uitstelSlot = $UitstelSlot; uitstelTot = $UitstelTot } | ConvertTo-Json)
 }
 function Get-LogSoort([datetime]$D) { 'log-' + $D.ToString('yyyy-MM') }
 
@@ -67,13 +69,19 @@ function Test-WebAdres([string]$U) {
 try {
     New-Item -ItemType Directory $Thuis -Force | Out-Null
 
-    # --- Moet de pop-up vandaag (nog) verschijnen? (lokaal, zonder iets te ontsleutelen) ---
+    # --- Moet de pop-up nu (nog) verschijnen? (lokaal, zonder iets te ontsleutelen) ---
+    # Twee lessen per dag: één in de ochtend en één vanaf 12:30 (na de lunch). De reeks blijft per dag.
     $vandaag = (Get-Date).ToString('yyyy-MM-dd')
-    $status = if (Test-Path $StatusPad) { Lees-Json $StatusPad } else { [pscustomobject]@{ laatstVoltooid = ''; uitstelDatum = ''; uitstelTot = '' } }
-    $script:uitstelGebruikt = ($status.uitstelDatum -eq $vandaag)
+    $slot = if ((Get-Date).ToString('HH:mm') -ge '12:30') { 'middag' } else { 'ochtend' }
+    $maxNu = if ($slot -eq 'middag') { 2 } else { 1 }
+    $status = if (Test-Path $StatusPad) { Lees-Json $StatusPad } else { $null }
+    $script:aantal = if ($status -and $status.datum -eq $vandaag) { [int]$status.aantal } elseif ($status -and $status.laatstVoltooid -eq $vandaag) { 1 } else { 0 }
+    $uitstelSlot = if ($status -and $status.datum -eq $vandaag) { [string]$status.uitstelSlot } else { '' }
+    $uitstelTot = if ($status -and $status.datum -eq $vandaag) { [string]$status.uitstelTot } else { '' }
+    $script:uitstelGebruikt = ($uitstelSlot -eq $slot)
     if (-not $Test -and -not $Snapshot) {
-        if ($status.laatstVoltooid -eq $vandaag) { exit }
-        if ($script:uitstelGebruikt -and $status.uitstelTot -and (Get-Date) -lt [datetime]$status.uitstelTot) { exit }
+        if ($script:aantal -ge $maxNu) { exit }
+        if ($script:uitstelGebruikt -and $uitstelTot -and (Get-Date) -lt [datetime]$uitstelTot) { exit }
     }
 
     $nieuweMutex = $false
@@ -118,9 +126,11 @@ try {
             if (-not $Test -and -not $Snapshot) { exit }
         }
     }
-    if (-not $Test -and -not $Snapshot -and ($logs | Where-Object { "$($_.datum)".StartsWith($vandaag) })) {
-        Schrijf-Status $vandaag $status.uitstelDatum $status.uitstelTot; exit     # al gedaan op een andere laptop
+    $gedaanVandaag = @($logs | Where-Object { "$($_.datum)".StartsWith($vandaag) }).Count
+    if (-not $Test -and -not $Snapshot -and $gedaanVandaag -ge $maxNu) {
+        Schrijf-Status $gedaanVandaag $uitstelSlot $uitstelTot; exit     # al gedaan op een andere laptop of de website
     }
+    if ($gedaanVandaag -gt $script:aantal) { $script:aantal = $gedaanVandaag }
 
     # --- Halfjaarlijkse check: na 31 januari / 31 juli eerst de skilllijst bijwerken (op de website) ---
     $script:skilllijstEerst = $null
@@ -207,7 +217,7 @@ try {
     $typeNaam = @{ basis = 'Basis'; verdieping = 'Verdieping'; herhaling = 'Herhaling'; nieuws = 'Nieuws' }[[string]$les.type]
     if (-not $typeNaam) { $typeNaam = $les.type }
     $win.FindName('Badge').Text = ('{0}  ·  {1}' -f $les.vakgebied, $typeNaam)
-    $win.FindName('Reeks').Text = ('Reeks: {0} {1}  ·  deze maand {2} {3}' -f $reeks, $(if ($reeks -eq 1) { 'dag' } else { 'dagen' }), $dezeMaand, $(if ($dezeMaand -eq 1) { 'les' } else { 'lessen' }))
+    $win.FindName('Reeks').Text = ('Les {4} van 2 vandaag  ·  reeks: {0} {1}  ·  deze maand {2} {3}' -f $reeks, $(if ($reeks -eq 1) { 'dag' } else { 'dagen' }), $dezeMaand, $(if ($dezeMaand -eq 1) { 'les' } else { 'lessen' }), [Math]::Min(2, $script:aantal + 1))
     $win.FindName('Titel').Text = $les.titel
 
     function Kleur($hex) { (New-Object Windows.Media.BrushConverter).ConvertFromString($hex) }
@@ -270,7 +280,7 @@ try {
     }
     function Voeg-UitstelKnop {
         if ($script:vrijblijvend) {
-            $k = Nieuw-Knop 'Vandaag overslaan' { if (-not $Test) { Schrijf-Status $vandaag $status.uitstelDatum $status.uitstelTot }; $script:magSluiten = $true; $win.Close() }
+            $k = Nieuw-Knop 'Vandaag overslaan' { if (-not $Test) { Schrijf-Status 2 $uitstelSlot $uitstelTot }; $script:magSluiten = $true; $win.Close() }
             $k.Margin = Rand 0 0 8 0
             [void]$linksKnoppen.Children.Add($k)
             return
@@ -288,7 +298,7 @@ try {
     }
 
     function Stel-Uit {
-        if (-not $Test) { Schrijf-Status $vandaag ((Get-Date).AddHours(2).ToString('s')) }
+        if (-not $Test) { Schrijf-Status $script:aantal $slot ((Get-Date).AddHours(2).ToString('s')) }
         $script:magSluiten = $true; $win.Close()
     }
 
@@ -440,7 +450,7 @@ try {
                 }
                 antwoord = $(if ($o.soort -ne 'meerkeuze') { $script:antwoord } else { '' })
             }
-            Schrijf-Status $vandaag $status.uitstelDatum $status.uitstelTot
+            Schrijf-Status ($script:aantal + 1) $uitstelSlot $uitstelTot
         }
         $script:magSluiten = $true; $win.Close()
     }

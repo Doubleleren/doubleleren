@@ -30,7 +30,8 @@ const params = new URLSearchParams(location.search);
 const LOKAAL = ['localhost', '127.0.0.1'].includes(location.hostname) && ['app', 'data'].every((k) => /^\/[\w\-/.]+$/.test(params.get(k) || ''));
 // Alleen lokaal testen: ?vandaag=JJJJ-MM-DD doet alsof het die dag is (deadlines, reeks, scorebord)
 const NU = LOKAAL && /^\d{4}-\d{2}-\d{2}$/.test(params.get('vandaag') || '') ? params.get('vandaag').split('-').map(Number) : null;
-const nu = () => { const d = new Date(); if (NU) d.setFullYear(NU[0], NU[1] - 1, NU[2]); return d; };
+const TIJD = LOKAAL && /^\d{2}:\d{2}$/.test(params.get('tijd') || '') ? params.get('tijd').split(':').map(Number) : null;   // ?tijd=HH:MM
+const nu = () => { const d = new Date(); if (NU) d.setFullYear(NU[0], NU[1] - 1, NU[2]); if (TIJD) d.setHours(TIJD[0], TIJD[1]); return d; };
 
 // Lokaal schrijven gaat naar test/lokale-server.py (alleen localhost, alleen de testmap).
 function lokaleBron(basis) {
@@ -337,10 +338,14 @@ function toonMij() {
   for (const l of [...logs].reverse()) { const k = l.datum.slice(0, 10); if (!gedaan.has(k)) gedaan.set(k, []); gedaan.get(k).push(l); }
   const vandaag = nu(); vandaag.setHours(12, 0, 0, 0);
   const d = new Date(vandaag); d.setDate(d.getDate() - 7 * 25 - ((d.getDay() + 6) % 7));
+  // Begin bij je aanmelding (of je eerste les als die eerder was) en groei door tot de laatste 26 weken
+  const begin = [lid.sinds, logs.length ? logs[logs.length - 1].datum.slice(0, 10) : null].filter((x) => /^\d{4}-\d{2}-\d{2}/.test(String(x))).map((x) => String(x).slice(0, 10)).sort()[0] || null;
+  let vanafAanmelding = false;
+  if (begin) { const b = new Date(begin + 'T12:00:00'); b.setDate(b.getDate() - ((b.getDay() + 6) % 7)); if (b > d) { d.setTime(b.getTime()); vanafAanmelding = true; } }
   const cellen = []; let n26 = 0;
   while (d <= vandaag || (d.getDay() + 6) % 7 !== 0) {
     const k = dagKey(d), ls = gedaan.get(k), toekomst = d > vandaag, isVandaag = k === dagKey(vandaag);
-    if (toekomst) cellen.push('<div class="buiten"></div>');
+    if (toekomst || (vanafAanmelding && k < begin)) cellen.push('<div class="buiten"></div>');
     else if (ls) {
       n26++; const tip = `${fmtDatum(k)}: ${ls.map(titelVan).join(' · ')}`;
       cellen.push(`<button type="button" class="gedaan${isVandaag ? ' vandaag' : ''}" data-les="${esc(ls[0].id)}" data-datum="${esc(ls[0].datum)}" data-tip="${esc(tip)}" aria-label="${esc(tip)}"></button>`);
@@ -348,7 +353,10 @@ function toonMij() {
     d.setDate(d.getDate() + 1);
   }
   $('kal').innerHTML = cellen.join(''); $('kal').parentNode.scrollLeft = 1e6;
-  $('kal-sub').textContent = `${n26} ${n26 === 1 ? 'les' : 'lessen'} in de afgelopen 26 weken`;
+  const nLessen = logs.filter((l) => !vanafAanmelding || l.datum.slice(0, 10) >= begin).length;
+  $('kal-sub').textContent = vanafAanmelding
+    ? `${nLessen} ${nLessen === 1 ? 'les' : 'lessen'} op ${n26} ${n26 === 1 ? 'dag' : 'dagen'} sinds je begon op ${fmtDatum(begin)}`
+    : `${n26} ${n26 === 1 ? 'dag' : 'dagen'} met een les in de afgelopen 26 weken`;
 
   const antw = new Map((lid.antwoorden || []).map((a) => [String(a.id) + String(a.datum), a.antwoord]));
   $('recent').innerHTML = logs.length ? logs.slice(0, 3).map((l) => lesHtml(l, antw.get(l.id + l.datum))).join('') : '<p class="leeg">Nog geen lessen afgerond. Je eerste les verschijnt vanzelf op je laptop.</p>';
@@ -905,9 +913,14 @@ function geldigeLes(l, id) {
   if (o.soort === 'meerkeuze' && !(Array.isArray(o.opties) && o.opties.length === 4 && Number.isInteger(Number(o.juist)) && o.juist >= 0 && o.juist <= 3)) return false;
   return true;
 }
+const MIDDAG = '12:30';
 async function kiesLes() {
   const ik = S.leden[S.mij];
-  if (ik.logs.some((l) => l.datum.startsWith(dagKey(nu())))) return { klaar: true };
+  // Twee lessen per dag: één in de ochtend, de tweede vanaf 12:30 (zelfde regel als de pop-up). De reeks blijft per dag.
+  const n = nu(), vandaagGedaan = ik.logs.filter((l) => l.datum.startsWith(dagKey(n))).length;
+  const middag = `${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}` >= MIDDAG;
+  if (vandaagGedaan >= 2) return { klaar: true, aantal: vandaagGedaan };
+  if (vandaagGedaan === 1 && !middag) return { klaar: true, later: true, aantal: 1 };
   if (ronde(ik).teLaat) return { geblokkeerd: true };
   const gedaan = new Set(ik.logs.map((l) => l.id));
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
@@ -931,10 +944,15 @@ function toonLesStatus() {
     $('les-knoppen').innerHTML = knop('naar-skilllijst', 'Skilllijst bijwerken', 'zwart');
     $('snelkoppeling').hidden = true; return;
   }
-  $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div>
-    <h2>${L.status?.klaar ? 'Je les van vandaag is klaar' : 'Er staat nu geen nieuwe les klaar'}</h2>`;
-  $('les-inhoud').innerHTML = `<p>${L.status?.klaar ? 'Goed bezig. Morgen staat er een nieuwe les voor je klaar.' : 'Je hebt alle beschikbare lessen gedaan. De generator vult ze aan; kijk morgen weer.'}</p>`;
-  $('les-knoppen').innerHTML = knop('naar-mij', 'Bekijk je voortgang', 'zwart') + (L.status?.klaar && L.les ? knop('feedback-les', 'Feedback over deze les') : '');
+  const st = L.status || {};
+  const kop = st.volgende ? 'Les klaar: je tweede les staat klaar' : st.later ? 'Je ochtendles is klaar' : st.klaar ? 'Je lessen van vandaag zijn klaar' : 'Er staat nu geen nieuwe les klaar';
+  const tekst = st.volgende ? 'Goed bezig. Je kunt meteen door met je tweede les van vandaag.'
+    : st.later ? `Goed bezig. Om ${MIDDAG}, na de lunch, staat je tweede les van vandaag klaar.`
+    : st.klaar ? 'Goed bezig: twee lessen vandaag. Morgen staan er weer twee voor je klaar.'
+    : 'Je hebt alle beschikbare lessen gedaan. De generator vult ze aan; kijk morgen weer.';
+  $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div><h2>${esc(kop)}</h2>`;
+  $('les-inhoud').innerHTML = `<p>${esc(tekst)}</p>`;
+  $('les-knoppen').innerHTML = (st.volgende ? knop('volgende-les', 'Naar je tweede les →', 'zwart') : knop('naar-mij', 'Bekijk je voortgang', 'zwart')) + (st.klaar && L.les ? knop('feedback-les', 'Feedback over deze les') : '');
   $('snelkoppeling').hidden = false;
 }
 function startLes(les) {
@@ -1018,7 +1036,10 @@ async function lesOpslaan() {
   const nieuw = await laadLid(S.mij); if (nieuw) S.leden[S.mij] = nieuw;
   toonMij(); toonSkilllijst();
   toonKennisbank();
-  L.status = { klaar: true }; toonLesStatus();
+  // Volgt er vandaag nog een les (bijv. na 12:30 of als de ochtendles werd overgeslagen)? Dan meteen de knop ernaartoe.
+  const volgende = await kiesLes().catch(() => ({}));
+  L.status = volgende.les ? { klaar: true, volgende: volgende.les } : volgende.later ? { klaar: true, later: true } : { klaar: true };
+  toonLesStatus();
   werkScorebordBij().catch(() => {});   // het scorebord loopt bij de volgende keer inloggen alsnog bij
 }
 
@@ -1042,7 +1063,8 @@ $('vandaag').addEventListener('click', async (e) => {
   }
   const b = e.target.closest('button[data-actie]'); if (!b || b.disabled) return;
   const actie = b.dataset.actie;
-  if (actie === 'opdracht') lesOpdracht();
+  if (actie === 'volgende-les' && L.status?.volgende) { const les = L.status.volgende; L.status = { les }; startLes(les); }
+  else if (actie === 'opdracht') lesOpdracht();
   else if (actie === 'controleer') lesAfronding();
   else if (actie === 'indienen') { L.antwoord = $('les-antwoord').value.trim(); lesAfronding(); }
   else if (actie === 'naar-mij') tab('mij');
