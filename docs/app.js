@@ -50,6 +50,9 @@ function apiBron(eigenaar, repo, token) {
   let paden = null; const shas = new Map();
   const kop = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.raw+json', 'X-GitHub-Api-Version': '2022-11-28' };
   const url = (p) => `https://api.github.com/repos/${eigenaar}/${repo}/contents/${p.split('/').map(encodeURIComponent).join('/')}`;
+  // Elke leesactie een eigen adres: een bedrijfsproxy (bijv. Cisco Umbrella) negeert 'Vary: Accept' en gaf anders het ruwe
+  // bestand terug waar JSON werd verwacht, of een verouderde versie (oude sha → steeds 'conflict')
+  const vers = (p, ref = '') => `${url(p)}?${ref}t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`;
   // Neutrale commit onder één algemene naam: geen namen, pseudoniemen of lestitels in de geschiedenis
   const wie = { name: 'doubleleren', email: 'sync@doubleleren.invalid' };
   const verstuur = async (methode, p, body) => {
@@ -67,12 +70,12 @@ function apiBron(eigenaar, repo, token) {
     },
     get paden() { return paden; },
     async bytes(p) {
-      const r = await fetch(url(p), { headers: kop, cache: 'no-store' });
+      const r = await fetch(vers(p), { headers: kop, cache: 'no-store' });
       if (r.status === 404) return null; if (!r.ok) throw new Error(`${p}: ${r.status}`); return new Uint8Array(await r.arrayBuffer());
     },
     // Nieuwste versie en sha ophalen (na een conflict: een andere laptop schreef net)
     async ververs(p) {
-      const r = await fetch(url(p), { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+      const r = await fetch(vers(p, 'ref=main&'), { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (r.status === 404) { shas.delete(p); return null; }
       if (!r.ok) throw new Error(`${p}: ${r.status}`);
       const j = await r.json(); shas.set(p, j.sha);

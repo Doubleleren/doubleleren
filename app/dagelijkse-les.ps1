@@ -69,6 +69,13 @@ function Test-WebAdres([string]$U) {
 try {
     New-Item -ItemType Directory $Thuis -Force | Out-Null
 
+    # Zichzelf bijwerken (hoogstens één keer per dag), alleen vanuit de geïnstalleerde map, nooit bij tests.
+    # De nieuwe versie geldt vanaf de volgende start (de pop-up draait elk half uur).
+    if (-not $Test -and -not $Snapshot -and -not $LesBestand -and $PSScriptRoot -like (Join-Path $Thuis 'programma*')) {
+        try { . (Join-Path $PSScriptRoot 'lib\bijwerken.ps1'); if (Update-DlProgramma $Thuis) { Log-Fout 'Bijgewerkt naar de nieuwste versie (geldt vanaf de volgende start).' } }
+        catch { Log-Fout "Bijwerken overgeslagen: $($_.Exception.Message)" }
+    }
+
     # --- Moet de pop-up nu (nog) verschijnen? (lokaal, zonder iets te ontsleutelen) ---
     # Twee lessen per dag: één in de ochtend en één vanaf 12:30 (na de lunch). De reeks blijft per dag.
     $vandaag = (Get-Date).ToString('yyyy-MM-dd')

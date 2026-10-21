@@ -19,7 +19,7 @@ function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body) {
     $kop = @{ 'User-Agent' = 'DoubleLeren'; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' }
     if ($O.token) { $kop.Authorization = "Bearer $($O.token)" }
     $url = "https://api.github.com/repos/$($O.eigenaar)/$($O.repo)/contents/$Pad"
-    if ($Methode -eq 'GET') { $url += "?ref=$($O.tak)" }
+    if ($Methode -eq 'GET') { $url += "?ref=$($O.tak)&t=$([DateTime]::UtcNow.Ticks)" }   # eigen adres per keer: een bedrijfsproxy geeft anders een verouderde versie
     $p = @{ Uri = $url; Method = $Methode; Headers = $kop; UseBasicParsing = $true; TimeoutSec = 30 }
     if ($Body) { $p.Body = $script:DlUtf8.GetBytes(($Body | ConvertTo-Json -Depth 5 -Compress)); $p.ContentType = 'application/json' }
     try { Invoke-RestMethod @p }
