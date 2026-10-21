@@ -5,8 +5,8 @@
 #   DL_DEPLOY_DATA         nieuwe deploy key met schrijfrecht op doubleleren-data (wachtrijen, scorebord)
 #   ANTHROPIC_API_KEY      je API-sleutel; gh vraagt erom (plakken, niet zichtbaar)
 # Plus de variabelen DL_LIVE = false (eerst proefruns) en DL_MODEL.
-#   powershell -ExecutionPolicy Bypass -File beheer\cloud-inrichten.ps1 [-ZonderApiSleutel] [-Model claude-sonnet-5]
-param([string]$Repo = 'Doubleleren/doubleleren-generator', [switch]$ZonderApiSleutel, [string]$Model = 'claude-sonnet-5')
+#   powershell -ExecutionPolicy Bypass -File beheer\cloud-inrichten.ps1 [-ZonderApiSleutel] [-Model claude-opus-5-5]
+param([string]$Repo = 'Doubleleren/doubleleren-generator', [switch]$ZonderApiSleutel, [string]$Model = 'claude-opus-5-5')
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
 foreach ($l in 'krypto', 'geheim') { . (Join-Path $App "app\lib\$l.ps1") }
