@@ -2,14 +2,14 @@
 # Een voorstel staat in doubleleren-data/voorstellen/<les-id>.json als {"v":2,"door":<id>,"inhoud":<les als JSON-tekst>,"sig"}.
 # Alleen opgenomen met een geldige handtekening van een lesmaker en als de les de controle doorstaat; daarna verwijderd.
 # Draait automatisch aan het begin van generator-context.ps1. De nieuwe lessen gaan mee met generator-publiceer.ps1 -Push.
-param([string]$DataMap, [string]$Thuis)
+param([string]$DataMap, [string]$Thuis, [switch]$Proef)   # -Proef: niets verwijderen of versturen
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
 foreach ($l in 'krypto', 'opslag', 'lid', 'geheim') { . (Join-Path $App "app\lib\$l.ps1") }
 . (Join-Path $PSScriptRoot 'lescontrole.ps1'); . (Join-Path $PSScriptRoot 'kloon.ps1')
 $inst = Get-Content (Join-Path $App 'instellingen.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if (-not $Thuis) { $Thuis = Join-Path (Get-DlThuis) 'beheer' }
-$geheim = Read-DlGeheim (Join-Path $Thuis 'beheer.dpapi'); if (-not $geheim) { throw 'Geen beheergeheimen: draai beheer.ps1 -Init' }
+$geheim = Read-DlGeneratorGeheim $Thuis
 $kloon = $null
 if (-not $DataMap) { $kloon = Get-DlKloon $Thuis; if ($kloon) { Update-DlKloon $kloon; $DataMap = $kloon } }
 $d = if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }
@@ -37,8 +37,8 @@ foreach ($naam in @(Get-DlOpslagLijst $d 'voorstellen' | Where-Object { $_ -like
         [IO.File]::WriteAllText($doel, $env.inhoud, (New-Object Text.UTF8Encoding($false)))
         Write-Host "  les van het team opgenomen: $id"; $opgenomen++
     } catch { Write-Host "  voorstel $naam afgewezen: $($_.Exception.Message)"; $afgewezen++ }
-    Remove-DlOpslag $d "voorstellen/$naam" $r.sha
+    if (-not $Proef) { Remove-DlOpslag $d "voorstellen/$naam" $r.sha }
 }
-if ($kloon) { Push-DlKloon $kloon }
+if ($kloon -and -not $Proef) { Push-DlKloon $kloon }
 if ($opgenomen) { & (Join-Path $PSScriptRoot 'lessen-index.ps1') }
 if ($opgenomen -or $afgewezen) { Write-Host "Voorstellen: $opgenomen opgenomen, $afgewezen afgewezen." }

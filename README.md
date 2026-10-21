@@ -121,6 +121,7 @@ beheer\beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht
 beheer\beheer.ps1 -Controleer
 beheer\beheer.ps1 -NieuweGeneratorsleutel             # eenmalig: aparte generatorsleutel (hervatbaar; beheersleutel blijft gelijk)
 beheer\scorebord-bijwerken.ps1 -Push                  # ieders scorebordstand (draait ook elke ochtend met de generator)
+beheer\cloud-inrichten.ps1                            # secrets voor de cloud-generator (Doubleleren/doubleleren-generator)
 beheer\feedback.ps1 -Nieuw                            # nieuwe feedback (draait ook bij elke Claude-chat via een SessionStart-hook)
 beheer\feedback.ps1 -Lijst                            # alle feedback met status
 beheer\feedback.ps1 -Afhandelen <bestand>

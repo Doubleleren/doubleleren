@@ -1,7 +1,8 @@
 ﻿# Voor de lesgenerator: controleert nieuwe lessen, zet de wachtrijen uit wachtrijen.json versleuteld en ondertekend
 # klaar per deelnemer, werkt de lessenindex bij en ruimt de ontsleutelde context altijd op (ook bij een fout).
 #   wachtrijen.json:  { "lid-xxxxxx": ["les-id-1", "les-id-2", "les-id-3"], ... }   (les-id's moeten in lessen/ staan)
-param([string]$DataMap, [string]$Thuis, [string]$Map, [switch]$Push)
+#   -Proef: alles controleren en de wachtrijen versleutelen, maar niets naar de repo's schrijven (cloud-proefrun)
+param([string]$DataMap, [string]$Thuis, [string]$Map, [switch]$Push, [switch]$Proef)
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
 foreach ($l in 'krypto', 'opslag', 'lid', 'geheim') { . (Join-Path $App "app\lib\$l.ps1") }
@@ -10,7 +11,7 @@ $inst = Get-Content (Join-Path $App 'instellingen.json') -Raw -Encoding UTF8 | C
 if (-not $Thuis) { $Thuis = Join-Path (Get-DlThuis) 'beheer' }
 if (-not $Map) { $Map = Join-Path $Thuis 'generator' }
 try {
-    $geheim = Read-DlGeheim (Join-Path $Thuis 'beheer.dpapi'); if (-not $geheim) { throw 'Geen beheergeheimen: draai beheer.ps1 -Init' }
+    $geheim = Read-DlGeneratorGeheim $Thuis
     . (Join-Path $PSScriptRoot 'kloon.ps1')
     $kloon = $null
     if (-not $DataMap) { $kloon = Get-DlKloon $Thuis; if ($kloon) { Update-DlKloon $kloon; $DataMap = $kloon } }
@@ -38,9 +39,11 @@ try {
         $s = Get-DlSleutelsUitDk (Unprotect-DlRsa $geheim.generatorPrive (ConvertFrom-B64u $t.kopieen.generator))
         $nieuw = [ordered]@{ v = 1; bijgewerkt = (Get-Date).ToString('s'); lessen = $lijst }
         $b = Read-DlOpslag $d (Get-DlLidPad $id 'wachtrij')      # wordt volledig vervangen
+        if ($Proef) { Protect-Dl $s "$id|wachtrij" (ConvertTo-DlEnvelop $id 'wachtrij' $nieuw 'generator' $geheim.generatorPrive) | Out-Null; $script:proefTel++; continue }
         Write-DlVersleuteld $d $id 'wachtrij' $s $nieuw $(if ($b) { $b.sha }) 'generator' $geheim.generatorPrive | Out-Null
         Write-Host "  $id`: $($lijst.Count) les(sen) klaargezet"
     }
+    if ($Proef) { Write-Host "PROEF: $($script:proefTel) wachtrij(en) versleuteld en ondertekend, $(@(Get-ChildItem (Join-Path $App 'lessen') -Filter *.json).Count - 1) lessen gecontroleerd; niets verstuurd."; return }
     # 3. Scorebord van iedereen bijwerken (ook wie de website niet opende); een fout hier houdt de lessen niet tegen
     try { & (Join-Path $PSScriptRoot 'scorebord-bijwerken.ps1') -DataMap $DataMap -Thuis $Thuis } catch { Write-Host "  Scorebord bijwerken mislukt: $($_.Exception.Message)" }
     if ($kloon) { Push-DlKloon $kloon; Write-Host 'Wachtrijen en scorebord verstuurd naar de data-repo.' }

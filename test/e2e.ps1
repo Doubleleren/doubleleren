@@ -267,6 +267,25 @@ $fbUit = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedb
 Controleer ($fG.tekst -eq 'Na de omzetting' -and $fB.tekst -eq 'Na de omzetting' -and $fbUit -match 'Na de omzetting') 'Feedback leesbaar voor beheerder en generator'
 Controleer ($gh.beheerPrive.n -eq $V.n -and $gh.generatorPrive.n -eq $G.n -and -not $gh.generatorNieuw) 'Beheergeheimen: beheersleutel en generatorsleutel apart bewaard'
 
+Write-Host '15. Cloudmodus: generatorsleutel uit de omgeving, proefrun publiceert niets'
+$C = Join-Path $Werk 'cloud'; New-Item -ItemType Directory $C -Force | Out-Null      # geen beheer.dpapi: zoals op een GitHub-runner
+$env:DL_GENERATOR_SLEUTEL = ((Read-DlGeheim "$T\beheer\beheer.dpapi").generatorPrive | ConvertTo-Json -Compress)
+try {
+    New-Item -ItemType Directory "$D\voorstellen" -Force | Out-Null
+    [IO.File]::WriteAllText("$D\voorstellen\proef-test.json", '{"v":2,"door":"lid-000000","inhoud":"{}","sig":"x"}')
+    $wVoor = Get-DlSha1 ([IO.File]::ReadAllBytes("$D\data\$($ids.Delta)\wachtrij.enc"))
+    & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis $C -Proef | Out-Null
+    $ctxC = Get-Content "$C\generator\context.json" -Raw | ConvertFrom-Json
+    [IO.File]::WriteAllText("$C\generator\wachtrijen.json", (@{ $ids.Delta = @('20261019-query-fan-out') } | ConvertTo-Json))
+    $uitP = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -Thuis $C -Proef) -join ' '
+    Controleer (@($ctxC.leden.PSObject.Properties).Count -ge 8 -and $uitP -match 'PROEF: 1 wachtrij' -and (Get-DlSha1 ([IO.File]::ReadAllBytes("$D\data\$($ids.Delta)\wachtrij.enc"))) -eq $wVoor -and (Test-Path "$D\voorstellen\proef-test.json") -and -not (Test-Path "$C\generator\context.json")) 'Proefrun met de sleutel uit de omgeving: alles gecontroleerd, niets gewijzigd, context opgeruimd'
+    & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis $C | Out-Null
+    [IO.File]::WriteAllText("$C\generator\wachtrijen.json", (@{ $ids.Delta = @('20261019-query-fan-out') } | ConvertTo-Json))
+    & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -Thuis $C | Out-Null
+    $wD = Read-DlVersleuteld $cd.data $cd.id 'wachtrij' $sD $cd.publiek
+    Controleer ($wD.obj.lessen -contains '20261019-query-fan-out' -and -not (Test-Path "$D\voorstellen\proef-test.json") -and -not (Get-ChildItem $C -Recurse -Filter *.dpapi)) 'Echte run in cloudmodus: wachtrij geplaatst, voorstellen verwerkt, nergens een DPAPI-bestand nodig'
+} finally { Remove-Item Env:\DL_GENERATOR_SLEUTEL -ErrorAction SilentlyContinue }
+
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h
 $testcodes = @{}; foreach ($k in $res.Keys) { if ($res[$k].code) { $testcodes[$k] = $res[$k].code } }

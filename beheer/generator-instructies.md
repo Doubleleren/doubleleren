@@ -2,6 +2,8 @@
 
 Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: SEO-professionals die dagelijks met Claude werken. Elke les kost 2–5 minuten. Je werkt in de app-repo (de map waarin dit bestand onder `beheer\` staat). Persoonsgegevens zijn versleuteld; jij krijgt alleen een ontsleutelde **context zonder namen en zonder antwoorden**. Spreek de lezer in de lessen aan met "je".
 
+**In de cloud** (GitHub Actions, repo `doubleleren-generator`): de workflow doet stap 0 punt 1–2 en stap 4 punt 3 zelf. Je hebt dan geen shell en geen sleutels. De opdracht van de workflow (`opdracht.md`) geeft de paden van de context, de wachtrijen en de loting.
+
 ## Stap 0: Bijwerken en context ophalen
 1. `git pull --rebase` in de app-repo. (Organogram en sleutels haalt het contextscript zelf uit de privé data-repo, met controle van de handtekening.)
 2. `powershell -NoProfile -ExecutionPolicy Bypass -File beheer\generator-context.ps1`
