@@ -1,0 +1,23 @@
+{
+  "id": "test-pop-up",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Statuscodes",
+  "matrix": [],
+  "titel": "TESTLES: welke statuscode zegt 'deze pagina is weg'?",
+  "volgorde": "uitleg-eerst",
+  "intro": "Dit is een **testles** om de pop-up te proberen. Hij telt niet mee voor je voortgang en wordt nergens opgeslagen. Druk op Esc om hem op elk moment te sluiten.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Een klant heeft een productlijn definitief geschrapt en er komt geen vervanger. Welke statuscode laat het duidelijkst zien dat deze pagina's permanent weg zijn?",
+    "opties": ["302 Found", "410 Gone", "503 Service Unavailable", "200 OK met de tekst 'niet meer leverbaar'"],
+    "juist": 1,
+    "hint": "Eén van de vier is een tijdelijke status, één is een 'soft 404'."
+  },
+  "toelichting": "410 zegt expliciet dat de pagina bewust en blijvend is verwijderd. Google behandelt 404 en 410 grotendeels hetzelfde, maar 410 is het duidelijkste signaal. Een 200 met 'niet meer leverbaar' wordt al snel als soft 404 gezien.",
+  "uitleg": "Als pagina's verdwijnen, bepaalt de statuscode wat zoekmachines ermee doen.\n\n- **301**: permanent verplaatst; gebruik dit als er een echte vervanger is (signalen gaan mee).\n- **404 / 410**: niet gevonden of bewust verwijderd; de pagina valt na verloop van tijd uit de index.\n- **302 / 503**: tijdelijk; Google blijft terugkomen en houdt de oude pagina langer vast.\n\nRedirect dus alleen naar een pagina die echt hetzelfde beantwoordt. Alles naar de homepage sturen ziet Google als soft 404.",
+  "kernpunt": "Geen vervanger? Geef 404 of 410. Wel een echte vervanger? 301 naar die pagina.",
+  "toepassing": "Kijk in Search Console bij 'Pagina's' of er soft 404's staan die eigenlijk een 410 of een 301 naar een echte vervanger zouden moeten krijgen.",
+  "bron": { "titel": "Google: How HTTP status codes affect Google's crawlers", "url": "https://developers.google.com/search/docs/crawling-indexing/http-network-errors" }
+}
