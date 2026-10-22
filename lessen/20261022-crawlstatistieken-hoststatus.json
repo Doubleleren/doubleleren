@@ -1,0 +1,27 @@
+{
+  "id": "20261022-crawlstatistieken-hoststatus",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Het Crawlstatistieken-rapport in Search Console",
+  "matrix": [
+    "1.5.4",
+    "1.1.1"
+  ],
+  "titel": "Nieuwe producten pas na weken in Google: wat zeggen de crawlstatistieken?",
+  "intro": "Een webshop met 60.000 URL's ziet dat nieuwe producten pas na weken in Google verschijnen. In het rapport Pagina-indexering staan veel URL's als 'Ontdekt - momenteel niet geïndexeerd'. Je wilt weten hoe Googlebot de site de laatste tijd heeft gecrawld.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de Search Console Help op waar je het Crawlstatistieken-rapport vindt en wat 'hoststatus' laat zien. Welke twee onderdelen van het rapport bekijk je bij deze klant als eerste, en wat zou een probleem daar verklaren?",
+    "minTekens": 120,
+    "hint": "Het rapport staat niet in het linkermenu tussen de andere rapporten."
+  },
+  "modelantwoord": "Je vindt het rapport onder **Instellingen → Crawlstatistieken**. Het werkt alleen voor een domeinproperty of een URL-prefixproperty op rootniveau.\n\nVerstandige eerste keuzes:\n- **Hoststatus.** Die toont of Google problemen had met het ophalen van robots.txt, met DNS of met de serververbinding. Gaat daar iets mis, dan gaat Google trager crawlen of stopt het tijdelijk. Dat verklaart direct waarom nieuwe URL's blijven liggen.\n- **Crawlreacties en gemiddelde reactietijd.** Een hoog aandeel 5xx-fouten of een stijgende reactietijd laat zien dat de server het niet bijhoudt. Google remt dan af.\n- Ook goed: **crawldoel**. Gaat bijna alles naar *Vernieuwen* (bekende URL's) en weinig naar *Ontdekken* (nieuwe URL's), dan besteedt Google zijn tijd aan oude pagina's, bijvoorbeeld aan parameter-URL's of redirects.\n\nEen sterk antwoord legt de link met 'Ontdekt - momenteel niet geïndexeerd': Google kent de URL's wel, maar heeft ze nog niet gecrawld.",
+  "uitleg": "Het Crawlstatistieken-rapport laat zien hoe Googlebot je site crawlt. Google noemt het een rapport voor gevorderde gebruikers: onder de duizend pagina's heb je het meestal niet nodig. Bij een webshop met tienduizenden URL's wel.\n\nWat erin staat:\n- **Totaal aantal crawlverzoeken, downloadgrootte en gemiddelde reactietijd** over de tijd.\n- **Hoststatus:** robots.txt ophalen, DNS-resolutie en serverconnectiviteit. Kan Google robots.txt niet goed ophalen, dan kan het crawlen vertragen of stoppen tot er weer een geldig antwoord komt.\n- **Uitsplitsingen** naar reactie (200, 301, 404, 5xx), bestandstype (HTML, afbeelding, JavaScript, CSS), crawldoel (ontdekken of vernieuwen) en type Googlebot (smartphone, desktop, afbeelding).\n\nZo lees je het samen met Pagina-indexering:\n- Veel 'Ontdekt - momenteel niet geïndexeerd' plus serverfouten of een trage reactietijd: het knelpunt zit bij de server.\n- Veel 'Ontdekt' en een gezonde server, maar veel crawls op redirects, 404's of parameter-URL's: Google verspilt tijd. Ruim die URL's op en verbeter de interne links naar nieuwe producten.\n\nLet op: de voorbeeld-URL's zijn een steekproef, en de aantallen kunnen afwijken van je serverlogs.",
+  "kernpunt": "Het Crawlstatistieken-rapport (Instellingen → Crawlstatistieken) laat zien of Google problemen heeft met je server en waar het zijn crawltijd aan besteedt. Begin bij hoststatus en crawlreacties.",
+  "toepassing": "Open bij je grootste klant deze week Instellingen → Crawlstatistieken en noteer drie getallen: het aandeel 5xx-reacties, de gemiddelde reactietijd en de verdeling ontdekken/vernieuwen.",
+  "bron": {
+    "titel": "Crawl Stats report - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/9679690"
+  }
+}

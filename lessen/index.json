@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-21T12:00:48",
+    "bijgewerkt":  "2026-10-22T07:50:00",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -968,6 +968,252 @@
                                      "url":  "https://www.youtube.com/watch?v=xUyGAbwuTas"
                                  },
                        "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-503-bij-php-onderhoud",
+                       "titel":  "PHP-noodpatch vanavond: wat ziet Googlebot als je site plat ligt?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Statuscode 503 bij gepland of onverwacht onderhoud",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "Ligt een site kort plat, serveer dan een 503 met Retry-After, maar niet op robots.txt. Houd het onder 1–2 dagen, anders kunnen URL\u0027s uit de index vallen.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: Google Reminds Sites To Serve A 503 During PHP Patch Downtime",
+                                    "url":  "https://www.searchenginejournal.com/google-reminds-sites-to-serve-503s-during-server-downtime/593873/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-crawlstatistieken-hoststatus",
+                       "titel":  "Nieuwe producten pas na weken in Google: wat zeggen de crawlstatistieken?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Het Crawlstatistieken-rapport in Search Console",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.4",
+                                      "1.1.1"
+                                  ],
+                       "kernpunt":  "Het Crawlstatistieken-rapport (Instellingen → Crawlstatistieken) laat zien of Google problemen heeft met je server en waar het zijn crawltijd aan besteedt. Begin bij hoststatus en crawlreacties.",
+                       "bron":  {
+                                    "titel":  "Crawl Stats report - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/9679690"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-eeat-ymyl-prioriteren",
+                       "titel":  "Supplementenblog zakt weg na een core update: welke drie ingrepen eerst?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "E-E-A-T beoordelen en verbeteren bij YMYL-content",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "11.1.4",
+                                      "11.1.5",
+                                      "11.1.3"
+                                  ],
+                       "kernpunt":  "Bij YMYL-onderwerpen weegt betrouwbaarheid het zwaarst. Verbeter eerst wie de content schrijft en controleert en hoe claims onderbouwd zijn; markup alleen verandert niets aan E-E-A-T.",
+                       "bron":  {
+                                    "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+                                },
+                       "video":  {
+                                     "titel":  "7 Proven E-E-A-T Strategies to Rank Higher",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=fzH-P1feVz8"
+                                 },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-fcp-render-blocking",
+                       "titel":  "FCP van 3,4 seconde, TTFB is prima: waar zit de vertraging?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "First Contentful Paint (FCP) controleren en verbeteren",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.9",
+                                      "5.2.8"
+                                  ],
+                       "kernpunt":  "Is de TTFB goed en de FCP slecht, dan zit de vertraging in wat het renderen blokkeert: CSS, synchrone scripts en fonts in de head. Afbeeldingen en hosting zijn dan zelden de oplossing.",
+                       "bron":  {
+                                    "titel":  "First Contentful Paint (FCP) | web.dev",
+                                    "url":  "https://web.dev/articles/fcp"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-geo-pakket-beoordelen",
+                       "titel":  "Een \u0027GEO-pakket\u0027 van € 2.500 per maand: wat adviseer je de klant?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Klassieke SEO vs. GEO/AEO: wat is echt anders?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "12.1.2",
+                                      "12.1.4"
+                                  ],
+                       "kernpunt":  "Voor AI Overviews en AI Mode gelden geen extra eisen: een pagina moet geïndexeerd zijn en een snippet mogen tonen. GEO verschuift het doel naar geciteerd worden, maar begint bij gewone, solide SEO.",
+                       "bron":  {
+                                    "titel":  "AI features and your website | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/ai-features"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-inline-validatie-formulier",
+                       "titel":  "Foutmelding pas na \u0027Verstuur\u0027: hoe valideer je een formulier wél?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Formulieroptimalisatie: inline validatie",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Goede inline validatie controleert een veld als de bezoeker het verlaat, haalt een fout weg zodra die is verbeterd en bevestigt goede velden met een vinkje. Te vroeg valideren werkt averechts.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: Usability Testing of Inline Form Validation",
+                                    "url":  "https://baymard.com/blog/inline-form-validation"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-inp-veldattributie-claude",
+                       "titel":  "Lighthouse is groen, INP is rood: laat Claude de velddata ontleden",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Core Web Vitals: trage INP-interacties in velddata diagnosticeren",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "5.2.5",
+                                      "5.2.4"
+                                  ],
+                       "kernpunt":  "Lab-data verklaren een slechte INP zelden. Groepeer velddata per element, kijk welke fase domineert (input delay, processing of presentation delay) en zoek pas dan met LoAF naar de schuldige code.",
+                       "bron":  {
+                                    "titel":  "Find slow interactions in the field | web.dev",
+                                    "url":  "https://web.dev/articles/find-slow-interactions-in-the-field"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-mobile-first-pariteit",
+                       "titel":  "\"Onze klanten zitten op desktop\": telt de mobiele versie dan wel?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Mobile-first indexing: gelijke content op mobiel en desktop",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "8.1.2",
+                                      "8.1.1"
+                                  ],
+                       "kernpunt":  "Google indexeert en rankt op de mobiele versie, ook als je bezoekers vooral op desktop zitten. Wat op mobiel ontbreekt of pas na een tik laadt, bestaat voor Google niet.",
+                       "bron":  {
+                                    "titel":  "Mobile-first indexing best practices | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+                                },
+                       "video":  {
+                                     "titel":  "Mobile-First Indexing",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+                                 },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-noindex-geblokkeerd-door-robots",
+                       "titel":  "noindex én Disallow, en de pagina\u0027s staan nog steeds in Google",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "noindex en robots.txt: waarom ze elkaar in de weg zitten",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.3.1",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "noindex werkt alleen als Google de pagina mag crawlen. robots.txt regelt het crawlen, niet het indexeren: blokkeer dus nooit een URL die je met noindex uit de index wilt halen.",
+                       "bron":  {
+                                    "titel":  "Block Search indexing with noindex | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/block-indexing"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-orphan-pages-claude",
+                       "titel":  "Na de migratie: laat Claude de verweesde pagina\u0027s opsporen",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Orphan pages vinden en oplossen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.1",
+                                      "1.2.6"
+                                  ],
+                       "kernpunt":  "Orphan pages vind je niet met een gewone crawl: vergelijk de crawl met de sitemap, Search Console en GA4. Waardevolle orphans krijg je terug met interne links, de rest redirect of verwijder je.",
+                       "bron":  {
+                                    "titel":  "How To Find Orphan Pages - Screaming Frog",
+                                    "url":  "https://www.screamingfrog.co.uk/seo-spider/tutorials/find-orphan-pages/"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-peeking-ab-test",
+                       "titel":  "Na 9 dagen \u002796% kans om te winnen\u0027: stoppen of doorgaan?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testen: peeking en tussentijds stoppen",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "7.2.2",
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Wie een A/B-test stopt zodra het dashboard \u0027winnaar\u0027 zegt, vergroot de kans op een vals positief resultaat sterk. Leg steekproef en looptijd vooraf vast, of kies een methode die tussentijds beslissen toestaat.",
+                       "bron":  {
+                                    "titel":  "How Not To Run an A/B Test – Evan Miller",
+                                    "url":  "https://www.evanmiller.org/how-not-to-run-an-ab-test.html"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261022-product-snippet-of-merchant-listing",
+                       "titel":  "Webshop én reviewblog: welke productresultaten kun je krijgen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Product-markup: product snippets vs. merchant listings",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.1"
+                                  ],
+                       "kernpunt":  "Merchant listings zijn voor pagina\u0027s waar je het product zelf verkoopt, product snippets voor pagina\u0027s over een product zonder directe aankoop, zoals reviews. Wat de pagina doet, bepaalt welk resultaat kan.",
+                       "bron":  {
+                                    "titel":  "Intro to Product structured data on Google | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/product"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    }
                ]

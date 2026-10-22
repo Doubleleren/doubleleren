@@ -1,0 +1,26 @@
+{
+  "id": "20261022-peeking-ab-test",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO",
+  "onderwerp": "A/B-testen: peeking en tussentijds stoppen",
+  "matrix": [
+    "7.2.2",
+    "7.2.1"
+  ],
+  "titel": "Na 9 dagen '96% kans om te winnen': stoppen of doorgaan?",
+  "intro": "Een A/B-test op de checkout zou volgens het testplan 4 weken lopen; de steekproefgrootte is vooraf berekend. De klant kijkt elke ochtend in het dashboard van de testtool. Na 9 dagen staat variant B op '96% kans om te winnen'. De klant wil de test nu stoppen en B live zetten.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat zeg je tegen de klant? Leg uit waarom je de test wel of niet stopt, en wat je voorstelt als de klant bij volgende tests wél tussentijds wil kunnen kijken.",
+    "minTekens": 120
+  },
+  "modelantwoord": "Een sterk antwoord:\n\n- **Niet stoppen.** Het testplan ging uit van een vaste steekproef na 4 weken. Wie elke dag kijkt en stopt zodra het er goed uitziet, vergroot de kans op een vals positief resultaat sterk. In het bekende voorbeeld van Evan Miller wordt een nominale kans van 5% op een vals positief resultaat zo **26,1%**, terwijl de variant in werkelijkheid niets doet.\n- **Er speelt meer:** 9 dagen dekt geen twee volledige weken, dus weekdag- en weekendgedrag zijn ongelijk vertegenwoordigd. En nieuwe varianten scoren soms eerst beter door het nieuwigheidseffect.\n- **Wel stoppen mag** bij duidelijke schade, bijvoorbeeld als een guardrail-metric zoals omzet of foutmeldingen hard daalt. Spreek die stopregel vooraf af.\n- **Voor de toekomst:** wil de klant tussentijds kunnen beslissen, kies dan vooraf een methode die daarvoor gemaakt is, zoals sequentieel testen of een Bayesiaanse opzet met vooraf vastgelegde beslisregels. Of spreek af dat je het dashboard tot de einddatum niet als beslissing gebruikt.",
+  "uitleg": "Een klassieke significantietoets gaat uit van één ding: je bepaalt **vooraf** hoeveel bezoekers je nodig hebt en kijkt pas aan het eind. Kijk je elke dag en stop je zodra de uitkomst 'significant' is, dan geef je het toeval steeds een nieuwe kans. Dat heet **peeking**.\n\nHoe groot het effect is, liet Evan Miller zien. In zijn voorbeeld met een variant die niets verandert, stop je met dagelijks kijken in **26,1%** van de gevallen met een 'winnaar', terwijl je dacht dat die kans 5% was. Hoe vaker je kijkt, hoe strenger je drempel moet zijn: bij tien keer kijken moet je eigenlijk 1% aanhouden om echt op 5% uit te komen.\n\nDashboards met 'kans om te winnen' maken het verleidelijk. Zo'n getal schommelt in de eerste dagen sterk, juist omdat er nog weinig data is.\n\nDe oplossing:\n- Leg vooraf de **steekproefgrootte** en de **looptijd** vast, in hele weken.\n- Spreek **stopregels voor schade** af (guardrails), los van de vraag of B wint.\n- Wil je tussentijds beslissen, gebruik dan een methode die daarop gebouwd is, zoals **sequentieel testen**.\n\nZo voorkom je dat je een variant live zet die in werkelijkheid niets oplevert, en dat je daar later verkeerde lessen uit trekt.",
+  "kernpunt": "Wie een A/B-test stopt zodra het dashboard 'winnaar' zegt, vergroot de kans op een vals positief resultaat sterk. Leg steekproef en looptijd vooraf vast, of kies een methode die tussentijds beslissen toestaat.",
+  "toepassing": "Zet bij je eerstvolgende A/B-test de steekproefgrootte, de looptijd in hele weken en de stopregels voor schade vooraf in het testplan, en deel dat met de klant voordat de test start.",
+  "bron": {
+    "titel": "How Not To Run an A/B Test – Evan Miller",
+    "url": "https://www.evanmiller.org/how-not-to-run-an-ab-test.html"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "20261022-inline-validatie-formulier",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Formulieroptimalisatie: inline validatie",
+  "matrix": [
+    "7.1.1"
+  ],
+  "titel": "Foutmelding pas na 'Verstuur': hoe valideer je een formulier wél?",
+  "intro": "Een leadgen-klant heeft een offerteformulier met 7 velden. In Clarity zie je veel bezoekers die op 'Verstuur' klikken, bovenaan een foutmelding krijgen en dan afhaken. De developer wil inline validatie toevoegen: elk veld wordt gecontroleerd terwijl het formulier wordt ingevuld, met een melding direct bij dat veld.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke manier van inline valideren werkt volgens usability-onderzoek het best?",
+    "opties": [
+      "Elk veld controleren vanaf de eerste toetsaanslag, zodat de bezoeker meteen ziet wat er nog mis is.",
+      "Alleen foutmeldingen tonen, pas na een klik op 'Verstuur', maar dan naast het veld in plaats van bovenaan.",
+      "Controleren zodra de bezoeker naar het volgende veld gaat, en de foutmelding pas weghalen bij opnieuw versturen.",
+      "Controleren als de bezoeker het veld verlaat, de foutmelding weghalen zodra de invoer klopt, en goede velden een vinkje geven."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Baymard Institute testte dit met echte gebruikers.\n\n- **Vanaf de eerste toetsaanslag** controleren is *voortijdige validatie*: je krijgt een fout terwijl je nog aan het typen bent. Deelnemers vonden dat irritant.\n- **Pas na Verstuur** is geen inline validatie: de bezoeker moet dan alsnog terugzoeken wat er mis is.\n- **De fout laten staan tot opnieuw versturen** verwarde deelnemers: ze hadden het al verbeterd, maar zagen nog steeds een fout.\n- Het juiste patroon: controleren bij het **verlaten van het veld**, de fout **direct weghalen** als de invoer klopt, en **positieve feedback** (een vinkje) voor goede velden.",
+  "uitleg": "Zonder inline validatie ontdekt een bezoeker pas na het versturen dat er iets mis is. Dan moet hij stoppen, zoeken welk veld het was en soms gegevens opnieuw invullen. Volgens het benchmarkonderzoek van Baymard heeft **31%** van de onderzochte webshops geen inline validatie.\n\nMaar inline validatie kan ook verkeerd. Baymard noemt drie regels:\n- **Niet te vroeg valideren.** Controleer de meeste velden pas als de bezoeker het veld verlaat. Bij velden met een vaste lengte, zoals een postcode of telefoonnummer, kan het zodra die lengte bereikt is.\n- **Fout weg zodra het klopt.** Haal de foutmelding bij elke toetsaanslag weg zodra de invoer goed is. Wachten tot het veld wordt verlaten, verwart mensen, vooral bij velden die van elkaar afhangen, zoals 'herhaal wachtwoord'.\n- **Positieve validatie.** Een vinkje of groene rand bij elk goed veld bevestigt dat het klopt en geeft een gevoel van voortgang.\n\nInline validatie vervangt de controle bij het versturen niet: mensen kunnen een formulier ook met fouten versturen. Zorg dan dat de foutmelding bij het veld staat en duidelijk zegt wat er moet gebeuren.\n\nMeet het effect: kijk in Clarity of GA4 naar het aantal mislukte verzendpogingen en het percentage dat het formulier afrondt.",
+  "kernpunt": "Goede inline validatie controleert een veld als de bezoeker het verlaat, haalt een fout weg zodra die is verbeterd en bevestigt goede velden met een vinkje. Te vroeg valideren werkt averechts.",
+  "toepassing": "Vul bij een klant met een lead- of checkoutformulier zelf een paar velden fout in en noteer wanneer de foutmelding verschijnt en weer verdwijnt. Klopt dat niet met de drie regels, zet het dan op de CRO-backlog.",
+  "bron": {
+    "titel": "Baymard Institute: Usability Testing of Inline Form Validation",
+    "url": "https://baymard.com/blog/inline-form-validation"
+  }
+}

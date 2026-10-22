@@ -1,0 +1,27 @@
+{
+  "id": "20261022-orphan-pages-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Orphan pages vinden en oplossen",
+  "matrix": [
+    "1.2.1",
+    "1.2.6"
+  ],
+  "titel": "Na de migratie: laat Claude de verweesde pagina's opsporen",
+  "intro": "Na een migratie van een B2B-site zijn oude pagina's blijven staan die uit het menu zijn verdwenen. Je hebt drie exports: een Screaming Frog-crawl (Internal: HTML), de URL's uit de XML-sitemap en een Search Console-export met klikken en vertoningen per pagina over 3 maanden. Een orphan page is een pagina waar geen enkele interne link naartoe gaat.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf een prompt waarmee Claude uit deze drie bestanden de orphan pages haalt en per pagina een advies geeft. Welke vergelijking moet Claude maken, wat moet hij eerst opschonen, en in welke actiegroepen deelt hij de pagina's in?",
+    "minTekens": 150,
+    "hint": "Een crawler vindt alleen wat gelinkt is. Wat weten de andere twee bestanden dat de crawl niet weet?"
+  },
+  "modelantwoord": "Een goede prompt bevat bijvoorbeeld:\n\n- **Context:** \"Ik geef je drie bestanden: een crawl die alleen interne links volgt, de URL's uit de XML-sitemap en een Search Console-export per pagina.\"\n- **Opschonen eerst:** maak URL's vergelijkbaar (zelfde protocol en host, trailing slash consequent, parameters en #-fragmenten apart). Neem uit de crawl alleen indexeerbare HTML-pagina's met status 200.\n- **De vergelijking:** een orphan page staat wel in de sitemap of in Search Console, maar níet in de crawl. Geef per URL aan in welke bron hij voorkomt.\n- **Actiegroepen:**\n  - heeft klikken of vertoningen en is nog actueel: interne links toevoegen vanaf een passende categorie- of overzichtspagina\n  - verouderd, maar er bestaat een goede opvolger: 301 naar die opvolger\n  - verouderd, zonder opvolger en zonder verkeer: verwijderen (404/410) en uit de sitemap halen\n  - dubbel met een andere pagina: samenvoegen of canonical\n- **Output:** een tabel met URL, bron, klikken, vertoningen, actiegroep en een korte reden. Zet bovenaan de pagina's met het meeste verkeer.\n- **Controle:** \"Vermeld URL's in de sitemap die geen 200 geven apart: dat is een sitemapfout, geen orphan.\"",
+  "uitleg": "Een orphan page is een pagina zonder interne links. Een crawler die vanaf de homepage links volgt, vindt hem dus nooit. Zoekmachines vinden hem soms nog via de sitemap of externe links, maar hij krijgt **geen interne PageRank** en presteert daardoor slechter.\n\nEen paar orphans is normaal. Op grote schaal veroorzaken ze **index bloat** en verspild crawlbudget, vooral na migraties, redesigns of het opschonen van een menu.\n\nZo spoor je ze op: vergelijk wat er **gelinkt** is (de crawl) met wat er **bestaat** volgens andere bronnen: de XML-sitemap, Search Console en GA4. Screaming Frog kan dat zelf: koppel de sitemap en de GA4- en GSC-API, laat ook de daar gevonden URL's crawlen, draai na de crawl de **Crawl Analysis** en bekijk de filters 'Orphan URLs'. Met Claude doe je dezelfde vergelijking op losse exports, en laat je meteen per pagina een advies opstellen.\n\nLet op twee valkuilen. Search Console toont alleen pagina's met vertoningen, dus een orphan zonder vertoningen mis je daar. En de sitemap bevat soms URL's die allang een 404 of redirect geven: dat is een sitemapprobleem, geen orphan.",
+  "kernpunt": "Orphan pages vind je niet met een gewone crawl: vergelijk de crawl met de sitemap, Search Console en GA4. Waardevolle orphans krijg je terug met interne links, de rest redirect of verwijder je.",
+  "toepassing": "Draai bij een klant met een recente migratie een crawl met de sitemap en de GSC-koppeling aan, voer de Crawl Analysis uit en bekijk de lijst met orphan-URL's.",
+  "bron": {
+    "titel": "How To Find Orphan Pages - Screaming Frog",
+    "url": "https://www.screamingfrog.co.uk/seo-spider/tutorials/find-orphan-pages/"
+  }
+}

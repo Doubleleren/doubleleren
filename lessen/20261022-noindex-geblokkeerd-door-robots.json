@@ -1,0 +1,32 @@
+{
+  "id": "20261022-noindex-geblokkeerd-door-robots",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "noindex en robots.txt: waarom ze elkaar in de weg zitten",
+  "matrix": [
+    "1.3.1",
+    "1.3.6"
+  ],
+  "titel": "noindex én Disallow, en de pagina's staan nog steeds in Google",
+  "intro": "Een webshop wil de interne zoekresultaatpagina's (/zoeken?q=...) uit Google houden. De developer heeft twee dingen gedaan: een meta robots-tag met noindex op die pagina's gezet, en 'Disallow: /zoeken' in robots.txt. Drie weken later staan er nog steeds zoekpagina's in Google.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste volgende stap?",
+    "opties": [
+      "Ook een X-Robots-Tag met noindex in de HTTP-header toevoegen, zodat Google de instructie dubbel krijgt.",
+      "Een canonical van alle zoekpagina's naar de homepage zetten, zodat Google ze samenvoegt.",
+      "De Disallow-regel voor /zoeken weghalen, zodat Googlebot de pagina's weer kan ophalen.",
+      "Niets doen: noindex en Disallow samen werken altijd, het duurt alleen wat langer."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google kan een noindex alleen zien als het de pagina mag ophalen. Door de Disallow leest Googlebot de pagina niet, dus ook de noindex niet. De URL kan dan gewoon in Google blijven staan, bijvoorbeeld als er links naar wijzen.\n\n- **X-Robots-Tag** heeft precies hetzelfde probleem: ook een header leest Google alleen als het de URL ophaalt.\n- **Een canonical naar de homepage** is een verkeerd signaal: de pagina's zijn geen duplicaat van de homepage, en Google kan ook die canonical niet lezen zolang de URL geblokkeerd is.\n- **Wachten** helpt niet: zolang de blokkade er staat, ziet Google de noindex nooit.",
+  "uitleg": "robots.txt en noindex doen twee verschillende dingen:\n\n- **robots.txt** stuurt het **crawlen**: mag Googlebot een URL ophalen?\n- **noindex** (meta robots of X-Robots-Tag) stuurt het **indexeren**: mag de pagina in de zoekresultaten?\n\nGoogle schrijft het letterlijk in de documentatie: een noindex werkt alleen als de pagina **niet** geblokkeerd is door robots.txt. Een geblokkeerde URL kan nog steeds in Google verschijnen, want Google kent hem via links. Hij staat er dan vaak zonder beschrijving, omdat Google de inhoud niet heeft gelezen.\n\nDe juiste volgorde bij pagina's die uit de index moeten:\n1. Zet noindex op de pagina's.\n2. Laat crawlen toe, zodat Google de noindex ziet.\n3. Controleer met de URL-inspectietool en het rapport Pagina-indexering of de URL's als 'Uitgesloten door noindex-tag' verschijnen.\n\nWil je daarna crawlbudget besparen met een Disallow, weeg dat dan af. Gelinkte URL's kunnen dan weer zonder inhoud in de index komen. Wil je URL's snel tijdelijk verbergen, gebruik dan de tool Verwijderingen in Search Console.",
+  "kernpunt": "noindex werkt alleen als Google de pagina mag crawlen. robots.txt regelt het crawlen, niet het indexeren: blokkeer dus nooit een URL die je met noindex uit de index wilt halen.",
+  "toepassing": "Zoek bij een klant in het rapport Pagina-indexering naar 'Geïndexeerd, hoewel geblokkeerd door robots.txt' en controleer per patroon of er een noindex op staat die Google niet kan lezen.",
+  "bron": {
+    "titel": "Block Search indexing with noindex | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/block-indexing"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20261022-eeat-ymyl-prioriteren",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "E-E-A-T beoordelen en verbeteren bij YMYL-content",
+  "matrix": [
+    "11.1.4",
+    "11.1.5",
+    "11.1.3"
+  ],
+  "titel": "Supplementenblog zakt weg na een core update: welke drie ingrepen eerst?",
+  "intro": "Een webshop in voedingssupplementen heeft 40 blogartikelen zoals 'Helpt magnesium tegen hoge bloeddruk?'. Ze staan onder de naam 'Redactie', zonder datum en zonder bronnen, en zijn geschreven door een copywriter met een AI-tool. Na de laatste core update zakken juist deze artikelen weg. De productpagina's blijven stabiel.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "De klant heeft budget voor drie verbeteringen. Welke drie kies je, in welke volgorde, en waarom juist deze bij dit onderwerp?",
+    "minTekens": 150
+  },
+  "modelantwoord": "Een sterk antwoord begint bij het onderwerp: gezondheid is **YMYL**. Daar weegt betrouwbaarheid het zwaarst.\n\n1. **Inhoudelijke deskundigheid toevoegen.** Laat de artikelen schrijven of controleren door iemand met aantoonbare expertise, zoals een diëtist of arts. Zet een echte byline met een link naar een auteurspagina met achtergrond en kwalificaties. Een verzonnen expert is misleiding en werkt averechts.\n2. **Claims onderbouwen en opschonen.** Voeg bronnen toe (onderzoek, voedingscentrum), zet een publicatie- en reviewdatum, en schrap of herschrijf beweringen die niet te onderbouwen zijn. Bij een vraag als 'helpt X tegen hoge bloeddruk' is een eerlijk, genuanceerd antwoord betrouwbaarder dan een verkooppraatje.\n3. **Snoeien en transparant zijn.** Voeg dunne of overlappende artikelen samen of haal ze weg. Leg uit hoe de content tot stand komt (wie schrijft, wie controleert, of er AI is gebruikt).\n\nWat níet de eerste keuze is: alleen Person-schema toevoegen (markup zonder echte expertise verandert niets), meer artikelen schrijven, of wachten op de volgende update. E-E-A-T is geen losse rankingfactor die je met één technische ingreep aanzet.",
+  "uitleg": "E-E-A-T staat voor Experience, Expertise, Authoritativeness en Trustworthiness. Google zegt er drie dingen over die je bij elke beoordeling gebruikt:\n\n- **Trust is het belangrijkst.** De andere drie dragen bij aan vertrouwen, maar een pagina hoeft ze niet allemaal te hebben.\n- **YMYL weegt zwaarder.** Bij onderwerpen die gezondheid, geld, veiligheid of het welzijn van mensen raken, geven Googles systemen extra gewicht aan signalen van E-E-A-T.\n- **E-E-A-T is geen rankingfactor op zich.** Het is een manier om naar kwaliteit te kijken, niet een score die je met markup verhoogt.\n\nGoogle geeft een handige toets: **Who, How, Why**.\n- *Who:* is duidelijk wie het schreef, en leidt de byline naar meer informatie over die persoon?\n- *How:* is duidelijk hoe de content tot stand kwam, bijvoorbeeld of er automatisering is gebruikt?\n- *Why:* is de content gemaakt om mensen te helpen, of vooral om verkeer te trekken? Google noemt dit misschien de belangrijkste vraag.\n\nIn deze case valt alles samen: een YMYL-onderwerp, een anonieme afzender, geen onderbouwing en content die vooral voor zoekverkeer lijkt gemaakt. Dat de productpagina's stabiel blijven, past daarbij: het probleem zit in de informatieve content, niet in de hele site.",
+  "kernpunt": "Bij YMYL-onderwerpen weegt betrouwbaarheid het zwaarst. Verbeter eerst wie de content schrijft en controleert en hoe claims onderbouwd zijn; markup alleen verandert niets aan E-E-A-T.",
+  "toepassing": "Kies bij een klant met gezondheids- of financiële content de vijf best bezochte artikelen en doe de Who-How-Why-toets: is de auteur zichtbaar en deskundig, staan er bronnen en een datum, en is het doel helpen of verkopen?",
+  "bron": {
+    "titel": "Creating helpful, reliable, people-first content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  },
+  "video": {
+    "titel": "7 Proven E-E-A-T Strategies to Rank Higher",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=fzH-P1feVz8"
+  }
+}

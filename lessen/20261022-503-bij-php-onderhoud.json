@@ -1,0 +1,31 @@
+{
+  "id": "20261022-503-bij-php-onderhoud",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Statuscode 503 bij gepland of onverwacht onderhoud",
+  "matrix": [
+    "5.1.2"
+  ],
+  "titel": "PHP-noodpatch vanavond: wat ziet Googlebot als je site plat ligt?",
+  "intro": "Op 21 oktober 2026 kwamen er noodpatches uit voor twee kritieke lekken in PHP. Een WordPress-klant laat de host vanavond patchen en de site ligt naar verwachting drie uur plat. De developer wil in die tijd op elke URL een nette pagina tonen: \"We zijn zo terug\".",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke instelling adviseer je voor die onderhoudspagina?",
+    "opties": [
+      "Statuscode 200, zodat Google ziet dat de server gewoon bereikbaar is en niets uit de index haalt.",
+      "Statuscode 503 met een Retry-After-header op alle pagina's, maar niet op robots.txt.",
+      "Statuscode 404 op alle pagina's, want die zijn tijdelijk niet beschikbaar voor bezoekers.",
+      "Statuscode 503 voor de hele site, robots.txt inbegrepen, zodat Googlebot drie uur niets crawlt."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Een **503** (Service Unavailable) zegt: tijdelijk niet beschikbaar, kom later terug. Google houdt al geïndexeerde URL's dan vast. Met **Retry-After** geef je aan wanneer de crawler terug kan komen.\n\n- **200** met een foutpagina: Google kan die onderhoudstekst indexeren of de pagina als soft 404 zien.\n- **404**: zegt dat de pagina weg is. Zo raak je URL's kwijt.\n- **503 op robots.txt**: volgens Google blokkeert dat al het crawlen. Laat robots.txt dus gewoon een 200 geven.",
+  "uitleg": "Google Search Central herinnerde site-eigenaren er op 21 oktober 2026 aan om tijdens downtime een 503 te serveren. Dat was dezelfde dag waarop PHP noodpatches uitbracht voor twee kritieke lekken.\n\nWat je moet weten:\n- **Kort is prima.** Een 503 van een paar uur is geen probleem. Duurt het langer dan **1–2 dagen** en ziet Googlebot meerdere dagen een 503 op dezelfde URL, dan kan die uit de index vallen. Voor een langere sluiting adviseert Google een indexeerbare homepage met een 200.\n- **Crawlsnelheid.** Geven veel URL's een 5xx of 429, dan crawlt Google tijdelijk trager op de hele host, ook op pagina's die wel werken. Daarna loopt het crawlen geleidelijk weer op.\n- **Geen updates.** Zolang een pagina een 503 geeft, kan Google titel, beschrijving en structured data niet verversen.\n- **Ligt PHP zelf plat,** dan kan PHP ook geen 503 sturen. Laat de webserver, de load balancer of het CDN dan de 503 geven. John Mueller van Google wees daar ook op.\n\nVerwar dit niet met een timeout of een 500. Google ziet die ook als serverfout, maar een bewuste 503 met Retry-After is de duidelijke boodschap.",
+  "kernpunt": "Ligt een site kort plat, serveer dan een 503 met Retry-After, maar niet op robots.txt. Houd het onder 1–2 dagen, anders kunnen URL's uit de index vallen.",
+  "toepassing": "Vraag deze week bij je WordPress-klanten na of de host de PHP-patch al heeft gedaan, en spreek af dat de onderhoudsmodus een 503 geeft, bij voorkeur via de webserver of het CDN.",
+  "bron": {
+    "titel": "Search Engine Journal: Google Reminds Sites To Serve A 503 During PHP Patch Downtime",
+    "url": "https://www.searchenginejournal.com/google-reminds-sites-to-serve-503s-during-server-downtime/593873/"
+  }
+}

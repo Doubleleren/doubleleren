@@ -1,0 +1,26 @@
+{
+  "id": "20261022-geo-pakket-beoordelen",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Klassieke SEO vs. GEO/AEO: wat is echt anders?",
+  "matrix": [
+    "12.1.2",
+    "12.1.4"
+  ],
+  "titel": "Een 'GEO-pakket' van € 2.500 per maand: wat adviseer je de klant?",
+  "intro": "Een ander bureau biedt je klant een 'GEO-pakket' aan van € 2.500 per maand: een llms.txt-bestand, speciale 'AI-schema-markup' en het herschrijven van alle teksten in vraag-antwoordvorm. De klant wil vaker in AI Overviews staan. Uit je eigen audit weet je dat een deel van de belangrijkste dienstpagina's niet geïndexeerd is door foute canonicals, en dat de blog een nosnippet-tag heeft.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat adviseer je de klant? Leg uit wat er bij optimaliseren voor AI-search wel en niet anders is dan bij klassieke SEO, en wat je als eerste zou aanpakken.",
+    "minTekens": 150
+  },
+  "modelantwoord": "Een sterk antwoord bevat:\n\n- **Eerst de basis.** Google zegt dat er voor AI Overviews en AI Mode geen extra eisen of speciale optimalisaties zijn. Een pagina moet wel **geïndexeerd** zijn en **een snippet mogen tonen**. De dienstpagina's die niet geïndexeerd zijn en de blog met nosnippet kunnen dus helemaal niet als bron verschijnen. Dat herstellen levert meer op dan het hele pakket.\n- **Het pakket kritisch bekijken:**\n  - llms.txt: Google noemt het nergens als voorwaarde voor AI Overviews. Het is goedkoop, maar geen hefboom.\n  - 'AI-schema': er bestaat geen speciale markup voor AI-features. Gewone, juiste structured data blijft nuttig.\n  - Alles herschrijven in vraag-antwoordvorm: duidelijke, zelfstandig leesbare passages helpen wel, omdat AI-features deelvragen opzoeken (query fan-out). Maar dat doe je waar het past, niet op elke pagina.\n- **Wat wel anders is:** het doel is ook **geciteerd worden**, niet alleen ranken. Daarom tellen heldere feiten, entiteiten, merkvermeldingen en goede passages zwaarder. En meten is lastiger: AI-features zitten in Search Console in het zoektype 'Web', zonder apart filter, en voor andere AI-tools heb je andere meetmethoden nodig.",
+  "uitleg": "GEO (generative engine optimization) en AEO (answer engine optimization) zijn namen voor optimaliseren om geciteerd te worden door AI-zoeksystemen. Dat klinkt als een nieuw vak, maar voor Google is het grotendeels dezelfde basis.\n\nWat Google zegt over AI Overviews en AI Mode:\n- Er zijn **geen extra eisen** en geen speciale optimalisaties nodig. Gewone SEO-best practices gelden.\n- Om als ondersteunende link te verschijnen, moet een pagina **geïndexeerd** zijn en **geschikt voor een snippet**. Een nosnippet-tag sluit een pagina dus uit.\n- AI-features gebruiken **query fan-out**: ze doen meerdere verwante zoekopdrachten over deelonderwerpen. Pagina's die een deelvraag helder beantwoorden, maken zo meer kans.\n- Het verkeer uit AI-features telt mee in het **Prestatierapport** in Search Console, onder zoektype 'Web'.\n\nWat wel anders is: je wilt niet alleen bovenaan staan, maar ook letterlijk worden aangehaald. Daarvoor helpen duidelijke feiten, korte zelfstandige passages en een sterk merk dat ook buiten je site wordt genoemd. Andere AI-zoekmachines dan Google hebben hun eigen crawlers en bronnen; daar meet je zichtbaarheid met andere tools.\n\nWees dus kritisch op pakketten die een losse 'AI-truc' verkopen terwijl de basis nog niet op orde is.",
+  "kernpunt": "Voor AI Overviews en AI Mode gelden geen extra eisen: een pagina moet geïndexeerd zijn en een snippet mogen tonen. GEO verschuift het doel naar geciteerd worden, maar begint bij gewone, solide SEO.",
+  "toepassing": "Controleer bij een klant die vraagt naar 'AI-zichtbaarheid' eerst of de belangrijkste pagina's geïndexeerd zijn en geen nosnippet- of max-snippet:0-tag hebben.",
+  "bron": {
+    "titel": "AI features and your website | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/ai-features"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "20261022-inp-veldattributie-claude",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Core Web Vitals: trage INP-interacties in velddata diagnosticeren",
+  "matrix": [
+    "5.2.5",
+    "5.2.4"
+  ],
+  "titel": "Lighthouse is groen, INP is rood: laat Claude de velddata ontleden",
+  "intro": "Een webshop scoort in Lighthouse prima op Total Blocking Time, maar Search Console meldt INP 'slecht' op mobiel (75e percentiel: 560 ms) voor de productpagina's. De developer heeft de web-vitals-library met de attribution-build al draaien en levert een CSV met 2.000 INP-metingen: interactionTarget, interactionType, inputDelay, processingDuration, presentationDelay en loadState.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee je Claude deze export laat analyseren. Wat moet Claude per element berekenen, hoe duidt hij per fase de waarschijnlijke oorzaak, en in welke vorm wil je de uitkomst voor de developer?",
+    "minTekens": 150,
+    "hint": "Denk aan het percentiel waarop Google beoordeelt, en aan wat een lange fase zegt over waar de vertraging zit."
+  },
+  "modelantwoord": "Een goede prompt bevat bijvoorbeeld:\n\n- **Rol en context:** \"Je bent een performance-specialist. De CSV bevat INP-metingen uit de web-vitals attribution-build van mobiele productpagina's.\"\n- **Berekening:** groepeer op interactionTarget (en interactionType). Geef per groep het aantal metingen, de p75 van de INP en de p75 van inputDelay, processingDuration en presentationDelay. Sorteer op aantal × p75, zodat je de interacties met de meeste impact bovenaan ziet. Splits ook op loadState: gebeurt het tijdens het laden of erna?\n- **Duiding per fase:**\n  - hoge inputDelay tijdens het laden: scripts die de main thread bezet houden (third-party, hydration)\n  - hoge processingDuration: de event handler zelf is te zwaar\n  - hoge presentationDelay: dure style/layout of rendering na de handler, bijvoorbeeld een grote DOM-update\n- **Output:** een tabel met de top 5 elementen, de dominante fase, de vermoedelijke oorzaak en een concrete vervolgstap (bijv. LoAF-data verzamelen voor dat element, werk opknippen en yielden, of de UI-update kleiner maken).\n- **Grenzen:** \"Noem het als een groep te weinig metingen heeft, en trek geen conclusies over code die niet in de data staat.\"\n\nWaarom niet alleen Lighthouse? Lighthouse doet geen echte interacties. TBT is een lab-proxy en zegt niets over de klik op 'In winkelwagen' van een echte bezoeker op een trage telefoon.",
+  "uitleg": "INP is goed tot en met **200 ms** en slecht boven **500 ms**, gemeten op het 75e percentiel van echte bezoeken. CrUX en Search Console laten zien **dát** er een probleem is, maar niet **wat** het veroorzaakt. Daarvoor heb je eigen velddata nodig.\n\nDe attribution-build van web-vitals splitst elke trage interactie in drie fasen:\n- **inputDelay:** de tijd tot de event handlers kunnen starten. Hoog als de main thread al bezig is, bijvoorbeeld met scripts tijdens het laden of met timers.\n- **processingDuration:** de tijd die de handlers zelf nodig hebben.\n- **presentationDelay:** de tijd van het einde van de handlers tot het volgende frame op het scherm staat. Hoog bij zware style- en layoutberekeningen.\n\nMet **interactionTarget** weet je om welk element het gaat. Wil je de schuldige code vinden, dan gebruik je de **Long Animation Frames API (LoAF)**. Die geeft per lang frame de scripts met bron-URL en functienaam.\n\nDe winst zit in de volgorde: eerst het element met de meeste impact vinden, dan de dominante fase, en pas dan de code. Zo krijgt de developer een gerichte opdracht in plaats van \"maak de site sneller\".",
+  "kernpunt": "Lab-data verklaren een slechte INP zelden. Groepeer velddata per element, kijk welke fase domineert (input delay, processing of presentation delay) en zoek pas dan met LoAF naar de schuldige code.",
+  "toepassing": "Vraag bij een klant met een oranje of rode INP of de web-vitals attribution-build al meedraait. Zo niet, laat hem dan deze week toevoegen en de data naar GA4 of een eigen endpoint sturen.",
+  "bron": {
+    "titel": "Find slow interactions in the field | web.dev",
+    "url": "https://web.dev/articles/find-slow-interactions-in-the-field"
+  }
+}

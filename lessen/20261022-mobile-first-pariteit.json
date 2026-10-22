@@ -1,0 +1,32 @@
+{
+  "id": "20261022-mobile-first-pariteit",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Mobile-first indexing: gelijke content op mobiel en desktop",
+  "matrix": [
+    "8.1.2",
+    "8.1.1"
+  ],
+  "titel": "\"Onze klanten zitten op desktop\": telt de mobiele versie dan wel?",
+  "intro": "Een dienstverlener heeft een responsive site waarop de mobiele weergave sterk is ingekort. Op mobiel zijn de klantreviews en de veelgestelde vragen weggelaten. De specificaties worden pas opgehaald na een tik op 'Meer tonen'. De structured data staat alleen in de desktopversie. De klant zegt: \"Onze bezoekers zitten vooral op desktop, dus voor Google maakt dit niet uit.\"",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Google Search Central op welke versie van een site Google gebruikt voor indexeren en ranken. Wat betekent elk van de drie verschillen voor Google, en wat adviseer je per punt?",
+    "minTekens": 120,
+    "hint": "Zoek op 'mobile-first indexing best practices' en kijk wat Google zegt over content, lazy loading en structured data."
+  },
+  "modelantwoord": "Google gebruikt de **mobiele versie**, gecrawld met de smartphone-crawler, voor het indexeren en ranken. Dat geldt ook als de meeste bezoekers op desktop zitten. De klant heeft dus geen gelijk.\n\nPer verschil:\n- **Reviews en FAQ weggelaten:** wat niet op mobiel staat, kent Google niet. Die tekst telt dus niet mee. Advies: zet dezelfde hoofdcontent op mobiel. Wil je ruimte besparen, gebruik dan een accordeon of tabbladen, met de tekst gewoon in de pagina.\n- **Specificaties pas na een tik geladen:** Google klikt, swipet en typt niet, dus content die pas na een interactie wordt opgehaald, ziet Google niet. Advies: laad de specificaties direct in de HTML en verberg ze desnoods visueel.\n- **Structured data alleen op desktop:** zonder markup op mobiel kun je rich results kwijtraken. Advies: dezelfde structured data in de mobiele versie.\n\nControleer het daarna met de URL-inspectietool: bekijk de gerenderde HTML van de live test.",
+  "uitleg": "Google indexeert sinds een aantal jaren **mobile-first**: de mobiele versie van een pagina, gecrawld met Googlebot Smartphone, bepaalt wat Google van die pagina weet. Voor responsive sites met dezelfde inhoud op elk scherm verandert er niets. Het gaat mis als de mobiele weergave **minder** laat zien.\n\nDe belangrijkste punten uit Googles best practices:\n- **Dezelfde hoofdcontent** op mobiel als op desktop, met dezelfde duidelijke koppen. Inklappen in accordeons of tabs mag; weglaten niet.\n- **Geen lazy loading van hoofdcontent na interactie.** Google laadt niets wat pas verschijnt na swipen, klikken of typen.\n- **Dezelfde structured data**, met mobiele URL's als je aparte mobiele URL's hebt.\n- **Dezelfde metadata:** title en meta description gelijk op beide versies.\n- **Dezelfde robots meta-tags.** Een noindex of nofollow die alleen op mobiel staat, kan het indexeren of crawlen stoppen.\n- Afbeeldingen en video's van goede kwaliteit, met dezelfde alt-teksten, ook op mobiel.\n\nMet de URL-inspectietool zie je de gerenderde pagina zoals Google hem ziet. Zo controleer je of de content die je verwacht er echt in staat.",
+  "kernpunt": "Google indexeert en rankt op de mobiele versie, ook als je bezoekers vooral op desktop zitten. Wat op mobiel ontbreekt of pas na een tik laadt, bestaat voor Google niet.",
+  "toepassing": "Vergelijk bij één klant deze week de gerenderde HTML van een belangrijke pagina in de URL-inspectietool met de desktopversie: staan de reviews, specificaties en structured data er allebei in?",
+  "bron": {
+    "titel": "Mobile-first indexing best practices | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+  },
+  "video": {
+    "titel": "Mobile-First Indexing",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+  }
+}
