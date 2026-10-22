@@ -7,6 +7,8 @@ $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
 foreach ($l in 'krypto', 'opslag', 'lid', 'geheim') { . (Join-Path $App "app\lib\$l.ps1") }
 . (Join-Path $PSScriptRoot 'lescontrole.ps1')
+# In de cloud (GitHub Actions) nooit pseudoniemen in het log
+function Get-Wie([string]$Id) { if ($env:GITHUB_ACTIONS) { 'deelnemer' } else { $Id } }
 $inst = Get-Content (Join-Path $App 'instellingen.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if (-not $Thuis) { $Thuis = Join-Path (Get-DlThuis) 'beheer' }
 if (-not $Map) { $Map = Join-Path $Thuis 'generator' }
@@ -62,7 +64,7 @@ try {
         if ($onbekend.Count) { throw "Onbekende les-id's voor ${id}: $($onbekend -join ', ')" }
         $uit = @($lijst | Where-Object { $inactief -contains $_ })
         if ($uit.Count) { $lijst = @($lijst | Where-Object { $inactief -notcontains $_ }); Write-Host "  $($uit.Count) les(sen) uit de roulatie uit een wachtrij gehaald" }
-        $t = Read-DlBeheer $d "toegang/$id.json" $V; if (-not $t) { Write-Host "  $id overgeslagen: nog niet goedgekeurd"; continue }
+        $t = Read-DlBeheer $d "toegang/$id.json" $V; if (-not $t) { Write-Host "  $(Get-Wie $id) overgeslagen: nog niet goedgekeurd"; continue }
         $s = Get-DlSleutelsUitDk (Unprotect-DlRsa $geheim.generatorPrive (ConvertFrom-B64u $t.kopieen.generator))
         $nieuw = [ordered]@{ v = 1; bijgewerkt = (Get-Date).ToString('s'); lessen = $lijst }
         $b = Read-DlOpslag $d (Get-DlLidPad $id 'wachtrij')      # wordt volledig vervangen
@@ -75,7 +77,7 @@ try {
             continue
         }
         Write-DlVersleuteld $d $id 'wachtrij' $s $nieuw $(if ($b) { $b.sha }) 'generator' $geheim.generatorPrive | Out-Null
-        Write-Host "  $id`: $($lijst.Count) les(sen) klaargezet"
+        Write-Host "  $(Get-Wie $id): $($lijst.Count) les(sen) klaargezet"
     }
     if ($Proef) { Write-Host "PROEF: $($script:proefTel) wachtrij(en) versleuteld en ondertekend, $(@(Get-ChildItem (Join-Path $App 'lessen') -Filter *.json).Count - 1) lessen gecontroleerd; niets verstuurd."; return }
     # 4. Scorebord van iedereen bijwerken (ook wie de website niet opende); een fout hier houdt de lessen niet tegen

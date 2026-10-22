@@ -177,6 +177,7 @@ Alleen als de opdracht een pad voor het geheugen geeft. Werk het geheugenbestand
 Regels:
 - Schrijf algemene lessen, geen dagboek. Houd het onder ~60 regels; voeg samen en schrap wat niet meer geldt.
 - **Nooit** pseudoniemen, namen, klantnamen of letterlijke tekst uit feedback.
+- **Nooit iets over één persoon**, ook niet omschreven: geen scores, gemiddelden, niveaus of resultaten van een deelnemer, en geen zinnen als "er is een ervaren deelnemer". In een klein team is dan direct duidelijk wie het is, en de beheerder leest het geheugen. Wat per persoon geldt, zie je elke ochtend opnieuw in de context. Het geheugen gaat alleen over lessen, formats, onderwerpen, bronnen en het team als geheel.
 - Je wijzigingen worden een voorstel (pull request) dat Thijs of Sjoerd eerst goedkeurt. Tot dan zie je morgen weer de oude versie. Herhaal een voorstel dat nog geldt dus gewoon.
 - Niets nieuws geleerd? Laat het bestand dan ongewijzigd.
 
