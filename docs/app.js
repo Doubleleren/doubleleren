@@ -962,9 +962,44 @@ function toonLesStatus() {
     : st.klaar ? 'Goed bezig: twee lessen vandaag. Morgen staan er weer twee voor je klaar.'
     : 'Je hebt alle beschikbare lessen gedaan. De generator vult ze aan; kijk morgen weer.';
   $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div><h2>${esc(kop)}</h2>`;
-  $('les-inhoud').innerHTML = `<p>${esc(tekst)}</p>`;
-  $('les-knoppen').innerHTML = (st.volgende ? knop('volgende-les', 'Naar je tweede les →', 'zwart') : knop('naar-mij', 'Bekijk je voortgang', 'zwart')) + (st.klaar && L.les ? knop('feedback-les', 'Feedback over deze les') : '');
+  $('les-inhoud').innerHTML = `<p>${esc(tekst)}</p>` + (st.later ? meldingUitleg() : '');
+  $('les-knoppen').innerHTML = (st.volgende ? knop('volgende-les', 'Naar je tweede les →', 'zwart') : knop('naar-mij', 'Bekijk je voortgang', 'zwart'))
+    + (st.later && meldingStand() === 'default' ? knop('melding-aan', `Stuur me om ${MIDDAG} een melding`) : '')
+    + (st.klaar && L.les ? knop('feedback-les', 'Feedback over deze les') : '');
   $('snelkoppeling').hidden = false;
+}
+
+// ---------------------------------------------------------------- melding om 12:30 (alleen als de website openstaat)
+// Na de ochtendles springt de kaart om 12:30 vanzelf naar de tweede les; met toestemming komt er ook een browsermelding.
+// Geen pushdienst: met de pagina dicht komt er niets (daarvoor is de pop-up).
+const meldingStand = () => ('Notification' in window ? Notification.permission : 'geen');   // granted | denied | default | geen
+function meldingUitleg() {
+  const s = meldingStand();
+  if (s === 'granted') return `<p class="sub">Je krijgt om ${MIDDAG} een melding als deze pagina dan nog openstaat (ook op de achtergrond).</p>`;
+  return `<p class="sub">Laat deze pagina openstaan, dan springt hij om ${MIDDAG} vanzelf naar je tweede les.${s === 'denied' ? ' Meldingen staan in je browser uit.' : ''}</p>`;
+}
+let middagBezig = false, middagGestart = false;
+async function controleerMiddag() {
+  if (middagBezig || !S.mij || !L.status?.later) return;
+  const n = nu();
+  if (`${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}` < MIDDAG) return;
+  middagBezig = true;
+  try {
+    const st = await kiesLes().catch(() => null);
+    if (!st || st.later || !L.status?.later) return;
+    L.status = st.les ? { klaar: true, volgende: st.les } : st;
+    toonLesStatus();
+    if (st.les && meldingStand() === 'granted') {
+      const m = new Notification('DoubleLeren: je tweede les staat klaar', { body: st.les.titel, tag: 'dl-middag-' + dagKey(n) });
+      m.onclick = () => { window.focus(); tab('vandaag'); m.close(); };
+    }
+  } finally { middagBezig = false; }
+}
+function startMiddagWekker() {
+  if (middagGestart) return; middagGestart = true;
+  setInterval(controleerMiddag, 60000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) controleerMiddag(); });
+  controleerMiddag();
 }
 function startLes(les) {
   Object.assign(L, { les, keuze: -1, antwoord: '', resultaat: '', uitlegGetoond: false });
@@ -1075,6 +1110,7 @@ $('vandaag').addEventListener('click', async (e) => {
   else if (actie === 'controleer') lesAfronding();
   else if (actie === 'indienen') { L.antwoord = $('les-antwoord').value.trim(); lesAfronding(); }
   else if (actie === 'naar-mij') tab('mij');
+  else if (actie === 'melding-aan') { try { await Notification.requestPermission(); } catch { /* browser weigert */ } toonLesStatus(); }
   else if (actie === 'naar-skilllijst') { tab('skilllijst'); toonSkillFormulier(); }
   else if (actie === 'feedback-les') openFeedback(L.les?.id);
   else if (actie === 'snel-win') { try { await navigator.clipboard.writeText(lesAdres()); b.textContent = 'Link gekopieerd'; } catch { b.textContent = lesAdres(); } }
@@ -1199,7 +1235,7 @@ async function naInloggen() {
   toonKennisbank();
   const lessen = magLessen();
   for (const t of ['vandaag', 'skilllijst', 'scorebord', 'maken']) $('tab-' + t).hidden = !magTab(t);
-  if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
+  if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); startMiddagWekker(); }
   toonRonde();
   route();
   const n = Object.keys(S.leden).length;
