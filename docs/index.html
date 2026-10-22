@@ -461,14 +461,12 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
         <div class="velden-rij">
           <label class="veld-label">Vakgebied<select id="m-vakgebied" class="veld"><option>SEO</option><option>CRO</option><option>SEO / AI-search</option><option>SEO × Claude</option><option>CRO × Claude</option><option>Analytics</option></select></label>
           <label class="veld-label">Niveau<select id="m-niveau" class="veld"><option value="basis">Basis</option><option value="gevorderd">Gevorderd</option><option value="expert">Expert</option></select></label>
-          <label class="veld-label">Type<select id="m-type" class="veld"><option value="basis">Basis</option><option value="verdieping">Verdieping</option><option value="nieuws">Nieuws</option></select></label>
-          <label class="veld-label">Volgorde<select id="m-volgorde" class="veld"><option value="opdracht-eerst">Eerst de opdracht</option><option value="uitleg-eerst">Eerst de uitleg</option></select></label>
-        </div>
+          <label class="veld-label">Type<select id="m-type" class="veld"><option value="basis">Basis</option><option value="verdieping">Verdieping</option><option value="nieuws">Nieuws</option></select></label>        </div>
         <div class="velden-rij">
           <label class="veld-label">Onderwerp<input id="m-onderwerp" class="veld" maxlength="80" placeholder="bijv. Core Web Vitals"></label>
           <label class="veld-label">Vaardigheid-id's uit de skilllijst<input id="m-matrix" class="veld" maxlength="120" placeholder="bijv. 1.3.3, 4.2.1"></label>
         </div>
-        <label class="veld-label">Intro (optioneel): context of klantsituatie<textarea id="m-intro" class="antwoord" rows="2" maxlength="1500"></textarea></label>
+        <label class="veld-label">Intro (optioneel): alleen de situatie, max. ~60 woorden. Verklap het antwoord niet: de uitleg komt pas na de opdracht.<textarea id="m-intro" class="antwoord" rows="2" maxlength="1500"></textarea></label>
         <label class="veld-label">Soort opdracht<select id="m-soort" class="veld"><option value="meerkeuze">Meerkeuze</option><option value="open">Open vraag</option><option value="zoek-op">Zoek het op</option><option value="maak-met-claude">Maak het met Claude</option></select></label>
         <label class="veld-label">Vraag of opdracht<textarea id="m-vraag" class="antwoord" rows="3" maxlength="2000"></textarea></label>
         <label class="veld-label">Tip (optioneel)<input id="m-hint" class="veld" maxlength="300"></label>

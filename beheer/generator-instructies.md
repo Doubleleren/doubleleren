@@ -51,6 +51,8 @@ Per soort feedback:
 - **`goed`** (dit gaat goed): gebruik vaker het format, het soort opdracht of het onderwerp dat genoemd wordt.
 - **`bug`**: is voor de beheerder. Doe er niets mee.
 
+**Spoilers in bestaande lessen.** Lessen verschijnen nu altijd met de opdracht eerst (zie "Opbouw" in stap 3). Wil je een eigen les hergebruiken, doe er dan eerst de spoilertoets op. Verraadt de intro of de hint het antwoord, of is de vraag zonder de uitleg niet te begrijpen, herzie de les dan (met `herzien` en `wijziging`) voordat je hem inplant.
+
 **Resultaten per les** (`lesstatistiek`, pas vanaf `n` ≥ 4):
 - **≥ 85% goed:** de les is te makkelijk voor zijn niveau. Gebruik hem niet meer voor ervaren deelnemers (gemiddelde score ≥ ~3,5), en maak nieuwe lessen over die vaardigheid een niveau hoger.
 - **≤ 25% goed:** controleer de les zoals bij `fout`-feedback. Is de vraag dubbelzinnig, is een afleider ook juist of is het antwoord onjuist, repareer hem dan. Klopt alles, dan is hij gewoon moeilijk: zet `niveau` zo nodig een stap hoger (met `herzien` en `wijziging`).
@@ -122,8 +124,7 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
   "onderwerp": "korte onderwerpnaam",
   "matrix": ["vaardigheid-id's uit skilllijst.csv, bijv. 1.3.3"],
   "titel": "pakkende titel, max ~70 tekens",
-  "volgorde": "opdracht-eerst | uitleg-eerst",
-  "intro": "optioneel: 1–2 zinnen context of klantscenario",
+  "intro": "optioneel: alleen de situatie, max ~60 woorden, zonder het antwoord (zie 'Opbouw: eerst zelf nadenken')",
   "opdracht": { "soort": "meerkeuze | open | zoek-op | maak-met-claude", "vraag": "...", "opties": ["4 bij meerkeuze"], "juist": 0, "minTekens": 100, "hint": "optioneel" },
   "toelichting": "optioneel, vooral bij meerkeuze",
   "modelantwoord": "bij open/zoek-op/maak-met-claude",
@@ -136,8 +137,15 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
 ```
 Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJJ-MM-DD"`, `"wijziging": "korte reden"` en eventueel `"actief": false` bij.
 
+**Opbouw: eerst zelf nadenken, dan de uitleg.** Een les verschijnt altijd in deze volgorde: `intro` (de situatie) → `opdracht` → bij meerkeuze goed/fout met `toelichting`, anders het `modelantwoord` → `uitleg`, `kernpunt` en `toepassing`. De deelnemer ziet de uitleg dus pas **na** zijn antwoord. Daarom:
+- **De intro schetst alleen de situatie** (klant, cijfers, wat er speelt), in maximaal ~60 woorden. Geen regels, geen oplossingsrichting, geen opsomming van opties en geen begrippen die het antwoord weggeven.
+- **Spoilertoets** vóór het opslaan: kan iemand die het onderwerp niet kent de vraag goed beantwoorden met alleen de intro en de vraag? Dan verraadt de les zichzelf: herschrijf hem. Hetzelfde geldt voor de `hint`: die wijst een richting aan, maar geeft geen antwoord.
+- **Toepassen, niet navertellen.** Vraag om een keuze, afweging, diagnose of prioriteit in de situatie ("welk van deze filters laat je indexeren, en waarom?"), liever dan om een opsomming die je uit de uitleg kunt overnemen ("noem vijf punten").
+- **Echte beginners** (score 1–2 op die vaardigheid, onderwerp is nieuw): kies meestal meerkeuze. Kiezen tussen plausibele opties lukt ook zonder voorkennis, en de toelichting leert het je. Is een begrip echt nodig om de vraag te snappen, geef dan **één zin definitie** in de intro (wat het is, niet wat je ermee moet doen).
+- `toelichting` (meerkeuze) en `modelantwoord` leggen uit **waarom** het juiste antwoord juist is en waarom de andere opties of veelgemaakte fouten het niet zijn. De `uitleg` daarna verdiept het onderwerp.
+- Het oude veld `volgorde` gebruik je niet meer; website en pop-up negeren het.
+
 **Formats variëren:**
-- **Volgorde:** wissel af tussen eerst de opdracht en eerst de uitleg. Er volgt altijd een uitleg.
 - **Soort opdracht**, ongeveer in deze verhouding:
   - 40% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
   - 25% open: minimaal 80–150 tekens

@@ -335,15 +335,7 @@ try {
     $script:antwoord = ''
     $script:minTekens = if ($o.minTekens) { [int]$o.minTekens } else { 40 }
 
-    function Fase-Uitleg {
-        Leeg
-        Toon-Label 'Uitleg'
-        Toon-Tekst $les.intro
-        Toon-Tekst $les.uitleg
-        $script:uitlegGetoond = $true
-        Voeg-UitstelKnop
-        [void]$knoppen.Children.Add((Nieuw-Knop 'Naar de opdracht  ->' { Fase-Opdracht } -Primair))
-    }
+    # Altijd eerst de opdracht (het oude veld volgorde = uitleg-eerst wordt genegeerd): de uitleg komt na het antwoord
 
     function Fase-Opdracht {
         Leeg
@@ -511,7 +503,6 @@ try {
         }
         $kaart.Margin = Rand 0 0 0 0
         if ($script:skilllijstEerst) { Fase-Skilllijst; Maak-Snapshot '0-skilllijst'; $script:magSluiten = $true; $win.Close(); exit }
-        if ($les.volgorde -eq 'uitleg-eerst') { Fase-Uitleg; Maak-Snapshot '1-uitleg' }
         Fase-Opdracht; Maak-Snapshot '2-opdracht'
         if ($o.soort -eq 'meerkeuze') { $script:keuze = ([int]$o.juist + 1) % @($o.opties).Count }
         else { $script:antwoord = 'Voorbeeldantwoord van de gebruiker om de lay-out te testen.' }
@@ -533,7 +524,7 @@ try {
         $timer.Start()
     }
 
-    if ($script:skilllijstEerst) { Fase-Skilllijst } elseif ($les.volgorde -eq 'uitleg-eerst') { Fase-Uitleg } else { Fase-Opdracht }
+    if ($script:skilllijstEerst) { Fase-Skilllijst } else { Fase-Opdracht }
 
     $app = New-Object Windows.Application
     $app.ShutdownMode = 'OnMainWindowClose'

@@ -972,12 +972,9 @@ function startLes(les) {
   $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">${esc(les.vakgebied || '')}${les.type ? ' · ' + esc(TYPE[les.type] || les.type) : ''}</span>
     <span class="sub">Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'}</span></div><h2>${esc(les.titel)}</h2>`;
   $('snelkoppeling').hidden = true;
-  if (les.volgorde === 'uitleg-eerst') lesUitleg(); else lesOpdracht();
-}
-function lesUitleg() {
-  L.uitlegGetoond = true;
-  $('les-inhoud').innerHTML = lesLabel('Uitleg') + tekstHtml(L.les.intro) + tekstHtml(L.les.uitleg);
-  $('les-knoppen').innerHTML = knop('opdracht', 'Naar de opdracht →', 'zwart');
+  // Altijd eerst zelf nadenken: situatie → opdracht → waarom goed of fout → uitleg. Het oude veld 'volgorde'
+  // (uitleg-eerst) wordt genegeerd: dan stond het antwoord al in beeld vóór de vraag.
+  lesOpdracht();
 }
 function lesOpdracht() {
   const les = L.les, o = les.opdracht;
@@ -1075,7 +1072,6 @@ $('vandaag').addEventListener('click', async (e) => {
   const b = e.target.closest('button[data-actie]'); if (!b || b.disabled) return;
   const actie = b.dataset.actie;
   if (actie === 'volgende-les' && L.status?.volgende) { const les = L.status.volgende; L.status = { les }; startLes(les); }
-  else if (actie === 'opdracht') lesOpdracht();
   else if (actie === 'controleer') lesAfronding();
   else if (actie === 'indienen') { L.antwoord = $('les-antwoord').value.trim(); lesAfronding(); }
   else if (actie === 'naar-mij') tab('mij');
@@ -1113,7 +1109,7 @@ function verzamelLes() {
   const les = {
     id: `${dagKey(nu()).replace(/-/g, '')}-${slug(v('m-titel'))}`, herkomst: 'team',
     type: v('m-type'), niveau: v('m-niveau'), vakgebied: v('m-vakgebied'), onderwerp: v('m-onderwerp'),
-    matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'), volgorde: v('m-volgorde'),
+    matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'),
     opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt')
   };
   for (const [veld, id] of [['intro', 'm-intro'], ['toelichting', 'm-toelichting'], ['modelantwoord', 'm-model'], ['toepassing', 'm-toepassing']]) if (v(id)) les[veld] = v(id);
