@@ -350,8 +350,9 @@ function toonMij() {
     const k = dagKey(d), ls = gedaan.get(k), toekomst = d > vandaag, isVandaag = k === dagKey(vandaag);
     if (toekomst || (vanafAanmelding && k < begin)) cellen.push('<div class="buiten"></div>');
     else if (ls) {
-      n26++; const tip = `${fmtDatum(k)}: ${ls.map(titelVan).join(' · ')}`;
-      cellen.push(`<button type="button" class="gedaan${isVandaag ? ' vandaag' : ''}" data-les="${esc(ls[0].id)}" data-datum="${esc(ls[0].datum)}" data-tip="${esc(tip)}" aria-label="${esc(tip)}"></button>`);
+      // Kleurintensiteit: licht = 1 les, donker = 2 (of meer) lessen die dag
+      n26++; const tip = `${fmtDatum(k)}, ${ls.length} ${ls.length === 1 ? 'les' : 'lessen'}: ${ls.map(titelVan).join(' · ')}`;
+      cellen.push(`<button type="button" class="gedaan${ls.length >= 2 ? ' twee' : ''}${isVandaag ? ' vandaag' : ''}" data-les="${esc(ls[0].id)}" data-datum="${esc(ls[0].datum)}" data-tip="${esc(tip)}" aria-label="${esc(tip)}"></button>`);
     } else cellen.push(`<div${isVandaag ? ' class="vandaag"' : ''} data-tip="${esc(fmtDatum(k) + ': geen les')}"></div>`);
     d.setDate(d.getDate() + 1);
   }

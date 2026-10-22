@@ -89,7 +89,12 @@ details[open] .pijl { transform: rotate(45deg); }
 .kal-box { overflow-x: auto; }
 .kal { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 13px); gap: 3px; width: max-content; }
 .kal div, .kal button { display: block; width: 13px; height: 13px; border-radius: 3px; background: var(--cool-50); border: 0; padding: 0; }
-.kal .gedaan { background: var(--smart-ink); cursor: pointer; }
+.kal .gedaan { background: var(--smart); cursor: pointer; }
+.kal .gedaan.twee { background: var(--smart-ink); }
+.kal-legenda { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.kal-legenda i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; background: var(--cool-50); }
+.kal-legenda i.een { background: var(--smart); margin-left: 8px; }
+.kal-legenda i.twee { background: var(--smart-ink); margin-left: 8px; }
 .kal button.gedaan:hover { outline: 2px solid var(--ink); outline-offset: 0; }
 .kal .vandaag { outline: 2px solid var(--ink); outline-offset: -1px; }
 .kal div.buiten { visibility: hidden; }
@@ -354,7 +359,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
     <section class="twee">
       <div class="stapel">
         <div class="paneel"><div class="paneel-kop"><div><h2>Wat gaat goed, wat minder</h2><p class="sub">Je eigen score naast je resultaten op de lessen die erover gingen. Klik op een vaardigheid voor de lessen.</p></div></div><div id="signalen"></div></div>
-        <div class="paneel"><div class="paneel-kop"><div><h2>Activiteit</h2><p class="sub" id="kal-sub"></p></div></div><div class="kal-box"><div class="kal" id="kal"></div></div><p class="sub">Klik op een gekleurd vakje om de les van die dag terug te lezen.</p></div>
+        <div class="paneel"><div class="paneel-kop"><div><h2>Activiteit</h2><p class="sub" id="kal-sub"></p></div></div><div class="kal-box"><div class="kal" id="kal"></div></div><div class="kal-legenda" aria-hidden="true"><i></i>geen les <i class="een"></i>1 les <i class="twee"></i>2 lessen</div><p class="sub">Klik op een gekleurd vakje om de lessen van die dag terug te lezen.</p></div>
         <div class="paneel" id="sb-instelling" hidden><div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Op het scorebord ziet het team alleen je naam, je aantal goed en je reeks. Nooit je skilllijst, vragen of antwoorden.</p></div></div>
           <label class="schakel"><input type="checkbox" id="sb-zichtbaar" checked> Toon mij op het scorebord</label>
           <p class="sub" id="sb-zichtbaar-status" role="status"></p>
