@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-22T07:50:00",
+    "bijgewerkt":  "2026-10-22T11:03:39",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1050,7 +1050,11 @@
                                     "titel":  "First Contentful Paint (FCP) | web.dev",
                                     "url":  "https://web.dev/articles/fcp"
                                 },
-                       "video":  null,
+                       "video":  {
+                                     "titel":  "The ultimate guide to web performance",
+                                     "kanaal":  "Beyond Fireship",
+                                     "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -1070,7 +1074,11 @@
                                     "titel":  "AI features and your website | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/ai-features"
                                 },
-                       "video":  null,
+                       "video":  {
+                                     "titel":  "What Is GEO and Why It Is Important in 2026",
+                                     "kanaal":  "Hostinger Academy",
+                                     "url":  "https://www.youtube.com/watch?v=TrAVBTFiDQ0"
+                                 },
                        "soort":  "open",
                        "herkomst":  "generator"
                    },
@@ -1109,7 +1117,11 @@
                                     "titel":  "Find slow interactions in the field | web.dev",
                                     "url":  "https://web.dev/articles/find-slow-interactions-in-the-field"
                                 },
-                       "video":  null,
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    },

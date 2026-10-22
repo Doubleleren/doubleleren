@@ -28,5 +28,10 @@
   "bron": {
     "titel": "First Contentful Paint (FCP) | web.dev",
     "url": "https://web.dev/articles/fcp"
+  },
+  "video": {
+    "titel": "The ultimate guide to web performance",
+    "kanaal": "Beyond Fireship",
+    "url": "https://www.youtube.com/watch?v=0fONene3OIA"
   }
 }

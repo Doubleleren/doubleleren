@@ -53,6 +53,8 @@ Per soort feedback:
 
 **Spoilers in bestaande lessen.** Lessen verschijnen nu altijd met de opdracht eerst (zie "Opbouw" in stap 3). Wil je een eigen les hergebruiken, doe er dan eerst de spoilertoets op. Verraadt de intro of de hint het antwoord, of is de vraag zonder de uitleg niet te begrijpen, herzie de les dan (met `herzien` en `wijziging`) voordat je hem inplant.
 
+**Video bij bestaande lessen.** Plan je een eigen les zonder `video` opnieuw in, kijk dan of er in `sjablonen\seo\videos.json` inmiddels een video staat die volgens de regel in stap 3 past. Zo ja, voeg hem toe, met `herzien` (vandaag) en `wijziging: "Kennisvideo toegevoegd."`. Een les met een video laat je zoals hij is.
+
 **Resultaten per les** (`lesstatistiek`, pas vanaf `n` ≥ 4):
 - **≥ 85% goed:** de les is te makkelijk voor zijn niveau. Gebruik hem niet meer voor ervaren deelnemers (gemiddelde score ≥ ~3,5), en maak nieuwe lessen over die vaardigheid een niveau hoger.
 - **≤ 25% goed:** controleer de les zoals bij `fout`-feedback. Is de vraag dubbelzinnig, is een afleider ook juist of is het antwoord onjuist, repareer hem dan. Klopt alles, dan is hij gewoon moeilijk: zet `niveau` zo nodig een stap hoger (met `herzien` en `wijziging`).
@@ -111,7 +113,7 @@ Meerdere lessen over hetzelfde onderwerp zijn juist goed, maar **elke les is een
 
 Ook voorraadlessen zijn feitelijk geverifieerd en hebben een bestaande bron. Liever 7 goede dan 10 matige.
 
-**Kennisvideo (optioneel).** `sjablonen\seo\videos.json` bevat gecontroleerde YouTube-video's per categorie en focus. Voeg `video` (titel, kanaal en url precies overgenomen uit die lijst) alleen toe als de video **echt over het onderwerp van de les gaat**, niet alleen over hetzelfde vakgebied. Twijfel je, laat het weg. Een les zonder video is prima. Gebruik nooit een video die niet in de lijst staat. Onder de bron verschijnt dan: "Wil je er meer over weten? Kijk deze video".
+**Kennisvideo (optioneel).** `sjablonen\seo\videos.json` bevat gecontroleerde YouTube-video's per categorie en focus. Voeg `video` (titel, kanaal en url precies overgenomen uit die lijst) alleen toe als de video **echt over het onderwerp van de les gaat**, niet alleen over hetzelfde vakgebied. Kijk daarvoor vooral naar het veld `focus`: behandelt de video hetzelfde concept dat de les toetst, dan past hij, ook als de titel algemener klinkt. Voorbeelden: een les over het verschil tussen Lighthouse en velddata past bij de video met focus "Lab data vs. Field data"; een les over een GEO-aanbod past bij "GEO Framework & LLMs". Twijfel je dan nog, laat het weg. Een les zonder video is prima. Gebruik nooit een video die niet in de lijst staat. Onder de bron verschijnt dan: "Wil je er meer over weten? Kijk deze video".
 
 Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoonlijk**: schrijf hem zo dat hij voor iedereen op dat niveau bruikbaar is. Schema:
 
