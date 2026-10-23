@@ -1,0 +1,31 @@
+{
+  "id": "20261023-magento-canonical-categoriepad",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Magento: dubbele product-URL's door het categoriepad",
+  "matrix": [
+    "5.1.7"
+  ],
+  "titel": "Eén rugzak, drie URL's: welke Magento-instelling pak je eerst aan?",
+  "intro": "In een Magento 2-webshop (Adobe Commerce) staat 'Use Categories Path for Product URLs' aan. Daardoor is dezelfde rugzak bereikbaar via /tassen/rugzak-x.html, /sale/rugzak-x.html en /rugzak-x.html. Search Console toont de sale-URL als de canonieke versie die Google koos. De sale stopt over twee weken, en dan verdwijnt die categorie.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing adviseer je als eerste?",
+    "opties": [
+      "Zet 'Use Canonical Link Meta Tag For Products' op Yes, zodat elke productpagina een canonical krijgt naar domein/product-url-key.",
+      "Zet in robots.txt een Disallow op /sale/, zodat Google die productpagina's niet meer kan bereiken.",
+      "Maak in URL Rewrites voor elke product-URL met een categoriepad een 302-redirect naar de URL zonder categoriepad.",
+      "Zet de sale-categoriepagina op noindex en laat de productpagina's verder zoals ze zijn."
+    ],
+    "juist": 0
+  },
+  "toelichting": "Met **Use Canonical Link Meta Tag For Products** krijgt elke productpagina een canonical naar domein/product-url-key. Dat kan, omdat de URL-key van een product uniek is in de hele winkel. Ook als het categoriepad in de URL blijft staan, wijst de canonical naar die korte URL. Adobe raadt aan canonicals voor zowel producten als categorieën aan te zetten.\n\n- **robots.txt** blokkeert het crawlen. Google ziet dan ook de canonical op die pagina's niet en kan de URL's toch zonder inhoud indexeren.\n- **302's** zijn tijdelijke redirects, en duizenden losse rewrites zijn foutgevoelig.\n- **noindex op de categoriepagina** geldt alleen voor die pagina zelf, niet voor de product-URL's met /sale/ erin.",
+  "uitleg": "Magento kan product-URL's maken met en zonder categoriepad. Staat **Use Categories Path for Product URLs** aan, dan krijgt een product in drie categorieën al snel drie of meer URL's. Adobe waarschuwt zelf dat dit dubbele URL's kan opleveren.\n\nDe instellingen staan onder Stores → Settings → Configuration → Catalog → Catalog → Search Engine Optimization. Haal eerst het vinkje 'Use system value' weg voordat je iets wijzigt.\n\nDe aanpak in drie stappen:\n- **Canonical aanzetten** voor producten en categorieën. Productpagina's wijzen dan naar de korte URL zonder categoriepad.\n- **Interne links gelijktrekken.** Een canonical is een sterk signaal, geen bevel. Linken menu, sitemap en categoriepagina's naar een andere variant, dan kan Google toch een andere URL kiezen. Overweeg daarom ook het categoriepad uit te zetten, zodat alleen nog de korte URL's worden gelinkt.\n- **Controleren.** Kijk na een paar weken met de URL-inspectie welke canonical Google kiest.\n\nWaarom haast hierbij? Als Google een tijdelijke categorie-URL als canonical kiest, verdwijnt die straks samen met de categorie.",
+  "kernpunt": "Zet in Magento de canonical voor producten aan, zodat elke productpagina naar domein/product-url-key wijst. Trek daarna de interne links gelijk, anders kiest Google toch een andere URL.",
+  "toepassing": "Open bij een Magento-klant een product dat in meerdere categorieën zit. Kijk in de broncode welke canonical er staat en of het menu naar dezelfde URL linkt.",
+  "bron": {
+    "titel": "Meta data | Adobe Commerce (Experience League)",
+    "url": "https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/meta-data"
+  }
+}

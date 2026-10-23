@@ -1,0 +1,26 @@
+{
+  "id": "20261023-steekproefgrootte-mde-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO × Claude",
+  "onderwerp": "A/B-testen: steekproefgrootte en minimum detectable effect",
+  "matrix": [
+    "7.2.1"
+  ],
+  "titel": "'Binnen twee weken weten of het beter is': kan dat met deze cijfers?",
+  "intro": "De offertepagina van een B2B-site krijgt 6.000 bezoekers per week, en 3% daarvan vraagt een offerte aan. De klant wil een nieuw formulier A/B-testen tegen het huidige en 'binnen twee weken' weten of het beter werkt. Hij hoopt op 10% meer aanvragen, dus van 3,0% naar 3,3%.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Laat Claude uitrekenen hoeveel bezoekers per variant nodig zijn bij een significantieniveau van 5% en een power van 80%, en hoe lang de test dan moet lopen. Vraag Claude de berekening te laten zien en controleer de uitkomst met de sample size calculator van Evan Miller. Schrijf je prompt op, en je advies aan de klant in maximaal vijf zinnen.",
+    "minTekens": 150,
+    "hint": "Let op of Claude met een relatief of een absoluut verschil rekent."
+  },
+  "modelantwoord": "Voorbeeldprompt: 'Bereken de steekproefgrootte per variant voor een A/B-test met twee varianten. Basisconversie 3,0%, gewenst te detecteren effect: van 3,0% naar 3,3% (relatief +10%, absoluut +0,3 procentpunt). Tweezijdig, alfa 0,05, power 0,80. Laat de formule en tussenstappen zien. Bereken daarna de looptijd bij 6.000 bezoekers per week, verdeeld over twee varianten. Geef ook aan welk effect we na twee weken wel zouden kunnen aantonen.'\n\nUitkomst: ongeveer **53.000 bezoekers per variant**, dus zo'n 106.000 in totaal. Bij 6.000 per week is dat ongeveer **18 weken**. In twee weken (12.000 bezoekers) kun je alleen een effect van ruwweg 30% relatief betrouwbaar aantonen. De calculator van Evan Miller geeft dezelfde orde van grootte.\n\nAdvies aan de klant: in twee weken kunnen we een verbetering van 10% niet betrouwbaar aantonen; daarvoor is de test ruim vier maanden nodig. Een korte test levert vooral toeval op. Alternatieven: test een grotere verandering, meet een stap met meer verkeer (zoals het starten van het formulier), of verbeter het formulier op basis van onderzoek (sessie-opnames, gebruikerstests) zonder A/B-test.\n\nVeelgemaakte fouten: rekenen met 10 procentpunt in plaats van 10% relatief, het aantal per variant aanzien voor het totaal, of de test toch na twee weken stoppen 'omdat er al een winnaar is'.",
+  "uitleg": "Voordat je een A/B-test start, bepaal je hoeveel bezoekers je nodig hebt. Daarvoor heb je vier dingen nodig:\n- **Basisconversie:** hoe goed de huidige versie converteert.\n- **Minimum detectable effect (MDE):** het kleinste verschil dat je wilt kunnen aantonen. Zeg er altijd bij of het relatief (+10%) of absoluut (+0,3 procentpunt) is.\n- **Significantieniveau (alfa):** hoe vaak je een verschil 'vindt' dat er niet is. Meestal 5%.\n- **Power (1 − bèta):** hoe vaak je het effect vindt als het er echt is. Meestal 80%.\n\nHoe lager de conversie en hoe kleiner het effect, hoe meer bezoekers je nodig hebt. Halveer je de MDE, dan heb je ongeveer vier keer zoveel bezoekers nodig. Daarom zijn kleine verbeteringen op pagina's met weinig verkeer in de praktijk vaak niet te testen.\n\nClaude is handig om de berekening uit te leggen en scenario's te vergelijken: wat als we 20% willen aantonen, of een stap met meer verkeer meten? Laat Claude altijd de tussenstappen tonen en controleer het eindgetal met een vaste calculator. Een taalmodel kan zich verrekenen, en een verwisseling van relatief en absoluut levert een totaal ander getal op.\n\nLeg steekproef en looptijd vast vóór de start. Wie tussentijds stopt zodra het dashboard 'winnaar' zegt, krijgt veel vaker een vals positief resultaat.",
+  "kernpunt": "Reken vóór elke A/B-test uit hoeveel bezoekers je nodig hebt voor het effect dat je wilt aantonen. Is dat niet haalbaar, test dan een grotere verandering, een stap met meer verkeer, of kies een andere onderzoeksmethode.",
+  "toepassing": "Reken deze week voor de eerstvolgende geplande test bij een klant de steekproefgrootte en looptijd uit, en zet die in het testplan voordat de test start.",
+  "bron": {
+    "titel": "Evan Miller: Sample Size Calculator",
+    "url": "https://www.evanmiller.org/ab-testing/sample-size.html"
+  }
+}

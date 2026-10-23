@@ -1,0 +1,32 @@
+{
+  "id": "20261023-gecrawld-of-gevonden-niet-geindexeerd",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Pagina-indexering: Gecrawld of Gevonden, maar niet geïndexeerd",
+  "matrix": [
+    "1.5.1",
+    "1.5.3"
+  ],
+  "titel": "2.240 URL's niet geïndexeerd: allemaal opnieuw indienen?",
+  "intro": "In het rapport Pagina-indexering van een klant met een grote blog staan 340 URL's met de status 'Gecrawld - momenteel niet geïndexeerd' en 1.900 met 'Gevonden - momenteel niet geïndexeerd'. De klant wil alle 2.240 URL's één voor één opnieuw indienen via de URL-inspectie.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de Search Console Help op wat beide statussen betekenen. Leg uit wat het verschil is, of opnieuw indienen zin heeft, en waar je bij de groep van 1.900 als eerste naar kijkt.",
+    "minTekens": 120,
+    "hint": "Zoek de helppagina over het rapport Pagina-indexering en lees de redenen waarom pagina's niet zijn geïndexeerd."
+  },
+  "modelantwoord": "**Gecrawld - momenteel niet geïndexeerd:** Google heeft de pagina bezocht, maar (nog) niet geïndexeerd. Volgens Google kan dat later alsnog gebeuren, en hoef je de URL niet opnieuw in te dienen. In de praktijk vindt Google zulke pagina's vaak niet waardevol of uniek genoeg. Verbeter ze, voeg ze samen of ruim ze op.\n\n**Gevonden - momenteel niet geïndexeerd:** Google kent de URL, maar heeft hem nog niet gecrawld. Meestal wilde Google wel crawlen, maar verwachtte het dat de site dat niet aankon, en is het crawlen uitgesteld. In het rapport is de laatste crawldatum daarom leeg.\n\nOpnieuw indienen heeft weinig zin: het probleem zit niet in het ontdekken van de URL's. De URL-inspectie is ook bedoeld voor losse URL's, niet voor duizenden.\n\nBij de 1.900: kijk eerst in de Crawlstatistieken naar de hoststatus en de reactietijd van de server. Kijk daarna of het om URL's gaat die je wilt laten indexeren, zoals artikelen, of om tagpagina's, parameters en archieven die crawltijd opslokken.",
+  "uitleg": "De twee statussen lijken op elkaar, maar zitten in een andere fase van het proces.\n\n- **Gevonden** = ontdekt, nog niet bezocht. Google heeft de URL ergens gezien (in een link of sitemap), maar het crawlen uitgesteld. Google noemt als gebruikelijke reden dat crawlen de site zou overbelasten. Bij grote aantallen kijk je dus naar serversnelheid en naar hoeveel overbodige URL's de site Google aanbiedt.\n- **Gecrawld** = bezocht, niet opgenomen. Hier speelt crawlcapaciteit geen rol. Google heeft de pagina gezien en voorlopig besloten hem niet te indexeren. Dunne, verouderde of erg op elkaar lijkende pagina's eindigen vaak hier.\n\nVoor beide geldt: dit zijn geen fouten die je kunt 'repareren' met een knop. Opnieuw indienen verandert niets aan de reden. Je verbetert de situatie door:\n- minder overbodige URL's te laten crawlen;\n- belangrijke pagina's beter intern te linken;\n- zwakke pagina's te verbeteren, samen te voegen of te verwijderen;\n- de server sneller en stabieler te maken.\n\nKijk ook altijd of de URL's in de lijst er echt toe doen. Een paar honderd niet-geïndexeerde tagpagina's is geen probleem.",
+  "kernpunt": "Gevonden = Google heeft de URL nog niet gecrawld, vaak uit zorg voor de server. Gecrawld = bezocht, maar (nog) niet waardevol genoeg bevonden. Opnieuw indienen lost geen van beide op.",
+  "toepassing": "Exporteer deze week bij één klant de voorbeelden van beide statussen. Deel ze in per paginatype (artikel, tag, parameter) en bepaal per type of het geïndexeerd moet worden.",
+  "bron": {
+    "titel": "Page indexing report - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/7440203"
+  },
+  "video": {
+    "titel": "[Solved] Discovered / Crawled - Currently Not Indexed Issue in Google Search Console",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=S5hcOZmslBw"
+  }
+}

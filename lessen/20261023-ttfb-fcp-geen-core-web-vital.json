@@ -1,0 +1,26 @@
+{
+  "id": "20261023-ttfb-fcp-geen-core-web-vital",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: welke metrics tellen, en wat doe je met de rest?",
+  "matrix": [
+    "5.2.1",
+    "5.2.10"
+  ],
+  "titel": "TTFB en FCP staan op oranje: zakt de klant voor de Core Web Vitals?",
+  "intro": "Een klant mailt bezorgd. In PageSpeed Insights staan voor de mobiele homepage op basis van velddata (de afgelopen 28 dagen) deze waarden:\n\n- TTFB 1,2 s (oranje)\n- FCP 2,4 s (oranje)\n- LCP 2,3 s\n- INP 150 ms\n- CLS 0,04\n\n'We zakken nu toch voor de Core Web Vitals?'",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat antwoord je de klant? Zakt de pagina voor de Core Web Vitals, en wat doe je met de oranje TTFB en FCP?",
+    "minTekens": 120
+  },
+  "modelantwoord": "Nee, de pagina slaagt. De Core Web Vitals zijn **LCP, INP en CLS**, en alle drie zijn goed: LCP 2,3 s (goed is maximaal 2,5 s), INP 150 ms (maximaal 200 ms) en CLS 0,04 (maximaal 0,1). Dat is beoordeeld op het 75e percentiel van echte bezoeken.\n\nTTFB en FCP zijn **ondersteunende metrics**, geen Core Web Vitals. Ze helpen verklaren waarom een Core Web Vital goed of slecht is.\n\nToch zou ik ze niet negeren. De LCP zit met 2,3 s dicht tegen de grens, en de TTFB van 1,2 s is daar al een groot deel van. Een tragere server of een drukke periode kan de LCP zo boven de 2,5 s duwen. Een snellere TTFB, bijvoorbeeld via caching of een CDN, geeft dus marge.\n\nVeelgemaakte fouten: elke oranje waarde in PageSpeed Insights als 'gezakt' zien, of TTFB en FCP wegzetten als onbelangrijk terwijl ze de LCP direct beïnvloeden.",
+  "uitleg": "De **Core Web Vitals** zijn drie metrics, elk voor een deel van de gebruikerservaring:\n- **LCP** (laden): goed bij maximaal 2,5 seconde.\n- **INP** (reageren op interactie): goed bij maximaal 200 milliseconden.\n- **CLS** (visuele stabiliteit): goed bij maximaal 0,1.\n\nEen pagina slaagt als alle drie goed zijn op het **75e percentiel** van de paginaweergaven, apart gemeten voor mobiel en desktop. Dus niet het gemiddelde: driekwart van de bezoeken moet onder de grens blijven.\n\nDaarnaast zijn er **ondersteunende metrics**, zoals TTFB en FCP. Die tellen niet mee in het oordeel, maar zijn handig om problemen te vinden:\n- Een trage **TTFB** wijst op de server: hosting, caching, redirects of een verre locatie. Dat vertraagt alles wat daarna komt, ook de LCP.\n- Een trage **FCP** bij een goede TTFB wijst meestal op render-blocking CSS, scripts of fonts.\n\nIn een rapport voor de klant houd je die twee groepen uit elkaar. De Core Web Vitals zijn het oordeel, de ondersteunende metrics zijn de diagnose. Zit een Core Web Vital dicht bij de grens, kijk dan welke ondersteunende metric de meeste tijd kost.",
+  "kernpunt": "Alleen LCP, INP en CLS zijn Core Web Vitals, beoordeeld op het 75e percentiel. TTFB en FCP tellen niet mee in het oordeel, maar verklaren wel waarom vooral de LCP goed of slecht is.",
+  "toepassing": "Kijk deze week in je eigen rapportage of je TTFB en FCP apart zet van de drie Core Web Vitals. Noteer bij elke klant met een LCP tussen 2 en 2,5 s hoeveel daarvan de TTFB is.",
+  "bron": {
+    "titel": "Web Vitals | web.dev",
+    "url": "https://web.dev/articles/vitals"
+  }
+}

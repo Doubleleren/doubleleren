@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-22T11:03:39",
+    "bijgewerkt":  "2026-10-23T04:27:11",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1223,6 +1223,226 @@
                        "bron":  {
                                     "titel":  "Intro to Product structured data on Google | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/product"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-checkout-verrassingskosten",
+                       "titel":  "62% haakt af bij \u0027Verzending\u0027: waar ligt dat aan?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Checkout: afhaken door extra kosten",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Onverwachte extra kosten zijn de meestgenoemde reden om af te haken in de checkout. Laat bezorgkosten zien vóórdat de bezoeker gaat afrekenen, en leg uit waar ze voor zijn.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: Cart \u0026 Checkout Abandonment Rate Statistics",
+                                    "url":  "https://baymard.com/lists/cart-abandonment-rate"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-css-media-renderblokkade",
+                       "titel":  "Drie stylesheets in de head: welke houdt de smartphone op?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "CSS: welke stylesheets blokkeren het renderen?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.6"
+                                  ],
+                       "kernpunt":  "CSS blokkeert het renderen, tenzij een media-attribuut zegt dat de stylesheet nu niet geldt. De browser downloadt zo\u0027n bestand wel, maar wacht er niet op.",
+                       "bron":  {
+                                    "titel":  "Render blocking CSS | web.dev",
+                                    "url":  "https://web.dev/articles/critical-rendering-path/render-blocking-css"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-gecrawld-of-gevonden-niet-geindexeerd",
+                       "titel":  "2.240 URL\u0027s niet geïndexeerd: allemaal opnieuw indienen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Pagina-indexering: Gecrawld of Gevonden, maar niet geïndexeerd",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.1",
+                                      "1.5.3"
+                                  ],
+                       "kernpunt":  "Gevonden = Google heeft de URL nog niet gecrawld, vaak uit zorg voor de server. Gecrawld = bezocht, maar (nog) niet waardevol genoeg bevonden. Opnieuw indienen lost geen van beide op.",
+                       "bron":  {
+                                    "titel":  "Page indexing report - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/7440203"
+                                },
+                       "video":  {
+                                     "titel":  "[Solved] Discovered / Crawled - Currently Not Indexed Issue in Google Search Console",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=S5hcOZmslBw"
+                                 },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-javascript-inhoud-na-klik",
+                       "titel":  "Productbeschrijving achter \u0027Lees meer\u0027: ziet Google die tekst?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "JavaScript: content die pas na een klik laadt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.3"
+                                  ],
+                       "kernpunt":  "Google rendert JavaScript, maar klikt niet. Wat pas na een klik wordt opgehaald, bestaat voor Google niet; zet het bij het laden al in de pagina.",
+                       "bron":  {
+                                    "titel":  "Fix lazy-loaded content | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading"
+                                },
+                       "video":  {
+                                     "titel":  "Essential JavaScript SEO tips - JavaScript SEO",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=nwGY-9lwTF4"
+                                 },
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-magento-canonical-categoriepad",
+                       "titel":  "Eén rugzak, drie URL\u0027s: welke Magento-instelling pak je eerst aan?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Magento: dubbele product-URL\u0027s door het categoriepad",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.7"
+                                  ],
+                       "kernpunt":  "Zet in Magento de canonical voor producten aan, zodat elke productpagina naar domein/product-url-key wijst. Trek daarna de interne links gelijk, anders kiest Google toch een andere URL.",
+                       "bron":  {
+                                    "titel":  "Meta data | Adobe Commerce (Experience League)",
+                                    "url":  "https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/meta-data"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-news-sitemap-regels",
+                       "titel":  "Een news sitemap met 14.000 artikelen: wat klopt er niet?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "News sitemaps: de regels van Google",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.4.3"
+                                  ],
+                       "kernpunt":  "Een news sitemap bevat alleen artikelen van de laatste twee dagen (maximaal 1.000), met news:publication, publication_date en title, en je werkt hem bij in plaats van steeds een nieuwe te maken.",
+                       "bron":  {
+                                    "titel":  "Create a News sitemap | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-python-redirectcheck-claude",
+                       "titel":  "2.000 redirects na een migratie: laat Claude het Python-script schrijven",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Python: redirects controleren met een script van Claude",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.5"
+                                  ],
+                       "kernpunt":  "Een redirectcheck in Python legt de hele keten vast via response.history, gebruikt altijd een timeout en vergelijkt de eind-URL met de verwachte URL. Controleer steekproefsgewijs voordat je de uitkomst deelt.",
+                       "bron":  {
+                                    "titel":  "Requests: Quickstart (Redirection and History, Timeouts)",
+                                    "url":  "https://requests.readthedocs.io/en/latest/user/quickstart/"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-robots-txt-ai-gebruik",
+                       "titel":  "\u0027No-AI-Training\u0027 in robots.txt: houdt dat Gemini echt tegen?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "robots.txt en AI-gebruik: Google-Extended",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "robots.txt regelt wie mag crawlen, niet wat er met de content gebeurt. Voor Gemini-training en grounding gebruik je het token Google-Extended; dat raakt Google Search niet.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: Google Explains The Limit Of Robots.txt For AI Content Use",
+                                    "url":  "https://www.searchenginejournal.com/google-illyes-robots-txt-crawling-ai-training/593957/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-steekproefgrootte-mde-claude",
+                       "titel":  "\u0027Binnen twee weken weten of het beter is\u0027: kan dat met deze cijfers?",
+                       "vakgebied":  "CRO × Claude",
+                       "onderwerp":  "A/B-testen: steekproefgrootte en minimum detectable effect",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Reken vóór elke A/B-test uit hoeveel bezoekers je nodig hebt voor het effect dat je wilt aantonen. Is dat niet haalbaar, test dan een grotere verandering, een stap met meer verkeer, of kies een andere onderzoeksmethode.",
+                       "bron":  {
+                                    "titel":  "Evan Miller: Sample Size Calculator",
+                                    "url":  "https://www.evanmiller.org/ab-testing/sample-size.html"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-ttfb-fcp-geen-core-web-vital",
+                       "titel":  "TTFB en FCP staan op oranje: zakt de klant voor de Core Web Vitals?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: welke metrics tellen, en wat doe je met de rest?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.1",
+                                      "5.2.10"
+                                  ],
+                       "kernpunt":  "Alleen LCP, INP en CLS zijn Core Web Vitals, beoordeeld op het 75e percentiel. TTFB en FCP tellen niet mee in het oordeel, maar verklaren wel waarom vooral de LCP goed of slecht is.",
+                       "bron":  {
+                                    "titel":  "Web Vitals | web.dev",
+                                    "url":  "https://web.dev/articles/vitals"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261023-verwijderingen-tijdelijk",
+                       "titel":  "Staging-site uit Google gehaald met Verwijderingen: klaar?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "De tool Verwijderingen in Search Console",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.2"
+                                  ],
+                       "kernpunt":  "Verwijderingen verbergt URL\u0027s maar ongeveer zes maanden. Blijvend weg krijg je ze alleen met een wachtwoord, noindex of een 404/410, niet met robots.txt.",
+                       "bron":  {
+                                    "titel":  "Removals and SafeSearch reports Tool - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/9689846"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

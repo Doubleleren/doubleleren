@@ -1,0 +1,25 @@
+{
+  "id": "20261023-checkout-verrassingskosten",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Checkout: afhaken door extra kosten",
+  "matrix": [
+    "7.1.1"
+  ],
+  "titel": "62% haakt af bij 'Verzending': waar ligt dat aan?",
+  "intro": "Een webshop in tuinmeubelen ziet in een GA4-funnel dat 62% van de bezoekers die de checkout starten, afhaakt op de stap 'Verzending'. Daar worden de bezorgkosten berekend: € 49 voor grote meubels. Op productpagina's en in het winkelmandje staat 'Bezorging: berekend bij afrekenen'. Mobiel en desktop laten hetzelfde beeld zien.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat is volgens jou de belangrijkste oorzaak van het afhaken in deze stap? Welke twee aanpassingen stel je voor om als eerste te testen, en waarom?",
+    "minTekens": 120
+  },
+  "modelantwoord": "Belangrijkste oorzaak: **onverwachte extra kosten**. De bezoeker ziet de € 49 pas als hij al heeft besloten te kopen. In het onderzoek van Baymard is 'extra kosten te hoog' de meestgenoemde reden om af te haken in de checkout (40% van wie afhaakte, als je 'alleen rondkijken' niet meetelt). Daarnaast haakt 12% af omdat de totale prijs niet vooraf te zien was.\n\nTwee aanpassingen om te testen:\n- **Bezorgkosten eerder tonen:** op de productpagina en in het winkelmandje, bijvoorbeeld met 'Bezorging € 49 (twee bezorgers, tot in huis)' of een berekening op postcode. Zo is er geen verrassing meer.\n- **De kosten anders verpakken:** gratis bezorging boven een bepaald bedrag, of de kosten in de productprijs opnemen. Leg uit waarom de bezorging iets kost.\n\nMeet daarna niet alleen de afhaakratio in de stap 'Verzending', maar ook de conversie en de omzet per bezoeker. Als bezoekers de kosten vooraf zien, kan het afhaken verschuiven naar de productpagina.\n\nVeelgemaakte fout: meteen de stap zelf gaan herontwerpen (knoppen, velden), terwijl het probleem de prijsverrassing is.",
+  "uitleg": "Een hoge uitval in één checkoutstap vertelt je **waar** bezoekers afhaken, nog niet **waarom**. Kijk daarom wat er in die stap voor het eerst gebeurt. Verschijnt daar nieuwe informatie, zoals een prijs, een verplicht account of een lange levertijd, dan is dat je eerste verdachte.\n\nBaymard Institute verzamelt al jaren onderzoek naar het afhaken in de checkout. Gemiddeld laat ongeveer 70% van de bezoekers het winkelmandje achter. De belangrijkste redenen, naast 'ik keek alleen rond':\n- extra kosten te hoog (verzending, belasting, toeslagen): 40%\n- levering te traag: 20%\n- geen vertrouwen om betaalgegevens in te vullen: 19%\n- account verplicht: 18%\n- checkout te lang of te ingewikkeld: 17%\n- totale prijs niet vooraf te zien: 12%\n\nVerrassingskosten combineren twee van die redenen: de kosten zijn hoog én komen onverwacht. Bij grote, zware producten zijn hoge bezorgkosten vaak onvermijdelijk. Het verschil zit dan in het moment waarop je ze laat zien en hoe je ze uitlegt.\n\nCheck je vermoeden met kwalitatieve data voordat je test: een exit-poll in de stap 'Verzending', sessie-opnames of klantenservicevragen over bezorgkosten.",
+  "kernpunt": "Onverwachte extra kosten zijn de meestgenoemde reden om af te haken in de checkout. Laat bezorgkosten zien vóórdat de bezoeker gaat afrekenen, en leg uit waar ze voor zijn.",
+  "toepassing": "Loop deze week bij een webshopklant het koopproces door als nieuwe bezoeker. Noteer in welke stap je de bezorgkosten en de totaalprijs voor het eerst ziet.",
+  "bron": {
+    "titel": "Baymard Institute: Cart & Checkout Abandonment Rate Statistics",
+    "url": "https://baymard.com/lists/cart-abandonment-rate"
+  }
+}

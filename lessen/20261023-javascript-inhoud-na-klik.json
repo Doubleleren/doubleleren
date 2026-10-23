@@ -1,0 +1,31 @@
+{
+  "id": "20261023-javascript-inhoud-na-klik",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "JavaScript: content die pas na een klik laadt",
+  "matrix": [
+    "5.3.3"
+  ],
+  "titel": "Productbeschrijving achter 'Lees meer': ziet Google die tekst?",
+  "intro": "Een kledingwebshop toont op productpagina's eerst twee regels tekst. De volledige beschrijving, de maattabel en de reviews worden pas met JavaScript van de server opgehaald als een bezoeker op 'Lees meer' klikt. In de HTML die bij het laden binnenkomt, staat alleen die knop.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat ziet Google van de beschrijving, de maattabel en de reviews? Wat adviseer je de developer, en hoe controleer je daarna of het werkt?",
+    "minTekens": 100,
+    "hint": "Denk na over wat Google wél doet met JavaScript, en wat een bezoeker doet dat Google niet doet."
+  },
+  "modelantwoord": "Google rendert de pagina wel met JavaScript, maar **klikt nergens op**. Content die pas na een klik wordt opgehaald, krijgt Google dus niet te zien. De beschrijving, de maattabel en de reviews tellen niet mee voor de ranking van de pagina.\n\nAdvies: laad de tekst meteen mee bij het openen van de pagina, het liefst in de HTML van de server. Wil de webshop de pagina kort houden, klap de tekst dan alleen visueel in. De knop toont of verbergt dan tekst die al op de pagina staat, in plaats van die op te halen.\n\nControle: gebruik de URL-inspectie in Search Console, test de live URL en bekijk de gerenderde HTML. Staat de volledige beschrijving daarin, dan kan Google hem lezen.\n\nVeelgemaakte fout: denken dat 'Google rendert JavaScript' betekent dat alles wat een bezoeker ooit kan zien, ook wordt geïndexeerd.",
+  "uitleg": "Google verwerkt JavaScript-pagina's in drie stappen: **crawlen, renderen en indexeren**. Bij het renderen voert een headless Chromium het JavaScript uit, soms pas na een tijd in de wachtrij. De HTML die daaruit komt, gebruikt Google om de pagina te indexeren.\n\nGoogle doet dan wat de pagina bij het laden doet, maar gedraagt zich niet als een bezoeker. Google klikt niet, scrolt niet zoals een mens en vult niets in. Google zegt daarom in zijn richtlijnen over lazy loading: laat het laden van content niet afhangen van acties van de gebruiker, zoals scrollen of klikken.\n\nVeilige patronen:\n- **Content staat bij het laden al in de pagina** en wordt alleen visueel ingeklapt (tabs, accordeons).\n- **Lazy loading op basis van zichtbaarheid** (laden zodra iets in beeld komt), niet op basis van een klik.\n- **Oneindig scrollen met eigen URL's** per deel, zodat Google elk deel apart kan bereiken.\n\nRiskante patronen zijn 'Toon meer'-knoppen die nieuwe content ophalen, reviews die pas na een klik laden en tabs die hun inhoud pas bij openen opvragen.",
+  "kernpunt": "Google rendert JavaScript, maar klikt niet. Wat pas na een klik wordt opgehaald, bestaat voor Google niet; zet het bij het laden al in de pagina.",
+  "toepassing": "Test deze week een productpagina van een klant met de URL-inspectie (live test) en zoek in de gerenderde HTML een zin uit de reviews of de beschrijving. Staat hij er niet in, dan heb je een concreet ticket voor de developer.",
+  "bron": {
+    "titel": "Fix lazy-loaded content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading"
+  },
+  "video": {
+    "titel": "Essential JavaScript SEO tips - JavaScript SEO",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=nwGY-9lwTF4"
+  }
+}

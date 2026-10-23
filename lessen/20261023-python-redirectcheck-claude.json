@@ -1,0 +1,26 @@
+{
+  "id": "20261023-python-redirectcheck-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Python: redirects controleren met een script van Claude",
+  "matrix": [
+    "5.3.5"
+  ],
+  "titel": "2.000 redirects na een migratie: laat Claude het Python-script schrijven",
+  "intro": "Na een migratie heeft een klant een CSV met 2.000 oude URL's en de nieuwe URL waar elk ervan naartoe moet. Elke oude URL hoort met één 301 op de juiste nieuwe pagina uit te komen, die een 200 geeft. De licentie van je crawler is net verlopen, en een collega stelt voor om Claude een klein Python-script te laten schrijven.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee je Claude dit script laat maken. Geef aan wat het script per URL moet vastleggen, waar het op moet letten en in welk formaat je de uitkomst wilt. Laat Claude het script schrijven, draai het op een stuk van de lijst en beschrijf in twee zinnen wat je controleert voordat je de uitkomst aan de klant geeft.",
+    "minTekens": 150,
+    "hint": "Een redirect gaat niet altijd in één stap, en een server antwoordt niet altijd."
+  },
+  "modelantwoord": "Een goede prompt bevat:\n- **Context:** 'Ik controleer redirects na een migratie. Input: redirects.csv met de kolommen oud en verwacht.'\n- **Techniek:** Python met de library requests, GET met allow_redirects=True, een timeout per verzoek (bijv. 10 seconden), een herkenbare User-Agent en een korte pauze tussen verzoeken om de server niet te belasten.\n- **Per URL vastleggen:** elke stap in de keten (statuscode en URL, via response.history), het aantal stappen, de eind-URL en de eindstatus.\n- **Markeren:** meer dan één stap (keten), een 302 of 307 waar een 301 hoort, een eindstatus die geen 200 is, een eind-URL die niet gelijk is aan de verwachte URL, en timeouts of verbindingsfouten.\n- **Output:** een CSV met één regel per oude URL plus een korte samenvatting met aantallen per probleem.\n\nControle: test eerst 20 URL's en check er een paar met de hand in de browser of met een header-checker. Kijk daarna hoeveel timeouts en fouten er zijn, voordat je conclusies trekt over de hele lijst.\n\nVeelgemaakte fout: requests.head gebruiken zonder allow_redirects=True. HEAD volgt in requests standaard geen redirects, dus dan zie je alleen de eerste stap.",
+  "uitleg": "Je hoeft geen programmeur te zijn om Python te gebruiken voor SEO-checks, maar je moet wel snappen wat het script doet. Dan kun je Claude gericht laten bouwen en de uitkomst beoordelen.\n\nDe library **requests** is de standaard om in Python webpagina's op te vragen. Drie dingen uit de documentatie die je bij redirects moet weten:\n- **response.history** bevat alle tussenstappen, van oud naar nieuw. Zo zie je ketens zoals 301 → 302 → 200.\n- **HEAD volgt standaard geen redirects,** de andere methodes wel. Met allow_redirects bepaal je het zelf.\n- **Zonder timeout wacht requests eindeloos.** De documentatie raadt aan om in vrijwel alle productiecode een timeout mee te geven.\n\nLaat Claude het script ook uitleggen. Vraag bijvoorbeeld: 'Wat gebeurt er als een URL niet reageert?' Zo vind je zwakke plekken voordat het script uren draait.\n\nGa netjes om met de server van de klant. Spreid de verzoeken, vooral bij duizenden URL's, en draai het script niet op het drukste moment van de dag.",
+  "kernpunt": "Een redirectcheck in Python legt de hele keten vast via response.history, gebruikt altijd een timeout en vergelijkt de eind-URL met de verwachte URL. Controleer steekproefsgewijs voordat je de uitkomst deelt.",
+  "toepassing": "Laat Claude deze week dit script maken en draai het op de redirectlijst van een recente migratie bij een klant. Zet de ketens en verkeerde eind-URL's in een ticket voor de developer.",
+  "bron": {
+    "titel": "Requests: Quickstart (Redirection and History, Timeouts)",
+    "url": "https://requests.readthedocs.io/en/latest/user/quickstart/"
+  }
+}

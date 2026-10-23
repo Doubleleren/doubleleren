@@ -1,0 +1,26 @@
+{
+  "id": "20261023-news-sitemap-regels",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "News sitemaps: de regels van Google",
+  "matrix": [
+    "1.4.3"
+  ],
+  "titel": "Een news sitemap met 14.000 artikelen: wat klopt er niet?",
+  "intro": "Een regionale nieuwssite heeft een news sitemap met alle 14.000 artikelen sinds 2019. Elk artikel staat erin met news:publication_date en news:title. Elke nacht maakt het CMS er een nieuw sitemapbestand naast, met de datum in de bestandsnaam. De hoofdredacteur vraagt waarom nieuwe artikelen niet sneller in Google verschijnen.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Google Search Central op welke regels gelden voor een news sitemap. Welke punten kloppen er bij deze site niet, en wat moet de developer veranderen?",
+    "minTekens": 120,
+    "hint": "Zoek op 'Create a News sitemap' in Google Search Central en vergelijk de regels één voor één met de situatie."
+  },
+  "modelantwoord": "Wat er niet klopt:\n- **Te oude artikelen.** Een news sitemap is alleen voor artikelen van de **laatste twee dagen**. Oudere artikelen haal je eruit, of je haalt de news-tags weg. Ze blijven gewoon in de gewone sitemap staan.\n- **Te veel artikelen.** Er mogen maximaal **1.000 news:news-tags** in één sitemap. Heb je er meer, dan splits je de sitemap.\n- **Verplichte tags ontbreken.** Naast news:publication_date en news:title is **news:publication** met news:name en news:language verplicht.\n- **Elke nacht een nieuw bestand.** Google wil dat je de bestaande news sitemap bijwerkt met nieuwe artikelen, in plaats van steeds een nieuwe sitemap te maken.\n\nAdvies: één news sitemap die automatisch alleen de artikelen van de laatste twee dagen bevat, met alle verplichte tags en ingediend in Search Console. Het archief blijft in de gewone XML-sitemap.\n\nVeelgemaakte fout: denken dat een news sitemap een archief van alle nieuwsartikelen moet zijn.",
+  "uitleg": "Een **news sitemap** helpt Google om nieuwe artikelen snel te vinden. Het is een gewone XML-sitemap met extra tags per artikel, maar met strengere regels.\n\nDe belangrijkste regels:\n- Alleen artikelen die in de **laatste twee dagen** zijn gemaakt.\n- Maximaal **1.000 news:news-tags** per sitemap; daarboven splits je in kleinere bestanden.\n- Per artikel verplicht: **news:publication** (met news:name en news:language), **news:publication_date** en **news:title**.\n- **Bijwerken, niet vervangen:** voeg nieuwe artikelen toe aan de bestaande sitemap.\n\nJe kunt de news-tags toevoegen aan je gewone sitemap of een aparte news sitemap maken. Een aparte sitemap maakt het in Search Console makkelijker om te volgen wat er met je nieuwsartikelen gebeurt.\n\nZo'n sitemap is een hulpmiddel om artikelen te laten ontdekken, geen garantie voor Google Nieuws of Topverhalen. Daarvoor tellen ook het nieuwsbeleid van Google en de kwaliteit van de site. Een rommelige news sitemap met duizenden oude URL's helpt in elk geval niet.",
+  "kernpunt": "Een news sitemap bevat alleen artikelen van de laatste twee dagen (maximaal 1.000), met news:publication, publication_date en title, en je werkt hem bij in plaats van steeds een nieuwe te maken.",
+  "toepassing": "Open deze week de news sitemap van een uitgever of nieuwsklant. Kijk naar de oudste publicatiedatum en het aantal artikelen, en of news:publication erin staat.",
+  "bron": {
+    "titel": "Create a News sitemap | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap"
+  }
+}

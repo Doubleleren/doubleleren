@@ -1,0 +1,31 @@
+{
+  "id": "20261023-css-media-renderblokkade",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "CSS: welke stylesheets blokkeren het renderen?",
+  "matrix": [
+    "5.3.6"
+  ],
+  "titel": "Drie stylesheets in de head: welke houdt de smartphone op?",
+  "intro": "Een developer wil de laadtijd van een webshop verbeteren en kijkt naar de CSS. In de head staan drie stylesheets:\n\n- link rel=stylesheet href=main.css\n- link rel=stylesheet href=print.css media=print\n- link rel=stylesheet href=wide.css media=(min-width: 1200px)\n\nDe meeste bezoekers gebruiken een smartphone met een scherm van 390 pixels breed.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke stylesheets houden het eerste beeld tegen bij een bezoeker op zo'n smartphone?",
+    "opties": [
+      "Alle drie: de browser downloadt ze allemaal voordat hij iets laat zien.",
+      "main.css en print.css. Alleen wide.css wordt overgeslagen, omdat het scherm te smal is.",
+      "Geen enkele: stylesheets in de head blokkeren nooit, alleen scripts doen dat.",
+      "Alleen main.css."
+    ],
+    "juist": 3
+  },
+  "toelichting": "CSS blokkeert het renderen standaard, want de browser wil geen pagina zonder opmaak laten zien. Met het **media-attribuut** geef je aan wanneer een stylesheet nodig is:\n\n- **print.css** geldt alleen bij afdrukken en blokkeert dus niet.\n- **wide.css** geldt alleen vanaf 1200 pixels. Op een scherm van 390 pixels klopt die voorwaarde niet, dus ook die blokkeert niet.\n- **main.css** heeft geen voorwaarde en blokkeert wel.\n\nDe browser downloadt wel alle drie de bestanden, maar de niet-blokkerende met een lagere prioriteit. Daarom is 'alle drie' fout. En stylesheets blokkeren wel degelijk, niet alleen scripts.",
+  "uitleg": "De browser bouwt een pagina pas op als hij zowel de HTML als de CSS kent. Daarom is CSS standaard **render-blocking**: zolang een stylesheet nog binnenkomt, blijft het scherm leeg. Dat telt mee in je First Contentful Paint en vaak ook in je LCP.\n\nMet media types en media queries maak je stylesheets voorwaardelijk:\n- media=print: alleen bij afdrukken.\n- media=(min-width: 1200px): alleen op brede schermen.\n- media=(orientation: portrait): afhankelijk van hoe het apparaat wordt vastgehouden.\n\nKlopt de voorwaarde bij het laden niet, dan wacht de browser niet op dat bestand. Hij downloadt het wel, maar later en met lagere prioriteit.\n\nWat betekent dit voor je advies?\n- Splits grote stylesheets op waar ze echt bij horen, zoals print en brede schermen.\n- Houd de CSS die voor het eerste beeld nodig is klein.\n- Kijk in het watervaldiagram van DevTools of PageSpeed Insights welke CSS het renderen tegenhoudt, voordat je iets verplaatst.",
+  "kernpunt": "CSS blokkeert het renderen, tenzij een media-attribuut zegt dat de stylesheet nu niet geldt. De browser downloadt zo'n bestand wel, maar wacht er niet op.",
+  "toepassing": "Bekijk deze week bij één klant de stylesheets in de head. Staat er print- of desktop-CSS zonder media-attribuut, geef de developer dan het advies om die voorwaardelijk te laden.",
+  "bron": {
+    "titel": "Render blocking CSS | web.dev",
+    "url": "https://web.dev/articles/critical-rendering-path/render-blocking-css"
+  }
+}

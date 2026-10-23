@@ -1,0 +1,31 @@
+{
+  "id": "20261023-verwijderingen-tijdelijk",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "De tool Verwijderingen in Search Console",
+  "matrix": [
+    "1.5.2"
+  ],
+  "titel": "Staging-site uit Google gehaald met Verwijderingen: klaar?",
+  "intro": "Een klant heeft per ongeluk een testomgeving van 60 pagina's openbaar gezet op staging.klant.nl, en die pagina's staan nu in Google. De klant heeft het subdomein in Search Console geverifieerd en via Verwijderingen een tijdelijk verzoek ingediend voor alle URL's met dat voorvoegsel. Een week later is niets meer te vinden. De testomgeving zelf staat nog gewoon open.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "De klant vindt het klaar. Wat adviseer je?",
+    "opties": [
+      "Klaar: een goedgekeurd verzoek haalt de URL's definitief uit de index van Google.",
+      "Nog niet: zet Disallow: / in de robots.txt van de staging. Dan blijven de URL's ook na afloop van het verzoek weg.",
+      "Nog niet: dien het verzoek elke maand opnieuw in, want het verloopt na 30 dagen.",
+      "Nog niet: het verzoek verbergt de URL's maar ongeveer zes maanden. Zet de staging achter een wachtwoord, of laat hij een noindex of 404/410 geven."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Een tijdelijke verwijdering **verbergt** URL's ongeveer **zes maanden** in de zoekresultaten. Google blijft ze wel crawlen. Staat de pagina daarna nog open, dan kan hij terugkomen.\n\nVoor blijvend resultaat moet de oorzaak weg: een **login of wachtwoord**, een **noindex**, of een **404 of 410**.\n\n- **robots.txt** raadt Google hier af. Een geblokkeerde pagina kan nog steeds in de index staan, en Google kan een noindex dan niet meer lezen.\n- **Elke maand opnieuw indienen** is niet nodig en lost niets op; het verzoek duurt geen 30 dagen.",
+  "uitleg": "De tool **Verwijderingen** (vroeger Remove URLs) in Search Console is een noodknop, geen opruimtool. Hij werkt snel, maar tijdelijk.\n\nWat de tool doet:\n- **Tijdelijke verwijdering:** verbergt een URL, of alle URL's met een voorvoegsel, ongeveer zes maanden in de zoekresultaten.\n- **Snippet wissen:** haalt de beschrijving onder een resultaat weg tot de pagina opnieuw is gecrawld.\n\nWat de tool niet doet: de pagina blijvend uit de index halen of het crawlen stoppen.\n\nDe juiste volgorde bij een ongewenste pagina in Google:\n- **Eerst de oorzaak wegnemen.** Een testomgeving zet je achter een wachtwoord: dat houdt ook bezoekers en andere zoekmachines buiten. Voor losse pagina's gebruik je noindex of een 404/410.\n- **Dan, als het snel moet, Verwijderingen gebruiken** om de URL's meteen te verbergen terwijl Google de wijziging oppakt.\n\nOnder hetzelfde menu zie je ook verzoeken van anderen voor verouderde content, en URL's die door SafeSearch als expliciet zijn gefilterd.",
+  "kernpunt": "Verwijderingen verbergt URL's maar ongeveer zes maanden. Blijvend weg krijg je ze alleen met een wachtwoord, noindex of een 404/410, niet met robots.txt.",
+  "toepassing": "Kijk deze week of de staging- en testomgevingen van je klanten achter een wachtwoord staan. Zoek bijvoorbeeld op site:staging.klantdomein.nl.",
+  "bron": {
+    "titel": "Removals and SafeSearch reports Tool - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/9689846"
+  }
+}
