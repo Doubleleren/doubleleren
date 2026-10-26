@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-23T04:27:11",
+    "bijgewerkt":  "2026-10-26T05:27:18",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1446,6 +1446,210 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-auteursinformatie-claude",
+                       "titel":  "120 artikelen van \u0027Redactie\u0027: laat Claude een auteursplan maken",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "E-E-A-T: auteurs- en reviewerinformatie op YMYL-content",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "11.1.6",
+                                      "11.1.5"
+                                  ],
+                       "kernpunt":  "Toon echte schrijvers en reviewers, met een auteurspagina en bronnen. Verzonnen experts zijn misleidend en schaden juist het vertrouwen, zeker bij YMYL.",
+                       "bron":  {
+                                    "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+                                },
+                       "video":  {
+                                     "titel":  "Author SEO: Optimize Your Site for Google E-E-A-T",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=D9hyyjQ-t90"
+                                 },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-checkout-account-uitstellen",
+                       "titel":  "\u0027Maak eerst een account aan\u0027: houden of schrappen in de checkout?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Checkout: verplicht account en gast-afrekenen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Maak gast-afrekenen de opvallendste keuze en bied het account pas na de bestelling aan, als alleen een wachtwoord nog nodig is.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: Save Account Creation for the Confirmation Step",
+                                    "url":  "https://baymard.com/blog/delayed-account-creation"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-garantie-top3-verwachtingen",
+                       "titel":  "\u0027Gegarandeerd top 3 binnen 60 dagen\u0027: waarom beloof jij dat niet?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Verwachtingen afstemmen: geen garanties, wel afspraken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "6.2.2",
+                                      "6.3.3"
+                                  ],
+                       "kernpunt":  "Niemand kan een positie in Google garanderen. Beloof wat je zelf in de hand hebt (inspanning en planning) en spreek af hoe en wanneer je de voortgang meet.",
+                       "bron":  {
+                                    "titel":  "Do You Need an SEO? | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/do-i-need-seo"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-googlebot-desktop-in-logs",
+                       "titel":  "Googlebot Desktop in de logs: is de site nog niet mobile-first?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Mobile-first indexing: welke Googlebot crawlt je site?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "8.1.3",
+                                      "8.1.1"
+                                  ],
+                       "kernpunt":  "Sinds 5 juli 2024 crawlt Google alle sites voor Search met Googlebot Smartphone. Googlebot Desktop in je logs is normaal; check de mobiele versie op volledigheid.",
+                       "bron":  {
+                                    "titel":  "Mobile-indexing vLast final final | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2024/06/mobile-indexing-vlast-final-final.doc"
+                                },
+                       "video":  {
+                                     "titel":  "Mobile-First Indexing",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+                                 },
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-jpeg-xl-google-images",
+                       "titel":  "Alle productfoto\u0027s naar JPEG XL nu Chrome het ondersteunt?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Afbeeldingsformaten: JPEG XL en Google Images",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.14"
+                                  ],
+                       "kernpunt":  "Google Images en Discover ondersteunen JPEG XL (nog) niet. Serveer het alleen via een picture-element, met JPEG, WebP of AVIF in de img src, og:image en structured data.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: Google Images \u0026 Discover Previews Don\u0027t Support JPEG XL",
+                                    "url":  "https://www.searchenginejournal.com/google-images-discover-previews-dont-support-jpeg-xl/593816/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-organization-markup-logo",
+                       "titel":  "Verkeerd logo in het knowledge panel: wat klopt er niet aan de markup?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Organization-markup: logo, naam en sameAs",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.5"
+                                  ],
+                       "kernpunt":  "Organization-markup hoort op de homepage of over-ons-pagina, met de merknaam in name, een logo van minimaal 112×112 px in een ondersteund formaat, en sameAs naar de officiële profielen.",
+                       "bron":  {
+                                    "titel":  "Organization (Organization) structured data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/organization"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-paid-organic-rapport",
+                       "titel":  "Waar staat de klant alleen organisch, en waar met ads én organisch?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Het Paid \u0026 organic-rapport: GSC en Google Ads samen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "9.2.2",
+                                      "9.2.3"
+                                  ],
+                       "kernpunt":  "Koppel Search Console aan Google Ads en gebruik het Paid \u0026 organic-rapport om per zoekopdracht te zien waar je alleen organisch staat en waar ads en organisch overlappen.",
+                       "bron":  {
+                                    "titel":  "About the paid \u0026 organic report - Google Ads Help",
+                                    "url":  "https://support.google.com/google-ads/answer/3097241"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-shopify-robots-txt-liquid",
+                       "titel":  "Eigen robots.txt op Shopify: via Cloudflare of in het thema?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Shopify: robots.txt aanpassen met robots.txt.liquid",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.1.6",
+                                      "1.1.8"
+                                  ],
+                       "kernpunt":  "Op Shopify pas je robots.txt aan via de template robots.txt.liquid, met Liquid bovenop de standaardregels. Geen vaste tekst en geen Cloudflare-workaround.",
+                       "bron":  {
+                                    "titel":  "Editing robots.txt.liquid | Shopify Help Center",
+                                    "url":  "https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-sponsored-ugc-nofollow",
+                       "titel":  "Betaalde links, reacties en een concurrent: welk rel-attribuut?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Uitgaande links kwalificeren: nofollow, sponsored en ugc",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.3.2"
+                                  ],
+                       "kernpunt":  "Betaald = sponsored, gebruikerscontent = ugc, en nofollow alleen als de andere twee niet passen. Combineren mag, en een gekwalificeerde link houdt een pagina niet uit Google.",
+                       "bron":  {
+                                    "titel":  "Qualify your outbound links to Google | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261026-url-parameters-zonder-tool-claude",
+                       "titel":  "De URL Parameters-tool is weg: laat Claude per parameter beslissen",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "URL-parameters sturen nu de GSC-tool weg is",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.6",
+                                      "1.1.8"
+                                  ],
+                       "kernpunt":  "De URL Parameters-tool bestaat sinds 2022 niet meer. Stuur parameters met interne links, canonicals en robots.txt, en blokkeer nooit wat Google via een canonical of noindex moet opruimen.",
+                       "bron":  {
+                                    "titel":  "Spring cleaning: the URL Parameters tool | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2022/03/url-parameters-tool-deprecated"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
                        "herkomst":  "generator"
                    }
                ]

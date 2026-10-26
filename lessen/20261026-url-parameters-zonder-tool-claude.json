@@ -1,0 +1,27 @@
+{
+  "id": "20261026-url-parameters-zonder-tool-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "URL-parameters sturen nu de GSC-tool weg is",
+  "matrix": [
+    "1.5.6",
+    "1.1.8"
+  ],
+  "titel": "De URL Parameters-tool is weg: laat Claude per parameter beslissen",
+  "intro": "In een oud auditsjabloon staat: 'Stel in Search Console bij URL-parameters in welke parameters Google moet negeren.' Die tool kun je nergens meer vinden. Uit een Screaming Frog-crawl van een webshop heb je een export met 18.000 URL's, met parameters als ?kleur=, ?maat=, ?sort=, ?utm_source=, ?sessionid= en ?page=.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee je Claude de export laat analyseren en per parameter laat adviseren wat je ermee doet. Welke beslisregels geef je mee, en welke output vraag je?",
+    "minTekens": 180,
+    "hint": "Per parameter: verandert hij de inhoud van de pagina, en zoekt iemand naar die variant?"
+  },
+  "modelantwoord": "Een sterke prompt bevat:\n\n- **Context:** 'De URL Parameters-tool in Search Console bestaat sinds 2022 niet meer. Google bepaalt zelf welke parameters ertoe doen. Wij sturen met interne links, canonicals en robots.txt.'\n- **Input:** de export (URL, statuscode, canonical, aantal inlinks) en een lijst zoekwoorden met volume voor filtervarianten.\n- **Beslisregels per parameter:**\n  - verandert de inhoud niet (utm_source, sessionid): niet intern naar linken, canonical naar de schone URL\n  - alleen andere volgorde (sort): uit de crawl houden met robots.txt, ook de variant met &sort=\n  - paginering (page): crawlbaar laten, met eigen canonical\n  - filter met zoekvraag (bijv. kleur): kandidaat voor een eigen, schone landingspagina\n  - filter zonder zoekvraag (bijv. maat): uit de crawl houden\n  - nooit blokkeren in robots.txt wat je via canonical of noindex wilt laten opruimen\n- **Output:** een tabel met per parameter het aantal URL's, verandert inhoud ja/nee, zoekvraag ja/nee, advies, voorbeeld-URL en risico. Daarnaast concrete robots.txt-regels om te testen.\n\nControleer daarna steekproefsgewijs een paar URL's per parameter voordat je het advies deelt.",
+  "uitleg": "Google schafte de **URL Parameters-tool** in Search Console af in 2022. De reden: Google was veel beter geworden in het zelf inschatten welke parameters nuttig zijn, en maar ongeveer **1%** van de ingestelde configuraties hielp nog bij het crawlen.\n\nVolgens Google hoef je meestal niets te doen. Wil je toch sturen, dan gebruik je andere middelen:\n- **robots.txt** voor parameters die alleen crawlverspilling opleveren, zoals sorteringen of sessie-ID's. Let op dat je regels ook de variant na een & afvangen.\n- **rel=canonical** voor varianten met dezelfde inhoud, zoals URL's met UTM-tags.\n- **Interne links** naar de schone URL. Link nooit intern naar URL's met tracking- of sessieparameters.\n- **hreflang** als een parameter een taalversie aangeeft.\n\nDe valkuil: robots.txt en canonical tegelijk inzetten op dezelfde URL's. Een geblokkeerde URL kan Google niet crawlen, dus ziet het de canonical of noindex ook niet.\n\nClaude helpt vooral bij het indelen van duizenden URL's per parameter. De beslissing over zoekvraag en bedrijfsbelang blijft jouw werk.",
+  "kernpunt": "De URL Parameters-tool bestaat sinds 2022 niet meer. Stuur parameters met interne links, canonicals en robots.txt, en blokkeer nooit wat Google via een canonical of noindex moet opruimen.",
+  "toepassing": "Filter deze week in een crawl van een klant alle URL's met een ? en tel per parameter hoeveel URL's er zijn. Begin bij de parameter met de meeste URL's.",
+  "bron": {
+    "titel": "Spring cleaning: the URL Parameters tool | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2022/03/url-parameters-tool-deprecated"
+  }
+}

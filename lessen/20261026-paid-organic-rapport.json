@@ -1,0 +1,27 @@
+{
+  "id": "20261026-paid-organic-rapport",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Het Paid & organic-rapport: GSC en Google Ads samen",
+  "matrix": [
+    "9.2.2",
+    "9.2.3"
+  ],
+  "titel": "Waar staat de klant alleen organisch, en waar met ads én organisch?",
+  "intro": "Een klant besteedt € 6.000 per maand aan Google Ads op merk- en productzoekwoorden. De SEO-specialist en de Ads-specialist willen samen weten voor welke zoekopdrachten de klant alleen organisch zichtbaar is, en waar advertenties en organische resultaten tegelijk verschijnen. De klant heeft zowel Search Console als Google Ads in eigen beheer.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek op welk rapport in Google Ads deze vraag beantwoordt, wat je moet instellen om het te kunnen gebruiken en welke beperking je moet kennen. Beschrijf daarna één beslissing die je met het rapport kunt onderbouwen.",
+    "minTekens": 120,
+    "hint": "Het rapport combineert data uit twee Google-producten. Zoek in de Google Ads Help."
+  },
+  "modelantwoord": "- **Rapport:** het **Paid & organic-rapport** in Google Ads. Het toont naast elkaar hoe vaak je site organisch verschijnt en hoe je tekstadvertenties presteren, per zoekopdracht. Je ziet onder meer zoekopdrachten waarvoor je **alleen organisch** verschijnt, en het gecombineerde beeld van ads en organisch.\n- **Instellen:** de Search Console-property van de site **koppelen aan het Google Ads-account**.\n- **Vinden:** in het menu Campagnes onder Insights and reports → Report editor, bij de standaardrapporten.\n- **Beperkingen:** het rapport telt alleen **tekstadvertenties** (geen Shopping) en wordt één keer per dag bijgewerkt.\n\n**Voorbeeldbeslissing:** zoekopdrachten met veel organische vertoningen maar een lage positie en geen advertentie zijn kandidaten om met ads te testen. Andersom: waar je organisch al bovenaan staat en ook adverteert, test je met een experiment of minder bieden echt verkeer kost, in plaats van de ads meteen uit te zetten.",
+  "uitleg": "SEO en PPC werken vaak langs elkaar heen, terwijl ze in dezelfde zoekresultaten staan. Het **Paid & organic-rapport** in Google Ads brengt ze samen. Het laat zien hoe vaak pagina's van je site in de gratis organische resultaten verschijnen, naast de prestaties van je tekstadvertenties.\n\nWat je nodig hebt:\n- een **Search Console-property** voor de site\n- een **koppeling** tussen die property en het Google Ads-account\n\nDaarna vind je het rapport bij de standaardrapporten in de Report editor.\n\nWat je ermee kunt:\n- **Gaten vinden:** zoekopdrachten waarvoor je alleen organisch zichtbaar bent, vaak op een lage positie. Daar kunnen ads extra verkeer opleveren.\n- **Overlap zien:** zoekopdrachten waarvoor je zowel adverteert als organisch verschijnt. Daar wil je weten hoeveel klikken de advertentie écht toevoegt.\n- **Zoekwoordideeën uitwisselen:** zoektermen die in Ads goed converteren, zijn interessant voor content, en andersom.\n\nKen de beperkingen: alleen tekstadvertenties tellen mee, en de data wordt dagelijks bijgewerkt. Neem beslissingen over het verlagen van budget nooit alleen op basis van overlap; meet het effect met een experiment.",
+  "kernpunt": "Koppel Search Console aan Google Ads en gebruik het Paid & organic-rapport om per zoekopdracht te zien waar je alleen organisch staat en waar ads en organisch overlappen.",
+  "toepassing": "Kijk deze week bij een klant met Google Ads of Search Console al gekoppeld is. Zo niet, plan de koppeling samen met de Ads-specialist.",
+  "bron": {
+    "titel": "About the paid & organic report - Google Ads Help",
+    "url": "https://support.google.com/google-ads/answer/3097241"
+  }
+}

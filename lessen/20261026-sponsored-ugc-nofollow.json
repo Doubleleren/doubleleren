@@ -1,0 +1,31 @@
+{
+  "id": "20261026-sponsored-ugc-nofollow",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Uitgaande links kwalificeren: nofollow, sponsored en ugc",
+  "matrix": [
+    "1.3.2"
+  ],
+  "titel": "Betaalde links, reacties en een concurrent: welk rel-attribuut?",
+  "intro": "Een receptenblog heeft drie soorten uitgaande links, allemaal zonder rel-attribuut:\n\n- (1) links naar een keukenmerk in een betaalde samenwerking\n- (2) links die lezers in de reacties onder recepten plaatsen\n- (3) een link naar een andere receptensite die in een artikel wordt genoemd, maar die de blogger niet wil aanbevelen",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpak past het best bij deze drie soorten links?",
+    "opties": [
+      "Niets aanpassen: Google herkent betaalde links en reacties zelf en negeert ze dan automatisch.",
+      "(1) rel=\"nofollow\", (2) rel=\"sponsored\", (3) rel=\"ugc\"",
+      "(1) rel=\"sponsored\", (2) rel=\"ugc\", (3) rel=\"noreferrer\"",
+      "(1) rel=\"sponsored\", (2) rel=\"ugc\", (3) rel=\"nofollow\""
+    ],
+    "juist": 3
+  },
+  "toelichting": "Google kent drie waarden om uitgaande links te kwalificeren:\n\n- **sponsored** voor advertenties en betaalde plaatsingen. nofollow mag hier ook nog, maar sponsored heeft de voorkeur.\n- **ugc** voor links die gebruikers plaatsen, zoals reacties en forumberichten.\n- **nofollow** als de andere waarden niet passen en je je site niet aan de gelinkte pagina wilt verbinden.\n\nWaarom de andere opties niet kloppen:\n- **Niets doen** is riskant: betaalde links die niet als zodanig zijn gemarkeerd, vallen onder Googles spambeleid voor links.\n- **De omgekeerde volgorde** zet de waarden op de verkeerde plek: ugc is voor gebruikerscontent, niet voor een link die de blogger zelf plaatst.\n- **noreferrer** zorgt alleen dat de browser niet doorgeeft van welke pagina de bezoeker komt. Voor Google zegt het niets over de aard van de link.",
+  "uitleg": "Met het **rel-attribuut** vertel je Google wat voor link het is. Dat is vooral belangrijk bij links waar je niet voor instaat.\n\nZo zet je de waarden in:\n- **rel=\"sponsored\"**: voor alles waar geld, producten of een andere vergoeding tegenover staat. Affiliate-links horen hier ook bij.\n- **rel=\"ugc\"**: voor links in reacties, forums en andere bijdragen van gebruikers. Bij vaste bijdragers die al lang goede links plaatsen, mag je het attribuut weglaten.\n- **rel=\"nofollow\"**: als de andere twee niet passen en je de gelinkte pagina niet wilt aanbevelen of niet wilt dat Google hem via jouw site crawlt.\n\nJe mag waarden combineren, bijvoorbeeld rel=\"ugc nofollow\".\n\nGoogle volgt zulke links in het algemeen niet, maar een gelinkte pagina kan nog steeds gecrawld worden als Google hem via een sitemap of een andere site vindt. Het attribuut is dus geen manier om een pagina uit Google te houden.\n\nVoor links binnen je eigen site gebruik je geen nofollow om het crawlen te sturen. Google raadt daarvoor robots.txt aan.",
+  "kernpunt": "Betaald = sponsored, gebruikerscontent = ugc, en nofollow alleen als de andere twee niet passen. Combineren mag, en een gekwalificeerde link houdt een pagina niet uit Google.",
+  "toepassing": "Crawl deze week de blog van een klant met affiliate- of samenwerkingsartikelen en filter de uitgaande links zonder rel-attribuut. Controleer of de betaalde links sponsored hebben.",
+  "bron": {
+    "titel": "Qualify your outbound links to Google | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20261026-auteursinformatie-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "E-E-A-T: auteurs- en reviewerinformatie op YMYL-content",
+  "matrix": [
+    "11.1.6",
+    "11.1.5"
+  ],
+  "titel": "120 artikelen van 'Redactie': laat Claude een auteursplan maken",
+  "intro": "Een vergelijkingssite voor zorgverzekeringen heeft 120 artikelen over vergoedingen. Bij allemaal staat 'Redactie' als auteur. In werkelijkheid zijn ze geschreven door twee freelance journalisten en nagekeken door een gecertificeerde zorgadviseur. De marketingmanager stelt voor om bij elk artikel een bedachte 'expert' met een stockfoto te zetten, 'want dat oogt betrouwbaarder'.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee je Claude een plan laat maken voor auteurs- en reviewerinformatie bij deze artikelen. Welke context en input geef je mee, welke regels stel je, en welke output vraag je? Geef ook in een paar zinnen je reactie op het voorstel van de marketingmanager.",
+    "minTekens": 200,
+    "hint": "Denk aan wie, hoe en waarom: wie schreef het, wie controleerde het, en wat de lezer moet kunnen nagaan."
+  },
+  "modelantwoord": "Een sterke prompt bevat:\n\n- **Rol en context:** 'Je bent SEO-specialist. Dit zijn YMYL-artikelen over zorgvergoedingen; lezers moeten kunnen nagaan wie de informatie schreef en controleerde.'\n- **Input:** een lijst van de 120 URL's met per artikel de echte schrijver, de reviewer en de datum van controle, plus korte profielen (opleiding, ervaring, certificering).\n- **Regels:**\n  - alleen echte personen; nooit namen, foto's of titels verzinnen\n  - een byline bij elk artikel, met link naar een auteurspagina\n  - een regel 'Gecontroleerd door' met naam, functie en datum\n  - claims over vergoedingen onderbouwen met een bron\n  - ontbreekt informatie, markeer het dan in plaats van het in te vullen\n- **Output:** een tabel per artikel (schrijver, reviewer, wat ontbreekt), een sjabloon voor de auteurspagina en een voorstel voor de byline-tekst. Eventueel ook author met naam en url in de Article-markup.\n\n**Reactie op het voorstel:** niet doen. Google noemt verzonnen makers, zoals bedachte namen of nepportretten, misleidend; dat maakt een pagina juist onbetrouwbaar. Bij YMYL weegt betrouwbaarheid het zwaarst, en de site heeft al echte experts. Laat die zien.",
+  "uitleg": "Google stelt drie vragen bij content: **wie** maakte het, **hoe** is het gemaakt en **waarom**. Bij de vraag 'wie' gaat het om informatie die de lezer helpt de content te vertrouwen.\n\nWat Google zegt:\n- Een byline hoort waar de lezer die verwacht. Google moedigt **juiste** auteursinformatie sterk aan.\n- **Misleidende** auteursinformatie, zoals een verzonnen naam of een nepfoto, maakt een pagina onbetrouwbaar.\n- E-E-A-T is zelf geen rankingfactor. Googles systemen gebruiken een mix van signalen die content met goede E-E-A-T herkennen.\n- Van de vier onderdelen is **trust** het belangrijkst. Experience, expertise en autoriteit dragen eraan bij.\n\nBij YMYL-onderwerpen (gezondheid, geld, veiligheid) weegt dat extra zwaar. Een goede opzet:\n- **Byline** met de echte schrijver en een link naar diens auteurspagina.\n- **Auteurspagina** met achtergrond, ervaring en relevante certificeringen.\n- **Reviewer** bij inhoud die vakkennis vraagt, met datum van controle.\n- **Bronnen** bij feiten en bedragen.\n\nClaude helpt dit voor 120 artikelen snel te ordenen, maar alleen als je hem verbiedt om gaten op te vullen met verzonnen gegevens.",
+  "kernpunt": "Toon echte schrijvers en reviewers, met een auteurspagina en bronnen. Verzonnen experts zijn misleidend en schaden juist het vertrouwen, zeker bij YMYL.",
+  "toepassing": "Kies deze week een YMYL-pagina van een klant en controleer: staat er een echte naam bij, is er een auteurspagina, en is te zien wie de inhoud controleerde?",
+  "bron": {
+    "titel": "Creating helpful, reliable, people-first content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  },
+  "video": {
+    "titel": "Author SEO: Optimize Your Site for Google E-E-A-T",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=D9hyyjQ-t90"
+  }
+}

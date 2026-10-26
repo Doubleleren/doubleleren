@@ -1,0 +1,25 @@
+{
+  "id": "20261026-organization-markup-logo",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Organization-markup: logo, naam en sameAs",
+  "matrix": [
+    "2.2.5"
+  ],
+  "titel": "Verkeerd logo in het knowledge panel: wat klopt er niet aan de markup?",
+  "intro": "Een fietsenmerk ziet in Google het verkeerde logo in het knowledge panel. Een plugin zet Organization-markup op alle 4.000 pagina's van de site. Daarin staat:\n\n- name: de juridische naam van de holding (met B.V.), niet de merknaam\n- logo: de favicon, 48×48 pixels, als .ico-bestand\n- geen sameAs\n- url: de homepage",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Welke aanpassingen aan de markup doe je als eerste, en waarom? En is het een probleem dat de markup op alle 4.000 pagina's staat?",
+    "minTekens": 120
+  },
+  "modelantwoord": "Een sterk antwoord bevat:\n\n- **Logo vervangen.** Google vraagt minimaal **112×112 pixels**, in een formaat dat Google Images ondersteunt (bijv. PNG, SVG of WebP; .ico hoort daar niet bij), op een URL die gecrawld en geïndexeerd mag worden, en het logo moet goed ogen op een witte achtergrond.\n- **Naam rechtzetten.** name wordt de merknaam die mensen kennen; de juridische naam van de holding past in legalName. Varianten kunnen in alternateName.\n- **sameAs toevoegen** met de officiële profielen van het merk (bijv. LinkedIn, Instagram, Wikipedia als die er is). Dat helpt Google het merk te onderscheiden van andere organisaties.\n- Eventueel ook adres, contactPoint en description.\n\n**Alle 4.000 pagina's:** geen fout, maar ook niet nodig. Google raadt aan de markup op de homepage of één pagina over de organisatie te zetten, zoals de over-ons-pagina.\n\nEn: markup is een hulpmiddel, geen garantie. Google kan er een logo of knowledge panel mee vullen, maar belooft niets.",
+  "uitleg": "Met **Organization-markup** vertel je Google wie er achter een site zit: naam, logo, contactgegevens en officiële profielen. Google kan dat gebruiken om het logo te kiezen in de zoekresultaten en het knowledge panel, en om de organisatie te onderscheiden van andere met een vergelijkbare naam.\n\nWat Google erover zegt:\n- **Geen verplichte velden.** Voeg zoveel relevante eigenschappen toe als je kunt, zoals name, alternateName, legalName, url, logo, sameAs, address, contactPoint, telephone en vatID.\n- **Plaats:** de homepage of één pagina die de organisatie beschrijft. De markup hoeft niet op elke pagina.\n- **Logo-eisen:** minimaal 112×112 pixels, crawlbaar en indexeerbaar, in een formaat dat Google Images ondersteunt, en goed zichtbaar op een witte achtergrond.\n- **Geen garantie:** Google belooft niet dat structured data in de resultaten wordt getoond.\n\nVeelvoorkomende fouten in de praktijk:\n- de favicon als logo gebruiken (te klein, vaak .ico)\n- de juridische naam in name in plaats van de merknaam\n- sameAs leeg laten of laten verwijzen naar profielen die niet meer bestaan\n\nControleer na een aanpassing met de Rich Results Test of de markup goed wordt gelezen.",
+  "kernpunt": "Organization-markup hoort op de homepage of over-ons-pagina, met de merknaam in name, een logo van minimaal 112×112 px in een ondersteund formaat, en sameAs naar de officiële profielen.",
+  "toepassing": "Haal deze week de homepage van een klant door de Rich Results Test en bekijk de Organization-markup: klopt de naam, voldoet het logo aan de eisen, en staat sameAs erin?",
+  "bron": {
+    "titel": "Organization (Organization) structured data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/organization"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "20261026-jpeg-xl-google-images",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Afbeeldingsformaten: JPEG XL en Google Images",
+  "matrix": [
+    "2.1.14"
+  ],
+  "titel": "Alle productfoto's naar JPEG XL nu Chrome het ondersteunt?",
+  "intro": "De developer van een modewebshop is enthousiast: sinds begin oktober toont ook Chrome JPEG XL-afbeeldingen, na Safari en Firefox. In een test zijn de productfoto's als .jxl gemiddeld 40% kleiner dan de huidige JPEG's. Hij wil alle foto's omzetten en alleen nog .jxl serveren: in de img src, in og:image en in de Product-markup.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je?",
+    "opties": [
+      "Doen: Googlebot rendert met een actuele Chrome-versie, dus alles wat Chrome kan tonen, kan Google ook indexeren.",
+      "Gebruik JPEG XL alleen als source in een picture-element. Zet een JPEG, WebP of AVIF in de img src, en ook in og:image en de structured data.",
+      "Doen, maar voeg een image sitemap toe met alle .jxl-URL's. Dan pakt Google Images ze vanzelf op.",
+      "Niet aan beginnen: kleinere afbeeldingen leveren geen enkel voordeel op voor SEO of conversie."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Google Search ondersteunt afbeeldingen in de **img src** in deze formaten: **BMP, GIF, JPEG, PNG, WebP, SVG en AVIF**. JPEG XL staat er niet bij, en John Mueller bevestigde op 15 oktober 2026 dat JPEG XL nu niet werkt voor Google Images en voor previews in Discover.\n\nMet een **picture-element** krijgen browsers die JPEG XL kennen het kleine bestand, terwijl de img src een formaat bevat dat elke zoekmachine leest. Volgens Mueller werkt dat voor elke zoekmachine.\n\n- **Rendering is niet hetzelfde als indexeren:** dat Chrome een formaat toont, betekent niet dat Google Images het opneemt.\n- **Een image sitemap** helpt Google afbeeldingen te vinden, maar maakt een niet-ondersteund formaat niet indexeerbaar.\n- **Kleinere bestanden** helpen wel: ze versnellen vaak de LCP en de laadtijd op mobiel.",
+  "uitleg": "**JPEG XL** is een beeldformaat dat bij dezelfde kwaliteit vaak kleiner is dan JPEG. Safari ondersteunt het sinds versie 17 (2023). Chrome 155 rolde het vanaf 6 oktober 2026 breed uit, Firefox 158 volgde op 13 oktober. Veel developers willen het nu inzetten.\n\nVoor Google Search verandert er nog niets. In de documentatie over afbeeldingen staat JPEG XL niet in de lijst met ondersteunde formaten, en Mueller zei op Bluesky dat het formaat niet wordt ondersteund voor Google Images en Discover-previews.\n\nWat doe je in de praktijk?\n- **Progressive enhancement:** zet JPEG XL (en eventueel AVIF of WebP) als source in een picture-element, met een ondersteund formaat in de img src. Google raadt altijd een fallback in de src aan, omdat niet elke crawler picture of srcset begrijpt.\n- **Previewafbeeldingen:** gebruik voor og:image en voor image in structured data een ondersteund formaat. Discover en sociale netwerken halen hun preview daar vaak vandaan.\n- **Bestandsextensie:** laat de extensie overeenkomen met het echte bestandstype.\n\nZo krijgt de bezoeker het snelste bestand, en verlies je geen zichtbaarheid in Google Images of Discover.",
+  "kernpunt": "Google Images en Discover ondersteunen JPEG XL (nog) niet. Serveer het alleen via een picture-element, met JPEG, WebP of AVIF in de img src, og:image en structured data.",
+  "toepassing": "Vraag deze week bij een klant met een nieuw thema of een beeld-CDN na in welk formaat de img src, og:image en de Product-markup staan. Staat daar ergens .jxl, zorg dan voor een fallback.",
+  "bron": {
+    "titel": "Search Engine Journal: Google Images & Discover Previews Don't Support JPEG XL",
+    "url": "https://www.searchenginejournal.com/google-images-discover-previews-dont-support-jpeg-xl/593816/"
+  }
+}

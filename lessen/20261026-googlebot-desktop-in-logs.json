@@ -1,0 +1,32 @@
+{
+  "id": "20261026-googlebot-desktop-in-logs",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Mobile-first indexing: welke Googlebot crawlt je site?",
+  "matrix": [
+    "8.1.3",
+    "8.1.1"
+  ],
+  "titel": "Googlebot Desktop in de logs: is de site nog niet mobile-first?",
+  "intro": "Een klant met een oudere B2B-webshop ziet in de serverlogs nog regelmatig Googlebot Desktop langskomen. Hij concludeert dat zijn site 'nog niet mobile-first wordt geïndexeerd' en wil daarom eerst de desktopversie verbeteren. De mobiele versie laat op productpagina's de specificatietabellen weg.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek op hoe het nu zit met mobile-first indexing, en waar je in Search Console ziet welke soorten Googlebot een site crawlen. Klopt de conclusie van de klant, en wat adviseer je?",
+    "minTekens": 120,
+    "hint": "Kijk in de Search Central-blog van juni 2024 en in de instellingen van Search Console."
+  },
+  "modelantwoord": "Nee, de conclusie klopt niet.\n\n- Google kondigde in juni 2024 de laatste stap aan: na **5 juli 2024** crawlt en indexeert Google alle sites voor Search met **Googlebot Smartphone**. Content die op mobiel helemaal niet bereikbaar is, is niet meer indexeerbaar.\n- **Googlebot Desktop** kan nog steeds in je logs staan. Google gebruikt hem soms voor bepaalde functies, zoals productvermeldingen en Google for Jobs. Dat zegt dus niets over hoe je site geïndexeerd wordt.\n- In Search Console zie je de verdeling via **Instellingen → Crawlstatistieken**, uitgesplitst naar Googlebot-type (Smartphone, Desktop, Image en meer). Dat rapport werkt alleen voor een domeinproperty of een URL-prefix op rootniveau.\n\n**Advies:** de mobiele versie eerst. De specificatietabellen die op mobiel ontbreken, bestaan voor Google niet. Zet ze ook op mobiel in de pagina, bijvoorbeeld in een uitklapblok dat al bij het laden in de HTML staat.",
+  "uitleg": "**Mobile-first indexing** betekent dat Google de mobiele versie van een pagina gebruikt om te indexeren en te ranken. De overstap duurde jaren. In oktober 2023 meldde Google dat de overgang klaar was, maar een kleine groep sites werd nog met de desktopcrawler bezocht. Die laatste groep ging na 5 juli 2024 ook over op Googlebot Smartphone.\n\nWat betekent dat voor je analyses?\n- **Elke site wordt mobile-first geïndexeerd.** Je hoeft niet meer te controleren óf een site is overgezet. De vraag is alleen of de mobiele versie compleet is.\n- **Desktop-hits in de logs zijn normaal.** Google gebruikt Googlebot Desktop nog voor een paar functies, en ook andere crawlers van Google komen langs.\n- **Crawlstatistieken** in Search Console (via Instellingen) laat per Googlebot-type zien hoeveel verzoeken er zijn. Daar zie je in één oogopslag dat Smartphone de hoofdmoot is.\n\nDe echte risico's zitten in verschillen tussen mobiel en desktop: tekst, afbeeldingen, structured data of interne links die alleen op desktop staan. Wat op mobiel ontbreekt, telt niet mee.",
+  "kernpunt": "Sinds 5 juli 2024 crawlt Google alle sites voor Search met Googlebot Smartphone. Googlebot Desktop in je logs is normaal; check de mobiele versie op volledigheid.",
+  "toepassing": "Open deze week bij een klant Instellingen → Crawlstatistieken in Search Console en vergelijk daarna één belangrijke pagina op mobiel en desktop: ontbreekt er op mobiel tekst, markup of links?",
+  "bron": {
+    "titel": "Mobile-indexing vLast final final | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2024/06/mobile-indexing-vlast-final-final.doc"
+  },
+  "video": {
+    "titel": "Mobile-First Indexing",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+  }
+}

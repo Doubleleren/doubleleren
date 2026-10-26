@@ -1,0 +1,27 @@
+{
+  "id": "20261026-garantie-top3-verwachtingen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Verwachtingen afstemmen: geen garanties, wel afspraken",
+  "matrix": [
+    "6.2.2",
+    "6.3.3"
+  ],
+  "titel": "'Gegarandeerd top 3 binnen 60 dagen': waarom beloof jij dat niet?",
+  "intro": "Een installatiebedrijf vergelijkt twee offertes. Het andere bureau belooft 'gegarandeerd top 3 in Google binnen 60 dagen, anders geld terug'. Jouw voorstel bevat een technische audit, nieuwe dienstpagina's per regio en een contentplan, maar geen garantie. De eigenaar vraagt aan de telefoon waarom jij dat niet durft te beloven.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat antwoord je? En welke afspraken stel je voor, zodat de klant toch weet wat hij kan verwachten?",
+    "minTekens": 120,
+    "hint": "Denk aan wat jij wel en niet in de hand hebt, en aan hoe je vooruitgang meetbaar maakt."
+  },
+  "modelantwoord": "Een sterk antwoord bevat:\n\n- **Eerlijk over garanties.** Niemand kan een toppositie in Google garanderen; Google zegt dat zelf letterlijk en raadt aan een ander te zoeken als iemand dat wel belooft. Rankings hangen af van Googles systemen en van wat concurrenten doen. Een garantie gaat vaak over een zoekwoord waar bijna niemand op zoekt.\n- **Afspraken over inspanning.** Wat je oplevert en wanneer: de audit, de dienstpagina's, het contentplan, met een planning.\n- **Afspraken over meten.** Een vaste set zoekwoorden met zoekvolume, plus tussenstappen die je eerder ziet (indexatie, vertoningen, posities) en het echte doel (aanvragen uit organisch verkeer).\n- **Vaste momenten.** Bijvoorbeeld een evaluatie per kwartaal, waarin je samen bijstuurt.\n- **Transparantie.** Je deelt welke wijzigingen je doet en waarom.\n\nZwak is: alleen 'SEO kost tijd' zeggen, of zelf toch een positie beloven om de opdracht binnen te halen.",
+  "uitleg": "Verwachtingen afstemmen begint vóór de opdracht. Een klant die een garantie krijgt aangeboden, vindt een voorstel zonder garantie al snel minder overtuigend. Jouw taak is uitleggen waarom een garantie niets zegt, en wat je in plaats daarvan wél belooft.\n\nGoogle is daar zelf duidelijk over: niemand kan een eerste plek garanderen. Wie dat wel belooft, kan het alleen waarmaken met een zoekwoord zonder concurrentie, of met methoden die tegen Googles richtlijnen ingaan.\n\nGoogle geeft eigenaren ook vragen mee voor een SEO-bureau. Bijvoorbeeld: welke resultaten verwacht je, en binnen welke termijn? Hoe meet je succes? Deel je alle wijzigingen die je doet, met de reden erachter? Gebruik die vragen als basis voor je eigen afspraken.\n\nEen handige indeling:\n- **Inspanning:** wat je doet en wanneer. Dat heb je zelf in de hand.\n- **Tussenresultaten:** indexatie, vertoningen, posities op relevante zoekwoorden. Die laten vroeg zien of het de goede kant op gaat.\n- **Bedrijfsresultaat:** leads, omzet of aanvragen uit organisch verkeer. Daar draait het voor de klant om.\n\nLeg vast wanneer je evalueert en wat je doet als het tegenvalt. Dan weet de klant waar hij aan toe is, zonder een belofte die je niet kunt waarmaken.",
+  "kernpunt": "Niemand kan een positie in Google garanderen. Beloof wat je zelf in de hand hebt (inspanning en planning) en spreek af hoe en wanneer je de voortgang meet.",
+  "toepassing": "Kijk deze week in een lopend voorstel of offerte of er vaste evaluatiemomenten en meetbare tussenresultaten in staan. Voeg ze toe als ze ontbreken.",
+  "bron": {
+    "titel": "Do You Need an SEO? | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/do-i-need-seo"
+  }
+}
