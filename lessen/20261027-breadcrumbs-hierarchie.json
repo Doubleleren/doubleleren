@@ -1,0 +1,32 @@
+{
+  "id": "20261027-breadcrumbs-hierarchie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Interne links voor bezoeker én zoekmachine: breadcrumbs",
+  "matrix": [
+    "7.1.2",
+    "1.2.5"
+  ],
+  "titel": "Het kruimelpad toont waar de bezoeker vandaan kwam: goed idee?",
+  "intro": "Een fietsenwinkel test een nieuw kruimelpad boven de productpagina's. De developer heeft het zo gebouwd dat het de laatste drie pagina's toont die de bezoeker bekeek, bijvoorbeeld 'Zoekresultaten > Sale > Gazelle Ultimate'. Op mobiel loopt het pad over drie regels. De laatste kruimel, de huidige pagina, is ook een link.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welk advies geef je over dit kruimelpad?",
+    "opties": [
+      "Laten zo: een pad op basis van de route van de bezoeker is persoonlijker en converteert daardoor beter dan een vaste structuur.",
+      "Toon de plek in de sitestructuur (Home > E-bikes > Stadsfietsen > Gazelle Ultimate), maak de huidige pagina geen link, en houd het op mobiel kort, bijvoorbeeld alleen het laatste niveau of twee.",
+      "Schrap het kruimelpad: op mobiel heeft niemand er iets aan, en Google gebruikt het niet meer.",
+      "Vervang het hoofdmenu door het kruimelpad, zodat er minder links op de pagina staan en de belangrijke links meer waarde krijgen."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Een kruimelpad laat zien **waar een pagina in de structuur van de site staat**, niet welke route de bezoeker aflegde. Daarvoor heeft de browser al een terugknop. Een pad op basis van de route verschilt per bezoeker, zegt niets over waar het product thuishoort en geeft zoekmachines geen consistente links naar de categorieën.\n\nWaarom de andere opties niet kloppen:\n- **Laten zo** gaat in tegen wat usability-onderzoek laat zien: het pad hoort de hiërarchie te tonen.\n- **Schrappen** is te rigoureus. Op mobiel moet je voorzichtig zijn met ruimte, maar een kort pad kan nog steeds helpen. En Google gebruikt BreadcrumbList-markup nog steeds om pagina's in de zoekresultaten in te delen (op desktop zichtbaar als kruimelpad).\n- **Het hoofdmenu vervangen** werkt niet: een kruimelpad vult de navigatie aan, maar vervangt hem nooit.",
+  "uitleg": "Kruimelpaden zijn een klein onderdeel waar UX en SEO elkaar raken. Voor de bezoeker zijn ze een tweede vorm van navigatie: je ziet in één oogopslag waar je bent en springt met één klik naar een bredere categorie. Voor zoekmachines zijn het interne links met duidelijke ankertekst naar categoriepagina's, op elke productpagina.\n\nRichtlijnen van Nielsen Norman Group:\n- **Toon de hiërarchie**, niet de geschiedenis van de bezoeker.\n- **Vul de navigatie aan**, vervang hem niet.\n- **Eindig met de huidige pagina**, zonder link en visueel anders.\n- **Begin met de homepage.**\n- Staat een product in meerdere categorieën, toon dan één **vaste route**.\n- Link alleen naar categorieën die echt een eigen pagina hebben.\n- Een platte site van één of twee niveaus heeft geen kruimelpad nodig.\n- **Op mobiel:** geen pad dat over meerdere regels loopt, geen te kleine tikdoelen, en overweeg alleen het laatste niveau of twee te tonen.\n\nVoor SEO komt daar BreadcrumbList-markup bij, die overeen moet komen met het zichtbare pad.",
+  "kernpunt": "Een kruimelpad toont de plek in de sitestructuur, nooit de route van de bezoeker. Het vult de navigatie aan, de huidige pagina is geen link, en op mobiel houd je het kort.",
+  "toepassing": "Bekijk deze week op mobiel drie productpagina's van een webshopklant: loopt het kruimelpad over meerdere regels, en wijst het naar categorieën met een eigen pagina?",
+  "bron": {
+    "titel": "Breadcrumbs: 11 Design Guidelines for Desktop and Mobile | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/breadcrumbs/"
+  }
+}

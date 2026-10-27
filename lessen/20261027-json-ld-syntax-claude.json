@@ -1,0 +1,27 @@
+{
+  "id": "20261027-json-ld-syntax-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "JSON en JSON-LD: syntaxfouten vinden en voorkomen",
+  "matrix": [
+    "5.3.4",
+    "2.2.9"
+  ],
+  "titel": "Rich Results Test zegt 'kan niet worden geparseerd': laat Claude meekijken",
+  "intro": "Een copywriter heeft in het CMS een JSON-LD-blok voor een evenementpagina geplakt, overgenomen uit een Word-document. De Rich Results Test meldt een parsefout en vindt geen enkel item. Het blok is 40 regels lang. Je wilt het niet alleen repareren, maar ook voorkomen dat het volgende week weer gebeurt.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee je Claude het blok laat controleren en repareren. Welke fouten laat je gericht zoeken, en wat vraag je Claude naast de gerepareerde code?",
+    "minTekens": 150,
+    "hint": "Denk aan wat een tekstverwerker met aanhalingstekens doet, en aan wat JSON strenger is dan JavaScript."
+  },
+  "modelantwoord": "Een sterke prompt bevat:\n\n- **Rol en doel:** 'Controleer dit JSON-LD-blok op geldige JSON-syntax en repareer het, zonder de inhoud te veranderen.'\n- **Gericht zoeken naar:**\n  - gekrulde aanhalingstekens (“ ” of ‘ ’) in plaats van rechte dubbele (\")\n  - enkele aanhalingstekens rond sleutels of waarden; JSON kent alleen dubbele\n  - een komma na het laatste item van een object of lijst\n  - ontbrekende komma's tussen eigenschappen\n  - accolades of blokhaken die niet sluiten\n  - commentaar (// of /* */), dat in JSON niet mag\n  - niet-geëscapete aanhalingstekens binnen een tekst\n- **Output:**\n  - de gerepareerde code in een codeblok\n  - een lijst met elke fout: regelnummer, wat er mis was, wat er nu staat\n  - een aparte lijst met inhoudelijke twijfels (bijvoorbeeld een datum zonder tijdzone), zonder die zelf aan te passen\n- **Voorkomen:** vraag om een korte instructie voor copywriters, zoals 'plak JSON-LD nooit vanuit Word; gebruik een platte-teksteditor of het sjabloon in het CMS'.\n\nPlak het resultaat daarna opnieuw in de Rich Results Test; Claudes oordeel is geen validatie.",
+  "uitleg": "**JSON-LD** is structured data in JSON-formaat, in een script-blok van het type application/ld+json. Google raadt het aan omdat het het makkelijkst te implementeren en te onderhouden is en minder foutgevoelig dan Microdata of RDFa. Het blok mag in de head of in de body staan, en mag ook door JavaScript worden toegevoegd.\n\nMaar **JSON** is streng. Eén teken verkeerd en het hele blok is ongeldig, waardoor Google er niets mee kan:\n- tekst en sleutels altijd tussen **rechte dubbele** aanhalingstekens\n- **geen komma** na het laatste item\n- **geen commentaar**\n- aanhalingstekens binnen een tekst escapen met een backslash\n\nDe meest voorkomende oorzaak in de praktijk: kopiëren uit Word, Google Docs of een mail. Die maken van rechte aanhalingstekens automatisch gekrulde. Voor een mens zien ze er bijna hetzelfde uit, voor een parser niet.\n\nClaude is snel in het vinden van zulke fouten en het uitleggen ervan. De controle doe je met de **Rich Results Test** tijdens het bouwen en de rich result-rapporten in Search Console na livegang.",
+  "kernpunt": "Eén syntaxfout maakt een heel JSON-LD-blok ongeldig. Let op gekrulde aanhalingstekens, een komma na het laatste item en commentaar, en controleer altijd opnieuw met de Rich Results Test.",
+  "toepassing": "Check deze week in Search Console bij een klant de rapporten onder Verbeteringen (of rich results) op items met parsefouten, en zoek uit waar die JSON-LD vandaan komt.",
+  "bron": {
+    "titel": "Introduction to structured data markup in Google Search | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+  }
+}

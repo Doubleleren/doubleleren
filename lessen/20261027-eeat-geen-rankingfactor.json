@@ -1,0 +1,32 @@
+{
+  "id": "20261027-eeat-geen-rankingfactor",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "E-E-A-T: wat het is en wat het niet is",
+  "matrix": [
+    "11.1.1",
+    "11.1.2"
+  ],
+  "titel": "\"Kun je onze E-E-A-T-score even verhogen?\"",
+  "intro": "De marketingmanager van een hypotheekadviseur heeft een webinar gezien over E-E-A-T. De vraag aan jou: 'Wat is onze E-E-A-T-score, en kun je die met wat schema-markup en een paar keurmerken in de footer omhoog krijgen? Dan stijgen we toch vanzelf?'",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat antwoord je? Leg in je eigen woorden uit wat E-E-A-T is, waar de letters voor staan, en wat je wel kunt doen voor deze klant.",
+    "minTekens": 150,
+    "hint": "Is E-E-A-T iets wat Google meet, of iets waarmee Google beschrijft wat het wil belonen?"
+  },
+  "modelantwoord": "**Er bestaat geen E-E-A-T-score.** E-E-A-T is een kader uit de richtlijnen voor Googles kwaliteitsbeoordelaars (quality raters). Die beoordelen zoekresultaten om te toetsen of Googles systemen goed werken, maar hun oordelen worden niet direct gebruikt om te ranken. Google zegt zelf: E-E-A-T is geen specifieke rankingfactor. Wel gebruiken de systemen een mix van signalen die content met goede E-E-A-T herkennen.\n\n**De letters:**\n- **Experience**: ervaring uit de eerste hand (een product echt gebruikt, de situatie zelf meegemaakt)\n- **Expertise**: kennis en vaardigheid van de maker\n- **Authoritativeness**: de reputatie van de maker of site op dit onderwerp\n- **Trustworthiness**: betrouwbaarheid; volgens Google het belangrijkste onderdeel\n\n**Wat wel helpt:** hypotheken zijn een YMYL-onderwerp, dus betrouwbaarheid weegt extra zwaar. Laat zien wie de adviseurs zijn (naam, registratie, ervaring), wie de content controleert, waar cijfers vandaan komen en hoe je bereikbaar bent. Markup kan die informatie verduidelijken, maar voegt zelf geen vertrouwen toe; keurmerken alleen als ze echt en controleerbaar zijn.",
+  "uitleg": "**E-E-A-T** staat voor Experience, Expertise, Authoritativeness en Trustworthiness. Het komt uit de **Search Quality Rater Guidelines**: de handleiding voor mensen die zoekresultaten beoordelen. In december 2022 kwam de eerste E (Experience) erbij, voor ervaring uit de eerste hand.\n\nWat het niet is:\n- **Geen score** die je ergens kunt opzoeken of meten.\n- **Geen rankingfactor op zich.** Google zegt dat de beoordelingen van raters niet direct in de algoritmes worden gebruikt. Ze helpen Google om te toetsen of de systemen goed werken.\n- **Geen technische ingreep.** Schema-markup of een auteursvak verandert niets aan wie de content echt maakt.\n\nWat het wel is: een beschrijving van wat Googles systemen proberen te belonen. **Trust** is volgens Google het belangrijkste onderdeel; de andere drie dragen eraan bij.\n\nBij **YMYL-onderwerpen** (Your Money or Your Life: gezondheid, geld, veiligheid) weegt dit zwaarder, omdat onbetrouwbare informatie daar echte schade kan doen.\n\nPraktisch: vraag je bij elke pagina af of een bezoeker kan zien wie het schreef, waarom die het weet en waar de feiten vandaan komen.",
+  "kernpunt": "E-E-A-T is geen score en geen rankingfactor op zich, maar een kader voor wat Google wil belonen. Trust is het belangrijkste onderdeel, zeker bij YMYL; je verbetert het met echte makers, bronnen en transparantie, niet met markup.",
+  "toepassing": "Kies deze week één belangrijke YMYL-pagina van een klant en check: staat er een echte auteur of reviewer bij, met een profielpagina, en zijn de belangrijkste cijfers onderbouwd met een bron?",
+  "bron": {
+    "titel": "Creating helpful, reliable, people-first content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  },
+  "video": {
+    "titel": "EEAT Explained: What Google Actually Uses to Judge Trust & Quality",
+    "kanaal": "Edward Sturm",
+    "url": "https://www.youtube.com/watch?v=4YhJH5VOF3w"
+  }
+}

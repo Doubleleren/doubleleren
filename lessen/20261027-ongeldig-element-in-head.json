@@ -1,0 +1,31 @@
+{
+  "id": "20261027-ongeldig-element-in-head",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "HTML: welke elementen horen in de head?",
+  "matrix": [
+    "5.3.2"
+  ],
+  "titel": "De noindex staat in de broncode, maar Google indexeert de pagina toch",
+  "intro": "Een klant wil zijn bedankpagina's uit Google houden. In de broncode staat in de head, in deze volgorde: de title, een meta description, een trackingpixel als img-element, de meta robots met noindex en de canonical. Toch staan de bedankpagina's na weken nog in Google, en de URL-inspectietool meldt geen noindex.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak?",
+    "opties": [
+      "De meta robots moet direct na de title staan; Google leest alleen de eerste drie elementen van de head.",
+      "Google negeert een noindex in een meta-tag en volgt alleen een X-Robots-Tag in de HTTP-header.",
+      "Het img-element hoort niet in de head. Google beschouwt de head daar als afgelopen en negeert de noindex en de canonical die erna komen.",
+      "De pagina heeft ook een canonical; bij een conflict tussen canonical en noindex kiest Google altijd de canonical."
+    ],
+    "juist": 2
+  },
+  "toelichting": "In de head horen alleen **title, meta, link, script, style, base, noscript en template**. Komt Google een ander element tegen, zoals een img of iframe, dan neemt het aan dat de head daar eindigt en leest het de elementen daarna niet meer als head-elementen. De noindex en de canonical na de pixel worden dus genegeerd. De URL-inspectietool die geen noindex ziet, bevestigt dat.\n\nWaarom de andere opties niet kloppen:\n- **Alleen de eerste drie elementen** is verzonnen. De volgorde telt alleen omdat er een ongeldig element tussen staat.\n- **Meta robots wordt genegeerd** klopt niet: de meta-tag en de X-Robots-Tag werken allebei.\n- **Canonical wint altijd** klopt niet. Het combineren van noindex en een canonical is wel een tegenstrijdig signaal, maar het verklaart niet dat de URL-inspectietool geen noindex ziet.",
+  "uitleg": "Browsers zijn vergevingsgezind: een pixel of iframe in de head werkt gewoon. Maar de HTML-parser sluit de head automatisch af zodra er een element verschijnt dat er niet hoort, en alles daarna komt in de body terecht. Google doet hetzelfde. Volgens Google worden alle elementen na een ongeldig element genegeerd.\n\nGeldig in de head zijn:\n- **title**\n- **meta**\n- **link**\n- **script**\n- **style**\n- **base**\n- **noscript**\n- **template**\n\nVeelvoorkomende boosdoeners zijn trackingpixels (img), iframes van chatwidgets of tagmanagers, en losse tekst of een div die een plugin in de head zet.\n\nZo controleer je het:\n- Kijk in de **gerenderde HTML** (URL-inspectietool, of Elementen in Chrome DevTools) in plaats van de broncode. Staan je meta-tags daar opeens in de body, dan is de head te vroeg afgesloten.\n- Kan het element niet weg, zet het dan **onder** alle belangrijke meta-tags.\n\nVoor GTM is dit een bekende valkuil: het noscript-iframe hoort direct na de openingstag van de body, niet in de head.",
+  "kernpunt": "Een img, iframe of ander ongeldig element in de head sluit hem voor Google af: alles daarna, zoals noindex, canonical of hreflang, wordt genegeerd. Controleer de gerenderde HTML, niet alleen de broncode.",
+  "toepassing": "Open deze week bij een klant de gerenderde HTML van de homepage in de URL-inspectietool en controleer of title, meta robots, canonical en hreflang nog in de head staan.",
+  "bron": {
+    "titel": "Use valid HTML to specify page metadata | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/valid-page-metadata"
+  }
+}

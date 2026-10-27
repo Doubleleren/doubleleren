@@ -1,0 +1,27 @@
+{
+  "id": "20261027-title-link-herschreven",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Title links: waarom Google je title herschrijft",
+  "matrix": [
+    "2.1.8",
+    "2.1.10"
+  ],
+  "titel": "Google toont 'Wintercollectie 2024' terwijl het 2026 is",
+  "intro": "Een modewebshop klaagt dat Google bij drie typen pagina's een andere titel toont dan de title-tag:\n\n- categoriepagina's: title 'Wintercollectie 2024 | Merk', H1 'Wintercollectie 2026'\n- 140 merkpagina's met allemaal de title 'Merken | Merk'\n- blogartikelen met drie even grote koppen bovenaan, waarvan geen enkele de H1 is",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in Googles documentatie over title links op waarom Google in elk van deze drie gevallen een andere titel kiest, en welke tekst Google dan waarschijnlijk toont. Wat pas je per paginatype aan?",
+    "minTekens": 150,
+    "hint": "Google noemt een handvol veelvoorkomende problemen met title-tags. Zoek welke drie hier spelen."
+  },
+  "modelantwoord": "Google noemt in de documentatie deze drie problemen:\n\n- **Categoriepagina's: verouderde title (obsolete title).** De title noemt nog 2024, de zichtbare titel 2026. Google kan het jaartal uit de zichtbare titel overnemen. Oplossing: title en H1 uit dezelfde bron laten vullen, zodat ze niet uit elkaar lopen.\n- **Merkpagina's: micro-boilerplate.** 140 pagina's met dezelfde title zijn niet van elkaar te onderscheiden. Google voegt dan een onderscheidend stukje toe uit opvallende tekst op de pagina, hier waarschijnlijk de merknaam. Oplossing: een unieke title per merk, zoals 'Merknaam kopen | Merk'.\n- **Blogartikelen: geen duidelijke hoofdtitel.** Bij meerdere even prominente koppen kan Google gewoon de eerste kop nemen. Oplossing: één duidelijke, visueel dominante H1 die past bij de title.\n\nUitzetten kan niet: Google past title links niet handmatig per site aan. Je stuurt alleen door de title en de zichtbare titel kloppend en consistent te maken.",
+  "uitleg": "De klikbare titel in Google heet een **title link**. Google genereert die automatisch. Meestal komt hij uit het title-element, maar Google kijkt ook naar de zichtbare hoofdtitel, koppen, og:title, andere opvallende tekst, ankerteksten van links naar de pagina en WebSite-structured data.\n\nGoogle kiest iets anders dan je title als die de pagina slecht beschrijft. De veelvoorkomende problemen volgens Google:\n- **Half lege titles**, zoals alleen '| Merk'\n- **Verouderde titles**, met een oud jaartal terwijl de pagina is bijgewerkt\n- **Onjuiste titles**, die niet passen bij de inhoud\n- **Micro-boilerplate**: veel pagina's met dezelfde title\n- **Geen duidelijke hoofdtitel**: meerdere koppen die even zwaar wegen\n- **Taal of schrift** van de title wijkt af van de content\n\nEen herschreven title is dus een diagnose: hij vertelt je welk signaal niet klopt. Bij sjabloonpagina's zit de oorzaak bijna altijd in het sjabloon, niet in losse pagina's.\n\nEen opt-out bestaat niet. Je kunt Google ook niet vragen een title link handmatig te veranderen.",
+  "kernpunt": "Google herschrijft een title als die de pagina slecht beschrijft: half leeg, verouderd, onjuist, overal hetzelfde of zonder duidelijke hoofdtitel. Herstel het in het sjabloon, zodat title en zichtbare H1 consistent zijn.",
+  "toepassing": "Zoek deze week met site: tien belangrijke pagina's van een klant op en vergelijk de getoonde titel met de title-tag. Noteer bij elke afwijking welk van de zes problemen speelt.",
+  "bron": {
+    "titel": "Influencing your title links in search results | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/title-link"
+  }
+}

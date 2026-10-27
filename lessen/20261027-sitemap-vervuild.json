@@ -1,0 +1,27 @@
+{
+  "id": "20261027-sitemap-vervuild",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Problemen in een XML-sitemap herkennen",
+  "matrix": [
+    "1.4.1",
+    "1.1.11"
+  ],
+  "titel": "Een sitemap vol redirects, noindex en lastmod 'vandaag'",
+  "intro": "Een woonwinkel heeft één sitemap.xml met 9.200 URL's. Een crawl van alleen de sitemap laat zien: 1.100 URL's geven een 301, 640 hebben een noindex, 300 geven een 404 en 2.000 zijn filter-URL's met een canonical naar de categorie. Elke URL heeft als lastmod de datum van vandaag, en alle URL's hebben priority 1.0.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Welke twee problemen pak je als eerste aan, en waarom die? Wat laat je juist liggen?",
+    "minTekens": 120,
+    "hint": "Wat moet een sitemap volgens Google bevatten, en welke velden gebruikt Google eigenlijk?"
+  },
+  "modelantwoord": "**Eerst: alleen indexeerbare, canonieke URL's met status 200 in de sitemap.** De 301's, noindex-pagina's, 404's en filter-URL's met een canonical naar elders (samen ruim 4.000 URL's) horen er niet in. Een sitemap is een lijst van URL's die je in Google wilt zien. Met deze URL's erin geef je Google tegenstrijdige signalen (in de sitemap wel, op de pagina niet), en zie je in Search Console niet meer welke belangrijke pagina's echt een probleem hebben.\n\n**Tweede: lastmod eerlijk maken.** Google gebruikt lastmod alleen als die consequent en controleerbaar klopt. Een datum die elke dag voor alle URL's verandert, klopt aantoonbaar niet, dus negeert Google hem. Laat lastmod alleen veranderen bij een echte wijziging van de hoofdinhoud, structured data of links.\n\n**Laten liggen: priority.** Google negeert priority en changefreq. Het kost geen moeite om ze weg te halen, maar het levert ook niets op.\n\nExtra: splits de sitemap per paginatype (categorieën, producten, blog) met een sitemap-index, zodat je in Search Console per type ziet hoeveel er geïndexeerd is.",
+  "uitleg": "Een XML-sitemap vertelt Google welke URL's je belangrijk vindt en wanneer ze zijn gewijzigd. Hij dwingt niets af, maar helpt bij het vinden van nieuwe en gewijzigde pagina's. Daarom moet hij kloppen.\n\nWat Google vraagt:\n- **Alleen de URL's die je in de zoekresultaten wilt zien.** Bij dubbele content alleen de voorkeurs-URL. Dus geen redirects, geen noindex, geen foutpagina's en geen URL's met een canonical naar een andere pagina.\n- **Volledige, absolute URL's.**\n- **lastmod** alleen als die consequent en controleerbaar juist is: de laatste wezenlijke wijziging, niet bijvoorbeeld een nieuw copyrightjaar in de footer.\n- **priority en changefreq** worden genegeerd.\n- Maximaal **50.000 URL's of 50 MB** (ongecomprimeerd) per sitemap. Daarboven splits je, en een sitemap-index bundelt ze.\n\nVervuiling ontstaat meestal door een plugin of export die 'alles' meeneemt. Los het dus op bij de bron: laat de sitemap automatisch alleen URL's opnemen die status 200 hebben, indexeerbaar zijn en naar zichzelf canonicaliseren.",
+  "kernpunt": "Een sitemap bevat alleen indexeerbare, canonieke URL's met status 200, en een lastmod die alleen bij echte wijzigingen verandert. priority en changefreq negeert Google.",
+  "toepassing": "Crawl deze week de sitemap van een klant in lijstmodus en tel hoeveel URL's geen 200 geven, een noindex hebben of naar een andere URL canonicaliseren.",
+  "bron": {
+    "titel": "Build and submit a sitemap | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+  }
+}

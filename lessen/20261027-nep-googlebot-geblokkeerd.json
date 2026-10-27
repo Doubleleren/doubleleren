@@ -1,0 +1,31 @@
+{
+  "id": "20261027-nep-googlebot-geblokkeerd",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawlen als Googlebot: wat een gespoofte user-agent wel en niet laat zien",
+  "matrix": [
+    "1.1.6"
+  ],
+  "titel": "Screaming Frog als Googlebot krijgt overal een 403: paniek?",
+  "intro": "Je crawlt de site van een klant met Screaming Frog, met de user-agent op Googlebot. Bijna elke URL geeft een 403. Met de standaard user-agent van Screaming Frog laadt alles normaal. De site draait achter een CDN met botbescherming. Verkeer en vertoningen in Search Console zijn stabiel.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke verklaring, en hoe controleer je wat de echte Googlebot krijgt?",
+    "opties": [
+      "De site blokkeert Googlebot. Zet de botbescherming direct uit, anders valt de site binnen een paar dagen uit de index.",
+      "De botbescherming herkent je crawler als nep-Googlebot, omdat het verzoek niet van een IP-adres van Google komt. Controleer met de live test van de URL-inspectietool en met geverifieerde Googlebot-verzoeken in de serverlogs wat Google echt krijgt.",
+      "robots.txt verbiedt Googlebot de toegang. Een 403 is de statuscode die bij een Disallow hoort.",
+      "Screaming Frog kan geen JavaScript renderen als Googlebot. Zet JavaScript-rendering aan en crawl opnieuw."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Een user-agent is gewoon een tekstje dat iedereen kan invullen. Daarom verifiëren CDN's en firewalls Googlebot op **IP-adres** (reverse DNS of de IP-lijsten die Google publiceert). Jouw crawler draait niet vanaf een Google-IP en wordt dus terecht als nep-Googlebot geweerd. Stabiele cijfers in Search Console passen daarbij.\n\nWaarom de andere opties niet kloppen:\n- **Botbescherming uitzetten** is voorbarig en opent de deur voor scrapers die zich als Googlebot voordoen. Eerst controleren wat de echte Googlebot krijgt.\n- **robots.txt** geeft geen 403. Een Disallow betekent dat een nette crawler de URL niet opvraagt; de server antwoordt dan niets.\n- **JavaScript-rendering** verandert niets aan de statuscode van de eerste HTTP-respons.",
+  "uitleg": "\"Crawlen als Googlebot\" kan op twee manieren, en ze laten iets anders zien.\n\n**Een crawler met de user-agent van Googlebot** (Screaming Frog, Sitebulb) laat zien wat een server teruggeeft op basis van die user-agent. Handig om te zien of een site andere content, redirects of robots-regels voor Googlebot heeft. Maar wat op IP-adres gebeurt, zie je zo niet. Veel CDN's laten alleen geverifieerde Googlebots door en blokkeren nepversies.\n\n**De URL-inspectietool in Search Console** laat de echte Google ophalen. De live test toont de HTTP-respons, de opgehaalde HTML, de geladen resources, JavaScript-meldingen en bij een geslaagde test een screenshot. Dat is het betrouwbaarste antwoord op 'wat krijgt Google?', per URL.\n\n**Serverlogs** laten zien wat Googlebot op grote schaal krijgt. Verifieer daar wel of het echt Googlebot is: doe een reverse DNS-lookup (googlebot.com, google.com of googleusercontent.com) en daarna een forward lookup die weer op hetzelfde IP uitkomt, of vergelijk met Googles IP-lijsten.\n\nVuistregel: gebruik de gespoofte crawl om patronen te vinden, en de URL-inspectietool en logs om ze te bevestigen.",
+  "kernpunt": "Een crawler met de Googlebot-user-agent is niet Google: wat op IP-adres gebeurt, zie je er niet mee. Bevestig met de live test in de URL-inspectietool en met geverifieerde Googlebot-regels in de logs.",
+  "toepassing": "Haal deze week bij een klant achter een CDN drie belangrijke URL's door de live test van de URL-inspectietool en vergelijk statuscode en HTML met je eigen crawl als Googlebot.",
+  "bron": {
+    "titel": "Verify requests from Google crawlers and fetchers | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot"
+  }
+}

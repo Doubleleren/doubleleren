@@ -1,0 +1,32 @@
+{
+  "id": "20261027-deelbare-paginas-noindex",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Deelbare en gegenereerde pagina's standaard uit de index houden",
+  "matrix": [
+    "1.3.1",
+    "1.5.1"
+  ],
+  "titel": "38.000 gedeelde offertes in Google: wat zet je standaard aan?",
+  "intro": "Een SaaS-klant biedt een gratis offertetool. Elke offerte krijgt een eigen openbare URL onder /deel/, zodat gebruikers hem kunnen doorsturen. In het rapport Pagina-indexering zie je in een maand 38.000 nieuwe geïndexeerde URL's onder /deel/. Een deel ervan blijkt aangemaakt door spammers, met casinoteksten en links.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke maatregel past het best als standaardinstelling voor deze gedeelde pagina's?",
+    "opties": [
+      "Direct Disallow: /deel/ in robots.txt, zodat Google de pagina's niet meer ziet en ze vanzelf uit de index verdwijnen.",
+      "Op elke gedeelde pagina een rel=canonical naar de homepage, zodat de waarde naar de homepage gaat.",
+      "Gedeelde pagina's standaard een noindex geven (meta robots of X-Robots-Tag), ze crawlbaar laten tot ze uit de index zijn, en het aantal nieuwe pagina's en indexeringspieken bewaken.",
+      "Alle URL's onder /deel/ verbergen met de tool Verwijderingen in Search Console en verder niets veranderen."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google vraagt platforms waar gebruikers pagina's kunnen delen of laten genereren om zich af te vragen of die content bedoeld is om via zoekmachines gevonden te worden. Is hij bedoeld voor delen, samenwerken of gebruik, dan hoort er standaard een **noindex** op.\n\nWaarom de andere opties niet kloppen:\n- **Meteen Disallow** voorkomt dat Google de pagina's nog crawlt. Dan ziet Google ook geen noindex, en URL's die al bekend zijn kunnen in de index blijven staan, alleen zonder beschrijving. Een robots.txt-blokkade is een prima standaard voor nieuwe pagina's, maar niet om al geïndexeerde URL's op te ruimen.\n- **Een canonical naar de homepage** is een misleidend signaal: de pagina's zijn geen duplicaat van de homepage. Google negeert zo'n canonical waarschijnlijk, en de spam blijft vindbaar.\n- **Verwijderingen** verbergt URL's maar tijdelijk (ongeveer zes maanden) en lost niets op bij de bron.",
+  "uitleg": "Op 26 oktober 2026 vulde Google zijn gids over het voorkomen van misbruik aan met een nieuw onderdeel: **indexeer alleen content die voor Search bedoeld is**. Het gaat om tools waarmee gebruikers gedeelde pagina's, gegenereerde content of web-apps publiceren, zoals offertes, wensenlijstjes, ontwerpen of AI-uitvoer.\n\nHet advies:\n- Bepaal per type pagina of hij gevonden moet worden via zoekmachines, of alleen bedoeld is voor wie de link heeft.\n- Zo niet: zet standaard een **noindex** (meta robots of X-Robots-Tag), of blokkeer het crawlen standaard in robots.txt.\n\nDie twee sluiten elkaar uit op dezelfde URL: een noindex werkt alleen als Google de pagina mag crawlen. Staan er al pagina's in de index, laat ze dan eerst crawlbaar met noindex tot ze verdwenen zijn.\n\nGoogle noemt ook hoe je misbruik vroeg ziet:\n- Search Console geverifieerd houden voor meldingen over handmatige acties en beveiliging\n- het rapport Pagina-indexering en het prestatierapport controleren op onverwachte pieken\n- op het platform zelf het aantal nieuwe openbare pagina's bijhouden, met een alarm bij plotselinge sprongen of als een paar gebruikers de meeste indexeerbare URL's maken",
+  "kernpunt": "Pagina's die gebruikers maken om te delen, horen standaard niet in Google: geef ze een noindex. Wat al geïndexeerd is, laat je crawlbaar tot het eruit is, en je bewaakt pieken in nieuwe pagina's.",
+  "toepassing": "Check deze week bij een klant met accounts, wensenlijstjes of een deelfunctie of die pagina's openbaar zijn. Zoek met site: en in Pagina-indexering of ze in Google staan.",
+  "bron": {
+    "titel": "Prevent user-generated spam on your site and platform | Google Search Central",
+    "url": "https://developers.google.com/search/docs/monitor-debug/prevent-abuse"
+  }
+}

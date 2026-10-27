@@ -1,0 +1,26 @@
+{
+  "id": "20261027-usability-test-vijf-gebruikers",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO",
+  "onderwerp": "Usability tests plannen: hoeveel deelnemers, en in hoeveel rondes?",
+  "matrix": [
+    "7.1.5"
+  ],
+  "titel": "Budget voor 15 testpersonen: één grote test of drie kleine?",
+  "intro": "Een energieleverancier wil weten waarom bezoekers afhaken in de aanvraagstraat voor een nieuw contract. Er is budget voor 15 deelnemers aan een moderated usability test. De klant stelt voor om in één week alle 15 te testen, dan alles in één keer aan te passen, en daarna een A/B-test te draaien.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Hoe zou jij die 15 deelnemers inzetten, en waarom? Noem ook wanneer je van die aanpak zou afwijken.",
+    "minTekens": 120,
+    "hint": "Hoeveel nieuwe problemen vind je met de tiende deelnemer nog, vergeleken met de tweede?"
+  },
+  "modelantwoord": "**Drie rondes van vijf in plaats van één ronde van vijftien.**\n\nWaarom: na een handvol deelnemers zie je vooral dezelfde problemen terug. Volgens het onderzoek van Nielsen Norman Group vinden vijf deelnemers ongeveer 85% van de usabilityproblemen. Deelnemers zes tot vijftien leveren vooral herhaling op. Met drie rondes:\n- vind je in ronde 1 de grootste problemen en los je die op\n- controleer je in ronde 2 of de oplossingen werken, en vind je problemen die eerst verborgen zaten of door het nieuwe ontwerp ontstaan\n- verfijn je in ronde 3 verder\n\n**Afwijken als:**\n- er duidelijk verschillende doelgroepen zijn (bijvoorbeeld nieuwe klanten en overstappers). Dan test je 3 à 4 deelnemers per groep.\n- je iets wilt **meten** (taaktijd, succespercentage) in plaats van problemen vinden. Daarvoor zijn minstens zo'n 20 deelnemers nodig.\n\nDe A/B-test komt daarna: de usability tests leveren de hypotheses, de A/B-test bewijst het effect op conversie.",
+  "uitleg": "Een **usability test** laat echte gebruikers een taak uitvoeren terwijl je meekijkt. Het doel is problemen vinden, niet cijfers verzamelen. Dat bepaalt hoeveel deelnemers je nodig hebt.\n\nDe bekende vuistregel van Nielsen Norman Group: **vijf deelnemers vinden ongeveer 85% van de problemen.** Elke extra deelnemer laat steeds meer van hetzelfde zien. Daarom is het advies om budget te verdelen over **meerdere kleine rondes**, met een aanpassing tussen elke ronde. Zo test je ook of je oplossingen werken.\n\nDe nuances die vaak worden vergeten:\n- **Verschillende doelgroepen:** test 3 à 4 per groep bij twee groepen, 3 per groep bij drie of meer.\n- **Kwantitatief onderzoek** (hoe lang duurt een taak, hoeveel procent lukt het): dat vraagt om ongeveer 20 deelnemers of meer.\n- **Vijf is geen statistisch bewijs.** Usability tests zeggen waarom iets misgaat; analytics en A/B-tests zeggen hoe vaak en hoeveel het oplevert.\n\nIn CRO vullen ze elkaar aan: analytics wijst de plek aan, usability tests en gedragstools geven het waarom, en daaruit volgt een testbare hypothese.",
+  "kernpunt": "Vijf deelnemers vinden de meeste usabilityproblemen. Verdeel je budget dus over meerdere kleine rondes met aanpassingen ertussen, met 3 à 4 per doelgroep, en gebruik grotere groepen alleen als je iets wilt meten.",
+  "toepassing": "Kies deze week bij een klant één cruciale taak (bijv. een offerte aanvragen) en laat drie collega's of bekenden die de site niet kennen hem uitvoeren terwijl je meekijkt. Noteer waar ze aarzelen.",
+  "bron": {
+    "titel": "Why You Only Need to Test with 5 Users | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20261027-hreflang-pdf-http-header",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "hreflang: de juiste methode kiezen (HTML, HTTP-header of sitemap)",
+  "matrix": [
+    "1.3.5",
+    "2.1.17"
+  ],
+  "titel": "Handleidingen als pdf in vier talen: waar zet je de hreflang?",
+  "intro": "Een fabrikant van cv-ketels heeft per model een installatiehandleiding als pdf, in het Nederlands, Frans, Duits en Engels. Iemand uit België met een Franstalige browser krijgt in Google de Nederlandse pdf te zien. De HTML-pagina's van de site hebben al correcte hreflang-tags. *hreflang* vertelt Google welke taalversies van dezelfde inhoud er zijn.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe geef je Google de taalversies van de pdf's door?",
+    "opties": [
+      "Met een Link-header in de HTTP-respons van elke pdf, die alle taalversies noemt, inclusief de pdf zelf.",
+      "Met een <link rel=\"alternate\" hreflang>-tag in de pdf, net als bij een HTML-pagina.",
+      "Dat kan niet: hreflang werkt alleen voor HTML-pagina's. Zet de pdf's op noindex en verwijs naar de HTML-pagina.",
+      "Met een rel=canonical van de Franse, Duitse en Engelse pdf naar de Nederlandse versie."
+    ],
+    "juist": 0
+  },
+  "toelichting": "Google kent drie gelijkwaardige manieren om hreflang door te geven: link-elementen in de HTML-head, een **Link-header in de HTTP-respons** en een XML-sitemap. Voor bestanden zonder HTML-head, zoals pdf's, noemt Google de HTTP-header als de geschikte methode. Ook een sitemap met xhtml:link-regels zou werken.\n\nWaarom de andere opties niet kloppen:\n- **Een link-tag in de pdf** bestaat niet: een pdf heeft geen HTML-head.\n- **hreflang alleen voor HTML** klopt niet: via de header of de sitemap werkt het ook voor andere bestanden. Noindex zou de pdf's juist onvindbaar maken.\n- **Een canonical naar de Nederlandse pdf** zegt dat de andere talen duplicaten zijn. Dan kan Google juist alleen de Nederlandse versie tonen, het omgekeerde van wat je wilt.",
+  "uitleg": "hreflang kun je op drie manieren doorgeven. Voor Google zijn ze gelijkwaardig:\n\n- **HTML-link-elementen** in de head van elke pagina. Het meest gebruikt, handig als je geen sitemap of headers kunt beheren.\n- **HTTP-headers** (Link: <url>; rel=\"alternate\"; hreflang=\"fr\"). Bedoeld voor bestanden die geen HTML zijn, zoals pdf's.\n- **XML-sitemap** met xhtml:link-regels onder elke URL. Handig voor grote sites, omdat je de pagina's zelf niet hoeft aan te passen.\n\nDe regels zijn bij alle drie hetzelfde: elke versie noemt zichzelf en alle andere versies, en de verwijzingen moeten over en weer kloppen.\n\nDaarnaast is er **x-default**: de versie voor bezoekers bij wie geen van je talen past, bijvoorbeeld een taalkeuzepagina of de Engelse versie.\n\nCombineren van methodes kan technisch, maar levert volgens Google niets extra op in Search en maakt het beheer lastiger. Kies per type content één methode.",
+  "kernpunt": "hreflang kan via HTML, HTTP-header of sitemap, en Google ziet ze als gelijkwaardig. Voor pdf's en andere bestanden zonder HTML gebruik je de HTTP-header of de sitemap.",
+  "toepassing": "Zoek deze week bij een meertalige klant met site:domein.nl filetype:pdf naar pdf's die in meerdere talen bestaan, en controleer met de URL-inspectietool of de HTTP-respons een Link-header met hreflang heeft.",
+  "bron": {
+    "titel": "Tell Google about localized versions of your page | Google Search Central",
+    "url": "https://developers.google.com/search/docs/specialty/international/localized-versions"
+  }
+}

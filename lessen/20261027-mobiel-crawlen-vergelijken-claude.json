@@ -1,0 +1,27 @@
+{
+  "id": "20261027-mobiel-crawlen-vergelijken-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Crawlen als mobiele user-agent en mobiel met desktop vergelijken",
+  "matrix": [
+    "8.2.1",
+    "8.1.2"
+  ],
+  "titel": "Mobiel minder interne links dan desktop? Laat Claude twee crawls vergelijken",
+  "intro": "Een webshop heeft een nieuw responsive thema. Op categoriepagina's staan op desktop een uitgebreide filterbalk, een SEO-tekst en blokken met gerelateerde categorieën. De developer zegt dat 'op mobiel alles er ook is, alleen anders ingedeeld'. Je wilt dat zwart op wit zien voor 2.400 categorie- en productpagina's.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Beschrijf hoe je de twee crawls in Screaming Frog instelt, en schrijf de prompt waarmee Claude de exports vergelijkt. Welke kolommen vergelijk je, en welke output vraag je?",
+    "minTekens": 180,
+    "hint": "Wat Googlebot Smartphone ziet, hangt niet alleen af van de user-agent, maar ook van wat er na het renderen in een smal scherm staat."
+  },
+  "modelantwoord": "**Twee crawls, verder identiek:**\n- Crawl 1: user-agent Googlebot Smartphone, JavaScript-rendering aan, mobiel venster.\n- Crawl 2: user-agent Googlebot desktop, JavaScript-rendering aan, desktopvenster.\nZelfde URL-lijst, zelfde robots-instellingen, zodat alleen het apparaat verschilt.\n\n**Exports per URL:** woordenaantal, aantal unieke interne uitgaande links, title, H1, canonical, meta robots, structured data-types, statuscode.\n\n**Prompt aan Claude:**\n'Je bent technisch SEO-specialist. Google indexeert op de mobiele versie. Hier zijn twee crawlexports van dezelfde URL's: mobiel en desktop. Koppel ze op URL en markeer per URL:\n- mobiel minstens 20% minder woorden of interne links dan desktop\n- andere title, H1, canonical of meta robots\n- structured data die alleen op desktop staat\nGroepeer de afwijkingen per paginatype (categorie, product) en geef per groep het aantal URL's, drie voorbeelden en een vermoedelijke oorzaak. Lever een tabel en een korte samenvatting voor de developer. Verzin geen oorzaken die je niet uit de data kunt halen; markeer die als te controleren.'\n\nControleer daarna een paar gemarkeerde URL's handmatig in de URL-inspectietool.",
+  "uitleg": "Google indexeert sites met de mobiele crawler. Wat alleen op de desktopversie staat, telt dus niet mee. Bij een responsive thema lijkt dat geen risico, maar thema's laten op smalle schermen vaak onderdelen weg: een filterbalk wordt een knop, een tekstblok verdwijnt, gerelateerde links worden niet geladen.\n\nEen crawl met alleen een mobiele **user-agent** vangt dat niet altijd. Wat er verdwijnt, hangt vaak af van CSS en JavaScript bij een bepaalde schermbreedte. Screaming Frog rendert daarom met Chromium en laadt de pagina bij mobiel in een venster van 411×731 pixels. De documentatie waarschuwt zelf dat sommige sites op kleinere vensters bepaalde elementen niet tonen.\n\nZet daarom in beide crawls **JavaScript-rendering** aan, met het passende venster, en vergelijk de gerenderde resultaten.\n\nDe vergelijking van duizenden rijen is precies waar Claude goed in is: koppelen, drempels toepassen en groeperen. Laat Claude wel onderscheid maken tussen wat de data laat zien en wat een vermoeden is. De oorzaak (een verborgen blok, lazy loading na een tik) controleer je zelf.",
+  "kernpunt": "Wat Google indexeert, is de gerenderde mobiele versie. Crawl mobiel én desktop met JavaScript-rendering en het juiste venster, en laat Claude de verschillen in woorden, links en metadata per paginatype groeperen.",
+  "toepassing": "Crawl deze week 200 URL's van een klant twee keer (mobiel en desktop, met rendering) en vergelijk alleen het aantal interne links. Begin bij de categoriepagina's.",
+  "bron": {
+    "titel": "Screaming Frog SEO Spider: Configuration (User-Agent en Rendering)",
+    "url": "https://www.screamingfrog.co.uk/seo-spider/user-guide/configuration/"
+  }
+}
