@@ -1,0 +1,27 @@
+{
+  "id": "20261028-rich-results-test-vs-validator",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Structured data testen: Rich Results Test vs. Schema Markup Validator",
+  "matrix": [
+    "2.2.11",
+    "2.2.8"
+  ],
+  "titel": "De ene tool zegt 'geen fouten', de andere 'niets gevonden'. Wie heeft gelijk?",
+  "intro": "Een collega heeft Service-markup van schema.org op de dienstpagina's van een schoonmaakbedrijf gezet. In de Schema Markup Validator geeft dat nul fouten. De Rich Results Test van Google meldt voor dezelfde pagina dat er geen items zijn gevonden die in aanmerking komen. De klant vraagt of hij nu een opvallend resultaat in Google krijgt.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek op wat het verschil is tussen de Rich Results Test en de Schema Markup Validator, en wat er met de oude Structured Data Testing Tool is gebeurd. Leg uit waarom de twee tools hier iets anders zeggen, en wat je de klant antwoordt.",
+    "minTekens": 120,
+    "hint": "Zoek in de Search Central-blog naar de update over de Structured Data Testing Tool uit december 2020."
+  },
+  "modelantwoord": "- **De Structured Data Testing Tool** is opgeheven. Google heeft hem in 2021 verhuisd naar schema.org, waar hij nu **Schema Markup Validator** heet.\n- **Schema Markup Validator:** controleert of je markup klopt volgens schema.org, voor alle types. Hij zegt niets over Google.\n- **Rich Results Test:** controleert alleen de types waarvoor Google een rich result heeft, en of de velden die Google eist erin staan.\n\nService is een geldig schema.org-type, maar Google heeft er geen rich result voor. Daarom keurt de validator het goed en vindt de Rich Results Test niets. Allebei hebben ze gelijk.\n\n**Antwoord aan de klant:** de markup is correct, maar levert in Google geen opvallend resultaat op. En ook als de Rich Results Test wel groen is, garandeert Google niet dat een rich result verschijnt.",
+  "uitleg": "Er zijn twee tools om structured data te testen, en ze beantwoorden een andere vraag.\n\n**Schema Markup Validator** (validator.schema.org)\n- Opvolger van de Structured Data Testing Tool van Google. Google kondigde in december 2020 aan dat die naar schema.org zou verhuizen; sinds augustus 2021 is hij daar stabiel.\n- Controleert of de markup klopt volgens schema.org: juiste types, juiste eigenschappen, geldige syntax.\n- Handig voor types die Google niet gebruikt, of als je markup voor andere platforms maakt.\n\n**Rich Results Test** (van Google)\n- Controleert alleen types waarvoor Google een rich result toont, zoals Product, Review, Video, Event of Recipe.\n- Kijkt of de verplichte velden van Google aanwezig zijn, en toont fouten en waarschuwingen.\n- Test standaard als smartphone, en kan een live URL of losse code testen.\n\n**Groen is geen garantie.** Google zegt dat structured data een feature mogelijk maakt, maar niet garandeert. Google kan een ander resultaat kiezen, of de markup negeren als hij niet past bij de zichtbare inhoud of de richtlijnen overtreedt.\n\nVuistregel: wil je weten of iets in aanmerking komt voor Google, gebruik de Rich Results Test. Wil je weten of je schema.org-code klopt, gebruik de validator.",
+  "kernpunt": "De Schema Markup Validator toetst aan schema.org, de Rich Results Test alleen aan wat Google als rich result ondersteunt. Geldige markup zonder Google-rich result is geen fout, en ook een groene Rich Results Test garandeert niets.",
+  "toepassing": "Test deze week één pagina van een klant met structured data in allebei de tools, en noteer welke types alleen in de validator verschijnen.",
+  "bron": {
+    "titel": "An update on the Structured Data Testing Tool | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2020/12/structured-data-testing-tool-update"
+  }
+}

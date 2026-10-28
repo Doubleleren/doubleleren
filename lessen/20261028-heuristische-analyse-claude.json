@@ -1,0 +1,26 @@
+{
+  "id": "20261028-heuristische-analyse-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO × Claude",
+  "onderwerp": "Heuristische analyse van een landingspagina met Claude",
+  "matrix": [
+    "7.1.1"
+  ],
+  "titel": "Offerteformulier converteert 1,8%: laat Claude een heuristische analyse doen",
+  "intro": "Een installateur van warmtepompen krijgt via Google Ads verkeer naar een landingspagina met een offerteformulier van 11 velden. De conversie is 1,8%. Op mobiel staat het formulier pas na drie schermen tekst. Je hebt screenshots (desktop en mobiel), de HTML en de advertentieteksten. Gebruikersonderzoek is er nog niet.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf een prompt waarmee Claude een heuristische analyse van deze landingspagina doet. Leg vast welke heuristieken Claude gebruikt, welke context het meekrijgt en in welk format je de bevindingen wilt, zodat je er testbare hypotheses uit haalt. Plak je prompt hieronder.",
+    "minTekens": 150,
+    "hint": "Een heuristische analyse levert vermoedens op, geen bewijs. Hoe zorg je dat Claude dat verschil in de output laat zien?"
+  },
+  "modelantwoord": "Je bent een UX- en CRO-specialist. Bijgevoegd: screenshots (desktop en mobiel), de HTML en de advertentieteksten van een landingspagina voor warmtepomp-offertes. Bezoekers komen via Google Ads; doel is het offerteformulier (11 velden). Conversie: 1,8%.\n\nOpdracht:\n1. Beoordeel de pagina aan de hand van de 10 usability-heuristieken van Nielsen Norman Group, en let daarnaast op de match tussen advertentie en pagina.\n2. Geef per bevinding: heuristiek, wat je ziet (met verwijzing naar de screenshot of HTML), ernst (hoog/middel/laag), en een hypothese in de vorm 'Als we X veranderen, dan verwachten we Y, omdat Z'.\n3. Scheid **observaties** (wat zichtbaar is) van **vermoedens** (wat je denkt dat bezoekers doen).\n4. Zet bij elke hypothese welke data het kan bevestigen (bijvoorbeeld een funnel in GA4, Clarity-opnames of een korte poll).\n\nOutput: een tabel, gesorteerd op ernst, en daaronder de top 3 om als eerste te testen. Verzin geen cijfers of gedrag dat niet in de input staat.\n\nIn gewone woorden: laat Claude de pagina langs een vaste lijst regels halen, en vraag om vermoedens die je daarna met echte data controleert.",
+  "uitleg": "Bij een **heuristische analyse** loop je een pagina na aan de hand van vaste vuistregels. De bekendste zijn de **10 usability-heuristieken** van Jakob Nielsen (NN/g), oorspronkelijk opgesteld met Rolf Molich voor precies dit soort evaluaties. Een paar die bij landingspagina's vaak opduiken:\n- **Aansluiting bij de echte wereld:** spreekt de pagina de taal van de bezoeker, of die van de installateur?\n- **Foutpreventie** en **herstel na fouten:** wat gebeurt er als iemand een veld verkeerd invult?\n- **Herkennen in plaats van herinneren:** hoeft de bezoeker niets te onthouden van het vorige scherm?\n- **Esthetisch en minimalistisch ontwerp:** staat er niets wat afleidt van de hoofdtaak?\n\nEen heuristische analyse is snel en goedkoop, maar levert **vermoedens** op, geen bewijs. Daarom is het formaat van de output zo belangrijk: observatie, heuristiek, ernst, hypothese en de data die het moet bevestigen. Zo wordt de analyse het begin van onderzoek, en geen lijstje meningen.\n\nClaude is hier sterk in het systematisch aflopen van een lijst en het netjes formuleren van hypotheses. Het kan wel dingen 'zien' die er niet zijn. Laat het dus verwijzen naar wat er in de input staat, en controleer de belangrijkste bevindingen zelf op de pagina.",
+  "kernpunt": "Een heuristische analyse toetst een pagina aan vaste vuistregels en levert hypotheses op, geen bewijs. Laat Claude observaties en vermoedens scheiden, en bij elke hypothese noemen welke data hem kan bevestigen.",
+  "toepassing": "Laat Claude deze week met jouw prompt de landingspagina met de meeste advertentieklikken van een klant analyseren, en leg de top 3 naast de funnel in GA4: zie je de afhakers waar Claude ze verwacht?",
+  "bron": {
+    "titel": "10 Usability Heuristics for User Interface Design | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/ten-usability-heuristics/"
+  }
+}

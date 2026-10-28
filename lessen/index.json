@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-27T05:27:25",
+    "bijgewerkt":  "2026-10-28T05:27:50",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1871,6 +1871,200 @@
                                 },
                        "video":  null,
                        "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-faq-rich-results-verdwenen",
+                       "titel":  "FAQ-markup op 300 pagina\u0027s voor € 4.000: doen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "FAQ-markup: wat levert het nog op in Google?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.4"
+                                  ],
+                       "kernpunt":  "Google toont sinds 7 mei 2026 voor geen enkele site nog FAQ-rich results. Investeer niet in FAQ-markup om de zoekresultaten; houd een FAQ-blok alleen als het bezoekers echt helpt.",
+                       "bron":  {
+                                    "titel":  "Latest Google Search Documentation Updates | Google Search Central",
+                                    "url":  "https://developers.google.com/search/updates"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-featured-snippet-afmelden",
+                       "titel":  "Een verouderd tarief in de featured snippet: wat kun je eraan doen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Featured snippets sturen en beperken",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.1.6"
+                                  ],
+                       "kernpunt":  "Je kunt featured snippets beperken (nosnippet voor alles, max-snippet zonder garantie, data-nosnippet voor een stuk tekst), maar niet aanwijzen welke pagina of tekst Google kiest. Een verkeerde featured snippet los je meestal op in de content.",
+                       "bron":  {
+                                    "titel":  "Featured Snippets and Your Website | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/featured-snippets"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-heuristische-analyse-claude",
+                       "titel":  "Offerteformulier converteert 1,8%: laat Claude een heuristische analyse doen",
+                       "vakgebied":  "CRO × Claude",
+                       "onderwerp":  "Heuristische analyse van een landingspagina met Claude",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Een heuristische analyse toetst een pagina aan vaste vuistregels en levert hypotheses op, geen bewijs. Laat Claude observaties en vermoedens scheiden, en bij elke hypothese noemen welke data hem kan bevestigen.",
+                       "bron":  {
+                                    "titel":  "10 Usability Heuristics for User Interface Design | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/ten-usability-heuristics/"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-hostingverhuizing-dns-ttl",
+                       "titel":  "Maandag naar een nieuwe hoster, dezelfde dag de oude opzeggen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Hosting verhuizen zonder URL-wijziging: DNS en TTL",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.1.1"
+                                  ],
+                       "kernpunt":  "Bij een hostingwissel zonder URL-wijziging verlaag je de TTL minstens een week vooraf, laat je de oude server draaien tot er geen verkeer meer komt, en zie je een korte crawldip als normaal.",
+                       "bron":  {
+                                    "titel":  "Changing Your Web Hosting and SEO | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-kannibalisatie-gsc-claude",
+                       "titel":  "Drie pagina\u0027s over wandelschoenen: concurrentie of niets aan de hand?",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Keyword-kannibalisatie herkennen en oplossen",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.2.3"
+                                  ],
+                       "kernpunt":  "Twee URL\u0027s op één zoekwoord is pas kannibalisatie als ze dezelfde intentie bedienen en elkaar verkeer kosten. Kijk eerst naar intentie en naar wat elke pagina verder oplevert; de beste oplossing is meestal samenvoegen en doorsturen.",
+                       "bron":  {
+                                    "titel":  "Keyword Cannibalization: What It (Really) Is \u0026 How to Fix It | Ahrefs",
+                                    "url":  "https://ahrefs.com/blog/keyword-cannibalization/"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-klikdiepte-sitestructuur",
+                       "titel":  "Producten op 12 klikken van de homepage: wat helpt echt?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Crawl depth: hoe diep pagina\u0027s in de sitestructuur zitten",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.2",
+                                      "1.1.10"
+                                  ],
+                       "kernpunt":  "Klikdiepte laat zien hoe makkelijk Google een pagina vindt en hoe belangrijk de site hem lijkt te vinden. Je verkleint hem met een plattere structuur en betere interne links, niet met een sitemap, canonical of robots.txt.",
+                       "bron":  {
+                                    "titel":  "Ecommerce Website Navigation Structure | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-linkbuildingrapport-freelancer",
+                       "titel":  "Het maandrapport van de freelance linkbuilder: wat keur je af?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Uitbesteed linkbuildingwerk controleren en feedback geven",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "6.2.1",
+                                      "6.3.2"
+                                  ],
+                       "kernpunt":  "Betaalde links zonder rel=\"sponsored\" of nofollow, en partnerpagina\u0027s die alleen naar elkaar linken, zijn linkspam volgens Google. Beoordeel uitbesteed werk op die regels en geef concrete feedback met een duidelijke afspraak.",
+                       "bron":  {
+                                    "titel":  "Spam Policies for Google Web Search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-meta-descriptions-40000-producten",
+                       "titel":  "40.000 producten, één meta description: allemaal laten herschrijven?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Meta descriptions op schaal: handwerk of uit productdata?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.1.9"
+                                  ],
+                       "kernpunt":  "Google maakt snippets vooral uit de pagina en gebruikt je meta description alleen als die beter beschrijft. Zorg dat elke description uniek en waar is: met de hand voor de belangrijkste pagina\u0027s, uit productdata voor de rest.",
+                       "bron":  {
+                                    "titel":  "How to Write Meta Descriptions | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/snippet"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-rich-results-test-vs-validator",
+                       "titel":  "De ene tool zegt \u0027geen fouten\u0027, de andere \u0027niets gevonden\u0027. Wie heeft gelijk?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Structured data testen: Rich Results Test vs. Schema Markup Validator",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.11",
+                                      "2.2.8"
+                                  ],
+                       "kernpunt":  "De Schema Markup Validator toetst aan schema.org, de Rich Results Test alleen aan wat Google als rich result ondersteunt. Geldige markup zonder Google-rich result is geen fout, en ook een groene Rich Results Test garandeert niets.",
+                       "bron":  {
+                                    "titel":  "An update on the Structured Data Testing Tool | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2020/12/structured-data-testing-tool-update"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261028-wordpress-zoekmachines-ontmoedigen",
+                       "titel":  "Nieuwe WordPress-site, drie weken live en bijna niets in Google",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "WordPress: de instelling die zoekmachines buitensluit",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.4",
+                                      "5.1.3"
+                                  ],
+                       "kernpunt":  "De WordPress-instelling om zoekmachines te ontmoedigen zet sinds versie 5.3 een noindex-metatag op elke pagina, niet meer een Disallow in robots.txt. Check hem bij elke livegang.",
+                       "bron":  {
+                                    "titel":  "Changes to prevent search engines indexing sites | Make WordPress Core",
+                                    "url":  "https://make.wordpress.org/core/2019/09/02/changes-to-prevent-search-engines-indexing-sites/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    }
                ]

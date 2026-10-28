@@ -1,0 +1,31 @@
+{
+  "id": "20261028-hostingverhuizing-dns-ttl",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Hosting verhuizen zonder URL-wijziging: DNS en TTL",
+  "matrix": [
+    "5.1.1"
+  ],
+  "titel": "Maandag naar een nieuwe hoster, dezelfde dag de oude opzeggen?",
+  "intro": "Een webshop verhuist volgende week maandag naar een nieuwe hostingpartij. Domein en URL's blijven precies hetzelfde. Het plan van de developer: maandagochtend de DNS-records omzetten naar het nieuwe IP-adres en het oude hostingpakket dezelfde middag opzeggen, 'want dan betalen we niet dubbel'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe pak je deze verhuizing het best aan?",
+    "opties": [
+      "Op de oude server overal een 301-redirect naar de nieuwe server zetten, zodat Google de nieuwe locatie snel oppikt.",
+      "Na het omzetten een adreswijziging indienen in Search Console, zodat Google weet dat de site verhuisd is.",
+      "Op de nieuwe server tijdelijk alles blokkeren in robots.txt tot de overstap klaar is, zodat Google geen halve site ziet.",
+      "Minstens een week vooraf de TTL van de DNS-records verlagen, de oude server laten draaien tot er geen verkeer meer op binnenkomt, en de crawlstatistieken in de gaten houden."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Bij een DNS-wijziging krijgt niet iedereen meteen het nieuwe IP-adres. Resolvers onthouden het oude adres zo lang als de **TTL** aangeeft. Google adviseert daarom de TTL minstens een week vooraf te verlagen (bijvoorbeeld naar een paar uur), en de oude hosting pas uit te zetten als het verkeer daar naar nul is gezakt en je zeker weet dat iedereen, ook Googlebot, de nieuwe server bereikt.\n\nWaarom de andere opties niet kloppen:\n- **301 op de oude server:** domein en URL's blijven gelijk. Een redirect naar 'dezelfde' URL zou naar zichzelf wijzen. Een redirect hoort bij een URL-wijziging, niet bij een hostingwissel.\n- **Adreswijziging in Search Console:** die tool is voor een verhuizing naar een ander domein.\n- **robots.txt-blokkade:** daarmee sluit je Googlebot buiten op het moment dat hij de nieuwe server juist moet leren kennen.",
+  "uitleg": "Om dit te snappen, moet je weten wat er gebeurt als iemand een URL opvraagt. De browser (of Googlebot) vraagt eerst via **DNS** welk IP-adres bij het domein hoort, en maakt dan verbinding met de server op dat adres. Dat antwoord wordt onderweg bewaard (gecachet), zo lang als de **TTL** (time to live) van het DNS-record aangeeft.\n\nStaat de TTL op een dag en zet je de DNS om, dan komt een deel van de bezoekers en crawlers tot een dag later nog bij de oude server uit. Zeg je die dezelfde middag op, dan krijgen zij foutmeldingen.\n\nGoogles stappenplan voor een hostingwissel zonder URL-wijziging:\n- Zet de nieuwe omgeving klaar en test hem, bijvoorbeeld met een tijdelijke hostname.\n- Verlaag de **TTL** minstens een week vooraf naar een lage waarde, zoals een paar uur.\n- Zet de DNS om naar de nieuwe server.\n- Kijk in de logs van de oude server of daar nog verkeer binnenkomt. Pas als dat naar nul is gezakt, zeg je de oude hosting op.\n- Houd de **crawlstatistieken** in Search Console in de gaten. Een tijdelijke daling van de crawlfrequentie direct na de overstap is normaal; daarna loopt hij in een paar dagen weer op, soms tot boven het oude niveau.\n\nDe zoekmachine merkt van zo'n verhuizing weinig, zolang de site bereikbaar blijft en snel antwoordt.",
+  "kernpunt": "Bij een hostingwissel zonder URL-wijziging verlaag je de TTL minstens een week vooraf, laat je de oude server draaien tot er geen verkeer meer komt, en zie je een korte crawldip als normaal.",
+  "toepassing": "Vraag bij de eerstvolgende geplande hostingwissel van een klant na welke TTL de DNS-records nu hebben, en zet het verlagen ervan een week vooraf in de planning.",
+  "bron": {
+    "titel": "Changing Your Web Hosting and SEO | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes"
+  }
+}

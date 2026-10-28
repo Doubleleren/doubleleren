@@ -1,0 +1,26 @@
+{
+  "id": "20261028-featured-snippet-afmelden",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Featured snippets sturen en beperken",
+  "matrix": [
+    "2.1.6"
+  ],
+  "titel": "Een verouderd tarief in de featured snippet: wat kun je eraan doen?",
+  "intro": "Een energievergelijker staat met een featured snippet bovenaan voor 'wat kost stroom per kWh'. Google toont daarin een alinea met tarieven van vorig jaar uit een oud kader verderop op de pagina. De actuele tabel staat bovenaan dezelfde pagina. De klant wil: geen verouderd bedrag meer in Google, maar wel de positie en de gewone snippet houden.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek op welke mogelijkheden Google biedt om featured snippets te beperken, en wat elke mogelijkheid doet met de gewone snippet. Kun je Google ook vertellen welke tekst of pagina het als featured snippet moet gebruiken? Wat adviseer je deze klant?",
+    "minTekens": 130,
+    "hint": "Google Search Central heeft een aparte pagina over featured snippets en je website. Let op het verschil tussen een instelling voor de hele pagina en een voor een deel van de tekst."
+  },
+  "modelantwoord": "Google noemt drie knoppen:\n\n- **nosnippet** (meta robots): geen enkele snippet meer voor de pagina, ook geen gewone. Te grof voor deze klant.\n- **max-snippet** met een lage waarde: verkleint de kans op een featured snippet, omdat die alleen verschijnt als er genoeg tekst getoond mag worden. Maar Google noemt geen exacte grens en garandeert niet dat de featured snippet verdwijnt. Het maakt ook de gewone snippet korter.\n- **data-nosnippet** op een stuk tekst: dat stuk komt niet meer in featured én gewone snippets. De rest van de pagina wel.\n\nJe kunt Google **niet** vertellen welke pagina of tekst het als featured snippet moet nemen. Dat bepaalt Google zelf.\n\n**Advies:** haal het verouderde kader weg of werk het bij. Dat is het echte probleem, ook voor bezoekers. Moet de oude tekst om een andere reden blijven staan (bijvoorbeeld als archief), zet er dan data-nosnippet op. Dan blijft de actuele tabel bruikbaar voor de snippet.",
+  "uitleg": "Een **featured snippet** is het uitgelichte antwoord bovenaan de resultaten, met een citaat uit één pagina. Google kiest zelf welke pagina en welke passage daarvoor geschikt zijn. Je kunt geen pagina aanwijzen en er bestaat geen markup voor.\n\nWat je wel kunt doen, is **beperken**:\n- **nosnippet** blokkeert alle snippets van de pagina, featured én gewoon. Staan nosnippet en data-nosnippet allebei op een pagina, dan wint nosnippet.\n- **max-snippet:[aantal]** zet een maximum op het aantal tekens. Featured snippets verschijnen alleen als er genoeg tekst getoond mag worden voor een nuttig antwoord. Een lage waarde verkleint dus de kans, maar Google noemt geen exacte drempel en geeft geen garantie.\n- **data-nosnippet** is een HTML-attribuut op een span, div of section. Die tekst komt in geen enkele snippet, de rest van de pagina wel.\n\nIn de praktijk is een verkeerde featured snippet bijna altijd een inhoudsprobleem: verouderde of tegenstrijdige tekst op de pagina. Los je dat op, dan heb je de knoppen meestal niet nodig.\n\nWil je juist een featured snippet winnen, beantwoord de vraag dan direct en kort, vlak onder een duidelijke kop, en werk de uitleg daarna verder uit.",
+  "kernpunt": "Je kunt featured snippets beperken (nosnippet voor alles, max-snippet zonder garantie, data-nosnippet voor een stuk tekst), maar niet aanwijzen welke pagina of tekst Google kiest. Een verkeerde featured snippet los je meestal op in de content.",
+  "toepassing": "Zoek deze week de vijf belangrijkste informatieve zoekwoorden van een klant op en controleer of de tekst in de featured snippet (van de klant of van een concurrent) nog klopt.",
+  "bron": {
+    "titel": "Featured Snippets and Your Website | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/featured-snippets"
+  }
+}

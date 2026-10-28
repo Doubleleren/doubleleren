@@ -1,0 +1,27 @@
+{
+  "id": "20261028-linkbuildingrapport-freelancer",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Uitbesteed linkbuildingwerk controleren en feedback geven",
+  "matrix": [
+    "6.2.1",
+    "6.3.2"
+  ],
+  "titel": "Het maandrapport van de freelance linkbuilder: wat keur je af?",
+  "intro": "Je stuurt een freelance linkbuilder aan voor een klant die zonnepanelen verkoopt. In het maandrapport staan 12 nieuwe links:\n\n- 8 gastblogs op verschillende blogs, elk met de ankertekst 'goedkope zonnepanelen kopen', € 150 per stuk, zonder rel-attribuut\n- 2 vermeldingen in regionale nieuwsartikelen na een open dag van de klant\n- 2 partnerpagina's waar de klant en een ander bedrijf alleen naar elkaar linken",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Welke links vormen een risico en waarom? Welke feedback geef je de freelancer, en wat spreek je af voor de volgende maand?",
+    "minTekens": 120,
+    "hint": "Kijk naar wat Google onder linkspam verstaat. Wat maakt een betaalde link toegestaan?"
+  },
+  "modelantwoord": "**Risico: de 8 gastblogs.** Ze zijn betaald, hebben allemaal dezelfde commerciële ankertekst en geen rel=\"sponsored\" of nofollow. Dat is precies wat Google linkspam noemt: links kopen om hoger te ranken. In het beste geval tellen ze niet mee, in het slechtste geval schaden ze de klant.\n\n**Risico: de 2 partnerpagina's.** Pagina's die alleen bestaan om naar elkaar te linken, noemt Google ook linkspam.\n\n**Goed: de 2 nieuwsartikelen.** Die zijn verdiend met iets wat echt gebeurde. Dit soort links wil je meer.\n\n**Feedback aan de freelancer:** concreet en zonder verwijt. 'Deze 8 links vallen onder de spamregels van Google, omdat ze betaald zijn en niet als sponsored gemarkeerd. Die ankertekst maakt het nog opvallender. De nieuwslinks zijn precies goed.'\n\n**Afspraak:** geen betaalde links die ranking doorgeven. Als er wordt betaald, dan met rel=\"sponsored\". Leg vooraf vast welke soorten links wel mogen, en controleer elke maand een paar links zelf.",
+  "uitleg": "Werk dat je uitbesteedt, blijf je zelf beoordelen. Bij linkbuilding is dat extra belangrijk: de freelancer wordt vaak afgerekend op het aantal links, maar de klant draagt het risico.\n\nGoogle omschrijft **linkspam** als links maken naar of vanaf een site, vooral om de rankings te beïnvloeden. Voorbeelden uit het spambeleid:\n- links kopen of verkopen om te ranken\n- overmatig links uitwisselen, of partnerpagina's die alleen bestaan om naar elkaar te linken\n- advertorials waarin betaalde links ranking doorgeven\n- links met geoptimaliseerde ankerteksten in gastblogs of persberichten op andere sites\n- links laten maken met geautomatiseerde programma's\n\nBetalen voor een link is **niet** verboden als de link gemarkeerd is met **rel=\"sponsored\"** of **rel=\"nofollow\"**. Dan geeft hij geen ranking door, en geldt hij als advertentie.\n\nGoede feedback op uitbesteed werk:\n- **Concreet:** welke links, en welke regel ze overtreden\n- **Met een reden:** zodat de freelancer het de volgende keer zelf kan beoordelen\n- **Ook wat goed ging:** zodat duidelijk is wat je meer wilt\n- **Met een afspraak:** criteria vooraf op papier, en een vaste steekproef bij elk rapport",
+  "kernpunt": "Betaalde links zonder rel=\"sponsored\" of nofollow, en partnerpagina's die alleen naar elkaar linken, zijn linkspam volgens Google. Beoordeel uitbesteed werk op die regels en geef concrete feedback met een duidelijke afspraak.",
+  "toepassing": "Neem deze week uit het laatste linkrapport van een klant vijf links en controleer zelf: is hij betaald, welke ankertekst heeft hij, en staat er een rel-attribuut op?",
+  "bron": {
+    "titel": "Spam Policies for Google Web Search | Google Search Central",
+    "url": "https://developers.google.com/search/docs/essentials/spam-policies"
+  }
+}

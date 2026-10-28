@@ -1,0 +1,32 @@
+{
+  "id": "20261028-klikdiepte-sitestructuur",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawl depth: hoe diep pagina's in de sitestructuur zitten",
+  "matrix": [
+    "1.2.2",
+    "1.1.10"
+  ],
+  "titel": "Producten op 12 klikken van de homepage: wat helpt echt?",
+  "intro": "Klikdiepte (crawl depth) is het aantal klikken dat nodig is om vanaf de homepage bij een pagina te komen. Een webshop heeft 12.000 producten. Categoriepagina's tonen 24 producten en linken alleen naar 'Volgende pagina'. In Screaming Frog zitten de meeste producten op klikdiepte 9 tot 14. Veel ervan staan in Search Console als 'Gevonden, momenteel niet geïndexeerd'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke maatregel pakt het probleem het meest direct aan?",
+    "opties": [
+      "Alle product-URL's in de XML-sitemap zetten en die opnieuw indienen in Search Console.",
+      "Op pagina 2 en verder een canonical naar pagina 1 van de categorie zetten, zodat Google zich op één pagina concentreert.",
+      "De structuur platter maken: subcategorieën toevoegen, de paginering laten linken naar meerdere pagina's (niet alleen 'Volgende') en belangrijke categorieën vanuit het menu en de homepage linken.",
+      "De diepe paginering blokkeren in robots.txt, zodat Googlebot zijn tijd aan de bovenste pagina's besteedt."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Producten zitten zo diep omdat de enige weg erheen een lange rij 'Volgende'-links is. Een plattere structuur met subcategorieën en een paginering die meerdere pagina's tegelijk aanbiedt, haalt ze dichter naar de homepage. Google leidt het relatieve belang van een pagina mede af uit hoeveel links het moet volgen om er te komen.\n\nWaarom de andere opties niet kloppen:\n- **Sitemap:** helpt Google URL's te vinden, maar verandert niets aan de interne links. Pagina's die diep en zwak gelinkt zijn, blijven in Googles ogen weinig belangrijk.\n- **Canonical naar pagina 1:** Google raadt dit af. Pagina 2 en verder tonen andere producten en horen een eigen canonical te hebben. Met een canonical naar pagina 1 raken de producten op die pagina's juist hun route kwijt.\n- **robots.txt:** dan kan Googlebot de producten op die pagina's helemaal niet meer via de categorie bereiken. Het probleem wordt erger.",
+  "uitleg": "**Klikdiepte** zegt hoeveel klikken een pagina van de homepage af zit. Het is geen directe rankingfactor, maar wel een goede graadmeter voor twee dingen die er wel toe doen: hoe makkelijk Googlebot een pagina vindt, en hoe belangrijk de site die pagina zelf lijkt te vinden.\n\nGoogle schrijft in zijn uitleg over de structuur van webshops dat het de relaties tussen pagina's afleidt uit de links, niet uit de URL-structuur. Het aantal links dat Google moet volgen om een pagina te bereiken, helpt om het relatieve belang in te schatten. Een bestseller kun je dus extra gewicht geven door hem vanaf de homepage te linken.\n\nZo meet je het:\n- **Screaming Frog** toont per URL de 'Crawl Depth'. Kijk welke paginatypes structureel diep zitten.\n- Vergelijk dat met het rapport **Pagina-indexering**: diepe pagina's vallen vaak onder 'Gevonden' of 'Gecrawld, momenteel niet geïndexeerd'.\n\nZo los je het op:\n- Subcategorieën en filters met zoekvraag als eigen landingspagina's\n- Paginering met links naar meerdere pagina's, met elke pagina een eigen URL en canonical\n- Menu en homepage voor wat commercieel belangrijk is\n- Gerelateerde producten en interne links vanuit content\n\nEr is geen magisch maximum, maar alles wat belangrijk is, wil je binnen een paar klikken bereikbaar hebben.",
+  "kernpunt": "Klikdiepte laat zien hoe makkelijk Google een pagina vindt en hoe belangrijk de site hem lijkt te vinden. Je verkleint hem met een plattere structuur en betere interne links, niet met een sitemap, canonical of robots.txt.",
+  "toepassing": "Crawl deze week een klantsite met Screaming Frog, sorteer op Crawl Depth en kijk welk paginatype het diepst zit. Zoek uit via welke links die pagina's nu bereikbaar zijn.",
+  "bron": {
+    "titel": "Ecommerce Website Navigation Structure | Google Search Central",
+    "url": "https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
+  }
+}

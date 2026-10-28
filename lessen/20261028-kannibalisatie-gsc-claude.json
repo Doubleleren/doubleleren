@@ -1,0 +1,26 @@
+{
+  "id": "20261028-kannibalisatie-gsc-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Keyword-kannibalisatie herkennen en oplossen",
+  "matrix": [
+    "1.2.3"
+  ],
+  "titel": "Drie pagina's over wandelschoenen: concurrentie of niets aan de hand?",
+  "intro": "Een outdoorwinkel heeft een categoriepagina 'Wandelschoenen', een koopgids 'Wandelschoenen kiezen' en een blog 'De beste wandelschoenen van 2025'. Voor 'wandelschoenen' wisselt in Search Console de getoonde URL om de paar weken, en de positie schommelt tussen 6 en 14. De klant wil de koopgids en de blog verwijderen.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Je hebt via de Search Console-koppeling een export met per dag: zoekopdracht, pagina, klikken, vertoningen en positie, voor de afgelopen 16 maanden. Schrijf een prompt waarmee Claude per zoekopdracht beoordeelt of er echte kannibalisatie is, en per geval een onderbouwd advies geeft. Leg vast welke criteria Claude gebruikt en welke output je wilt. Plak je prompt hieronder.",
+    "minTekens": 150,
+    "hint": "Niet elke zoekopdracht met twee URL's is een probleem. Wat moet Claude per pagina nog meer bekijken voordat het iets adviseert?"
+  },
+  "modelantwoord": "Je bent een SEO-specialist. In de bijlage staat een Search Console-export (datum, zoekopdracht, pagina, klikken, vertoningen, positie) van een outdoorwinkel.\n\nOpdracht:\n1. Zoek zoekopdrachten waarvoor twee of meer URL's van de site vertoningen krijgen, en waarbij de getoonde URL in de tijd wisselt.\n2. Bekijk per URL ook **alle andere zoekopdrachten** waarop hij klikken haalt. Een pagina die op veel andere termen verkeer trekt, haal je niet zomaar weg.\n3. Beoordeel per pagina de **zoekintentie**: wil iemand kopen (categorie), kiezen (koopgids) of lezen (blog)? Verschillende intenties zijn geen kannibalisatie.\n4. Geef per geval één advies met reden:\n   - niets doen (verschillende intentie of beide pagina's presteren)\n   - samenvoegen en de zwakkere URL met een 301 doorsturen\n   - interne links aanpassen, zodat de juiste pagina de belangrijkste links krijgt\n   - canonical alleen bij (bijna) dubbele pagina's\n\nOutput: een tabel met zoekopdracht, URL's, klikken per URL, intentie per URL, advies en onderbouwing. Noem expliciet wat je níet zeker weet en wat ik in de SERP moet controleren. Verzin geen cijfers die niet in de export staan.\n\nIn gewone woorden: laat Claude niet alleen dubbele URL's zoeken, maar ook kijken wat elke pagina verder oplevert en welke vraag hij beantwoordt. Pas dan volgt een advies.",
+  "uitleg": "**Keyword-kannibalisatie** betekent dat meerdere pagina's van één site op dezelfde zoekvraag mikken en elkaar daardoor in de weg zitten. Je herkent het vaak aan een getoonde URL die steeds wisselt en een positie die schommelt.\n\nMaar twee URL's op één zoekwoord is niet altijd een probleem. Ahrefs noemt drie situaties waarin je beter niets doet:\n- De pagina's halen verkeer op veel **andere zoekwoorden**. Weghalen kost dan meer dan het oplevert.\n- Ze bedienen een **andere intentie**. Bij een gemengde zoekvraag als 'wandelschoenen' kan Google bewust een winkelpagina en een gids tonen.\n- Een pagina zit al dicht bij zijn **verkeerspotentieel**.\n\nIs het wél kannibalisatie, dan is **samenvoegen en doorsturen met een 301** meestal de beste oplossing: één sterkere pagina, en de links van de oude URL gaan mee. Pas daarna de interne links aan. Een **canonical** past alleen bij (bijna) dubbele pagina's, en een pagina 'de-optimaliseren' werkt slecht, omdat je dan ook op andere zoekwoorden verliest.\n\nMet Claude en de Search Console-koppeling maak je hier een herbruikbare check van. Controleer de uitkomst altijd in de echte zoekresultaten: daar zie je welke intentie Google voor die zoekvraag kiest.",
+  "kernpunt": "Twee URL's op één zoekwoord is pas kannibalisatie als ze dezelfde intentie bedienen en elkaar verkeer kosten. Kijk eerst naar intentie en naar wat elke pagina verder oplevert; de beste oplossing is meestal samenvoegen en doorsturen.",
+  "toepassing": "Filter deze week in Search Console bij een klant op een belangrijk zoekwoord en open het tabblad Pagina's. Krijgen meerdere URL's vertoningen? Bekijk per URL welke andere zoekopdrachten hij binnenhaalt voordat je iets adviseert.",
+  "bron": {
+    "titel": "Keyword Cannibalization: What It (Really) Is & How to Fix It | Ahrefs",
+    "url": "https://ahrefs.com/blog/keyword-cannibalization/"
+  }
+}

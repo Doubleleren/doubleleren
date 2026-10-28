@@ -1,0 +1,26 @@
+{
+  "id": "20261028-meta-descriptions-40000-producten",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Meta descriptions op schaal: handwerk of uit productdata?",
+  "matrix": [
+    "2.1.9"
+  ],
+  "titel": "40.000 producten, één meta description: allemaal laten herschrijven?",
+  "intro": "Een B2B-webshop in bevestigingsmaterialen heeft 40.000 productpagina's en 600 categorieën. Elke pagina heeft dezelfde meta description: 'Bestel vandaag, morgen in huis. Ruim assortiment voor de vakman.' De klant wil een copywriter alle 40.000 descriptions met de hand laten schrijven en vraagt jou wat dat oplevert.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat adviseer je de klant? Geef aan wat je met de hand laat schrijven, wat niet, en waarom.",
+    "minTekens": 120,
+    "hint": "Waar haalt Google de tekst onder een zoekresultaat meestal vandaan, en wat zegt Google over grote sites die uit een database draaien?"
+  },
+  "modelantwoord": "Niet alles met de hand.\n\n- **Het probleem is dat alle descriptions hetzelfde zijn.** Google gebruikt een meta description alleen als die de pagina beter beschrijft dan de tekst op de pagina zelf. Een zin die overal staat, beschrijft geen enkele pagina, dus kiest Google iets anders.\n- **Met de hand:** homepage, de categorieën met het meeste verkeer en een handvol belangrijke productpagina's. Daar loont het om de belangrijkste reden om te klikken op te schrijven.\n- **Uit de productdata:** de rest. Google zegt dat het bij grote sites prima is om descriptions automatisch te maken, als ze leesbaar en gevarieerd zijn. Bijvoorbeeld: productnaam, maat, materiaal, verpakkingsaantal en of het uit voorraad leverbaar is.\n- **Verwachting:** Google kan ook dan nog een eigen stukje tekst kiezen. Een description is een voorstel, geen garantie.\n\nKort gezegd: maak de descriptions per pagina anders en waar, en steek handwerk alleen in de pagina's die het verschil maken.",
+  "uitleg": "De tekst onder een zoekresultaat heet de **snippet**. Google maakt die vooral **uit de inhoud van de pagina** en past hem aan op de zoekopdracht. De **meta description** gebruikt Google alleen als die de pagina nauwkeuriger beschrijft dan een stuk tekst van de pagina zelf.\n\nWat Google adviseert:\n- **Elke pagina een eigen description.** Dezelfde tekst op veel pagina's helpt niemand.\n- **Sitebreed** mag een description voor de homepage en overzichtspagina's; **per pagina** een specifieke voor de rest.\n- **Grote sites met een database** mogen descriptions **automatisch genereren**, zolang ze leesbaar en gevarieerd zijn. Gebruik dus echte gegevens: specificaties, prijs, beschikbaarheid, merk.\n- **Geen lengtelimiet.** Google kort de tekst in op basis van de schermbreedte. Zet het belangrijkste dus vooraan.\n\nWil je controleren of het werkt? Vergelijk in Search Console de CTR van een groep pagina's vóór en na de wijziging, en kijk in de zoekresultaten welke tekst Google nu toont.\n\nDe snippet is je advertentietekst in de organische resultaten. Wil je níet dat (een deel van) een pagina in de snippet komt, dan kan dat met nosnippet, max-snippet of data-nosnippet.",
+  "kernpunt": "Google maakt snippets vooral uit de pagina en gebruikt je meta description alleen als die beter beschrijft. Zorg dat elke description uniek en waar is: met de hand voor de belangrijkste pagina's, uit productdata voor de rest.",
+  "toepassing": "Crawl deze week een klantsite en tel hoeveel pagina's een dubbele of lege meta description hebben. Kies de tien met het meeste verkeer om als eerste te herschrijven.",
+  "bron": {
+    "titel": "How to Write Meta Descriptions | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/snippet"
+  }
+}

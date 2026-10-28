@@ -1,0 +1,32 @@
+{
+  "id": "20261028-wordpress-zoekmachines-ontmoedigen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "WordPress: de instelling die zoekmachines buitensluit",
+  "matrix": [
+    "5.1.4",
+    "5.1.3"
+  ],
+  "titel": "Nieuwe WordPress-site, drie weken live en bijna niets in Google",
+  "intro": "Een kinderopvang heeft een nieuwe WordPress-site, drie weken geleden live gezet vanaf een testomgeving. In het rapport Pagina-indexering van Search Console staan bijna alle pagina's onder 'Uitgesloten door noindex-tag'. De developer zegt: 'robots.txt staat helemaal open, dus aan ons ligt het niet.' Er is geen SEO-plugin geïnstalleerd.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak?",
+    "opties": [
+      "robots.txt blokkeert de site toch, want Search Console meldt een geblokkeerde site altijd als noindex.",
+      "De instelling bij Instellingen → Lezen om zoekmachines te ontmoedigen de site te indexeren staat nog aan vanuit de testomgeving. WordPress zet dan een robots-metatag met noindex op elke pagina.",
+      "Google indexeert nieuwe sites pas na een paar maanden. Tot die tijd krijgen pagina's de status 'Uitgesloten door noindex-tag'.",
+      "Zonder SEO-plugin heeft WordPress geen canonical-tags, en daarom weigert Google de pagina's."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Search Console zegt letterlijk dat het een **noindex-tag** heeft gevonden. In WordPress zit een instelling bij **Instellingen → Lezen** ('Discourage search engines from indexing this site') die vaak aanstaat op een testomgeving en bij de livegang wordt vergeten. Sinds WordPress 5.3 zet die instelling een robots-metatag met noindex en nofollow in elke pagina, en niet meer een Disallow in robots.txt. Daarom ziet de developer niets vreemds in robots.txt.\n\nWaarom de andere opties niet kloppen:\n- **robots.txt:** een blokkade in robots.txt heeft in Search Console een eigen status ('Geblokkeerd door robots.txt'). Bovendien kan Google een noindex alleen zien als het de pagina mag crawlen.\n- **Nieuwe sites wachten:** indexeren kost soms tijd, maar dan staat er 'Gevonden' of 'Gecrawld', niet 'noindex'.\n- **Canonicals:** WordPress zet zelf al canonicals op berichten en pagina's, en een ontbrekende canonical geeft nooit de status noindex.",
+  "uitleg": "WordPress heeft standaard een instelling om zoekmachines buiten te houden, bedoeld voor sites die nog niet af zijn. Je vindt hem bij **Instellingen → Lezen**: 'Discourage search engines from indexing this site'.\n\nWat die instelling doet, is in de loop van de tijd veranderd:\n- **Tot WordPress 5.3** zette hij een **Disallow: /** in de virtuele robots.txt. Dat bleek niet waterdicht: een geblokkeerde URL kan toch in Google komen als er andere sites naar linken.\n- **Sinds WordPress 5.3 (2019)** zet hij in elke pagina een robots-metatag met **noindex, nofollow**. Dat houdt pagina's echt uit de index.\n\nDaarom zie je in robots.txt niets bijzonders, terwijl de hele site uit Google blijft.\n\nZo controleer je het snel:\n- Bekijk de broncode of gebruik de URL-inspectietool en zoek naar een robots-metatag met noindex.\n- Check de instelling bij Instellingen → Lezen.\n\nNa het uitzetten haalt Google de pagina's niet meteen terug. Dien de sitemap opnieuw in en vraag voor de belangrijkste pagina's indexering aan met de URL-inspectietool. Zet bij elke livegang 'zoekmachinezichtbaarheid' op je checklist.",
+  "kernpunt": "De WordPress-instelling om zoekmachines te ontmoedigen zet sinds versie 5.3 een noindex-metatag op elke pagina, niet meer een Disallow in robots.txt. Check hem bij elke livegang.",
+  "toepassing": "Zet deze week 'Instellingen → Lezen: zoekmachines niet ontmoedigd' op de livegang-checklist van je team, en controleer het meteen bij de WordPress-klant die het laatst live is gegaan.",
+  "bron": {
+    "titel": "Changes to prevent search engines indexing sites | Make WordPress Core",
+    "url": "https://make.wordpress.org/core/2019/09/02/changes-to-prevent-search-engines-indexing-sites/"
+  }
+}
