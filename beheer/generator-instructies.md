@@ -53,6 +53,10 @@ Per soort feedback:
 
 **Spoilers in bestaande lessen.** Lessen verschijnen nu altijd met de opdracht eerst (zie "Opbouw" in stap 3). Wil je een eigen les hergebruiken, doe er dan eerst de spoilertoets op. Verraadt de intro of de hint het antwoord, of is de vraag zonder de uitleg niet te begrijpen, herzie de les dan (met `herzien` en `wijziging`) voordat je hem inplant.
 
+**Te raden meerkeuze.** Staat bij een les in `lessen\index.json` `"juistLangst": true`, dan is het juiste antwoord ruim de langste optie: dan is de les te raden zonder het onderwerp te kennen. Herzie zo'n eigen les eerst voordat je hem inplant. Pas de opties aan volgens de regel voor meerkeuze in stap 3, met `herzien` en `wijziging: "Opties even lang gemaakt."`. Herzie daarnaast elke run tot 5 van zulke lessen, ook als je ze niet inplant, tot er geen meer over zijn.
+
+**Modelantwoord in bestaande lessen.** Plan je een eigen open, zoek-op- of maak-met-claude-les opnieuw in en begint het `modelantwoord` nog niet met `**De kern:**`? Herschrijf het dan eerst volgens de regel in stap 3, met `herzien` en `wijziging: "Modelantwoord eenvoudiger gemaakt."`.
+
 **Video bij bestaande lessen.** Plan je een eigen les zonder `video` opnieuw in, kijk dan of er in `sjablonen\seo\videos.json` inmiddels een video staat die volgens de regel in stap 3 past. Zo ja, voeg hem toe, met `herzien` (vandaag) en `wijziging: "Kennisvideo toegevoegd."`. Een les met een video laat je zoals hij is.
 
 **Resultaten per les** (`lesstatistiek`, pas vanaf `n` ≥ 4):
@@ -145,11 +149,15 @@ Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJ
 - **Toepassen, niet navertellen.** Vraag om een keuze, afweging, diagnose of prioriteit in de situatie ("welk van deze filters laat je indexeren, en waarom?"), liever dan om een opsomming die je uit de uitleg kunt overnemen ("noem vijf punten").
 - **Echte beginners** (score 1–2 op die vaardigheid, onderwerp is nieuw): kies meestal meerkeuze. Kiezen tussen plausibele opties lukt ook zonder voorkennis, en de toelichting leert het je. Is een begrip echt nodig om de vraag te snappen, geef dan **één zin definitie** in de intro (wat het is, niet wat je ermee moet doen).
 - `toelichting` (meerkeuze) en `modelantwoord` leggen uit **waarom** het juiste antwoord juist is en waarom de andere opties of veelgemaakte fouten het niet zijn. De `uitleg` daarna verdiept het onderwerp.
+- **Het modelantwoord is iets om je eigen antwoord naast te leggen, geen perfecte tekst.** De deelnemer beoordeelt zelf of hij het goed had. Dat moet makkelijk gaan, ook als hij het in andere woorden zei. Begin daarom met `**De kern:**` en 1–2 korte zinnen in gewone taal: wat een goed antwoord in elk geval bevat, zoals een collega het zou opschrijven. Gebruik geen opgepoetste formuleringen en geen stapel vaktermen. Daarna mag het uitgebreider: waarom het zo is en welke fouten vaak gemaakt worden. Voorbeeld: `"**De kern:** laat alleen het merkfilter indexeren, want daar zoeken mensen op. Kleur en prijs krijgen noindex.\n\nWaarom: …"`.
 - Het oude veld `volgorde` gebruik je niet meer; website en pop-up negeren het.
 
 **Formats variëren:**
 - **Soort opdracht**, ongeveer in deze verhouding:
   - 40% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
+    - **Het juiste antwoord valt niet op.** Alle vier opties zijn ongeveer even lang en even precies. Geef de afleiders net zoveel detail en nuance als het juiste antwoord, bijvoorbeeld een reden ("omdat …") of een voorwaarde. Zet woorden als "altijd" en "nooit" niet alleen in de foute opties.
+    - Het juiste antwoord is in de meeste lessen **niet** de langste optie, en nooit meer dan 10% langer dan elke andere optie (zo'n les krijgt `juistLangst` in `lessen\index.json`). Soms mag het wel de langste zijn, anders wordt "nooit de langste" het nieuwe trucje.
+    - **Raadtoets** vóór het opslaan: kun je het antwoord kiezen zonder de vraag te lezen, alleen op lengte, toon of stelligheid? Herschrijf dan de opties.
   - 25% open: minimaal 80–150 tekens
   - 15% zoek-op: minimaal 100–150 tekens, met een hint
   - 20% maak-met-claude: minimaal 120–200 tekens; gebruik koppelingen zoals Search Console, Ahrefs en DataForSEO

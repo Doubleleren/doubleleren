@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-29T11:20:44",
+    "bijgewerkt":  "2026-10-29T12:21:55",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -113,7 +113,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29"
+                       "herzien":  "2026-10-29",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261019-striking-distance",
@@ -221,7 +222,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-cls-verbeteren",
@@ -282,7 +284,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-ga4-eventmodel",
@@ -324,7 +327,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-ga-certificering",
@@ -446,7 +450,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-paginering-zonder-prev-next",
@@ -466,7 +471,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-paid-social-campagnestructuur",
@@ -527,7 +533,8 @@
                                      "url":  "https://www.youtube.com/watch?v=wYAa4BHXUPA"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-penguin-realtime",
@@ -585,7 +592,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-ratings-eigen-reviews",
@@ -604,7 +612,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-rel-canonical",
@@ -623,7 +632,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-robots-txt-rapport",
@@ -684,7 +694,8 @@
                                      "url":  "https://www.youtube.com/watch?v=hLFYOS_lGOE"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-ttfb-verbeteren",
@@ -707,7 +718,8 @@
                                      "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261020-user-signals-bounce-rate",
@@ -792,7 +804,8 @@
                                      "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261021-funnel-dropoff-ga4",
@@ -816,7 +829,8 @@
                                      "url":  "https://www.youtube.com/watch?v=eWWOJL1y8Qw"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261021-ga4-debugview-controle",
@@ -835,7 +849,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261021-gsc-bigquery-sql",
@@ -945,7 +960,8 @@
                                      "url":  "https://www.youtube.com/watch?v=nwGY-9lwTF4"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261021-zero-click-ai-samenvatting",
@@ -1057,7 +1073,8 @@
                                      "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261022-geo-pakket-beoordelen",
@@ -1100,7 +1117,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261022-inp-veldattributie-claude",
@@ -1227,7 +1245,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261023-checkout-verrassingskosten",
@@ -1331,7 +1350,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261023-news-sitemap-regels",
@@ -1389,7 +1409,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261023-steekproefgrootte-mde-claude",
@@ -1447,7 +1468,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261026-auteursinformatie-claude",
@@ -1490,7 +1512,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261026-garantie-top3-verwachtingen",
@@ -1553,7 +1576,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261026-organization-markup-logo",
@@ -1612,7 +1636,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261026-sponsored-ugc-nofollow",
@@ -1671,7 +1696,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261027-deelbare-paginas-noindex",
@@ -1691,7 +1717,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261027-eeat-geen-rankingfactor",
@@ -1794,7 +1821,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261027-ongeldig-element-in-head",
@@ -1813,7 +1841,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261027-sitemap-vervuild",
@@ -1891,7 +1920,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261028-featured-snippet-afmelden",
@@ -1948,7 +1978,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261028-kannibalisatie-gsc-claude",
@@ -1987,7 +2018,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261028-linkbuildingrapport-freelancer",
@@ -2066,7 +2098,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261029-ankerteksten-interne-links",
@@ -2224,7 +2257,8 @@
                                      "url":  "https://www.youtube.com/watch?v=aKoZSzvVu6k"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261029-klantmail-verkeersdaling-claude",
@@ -2342,7 +2376,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261029-ranktracker-vs-gsc-positie",
@@ -2362,7 +2397,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "juistLangst":  true
                    },
                    {
                        "id":  "20261029-redirectmap-delegeren",

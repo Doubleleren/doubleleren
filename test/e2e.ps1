@@ -322,6 +322,8 @@ $tTeam = Titel '20261020-teamles'; $tSrm = Titel '20261019-srm'
 ZetLes '20261020-teamles' @{ titel = 'Aangepast door de generator'; herzien = '2026-10-21' }
 $p1 = Publiceer @('20261019-srm')
 Controleer ($p1.ok -and $p1.uit -match 'teruggedraaid: 20261020-teamles.json \(een teamles wordt nooit' -and (Titel '20261020-teamles') -eq $tTeam) 'Teamles aangepast: teruggedraaid, de rest wordt gewoon gepubliceerd'
+$idx1 = (Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen
+Controleer (($idx1 | Where-Object id -eq '20261019-srm').juistLangst -eq $true -and -not ($idx1 | Where-Object id -eq '20261019-query-fan-out').juistLangst) 'Index: meerkeuze met het juiste antwoord ruim het langst gemarkeerd als te raden'
 ZetLes '20261019-srm' @{ titel = 'Stil aangepast' }
 $p2 = Publiceer @('20261019-srm')
 $ok2 = $p2.ok -and $p2.uit -match 'herzien-datum' -and (Titel '20261019-srm') -eq $tSrm

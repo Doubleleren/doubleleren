@@ -11,6 +11,12 @@ $lessen = foreach ($f in Get-ChildItem (Join-Path $App 'lessen') -Filter *.json 
     }
     if ($l.herzien) { $r.herzien = "$($l.herzien)" }
     if ($l.actief -eq $false) { $r.actief = $false }     # uit de roulatie: nooit meer in een wachtrij, wel nog na te lezen
+    # Meerkeuze waarbij het juiste antwoord ruim de langste optie is (meer dan 10%): te raden, de generator herziet hem
+    elseif ($l.opdracht.soort -eq 'meerkeuze' -and @($l.opdracht.opties).Count -eq 4 -and [int]$l.opdracht.juist -in 0..3) {
+        $len = @($l.opdracht.opties | ForEach-Object { "$_".Length }); $j = [int]$l.opdracht.juist
+        $rest = (@(0..3 | Where-Object { $_ -ne $j } | ForEach-Object { $len[$_] }) | Measure-Object -Maximum).Maximum
+        if ($len[$j] -gt 1.1 * $rest) { $r.juistLangst = $true }
+    }
     $r
 }
 $index = [ordered]@{ v = 1; bijgewerkt = (Get-Date).ToString('s'); lessen = @($lessen) }
