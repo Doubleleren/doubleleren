@@ -186,8 +186,10 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
           </DockPanel>
         </Border>
         <CheckBox x:Name="Bewaard" FontSize="14">Ik heb mijn code veilig bewaard</CheckBox>
-        <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,18,0,6">Stuur deze zes controlewoorden via Teams naar je beheerder. Daarmee wordt gecontroleerd dat jouw aanmelding echt van jou komt:</TextBlock>
-        <Border Background="#E2EDF6" CornerRadius="10" Padding="16,10"><TextBlock x:Name="Controle" FontSize="18" FontWeight="SemiBold"/></Border>
+        <StackPanel x:Name="ControleRij">
+          <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,18,0,6">Stuur deze zes controlewoorden via Teams naar je beheerder. Omdat je een nieuwe code aanvraagt, wordt zo gecontroleerd dat het echt jouw aanvraag is:</TextBlock>
+          <Border Background="#E2EDF6" CornerRadius="10" Padding="16,10"><TextBlock x:Name="Controle" FontSize="18" FontWeight="SemiBold"/></Border>
+        </StackPanel>
         <TextBlock x:Name="Info" TextWrapping="Wrap" FontSize="13" Foreground="#5c5c5c" Margin="0,12,0,0"/>
       </StackPanel>
 
@@ -201,7 +203,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
 </Window>
 '@
 $win = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $xaml))
-$e = @{}; foreach ($n in 'Stap', 'P1', 'P2', 'P2b', 'P3', 'Uitn', 'KNieuw', 'KLaptop', 'KKwijt', 'Naam', 'XlsxRij', 'Lessen', 'XlsxLabel', 'Lessen2', 'Kies', 'Xlsx', 'Code', 'CodeToon', 'Kopieer', 'Bewaard', 'Controle', 'Info', 'Fout', 'Bezig', 'Volgende') { $e[$n] = $win.FindName($n) }
+$e = @{}; foreach ($n in 'Stap', 'P1', 'P2', 'P2b', 'P3', 'Uitn', 'KNieuw', 'KLaptop', 'KKwijt', 'Naam', 'XlsxRij', 'Lessen', 'XlsxLabel', 'Lessen2', 'Kies', 'Xlsx', 'Code', 'CodeToon', 'Kopieer', 'Bewaard', 'Controle', 'ControleRij', 'Info', 'Fout', 'Bezig', 'Volgende') { $e[$n] = $win.FindName($n) }
 $script:fase = 1; $script:u = $null
 $e.Stap.Text = 'Stap 1 van 3'
 function Toon([string]$p) { foreach ($x in 'P1', 'P2', 'P2b', 'P3') { $e[$x].Visibility = $(if ($x -eq $p) { 'Visible' } else { 'Collapsed' }) } }
@@ -237,7 +239,8 @@ $e.Volgende.Add_Click({
                 $r = Install-Nieuw $script:u $e.Naam.Text.Trim() $(if ($e.Xlsx.Text -and (Test-Path $e.Xlsx.Text)) { $e.Xlsx.Text } else { '' }) -herstel:([bool]$e.KKwijt.IsChecked) -lessen:$lessenKeuze
                 Register-DlTaak; Klaar
                 $e.CodeToon.Text = $r.code; $e.Controle.Text = $r.controlewoorden
-                $e.Info.Text = $(if ($r.gekoppeld) { "Skilllijst ingelezen: $($r.gekoppeld) vaardigheden. " } else { '' }) + 'Zodra je beheerder je heeft goedgekeurd, kun je inloggen op de website. Je eerste les verschijnt de volgende werkdag.'
+                $e.ControleRij.Visibility = $(if ($e.KKwijt.IsChecked) { 'Visible' } else { 'Collapsed' })
+                $e.Info.Text = $(if ($r.gekoppeld) { "Skilllijst ingelezen: $($r.gekoppeld) vaardigheden. " } else { '' }) + $(if ($e.KKwijt.IsChecked) { 'Zodra je beheerder je nieuwe code heeft goedgekeurd, kun je weer inloggen.' } else { 'Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten. Daarna kun je inloggen op de website.' }) + ' Je eerste les verschijnt de volgende werkdag.'
                 Toon 'P3'; $e.Stap.Text = 'Stap 3 van 3'; $e.Volgende.Content = 'Afronden'; $e.Volgende.IsEnabled = $false; $script:fase = 3
             }
             21 {

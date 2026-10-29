@@ -806,8 +806,8 @@ const lokaleTijd = (d = nu()) => `${dagKey(d)}T${[d.getHours(), d.getMinutes(), 
 
 // ---------------------------------------------------------------- aanmelden (#welkom)
 // Alles gebeurt in deze browser: sleutelpaar, code van zes woorden, kluis, datasleutel, versleuteld profiel en
-// skilllijst. Naar de privé-repo gaan alleen versleutelde bestanden en een aanvraag; de beheerder keurt die goed
-// nadat de controlewoorden via Teams zijn vergeleken. Spiegelbeeld van Install-Nieuw in app/installeer.ps1.
+// skilllijst. Naar de privé-repo gaan alleen versleutelde bestanden en een aanvraag; beheer.ps1 -AutoGoedkeuren keurt
+// nieuwe aanvragen vanzelf goed. Alleen bij herstel (code kwijt) worden de controlewoorden via Teams vergeleken. Spiegelbeeld van Install-Nieuw in app/installeer.ps1.
 const W = { id: null, uitnodiging: null, leren: 'verplicht', naam: '', matrix: null, herstel: false };
 function welkomStap(naam) {
   for (const s of ['w-stap1', 'w-stap2', 'w-stap3', 'w-bestaand', 'w-wacht']) $(s).hidden = s !== naam;
@@ -825,6 +825,7 @@ async function welkomVerbind() {
   const a = await json(S.data, `aanvragen/${W.id}.json`);
   if (a && a.id === W.id && a.publiek && a.kluis) {
     $('w-wacht-woorden').textContent = await K.controlewoorden(a, WOORDEN);
+    $('w-wacht-herstel').hidden = !a.herstel; $('w-wacht-auto').hidden = !!a.herstel;
     welkomStap('w-wacht'); return;
   }
   welkomFormulier(false);
@@ -880,6 +881,7 @@ async function welkomMaak() {
   await S.data.schrijf(`aanvragen/${W.id}.json`, K.tekst.naarBytes(JSON.stringify(aanvraag, null, 2)));
   $('w-code').textContent = code.replace(/-/g, ' ');
   $('w-controle').textContent = await K.controlewoorden(aanvraag, WOORDEN);
+  $('w-controle-stap').hidden = !aanvraag.herstel; $('w-auto-stap').hidden = !!aanvraag.herstel;
   $('w-bewaard').checked = false; $('w-klaar').disabled = true;
   welkomStap('w-stap3');
 }

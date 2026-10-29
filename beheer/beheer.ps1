@@ -5,6 +5,7 @@
 #   beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Optioneel] [-Beheerder]
 #   beheer.ps1 -Aanvragen                                        openstaande aanmeldingen
 #   beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f"
+#   beheer.ps1 -AutoGoedkeuren                                   nieuwe aanmeldingen zonder controlewoorden (herstel niet)
 #   beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal     (of -Cel leadgen) en toegang meteen bijwerken
 #   beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht|optioneel
 #   beheer.ps1 -Bijwerken                                        toegang opnieuw berekenen
@@ -13,7 +14,7 @@
 #   beheer.ps1 -Migreer -VanMap <map>                            eenmalig: oude beheer-repo (onondertekend) overzetten
 # Rollen: lid (met -Project of -Cel), projectleider (-Project), celleider (-Cel), head.
 param(
-    [switch]$Init, [switch]$Uitnodigen, [switch]$Aanvragen, [string]$Goedkeuren, [switch]$Bijwerken, [switch]$Controleer,
+    [switch]$Init, [switch]$Uitnodigen, [switch]$Aanvragen, [switch]$AutoGoedkeuren, [string]$Goedkeuren, [switch]$Bijwerken, [switch]$Controleer,
     [string]$Wijzig, [string]$Verplaats, [switch]$Migreer, [string]$VanMap, [switch]$NieuweGeneratorsleutel,
     [string]$Naam, [ValidateSet('lid', 'projectleider', 'celleider', 'head')][string]$Rol = 'lid', [string]$Project, [string]$Cel,
     [string]$Controlewoorden, [switch]$Optioneel, [switch]$Beheerder,
@@ -220,6 +221,19 @@ elseif ($Aanvragen) {
         $a = Read-DlJson $d "aanvragen/$f"
         $vorm = if (Test-DlSleutelVorm $a.publiek) { '' } else { '  (ONGELDIGE SLEUTEL)' }
         Write-Host ("{0,-28} {1}{2}  controlewoorden: {3}" -f (Naam $a.id), $(if ($a.herstel) { 'herstel ' } else { '' }), $vorm, (Get-DlControlewoorden $a))
+    }
+}
+
+elseif ($AutoGoedkeuren) {
+    # Nieuwe aanmeldingen zonder controlewoorden goedkeuren: het wachtwoord van zes woorden is genoeg.
+    # "Code kwijt" (herstel) blijft handwerk met controlewoorden, anders kan een collega een account overnemen.
+    foreach ($f in @(Get-DlOpslagLijst $d 'aanvragen')) {
+        $a = Read-DlJson $d "aanvragen/$f"
+        if ($f -ne "$($a.id).json" -or -not $org.leden.($a.id)) { Write-Host "Overgeslagen: $f hoort niet bij een lid uit het organogram"; continue }
+        if ($a.herstel) { Write-Host "Wacht op handmatige controle (code kwijt): $(Naam $a.id)  controlewoorden: $(Get-DlControlewoorden $a)"; continue }
+        if (Read-DlBeheer $d "sleutels/$($a.id).json" $V) { Write-Host "Overgeslagen: $(Naam $a.id) is al goedgekeurd"; continue }
+        $extra = @('-Thuis', $Thuis); if ($DataMap) { $extra += @('-DataMap', $DataMap) }
+        & powershell -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath -Goedkeuren $a.id -Controlewoorden (Get-DlControlewoorden $a) @extra
     }
 }
 

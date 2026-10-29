@@ -56,7 +56,9 @@ $uit = Beheer -Goedkeuren $ids.Golf -Controlewoorden 'aap noot mies wim zus jet'
 Controleer (-not (Test-Path "$D\beheer\toegang\$($ids.Golf).json")) 'Verkeerde controlewoorden: niet goedgekeurd'
 
 Write-Host '4. Goedkeuren'
-foreach ($n in 'Foxtrot', 'Golf', 'Delta', 'Bravo', 'Alfa', 'Echo', 'Charlie') { Beheer -Goedkeuren $ids[$n] -Controlewoorden $res[$n].controlewoorden | Out-Null }
+foreach ($n in 'Foxtrot', 'Golf', 'Delta', 'Bravo') { Beheer -Goedkeuren $ids[$n] -Controlewoorden $res[$n].controlewoorden | Out-Null }
+Beheer -AutoGoedkeuren | Out-Null
+Controleer (@('Alfa', 'Echo', 'Charlie' | Where-Object { Test-Path "$D\beheer\toegang\$($ids[$_]).json" }).Count -eq 3) 'AutoGoedkeuren keurt nieuwe aanmeldingen goed zonder controlewoorden'
 Controleer (-not (Get-ChildItem "$D\aanvragen" -ErrorAction SilentlyContinue)) 'Alle aanvragen verwerkt'
 Beheer -Controleer
 
@@ -117,6 +119,8 @@ Controleer (-not $ok) 'Vervalst beheerbestand (toegang) wordt geweigerd: alleen 
 Write-Host '8. Code kwijt: nieuwe sleutel en nieuwe datasleutel'
 $oudeC = Get-DlClient -Thuis "$T\Golf"
 $h = Installeer $ids.Golf 'Golf' @('-Herstel')
+Beheer -AutoGoedkeuren | Out-Null
+Controleer (Test-Path "$D\aanvragen\$($ids.Golf).json") 'AutoGoedkeuren laat herstel (code kwijt) liggen voor handmatige controle'
 Beheer -Goedkeuren $ids.Golf -Controlewoorden $h.controlewoorden | Out-Null
 Controleer (KanOpenen 'Golf' 'Golf') 'Golf leest de eigen scores weer'
 Controleer (KanOpenen 'Echo' 'Golf') 'Echo (projectleider) ziet Golf nog steeds'

@@ -6,8 +6,8 @@ Elke dag een korte SEO-les, en een eigen dashboard met je voortgang. Leidinggeve
 Alles gaat in de browser; je hoeft niets te installeren.
 1. Je krijgt via Teams een link (`https://doubleleren.github.io/doubleleren/#welkom`) en een **uitnodigingscode**.
 2. Plak de uitnodigingscode, vul je naam in en kies je ingevulde **skilllijst (Excel)**. Je browser maakt je **code van zes woorden**: bewaar die in je wachtwoordkluis.
-3. Stuur de **zes controlewoorden** die je ziet via Teams naar de beheerder.
-4. Na goedkeuring log je in met je uitnodigingscode en je code. Onder **Les van vandaag** staat elke werkdag een les van 2–5 minuten.
+3. Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten (`beheer.ps1 -AutoGoedkeuren` op de laptop van de beheerder). Alleen bij *Code kwijt* stuur je de **zes controlewoorden** via Teams naar de beheerder.
+4. Daarna log je in met je uitnodigingscode en je code. Onder **Les van vandaag** staat elke werkdag een les van 2–5 minuten.
 5. Wil je dat DoubleLeren elke ochtend vanzelf opent? Na je les staat hoe je een opstart-snelkoppeling maakt (Windows en Mac). Vink bij het inloggen **Onthoud mij** aan, dan opent hij meteen in je les zonder code (30 dagen, tot je uitlogt).
 
 **Andere computer?** Gewoon inloggen op de website.
@@ -67,7 +67,8 @@ Alles gaat in de browser; je hoeft niets te installeren.
 - De beheerder kent geen codes.
 
 **Goedkeuren**
-- Zes controlewoorden dekken de hele aanvraag: sleutel, kluis en sleutelkopieën.
+- Nieuwe aanmeldingen keurt `beheer.ps1 -AutoGoedkeuren` vanzelf goed (elke minuut via een taak op de laptop van de beheerder), voor leden die in het organogram staan en nog geen sleutel hebben. De uitnodigingscode is persoonlijk; wie een token heeft, kan zich in theorie aanmelden voor een collega die dat nog niet deed. Dat valt op, want die collega kan zich dan niet meer aanmelden.
+- Bij herstel (*Code kwijt*) blijft het handwerk: zes controlewoorden dekken de hele aanvraag (sleutel, kluis en sleutelkopieën) en worden via Teams vergeleken. Zo kan niemand andermans account overnemen.
 - Alleen sleutels met e = 65537 en n = 3072 bit worden geaccepteerd.
 
 **Sleutelwissel**

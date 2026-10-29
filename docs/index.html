@@ -286,8 +286,8 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
         <button class="knop" type="button" id="w-kopieer" style="justify-self:start;background:var(--cool-50)">Kopieer code</button>
         <ol class="stappen-lijst">
           <li><strong>Zet deze code nu in je wachtwoordkluis.</strong> Hij wordt maar één keer getoond. Niemand anders heeft hem, ook de beheerder niet.</li>
-          <li><strong>Stuur deze zes controlewoorden in Teams naar de beheerder:</strong><span class="controle" id="w-controle"></span>Daarmee controleert de beheerder dat jouw aanmelding onderweg niet is aangepast.</li>
-          <li>Na goedkeuring log je in met je uitnodigingscode en deze code.</li>
+          <li id="w-controle-stap" hidden><strong>Stuur deze zes controlewoorden in Teams naar de beheerder:</strong><span class="controle" id="w-controle"></span>Omdat je een nieuwe code aanvraagt, controleert de beheerder zo dat het echt jouw aanvraag is.</li>
+          <li id="w-auto-stap">Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten. Daarna log je in met je uitnodigingscode en deze code.</li>
         </ol>
         <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="w-bewaard"> Ik heb mijn code veilig bewaard</label>
         <button class="knop zwart" type="button" id="w-klaar" disabled>Klaar</button>
@@ -302,8 +302,11 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
 
       <div id="w-wacht" class="stappen" hidden>
         <h2>Wacht op goedkeuring</h2>
-        <p class="sub" style="margin:0">Je aanmelding staat klaar. Heb je de controlewoorden al in Teams naar de beheerder gestuurd? Ze zijn:</p>
-        <span class="controle" id="w-wacht-woorden"></span>
+        <p class="sub" style="margin:0" id="w-wacht-auto">Je aanmelding staat klaar en wordt vanzelf geactiveerd, meestal binnen een paar minuten. Probeer het daarna opnieuw.</p>
+        <div id="w-wacht-herstel" hidden>
+          <p class="sub" style="margin:0">Je nieuwe code staat klaar. Heb je de controlewoorden al in Teams naar de beheerder gestuurd? Ze zijn:</p>
+          <span class="controle" id="w-wacht-woorden"></span>
+        </div>
         <p class="sub" style="margin:0">Code kwijt voordat je bent goedgekeurd? Begin dan gewoon opnieuw; de oude aanmelding wordt vervangen.</p>
         <button class="knop" type="button" id="w-opnieuw" style="background:var(--cool-50)">Opnieuw beginnen</button>
       </div>
