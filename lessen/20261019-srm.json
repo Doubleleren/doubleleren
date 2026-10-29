@@ -7,26 +7,28 @@
     "7.2.1",
     "7.2.2"
   ],
-  "titel": "Sample Ratio Mismatch: de test die stiekem kapot is",
-  "volgorde": "uitleg-eerst",
-  "uitleg": "Bij een A/B-test met een 50/50-verdeling verwacht je ongeveer evenveel bezoekers per variant. Kleine verschillen zijn toeval. Een **Sample Ratio Mismatch (SRM)** betekent dat de verdeling méér afwijkt dan toeval kan verklaren.\n\nDat is een alarmsignaal: er gaat iets mis in de test zelf. Veelvoorkomende oorzaken:\n- Een redirect-test waarbij een deel van variant B afhaakt of niet getrackt wordt\n- Variant B laadt trager, waardoor de tracking later of niet vuurt\n- Bots of interne bezoekers die maar in één variant terechtkomen\n- Een bug in de toewijzing of in cookies/consent\n\nJe toetst SRM met een **chi-kwadraattoets** op de aantallen bezoekers. Vuistregel uit de praktijk: is p < 0,01, vertrouw de resultaten dan niet. Zoek eerst de oorzaak. Hoe significant de conversie-uitkomst ook is, met een SRM vergelijk je geen gelijke groepen meer.",
+  "titel": "Variant B wint significant: morgen uitrollen?",
+  "intro": "Een webshop test een nieuwe productpagina met een 50/50-verdeling. Na drie weken meldt de testtool: 'Variant B wint, 97% significant'. De productowner wil morgen uitrollen. Variant A had 50.000 bezoekers, variant B 48.500.",
   "opdracht": {
     "soort": "meerkeuze",
-    "vraag": "Je test draait 50/50. Variant A heeft 50.000 bezoekers, variant B 48.500. B wint significant op conversie. Wat doe je?",
+    "vraag": "Wat doe je voordat er iets wordt uitgerold?",
     "opties": [
-      "B uitrollen: het resultaat is significant",
-      "Eerst de verdeling toetsen en de oorzaak van de afwijking zoeken, want dit is (vrijwel zeker) een SRM",
-      "Negeren: 3% verschil in bezoekers is verwaarloosbaar",
-      "De test langer laten lopen tot B ook 50.000 bezoekers heeft"
+      "Uitrollen: de tool zegt dat het resultaat significant is, en daar gaat het om",
+      "Eerst toetsen of 50.000 tegen 48.500 nog bij toeval past, en zo niet de oorzaak zoeken",
+      "Niets: 3% verschil in bezoekers is te klein om de uitkomst te beïnvloeden",
+      "De test laten doorlopen tot variant B ook 50.000 bezoekers heeft gehad"
     ],
     "juist": 1
   },
-  "toelichting": "Reken het na: verwacht is 49.250 per variant. Een chi-kwadraattoets geeft χ² ≈ 22,8 met p ≈ 0,000002. Zo'n verschil ontstaat bij toeval vrijwel nooit. 3% klinkt klein, maar bij deze aantallen is het enorm. Langer doorlopen lost het niet op: de oorzaak blijft bestaan.",
+  "toelichting": "Bij een 50/50-test verwacht je 49.250 bezoekers per variant. Een chi-kwadraattoets op 50.000 tegen 48.500 geeft χ² ≈ 22,8 met p ≈ 0,000002. Zo'n verschil ontstaat bij toeval vrijwel nooit: dit is een **Sample Ratio Mismatch (SRM)**. 3% klinkt klein, maar bij deze aantallen is het enorm. Uitrollen kan niet, want je vergelijkt geen gelijke groepen meer. Langer doorlopen lost het ook niet op: de oorzaak blijft bestaan.",
+  "uitleg": "Bij een A/B-test met een 50/50-verdeling verwacht je ongeveer evenveel bezoekers per variant. Kleine verschillen zijn toeval. Een **Sample Ratio Mismatch (SRM)** betekent dat de verdeling méér afwijkt dan toeval kan verklaren.\n\nDat is een alarmsignaal: er gaat iets mis in de test zelf. Veelvoorkomende oorzaken:\n- Een redirect-test waarbij een deel van variant B afhaakt of niet getrackt wordt\n- Variant B laadt trager, waardoor de tracking later of niet vuurt\n- Bots of interne bezoekers die maar in één variant terechtkomen\n- Een bug in de toewijzing of in cookies/consent\n\nJe toetst SRM met een **chi-kwadraattoets** op de aantallen bezoekers. Vuistregel uit de praktijk: is p < 0,01, vertrouw de resultaten dan niet. Zoek eerst de oorzaak. Hoe significant de conversie-uitkomst ook is, met een SRM vergelijk je geen gelijke groepen meer.",
   "kernpunt": "Controleer bij elke A/B-test eerst of de bezoekersverdeling klopt (SRM-check). Pas daarna kijk je naar de conversie.",
   "toepassing": "Zoek 'SRM calculator' (bijv. die van Lukas Vermeer) en vul de bezoekersaantallen van je laatst afgeronde test in.",
   "bron": {
     "titel": "Lukas Vermeer: SRM Checker",
     "url": "https://www.lukasvermeer.nl/srm/"
   },
-  "niveau": "basis"
+  "niveau": "basis",
+  "herzien": "2026-10-29",
+  "wijziging": "Spoiler weggehaald: titel en juiste optie verraadden het antwoord. Situatie naar de intro, opties gelijkwaardiger gemaakt."
 }

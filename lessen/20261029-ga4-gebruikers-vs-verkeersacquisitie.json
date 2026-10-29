@@ -1,0 +1,34 @@
+{
+  "id": "20261029-ga4-gebruikers-vs-verkeersacquisitie",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4-rapportage: Gebruikersacquisitie vs. Verkeersacquisitie",
+  "matrix": ["4.1.3"],
+  "titel": "1.200 of 4.800? Twee GA4-rapporten, twee getallen voor Organic",
+  "intro": "Je maakt het maandrapport voor een webshop. In het GA4-rapport Gebruikersacquisitie (User acquisition) staat Organic Search op 1.200 nieuwe gebruikers. In Verkeersacquisitie (Traffic acquisition) heeft Organic Search 4.800 sessies. De klant mailt: 'Welk getal klopt nou? Eén van die rapporten is toch kapot?'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste verklaring voor het verschil?",
+    "opties": [
+      "Gebruikersacquisitie filtert bots eruit en Verkeersacquisitie niet, dus het lagere getal is het betrouwbare",
+      "Verkeersacquisitie bevat gemodelleerde data uit Consent Mode, Gebruikersacquisitie alleen geobserveerde data",
+      "Gebruikersacquisitie telt alleen ingelogde gebruikers met een User-ID, Verkeersacquisitie iedereen",
+      "Gebruikersacquisitie laat zien via welk kanaal nieuwe gebruikers de eerste keer kwamen, Verkeersacquisitie per sessie waar die sessie vandaan kwam"
+    ],
+    "juist": 3
+  },
+  "toelichting": "De twee rapporten meten iets anders. **Gebruikersacquisitie** gaat over nieuwe gebruikers en gebruikt dimensies met 'First user': het kanaal waarmee iemand de allereerste keer binnenkwam. **Verkeersacquisitie** gaat over sessies, van nieuwe én terugkerende gebruikers, en kijkt per sessie waar die vandaan kwam. Je vergelijkt dus gebruikers met sessies. Bots, consent-modellering en User-ID verklaren dit verschil niet: Google filtert bekend botverkeer in beide rapporten, en geen van beide rapporten is beperkt tot ingelogde gebruikers.",
+  "uitleg": "GA4 heeft twee acquisitierapporten die op elkaar lijken, maar een andere vraag beantwoorden.\n\n- **Gebruikersacquisitie (User acquisition)** gaat over **nieuwe gebruikers**. Alle dimensies beginnen met 'First user', bijvoorbeeld *First user default channel group*. Die waarde blijft hetzelfde, hoe vaak iemand ook terugkomt.\n- **Verkeersacquisitie (Traffic acquisition)** gaat over **sessies**. Elke sessie krijgt een eigen bron, ook als dezelfde persoon eerder via een ander kanaal kwam.\n\nGoogles eigen voorbeeld: iemand komt de eerste keer via Google en komt daarna nog tien keer terug door de URL in te typen. In Gebruikersacquisitie vallen al die elf sessies onder Google. In Verkeersacquisitie valt de eerste sessie onder Google en de andere tien onder direct (als ze buiten de terugkijkperiode voor key events vallen).\n\nVoor rapportage betekent dat:\n- Wil je weten welk kanaal **nieuwe klanten** binnenhaalt, kijk dan naar Gebruikersacquisitie.\n- Wil je weten hoeveel **bezoeken** een kanaal oplevert, kijk dan naar Verkeersacquisitie.\n\nZet nooit een getal uit het ene rapport naast een getal uit het andere alsof ze hetzelfde meten. Zet in je rapport erbij welk rapport en welke metric je gebruikt.",
+  "kernpunt": "Gebruikersacquisitie = via welk kanaal nieuwe gebruikers de eerste keer kwamen. Verkeersacquisitie = waar elke sessie vandaan kwam. Kies het rapport bij de vraag, en vergelijk geen gebruikers met sessies.",
+  "toepassing": "Zet in je eerstvolgende klantrapport bij elk GA4-getal over kanalen erbij uit welk rapport het komt en of het om gebruikers of sessies gaat.",
+  "bron": {
+    "titel": "User acquisition report vs. Traffic acquisition report - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/14731736?hl=en"
+  },
+  "video": {
+    "titel": "Acquisition Report in GA4 | How to Use & Get Insights in Google Analytics 4",
+    "kanaal": "Clicks Don't Lie",
+    "url": "https://www.youtube.com/watch?v=aKoZSzvVu6k"
+  }
+}

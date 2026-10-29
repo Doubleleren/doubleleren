@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-28T05:27:50",
+    "bijgewerkt":  "2026-10-29T05:27:54",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -96,7 +96,7 @@
                    },
                    {
                        "id":  "20261019-srm",
-                       "titel":  "Sample Ratio Mismatch: de test die stiekem kapot is",
+                       "titel":  "Variant B wint significant: morgen uitrollen?",
                        "vakgebied":  "CRO",
                        "onderwerp":  "A/B-testen: Sample Ratio Mismatch",
                        "type":  "basis",
@@ -112,7 +112,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-10-29"
                    },
                    {
                        "id":  "20261019-striking-distance",
@@ -2065,6 +2066,203 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-ankerteksten-interne-links",
+                       "titel":  "\u0027Klik hier\u0027, \u0027Lees meer\u0027 en een rij zoekwoorden als linktekst",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Interne links: ankerteksten die werken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.15"
+                                  ],
+                       "kernpunt":  "Een goede ankertekst is beschrijvend, kort en relevant: geen \u0027klik hier\u0027, geen rij zoekwoorden. Lees alleen de linktekst; snap je waar hij heen gaat, dan is hij goed.",
+                       "bron":  {
+                                    "titel":  "Link best practices for Google | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-article-markup-auteurs-claude",
+                       "titel":  "Twee auteurs in één veld: laat Claude de Article-markup herschrijven",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Article-markup: auteurs en datums goed opgeven",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.7"
+                                  ],
+                       "kernpunt":  "Article-markup heeft geen verplichte velden, maar de auteursregels zijn streng: elke auteur een eigen Person, in author.name alleen de naam, en datums in ISO 8601.",
+                       "bron":  {
+                                    "titel":  "Article (Article, NewsArticle, BlogPosting) Schema | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/article"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-categorietekst-keyword-stuffing",
+                       "titel":  "900 woorden onder de loungesets: wat doe je met die tekst?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Body copy: de SEO-tekst onder een categoriepagina",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.13"
+                                  ],
+                       "kernpunt":  "Een tekst vol herhalingen of plaatsnamen is keyword stuffing, en lengte alleen helpt niet. Schrijf de categorietekst voor de koper; het zoekwoord komt er dan vanzelf in.",
+                       "bron":  {
+                                    "titel":  "Spam Policies for Google Web Search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-externe-links-naar-bronnen",
+                       "titel":  "\"Alle externe links eruit, anders lekt onze linkwaarde weg\"",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Externe links: wanneer link je naar andere sites?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.16"
+                                  ],
+                       "kernpunt":  "Link naar bronnen die je vertrouwt; dat helpt de lezer. Betaalde links krijgen sponsored, gebruikerslinks ugc of nofollow, en een bron die je niet vertrouwt nofollow.",
+                       "bron":  {
+                                    "titel":  "Search Engine Optimization (SEO) Starter Guide | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-ga4-gebruikers-vs-verkeersacquisitie",
+                       "titel":  "1.200 of 4.800? Twee GA4-rapporten, twee getallen voor Organic",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4-rapportage: Gebruikersacquisitie vs. Verkeersacquisitie",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "4.1.3"
+                                  ],
+                       "kernpunt":  "Gebruikersacquisitie = via welk kanaal nieuwe gebruikers de eerste keer kwamen. Verkeersacquisitie = waar elke sessie vandaan kwam. Kies het rapport bij de vraag, en vergelijk geen gebruikers met sessies.",
+                       "bron":  {
+                                    "titel":  "User acquisition report vs. Traffic acquisition report - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/14731736?hl=en"
+                                },
+                       "video":  {
+                                     "titel":  "Acquisition Report in GA4 | How to Use \u0026 Get Insights in Google Analytics 4",
+                                     "kanaal":  "Clicks Don\u0027t Lie",
+                                     "url":  "https://www.youtube.com/watch?v=aKoZSzvVu6k"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-klantmail-verkeersdaling-claude",
+                       "titel":  "\"Ons verkeer is 18% gedaald!\" Laat Claude het antwoord voorbereiden",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Klantcommunicatie per e-mail bij een verkeersdaling",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "6.1.1",
+                                      "10.1.1"
+                                  ],
+                       "kernpunt":  "Eerst uitzoeken wat er daalde (periode, jaar-op-jaar, uitsplitsing, Trends), dan kort mailen: wat we zien, hoe zeker we zijn, wat we doen en wanneer we terugkoppelen. Geen beloftes en geen geraden oorzaken.",
+                       "bron":  {
+                                    "titel":  "Debugging drops in Google Search traffic | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-plaatspaginas-doorway",
+                       "titel":  "\u0027Loodgieter Zeist\u0027, \u0027Loodgieter Houten\u0027 en nog 178 pagina\u0027s",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Dunne content: 180 plaatspagina\u0027s met dezelfde tekst",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.1.7"
+                                  ],
+                       "kernpunt":  "Bijna gelijke plaatspagina\u0027s die alleen bedoeld zijn om te ranken, zijn doorway abuse, en ze laten herschrijven verandert daar niets aan. Houd alleen plaatspagina\u0027s met echt eigen inhoud.",
+                       "bron":  {
+                                    "titel":  "Spam Policies for Google Web Search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-ranktracker-vs-gsc-positie",
+                       "titel":  "Positie 7 in de rank tracker, 3,2 in Search Console: wie liegt er?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Rank tracker vs. gemiddelde positie in Search Console",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.4",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Search Console middelt de hoogste positie over alle echte vertoningen; een rank tracker is één vaste meting. Ze verschillen bijna altijd, vooral bij lokale zoekopdrachten, en dat is geen fout.",
+                       "bron":  {
+                                    "titel":  "What are impressions, position, and clicks? - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/7042828"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-redirectmap-delegeren",
+                       "titel":  "\"Maak jij even de redirectmap?\" Zo delegeer je het goed",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Werk delegeren: een redirectmap overdragen aan een collega",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "6.3.1",
+                                      "6.3.2"
+                                  ],
+                       "kernpunt":  "Goed delegeren = doel, input, format, regels, prioriteit en een vroeg controlemoment. Bij een redirectmap: elke URL naar de best passende pagina, permanent, zonder ketens en niet alles naar de homepage.",
+                       "bron":  {
+                                    "titel":  "Site moves with URL changes | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-url-inspectie-live-test",
+                       "titel":  "noindex is gisteren weggehaald, maar Search Console zegt van niet",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "URL-inspectie: geïndexeerde versie vs. live test",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.5"
+                                  ],
+                       "kernpunt":  "URL-inspectie toont standaard de laatst geïndexeerde versie, niet de huidige pagina. Controleer een fix met \u0027URL live testen\u0027; ook een geslaagde test garandeert geen indexering.",
+                       "bron":  {
+                                    "titel":  "URL Inspection tool - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/9012289"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
                        "herkomst":  "generator"
                    }
                ]

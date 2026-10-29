@@ -1,0 +1,29 @@
+{
+  "id": "20261029-ranktracker-vs-gsc-positie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Rank tracker vs. gemiddelde positie in Search Console",
+  "matrix": ["4.1.4", "4.1.2"],
+  "titel": "Positie 7 in de rank tracker, 3,2 in Search Console: wie liegt er?",
+  "intro": "Je rapporteert elke maand posities uit een rank tracker (zoals STAT). Die controleert elke dag één keer, vanaf één locatie en zonder zoekgeschiedenis. Voor 'zonnepanelen installateur' staat de klant daar op positie 7. Search Console geeft voor dezelfde zoekopdracht over dezelfde maand een gemiddelde positie van 3,2.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "De klant vraagt welk van de twee getallen niet klopt. Wat antwoord je?",
+    "opties": [
+      "Search Console klopt niet: het rondt posities altijd af naar de beste waarde van de maand",
+      "Allebei kunnen kloppen: Search Console middelt over alle echte vertoningen, de rank tracker is één meting per dag op één plek",
+      "De rank tracker meet alleen desktop en Search Console alleen mobiel, daarom verschillen ze",
+      "Search Console loopt twee dagen achter, en daardoor zie je een andere positie"
+    ],
+    "juist": 1
+  },
+  "toelichting": "Search Console neemt per vertoning de **hoogste positie** van de site en middelt die over **alle vertoningen**: van echte zoekers, op verschillende locaties, apparaten en met hun eigen zoekgeschiedenis. Een rank tracker doet één gestandaardiseerde meting. Een lokale zoekopdracht als 'zonnepanelen installateur' verschilt sterk per plaats, dus een groot verschil is normaal. Search Console rondt niet af naar de beste waarde, meet alle apparaten, en een vertraging van een paar dagen verklaart geen verschil over een hele maand.",
+  "uitleg": "Een rank tracker en Search Console geven allebei een 'positie', maar ze meten iets anders.\n\n**Search Console** kijkt naar echte zoekopdrachten:\n- Per vertoning telt de **hoogste positie** waarop een link naar je site stond.\n- Die posities worden **gemiddeld over alle vertoningen**. Wie op locatie A op plek 2 staat en op locatie B op plek 9, krijgt een gemiddelde dat bij het aantal vertoningen op elke plek past.\n- Een carrousel of AI Overview neemt één positie in. Alle links erin krijgen die positie.\n- Je eigen positie in een zoekopdracht kan afwijken door onder meer **locatie en zoekgeschiedenis**.\n\n**Een rank tracker** doet een gecontroleerde meting: vast moment, vaste locatie, vast apparaat, geen geschiedenis. Dat is handig om een **trend** te volgen, want de omstandigheden blijven gelijk. Maar het is één steekproef, niet wat alle zoekers zien.\n\nGebruik ze dus naast elkaar:\n- de rank tracker voor de ontwikkeling van vaste zoekwoorden en concurrenten;\n- Search Console voor wat er echt gebeurde: vertoningen, klikken en gemiddelde positie.\n\nZet in je rapport bij elk getal waar het vandaan komt, dan krijg je deze vraag niet meer.",
+  "kernpunt": "Search Console middelt de hoogste positie over alle echte vertoningen; een rank tracker is één vaste meting. Ze verschillen bijna altijd, vooral bij lokale zoekopdrachten, en dat is geen fout.",
+  "toepassing": "Zoek bij een klant drie zoekwoorden met een groot verschil tussen rank tracker en Search Console en kijk in Search Console per land of apparaat of dat het verschil verklaart.",
+  "bron": {
+    "titel": "What are impressions, position, and clicks? - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/7042828"
+  }
+}

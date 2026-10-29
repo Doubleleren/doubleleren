@@ -1,0 +1,29 @@
+{
+  "id": "20261029-categorietekst-keyword-stuffing",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Body copy: de SEO-tekst onder een categoriepagina",
+  "matrix": ["2.1.13"],
+  "titel": "900 woorden onder de loungesets: wat doe je met die tekst?",
+  "intro": "Een webshop in tuinmeubelen heeft onder elke categoriepagina een tekst van 900 woorden. In de tekst bij loungesets staat 'loungeset kopen' 23 keer. Onderaan staat een blok: 'loungeset Amsterdam, loungeset Utrecht, loungeset Rotterdam…', voor 40 plaatsen. De webshop verstuurt alles vanuit één magazijn en heeft geen winkels.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "De klant vraagt wat hij het beste met deze tekst kan doen. Welk advies geef je?",
+    "opties": [
+      "Laten staan: hoe vaker het zoekwoord en hoe meer plaatsen erin staan, hoe meer zoekopdrachten de pagina kan raken",
+      "Uitbreiden naar 1.500 woorden met meer varianten van het zoekwoord, want een langere tekst rankt beter",
+      "Het plaatsenblok schrappen en de tekst herschrijven tot wat een koper helpt kiezen, met het zoekwoord waar het vanzelf past",
+      "Het plaatsenblok met CSS verbergen, zodat Google het nog leest maar bezoekers er geen last van hebben"
+    ],
+    "juist": 2
+  },
+  "toelichting": "Een lijst met plaatsen waarop je wilt ranken en woorden die zo vaak terugkomen dat het onnatuurlijk klinkt, noemt Google letterlijk als voorbeelden van **keyword stuffing**. Dat is spam, dus laten staan is een risico. Langer maken helpt niet: volgens Google maakt de lengte van een tekst op zich niet uit voor de ranking. Verbergen met CSS is nog erger: verborgen tekst om zoekmachines te sturen valt ook onder het spambeleid. Wat overblijft is een tekst die de koper echt verder helpt.",
+  "uitleg": "**Body copy** is de lopende tekst op een pagina. Op categoriepagina's staat vaak een 'SEO-tekst' onderaan die vooral voor Google geschreven is. Google zegt daar duidelijk over:\n\n- Het eindeloos herhalen van hetzelfde woord, ook in varianten, is vermoeiend voor bezoekers. Gaat het zo ver dat het onnatuurlijk klinkt, dan is het **keyword stuffing** en dus spam.\n- Ook **lijsten met plaatsen of regio's** waarop je wilt ranken staan als voorbeeld in het spambeleid.\n- Er is **geen magisch aantal woorden**. Lengte alleen doet niets voor de ranking.\n\nWat werkt wel? Schrijf voor de koper die op die pagina belandt. Bij loungesets: waar let je op bij materiaal, hoeveel zitplaatsen heb je nodig, hoe onderhoud je het, wat zijn de levertijden. Dat zijn vragen die mensen echt hebben, en het zoekwoord komt er dan vanzelf in voor.\n\nZet korte, nuttige tekst liever bóven de producten (een paar zinnen) en uitgebreidere hulp eronder. Wil de klant lokaal gevonden worden, dan helpt een plaatsenlijst niet. Lokaal gevonden worden draait om echte aanwezigheid in een regio, bijvoorbeeld met een Bedrijfsprofiel.",
+  "kernpunt": "Een tekst vol herhalingen of plaatsnamen is keyword stuffing, en lengte alleen helpt niet. Schrijf de categorietekst voor de koper; het zoekwoord komt er dan vanzelf in.",
+  "toepassing": "Open de categoriepagina met het meeste verkeer bij een klant, lees alleen de SEO-tekst hardop en streep alles door wat een koper niet helpt kiezen.",
+  "bron": {
+    "titel": "Spam Policies for Google Web Search | Google Search Central",
+    "url": "https://developers.google.com/search/docs/essentials/spam-policies"
+  }
+}

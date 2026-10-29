@@ -1,0 +1,24 @@
+{
+  "id": "20261029-article-markup-auteurs-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Article-markup: auteurs en datums goed opgeven",
+  "matrix": ["2.2.7"],
+  "titel": "Twee auteurs in één veld: laat Claude de Article-markup herschrijven",
+  "intro": "Een platform over hypotheken publiceert artikelen die vaak door twee mensen zijn geschreven. Boven een artikel staat: 'Door Sanne de Vries, hypotheekadviseur, en Ahmed Bakker'. Het CMS zet in de JSON-LD nu één author met als name: 'Sanne de Vries, hypotheekadviseur en Ahmed Bakker | Hypotheekwijzer'. datePublished staat er als '12-10-2026'.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee je Claude een correct Article-blok in JSON-LD laat maken dat het CMS als sjabloon kan gebruiken. Zeg in de prompt wat er aan de huidige markup fout is, wat Claude moet opleveren en hoe je de uitkomst controleert.",
+    "minTekens": 150,
+    "hint": "Kijk naar wat er nu allemaal in één veld staat, en naar de notatie van de datum."
+  },
+  "modelantwoord": "Een goede prompt bevat ongeveer dit:\n\n- **Context:** 'Je bent een technisch SEO-specialist. Maak een JSON-LD-sjabloon voor een artikel (type Article of BlogPosting) op een hypotheekplatform.'\n- **Wat er fout is:** twee auteurs staan samen in één author-veld, en in de naam staan ook een functie en de naam van het platform. De datum is geen ISO 8601.\n- **Wat Claude moet doen:**\n  - Elke auteur als **eigen Person-object** in author, niet samengevoegd.\n  - In author.name **alleen de naam**. De functie gaat naar jobTitle, het platform naar publisher (een Organization).\n  - Per auteur een author.url naar diens auteurspagina.\n  - datePublished en dateModified in ISO 8601 met tijdzone, bijvoorbeeld 2026-10-12T09:00:00+02:00.\n  - headline en image erbij. Gebruik alleen wat ook zichtbaar op de pagina staat.\n- **Outputformaat:** één codeblok met geldige JSON-LD, met placeholders voor wat per artikel verschilt.\n- **Controle:** test het resultaat met de Rich Results Test en kijk zelf na of elke auteur die op de pagina staat ook in de markup staat.",
+  "uitleg": "Article-markup helpt Google te begrijpen wie een artikel schreef, wanneer het verscheen en wat de titel en afbeelding zijn. Je gebruikt het type **Article, NewsArticle of BlogPosting**.\n\nOpvallend: Article-markup heeft **geen verplichte velden**. Google raadt aan wat bij je content past, vooral author, datePublished, dateModified, headline en image.\n\nDe meeste fouten zitten in de auteurs. Googles regels:\n- **Alle auteurs** die op de pagina als auteur staan, horen ook in de markup.\n- **Eén auteur per author-veld.** Voeg nooit meerdere namen samen in één veld.\n- In **author.name alleen de naam**: geen functietitel, geen aanspreektitel en geen naam van de uitgever. Daarvoor zijn jobTitle, honorificPrefix en publisher.\n- **Person** voor mensen, **Organization** voor organisaties.\n- Met author.url (of sameAs) verwijs je naar een pagina die de auteur eenduidig aanwijst, zoals een auteurspagina.\n\nDatums geef je in **ISO 8601**, het liefst met tijdzone. Een notatie als 12-10-2026 is niet eenduidig: is dat 12 oktober of 10 december?\n\nClaude is handig om zo'n sjabloon snel te maken, maar controleer altijd zelf. Laat Claude geen auteurs of datums verzinnen die niet op de pagina staan.",
+  "kernpunt": "Article-markup heeft geen verplichte velden, maar de auteursregels zijn streng: elke auteur een eigen Person, in author.name alleen de naam, en datums in ISO 8601.",
+  "toepassing": "Test deze week één artikel met meerdere auteurs bij een klant in de Rich Results Test en bekijk hoe author en datePublished in de markup staan.",
+  "bron": {
+    "titel": "Article (Article, NewsArticle, BlogPosting) Schema | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/article"
+  }
+}

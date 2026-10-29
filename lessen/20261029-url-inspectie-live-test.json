@@ -1,0 +1,24 @@
+{
+  "id": "20261029-url-inspectie-live-test",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "URL-inspectie: geïndexeerde versie vs. live test",
+  "matrix": ["1.1.5"],
+  "titel": "noindex is gisteren weggehaald, maar Search Console zegt van niet",
+  "intro": "Bij een webshop stond per ongeluk een noindex op alle categoriepagina's. De developer heeft dat gisteren hersteld. De klant opent vanochtend de URL-inspectie in Search Console voor een categoriepagina en ziet nog steeds: 'Uitgesloten door noindex-tag'. Hij mailt: 'De fix werkt dus niet.'",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de Search Console Help op wat de URL-inspectietool precies laat zien. Leg de klant uit waarom hij deze melding nog ziet, hoe je controleert of de fix werkt, en wat je daarna doet.",
+    "minTekens": 120,
+    "hint": "Dezelfde tool kan twee soorten resultaten tonen. Uit welk moment komt het resultaat dat de klant ziet?"
+  },
+  "modelantwoord": "De melding zegt nog niets over de fix:\n\n- Wat de klant ziet, is **geen live test**. Het is het resultaat van de **laatst geïndexeerde versie**: hoe Google de pagina zag bij het laatste bezoek, vóór de fix.\n- **Controleren:** klik op 'URL live testen'. Google haalt de pagina dan nú op. Bij 'Geteste pagina bekijken' zie je de HTML die Google kreeg. Check dat daar geen noindex meer in staat.\n- **Daarna:** vraag voor de belangrijkste categoriepagina's indexering aan. Er is een daglimiet, en een aanvraag is geen garantie. Voor veel URL's werkt een bijgewerkte sitemap beter.\n- Let op: een geslaagde live test betekent dat Google de pagina kan ophalen, niet dat hij zeker geïndexeerd wordt. Volg de komende weken het rapport Pagina-indexering.",
+  "uitleg": "De **URL-inspectietool** in Search Console laat zien wat Google van één URL weet. Hij kan twee soorten resultaten tonen, en die worden vaak verward.\n\n**1. De geïndexeerde versie (standaard).** Als je een URL inspecteert, zie je eerst hoe Google de pagina zag bij het **laatste bezoek**. Volgens de documentatie is dat uitdrukkelijk *geen* live test. Heb je net iets aangepast, dan staat de oude situatie er nog.\n\n**2. De live test.** Met 'URL live testen' haalt Google de pagina op dat moment op. Via 'Geteste pagina bekijken' zie je onder meer de opgehaalde HTML en, bij een geslaagde test, een screenshot. Zo controleer je of een fix (noindex weg, canonical goed, pagina bereikbaar) echt live staat.\n\nTwee dingen om te onthouden:\n- Een geslaagde live test is **geen garantie** dat de pagina in de index komt. Google zegt dat er geen test is die dat kan garanderen.\n- **Indexering aanvragen** kan, maar er is een daglimiet en ook dat is geen garantie. Gaat het om veel URL's, dien dan een sitemap in.\n\nHet is een goede gewoonte om na elke technische fix de live test te doen en de klant een screenshot van het resultaat te sturen.",
+  "kernpunt": "URL-inspectie toont standaard de laatst geïndexeerde versie, niet de huidige pagina. Controleer een fix met 'URL live testen'; ook een geslaagde test garandeert geen indexering.",
+  "toepassing": "Doe bij de eerstvolgende technische fix voor een klant een live test van een getroffen URL en voeg de HTML-check of het screenshot toe aan je terugkoppeling.",
+  "bron": {
+    "titel": "URL Inspection tool - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/9012289"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "20261029-redirectmap-delegeren",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Werk delegeren: een redirectmap overdragen aan een collega",
+  "matrix": ["6.3.1", "6.3.2"],
+  "titel": "\"Maak jij even de redirectmap?\" Zo delegeer je het goed",
+  "intro": "Over vier weken verhuist een webshop met 3.000 URL's naar een nieuw domein, met een nieuwe URL-structuur. Je wilt het maken van de redirectmap overdragen aan een junior collega die dat nog nooit heeft gedaan. Je hebt tien minuten om de opdracht op te schrijven.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat zet je in de opdracht, zodat je collega het zelfstandig goed kan doen en jij het snel kunt controleren?",
+    "minTekens": 120,
+    "hint": "Bedenk wat er mis kan gaan als je alleen zegt: 'maak even een redirectmap'."
+  },
+  "modelantwoord": "Een goede opdracht bevat:\n\n- **Doel en deadline:** waarom het belangrijk is (bezoekers en rankings meenemen naar het nieuwe domein) en wanneer het af moet, met een tussenmoment.\n- **Input:** waar de oude URL's vandaan komen: een crawl, de sitemap, en Search Console en GA4 voor URL's met verkeer. Ook URL's met externe links horen erbij.\n- **Format:** een spreadsheet met oude URL, nieuwe URL en een kolom voor opmerkingen.\n- **De regels:**\n  - elke oude URL naar de meest passende nieuwe pagina, niet alles naar de homepage;\n  - permanente redirects (301 of 308), direct naar de eindbestemming, zonder ketens;\n  - geen goede tegenhanger? Niet zelf iets kiezen, maar markeren en overleggen.\n- **Prioriteit:** eerst de URL's met het meeste verkeer en de meeste links.\n- **Overleg:** na de eerste 100 regels even samen kijken, en een vast moment om vragen te stellen.\n- **Controle:** hoe jij het nakijkt, bijvoorbeeld een steekproef plus een script dat alle redirects test.",
+  "uitleg": "Delegeren is meer dan een taak doorgeven. De ander moet weten **wat** het resultaat is, **waarom** het ertoe doet, **welke regels** gelden en **wanneer** je samen kijkt. Anders krijg je iets terug dat je opnieuw moet doen, of erger: dat live gaat met fouten.\n\nBij een redirectmap zijn de regels duidelijk, want Google beschrijft ze in de documentatie over verhuizen met URL-wijzigingen:\n- Koppel **elke oude URL** aan een nieuwe URL.\n- Gebruik **permanente redirects** aan de serverkant, zoals 301 of 308.\n- Stuur **direct naar de eindbestemming**, zonder ketens.\n- Stuur niet veel oude URL's naar één pagina die er niets mee te maken heeft, zoals de homepage. Dat verwart bezoekers en Google kan het als **soft 404** zien.\n- Houd de redirects **zo lang mogelijk** aan, in het algemeen minstens een jaar.\n- Pas daarna ook interne links, sitemaps en canonicals aan.\n\nWie dat nog nooit heeft gedaan, weet dat niet vanzelf. Zet de regels daarom in de opdracht en spreek een **vroeg controlemoment** af: na de eerste 100 regels zie je al of je collega het goed begrepen heeft. Dat kost je tien minuten en bespaart uren herstelwerk.\n\nGeef ook ruimte om te vragen. 'Twijfel je, markeer het en vraag het' werkt beter dan iemand die blijft gokken.",
+  "kernpunt": "Goed delegeren = doel, input, format, regels, prioriteit en een vroeg controlemoment. Bij een redirectmap: elke URL naar de best passende pagina, permanent, zonder ketens en niet alles naar de homepage.",
+  "toepassing": "Schrijf voor één taak die je deze week overdraagt een opdracht met doel, regels en een tussentijds controlemoment, en vraag de ander om in eigen woorden terug te vertellen wat het resultaat moet zijn.",
+  "bron": {
+    "titel": "Site moves with URL changes | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+  }
+}

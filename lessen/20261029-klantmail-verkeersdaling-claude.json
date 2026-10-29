@@ -1,0 +1,24 @@
+{
+  "id": "20261029-klantmail-verkeersdaling-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Klantcommunicatie per e-mail bij een verkeersdaling",
+  "matrix": ["6.1.1", "10.1.1"],
+  "titel": "\"Ons verkeer is 18% gedaald!\" Laat Claude het antwoord voorbereiden",
+  "intro": "Een online fietsenwinkel mailt maandagochtend: 'Ons organisch verkeer is vorige week 18% gedaald. Wat is er aan de hand en wat gaan jullie doen?' De klant is zichtbaar geschrokken. Je hebt Claude met een koppeling naar Search Console tot je beschikking, en de klant wil vandaag nog een antwoord.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee je Claude eerst de daling laat onderzoeken en daarna een antwoordmail laat opstellen. Wat moet Claude uitzoeken, wat moet er in de mail staan en wat juist niet?",
+    "minTekens": 150,
+    "hint": "Een mail die rust geeft, begint bij weten wát er daalde, niet bij een oorzaak raden."
+  },
+  "modelantwoord": "Een goede prompt heeft twee delen.\n\n**1. Eerst onderzoeken.** Laat Claude in Search Console:\n- de laatste week vergelijken met de week ervoor én met dezelfde week vorig jaar (seizoen?);\n- uitsplitsen naar zoekopdrachten, pagina's, apparaat en land: zit de daling overal of op één plek?\n- kijken of posities licht of sterk zijn gezakt;\n- nagaan of er technische meldingen zijn (Pagina-indexering, handmatige acties, beveiliging);\n- de zoekopdrachten met de grootste daling opzoeken in Google Trends: daalt de vraag misschien overal?\n\nVraag Claude om alleen te concluderen wat de data laat zien, en te zeggen hoe zeker die conclusie is.\n\n**2. Dan de mail.** Kort en rustig, in gewone taal:\n- wat we zien (één of twee cijfers);\n- wat de waarschijnlijke oorzaak is en hoe zeker we dat weten;\n- wat we nu doen en wanneer de klant weer van ons hoort.\n\n**Niet in de mail:** beloftes over herstel of posities, vakjargon, een oorzaak die niet uit de data blijkt, en een lange lijst met alles wat je hebt bekeken.",
+  "uitleg": "Een klant die schrikt van een daling wil drie dingen weten: is het erg, weet je wat er aan de hand is, en wat ga je doen? Een goede mail beantwoordt die vragen kort. Daarvoor moet je eerst weten wat er echt gebeurde.\n\nGoogle noemt als belangrijkste oorzaken van een daling: een **algoritme-update**, **technische problemen**, **beveiligingsproblemen**, **spam**, **seizoen of veranderende interesse** en een **verhuizing of migratie**. Je onderzoek volgt die lijst:\n- Vergelijk in het Prestatierapport met de vorige periode én jaar-op-jaar. Bekijk 16 maanden om seizoenspatronen te zien.\n- Kijk of de daling in specifieke zoekopdrachten, pagina's, landen of apparaten zit.\n- Check in Google Trends of de vraag naar die onderwerpen overal daalt.\n- Bij een **core update** kan het zijn dat er niets mis is met je content. Kleine verschuivingen in positie zijn normaal.\n\nClaude kan dat uitzoekwerk met een Search Console-koppeling snel doen en een eerste versie van de mail schrijven. Twee risico's: Claude kan een oorzaak 'invullen' die de data niet laat zien, en de toon kan te lang of te technisch worden. Vraag daarom om onderbouwing per conclusie, en lees de mail zelf na voordat je hem verstuurt.\n\nEen goede mail eindigt met een afspraak: wanneer hoort de klant weer van je?",
+  "kernpunt": "Eerst uitzoeken wat er daalde (periode, jaar-op-jaar, uitsplitsing, Trends), dan kort mailen: wat we zien, hoe zeker we zijn, wat we doen en wanneer we terugkoppelen. Geen beloftes en geen geraden oorzaken.",
+  "toepassing": "Maak deze week een vaste prompt (of skill) voor 'daling onderzoeken + klantmail' en test hem op de laatste daling bij een van je klanten.",
+  "bron": {
+    "titel": "Debugging drops in Google Search traffic | Google Search Central",
+    "url": "https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops"
+  }
+}

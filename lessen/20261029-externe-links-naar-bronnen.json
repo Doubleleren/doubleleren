@@ -1,0 +1,24 @@
+{
+  "id": "20261029-externe-links-naar-bronnen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Externe links: wanneer link je naar andere sites?",
+  "matrix": ["2.1.16"],
+  "titel": "\"Alle externe links eruit, anders lekt onze linkwaarde weg\"",
+  "intro": "Een fysiotherapiepraktijk schrijft blogs over rugklachten. De copywriter linkt in elk artikel naar een richtlijn voor huisartsen en naar een onderzoek. Daarnaast staan er links naar een webshop met hulpmiddelen, die daarvoor betaalt, en in de reacties onder de blogs plaatsen bezoekers soms zelf links. De marketingmanager wil alle externe links weghalen.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat adviseer je per soort externe link: houden, aanpassen of weghalen? Leg kort uit waarom.",
+    "minTekens": 100,
+    "hint": "Het gaat er niet om óf je naar buiten linkt, maar naar wie en waarom."
+  },
+  "modelantwoord": "Niet alles weghalen. Per soort link:\n\n- **Richtlijn en onderzoek: houden.** Dit zijn bronnen die je vertrouwt en die de lezer verder helpen. Ze laten zien waar je informatie vandaan komt. Bij gezondheidsinformatie is dat juist belangrijk voor het vertrouwen.\n- **Betaalde links naar de webshop: aanpassen.** Een link waarvoor betaald wordt, krijgt rel=\"sponsored\" (of nofollow). Zonder die markering is het een betaalde link die Google als linkspam ziet.\n- **Links in reacties: aanpassen.** Daar heb je geen controle over. Laat het CMS er automatisch rel=\"ugc\" of nofollow aan toevoegen.\n\nHet idee dat je 'linkwaarde verliest' door naar goede bronnen te linken, is geen reden om ze weg te halen. Google raadt aan om te linken naar bronnen die je vertrouwt, en een markering te gebruiken als je een bron niet vertrouwt.",
+  "uitleg": "Externe links zijn links naar andere websites. Veel klanten zijn er bang voor: 'dan sturen we bezoekers weg' of 'dan lekt onze linkwaarde weg'. Google kijkt er anders naar.\n\nIn de **SEO Starter Guide** staat:\n- Link gerust naar andere sites, maar zorg dat je **de bron vertrouwt** waarnaar je linkt.\n- Vertrouw je een bron niet, maar wil je er toch naar linken? Voeg dan **nofollow** of een vergelijkbare markering toe, zodat Google jouw site niet met die site verbindt.\n- Voor **gebruikerscontent**, zoals reacties of forumberichten, laat je het CMS automatisch nofollow of ugc toevoegen.\n\nDaarnaast geldt: een link waarvoor betaald is, markeer je met **sponsored**. Anders valt hij onder het spambeleid voor links.\n\nVoor de lezer zijn goede externe links juist waardevol. Ze maken een artikel controleerbaar. Zeker op onderwerpen als gezondheid of geld, waar betrouwbaarheid zwaar weegt, laat je ermee zien dat je informatie ergens op gebaseerd is.",
+  "kernpunt": "Link naar bronnen die je vertrouwt; dat helpt de lezer. Betaalde links krijgen sponsored, gebruikerslinks ugc of nofollow, en een bron die je niet vertrouwt nofollow.",
+  "toepassing": "Crawl een blog van een klant, exporteer de uitgaande links en zoek de betaalde of affiliate-links zonder rel=\"sponsored\" of nofollow.",
+  "bron": {
+    "titel": "Search Engine Optimization (SEO) Starter Guide | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+  }
+}

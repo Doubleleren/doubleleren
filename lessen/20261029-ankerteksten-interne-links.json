@@ -1,0 +1,24 @@
+{
+  "id": "20261029-ankerteksten-interne-links",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Interne links: ankerteksten die werken",
+  "matrix": ["2.1.15"],
+  "titel": "'Klik hier', 'Lees meer' en een rij zoekwoorden als linktekst",
+  "intro": "Een advocatenkantoor zet onder elk blogartikel drie interne links naar dienstpagina's. De linkteksten zijn: 'Klik hier', 'Lees meer' en 'advocaat arbeidsrecht ontslag advocaat Utrecht arbeidsrecht advocaat kosten'. Verder krijgen de dienstpagina's bijna geen interne links.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Google Search Central op wat Google over linkteksten zegt. Beoordeel de drie linkteksten en schrijf voor elk een betere versie.",
+    "minTekens": 120,
+    "hint": "Google heeft een pagina met 'best practices' voor links, met goede en slechte voorbeelden van linkteksten."
+  },
+  "modelantwoord": "Op de pagina 'Link best practices for Google' staat dat een goede linktekst (ankertekst) beschrijvend is, redelijk kort, en past bij de pagina waar hij op staat.\n\n- **'Klik hier'**: slecht. Het zegt niets over de pagina waarnaar je linkt. Beter: 'hulp bij ontslag op staande voet'.\n- **'Lees meer'**: ook slecht, om dezelfde reden. Beter: 'wat kost een arbeidsrechtadvocaat?'.\n- **De rij zoekwoorden**: te lang en volgepropt met zoekwoorden. Google zegt dat je niet alle zoekwoorden in een link moet proppen; dat is keyword stuffing en tegen het spambeleid. Beter: 'arbeidsrechtadvocaat in Utrecht'.\n\nHandige toets uit Google: lees alleen de linktekst. Snap je dan waar de link heen gaat? Dan is hij goed.\n\nEn: elke belangrijke pagina hoort minstens één link te krijgen vanaf een andere pagina op de site. De dienstpagina's verdienen dus ook links vanuit relevante artikelen, midden in de tekst.",
+  "uitleg": "De **ankertekst** (linktekst) is het zichtbare, klikbare deel van een link. Die tekst vertelt bezoekers én Google iets over de pagina waarnaar je linkt. Bij interne links heb je dat helemaal zelf in de hand.\n\nWat Google aanraadt:\n- Een goede ankertekst is **beschrijvend, redelijk kort en relevant** voor de pagina waarop hij staat.\n- **Algemene teksten** als 'klik hier' of 'lees meer' zijn slecht: ze zeggen niets over de bestemming.\n- **Te lange** teksten zijn ook niet goed. Maak ze korter.\n- **Prop niet alle zoekwoorden** in een link. Keyword stuffing valt onder het spambeleid.\n- Bij een afbeelding als link gebruikt Google de **alt-tekst** als ankertekst. Laat die dus niet leeg.\n- Toets: lees alleen de linktekst. Is die op zichzelf duidelijk genoeg?\n\nDaarnaast zegt Google dat **elke pagina die je belangrijk vindt** een link moet krijgen vanaf minstens één andere pagina op je site. Denk bij het schrijven na over welke andere pagina's de lezer verder kunnen helpen, en link daar in de lopende tekst naartoe. Het gaat erom dat de lezer weet wat hij krijgt als hij klikt.",
+  "kernpunt": "Een goede ankertekst is beschrijvend, kort en relevant: geen 'klik hier', geen rij zoekwoorden. Lees alleen de linktekst; snap je waar hij heen gaat, dan is hij goed.",
+  "toepassing": "Exporteer bij een klant de interne ankerteksten uit Screaming Frog (Bulk Export → Links → All Inlinks) en filter op 'klik hier', 'lees meer' en 'meer info'.",
+  "bron": {
+    "titel": "Link best practices for Google | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+  }
+}
