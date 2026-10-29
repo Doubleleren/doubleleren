@@ -1,0 +1,32 @@
+{
+  "id": "20261029-dashboard-geanonimiseerde-zoekopdrachten",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Rapportagedashboard: waarom de som van zoekopdrachten lager is dan het totaal",
+  "matrix": [
+    "4.1.5",
+    "4.1.2"
+  ],
+  "titel": "42.300 of 30.900 klikken? Twee tegels in je dashboard spreken elkaar tegen",
+  "intro": "Je bouwt in Whatagraph een maanddashboard voor een klant, met Search Console als bron. Tegel 1 toont het totaal aantal klikken: 42.300. Tegel 2 is een tabel met alle 640 zoekopdrachten van die maand; opgeteld komen die op 30.900 klikken. Allebei over dezelfde periode, hetzelfde land en hetzelfde zoektype. De klant mailt: 'Welk getal klopt?'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de verklaring?",
+    "opties": [
+      "Whatagraph haalt de data later op dan Search Console, waardoor de tabel een paar dagen achterloopt op het totaal.",
+      "De tabel mist geanonimiseerde zoekopdrachten die te weinig mensen gebruiken; het totaal telt die klikken wel mee.",
+      "De tabel telt alleen de klikken op de eerste pagina van Google, en het totaal ook klikken vanaf pagina twee en verder.",
+      "Search Console telt in het totaal ook klikken op Google Ads mee, en in de tabel alleen de organische klikken."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Beide getallen kloppen. Search Console laat **geanonimiseerde zoekopdrachten** (zoekopdrachten die in twee à drie maanden door niet meer dan een paar dozijn mensen zijn gedaan) weg uit tabellen met zoekopdrachten. In het totaal tellen die klikken wel mee. Bij sites met veel unieke long-tail zoekopdrachten kan dat verschil groot zijn.\n\n- **Vertraging** speelt hier niet: beide tegels gaan over dezelfde afgesloten maand.\n- **Pagina twee en verder** telt ook in de tabel mee: elke zoekopdracht met een klik staat erin, op welke positie dan ook.\n- **Google Ads** zit nooit in de prestatiegegevens van Search Console; die gaan alleen over organische resultaten.",
+  "uitleg": "Een dashboardtool als Whatagraph haalt zijn cijfers via de API van Search Console. Je krijgt dus dezelfde regels als in Search Console zelf, en die moet je kennen voordat je een rapport naar de klant stuurt.\n\n**Geanonimiseerde zoekopdrachten**\n- Uit privacyoverwegingen toont Search Console zeldzame zoekopdrachten niet.\n- Ze ontbreken in elke tabel met de dimensie zoekopdracht, maar tellen mee in het totaal.\n- Zet je een filter op zoekopdracht (bijvoorbeeld 'bevat merknaam'), dan vallen ze helemaal weg. Daardoor komen 'bevat' en 'bevat niet' samen niet op het totaal uit.\n\n**Limieten op rijen**\n- In de interface exporteer je maximaal 1.000 rijen.\n- Via de API en Looker Studio is dat 50.000 rijen per dag, per site en per zoektype.\n- Voor dimensies als land of apparaat geldt geen limiet.\n\nWat betekent dit voor je dashboard?\n- Haal totalen uit een tegel **zonder** de dimensie zoekopdracht.\n- Zet bij tabellen met zoekopdrachten een korte toelichting dat zeldzame zoekopdrachten ontbreken.\n- Tel nooit rijen op om een totaal te maken.",
+  "kernpunt": "Tabellen met zoekopdrachten missen de geanonimiseerde zoekopdrachten, het totaal niet. Haal totalen dus uit een tegel zonder de dimensie zoekopdracht en tel nooit rijen op.",
+  "toepassing": "Open deze week het dashboard van een klant en controleer waar het totaal aantal klikken vandaan komt. Zet bij elke tabel met zoekopdrachten een regel uitleg over geanonimiseerde zoekopdrachten.",
+  "bron": {
+    "titel": "A deep dive into Search Console performance data filtering and limits | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2022/10/performance-data-deep-dive"
+  }
+}

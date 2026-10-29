@@ -14,10 +14,10 @@
     "soort": "meerkeuze",
     "vraag": "Wat adviseer je?",
     "opties": [
-      "Prima: Shopify genereert robots.txt automatisch en zet hem vast, dus een workaround via Cloudflare is de enige optie.",
-      "Maak in het thema de template robots.txt.liquid aan en vervang de inhoud door je eigen vaste regels, zodat je precies weet wat erin staat.",
-      "Maak in het thema de template robots.txt.liquid aan en voeg met Liquid een Disallow-regel toe aan de standaardregels. Haal een eventuele Cloudflare-workaround weg.",
-      "Niets doen: de standaard-robots.txt van Shopify blokkeert alle URL's onder /pages/ al."
+      "Prima: Shopify zet robots.txt vast, dus een eigen bestand via Cloudflare is hier de enige route die werkt.",
+      "Maak de template robots.txt.liquid aan en vervang de inhoud door vaste regels, zodat je precies weet wat erin staat.",
+      "Maak de template robots.txt.liquid aan en voeg met Liquid een Disallow toe aan de standaardregels van Shopify.",
+      "Niets doen: de standaard-robots.txt van Shopify blokkeert alle URL's onder /pages/ al, dus ook deze actiepagina's."
     ],
     "juist": 2
   },
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Editing robots.txt.liquid | Shopify Help Center",
     "url": "https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt"
-  }
+  },
+  "herzien": "2026-10-29",
+  "wijziging": "Opties even lang gemaakt."
 }

@@ -8,16 +8,15 @@
     "3.1.1"
   ],
   "titel": "Het formulier werkt, maar GA4 ziet geen lead: hoe test je dat?",
-  "volgorde": "opdracht-eerst",
   "intro": "Een klant heeft een nieuw contactformulier en een event generate_lead laten inbouwen. Na twee dagen staat er nog niets in de rapporten. Je wilt nu, live, controleren of het event wel binnenkomt.",
   "opdracht": {
     "soort": "meerkeuze",
     "vraag": "Wat is de snelste juiste manier om dat te controleren?",
     "opties": [
-      "Een testformulier invullen en wachten tot het event in het rapport Events verschijnt",
-      "In de GTM-container debug_mode op false zetten, zodat alle events direct in de rapporten komen",
-      "Een realtime-rapport openen en kijken of het aantal gebruikers stijgt",
-      "Tag Assistant of GTM Preview starten, het formulier invullen en in DebugView kijken of generate_lead met de juiste parameters binnenkomt"
+      "Een testformulier invullen en in het rapport Events kijken of generate_lead binnen een paar minuten verschijnt",
+      "In GTM debug_mode op false zetten, zodat alle events van de tag direct in de standaardrapporten verschijnen",
+      "Het realtime-rapport openen, het formulier invullen en kijken of het aantal gebruikers op de site stijgt",
+      "GTM Preview starten, het formulier invullen en in DebugView kijken of generate_lead met parameters binnenkomt"
     ],
     "juist": 3
   },
@@ -28,5 +27,7 @@
   "bron": {
     "titel": "Monitor events in DebugView - Analytics Help",
     "url": "https://support.google.com/analytics/answer/7201382"
-  }
+  },
+  "herzien": "2026-10-29",
+  "wijziging": "Opties even lang gemaakt."
 }

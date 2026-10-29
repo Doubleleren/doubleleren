@@ -1,0 +1,32 @@
+{
+  "id": "20261029-robots-txt-spoedfix-recrawl",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Het robots.txt-rapport in Search Console: een herstelde robots.txt laten ophalen",
+  "matrix": [
+    "1.5.5",
+    "1.1.7"
+  ],
+  "titel": "Het hele weekend 'Disallow: /' in robots.txt: wat doe je maandag?",
+  "intro": "Bij een deploy op vrijdagmiddag is het robots.txt-bestand van de testomgeving meegegaan naar de live webshop. Daarin staat Disallow: / voor alle crawlers. Maandagochtend zie je het en zet de developer het juiste bestand terug. De klant vraagt hoe Google zo snel mogelijk de herstelde versie gebruikt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je in Search Console?",
+    "opties": [
+      "Open de robots.txt-tester, plak het nieuwe bestand erin en klik op Verzenden, zodat Google de versie overneemt.",
+      "Open het robots.txt-rapport, controleer of de nieuwe versie is opgehaald en vraag zo nodig een nieuwe crawl aan.",
+      "Dien de XML-sitemap opnieuw in, want daarmee haalt Google ook robots.txt direct opnieuw op voor de hele site.",
+      "Vraag voor elke belangrijke URL indexering aan in URL-inspectie, zodat Google die pagina's als eerste opnieuw crawlt."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Het **robots.txt-rapport** (Instellingen → robots.txt) laat zien welke versie Google het laatst heeft opgehaald, wanneer en of dat gelukt is. Via het menu naast het bestand vraag je een nieuwe crawl aan. Google noemt precies deze situatie: je hebt belangrijke URL's weer vrijgegeven of een kritieke fout hersteld.\n\n- **De robots.txt-tester** bestaat niet meer: eind 2023 is hij vervangen door het robots.txt-rapport.\n- **De sitemap opnieuw indienen** zegt Google welke URL's er zijn, maar zorgt er niet voor dat robots.txt opnieuw wordt opgehaald.\n- **Indexering aanvragen** helpt niet zolang Google nog de oude robots.txt gebruikt: die blokkeert de pagina's dan nog steeds.",
+  "uitleg": "De oude **robots.txt-tester** in Search Console is eind 2023 vervangen door het **robots.txt-rapport**. Daarin zie je voor de belangrijkste hosts van je property:\n- welk robots.txt-bestand Google heeft gevonden\n- wanneer het voor het laatst is opgehaald, en met welke status\n- de bestandsgrootte en eventuele fouten of waarschuwingen\n- eerdere versies van de laatste 30 dagen\n\nGoogle haalt robots.txt zelf regelmatig op en bewaart een versie meestal tot 24 uur. Meestal hoef je dus niets te doen. Een nieuwe crawl aanvragen is bedoeld voor noodgevallen, zoals een per ongeluk geblokkeerde site of een robots.txt die een serverfout gaf. Ook dan is het geen garantie dat de vrijgegeven pagina's meteen opnieuw worden gecrawld.\n\nWat vroeger in de tester kon, doe je nu zo:\n- **Per URL controleren:** gebruik de live test in de URL-inspectietool.\n- **Vooraf testen:** controleer een nieuw bestand vóór de livegang met een externe tester of met je crawler, en laat de testomgeving nooit met dezelfde deploy meeliften.\n\nHoud na zo'n incident een paar dagen het rapport Crawlstatistieken en Pagina-indexering in de gaten.",
+  "kernpunt": "Een herstelde robots.txt controleer je in het robots.txt-rapport. Daar vraag je in noodgevallen ook een nieuwe crawl aan. De oude tester bestaat niet meer; per URL test je met URL-inspectie.",
+  "toepassing": "Open deze week bij een klant het robots.txt-rapport en kijk wanneer robots.txt voor het laatst is opgehaald en of er waarschuwingen zijn. Vraag de developer of robots.txt van de testomgeving ooit mee kan gaan met een deploy.",
+  "bron": {
+    "titel": "robots.txt report - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/6062598?hl=en"
+  }
+}

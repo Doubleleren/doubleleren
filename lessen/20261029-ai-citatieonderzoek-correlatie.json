@@ -1,0 +1,27 @@
+{
+  "id": "20261029-ai-citatieonderzoek-correlatie",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Onderzoek naar AI-citaties lezen: samenhang is geen oorzaak",
+  "matrix": [
+    "12.1.4",
+    "12.1.3"
+  ],
+  "titel": "Jaartal erin, auteursnaam eruit? Een AI-citatieonderzoek op waarde schatten",
+  "intro": "Een klant stuurt je een artikel over een onderzoek naar bijna 200.000 antwoorden van ChatGPT, AI Mode en AI Overviews. Pagina's met een jaartal in de title hadden ruim twee keer zoveel kans om geciteerd te worden, en pagina's met een auteursnaam 28% minder. De klant wil volgende week bij alle 300 blogartikelen een jaartal in de title zetten en de auteursnamen weghalen.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat adviseer je de klant, en waarom? Beschrijf ook hoe je wél kunt achterhalen of zo'n aanpassing werkt.",
+    "minTekens": 150,
+    "hint": "Kijk naar wat dit soort onderzoek kan aantonen, en naar wat er nog meer verandert als je een auteursnaam weghaalt."
+  },
+  "modelantwoord": "**De kern:** niet in één keer doorvoeren. Het onderzoek laat samenhang zien, geen oorzaak. Test het eerst op een groep pagina's en vergelijk met een vergelijkbare groep die je niet aanpast.\n\nWaarom:\n- De onderzoeker schrijft zelf dat het om verbanden gaat en dat hij niet kan verklaren waarom pagina's met een auteursnaam minder vaak werden geciteerd. Hij raadt zelf af om op basis hiervan iets weg te halen.\n- Een jaartal in de title hangt waarschijnlijk samen met iets anders: actuele content. Pagina's die het afgelopen jaar zijn bijgewerkt, werden in hetzelfde onderzoek ook vaker geciteerd. Een jaartal zonder echte update is misleidend.\n- Auteursnamen weghalen gaat in tegen wat Google aanraadt: laat zien wie de content maakte. Dat raakt vertrouwen en E-E-A-T, juist bij gewone zoekresultaten.\n- Het onderzoek komt van een bureau dat GEO-diensten verkoopt, met eigen klantvragen als basis.\n\nZo test je het: kies twee vergelijkbare groepen artikelen, pas bij één groep één ding aan (bijvoorbeeld een direct antwoord bovenaan), en volg een paar weken de citaties in een tool voor AI-zichtbaarheid. Kijk ook naar organisch verkeer.",
+  "uitleg": "Er verschijnen steeds meer onderzoeken naar wat AI-zoekmachines citeren. Ze zijn nuttig als bron voor ideeën, maar je moet ze goed lezen.\n\nIn dit onderzoek (193.507 antwoorden, 78 bedrijven, augustus tot oktober 2026) werden geciteerde pagina's vergeleken met pagina's die wel gevonden, maar niet geciteerd werden. Opvallend:\n- geciteerde pagina's begonnen vaker met een direct antwoord (23% tegenover 14%)\n- ze waren vollediger in het beantwoorden van de vraag\n- een recente update, tabellen en eigen ervaring hingen samen met meer citaties\n\nWaarom je dit niet één op één overneemt:\n- **Samenhang, geen oorzaak.** Een kenmerk kan meeliften met iets anders, zoals actualiteit of autoriteit.\n- **Wie onderzoekt?** Een partij met een commercieel belang en een eigen selectie van vragen.\n- **Wat vind je zelf?** Auteurs tonen, bronnen noemen en eerlijk zijn over datums blijven goed voor bezoekers en voor Google.\n\nDe bruikbaarste les is een hypothese: begin een pagina met een duidelijk antwoord op de vraag. Dat helpt bezoekers sowieso, en je kunt het testen.",
+  "kernpunt": "Onderzoek naar AI-citaties laat meestal samenhang zien, geen oorzaak. Gebruik het als hypothese om te testen met een controlegroep, en haal nooit iets weg wat bezoekers en vertrouwen helpt.",
+  "toepassing": "Kies deze week bij een klant tien informatieve artikelen. Begin vijf daarvan met een direct antwoord van twee zinnen, laat er vijf ongemoeid, en spreek af wanneer je de citaties en het verkeer vergelijkt.",
+  "bron": {
+    "titel": "Search Engine Journal: AI-Cited Pages More Often Got Straight To The Answer",
+    "url": "https://www.searchenginejournal.com/ai-cited-pages-more-often-got-straight-to-the-answer/594781/"
+  }
+}

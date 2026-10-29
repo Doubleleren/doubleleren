@@ -13,10 +13,10 @@
     "soort": "meerkeuze",
     "vraag": "Welk advies klopt?",
     "opties": [
-      "Beide paginatypes komen in aanmerking voor merchant listings, zolang de markup een offer met prijs bevat.",
-      "Alleen de webshoppagina's komen in aanmerking voor merchant listings, met onder meer verzend- en retourinformatie. De reviewblog kan wel product snippets krijgen, bijvoorbeeld met beoordelingen en voor- en nadelen.",
-      "De reviewblog kan geen enkele vorm van Product-markup gebruiken, omdat er op die pagina's niets te koop is.",
-      "Productresultaten vereisen een Merchant Center-account. Zonder account negeert Google de Product-markup op beide paginatypes."
+      "Beide paginatypes komen in aanmerking voor merchant listings, zolang de markup een offer met prijs en verzendkosten bevat.",
+      "Alleen de webshop kan merchant listings met verzend- en retourinfo krijgen; de reviewblog wel product snippets.",
+      "De reviewblog kan geen enkele vorm van Product-markup gebruiken, omdat er op die pagina's zelf niets te koop is.",
+      "Productresultaten vereisen een Merchant Center-account; zonder account negeert Google de markup op beide paginatypes."
     ],
     "juist": 1
   },
@@ -27,5 +27,7 @@
   "bron": {
     "titel": "Intro to Product structured data on Google | Google Search Central",
     "url": "https://developers.google.com/search/docs/appearance/structured-data/product"
-  }
+  },
+  "herzien": "2026-10-29",
+  "wijziging": "Opties even lang gemaakt."
 }

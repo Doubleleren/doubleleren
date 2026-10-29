@@ -8,15 +8,14 @@
     "1.3.3"
   ],
   "titel": "Eén product, drie URL's: wat doet rel=canonical eigenlijk?",
-  "volgorde": "opdracht-eerst",
   "intro": "Een sneaker is op een webshop bereikbaar via /schoenen/sneaker-x, /sale/sneaker-x en /sneaker-x?utm_source=nieuwsbrief. Alle drie de URL's hebben in de head: <link rel=\"canonical\" href=\"https://www.shop.nl/sneaker-x\" />.",
   "opdracht": {
     "soort": "meerkeuze",
     "vraag": "Wat doet deze rel=canonical voor Google?",
     "opties": [
-      "Hij verbiedt Googlebot om de twee andere URL's nog te crawlen.",
-      "Hij werkt als een noindex: de andere URL's verdwijnen direct uit de index.",
-      "Hij stuurt bezoekers en Googlebot automatisch door naar /sneaker-x.",
+      "Hij verbiedt Googlebot om de twee andere URL's nog te crawlen, zodat er geen crawlbudget aan opgaat.",
+      "Hij werkt als een noindex: de twee andere URL's verdwijnen bij het volgende bezoek uit de index.",
+      "Hij stuurt bezoekers en Googlebot automatisch door naar /sneaker-x, net als een 301-redirect.",
       "Hij is een sterk signaal welke URL de voorkeur heeft, zodat Google signalen daarop bundelt."
     ],
     "juist": 3
@@ -28,5 +27,7 @@
   "bron": {
     "titel": "How to specify a canonical URL with rel=\"canonical\" and other methods",
     "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
-  }
+  },
+  "herzien": "2026-10-29",
+  "wijziging": "Opties even lang gemaakt."
 }

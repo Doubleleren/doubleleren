@@ -1,0 +1,26 @@
+{
+  "id": "20261029-merk-categoriepaginas-indexeren",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Zoekwoordonderzoek gebruiken om te bepalen welke landingspagina's je laat indexeren",
+  "matrix": [
+    "2.1.3"
+  ],
+  "titel": "420 merk-categoriepagina's, 55 met zoekvraag: welke mogen in Google?",
+  "intro": "Een fietsenwebshop laat automatisch een pagina maken voor elke combinatie van categorie en merk, zoals /e-bikes/gazelle/ en /kinderfietsen/batavus/. Dat zijn er 420, allemaal indexeerbaar. Uit je zoekwoordonderzoek blijkt dat 55 combinaties duidelijk zoekvolume hebben. Voor de andere 365 vind je geen zoekvraag, en 90 daarvan tonen minder dan drie fietsen.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Welke van deze pagina's laat je indexeren, en wat doe je met de rest? Leg uit waarop je die keuze baseert.",
+    "minTekens": 120,
+    "hint": "Denk aan wat een zoeker op zo'n pagina verwacht, en wat het oplevert als Google honderden pagina's zonder zoekvraag moet crawlen."
+  },
+  "modelantwoord": "**De kern:** laat alleen de combinaties met zoekvraag en genoeg aanbod indexeren, en maak daar echte landingspagina's van. De rest krijgt een noindex, en de pagina's met bijna geen fietsen al helemaal.\n\nWaarom: een pagina hoort in Google als iemand ernaar zoekt en er iets vindt. Voor de 55 combinaties met zoekvolume is dat zo, mits er genoeg fietsen staan. Geef die een eigen title, H1 en een korte tekst, en link er vanuit de categorie naar.\n\nDe 365 pagina's zonder zoekvraag mogen voor bezoekers blijven bestaan, maar horen niet in de index. Een noindex is hier de duidelijkste keuze. Linken ze vooral intern, dan kun je ze later ook uit de crawl houden. Doe dat pas als ze uit de index zijn, anders ziet Google de noindex niet.\n\nVeelgemaakte fouten:\n- alles indexeerbaar laten omdat 'meer pagina's meer verkeer is'\n- alles op noindex zetten, ook de 55 met zoekvraag\n- een canonical naar de categorie: dit zijn geen duplicaten, dus Google kan die negeren\n- het besluit nooit herzien: kijk elk halfjaar opnieuw of er nieuwe zoekvraag is",
+  "uitleg": "Zoekwoordonderzoek gebruik je niet alleen om content te schrijven, maar ook om te bepalen **welke pagina's in Google horen**. Dat speelt vooral bij pagina's die een systeem automatisch maakt: combinaties van categorie en merk, filters, tags en plaatsnamen.\n\nEen werkbare beslisregel per pagina:\n- **Is er zoekvraag?** Zoek naar de combinatie in je zoekwoordtool. Groepeer varianten die dezelfde zoekresultaten geven.\n- **Is er genoeg aanbod?** Een pagina met één of twee producten stelt de zoeker teleur.\n- **Is de pagina echt anders?** Een eigen selectie en een eigen invalshoek, geen kopie van de categorie.\n\nAlle drie ja: indexeren en goed inrichten. Anders: noindex, of de pagina helemaal niet laten ontstaan.\n\nZo krijg je minder, maar betere pagina's in Google. Googlebot besteedt zijn tijd aan pagina's die verkeer kunnen opleveren, en in Search Console zie je sneller wat er misgaat.\n\nLeg de keuze vast in een lijst of regel voor de developer. Dan weet iedereen wat er gebeurt met nieuwe combinaties, bijvoorbeeld als er een merk bijkomt.",
+  "kernpunt": "Laat een automatisch gemaakte pagina alleen indexeren als er zoekvraag is, genoeg aanbod en een eigen invalshoek. De rest krijgt noindex, en je herziet die keuze periodiek.",
+  "toepassing": "Kies deze week bij een webshopklant één type automatisch gemaakte pagina (merk, filter of tag). Zoek voor tien voorbeelden het zoekvolume op en tel hoeveel producten erop staan. Hoeveel verdienen een plek in Google?",
+  "bron": {
+    "titel": "Faceted Navigation: Definition, Examples & SEO Best Practices | Ahrefs",
+    "url": "https://ahrefs.com/blog/faceted-navigation/"
+  }
+}

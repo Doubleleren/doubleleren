@@ -8,16 +8,15 @@
     "5.2.11"
   ],
   "titel": "TTFB van 2,4 seconde: waar begin je met verbeteren?",
-  "volgorde": "opdracht-eerst",
   "intro": "PageSpeed Insights laat voor de categoriepagina's van een webshopklant een TTFB van 2,4 seconde zien bij echte gebruikers. De developer stelt voor om eerst de afbeeldingen te comprimeren.",
   "opdracht": {
     "soort": "meerkeuze",
     "vraag": "Welke maatregel pakt de TTFB van deze pagina's het meest direct aan?",
     "opties": [
-      "Afbeeldingen comprimeren en lazy-loading toevoegen",
-      "JavaScript met defer laden zodat het de rendering niet blokkeert",
+      "Afbeeldingen comprimeren en lazy-loading toevoegen, zodat de pagina minder bytes hoeft te downloaden",
+      "JavaScript met defer laden, zodat de scripts het opbouwen van de pagina niet meer blokkeren",
       "Server- en CDN-caching inrichten, zodat de HTML niet bij elk verzoek opnieuw wordt opgebouwd",
-      "CSS minificeren en ongebruikte CSS verwijderen"
+      "CSS minificeren en ongebruikte CSS verwijderen, zodat de browser eerder kan beginnen met tekenen"
     ],
     "juist": 2
   },
@@ -33,5 +32,7 @@
     "titel": "The ultimate guide to web performance",
     "kanaal": "Beyond Fireship",
     "url": "https://www.youtube.com/watch?v=0fONene3OIA"
-  }
+  },
+  "herzien": "2026-10-29",
+  "wijziging": "Opties even lang gemaakt."
 }

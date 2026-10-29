@@ -1,0 +1,32 @@
+{
+  "id": "20261029-p-waarde-kans-variant-beter",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "A/B-testen: wat een p-waarde wel en niet betekent",
+  "matrix": [
+    "7.2.2",
+    "7.2.1"
+  ],
+  "titel": "p = 0,03, dus '97% kans dat B beter is'? Lees het testresultaat goed",
+  "intro": "Een A/B-test op een productpagina is afgerond. De testtool meldt voor variant B: conversie +3,1% ten opzichte van A, p = 0,03. De accountmanager schrijft in het klantrapport: 'Er is 97% kans dat variant B beter is.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Klopt die zin in het rapport?",
+    "opties": [
+      "Ja: p = 0,03 betekent dat er 3% kans is dat het verschil toeval is, dus 97% dat B echt beter is.",
+      "Nee: de p-waarde zegt hoe verrassend deze data zijn als er geen verschil is, niet hoe kansrijk B is.",
+      "Ja, mits de test minstens twee weken liep; dan is de p-waarde ook de kans dat B echt beter is dan A.",
+      "Nee: p = 0,03 betekent dat B ongeveer 3% beter converteert dan A, en dat zegt niets over een kans."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Een p-waarde beantwoordt deze vraag: als er in werkelijkheid geen verschil is tussen A en B, hoe vaak zou je dan een verschil zien dat minstens zo groot is? Bij p = 0,03 is dat zelden. Dat is iets anders dan de kans dat B beter is. De American Statistical Association zegt het letterlijk: een p-waarde meet niet de kans dat de hypothese waar is, en ook niet de kans dat de data alleen door toeval zijn ontstaan.\n\n- **'3% kans op toeval'** is precies de misvatting die de ASA noemt.\n- **De looptijd** maakt een test betrouwbaarder, maar verandert niet wat een p-waarde betekent.\n- **De p-waarde is geen effectgrootte:** de +3,1% is het gemeten verschil, de p-waarde iets anders.",
+  "uitleg": "In 2016 publiceerde de American Statistical Association (ASA) een verklaring over p-waarden, omdat ze zo vaak verkeerd worden gebruikt. Drie principes zijn direct bruikbaar voor A/B-testen:\n\n- Een p-waarde meet **niet** de kans dat de hypothese waar is, en ook niet de kans dat het resultaat toeval is.\n- Beslissingen moeten **niet alleen** afhangen van of een p-waarde onder een drempel (zoals 0,05) valt.\n- Een p-waarde of 'significant' resultaat zegt **niets over de grootte** of het belang van een effect.\n\nWat betekent dat voor je rapport?\n- Schrijf: 'Het verschil is statistisch significant (p = 0,03). Als B in werkelijkheid niet beter was, zou je zo'n groot verschil zelden zien.'\n- Noem het gemeten effect met een betrouwbaarheidsinterval, bijvoorbeeld '+3,1% (tussen +0,3% en +5,9%)'. Dan ziet de klant hoe zeker de winst is.\n- Check of de test volgens plan liep: vooraf bepaalde steekproef, geen tussentijds stoppen en een kloppende verdeling van bezoekers.\n\nWil de klant echt 'de kans dat B beter is', dan heb je een Bayesiaanse analyse nodig. Die geeft wel zo'n kans, op basis van andere aannames.",
+  "kernpunt": "Een p-waarde zegt hoe verrassend je data zijn als er geen verschil is, niet hoe groot de kans is dat de variant beter is. Rapporteer daarom ook het effect met een interval.",
+  "toepassing": "Zoek deze week het laatste A/B-testrapport van een klant op en controleer hoe het resultaat is opgeschreven. Staat er 'X% kans dat B wint' bij een p-waarde, herschrijf die zin dan.",
+  "bron": {
+    "titel": "American Statistical Association: Statement on Statistical Significance and P-Values (2016)",
+    "url": "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf"
+  }
+}

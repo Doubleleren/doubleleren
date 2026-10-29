@@ -1,0 +1,31 @@
+{
+  "id": "20261029-audit-opleveren-prioriteren",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Werk duidelijk en op tijd opleveren: een audit met 140 bevindingen",
+  "matrix": [
+    "6.3.4"
+  ],
+  "titel": "140 bevindingen, één developer, deadline vrijdag: hoe lever je op?",
+  "intro": "Je technische audit voor een webshop is bijna klaar: 140 bevindingen, op volgorde van de hoofdstukken uit je crawltool. De klant heeft één developer, die twee dagen per maand aan de site werkt. Je hebt beloofd vrijdag op te leveren, en het is donderdag.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe lever je dit het best op?",
+    "opties": [
+      "Stuur de volledige spreadsheet vrijdag op, zodat de klant alles ziet en de developer zelf de volgorde kan kiezen.",
+      "Zet bovenaan de vijf à tien acties met de meeste impact per uur werk, en stuur de rest als bijlage mee.",
+      "Vraag uitstel tot je alle 140 punten hebt uitgewerkt, want een half rapport komt onprofessioneel over bij de klant.",
+      "Lever alleen de bevindingen die de tool als kritiek markeert, zodat de developer met de zwaarste fouten begint."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Een audit is pas af als de klant weet wat hij moet doen. Met twee developerdagen per maand is de vraag niet 'wat is er mis?', maar 'wat eerst?'. Daarom zet je bovenaan een korte lijst met de acties die het meeste opleveren voor de minste moeite, en lever je de rest mee als naslag.\n\n- **De volledige spreadsheet** schuift het belangrijkste werk, prioriteren, door naar de developer, die de SEO-impact niet kan inschatten.\n- **Uitstel vragen** voor iets wat de klant toch niet in één keer kan uitvoeren, kost vertrouwen en levert niets op.\n- **Alleen 'kritiek' uit de tool** is een gok: de ernst die een tool geeft, zegt niets over hoeveel omzet of verkeer erachter zit.",
+  "uitleg": "Werk duidelijk en op tijd opleveren betekent: de klant krijgt op het afgesproken moment iets waarmee hij verder kan. Bij een audit is dat een **prioriteitenlijst**, geen opsomming van alles wat een tool vond.\n\nEen handig hulpmiddel is een **prioriteringsmatrix**. Nielsen Norman Group beschrijft hem als een grafiek met twee criteria, bijvoorbeeld de waarde van een actie tegenover de moeite die het kost. Wat steeds in het hoekje 'veel waarde, weinig moeite' valt, pak je eerst. Het resultaat moet volgens NN/g een duidelijk actieplan met een planning zijn.\n\nVoor SEO kun je zo scoren:\n- **Impact:** hoeveel belangrijke pagina's, verkeer of omzet raakt het?\n- **Moeite:** hoeveel developeruren, en zijn er afhankelijkheden?\n- **Risico:** wat gebeurt er als je het laat liggen?\n\nVorm van de oplevering:\n- één pagina bovenaan: de top 5 à 10, met per actie wat, waarom en een schatting van de tijd\n- een voorstel voor de volgorde over de komende maanden\n- de volledige lijst als bijlage\n\nLukt iets niet voor de deadline? Lever op tijd wat af is, en zeg erbij wat nog volgt en wanneer.",
+  "kernpunt": "Lever een audit op als prioriteitenlijst: bovenaan de acties met de meeste impact voor de minste moeite, de rest als bijlage. De ernst die een tool geeft, is geen prioriteit.",
+  "toepassing": "Pak deze week je laatste audit of actielijst erbij en scoor de tien grootste punten op impact en moeite. Staat de top 3 ook bovenaan in wat de klant van je kreeg?",
+  "bron": {
+    "titel": "Using Prioritization Matrices to Inform UX Decisions | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/prioritization-matrices/"
+  }
+}

@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-29T12:21:55",
+    "bijgewerkt":  "2026-10-29T11:36:23",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -633,7 +633,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-29"
                    },
                    {
                        "id":  "20261020-robots-txt-rapport",
@@ -719,7 +719,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-29"
                    },
                    {
                        "id":  "20261020-user-signals-bounce-rate",
@@ -850,7 +850,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-29"
                    },
                    {
                        "id":  "20261021-gsc-bigquery-sql",
@@ -1246,7 +1246,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-29"
                    },
                    {
                        "id":  "20261023-checkout-verrassingskosten",
@@ -1637,7 +1637,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-29"
                    },
                    {
                        "id":  "20261026-sponsored-ugc-nofollow",
@@ -2102,6 +2102,26 @@
                        "juistLangst":  true
                    },
                    {
+                       "id":  "20261029-ai-citatieonderzoek-correlatie",
+                       "titel":  "Jaartal erin, auteursnaam eruit? Een AI-citatieonderzoek op waarde schatten",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Onderzoek naar AI-citaties lezen: samenhang is geen oorzaak",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "12.1.4",
+                                      "12.1.3"
+                                  ],
+                       "kernpunt":  "Onderzoek naar AI-citaties laat meestal samenhang zien, geen oorzaak. Gebruik het als hypothese om te testen met een controlegroep, en haal nooit iets weg wat bezoekers en vertrouwen helpt.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: AI-Cited Pages More Often Got Straight To The Answer",
+                                    "url":  "https://www.searchenginejournal.com/ai-cited-pages-more-often-got-straight-to-the-answer/594781/"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261029-ankerteksten-interne-links",
                        "titel":  "\u0027Klik hier\u0027, \u0027Lees meer\u0027 en een rij zoekwoorden als linktekst",
                        "vakgebied":  "SEO",
@@ -2137,6 +2157,25 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-audit-opleveren-prioriteren",
+                       "titel":  "140 bevindingen, één developer, deadline vrijdag: hoe lever je op?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Werk duidelijk en op tijd opleveren: een audit met 140 bevindingen",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "6.3.4"
+                                  ],
+                       "kernpunt":  "Lever een audit op als prioriteitenlijst: bovenaan de acties met de meeste impact voor de minste moeite, de rest als bijlage. De ernst die een tool geeft, is geen prioriteit.",
+                       "bron":  {
+                                    "titel":  "Using Prioritization Matrices to Inform UX Decisions | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/prioritization-matrices/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
                    {
@@ -2195,6 +2234,26 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-dashboard-geanonimiseerde-zoekopdrachten",
+                       "titel":  "42.300 of 30.900 klikken? Twee tegels in je dashboard spreken elkaar tegen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Rapportagedashboard: waarom de som van zoekopdrachten lager is dan het totaal",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.5",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Tabellen met zoekopdrachten missen de geanonimiseerde zoekopdrachten, het totaal niet. Haal totalen dus uit een tegel zonder de dimensie zoekopdracht en tel nooit rijen op.",
+                       "bron":  {
+                                    "titel":  "A deep dive into Search Console performance data filtering and limits | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2022/10/performance-data-deep-dive"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
                    {
@@ -2261,6 +2320,46 @@
                        "juistLangst":  true
                    },
                    {
+                       "id":  "20261029-kickoff-gespreksleidraad-claude",
+                       "titel":  "Drie gesprekken op de kick-off: laat Claude je leidraad maken",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Kick-off in persoon: stakeholdergesprekken voorbereiden met Claude",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "6.1.3",
+                                      "6.2.2"
+                                  ],
+                       "kernpunt":  "Bereid elk gesprek op een kick-off apart voor, met een doel en open vragen over succes, prioriteiten, geschiedenis en werkwijze. Claude maakt de leidraad, jij bepaalt het doel.",
+                       "bron":  {
+                                    "titel":  "Stakeholder Interviews 101 | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/stakeholder-interviews/"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-klant-belt-urls-wijzigen",
+                       "titel":  "\"Kun je even zeggen dat het goed is?\" De klant belt over 600 nieuwe URL\u0027s",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Telefonisch adviseren: een klant wil snel een grote wijziging doorvoeren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "6.1.2",
+                                      "6.3.3"
+                                  ],
+                       "kernpunt":  "Geef aan de telefoon geen definitief oordeel over een ingrijpende wijziging. Luister, noem wat je zeker weet, spreek een moment voor schriftelijk advies af en bevestig dat per mail.",
+                       "bron":  {
+                                    "titel":  "Site moves with URL changes | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261029-klantmail-verkeersdaling-claude",
                        "titel":  "\"Ons verkeer is 18% gedaald!\" Laat Claude het antwoord voorbereiden",
                        "vakgebied":  "SEO × Claude",
@@ -2278,6 +2377,26 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-kopstructuur-volgorde-aantal",
+                       "titel":  "\u0027H3 vóór H2\u0027 en \u002714 koppen\u0027: moet de developer alles omnummeren?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Paginastructuur: kopvolgorde en aantal koppen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.12",
+                                      "2.1.10"
+                                  ],
+                       "kernpunt":  "Voor Google Search maken de volgorde en het aantal koppen niet uit. Wel telt dat koppen de pagina in duidelijke, beschrijvende secties opdelen voor de lezer.",
+                       "bron":  {
+                                    "titel":  "SEO Starter Guide | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
                    {
@@ -2317,6 +2436,25 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-merk-categoriepaginas-indexeren",
+                       "titel":  "420 merk-categoriepagina\u0027s, 55 met zoekvraag: welke mogen in Google?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Zoekwoordonderzoek gebruiken om te bepalen welke landingspagina\u0027s je laat indexeren",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.1.3"
+                                  ],
+                       "kernpunt":  "Laat een automatisch gemaakte pagina alleen indexeren als er zoekvraag is, genoeg aanbod en een eigen invalshoek. De rest krijgt noindex, en je herziet die keuze periodiek.",
+                       "bron":  {
+                                    "titel":  "Faceted Navigation: Definition, Examples \u0026 SEO Best Practices | Ahrefs",
+                                    "url":  "https://ahrefs.com/blog/faceted-navigation/"
+                                },
+                       "video":  null,
+                       "soort":  "open",
                        "herkomst":  "generator"
                    },
                    {
@@ -2380,6 +2518,26 @@
                        "juistLangst":  true
                    },
                    {
+                       "id":  "20261029-p-waarde-kans-variant-beter",
+                       "titel":  "p = 0,03, dus \u002797% kans dat B beter is\u0027? Lees het testresultaat goed",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testen: wat een p-waarde wel en niet betekent",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.2.2",
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Een p-waarde zegt hoe verrassend je data zijn als er geen verschil is, niet hoe groot de kans is dat de variant beter is. Rapporteer daarom ook het effect met een interval.",
+                       "bron":  {
+                                    "titel":  "American Statistical Association: Statement on Statistical Significance and P-Values (2016)",
+                                    "url":  "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261029-ranktracker-vs-gsc-positie",
                        "titel":  "Positie 7 in de rank tracker, 3,2 in Search Console: wie liegt er?",
                        "vakgebied":  "SEO",
@@ -2418,6 +2576,26 @@
                                 },
                        "video":  null,
                        "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-robots-txt-spoedfix-recrawl",
+                       "titel":  "Het hele weekend \u0027Disallow: /\u0027 in robots.txt: wat doe je maandag?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Het robots.txt-rapport in Search Console: een herstelde robots.txt laten ophalen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.5",
+                                      "1.1.7"
+                                  ],
+                       "kernpunt":  "Een herstelde robots.txt controleer je in het robots.txt-rapport. Daar vraag je in noodgevallen ook een nieuwe crawl aan. De oude tester bestaat niet meer; per URL test je met URL-inspectie.",
+                       "bron":  {
+                                    "titel":  "robots.txt report - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/6062598?hl=en"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
                    {

@@ -1,0 +1,27 @@
+{
+  "id": "20261029-klant-belt-urls-wijzigen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Telefonisch adviseren: een klant wil snel een grote wijziging doorvoeren",
+  "matrix": [
+    "6.1.2",
+    "6.3.3"
+  ],
+  "titel": "\"Kun je even zeggen dat het goed is?\" De klant belt over 600 nieuwe URL's",
+  "intro": "Een webshopklant belt je onverwacht: 'Onze nieuwe marketeer zegt dat alle 600 product-URL's het hoofdzoekwoord moeten bevatten. De developer kan het vrijdag live zetten. Kun je even zeggen dat het goed is?' Je zit niet achter je laptop en hebt geen cijfers bij de hand.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat zeg je in dit telefoongesprek, en wat spreek je af? Noem ook wat je juist níet doet.",
+    "minTekens": 120,
+    "hint": "Wat weet je zeker, ook zonder cijfers, en wat moet je eerst uitzoeken?"
+  },
+  "modelantwoord": "**De kern:** zeg niet meteen ja of nee. Vraag wat ze ermee willen bereiken, noem het risico (alle URL's veranderen geeft weken onrust in Google en vraagt om goede redirects) en spreek af dat je vóór vrijdag schriftelijk advies stuurt.\n\nWaarom: aan de telefoon heb je geen data, dus geef je geen definitief oordeel. Wat je wel zeker weet: als URL's veranderen, duurt het volgens Google een paar weken of langer voordat de nieuwe URL's de oude vervangen. Dat werkt alleen goed met een permanente redirect (301) per URL, die je minstens een jaar laat staan.\n\nIn het gesprek:\n- luister en vraag door: waarom nu, wat moet het opleveren, wie beslist?\n- vat samen wat je hebt gehoord\n- spreek een concreet moment af: 'Ik stuur je woensdag mijn advies, zet de livegang tot dan in de wacht'\n- bevestig de afspraak meteen per mail\n\nWat je níet doet: 'prima, doe maar' zeggen om van het gesprek af te zijn, de marketeer afkraken, of een oorzaak of opbrengst beloven die je niet hebt gecheckt.",
+  "uitleg": "Aan de telefoon voelt het alsof je meteen antwoord moet geven. Toch is het vaak beter om eerst goed te luisteren en een vervolgmoment af te spreken. Zeker als het om een wijziging gaat die moeilijk terug te draaien is.\n\nEen goed telefoongesprek met een klant:\n- **Luisteren en doorvragen.** Wat is het doel? Waar komt het idee vandaan? Is er een deadline, en waarom?\n- **Zeggen wat je wél weet.** Bij URL-wijzigingen: Google heeft tijd nodig om de nieuwe URL's over te nemen, bij grotere sites langer. Elke oude URL heeft een permanente redirect naar de nieuwe nodig. Doe je dat goed, dan gaat er volgens Google geen PageRank verloren, maar er is wel een periode van schommelingen.\n- **Geen oordeel zonder data.** Zeg wat je gaat uitzoeken, bijvoorbeeld welke URL's nu verkeer en links hebben.\n- **Afspraak maken en vastleggen.** Wie doet wat, wanneer? Stuur na het gesprek een korte mail met de afspraken.\n\nZo blijf je behulpzaam, voorkom je dat een snelle 'ja' later problemen geeft, en voelt de klant zich gehoord.",
+  "kernpunt": "Geef aan de telefoon geen definitief oordeel over een ingrijpende wijziging. Luister, noem wat je zeker weet, spreek een moment voor schriftelijk advies af en bevestig dat per mail.",
+  "toepassing": "Schrijf deze week voor jezelf drie standaardvragen op voor als een klant belt met een snel plan, en een zin om een vervolgmoment af te spreken. Gebruik ze bij het volgende onverwachte telefoontje.",
+  "bron": {
+    "titel": "Site moves with URL changes | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+  }
+}

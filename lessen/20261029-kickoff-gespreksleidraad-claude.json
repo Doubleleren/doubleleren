@@ -1,0 +1,27 @@
+{
+  "id": "20261029-kickoff-gespreksleidraad-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Kick-off in persoon: stakeholdergesprekken voorbereiden met Claude",
+  "matrix": [
+    "6.1.3",
+    "6.2.2"
+  ],
+  "titel": "Drie gesprekken op de kick-off: laat Claude je leidraad maken",
+  "intro": "Volgende week heb je een kick-off op locatie bij een nieuwe klant, een installatiebedrijf met een website die leads moet opleveren. Je spreekt de marketingmanager, de developer en de directeur, elk een half uur apart. Je kent alleen de website en de offerteaanvraag.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee Claude een gespreksleidraad maakt voor deze drie gesprekken. Wat geef je Claude mee, en wat moet er per persoon in de leidraad staan?",
+    "minTekens": 150,
+    "hint": "Een goede leidraad heeft per gesprek een doel en vooral open vragen."
+  },
+  "modelantwoord": "**De kern:** geef Claude per gesprek mee wie de persoon is, wat je al weet en wat je uit dat gesprek wilt halen. Vraag dan per persoon een korte leidraad met open vragen over succes, prioriteiten, eerdere ervaringen en werkwijze, en twee vaste slotvragen.\n\nVoorbeeldprompt: 'Ik heb een kick-off bij een installatiebedrijf (website voor leads). Ik spreek apart de marketingmanager, de developer en de directeur, elk 30 minuten. Hieronder staan de offerteaanvraag en mijn eerste indruk van de site. Maak per persoon een leidraad: één doel voor het gesprek, een openingszin, 6 tot 8 open vragen (over wat succes is, prioriteiten, wat eerder is geprobeerd en waarom dat wel of niet werkte, en hoe ze willen samenwerken) en sluit af met \"Wat moet ik nog weten?\" en \"Met wie moet ik nog praten?\". Geen gesloten vragen en geen verkooppraatje.'\n\nVeelgemaakte fouten:\n- één algemene vragenlijst voor alle drie; de developer en de directeur hebben andere zorgen\n- gesloten vragen ('Hebben jullie GA4?') die je ook zelf kunt checken\n- de leidraad letterlijk voorlezen; het is een geheugensteun, geen script",
+  "uitleg": "Een eerste gesprek in persoon bepaalt hoe een samenwerking start. Nielsen Norman Group noemt zulke stakeholdergesprekken de basis van een goede samenwerking: je begrijpt de context, de doelen en wat er eerder is gebeurd, en mensen voelen zich gehoord.\n\nVolgens NN/g werkt dit het best:\n- **Eén op één** praten, liefst vroeg in het project.\n- **Een concreet doel** per gesprek: wat wil je weten of afspreken?\n- **Een half gestructureerde leidraad** rond vier thema's: wat succes is, prioriteiten, geschiedenis en kennis, en werkwijze.\n- **Open vragen** en doorvragen: 'Kun je een voorbeeld geven?'\n- **Neutraal blijven** en actief luisteren, ook als iemand lang van stof is.\n- Afsluiten met: 'Is er nog iets wat ik moet weten?' en 'Met wie moet ik nog praten?'\n\nClaude helpt je om snel een leidraad per persoon te maken. Jij bepaalt het doel en checkt of de vragen passen bij deze klant.\n\nNa de gesprekken zet je de belangrijkste thema's op een rij en stuur je de klant een korte samenvatting met de afspraken.",
+  "kernpunt": "Bereid elk gesprek op een kick-off apart voor, met een doel en open vragen over succes, prioriteiten, geschiedenis en werkwijze. Claude maakt de leidraad, jij bepaalt het doel.",
+  "toepassing": "Laat Claude deze week een leidraad maken voor je eerstvolgende klantgesprek. Schrap daarna elke vraag die je ook zelf had kunnen opzoeken.",
+  "bron": {
+    "titel": "Stakeholder Interviews 101 | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/stakeholder-interviews/"
+  }
+}

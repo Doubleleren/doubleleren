@@ -1,0 +1,27 @@
+{
+  "id": "20261029-kopstructuur-volgorde-aantal",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Paginastructuur: kopvolgorde en aantal koppen",
+  "matrix": [
+    "2.1.12",
+    "2.1.10"
+  ],
+  "titel": "'H3 vóór H2' en '14 koppen': moet de developer alles omnummeren?",
+  "intro": "Een klant heeft een lange koopgids over waterontharders laten bouwen. Elke sectie heeft een eigen kop. Een SEO-tool meldt twee problemen: 'H3 komt vóór de eerste H2' en 'de pagina heeft 14 koppen'. De developer vraagt je of hij de koppen voor Google moet omnummeren, en of 14 koppen te veel is.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de SEO Starter Guide van Google op wat die zegt over de volgorde en het aantal koppen. Wat antwoord je de developer, en wat zou je wél aan de koppen laten verbeteren?",
+    "minTekens": 120,
+    "hint": "Zoek in de gids op 'headings'. Let op het verschil tussen wat goed is voor bezoekers en wat Google Search ermee doet."
+  },
+  "modelantwoord": "**De kern:** voor Google hoeft hij niet om te nummeren en 14 koppen is geen probleem. Belangrijker is dat elke kop zegt wat er in dat stuk staat. Een logische volgorde is vooral goed voor mensen met een screenreader.\n\nWaarom: Google schrijft in de SEO Starter Guide dat het voor Google Search niet uitmaakt of koppen in de juiste volgorde staan, en dat er geen ideaal aantal koppen is. Wel raadt Google aan lange content op te delen in alinea's en secties met koppen, zodat bezoekers hun weg vinden.\n\nWat je wél laat verbeteren:\n- koppen die beschrijven wat er komt ('Wat kost een waterontharder?' in plaats van 'Prijzen')\n- de volgorde rechtzetten als het weinig werk is, voor de toegankelijkheid\n- geen koppen gebruiken alleen om tekst groot of vet te maken\n\nVeelgemaakte fout: een melding uit een SEO-tool zien als een rankingprobleem. Veel van die meldingen gaan over goede gewoontes, niet over wat Google meetelt.",
+  "uitleg": "Koppen (H1 tot en met H6) geven een pagina structuur. Over wat Google ermee doet, bestaan veel misverstanden.\n\nWat Google zelf zegt in de SEO Starter Guide:\n- Deel lange content op in **alinea's en secties met koppen**, zodat bezoekers hun weg vinden.\n- Koppen in **semantische volgorde** zijn heel goed voor screenreaders. Voor Google Search maakt het niet uit als ze niet op volgorde staan, omdat Google zelden kan vertrouwen op de betekenis die in de HTML-specificatie zit.\n- Er is **geen ideaal aantal koppen**. Wel: denk je dat het te veel is, dan is dat waarschijnlijk zo.\n\nWat betekent dat in de praktijk?\n- Een goede paginastructuur gaat over de lezer: kan hij snel scannen en het stuk vinden dat hij zoekt?\n- Een kop die het onderwerp van de sectie noemt, helpt bezoekers. Ook voor zoekmachines en AI-systemen is zo'n stuk tekst dan makkelijker op zichzelf te begrijpen.\n- Toolmeldingen als 'H3 vóór H2' of 'meerdere H1's' zijn geen fouten volgens Google. Geef ze een lage prioriteit, tenzij er ook een toegankelijkheidsdoel is.",
+  "kernpunt": "Voor Google Search maken de volgorde en het aantal koppen niet uit. Wel telt dat koppen de pagina in duidelijke, beschrijvende secties opdelen voor de lezer.",
+  "toepassing": "Bekijk deze week de belangrijkste lange pagina van een klant met alleen de koppen in beeld (bijvoorbeeld met een browserextensie). Snap je het verhaal uit alleen de koppen? Zo niet, herschrijf dan de vaagste drie.",
+  "bron": {
+    "titel": "SEO Starter Guide | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+  }
+}
