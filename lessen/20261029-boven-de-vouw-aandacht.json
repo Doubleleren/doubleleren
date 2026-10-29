@@ -1,0 +1,23 @@
+{
+  "id": "20261029-boven-de-vouw-aandacht",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Above the fold: hoeveel aandacht krijgt de bovenkant echt?",
+  "matrix": ["7.1.1"],
+  "titel": "'Niemand scrolt, dus alles moet bovenaan'",
+  "intro": "Een leadgen-klant in zonwering laat de homepage opnieuw ontwerpen. De directeur wil boven de vouw: alle zes diensten, drie keurmerken, reviews, een video en het offerteformulier. 'Niemand scrolt.' De designer wil juist een rustige bovenkant met één boodschap en één knop naar de offerte, en de rest eronder.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat adviseer je? Onderbouw je advies met wat bekend is over hoe bezoekers hun aandacht over een pagina verdelen, en noem één ontwerpfout die bezoekers kan laten stoppen met scrollen.",
+    "minTekens": 120
+  },
+  "modelantwoord": "In gewone woorden: de bovenkant krijgt de meeste aandacht, maar mensen scrollen wel als de pagina ze een reden geeft. Dus niet alles bovenaan proppen, maar het belangrijkste bovenaan en de rest goed vindbaar eronder.\n\n- **Onderbouwing:** in het eyetrackingonderzoek van Nielsen Norman Group (2018) ging 57% van de kijktijd naar het deel boven de vouw en 74% naar de eerste twee schermen. De bovenkant is dus het belangrijkst, maar 'niemand scrolt' klopt niet.\n- **Advies:** zet bovenaan wat voor bezoeker en bedrijf het zwaarst weegt: een heldere boodschap en de knop naar de offerte. Zes diensten, keurmerken, reviews en een video tegelijk maken de bovenkant druk, en dan valt niets meer op. Zet ze direct eronder, met duidelijke koppen.\n- **Ontwerpfout:** een *false floor*, een bovenkant die er af uitziet, bijvoorbeeld een volle hero met daaronder een witte balk. Bezoekers denken dan dat de pagina klaar is. Laat zien dat er meer komt, bijvoorbeeld met content die net afgesneden is.\n- **Toetsen:** kijk na livegang met scrollmaps en heatmaps hoe ver bezoekers komen en of de knop gebruikt wordt.",
+  "uitleg": "**Above the fold** is het deel van een pagina dat je ziet zonder te scrollen. Nielsen Norman Group onderzocht met eyetracking hoe mensen hun aandacht verdelen. In 2018 (120 deelnemers, schermen van 1920×1080) ging:\n- **57%** van de kijktijd naar het eerste scherm\n- **74%** naar de eerste twee schermen\n- **81%** naar de eerste drie schermen\n\nIn 2010 was dat eerste scherm nog goed voor 80%. Mensen scrollen dus meer dan vroeger, maar volgens NN/g 'niet veel meer': de aandacht zakt na het eerste scherm nog steeds sterk.\n\nWat betekent dat voor een pagina?\n- **Bovenaan het belangrijkste:** de kernboodschap en de belangrijkste actie. Bij een leadgen-site is dat meestal de offerte of het contact.\n- **Kies.** Alles boven de vouw zetten betekent dat elk onderdeel minder aandacht krijgt.\n- **Maak de rest scanbaar** met duidelijke, consistente koppen en vette tekst.\n- **Voorkom een false floor:** een ontwerp dat eruitziet alsof de pagina ophoudt.\n\nNN/g zegt al jaren: mensen scrollen als ze er een reden voor hebben. Test de lengte en volgorde van een pagina daarom met echte bezoekers.",
+  "kernpunt": "De bovenkant van een pagina krijgt de meeste aandacht (57% in het NN/g-onderzoek), maar bezoekers scrollen wel als er een reden is. Zet het belangrijkste bovenaan en maak de rest makkelijk vindbaar, in plaats van alles boven de vouw te proppen.",
+  "toepassing": "Open deze week de scrollmap van een belangrijke landingspagina van een klant in Clarity of Hotjar. Welk percentage bezoekers komt voorbij het eerste scherm, en staat de belangrijkste knop binnen dat bereik?",
+  "bron": {
+    "titel": "Scrolling and Attention | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/scrolling-and-attention/"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "20261029-openai-searchbot-vs-gptbot",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "AI-crawlers van OpenAI: GPTBot, OAI-SearchBot en ChatGPT-User",
+  "matrix": ["12.1.6", "12.1.3"],
+  "titel": "Uit de training, maar wél als bron in ChatGPT: hoe regel je dat?",
+  "intro": "Een uitgever van vakartikelen wil niet dat OpenAI zijn artikelen gebruikt om modellen te trainen. Wel wil hij als bron blijven verschijnen in de antwoorden van ChatGPT search, want dat levert steeds meer bezoekers op. De developer stelt voor om 'voor de zekerheid' alle bots van OpenAI in robots.txt te blokkeren.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke robots.txt-aanpak past bij wat de uitgever wil?",
+    "opties": [
+      "Alle drie de OpenAI-agents blokkeren: GPTBot, OAI-SearchBot en ChatGPT-User. Alleen zo is training uitgesloten.",
+      "Alleen OAI-SearchBot blokkeren: dat is de crawler die content verzamelt voor zowel training als zoekresultaten.",
+      "GPTBot blokkeren en OAI-SearchBot toestaan: die instellingen staan los van elkaar, dus zoeken blijft mogelijk.",
+      "Alleen ChatGPT-User blokkeren: die agent haalt pagina's op als gebruikers vragen stellen, en dus ook voor training."
+    ],
+    "juist": 2
+  },
+  "toelichting": "OpenAI gebruikt aparte agents met elk een eigen doel, en volgens OpenAI staat elke instelling **los van de andere**.\n\n- **GPTBot** crawlt content die gebruikt kan worden om de modellen te trainen. Blokkeren betekent: niet gebruiken voor training. Dat is precies wat de uitgever wil.\n- **OAI-SearchBot** is voor search. Blokkeer je die, dan verschijn je niet meer in de antwoorden van ChatGPT search (hooguit nog als navigatielink). Alles blokkeren kost de uitgever dus juist de zichtbaarheid die hij wil houden.\n- **ChatGPT-User** haalt een pagina op als een gebruiker daar in ChatGPT om vraagt. Hij crawlt niet automatisch, wordt niet gebruikt om te bepalen wat in search verschijnt, en robots.txt geldt er volgens OpenAI mogelijk niet voor.",
+  "uitleg": "Een AI-platform is geen één crawler. OpenAI onderscheidt onder meer:\n\n- **GPTBot**: verzamelt content die gebruikt kan worden voor het trainen van de modellen.\n- **OAI-SearchBot**: zorgt dat sites in de zoekfuncties van ChatGPT kunnen verschijnen.\n- **ChatGPT-User**: bezoekt een pagina namens een gebruiker, bijvoorbeeld als die in een gesprek een link laat openen. Omdat een gebruiker de actie start, gelden robots.txt-regels hier mogelijk niet.\n\nDe instellingen werken onafhankelijk van elkaar. Je kunt dus training weigeren en toch als bron in ChatGPT search blijven staan. Na een wijziging in robots.txt kan het volgens OpenAI ongeveer 24 uur duren voordat de zoeksystemen zich aanpassen.\n\nDe valkuil in de praktijk: een 'blokkeer alle AI-bots'-lijstje uit een plugin of CDN-instelling. Dat haalt een site in één keer uit de AI-zoekresultaten, terwijl de klant vaak alleen training wilde uitsluiten. Bij Google werkt het vergelijkbaar: Google-Extended regelt gebruik voor Gemini, Googlebot regelt Search.\n\nControleer daarom bij elke klant twee dingen: wat staat er in robots.txt per agent, en welke agents komen volgens de serverlogs echt langs?",
+  "kernpunt": "GPTBot (training) en OAI-SearchBot (ChatGPT search) stuur je los van elkaar. Wie alle OpenAI-bots blokkeert, verdwijnt ook uit de antwoorden van ChatGPT search.",
+  "toepassing": "Open deze week de robots.txt van twee klanten en noteer per OpenAI-agent of hij is toegestaan of geblokkeerd. Klopt dat met wat de klant wil: wel of geen training, wel of geen zichtbaarheid in ChatGPT search?",
+  "bron": {
+    "titel": "OpenAI: Overview of OpenAI Crawlers",
+    "url": "https://developers.openai.com/api/docs/bots"
+  }
+}

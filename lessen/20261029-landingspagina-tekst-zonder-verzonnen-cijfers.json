@@ -1,0 +1,24 @@
+{
+  "id": "20261029-landingspagina-tekst-zonder-verzonnen-cijfers",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Content maken met Claude zonder verzonnen feiten",
+  "matrix": ["2.1.5"],
+  "titel": "'68% van de huiseigenaren bespaart binnen drie jaar': waar komt dat vandaan?",
+  "intro": "Je liet Claude een tekst schrijven voor de landingspagina 'warmtepomp laten installeren' van een installateur. Het concept leest goed, maar bevat cijfers als '68% van de huiseigenaren bespaart binnen drie jaar' en een subsidiebedrag. In je prompt zat geen enkele bron. Je hebt wel het productblad van de fabrikant en de subsidiepagina van de overheid als pdf.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Herschrijf je prompt zo dat Claude alleen feiten gebruikt die je kunt controleren. Welke instructies geef je, en hoe controleer je het resultaat? Plak je prompt hieronder.",
+    "minTekens": 150,
+    "hint": "Wat mag Claude doen als iets niet in je documenten staat?"
+  },
+  "modelantwoord": "In gewone woorden: geef Claude de bronnen, laat het alleen die gebruiken, laat het zeggen wat het niet weet, en laat het elke bewering aan een citaat koppelen.\n\nEen goede prompt bevat ongeveer dit:\n- **Bronnen meegeven:** 'Gebruik alleen informatie uit het productblad en de subsidiepagina in de bijlage, niet je eigen algemene kennis.'\n- **Onzekerheid toestaan:** 'Staat een gegeven er niet in, schrijf dan [ONTBREEKT: ...] en verzin niets.'\n- **Eerst citeren:** 'Haal eerst letterlijke citaten uit de documenten over prestaties, besparing en subsidie. Schrijf daarna de tekst op basis van die citaten.'\n- **Achteraf controleren:** 'Zoek na het schrijven voor elke bewering met een cijfer het citaat dat hem onderbouwt. Vind je er geen, haal de bewering dan weg en zet op die plek [].'\n- **Output:** de tekst, plus een tabel met elke bewering, het citaat en het document.\n\nControle door jou: lees de cijfers na in de bronnen, vooral bedragen en voorwaarden van de subsidie, en laat de klant de technische claims bevestigen.",
+  "uitleg": "Een taalmodel kan overtuigende zinnen maken met feiten die niet bestaan. Anthropic noemt dat **hallucinaties**. Op een landingspagina is dat riskant: een verzonnen besparing of een verkeerd subsidiebedrag kost vertrouwen en kan klachten opleveren. Juist bij onderwerpen over geld weegt betrouwbaarheid zwaar.\n\nDe documentatie van Claude noemt een paar technieken die het risico sterk verkleinen:\n- **Laat Claude 'ik weet het niet' zeggen.** Geef expliciet toestemming om onzekerheid te melden.\n- **Beperk de kennis** tot de documenten die je meegeeft.\n- **Werk met letterlijke citaten.** Laat Claude bij lange documenten eerst citaten verzamelen en daarop bouwen.\n- **Laat elke bewering onderbouwen.** Na het schrijven zoekt Claude per claim een citaat; zonder citaat gaat de claim eruit.\n- **Vergelijk meerdere antwoorden.** Geeft dezelfde prompt steeds andere cijfers, dan is dat een waarschuwing.\n\nAnthropic is duidelijk: deze technieken verkleinen het probleem, maar lossen het niet helemaal op. Controleer belangrijke informatie dus altijd zelf.\n\nVoor SEO-content betekent dit: Claude schrijft het concept, jij en de klant zijn verantwoordelijk voor de feiten.",
+  "kernpunt": "Laat Claude bij content met feiten alleen jouw bronnen gebruiken, onzekerheid melden en elke bewering aan een citaat koppelen. Controleer cijfers daarna altijd zelf.",
+  "toepassing": "Neem deze week een tekst die met AI is geschreven voor een klant, markeer elke zin met een cijfer of belofte, en zoek per zin de bron. Wat je niet kunt onderbouwen, gaat eruit of terug naar de klant.",
+  "bron": {
+    "titel": "Reduce hallucinations | Claude Docs",
+    "url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
+  }
+}

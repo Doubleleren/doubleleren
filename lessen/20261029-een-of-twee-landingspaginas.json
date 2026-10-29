@@ -1,0 +1,23 @@
+{
+  "id": "20261029-een-of-twee-landingspaginas",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Zoekwoordonderzoek: één landingspagina of twee? SERP-overlap als toets",
+  "matrix": ["2.1.4", "2.1.2"],
+  "titel": "'Zonnepanelen kopen' en 'zonnepanelen prijs': één pagina of twee?",
+  "intro": "Een installateur van zonnepanelen wil voor twee zoekwoorden elk een nieuwe landingspagina: 'zonnepanelen kopen' en 'zonnepanelen prijs'. Beide hebben volgens Ahrefs flink zoekvolume. De copywriter heeft al twee briefings klaarstaan, met elk een eigen zoekwoord in de titel.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Hoe bepaal je of dit één of twee pagina's moeten worden? Beschrijf je check, en welke uitkomst tot welke keuze leidt.",
+    "minTekens": 120
+  },
+  "modelantwoord": "Niet het zoekvolume of hoe de woorden op elkaar lijken beslist, maar **wat Google laat zien**.\n\n- **Check:** vergelijk de top 10 voor beide zoekwoorden. Staan grotendeels dezelfde URL's en hetzelfde soort pagina's bovenaan? In Ahrefs kan het ook met 'Compare with' in het SERP-overzicht: dat geeft een SERP-similarity-score van 0 tot 100. Kijk ook of beide zoekwoorden dezelfde Parent Topic hebben.\n- **Veel overlap** (hoge score, dezelfde pagina's): één pagina die beide vragen beantwoordt, bijvoorbeeld een pagina over zonnepanelen kopen met een duidelijk prijsblok. Eén titel, het tweede zoekwoord in een kop en de tekst.\n- **Weinig overlap** (lage score, ander soort pagina's, bijvoorbeeld prijsoverzichten en rekenhulpen tegenover aanbieders): twee pagina's, elk met een eigen doel, die naar elkaar linken.\n- **Twijfel** (middenscore): bekijk welke pagina's precies ranken en welk type content daar wint, en kies op basis daarvan.\n\nVeelgemaakte fout: voor elk zoekwoord met volume een pagina maken. Bij dezelfde intentie gaan die twee pagina's met elkaar concurreren.",
+  "uitleg": "Zoekwoordonderzoek bepaalt niet alleen óf je een landingspagina maakt, maar ook **hoeveel**. Twee zoekwoorden kunnen er verschillend uitzien en toch dezelfde vraag zijn, of juist op elkaar lijken en iets heel anders zoeken.\n\nDe betrouwbaarste toets is de zoekresultatenpagina zelf. Google laat met de top 10 zien welke intentie het achter een zoekopdracht ziet. Ahrefs adviseert om de resultaten van beide zoekwoorden naast elkaar te leggen: lijken ze op elkaar, dan horen de zoekwoorden waarschijnlijk op één pagina. In Keywords Explorer doe je dat met de functie **Compare with**, die een **SERP similarity score** van 0 tot 100 geeft:\n- hoog: samen op één pagina\n- laag: aparte pagina's\n- midden: zelf beoordelen\n\nAhrefs groepeert zoekwoorden ook op **Parent Topic**: het zoekwoord dat de best rankende pagina het meeste verkeer oplevert. Hebben twee zoekwoorden dezelfde Parent Topic, dan is dat een sterke aanwijzing voor één pagina.\n\nAhrefs waarschuwt wel dat clusteren bijna altijd interpretatie vraagt. Kijk bij twijfel naar het soort pagina's dat rankt: gidsen, rekenhulpen, winkels of offertepagina's. Zo voorkom je kannibalisatie al bij het plannen van de sitestructuur.",
+  "kernpunt": "Of twee zoekwoorden één of twee pagina's krijgen, bepaal je met de overlap in de zoekresultaten, niet met het zoekvolume of de woorden. Veel overlap: één pagina. Weinig overlap: twee pagina's met elk een eigen doel.",
+  "toepassing": "Neem deze week bij een klant twee zoekwoorden waarvoor een nieuwe pagina gepland staat, en vergelijk de top 10 van beide. Hoeveel URL's komen in beide lijsten voor?",
+  "bron": {
+    "titel": "Keyword Clustering | Ahrefs",
+    "url": "https://ahrefs.com/blog/keyword-clustering/"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "20261029-non-branded-rapporteren",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Rapportage: branded en non-branded zoekverkeer scheiden",
+  "matrix": ["4.1.1", "4.1.2"],
+  "titel": "Organische klikken +22%: komt dat door het SEO-werk?",
+  "intro": "Een fietsenwebshop startte dit kwartaal een tv-campagne. In het kwartaalrapport staat: organische klikken +22% ten opzichte van het vorige kwartaal. De marketingmanager wil dat cijfer in de directievergadering gebruiken als bewijs dat de SEO-aanpak werkt. De klant heeft een domeinproperty in Search Console met veel verkeer.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat rapporteer je als hoofdcijfer voor het effect van het SEO-werk?",
+    "opties": [
+      "Het totaal aan organische klikken, want het filter voor branded zoekopdrachten beïnvloedt ook hoe Google je pagina's rankt.",
+      "Alleen de gemiddelde positie over alle zoekopdrachten, want die beweegt niet mee met extra merkzoekopdrachten door tv.",
+      "Branded klikken, want een stijging daar laat zien dat de SEO-aanpak het merk sterker maakt in Google.",
+      "Non-branded klikken en vertoningen via het filter voor branded zoekopdrachten, met het branded verkeer apart ernaast."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Een tv-campagne laat vooral **zoekopdrachten op de merknaam** stijgen. Die klikken komen door de campagne, niet door SEO. Met het **filter voor branded zoekopdrachten** in het Prestatierapport splits je klikken, vertoningen, CTR en positie in branded en non-branded. Non-branded laat zien hoe nieuwe bezoekers je vinden zonder dat ze al naar jou zochten: dat is waar SEO-werk het meest zichtbaar wordt.\n\n- **Het filter beïnvloedt rankings niet:** volgens Google is het alleen voor analyse.\n- **De gemiddelde positie beweegt juist wél mee:** merkzoekopdrachten staan meestal bovenaan. Komen er veel bij, dan verbetert het gemiddelde zonder dat er iets aan de site veranderde.\n- **Branded klikken** zeggen vooral iets over merkbekendheid, en die komt hier door tv.",
+  "uitleg": "Sinds november 2025 heeft Search Console een **filter voor branded zoekopdrachten** in het Prestatierapport (zoekresultaten). Je kiest Branded of Non-branded, en alle cijfers gelden dan alleen voor die groep. In het Insights-rapport staat ook een kaart met de verdeling van klikken.\n\nWat telt als branded:\n- je merknaam, ook in andere talen en met typfouten\n- producten of diensten die bij je merk horen, ook zonder de merknaam (Google noemt Gmail bij google.com)\n\nGoed om te weten:\n- De indeling komt uit een **AI-ondersteund systeem van Google**, niet uit een reguliere expressie. Een enkele zoekopdracht kan verkeerd zijn ingedeeld.\n- Het filter is er alleen voor properties op het **hoogste niveau** (niet voor een pad of subdomein) met **genoeg zoekopdrachten en vertoningen**.\n- Het heeft geen invloed op rankings.\n\nWaarom dit voor rapportage zo belangrijk is: branded zoekopdrachten scoren bijna altijd hoge posities en een hoge CTR. Stijgt het merkverkeer door een campagne, PR of seizoen, dan kleuren totale klikken, CTR en gemiddelde positie mee. Zet dus non-branded als hoofdcijfer voor SEO-groei, en toon branded ernaast als context. Heeft een property het filter niet, dan kun je met een eigen reguliere expressie in 'Zoekopdracht filteren' een benadering maken.",
+  "kernpunt": "Rapporteer het effect van SEO op non-branded zoekverkeer, met branded apart ernaast. Merkzoekopdrachten door campagnes of PR kleuren anders je totale klikken, CTR en gemiddelde positie.",
+  "toepassing": "Open deze week voor een klant het Prestatierapport, kies Non-branded en vergelijk de groei met die van het totaal. Zet beide cijfers in het volgende rapport, met een zin uitleg.",
+  "bron": {
+    "titel": "Introducing the branded queries filter in Search Console | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2025/11/search-console-branded-filter"
+  }
+}

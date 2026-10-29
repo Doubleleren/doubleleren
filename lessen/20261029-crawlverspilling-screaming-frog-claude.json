@@ -1,0 +1,24 @@
+{
+  "id": "20261029-crawlverspilling-screaming-frog-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Crawlverspilling opsporen in een Screaming Frog-crawl",
+  "matrix": ["1.1.2", "1.1.4"],
+  "titel": "3.000 producten, 48.000 URL's in de crawl: waar komen die vandaan?",
+  "intro": "Een webshop heeft 3.000 producten en 150 categorieën. Een crawl met Screaming Frog stopt pas bij 48.000 HTML-URL's. Je exporteert Internal: HTML, met per URL de statuscode, of hij indexeerbaar is, de canonical en het aantal interne links ernaartoe (inlinks).",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf een prompt waarmee Claude uit deze export haalt welke soorten URL's de crawl opblazen, hoe crawlers ze vinden, en wat je per soort adviseert. Plak je prompt hieronder.",
+    "minTekens": 150,
+    "hint": "Hoe breng je 48.000 losse URL's terug tot een handvol groepen?"
+  },
+  "modelantwoord": "In gewone woorden: laat Claude de URL's in groepen indelen op hun patroon, tellen hoeveel er in elke groep zitten, en per groep zeggen waar ze vandaan komen en wat je ermee doet.\n\nEen goede prompt bevat ongeveer dit:\n- **Context:** 'In de bijlage staat een Screaming Frog-export (Internal: HTML) van een webshop met ongeveer 3.300 echte pagina's. De crawl vond 48.000 URL's.'\n- **Groeperen:** 'Deel de URL's in op patroon: map in het pad en de namen van parameters, zoals ?sort=, ?kleur=, utm_, sessie-ID's en interne zoekpagina's. Tel per groep het aantal URL's.'\n- **Per groep:** hoeveel indexeerbaar zijn, waar de canonical naartoe wijst, en het gemiddelde en hoogste aantal inlinks. Veel inlinks wijst op een link in een sjabloon, zoals een filter of het menu. Geef drie voorbeeld-URL's.\n- **Advies per groep:** bijvoorbeeld interne links zonder utm-parameters, interne zoekpagina's en sorteringen uit de crawl houden, duplicaten met een canonical, filters met zoekvraag bewust indexeerbaar.\n- **Output:** een tabel, gesorteerd op aantal URL's. Verzin geen aantallen die niet in de export staan, en noem wat ik in Screaming Frog moet nakijken (Inlinks van een voorbeeld-URL).",
+  "uitleg": "Een crawl met **Screaming Frog** laat zien wat een crawler via interne links kan vinden. Zijn dat er veel meer dan de site echte pagina's heeft, dan besteedt ook Googlebot waarschijnlijk tijd aan URL's die niets toevoegen. Bij grote sites kan dat het crawlen van belangrijke pagina's vertragen.\n\nScreaming Frog helpt met filters in het tabblad URL:\n- **Parameters:** URL's met ? of &. Parameters zijn op zich geen probleem voor zoekmachines, maar veel combinaties van filters en sorteringen blazen een site snel op.\n- **GA Tracking Parameters:** interne links met bijvoorbeeld utm-tags. Volgens Screaming Frog maken die dubbele pagina's die toch gecrawld moeten worden.\n- **Internal Search:** interne zoekpagina's, die zoekmachines aanraden niet te laten crawlen.\n\nBij tienduizenden URL's wordt handmatig filteren traag. Claude kan de export in groepen indelen en per groep een advies opstellen. Controleer zelf een paar voorbeelden: open een URL in Screaming Frog en kijk bij **Inlinks** vanaf welke pagina's hij gelinkt wordt.\n\nLet op: een crawler is niet hetzelfde als Googlebot. Wil je weten waar Google echt zijn tijd aan besteedt, leg de crawl dan naast de serverlogs of het Crawlstatistieken-rapport.",
+  "kernpunt": "Vindt een crawl veel meer URL's dan er echte pagina's zijn, groepeer ze dan op patroon (parameters, tracking, interne zoekpagina's) en zoek per groep de link die ze laat ontstaan. Claude maakt van zo'n export snel een overzicht met advies.",
+  "toepassing": "Crawl deze week een webshopklant en vergelijk het aantal HTML-URL's met het aantal producten en categorieën. Bekijk daarna de filters Parameters, GA Tracking Parameters en Internal Search in het tabblad URL.",
+  "bron": {
+    "titel": "SEO Spider Tabs | Screaming Frog",
+    "url": "https://www.screamingfrog.co.uk/seo-spider/user-guide/tabs/"
+  }
+}

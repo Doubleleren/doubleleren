@@ -1,0 +1,24 @@
+{
+  "id": "20261029-schemaplugin-losse-blokken",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Schema-plugins: één samenhangende graph in plaats van losse blokken",
+  "matrix": ["2.2.10", "2.2.9"],
+  "titel": "Yoast, het thema én een offerteplugin: drie keer schema op één pagina",
+  "intro": "Op de WordPress-site van een installatiebedrijf staan op elke pagina drie JSON-LD-blokken: de schema-output van Yoast SEO, een Organization-blok van het thema met de bedrijfsnaam van vóór de fusie, en een los Service-blok van een offerteplugin dat nergens naar verwijst. De developer vraagt wat hij ermee moet.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de developerdocumentatie van Yoast op hoe Yoast zijn schema opbouwt en hoe andere code daarop hoort aan te sluiten. Wat adviseer je de developer voor het blok van het thema, en wat voor het blok van de offerteplugin?",
+    "minTekens": 120,
+    "hint": "Kijk hoe de onderdelen van het Yoast-schema naar elkaar verwijzen."
+  },
+  "modelantwoord": "Yoast zet alle markup van een pagina in **één samenhangende graph** in JSON-LD. De onderdelen (pieces) verwijzen naar elkaar via een **@id**, en elke pagina heeft één hoofdentiteit in het midden van die graph. Code die iets toevoegt, hoort daarop aan te sluiten: verwijs naar een bestaand @id of breid een bestaand onderdeel uit met hetzelfde @id, in plaats van een los blok ernaast te zetten.\n\nAdvies:\n- **Themablok:** uitzetten. Eén bron per entiteit: de Organization komt uit Yoast, en daar zet je de huidige naam en het juiste logo. Twee Organization-blokken met verschillende namen zijn tegenstrijdig.\n- **Offerteplugin:** het Service-blok aan de graph koppelen, bijvoorbeeld met provider naar het @id van de Organization van Yoast. Dat kan via een integratie van de plugin of met de filter wpseo_schema_graph_pieces. Kan dat niet, overweeg dan of dit blok iets toevoegt.\n- **Controle:** daarna met de Schema Markup Validator kijken of er nog maar één Organization is en alles verbonden is, en met de Rich Results Test of er geen fouten zijn.",
+  "uitleg": "**Schema-plugins** zoals Yoast SEO en Rank Math maken structured data zonder dat je zelf JSON-LD hoeft te schrijven. Dat is handig, maar op WordPress-sites gaat het vaak mis doordat meerdere bronnen tegelijk markup uitspugen: de SEO-plugin, het thema, een webshop-, review- of offerteplugin.\n\nYoast kiest bewust voor **één graph per pagina**:\n- Elk onderdeel (WebSite, Organization, WebPage, Article) heeft een vast **@id**.\n- Onderdelen verwijzen naar elkaar met eigenschappen als isPartOf en mainEntityOfPage, in plaats van gegevens te herhalen.\n- Elke pagina draait om één **hoofdentiteit**.\n- Andere code kan een onderdeel uitbreiden door hetzelfde @id te gebruiken. Zo voegt Yoast WooCommerce SEO zelf productgegevens toe die naadloos aansluiten op de rest.\n\nLosse blokken ernaast maken de markup rommelig, en als ze elkaar tegenspreken (twee namen, twee logo's) is niet meer duidelijk wat klopt.\n\nWat je als SEO'er doet:\n- Tel per paginatype hoeveel blokken er zijn en waar ze vandaan komen.\n- Kies per entiteit één bron en zet de rest uit.\n- Laat extra markup verwijzen naar de @id's van de plugin die de basis levert.",
+  "kernpunt": "Een schema-plugin zoals Yoast bouwt één graph waarin onderdelen via @id naar elkaar verwijzen. Kies per entiteit één bron, zet dubbele output van thema of plugins uit, en laat extra markup op die graph aansluiten.",
+  "toepassing": "Plak deze week de homepage van een WordPress-klant in de Schema Markup Validator. Hoeveel Organization- of LocalBusiness-entiteiten zie je, en uit welke plugin of welk thema komt elk blok?",
+  "bron": {
+    "titel": "Schema - Technology and approach | Yoast developer portal",
+    "url": "https://developer.yoast.com/features/schema/technology-approach/"
+  }
+}

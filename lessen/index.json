@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-29T05:27:54",
+    "bijgewerkt":  "2026-10-29T11:20:44",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -2107,6 +2107,25 @@
                        "herkomst":  "generator"
                    },
                    {
+                       "id":  "20261029-boven-de-vouw-aandacht",
+                       "titel":  "\u0027Niemand scrolt, dus alles moet bovenaan\u0027",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Above the fold: hoeveel aandacht krijgt de bovenkant echt?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "De bovenkant van een pagina krijgt de meeste aandacht (57% in het NN/g-onderzoek), maar bezoekers scrollen wel als er een reden is. Zet het belangrijkste bovenaan en maak de rest makkelijk vindbaar, in plaats van alles boven de vouw te proppen.",
+                       "bron":  {
+                                    "titel":  "Scrolling and Attention | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/scrolling-and-attention/"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261029-categorietekst-keyword-stuffing",
                        "titel":  "900 woorden onder de loungesets: wat doe je met die tekst?",
                        "vakgebied":  "SEO",
@@ -2123,6 +2142,46 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-crawlverspilling-screaming-frog-claude",
+                       "titel":  "3.000 producten, 48.000 URL\u0027s in de crawl: waar komen die vandaan?",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Crawlverspilling opsporen in een Screaming Frog-crawl",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.2",
+                                      "1.1.4"
+                                  ],
+                       "kernpunt":  "Vindt een crawl veel meer URL\u0027s dan er echte pagina\u0027s zijn, groepeer ze dan op patroon (parameters, tracking, interne zoekpagina\u0027s) en zoek per groep de link die ze laat ontstaan. Claude maakt van zo\u0027n export snel een overzicht met advies.",
+                       "bron":  {
+                                    "titel":  "SEO Spider Tabs | Screaming Frog",
+                                    "url":  "https://www.screamingfrog.co.uk/seo-spider/user-guide/tabs/"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-een-of-twee-landingspaginas",
+                       "titel":  "\u0027Zonnepanelen kopen\u0027 en \u0027zonnepanelen prijs\u0027: één pagina of twee?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Zoekwoordonderzoek: één landingspagina of twee? SERP-overlap als toets",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.1.4",
+                                      "2.1.2"
+                                  ],
+                       "kernpunt":  "Of twee zoekwoorden één of twee pagina\u0027s krijgen, bepaal je met de overlap in de zoekresultaten, niet met het zoekvolume of de woorden. Veel overlap: één pagina. Weinig overlap: twee pagina\u0027s met elk een eigen doel.",
+                       "bron":  {
+                                    "titel":  "Keyword Clustering | Ahrefs",
+                                    "url":  "https://ahrefs.com/blog/keyword-clustering/"
+                                },
+                       "video":  null,
+                       "soort":  "open",
                        "herkomst":  "generator"
                    },
                    {
@@ -2188,6 +2247,85 @@
                        "herkomst":  "generator"
                    },
                    {
+                       "id":  "20261029-landingspagina-tekst-zonder-verzonnen-cijfers",
+                       "titel":  "\u002768% van de huiseigenaren bespaart binnen drie jaar\u0027: waar komt dat vandaan?",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Content maken met Claude zonder verzonnen feiten",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.5"
+                                  ],
+                       "kernpunt":  "Laat Claude bij content met feiten alleen jouw bronnen gebruiken, onzekerheid melden en elke bewering aan een citaat koppelen. Controleer cijfers daarna altijd zelf.",
+                       "bron":  {
+                                    "titel":  "Reduce hallucinations | Claude Docs",
+                                    "url":  "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-lightspeed-kleurvarianten-canonical",
+                       "titel":  "Zes kleuren, zes productpagina\u0027s: wat stel je in Lightspeed in?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Lightspeed: dubbele productpagina\u0027s sturen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.5",
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "Wil je in Lightspeed dat Google één van meerdere gelijke productpagina\u0027s toont, zet dan Custom canonical URLs aan en vul per variant de canonical in. Verbergen, robots.txt of URL\u0027s wijzigen lost iets anders op.",
+                       "bron":  {
+                                    "titel":  "Managing product SEO data | Lightspeed eCom (C-Series) Help Center",
+                                    "url":  "https://ecom-support.lightspeedhq.com/hc/en-us/articles/220661107-Managing-product-SEO-data"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-non-branded-rapporteren",
+                       "titel":  "Organische klikken +22%: komt dat door het SEO-werk?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Rapportage: branded en non-branded zoekverkeer scheiden",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "4.1.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Rapporteer het effect van SEO op non-branded zoekverkeer, met branded apart ernaast. Merkzoekopdrachten door campagnes of PR kleuren anders je totale klikken, CTR en gemiddelde positie.",
+                       "bron":  {
+                                    "titel":  "Introducing the branded queries filter in Search Console | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2025/11/search-console-branded-filter"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-openai-searchbot-vs-gptbot",
+                       "titel":  "Uit de training, maar wél als bron in ChatGPT: hoe regel je dat?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "AI-crawlers van OpenAI: GPTBot, OAI-SearchBot en ChatGPT-User",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "12.1.3"
+                                  ],
+                       "kernpunt":  "GPTBot (training) en OAI-SearchBot (ChatGPT search) stuur je los van elkaar. Wie alle OpenAI-bots blokkeert, verdwijnt ook uit de antwoorden van ChatGPT search.",
+                       "bron":  {
+                                    "titel":  "OpenAI: Overview of OpenAI Crawlers",
+                                    "url":  "https://developers.openai.com/api/docs/bots"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261029-plaatspaginas-doorway",
                        "titel":  "\u0027Loodgieter Zeist\u0027, \u0027Loodgieter Houten\u0027 en nog 178 pagina\u0027s",
                        "vakgebied":  "SEO",
@@ -2244,6 +2382,26 @@
                                 },
                        "video":  null,
                        "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261029-schemaplugin-losse-blokken",
+                       "titel":  "Yoast, het thema én een offerteplugin: drie keer schema op één pagina",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Schema-plugins: één samenhangende graph in plaats van losse blokken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.10",
+                                      "2.2.9"
+                                  ],
+                       "kernpunt":  "Een schema-plugin zoals Yoast bouwt één graph waarin onderdelen via @id naar elkaar verwijzen. Kies per entiteit één bron, zet dubbele output van thema of plugins uit, en laat extra markup op die graph aansluiten.",
+                       "bron":  {
+                                    "titel":  "Schema - Technology and approach | Yoast developer portal",
+                                    "url":  "https://developer.yoast.com/features/schema/technology-approach/"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
                        "herkomst":  "generator"
                    },
                    {

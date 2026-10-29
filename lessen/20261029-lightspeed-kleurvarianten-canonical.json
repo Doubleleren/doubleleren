@@ -1,0 +1,29 @@
+{
+  "id": "20261029-lightspeed-kleurvarianten-canonical",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Lightspeed: dubbele productpagina's sturen",
+  "matrix": ["5.1.5", "1.3.3"],
+  "titel": "Zes kleuren, zes productpagina's: wat stel je in Lightspeed in?",
+  "intro": "Een Lightspeed-webshop in rugzakken heeft elke kleur van een model als apart product aangemaakt. De zes pagina's hebben dezelfde tekst; alleen de foto en de kleur verschillen. In Google wisselen ze elkaar af. Bezoekers moeten alle kleuren kunnen blijven bekijken en kopen, maar de klant wil dat de zwarte versie, de bestseller, in de zoekresultaten staat.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste aanpak in Lightspeed?",
+    "opties": [
+      "Bij de andere vijf kleuren het vinkje 'Hide from search engine' aanzetten, zodat Google alleen de zwarte versie nog kan tonen.",
+      "'Custom canonical URLs' aanzetten (Settings > Workflow) en bij de andere vijf kleuren de zwarte versie als canonical invullen.",
+      "In Web Extras de eigen robots.txt aanzetten en de URL's van de andere vijf kleuren uitsluiten met een Disallow-regel.",
+      "De URL's van de andere vijf kleuren aanpassen, zodat Lightspeed automatisch een redirect naar de zwarte versie aanmaakt."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Een **canonical** zegt tegen Google welke van meerdere (bijna) gelijke pagina's hij moet indexeren en tonen, terwijl alle kleuren bereikbaar blijven voor bezoekers. In Lightspeed zet je daarvoor eerst **Custom canonical URLs** aan onder Settings > Workflow; daarna kun je per product een canonical invullen.\n\n- **Hide from search engine** houdt een product uit de index. Dan verdwijnen die pagina's wel uit Google, maar je wijst geen voorkeursversie aan.\n- **robots.txt** blokkeert het crawlen, niet het indexeren. Google ziet de pagina dan niet meer, dus ook geen canonical. Lightspeed raadt bovendien af om robots.txt aan te passen zonder SEO-ervaring.\n- **Een URL wijzigen** maakt een redirect van de oude naar de nieuwe URL van **hetzelfde** product, niet naar een ander product. De rode rugzak blijft dus gewoon bestaan, op een nieuw adres.",
+  "uitleg": "Lightspeed eCom (C-Series) regelt veel SEO-basis zelf. Per product heb je in het blok voor zoekmachines onder meer:\n\n- **paginatitel en meta description** (standaard gevuld uit de producttitel en omschrijving)\n- **product-URL**, maximaal 50 tekens. Wijzig je hem, dan maakt Lightspeed automatisch een redirect. Lightspeed raadt af URL's vaak te veranderen.\n- **Hide from search engine**: het product wordt niet geïndexeerd\n- **canonical URL**: pas zichtbaar als je Custom canonical URLs aanzet onder Settings > Workflow\n\nDe robots.txt blokkeert standaard al /admin, /cart, /compare en /checkout en geeft de sitemap door. Aanpassen kan in Web Extras, maar Lightspeed waarschuwt dat het niet nodig is en je rankings kan schaden.\n\nVoor varianten met dezelfde tekst is de canonical de logische keuze. Twee kanttekeningen:\n- Een canonical is een sterk signaal, geen bevel. Laat interne links en de sitemap dezelfde voorkeur geven.\n- Heeft een kleur echt eigen zoekvraag, zoals 'rode rugzak' voor dit model, dan kan een eigen pagina met unieke tekst juist beter zijn.",
+  "kernpunt": "Wil je in Lightspeed dat Google één van meerdere gelijke productpagina's toont, zet dan Custom canonical URLs aan en vul per variant de canonical in. Verbergen, robots.txt of URL's wijzigen lost iets anders op.",
+  "toepassing": "Kijk deze week bij een Lightspeed-klant of Custom canonical URLs aanstaat, en zoek drie producten die als losse varianten zijn aangemaakt. Welke canonical hebben ze nu?",
+  "bron": {
+    "titel": "Managing product SEO data | Lightspeed eCom (C-Series) Help Center",
+    "url": "https://ecom-support.lightspeedhq.com/hc/en-us/articles/220661107-Managing-product-SEO-data"
+  }
+}
