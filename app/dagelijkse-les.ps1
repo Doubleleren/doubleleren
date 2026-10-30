@@ -165,8 +165,15 @@ try {
             if ($l.actief -ne $false) { $les = $l; break }
         }
         if (-not $les) {
+            # Uit de gedeelde pool alleen lessen van vakken die je leert (zelfde regel als de website): je keuze uit je
+            # skilllijstbestand, anders je eigen vak uit het organogram. Vak van een les: 'cro:1.2.3' = cro, kale id's = standaardvak.
+            $inst = Read-DlJson $c.app 'instellingen.json'; $standaard = [string]$inst.vakgebied
+            $mijn = @()
+            try { $mxV = Read-DlVersleuteld $c.data $c.id 'matrix' $s $c.publiek; if ($mxV -and $mxV.obj.vakken) { $mijn = @($mxV.obj.vakken.PSObject.Properties | Where-Object { @(1, 2, 3) -contains [int]$_.Value } | ForEach-Object { $_.Name }) } } catch {}
+            if (-not $mijn.Count) { $mijn = @($(if ($org -and $org.leden.($c.id).vak) { [string]$org.leden.($c.id).vak } else { $standaard })) }
+            $lesVak = { param($l) $m = @($l.matrix | Where-Object { "$_" -like '*:*' })[0]; if ($m) { "$m".Split(':')[0] } else { $standaard } }
             $idx = Read-DlJson $c.app 'lessen/index.json'
-            $lesId = if ($idx) { @($idx.lessen | Where-Object { $gedaan -notcontains $_.id -and $_.actief -ne $false }) | Select-Object -First 1 -ExpandProperty id }
+            $lesId = if ($idx) { @($idx.lessen | Where-Object { $gedaan -notcontains $_.id -and $_.actief -ne $false -and $mijn -contains (& $lesVak $_) }) | Select-Object -First 1 -ExpandProperty id }
             if ($lesId) { $les = Read-DlJson $c.app "lessen/$lesId.json" }
         }
         if (-not $les) { Log-Fout 'Geen les beschikbaar: wachtrij en lessenpool zijn op. De generator vult ze aan.'; exit }

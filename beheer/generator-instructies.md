@@ -10,7 +10,7 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die
    Meldt het script bestanden met een ongeldige handtekening, noem dat aantal dan in je eindrapport (zonder pseudoniemen).
    Lessen worden bij het publiceren gecontroleerd. Een `bron.url` moet een `https://`-adres zijn, anders wordt er niets gepubliceerd.
 3. Lees `%USERPROFILE%\.doubleleren\beheer\generator\context.json`. Per deelnemer (pseudoniem `lid-xxxxxx`):
-   - `vak`: het vak waar de deelnemer bij hoort, en `vakken`: de vakken die hij wil leren met zijn prioriteit (`1` = hoog, `2` = normaal, `3` = laag). Een vak dat niet in `vakken` staat, staat uit: daar krijgt hij geen lessen over.
+   - `vak`: het vak waar de deelnemer bij hoort, en `vakken`: de vakken die hij wil leren met zijn stand: `1` = focus, `2` = meeleren (een oude `3` telt ook als meeleren). Een vak dat niet in `vakken` staat, staat uit: daar krijgt hij geen lessen over.
    - `scores`: laatste eigen score (1–5) per vaardigheid-id uit `sjablonen\<vak>\skilllijst.csv`. Het standaardvak (`vakgebied` in de context, `seo`) heeft kale id's (`1.3.3`), andere vakken het vak ervoor (`cro:1.3.3`).
    - `resultaten`: lessen van de laatste 3 maanden met `resultaat` (goed / deels / fout), `matrix`, `niveau`
    - `gedaan`: alle les-id's die de deelnemer ooit deed (ook ouder dan 3 maanden); die komen nooit meer in de wachtrij
@@ -26,8 +26,8 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die
 
 ## Vakken
 `vakken` in de context zijn de vakken met een skilllijst (bijv. `seo`, `cro`). Elke les hoort bij één vak; `matrix` gebruikt de id's van dat vak (`cro:1.3.3` voor CRO). Iemand krijgt alleen lessen over vakken die in zijn eigen `vakken` staan:
-- **Verdeling**: over de dag en de week ongeveer naar prioriteit, met gewicht 3 (hoog), 2 (normaal) en 1 (laag). Heeft iemand één vak, dan gaat alles daarover.
-- **Geen scores in een vak** (net aangezet, skilllijst nog niet ingevuld): behandel hem als beginner in dat vak (score 1–2), dus fundamenten op `basis`-niveau.
+- **Verdeling**: over de week ongeveer naar stand, met gewicht 3 voor focus en 1 voor meeleren. Heeft iemand één vak, dan gaat alles daarover. Het eigen vak staat standaard op focus.
+- **Geen scores in een vak** (net aangezet; een skilllijst invullen is voor een extra vak niet nodig): behandel hem als beginner in dat vak (score 1–2), dus fundamenten op `basis`-niveau, en laat de resultaten het niveau bijsturen: na een paar keer goed op `basis` mag het naar `gevorderd`. Een hele hoofdgebied met dezelfde score is meestal een snelle inschatting per hoofdgebied: neem die als ruwe indicatie.
 - **Bronnen per vak**: elk vak heeft eigen betrouwbare bronnen. Gebruik voor een vak zonder `curriculum.md` de gangbare vakliteratuur en officiële documentatie (bijv. Google Ads-help voor SEA, Meta-hulpcentrum voor social ads, GitHub Docs voor GitHub).
 - Het SEO-curriculum (CRO en werken met Claude als derde van de SEO-lessen) geldt alleen voor wie SEO leert.
 

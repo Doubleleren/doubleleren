@@ -441,14 +441,21 @@ function toonSkilllijst() {
     : perVak(klaar[0]));
 }
 // Bewust leeg: je eerdere score staat er niet bij, zodat je echt opnieuw inschat. Typ 1–5 en je springt naar de volgende.
-function toonSkillFormulier(vak) {
+// Twee manieren: per vaardigheid, of snel per hoofdgebied (die score geldt dan voor elke vaardigheid eronder).
+// Standaard snel voor een extra vak dat je nog niet invulde; per vaardigheid voor je eigen vak.
+function toonSkillFormulier(vak, modus) {
   const lid = S.leden[S.mij]; if (!lid?.sl) return;
   const vk = vakkenVan(lid); if (!vk.length) return;
   S.formVak = vk.includes(vak) ? vak : vk.find((v) => !ingevuld(lid, v)) || vk[0];
+  S.formModus = modus || (S.formVak !== eigenVak(S.mij) && !ingevuld(lid, S.formVak) ? 'snel' : 'detail');
+  $('mx-modus').innerHTML = [['snel', 'Snel per hoofdgebied'], ['detail', 'Per vaardigheid']].map(([m, t]) => `<button type="button" class="knop" data-modus="${m}" aria-pressed="${S.formModus === m}">${t}</button>`).join('');
   $('mx-vakkeuze').hidden = vk.length < 2;
   $('mx-vakkeuze').innerHTML = vk.length < 2 ? '' : vk.map((v) => `<button type="button" class="knop" data-formvak="${esc(v)}" aria-pressed="${v === S.formVak}">${esc(vakNaam(v))}${ingevuld(lid, v) ? '' : ' (nieuw)'}</button>`).join('');
   $('mx-form-titel').textContent = meerVakken() ? `Skilllijst ${vakNaam(S.formVak)} bijwerken` : 'Skilllijst bijwerken';
-  $('mx-velden').innerHTML = [...groepeer(lid, [S.formVak])].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
+  if (S.formModus === 'snel') {
+    const hg = new Map(); for (const it of itemsVan(null, S.formVak)) { const n = hgSleutel(it.id); if (!hg.has(n)) hg.set(n, { naam: it.hoofdgebied, n: 0 }); hg.get(n).n++; }
+    $('mx-velden').innerHTML = `<div class="mx-groep">${[...hg].map(([n, x]) => `<div class="mx-rij"><span class="id num">${esc(n.split(':').pop())}</span><label for="h-${esc(n)}">${esc(x.naam)} <span class="noot">${x.n} vaardigheden</span></label><input class="score-veld num" id="h-${esc(n)}" data-hg="${esc(n)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${x.naam}`)}"></div>`).join('')}</div>`;
+  } else $('mx-velden').innerHTML = [...groepeer(lid, [S.formVak])].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
     let context = '';
     const rijen = its.map((i) => {
       const kop = i.context && i.context !== context ? `<div class="mx-context">${esc(i.context)}</div>` : ''; context = i.context;
@@ -505,10 +512,15 @@ async function bewaarScores(nieuw, melding) {
 }
 async function slaSkilllijstOp() {
   const maand = dagKey(nu()).slice(0, 7), keuze = {}, missend = [];
-  for (const veld of skillVelden()) { const v = Number(veld.value); if (S.sjabloon.has(veld.dataset.id) && v >= 1 && v <= 5) keuze[veld.dataset.id] = v; else { missend.push(veld); veld.classList.add('mist'); } }
+  for (const veld of skillVelden()) {
+    const v = Number(veld.value);
+    if (!(v >= 1 && v <= 5)) { missend.push(veld); veld.classList.add('mist'); continue; }
+    if (veld.dataset.hg) { for (const it of itemsVan(null, S.formVak)) if (hgSleutel(it.id) === veld.dataset.hg) keuze[it.id] = v; }   // snel: geldt voor het hele hoofdgebied
+    else if (S.sjabloon.has(veld.dataset.id)) keuze[veld.dataset.id] = v;
+  }
   if (missend.length) {
     missend[0].focus();
-    throw new Error(`Vul nog ${missend.length} ${missend.length === 1 ? 'vaardigheid' : 'vaardigheden'} in (rood gemarkeerd).`);
+    throw new Error(`Vul nog ${missend.length} ${S.formModus === 'snel' ? (missend.length === 1 ? 'hoofdgebied' : 'hoofdgebieden') : missend.length === 1 ? 'vaardigheid' : 'vaardigheden'} in (rood gemarkeerd).`);
   }
   await bewaarScores(Object.fromEntries(Object.entries(keuze).map(([id, n]) => [id, { [maand]: n }])),
     `Opgeslagen: je inschatting${meerVakken() ? ` voor ${vakNaam(S.formVak)}` : ''} van ${fmtMaand(maand)} staat erin.`);
@@ -531,17 +543,22 @@ $('mx-xlsx').addEventListener('change', uploadSkilllijst);
 
 // ---------------------------------------------------------------- eigen prioriteit per hoofdgebied
 const PRIO = { 1: 'Hoog', 2: 'Normaal', 3: 'Laag' };
+// Optioneel: per vak een dichtgeklapt blok; alles staat standaard op normaal
 function toonPrioriteit() {
-  const lid = S.leden[S.mij], p = lid?.prioriteit || {};
-  $('prio').innerHTML = lid?.matrix
-    ? [...hoofdgebieden(lid)].map(([n, naam]) => `<div class="rij"><span>${esc(naam)}</span><span class="prio-keuze" role="group" aria-label="${esc(`Prioriteit ${naam}`)}">${[1, 2, 3].map((k) => `<button type="button" class="knop" data-prio="${esc(n)}" data-waarde="${k}" aria-pressed="${(p[n] || 2) === k}">${PRIO[k]}</button>`).join('')}</span></div>`).join('')
-    : '<p class="leeg">Vul eerst je skilllijst in; daarna kies je hier waar je je op wilt richten.</p>';
+  const lid = S.leden[S.mij], p = lid?.prioriteit || {}, open = new Set([...$('prio').querySelectorAll('details[open]')].map((d) => d.dataset.vak));
+  const vk = lid?.sl ? vakkenVan(lid) : [];
+  $('prio').innerHTML = vk.length ? vk.map((v) => {
+    const hg = new Map(); for (const it of itemsVan(null, v)) if (!hg.has(hgSleutel(it.id))) hg.set(hgSleutel(it.id), it.hoofdgebied);
+    const anders = [...hg.keys()].filter((n) => (p[n] || 2) !== 2).length;
+    return `<details class="mx-vak" data-vak="${esc(v)}"${open.has(v) ? ' open' : ''}><summary><span class="mx-naam"><i class="pijl"></i>${esc(vakNaam(v))}</span><span class="sub">${anders ? `${anders} aangepast` : 'alles normaal'}</span><span></span></summary>`
+      + [...hg].map(([n, naam]) => `<div class="rij"><span>${esc(naam)}</span><span class="prio-keuze" role="group" aria-label="${esc(`Prioriteit ${naam}`)}">${[1, 2, 3].map((k) => `<button type="button" class="knop" data-prio="${esc(n)}" data-waarde="${k}" aria-pressed="${(p[n] || 2) === k}">${PRIO[k]}</button>`).join('')}</span></div>`).join('') + '</details>';
+  }).join('') : '<p class="leeg">Zet eerst een vak aan bij "Wat wil je leren?".</p>';
 }
 async function zetPrioriteit(n, k) {
   const ik = S.leden[S.mij];
   $('prio').querySelectorAll('button').forEach((b) => { b.disabled = true; }); $('prio-status').textContent = 'Opslaan…';
   try {
-    await werkBij(S.mij, 'matrix', ik.sl, (h) => { if (!h) throw new Error('Vul eerst je skilllijst in.'); return { ...h, prioriteit: { ...schoonPrioriteit(h.prioriteit), [n]: k } }; });
+    await werkBij(S.mij, 'matrix', ik.sl, (h) => ({ ...(h || { v: 1, sjabloon: S.inst.vakgebied, scores: {} }), prioriteit: { ...schoonPrioriteit(h?.prioriteit), [n]: k } }));
     ik.prioriteit = { ...(ik.prioriteit || {}), [n]: k };
     $('prio-status').textContent = `Opgeslagen: ${hoofdgebieden().get(n)} heeft nu prioriteit ${PRIO[k].toLowerCase()}. De generator houdt er vanaf de volgende ochtend rekening mee.`;
   } catch (e) { $('prio-status').textContent = 'Opslaan mislukt: ' + e.message; }
@@ -560,15 +577,19 @@ function toonInstellingen() {
 // ---------------------------------------------------------------- welke vakken je leert
 // Alle vakken uit instellingen.json die je kunt leren (geen groepen zoals Base); een vak zonder skilllijst staat erbij als
 // "volgt nog". Uit = geen lessen over dat vak. Wie bij een groep hoort, heeft geen standaardvak en kiest zelf.
+// Per vak drie standen: focus (1, de meeste lessen), meeleren (2) en uit; een oude 'laag' (3) telt als meeleren
+const STAND = [[1, 'Focus'], [2, 'Meeleren'], [0, 'Uit']];
+const stand = (w) => (w === 1 ? 1 : w ? 2 : 0);
 const isGroep = (v) => S.alleVakken.find((x) => x.id === v)?.soort === 'groep';
 function toonVakken() {
   const lid = S.leden[S.mij], leerbaar = S.alleVakken.filter((v) => v.soort !== 'groep');
   $('vakken-paneel').hidden = leerbaar.length < 2 || !lid?.sl;
   if ($('vakken-paneel').hidden) return;
   const k = gekozenVakken(lid), eigen = eigenVak(S.mij);
+  leerbaar.sort((a, b) => (b.id === eigen) - (a.id === eigen));   // je eigen vak bovenaan
   $('vakken').innerHTML = (isGroep(eigen) ? `<p class="sub" style="margin:0 0 6px">Bij ${esc(vakNaam(eigen))} hoort geen vak met eigen lessen. Zet hieronder aan wat je wilt leren.</p>` : '') + leerbaar.map((v) => !v.lijst
     ? `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="sub">Skilllijst volgt nog</span></div>`
-    : `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="prio-keuze" role="group" aria-label="${esc(`Leren: ${v.naam}`)}">${[1, 2, 3, 0].map((w) => `<button type="button" class="knop" data-vak="${esc(v.id)}" data-waarde="${w}" aria-pressed="${(k[v.id] || 0) === w}">${w ? PRIO[w] : 'Uit'}</button>`).join('')}</span></div>`).join('');
+    : `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="prio-keuze" role="group" aria-label="${esc(`Leren: ${v.naam}`)}">${STAND.map(([w, t]) => `<button type="button" class="knop" data-vak="${esc(v.id)}" data-waarde="${w}" aria-pressed="${stand(k[v.id]) === w}">${t}</button>`).join('')}</span></div>`).join('');
 }
 async function zetVak(vak, w) {
   const ik = S.leden[S.mij], nieuw = { ...gekozenVakken(ik) };
@@ -579,12 +600,13 @@ async function zetVak(vak, w) {
     await werkBij(S.mij, 'matrix', ik.sl, (h) => ({ ...(h || { v: 1, sjabloon: S.inst.vakgebied, scores: {} }), vakken: nieuw }));
     ik.vakken = nieuw;
     $('vakken-status').textContent = w
-      ? `Opgeslagen: ${vakNaam(vak)} staat op ${PRIO[w].toLowerCase()}.${ingevuld(ik, vak) ? '' : ' Vul ook je skilllijst voor dit vak in, dan passen de lessen bij je niveau.'} De generator houdt er vanaf de volgende ochtend rekening mee.`
+      ? `Opgeslagen: ${vakNaam(vak)} staat op ${w === 1 ? 'focus' : 'meeleren'}.${ingevuld(ik, vak) ? '' : ' Een skilllijst invullen hoeft niet: je begint op beginnersniveau en de lessen passen zich aan je antwoorden aan. Sneller op niveau? Schat jezelf in bij Skilllijst; per hoofdgebied kost dat een minuut.'} De generator houdt er vanaf de volgende ochtend rekening mee.`
       : `Opgeslagen: je krijgt geen lessen meer over ${vakNaam(vak)}.`;
   } catch (e) { $('vakken-status').textContent = 'Opslaan mislukt: ' + e.message; }
   toonInstellingen(); toonSkilllijst(); toonMij();
 }
 $('vakken').addEventListener('click', (e) => { const b = e.target.closest('button[data-vak]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetVak(b.dataset.vak, Number(b.dataset.waarde)); });
+$('mx-modus').addEventListener('click', (e) => { const b = e.target.closest('button[data-modus]'); if (b && b.getAttribute('aria-pressed') !== 'true') toonSkillFormulier(S.formVak, b.dataset.modus); });
 $('mx-vakkeuze').addEventListener('click', (e) => { const b = e.target.closest('button[data-formvak]'); if (b && b.getAttribute('aria-pressed') !== 'true') toonSkillFormulier(b.dataset.formvak); });
 
 // ---------------------------------------------------------------- halfjaarlijkse check van de skilllijst
@@ -842,9 +864,14 @@ async function toonScorebord() {
   $('sb-tabel').innerHTML = '<tbody><tr><td class="sub">Laden…</td></tr></tbody>';
   const [standen, verborgen] = await Promise.all([Promise.all(sbPaden().filter((p) => ms.includes(SB_PAD.exec(p)[1])).map(leesScore)), sbVerborgen()]);
   if (sel.value !== gekozen) return;
+  // Jouw vak (of groep) of heel DoubleSmart
+  const mijnVak = eigenVak(S.mij), groep = S.alleVakken.length > 1 && SB.groep !== 'alles' ? mijnVak : null;
+  $('sb-groep').hidden = S.alleVakken.length < 2;
+  $('sb-groep').innerHTML = [['vak', vakNaam(mijnVak)], ['alles', 'DoubleSmart']].map(([g, t]) => `<button type="button" class="knop" data-groep="${g}" aria-pressed="${(SB.groep || 'vak') === g}">${esc(t)}</button>`).join('');
   const per = new Map();
   for (const s of standen) {
     if (!s?.zichtbaar || verborgen.has(s.id) || !S.org.leden[s.id]) continue;
+    if (groep && eigenVak(s.id) !== groep) continue;
     const t = per.get(s.id) || { id: s.id, goed: 0, punten: 0, reeks: 0, nu: 0 };
     t.goed += s.goed; t.punten += s.goed + s.langsteReeks; t.reeks = Math.max(t.reeks, s.langsteReeks); if (s.maand === nuM) t.nu = actueleReeks(s);
     per.set(s.id, t);
@@ -857,6 +884,7 @@ async function toonScorebord() {
   }).join('')}</tbody>` : '<tbody><tr><td class="leeg">Nog niemand op het scorebord in deze periode.</td></tr></tbody>';
   $('sb-sub').textContent = soort === 'j' ? `Jaarstand ${w}: punten en goed opgeteld over de maanden, langste reeks = de beste maand.` : huidig ? 'Deze maand loopt nog. Je stand wordt bijgewerkt zodra je een les afrondt.' : '';
 }
+$('sb-groep').addEventListener('click', (e) => { const b = e.target.closest('button[data-groep]'); if (b && b.getAttribute('aria-pressed') !== 'true') { SB.groep = b.dataset.groep; toonScorebord(); } });
 // De keuze staat in je eigen profiel (versleuteld en door jou ondertekend), niet in de openbare scorebordbestanden
 async function zetZichtbaar(aan) {
   $('sb-zichtbaar').disabled = true; $('sb-zichtbaar-status').textContent = 'Opslaan…';
@@ -1051,6 +1079,8 @@ function geldigeLes(l, id) {
   return true;
 }
 const MIDDAG = '12:30';
+// Vak van een les: uit de vaardigheid-id's (cro:1.2.3 = CRO); kale id's of geen = het standaardvak
+const lesVak = (l) => { const m = (Array.isArray(l?.matrix) ? l.matrix : []).map(String).find((x) => x.includes(':')); return m ? m.split(':')[0] : S.inst.vakgebied; };
 async function kiesLes() {
   const ik = S.leden[S.mij];
   // Twee lessen per dag: één in de ochtend, de tweede vanaf 12:30 (zelfde regel als de pop-up). De reeks blijft per dag.
@@ -1061,7 +1091,9 @@ async function kiesLes() {
   if (ronde(ik).teLaat) return { geblokkeerd: true };
   const gedaan = new Set(ik.logs.map((l) => l.id));
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
-  const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen)];
+  // Je wachtrij (klaargezet door de generator) altijd; uit de gedeelde kennisbank alleen lessen van vakken die je leert
+  const mijn = vakkenVan(ik);
+  const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen).filter((id) => mijn.includes(lesVak(S.lessen[id])))];
   for (const id of kandidaten) {
     if (!id || gedaan.has(id) || !LES_ID.test(id) || S.lessen[id]?.actief === false) continue;
     const les = await haalLes(id);
