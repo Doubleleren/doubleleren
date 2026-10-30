@@ -1,0 +1,32 @@
+{
+  "id": "20261030-ai-assistenten-kanaalgroep-claude",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "AI-verkeer meten met een aangepaste kanaalgroep in GA4",
+  "matrix": [
+    "12.1.6",
+    "3.1.4"
+  ],
+  "titel": "Hoeveel leads komen uit ChatGPT? Bouw met Claude een eigen GA4-kanaal",
+  "intro": "Een installatiebedrijf wil elke maand weten hoeveel bezoekers en offerteaanvragen uit AI-assistenten komen, zoals ChatGPT, Perplexity, Gemini, Copilot en Claude. Nu staat dat verkeer verspreid tussen tientallen andere bronnen in het kanaal Referral. De klant heeft een gewone GA4-property, zonder 360.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Laat Claude een kanaal 'AI-assistenten' opzetten voor een aangepaste kanaalgroep in GA4: de voorwaarde, de regex en waar het kanaal in de volgorde moet staan. Plak je prompt en Claudes regex, en schrijf in twee zinnen hoe je controleert of het klopt en wat dit kanaal níet laat zien.",
+    "minTekens": 150,
+    "hint": "GA4 deelt een sessie in bij het eerste kanaal in de lijst waarvan de regels kloppen."
+  },
+  "modelantwoord": "**De kern:** maak een eigen kanaal met als voorwaarde 'bron komt overeen met regex' en een regex met de domeinen van de AI-assistenten. Zet het kanaal boven Referral, anders pakt Referral het verkeer eerst.\n\nPrompt: 'Ik maak in GA4 een aangepaste kanaalgroep. Schrijf een regex voor de dimensie Bron die verkeer van ChatGPT, Perplexity, Gemini, Copilot en Claude herkent. Leg uit waar het kanaal in de volgorde moet staan, en noem domeinen die ik per ongeluk zou kunnen meepakken.'\n\nVoorbeeld van een regex: .*(chatgpt\\.com|openai\\.com|perplexity\\.ai|gemini\\.google\\.com|copilot\\.microsoft\\.com|claude\\.ai).*\n\nControle: test de regex eerst als filter in het rapport Verkeersacquisitie op Sessiebron. Komen er alleen AI-bronnen uit, dan klopt hij. Kijk daarna of het nieuwe kanaal ongeveer evenveel sessies heeft.\n\nWat het níet laat zien: klikken uit AI-antwoorden die zonder verwijzing binnenkomen. Die staan bij Direct. Zie het kanaal dus als ondergrens.\n\nVeelgemaakte fout: het kanaal onderaan de lijst zetten. Dan valt het verkeer al in Referral en blijft je nieuwe kanaal leeg.",
+  "uitleg": "Een **aangepaste kanaalgroep** is je eigen indeling van verkeersbronnen naast de standaardindeling van GA4. Je maakt hem onder Beheer → Gegevensweergave → Kanaalgroepen. Je hebt de rol Bewerker nodig.\n\nWat de GA4-help erover zegt:\n- Een gewone property mag **2** aangepaste kanaalgroepen hebben, een 360-property 5. Elke groep kan tot 50 kanalen bevatten.\n- Een sessie komt in het **eerste kanaal** waarvan de regels kloppen. De volgorde telt dus. Google noemt AI-assistenten zelf als voorbeeld: zet zo'n kanaal boven Referral.\n- Een aangepaste kanaalgroep werkt **met terugwerkende kracht**. Je ziet het AI-kanaal dus ook voor de afgelopen maanden.\n- De groep zit niet in de BigQuery-export, en verwijderen kan niet ongedaan worden gemaakt.\n\nClaude is handig voor de regex: die moet alle varianten van een domein vangen, maar niets anders. Laat Claude ook uitleggen wat elk deel doet, zodat je hem later zelf kunt bijwerken. Er komen steeds nieuwe AI-tools bij, dus zet in je agenda dat je de lijst elk kwartaal controleert.\n\nRapporteer het AI-kanaal altijd met een kanttekening: niet elke klik uit een AI-antwoord geeft een verwijzing mee.",
+  "kernpunt": "Meet AI-verkeer met een eigen kanaal in een aangepaste kanaalgroep: regex op de bron, boven Referral in de volgorde. Het werkt met terugwerkende kracht, maar mist klikken zonder verwijzing.",
+  "toepassing": "Maak deze week bij één klant het kanaal 'AI-assistenten' aan en zet de sessies en key events van de laatste drie maanden in je volgende rapportage.",
+  "bron": {
+    "titel": "Custom channel groups - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/13051316"
+  },
+  "video": {
+    "titel": "How to Track AI Traffic in GA4 and Ahrefs Web Analytics (ChatGPT & More)",
+    "kanaal": "Ahrefs",
+    "url": "https://www.youtube.com/watch?v=9TpyYFcAhmk"
+  }
+}

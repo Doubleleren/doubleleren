@@ -13,10 +13,10 @@
     "soort": "meerkeuze",
     "vraag": "Wat doe je voordat er iets wordt uitgerold?",
     "opties": [
-      "Uitrollen: de tool zegt dat het resultaat significant is, en daar gaat het om",
+      "Uitrollen: 97% haalt de significantiedrempel die vooraf is afgesproken, en daar gaat het om",
       "Eerst toetsen of 50.000 tegen 48.500 nog bij toeval past, en zo niet de oorzaak zoeken",
-      "Niets: 3% verschil in bezoekers is te klein om de uitkomst te beïnvloeden",
-      "De test laten doorlopen tot variant B ook 50.000 bezoekers heeft gehad"
+      "Niets extra: 3% verschil in bezoekers is te klein om de conversie-uitkomst te beïnvloeden",
+      "De test laten doorlopen tot variant B ook 50.000 bezoekers heeft, zodat de groepen gelijk zijn"
     ],
     "juist": 1
   },
@@ -29,6 +29,6 @@
     "url": "https://www.lukasvermeer.nl/srm/"
   },
   "niveau": "basis",
-  "herzien": "2026-10-29",
-  "wijziging": "Spoiler weggehaald: titel en juiste optie verraadden het antwoord. Situatie naar de intro, opties gelijkwaardiger gemaakt."
+  "herzien": "2026-10-30",
+  "wijziging": "Opties even lang gemaakt."
 }

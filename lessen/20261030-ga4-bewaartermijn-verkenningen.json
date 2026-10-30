@@ -1,0 +1,27 @@
+{
+  "id": "20261030-ga4-bewaartermijn-verkenningen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: bewaartermijn van gegevens en verkenningen",
+  "matrix": [
+    "3.1.2",
+    "3.1.4"
+  ],
+  "titel": "De verkenning is leeg vóór september, het standaardrapport niet",
+  "intro": "Je wilt voor een klant in GA4 een trechterverkenning maken van de leadformulieren, met oktober van dit jaar naast oktober vorig jaar. De verkenning toont alleen data van de laatste twee maanden; daarvoor is alles leeg. In het standaardrapport Verkeersacquisitie zie je oktober vorig jaar wel gewoon.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de Analytics Help op waardoor dit komt. Leg uit welke instelling je aanpast, voor welke rapporten die instelling geldt, en of de lege maanden daarna weer gevuld worden.",
+    "minTekens": 120,
+    "hint": "Zoek in de Analytics Help naar hoe lang GA4 gegevens op gebruikers- en eventniveau bewaart."
+  },
+  "modelantwoord": "**De kern:** de bewaartermijn van de property staat op 2 maanden. Zet hem op 14 maanden. Dat geldt alleen voor verkenningen en trechterrapporten; data die al weg is, komt niet terug.\n\nWaarom: GA4 bewaart gegevens op gebruikers- en eventniveau maar beperkt. Bij een gewone property kies je 2 of 14 maanden (langere termijnen zijn er alleen voor GA4 360). De standaardrapporten werken met samengevoegde data en hebben daar geen last van. Daarom zie je oktober vorig jaar daar wel.\n\nJe vindt de instelling onder Beheer → Gegevensverzameling en -aanpassing → Gegevensbewaring. Een langere termijn geldt voor de data die er nog is. Wat al verwijderd is, haal je niet terug. Voor deze vergelijking gebruik je dus het standaardrapport, en over een jaar kan het wel in een verkenning.\n\nVeelgemaakte fout: denken dat er iets mis is met de tracking. De data is wel gemeten, maar na twee maanden niet meer beschikbaar voor verkenningen.",
+  "uitleg": "GA4 kent twee soorten rapportage:\n- **Standaardrapporten** (zoals Verkeersacquisitie) werken met samengevoegde gegevens. Daar geldt de bewaartermijn niet.\n- **Verkenningen en trechterrapporten** werken met gegevens op gebruikers- en eventniveau. Die zijn maar beperkt beschikbaar.\n\nHoe lang, bepaal je met de instelling **Gegevensbewaring**. Bij een gewone property kies je 2 of 14 maanden. Verlengen werkt ook voor data die er nog is. Verkorten verwijdert oudere data bij de eerstvolgende maandelijkse opschoning. Na een wijziging heb je 24 uur om die terug te draaien.\n\nDaarnaast is er de optie **Gebruikersgegevens resetten bij nieuwe activiteit**. Staat die aan, dan begint de bewaartermijn van een gebruiker opnieuw bij elk nieuw event.\n\nIn de praktijk staan veel properties nog op 2 maanden, omdat niemand er bij de installatie naar keek. Dat merk je pas als je een jaar-op-jaarvergelijking in een verkenning wilt maken, en dan is het te laat. Zet de termijn op 14 maanden zodra een property live gaat, tenzij er een privacyreden is om dat niet te doen. Bespreek dat met de klant.",
+  "kernpunt": "De bewaartermijn (2 of 14 maanden) geldt alleen voor verkenningen en trechterrapporten, niet voor standaardrapporten. Zet hem direct op 14 maanden: wat al verwijderd is, komt niet terug.",
+  "toepassing": "Controleer deze week bij al je GA4-klanten onder Beheer → Gegevensbewaring hoe lang gegevens bewaard worden. Staat het op 2 maanden, overleg dan met de klant en zet het op 14 maanden.",
+  "bron": {
+    "titel": "Data retention - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/7667196"
+  }
+}

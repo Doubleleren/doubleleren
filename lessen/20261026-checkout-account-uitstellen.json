@@ -13,12 +13,12 @@
     "soort": "meerkeuze",
     "vraag": "Welke aanpak adviseer je?",
     "opties": [
-      "Maak gast-afrekenen de opvallendste optie bovenaan de eerste stap, en bied het account pas op de bevestigingspagina aan, waar alleen nog een wachtwoord nodig is.",
-      "Houd het account verplicht, maar beloof 10% korting op de volgende bestelling voor wie er een aanmaakt.",
-      "Houd het account verplicht, maar vraag alleen nog e-mailadres en wachtwoord, zodat de stap sneller gaat.",
-      "Bied gast-afrekenen aan als tekstlink onder het inlogformulier, en vraag halverwege de checkout nog eens of de bezoeker toch een account wil."
+      "Houd het account verplicht, maar beloof 10% korting op de volgende bestelling aan iedereen die er een aanmaakt.",
+      "Houd het account verplicht, maar vraag alleen nog e-mailadres en wachtwoord, zodat die eerste stap veel sneller gaat.",
+      "Gast-afrekenen als duidelijkste keuze bovenaan, en het account pas na de bestelling aanbieden met alleen een wachtwoord.",
+      "Gast-afrekenen als tekstlink onder het inlogformulier, en halverwege nog eens vragen of het toch een account wordt."
     ],
-    "juist": 0
+    "juist": 2
   },
   "toelichting": "In Baymards onderzoek noemt **18%** van de shoppers een verplicht account als reden om een bestelling af te breken. De beste aanpak houdt het account, maar haalt het uit de weg:\n\n- **Gast-afrekenen opvallend bovenaan**, als knop met het woord 'gast' erin.\n- **Account na de bestelling** op de bevestigingspagina. Alle gegevens zijn dan al ingevuld, dus alleen een wachtwoord is nog nodig. Zo krijgt de eigenaar alsnog accounts.\n\nWaarom de andere opties tekortschieten:\n- **Korting** maakt het account aantrekkelijker, maar blijft een drempel voor wie gewoon wil bestellen.\n- **Minder velden** verkort de stap, maar het account blijft verplicht.\n- **Een tekstlink onder het inlogformulier** wordt makkelijk gemist, en halverwege opnieuw vragen irriteert en wekt de indruk dat een account toch verplicht is.",
   "uitleg": "Een verplicht account is een van de bekendste oorzaken van afhaken in de checkout. In Baymards enquête onder Amerikaanse shoppers noemde 18% het als reden om een bestelling af te breken. Toch vraagt volgens Baymard 42% van de onderzochte sites om een account vóór of tijdens het afrekenen.\n\nDe oplossing is niet 'geen accounts meer', maar een andere volgorde:\n- **Begin met gast-afrekenen** als de duidelijkste keuze. Wie de gastoptie niet ziet, ervaart hem als afwezig.\n- **Meld dat een account later kan.** Zo hoeven terugkerende klanten niet te zoeken.\n- **Bied het account aan op de bevestigingspagina.** De bestelling is binnen, de gegevens staan er al, en een wachtwoord kiezen is genoeg. Noem daar 3–5 voordelen, zoals sneller bestellen, orderstatus volgen of spaarpunten.\n\nIn Baymards tests werkte account aanmaken na de bestelling beter dan aan het begin of halverwege. Bezoekers blijven gefocust op afronden en koppelen de checkoutvelden niet aan een account.\n\nWil de eigenaar klanten later mailen? Dan kan dat ook met een aparte, duidelijke opt-in voor de nieuwsbrief, los van het account.",
@@ -27,5 +27,7 @@
   "bron": {
     "titel": "Baymard Institute: Save Account Creation for the Confirmation Step",
     "url": "https://baymard.com/blog/delayed-account-creation"
-  }
+  },
+  "herzien": "2026-10-30",
+  "wijziging": "Opties even lang gemaakt."
 }

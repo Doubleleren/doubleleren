@@ -8,16 +8,15 @@
     "5.2.6"
   ],
   "titel": "Lighthouse zegt CLS 0,02, Search Console zegt 0,28. Wie heeft gelijk?",
-  "volgorde": "opdracht-eerst",
   "intro": "Een klant met een nieuwsblog stuurt een screenshot van Lighthouse: CLS 0,02, groen. Toch markeert het Core Web Vitals-rapport in Search Console dezelfde artikelpagina's op mobiel als 'Slecht' met een CLS van 0,28.",
   "opdracht": {
     "soort": "meerkeuze",
     "vraag": "Wat is de meest waarschijnlijke verklaring voor het verschil?",
     "opties": [
-      "Lighthouse is onbetrouwbaar voor CLS; alleen Search Console meet het echt, dus de Lighthouse-score kun je negeren.",
-      "Search Console telt alle layout shifts van het hele bezoek bij elkaar op, Lighthouse alleen de grootste.",
-      "Search Console rapporteert alleen desktopdata; op mobiel is de CLS dus waarschijnlijk wel goed.",
-      "Lighthouse meet in het lab alleen tijdens het laden, terwijl de velddata ook shifts verderop in het bezoek meetellen, zoals advertenties die bij het scrollen inladen."
+      "Lighthouse is onbetrouwbaar voor CLS; alleen Search Console meet het echt, dus het labresultaat kun je negeren.",
+      "Search Console telt alle layout shifts van het hele bezoek bij elkaar op, terwijl Lighthouse alleen de grootste neemt.",
+      "Search Console gebruikt hier eigenlijk desktopdata, dus voor mobiel zegt die 0,28 weinig over deze pagina's.",
+      "Lighthouse meet alleen tijdens het laden; de velddata tellen ook shifts later in het bezoek mee, zoals ads bij scrollen."
     ],
     "juist": 3
   },
@@ -33,5 +32,7 @@
     "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
     "kanaal": "Matt Diggity",
     "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
-  }
+  },
+  "herzien": "2026-10-30",
+  "wijziging": "Opties even lang gemaakt."
 }

@@ -1,0 +1,26 @@
+{
+  "id": "20261030-consent-mode-basis-of-geavanceerd",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Analytics",
+  "onderwerp": "Consent Mode: basis of geavanceerd, en wat dat met je GA4-data doet",
+  "matrix": [
+    "3.1.1",
+    "3.1.4"
+  ],
+  "titel": "Sinds de nieuwe cookiebanner mist GA4 een derde van de bestellingen",
+  "intro": "Een webshop heeft een nieuwe cookiebanner. Die is zo ingesteld dat Google-tags pas laden nadat een bezoeker op 'Accepteren' klikt. Sindsdien telt GA4 ongeveer een derde minder aankopen dan het webshopsysteem. De marketingmanager vraagt of 'die Consent Mode' daar iets aan kan doen, en of dat dan wel mag.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Leg de marketingmanager uit wat er nu gebeurt met bezoekers die geen toestemming geven, wat de andere manier van instellen anders doet, en welke afweging de klant moet maken voordat je iets verandert.",
+    "minTekens": 150
+  },
+  "modelantwoord": "**De kern:** nu laadt GA4 pas na 'Accepteren', dus van wie weigert of niets kiest, komt niets binnen. In de geavanceerde instelling laadt de tag wel, maar stuurt hij zonder toestemming alleen meldingen zonder cookies. Daarmee kan GA4 een deel van het gat schatten. Of de klant dat wil, is ook een privacy- en juridische keuze.\n\nUitgebreider:\n- **Nu (basis):** Google-tags worden geblokkeerd tot de bezoeker iets kiest. Zonder toestemming gaat er geen data naar Google.\n- **Geavanceerd:** de tags laden direct, met toestemming standaard op 'geweigerd'. Weigert iemand, dan stuurt de tag pings zonder cookies. Als er genoeg data is, kan GA4 met gedragsmodellering het gedrag van niet-toestemmers schatten.\n- **Afweging:** meer en beter geschatte data tegenover het feit dat er ook zonder toestemming iets naar Google gaat. Laat de klant dat met de privacyverantwoordelijke of jurist beslissen; jij legt de opties uit.\n\nVeelgemaakte fout: beloven dat Consent Mode de ontbrekende aankopen 'terughaalt'. Modellering is een schatting, en werkt alleen boven een bepaalde hoeveelheid data. Echte cijfers blijven in het webshopsysteem staan.",
+  "uitleg": "**Consent Mode** laat Google-tags hun gedrag aanpassen aan de keuze die een bezoeker in de cookiebanner maakt. Er zijn vier toestemmingstypes:\n- **analytics_storage:** cookies en identifiers voor analytics;\n- **ad_storage:** cookies en identifiers voor advertenties;\n- **ad_user_data:** gebruikersgegevens naar Google sturen voor advertenties;\n- **ad_personalization:** gepersonaliseerde advertenties.\n\nJe kunt Consent Mode op twee manieren gebruiken:\n- **Basis:** de Google-tags laden pas als de bezoeker iets kiest in de banner. Zonder toestemming wordt er niets verstuurd.\n- **Geavanceerd:** de tags laden meteen, met een standaardstatus (meestal 'geweigerd'). Zonder toestemming sturen ze metingen zonder cookies. Die kan GA4 gebruiken voor gedragsmodellering, als de property genoeg data verzamelt.\n\nVoor jou als SEO-consultant betekent dit:\n- Een daling in GA4 na een nieuwe banner is meestal geen daling in verkeer of omzet. Vergelijk altijd met de backend.\n- Rapporteer conversies uit GA4 met een kanttekening over toestemming.\n- Controleer met Tag Assistant of de juiste toestemmingsstatus wordt doorgegeven, vóór en na een klik in de banner.\n\nWelke manier de klant kiest, is niet alleen een technische keuze. Die beslissing hoort bij de klant.",
+  "kernpunt": "In de basismodus gaat er zonder toestemming niets naar Google; in de geavanceerde modus sturen de tags pings zonder cookies, die GA4 kan gebruiken voor modellering. Welke het wordt, beslist de klant.",
+  "toepassing": "Open bij één klant Tag Assistant, weiger de cookies en kijk of de GA4-tag dan laadt en welke toestemmingsstatus hij doorgeeft. Zo weet je of de klant basis of geavanceerd gebruikt.",
+  "bron": {
+    "titel": "Consent mode overview | Google for Developers",
+    "url": "https://developers.google.com/tag-platform/security/concepts/consent-mode"
+  }
+}

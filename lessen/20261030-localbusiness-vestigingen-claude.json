@@ -1,0 +1,27 @@
+{
+  "id": "20261030-localbusiness-vestigingen-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "LocalBusiness-markup voor bedrijven met meerdere vestigingen",
+  "matrix": [
+    "2.2.8",
+    "2.2.9"
+  ],
+  "titel": "Drie vestigingen, één generiek schemablok: laat Claude het per locatie maken",
+  "intro": "Een loodgieters- en installatiebedrijf heeft vestigingen in Utrecht, Amersfoort en Zeist, elk met een eigen pagina, adres, telefoonnummer en openingstijden. De SEO-plugin zet op alle pagina's hetzelfde Organization-blok met alleen de bedrijfsnaam en het logo. De klant wil per vestiging ook de Google-reviews als sterren in de markup.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de prompt waarmee Claude JSON-LD voor de vestigingspagina in Amersfoort maakt. Zeg welk type en welke gegevens erin moeten, en wat je met de wens over de reviews doet. Laat Claude de code maken en noem in twee zinnen hoe je het resultaat controleert.",
+    "minTekens": 150,
+    "hint": "Kijk in Googles documentatie over LocalBusiness welke velden verplicht zijn, en voor welke sites review-markup bedoeld is."
+  },
+  "modelantwoord": "**De kern:** per vestigingspagina een eigen LocalBusiness-blok met het meest specifieke type (bijvoorbeeld Plumber), met in elk geval naam en adres, plus telefoon, url, geo en openingstijden. De eigen reviews zet je er niet in: die markup is volgens Google bedoeld voor sites die reviews over andere bedrijven verzamelen.\n\nPrompt: 'Maak JSON-LD voor de vestigingspagina Amersfoort van [bedrijf]. Gebruik het meest specifieke LocalBusiness-type van schema.org voor een loodgieter. Vul in: name, address (PostalAddress), telephone, url, geo (latitude en longitude) en openingHoursSpecification. Gebruik alleen de gegevens hieronder en verzin niets. Laat review en aggregateRating weg. Verwijs met parentOrganization naar het hoofdbedrijf.'\n\nControle: de code door de Rich Results Test halen en checken of adres, telefoon en openingstijden precies hetzelfde zijn als op de pagina en in het Google Bedrijfsprofiel.\n\nVeelgemaakte fout: één LocalBusiness-blok met alle drie de adressen op elke pagina, of sterren voor reviews over het eigen bedrijf.",
+  "uitleg": "Met **LocalBusiness-markup** vertel je Google wat je bedrijfsgegevens zijn: welk soort bedrijf, waar, wanneer open en hoe bereikbaar. Volgens Google zijn **name** en **address** verplicht. Aanbevolen zijn onder meer telephone, url, geo, openingHoursSpecification en priceRange.\n\nDrie regels uit de documentatie die in de praktijk vaak misgaan:\n- **Kies het meest specifieke type.** Schema.org heeft subtypes zoals Plumber, Electrician en HVACBusiness. Die zeggen meer dan LocalBusiness alleen.\n- **Eén vestiging, één blok,** op de pagina van die vestiging. Een losse afdeling, zoals een showroom met eigen openingstijden, kan met department.\n- **Reviews en sterren** (review en aggregateRating) zijn bij LocalBusiness alleen bedoeld voor sites die reviews over andere bedrijven verzamelen. Reviews over je eigen bedrijf op je eigen site leveren geen sterren op.\n\nClaude schrijft zulke JSON-LD in seconden. Jij levert de gegevens aan en controleert ze. Laat Claude niets aanvullen wat je niet hebt gegeven, zoals coördinaten of tijden. Een verkeerd telefoonnummer in de markup is erger dan geen markup. Controleer met de Rich Results Test of de code geldig is, en houd de gegevens gelijk aan de pagina en het Bedrijfsprofiel.",
+  "kernpunt": "LocalBusiness-markup zet je per vestiging op de eigen pagina, met het meest specifieke type en minimaal naam en adres. Sterren voor reviews over je eigen bedrijf horen er niet in.",
+  "toepassing": "Kies een klant met meerdere vestigingen en bekijk de markup van één vestigingspagina in de Rich Results Test. Staat er een eigen LocalBusiness-blok met het juiste adres, of alleen een algemeen Organization-blok?",
+  "bron": {
+    "titel": "Local Business (LocalBusiness) Structured Data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/local-business"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "20261030-core-update-analysemoment",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core update: wanneer en hoe je de impact analyseert",
+  "matrix": [
+    "10.1.1"
+  ],
+  "titel": "De core update is gisteren klaar. Morgen al de analyse?",
+  "intro": "Google heeft gisteren gemeld dat een core update volledig is uitgerold. Een klant met een kennisbank over huisdierverzorging zag tijdens de uitrol van twee weken de klikken uit Search 12% dalen. De marketingmanager wil morgen een analyse en stelt voor om meteen alle artikelen met verlies te laten herschrijven.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je over het moment en de manier van analyseren?",
+    "opties": [
+      "Nu meteen alle pagina's met verlies herschrijven, zodat Google de verbeteringen bij de volgende crawl al meeneemt.",
+      "Een heroverwegingsverzoek indienen in Search Console, omdat de daling na zo'n update als handmatige maatregel geldt.",
+      "Minstens een week na afronding wachten en dan de week erna vergelijken met de week vóór de uitrol.",
+      "Twee dagen vóór en twee dagen na de afronding vergelijken, want daarna mengen andere factoren zich in de data."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google raadt aan om **minstens een volle week na het afronden** van een core update te wachten voordat je in Search Console analyseert. Vergelijk dan de week ná de update met de week vóór de uitrol begon.\n\n- **Meteen alles herschrijven:** je weet nog niet wat er echt veranderd is. Bij een kleine daling is volgens Google geen ingrijpende actie nodig, en verbeteringen worden pas na maanden zichtbaar.\n- **Heroverwegingsverzoek:** dat is alleen voor handmatige maatregelen. Een core update is geen straf en richt zich niet op specifieke sites.\n- **Twee dagen voor en na:** tijdens de uitrol schommelen posities nog, en een paar dagen data is te weinig om weekpatronen uit te sluiten.",
+  "uitleg": "Een **core update** is een brede aanpassing van Googles rankingsystemen. Hij richt zich niet op specifieke sites of pagina's. Zakt een pagina, dan is er niet per se iets mis mee: andere pagina's kunnen nu beter aansluiten bij wat zoekers willen.\n\nZo pak je de analyse aan, volgens Google:\n- **Wacht minstens een week** na het afronden van de uitrol. Tijdens de uitrol schuift er nog veel.\n- **Vergelijk de week na de update met de week vóór de uitrol** in het prestatierapport van Search Console.\n- **Kijk naar de grootte:** zakt een pagina een paar posities, dan is volgens Google geen drastische actie nodig. Bij een grote daling kijk je kritisch naar de content: is die nog de meest behulpzame en betrouwbare op dit onderwerp?\n- **Zoek patronen:** welke paginatypes, onderwerpen of zoekopdrachten dalen? Een daling bij één cluster vraagt om een andere aanpak dan een daling over de hele site.\n\nVerwacht geen snel herstel. Volgens Google kan het **enkele maanden** duren voordat zijn systemen verbeteringen oppikken, en soms pas bij een volgende core update.",
+  "kernpunt": "Analyseer een core update pas minstens een week na de afronding: de week erna tegen de week vóór de uitrol. Het is geen straf, en herstel na verbeteringen kan maanden duren.",
+  "toepassing": "Leg voor je klanten een vaste werkwijze vast: bij een core update noteer je de start- en einddatum en plan je de analyse een week na de afronding, met de vergelijking van week tegen week.",
+  "bron": {
+    "titel": "Google Search's Core Updates | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/core-updates"
+  },
+  "video": {
+    "titel": "Recover From ANY Google Algorithm Update",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=Qcd_2W5na60"
+  }
+}

@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-29T11:36:23",
+    "bijgewerkt":  "2026-10-30T05:28:14",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -113,8 +113,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261019-striking-distance",
@@ -223,7 +222,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261020-cls-verbeteren",
@@ -246,7 +245,8 @@
                                      "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261020-faceted-navigatie",
@@ -870,7 +870,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261021-gtm-event-tracking",
@@ -961,7 +962,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261021-zero-click-ai-samenvatting",
@@ -1074,7 +1075,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261022-geo-pakket-beoordelen",
@@ -1513,7 +1514,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261026-garantie-top3-verwachtingen",
@@ -2019,7 +2020,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-10-30"
                    },
                    {
                        "id":  "20261028-linkbuildingrapport-freelancer",
@@ -2635,6 +2636,171 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-ai-assistenten-kanaalgroep-claude",
+                       "titel":  "Hoeveel leads komen uit ChatGPT? Bouw met Claude een eigen GA4-kanaal",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "AI-verkeer meten met een aangepaste kanaalgroep in GA4",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "Meet AI-verkeer met een eigen kanaal in een aangepaste kanaalgroep: regex op de bron, boven Referral in de volgorde. Het werkt met terugwerkende kracht, maar mist klikken zonder verwijzing.",
+                       "bron":  {
+                                    "titel":  "Custom channel groups - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/13051316"
+                                },
+                       "video":  {
+                                     "titel":  "How to Track AI Traffic in GA4 and Ahrefs Web Analytics (ChatGPT \u0026 More)",
+                                     "kanaal":  "Ahrefs",
+                                     "url":  "https://www.youtube.com/watch?v=9TpyYFcAhmk"
+                                 },
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-betaalvelden-voelen-onveilig",
+                       "titel":  "De site is veilig, maar klanten durven hun creditcard niet in te vullen",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Betrouwbaarheid: hoe veilig voelt de betaalstap?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.3"
+                                  ],
+                       "kernpunt":  "Bezoekers beoordelen veiligheid op wat ze zien, niet op HTTPS. Geef de kaartvelden een eigen kader met een slotje of keurmerk, zodat ze er veiliger uitzien dan de rest van het formulier.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: How Users Perceive Security During the Checkout Flow",
+                                    "url":  "https://baymard.com/blog/perceived-security-of-payment-form"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-consent-mode-basis-of-geavanceerd",
+                       "titel":  "Sinds de nieuwe cookiebanner mist GA4 een derde van de bestellingen",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Consent Mode: basis of geavanceerd, en wat dat met je GA4-data doet",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.1.1",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "In de basismodus gaat er zonder toestemming niets naar Google; in de geavanceerde modus sturen de tags pings zonder cookies, die GA4 kan gebruiken voor modellering. Welke het wordt, beslist de klant.",
+                       "bron":  {
+                                    "titel":  "Consent mode overview | Google for Developers",
+                                    "url":  "https://developers.google.com/tag-platform/security/concepts/consent-mode"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-core-update-analysemoment",
+                       "titel":  "De core update is gisteren klaar. Morgen al de analyse?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core update: wanneer en hoe je de impact analyseert",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.1"
+                                  ],
+                       "kernpunt":  "Analyseer een core update pas minstens een week na de afronding: de week erna tegen de week vóór de uitrol. Het is geen straf, en herstel na verbeteringen kan maanden duren.",
+                       "bron":  {
+                                    "titel":  "Google Search\u0027s Core Updates | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/core-updates"
+                                },
+                       "video":  {
+                                     "titel":  "Recover From ANY Google Algorithm Update",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-ga4-betaalprovider-als-verwijzing",
+                       "titel":  "De betaalprovider is opeens je beste verkoopkanaal in GA4",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: ongewenste verwijzingen (betaalprovider als bron)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.2",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "Komen klanten via een betaalprovider of ander extern domein terug op je site, zet dat domein dan op de lijst met ongewenste verwijzingen. Anders krijgt dat domein het krediet voor je aankopen.",
+                       "bron":  {
+                                    "titel":  "Identify unwanted referrals - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/10327750"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-ga4-bewaartermijn-verkenningen",
+                       "titel":  "De verkenning is leeg vóór september, het standaardrapport niet",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: bewaartermijn van gegevens en verkenningen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.2",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "De bewaartermijn (2 of 14 maanden) geldt alleen voor verkenningen en trechterrapporten, niet voor standaardrapporten. Zet hem direct op 14 maanden: wat al verwijderd is, komt niet terug.",
+                       "bron":  {
+                                    "titel":  "Data retention - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/7667196"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-localbusiness-vestigingen-claude",
+                       "titel":  "Drie vestigingen, één generiek schemablok: laat Claude het per locatie maken",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "LocalBusiness-markup voor bedrijven met meerdere vestigingen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.8",
+                                      "2.2.9"
+                                  ],
+                       "kernpunt":  "LocalBusiness-markup zet je per vestiging op de eigen pagina, met het meest specifieke type en minimaal naam en adres. Sterren voor reviews over je eigen bedrijf horen er niet in.",
+                       "bron":  {
+                                    "titel":  "Local Business (LocalBusiness) Structured Data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/local-business"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261030-uit-assortiment-404-410",
+                       "titel":  "1.400 producten uit het assortiment: wat doe je met de oude URL\u0027s?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Statuscodes: 404, 410, soft 404 en redirects bij verdwenen pagina\u0027s",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "Een 301 alleen als er een duidelijke vervanger is, anders een 404 of 410 (voor Google gelijk). Nooit een foutmelding met status 200 en nooit alles naar de homepage.",
+                       "bron":  {
+                                    "titel":  "Troubleshoot Google Search crawling errors | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    }
                ]
