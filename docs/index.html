@@ -119,7 +119,7 @@ details.sig > summary:hover b { text-decoration: underline; text-underline-offse
 .prio-keuze .knop[aria-pressed="true"] { background: var(--ink); color: var(--white); }
 #vakken-paneel[hidden] + .paneel { margin-top: 0; }
 #instellingen-knop { display: inline-flex; align-items: center; gap: 6px; }
-#instellingen-knop[aria-current="page"] { background: var(--ink); color: var(--white); }
+#instellingen-knop[aria-current="page"] { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--ink); }
 #sb-instelling[hidden] + #snelkoppeling { margin-top: 24px; }
 #mx-vakkeuze { justify-content: flex-start; }
 .mx-onderwerp { margin: 10px 0 14px; }
@@ -221,7 +221,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   <div class="wrap">
     <div class="merk">
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><h1>double<span>leren</span></h1><span class="pill" id="vak">SEO</span></div>
-      <div class="wie" id="wie" hidden><span id="wie-naam"></span><button class="knop fun" id="feedback-knop" type="button">Geef feedback</button><button class="knop" id="instellingen-knop" type="button" aria-label="Instellingen" title="Instellingen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Instellingen</span></button><button class="knop" id="uitloggen" type="button">Uitloggen</button></div>
+      <div class="wie" id="wie" hidden><span id="wie-naam"></span><button class="knop fun" id="feedback-knop" type="button">Geef feedback</button><button class="knop zwart" id="instellingen-knop" type="button" aria-label="Instellingen" title="Instellingen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Instellingen</span></button><button class="knop" id="uitloggen" type="button">Uitloggen</button></div>
     </div>
     <div class="tabs" id="tabs" role="tablist" hidden>
       <button type="button" role="tab" data-tab="vandaag" aria-selected="false" id="tab-vandaag" hidden>Les van vandaag</button>
