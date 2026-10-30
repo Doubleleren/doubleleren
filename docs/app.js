@@ -525,6 +525,7 @@ function rolTitel() {
 }
 function plekVan(id) {
   const l = S.org.leden[id] || {};
+  if (S.org.head === id) return 'Head';   // ook als de head in een cel staat (dan ziet die celleider hem)
   for (const c of S.org.cellen) { if (l.cel === c.id) return String(c.naam); const p = c.projecten.find((x) => x.id === l.project); if (p) return String(p.naam); }
   return S.org.head === id ? 'Head' : '';
 }
