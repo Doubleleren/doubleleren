@@ -153,14 +153,15 @@ Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJ
 - Het oude veld `volgorde` gebruik je niet meer; website en pop-up negeren het.
 
 **Formats variëren:**
-- **Soort opdracht**, ongeveer in deze verhouding:
-  - 40% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
+- **Soort opdracht**, ongeveer in deze verhouding (feedback oktober 2026: schrijfopdrachten kosten veel tijd, ook om daarna je eigen antwoord na te kijken):
+  - **Per persoon nooit twee schrijfopdrachten (open, zoek-op, maak-met-claude) achter elkaar** in de wachtrij. Na een schrijfopdracht volgt minstens één meerkeuzeles.
+  - 65% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
     - **Het juiste antwoord valt niet op.** Alle vier opties zijn ongeveer even lang en even precies. Geef de afleiders net zoveel detail en nuance als het juiste antwoord, bijvoorbeeld een reden ("omdat …") of een voorwaarde. Zet woorden als "altijd" en "nooit" niet alleen in de foute opties.
     - Het juiste antwoord is in de meeste lessen **niet** de langste optie, en nooit meer dan 10% langer dan elke andere optie (zo'n les krijgt `juistLangst` in `lessen\index.json`). Soms mag het wel de langste zijn, anders wordt "nooit de langste" het nieuwe trucje.
     - **Raadtoets** vóór het opslaan: kun je het antwoord kiezen zonder de vraag te lezen, alleen op lengte, toon of stelligheid? Herschrijf dan de opties.
-  - 25% open: minimaal 80–150 tekens
-  - 15% zoek-op: minimaal 100–150 tekens, met een hint
-  - 20% maak-met-claude: minimaal 120–200 tekens; gebruik koppelingen zoals Search Console, Ahrefs en DataForSEO
+  - 15% open: minimaal 80–150 tekens
+  - 10% zoek-op: minimaal 100–150 tekens, met een hint
+  - 10% maak-met-claude: minimaal 120–200 tekens; gebruik koppelingen zoals Search Console, Ahrefs en DataForSEO
 
 **Opmaak in tekstvelden:**
 - `\n\n` voor een nieuwe alinea

@@ -529,11 +529,14 @@ function plekVan(id) {
   return S.org.head === id ? 'Head' : '';
 }
 function toonTeam() {
-  const leden = teamLeden().sort((a, b) => plekVan(a.id).localeCompare(plekVan(b.id)) || a.naam.localeCompare(b.naam));
+  // Jezelf bovenaan, zodat je je eigen stand naast die van je team ziet
+  const ik = S.leden[S.mij], zelf = ik && (ik.matrix || ik.logs.length) ? [ik] : [];
+  const leden = zelf.concat(teamLeden().sort((a, b) => plekVan(a.id).localeCompare(plekVan(b.id)) || a.naam.localeCompare(b.naam)));
+  const naamVan = (l) => esc(l.naam) + (l.id === S.mij ? ' <span class="sub" style="font-weight:400">(jij)</span>' : '');
   $('team-titel').textContent = rolTitel();
   const hgs = [...new Set([...S.sjabloon.values()].map((i) => i.hoofdgebied))];
   const gemHg = (lid, hg) => gem([...S.sjabloon.values()].filter((i) => i.hoofdgebied === hg).map((i) => laatste(scoresVan(lid, i.id))?.s));
-  $('heatmap').innerHTML = `<thead><tr><th style="width:150px"></th>${hgs.map((h) => `<th title="${esc(h)}">${esc(h)}</th>`).join('')}</tr></thead><tbody>${leden.map((l) => `<tr><td class="naam"><button type="button" data-lid="${esc(l.id)}">${esc(l.naam)}</button><br><span class="sub" style="font-weight:400">${esc(plekVan(l.id))}</span></td>${hgs.map((h) => { const v = gemHg(l, h); const i = Math.max(0, Math.min(4, Math.round(v) - 1)); return v ? `<td style="background:${HEAT[i]};color:${i >= 3 ? '#fff' : '#000'}" data-tip="${esc(`${l.naam} · ${h}: ${komma(v)}`)}">${komma(v)}</td>` : '<td style="background:var(--cool-50)">–</td>'; }).join('')}</tr>`).join('')}</tbody>`;
+  $('heatmap').innerHTML = `<thead><tr><th style="width:150px"></th>${hgs.map((h) => `<th title="${esc(h)}">${esc(h)}</th>`).join('')}</tr></thead><tbody>${leden.map((l) => `<tr><td class="naam"><button type="button" data-lid="${esc(l.id)}">${naamVan(l)}</button><br><span class="sub" style="font-weight:400">${esc(plekVan(l.id))}</span></td>${hgs.map((h) => { const v = gemHg(l, h); const i = Math.max(0, Math.min(4, Math.round(v) - 1)); return v ? `<td style="background:${HEAT[i]};color:${i >= 3 ? '#fff' : '#000'}" data-tip="${esc(`${l.naam} · ${h}: ${komma(v)}`)}">${komma(v)}</td>` : '<td style="background:var(--cool-50)">–</td>'; }).join('')}</tr>`).join('')}</tbody>`;
   $('hm-legenda').innerHTML = [1, 2, 3, 4, 5].map((s) => `<span><i class="sw" style="background:${HEAT[s - 1]};border:1px solid var(--cool)"></i>${s}</span>`).join('') + '<span>gemiddelde laatste score</span>';
 
   const aandacht = hgs.map((h) => ({ h, v: gem(leden.map((l) => gemHg(l, h)).filter((x) => x)), sterk: leden.filter((l) => gemHg(l, h) >= 3.5) })).filter((x) => x.v && x.v < 2.5).sort((a, b) => a.v - b.v);
@@ -541,7 +544,7 @@ function toonTeam() {
 
   const maand = dagKey(nu()).slice(0, 7);
   const skillChip = (l) => { const r = ronde(l); return r.voldaan ? '<span class="chip goed"><i></i>Bijgewerkt</span>' : r.vrij ? '<span class="sub">Nieuw</span>' : `<span class="chip ${r.teLaat ? 'fout' : 'deels'}" data-tip="${esc(`Deadline ${r.tekst}`)}"><i></i>${r.teLaat ? 'Te laat' : 'Nog doen'}</span>`; };
-  $('activiteit').innerHTML = `<thead><tr><th>Naam</th><th>Plek</th><th class="r">Deze maand</th><th class="r">Reeks</th><th class="r">Goed</th><th>Laatste les</th><th>Skilllijst</th></tr></thead><tbody>${leden.map((l) => { const t = l.logs.filter((x) => x.resultaat); return `<tr><td><button type="button" class="leslink" data-lid="${esc(l.id)}">${esc(l.naam)}</button></td><td>${esc(plekVan(l.id))}</td><td class="r num">${l.logs.filter((x) => x.datum.startsWith(maand)).length}</td><td class="r num">${reeks(l.logs)}</td><td class="r num">${t.length ? pct(t.filter((x) => x.resultaat === 'goed').length, t.length) + '%' : '–'}</td><td class="num">${l.logs[0] ? esc(fmtDatum(l.logs[0].datum)) : '–'}</td><td>${skillChip(l)}</td></tr>`; }).join('')}</tbody>`;
+  $('activiteit').innerHTML = `<thead><tr><th>Naam</th><th>Plek</th><th class="r">Deze maand</th><th class="r">Reeks</th><th class="r">Goed</th><th>Laatste les</th><th>Skilllijst</th></tr></thead><tbody>${leden.map((l) => { const t = l.logs.filter((x) => x.resultaat); return `<tr><td><button type="button" class="leslink" data-lid="${esc(l.id)}">${naamVan(l)}</button></td><td>${esc(plekVan(l.id))}</td><td class="r num">${l.logs.filter((x) => x.datum.startsWith(maand)).length}</td><td class="r num">${reeks(l.logs)}</td><td class="r num">${t.length ? pct(t.filter((x) => x.resultaat === 'goed').length, t.length) + '%' : '–'}</td><td class="num">${l.logs[0] ? esc(fmtDatum(l.logs[0].datum)) : '–'}</td><td>${skillChip(l)}</td></tr>`; }).join('')}</tbody>`;
   zoekExperts();
 }
 function zoekExperts() {
