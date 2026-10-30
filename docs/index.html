@@ -118,6 +118,9 @@ details.sig > summary:hover b { text-decoration: underline; text-underline-offse
 .prio-keuze .knop { background: var(--cool-50); padding: 5px 12px; font-size: 13px; }
 .prio-keuze .knop[aria-pressed="true"] { background: var(--ink); color: var(--white); }
 #vakken-paneel[hidden] + .paneel { margin-top: 0; }
+#instellingen-knop { display: inline-flex; align-items: center; gap: 6px; }
+#instellingen-knop[aria-current="page"] { background: var(--ink); color: var(--white); }
+#sb-instelling[hidden] + #snelkoppeling { margin-top: 24px; }
 #mx-vakkeuze { justify-content: flex-start; }
 .mx-onderwerp { margin: 10px 0 14px; }
 .mx-onderwerp h4 { font-size: 15px; font-weight: 700; margin: 0 0 2px; padding-top: 8px; border-top: 1.6px solid var(--cool); }
@@ -218,7 +221,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   <div class="wrap">
     <div class="merk">
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><h1>double<span>leren</span></h1><span class="pill" id="vak">SEO</span></div>
-      <div class="wie" id="wie" hidden><span id="wie-naam"></span><button class="knop fun" id="feedback-knop" type="button">Geef feedback</button><button class="knop" id="uitloggen" type="button">Uitloggen</button></div>
+      <div class="wie" id="wie" hidden><span id="wie-naam"></span><button class="knop fun" id="feedback-knop" type="button">Geef feedback</button><button class="knop" id="instellingen-knop" type="button" aria-label="Instellingen" title="Instellingen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Instellingen</span></button><button class="knop" id="uitloggen" type="button">Uitloggen</button></div>
     </div>
     <div class="tabs" id="tabs" role="tablist" hidden>
       <button type="button" role="tab" data-tab="vandaag" aria-selected="false" id="tab-vandaag" hidden>Les van vandaag</button>
@@ -323,8 +326,39 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <div id="les-inhoud" class="les-tekst"></div>
       <div id="les-knoppen" class="les-knoppen"></div>
       <p class="fout" id="les-fout" role="alert"></p>
+      <p class="sub" id="snel-hint" hidden>Elke dag vanzelf je les? Zet de pop-up of een snelkoppeling aan bij <button type="button" class="leslink" data-naar="instellingen">Instellingen</button>.</p>
     </section>
-    <section class="paneel" id="snelkoppeling" hidden>
+  </div>
+
+  <div id="mij" hidden>
+    <div class="kpis" id="kpis"></div>
+    <section class="twee">
+      <div class="stapel">
+        <div class="paneel"><div class="paneel-kop"><div><h2>Wat gaat goed, wat minder</h2><p class="sub">Je eigen score naast je resultaten op de lessen die erover gingen. Klik op een vaardigheid voor de lessen.</p></div></div><div id="signalen"></div></div>
+        <div class="paneel"><div class="paneel-kop"><div><h2>Activiteit</h2><p class="sub" id="kal-sub"></p></div></div><div class="kal-box"><div class="kal" id="kal"></div></div><div class="kal-legenda" aria-hidden="true"><i></i>geen les <i class="een"></i>1 les <i class="twee"></i>2 lessen</div><p class="sub">Klik op een gekleurd vakje om de lessen van die dag terug te lezen.</p></div>
+      </div>
+      <div class="stapel">
+        <div class="paneel"><div class="paneel-kop"><div><h2>Recent geleerd</h2><p class="sub">Je laatste drie lessen, met het kernpunt en je eigen antwoord (alleen voor jou). Klik op een les voor de volledige uitleg; alle lessen staan in de kennisbank.</p></div></div><div id="recent"></div></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="instellingen" hidden>
+    <section class="paneel" id="vakken-paneel" style="margin-top:0" hidden>
+      <div class="paneel-kop"><div><h2>Wat wil je leren?</h2><p class="sub">Je eigen vak staat standaard aan. Zet er een ander vak bij als je daar ook meer van wilt weten: <b>hoog</b> komt vaker voorbij dan <b>laag</b>. Bij <b>uit</b> krijg je over dat vak geen lessen.</p></div></div>
+      <div id="vakken"></div>
+      <p class="sub" id="vakken-status" role="status"></p>
+    </section>
+    <section class="paneel">
+      <div class="paneel-kop"><div><h2>Waar wil je je op richten?</h2><p class="sub">Je krijgt vooral lessen over wat je nog niet goed kent. Geef hier per hoofdgebied aan wat je nu belangrijk vindt: <b>hoog</b> komt ongeveer twee keer zo vaak voorbij, <b>laag</b> ongeveer een derde zo vaak (maar nooit helemaal niet). Herhalingen van wat je fout had blijven altijd komen. Je leidinggevende ziet je keuze, net als je skilllijst.</p></div></div>
+      <div id="prio"></div>
+      <p class="sub" id="prio-status" role="status"></p>
+    </section>
+    <section class="paneel" id="sb-instelling" hidden><div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Op het scorebord ziet het team alleen je naam, je aantal goed en je reeks. Nooit je skilllijst, vragen of antwoorden.</p></div></div>
+      <label class="schakel"><input type="checkbox" id="sb-zichtbaar" checked> Toon mij op het scorebord</label>
+      <p class="sub" id="sb-zichtbaar-status" role="status"></p>
+    </section>
+    <section class="paneel" id="snelkoppeling">
       <div class="paneel-kop"><div><h2>Elke dag vanzelf je les</h2><p class="sub">Kies een van de twee opties. Eenmalig instellen, ongeveer een minuut.</p></div></div>
       <h3 style="font-size:15px;margin-bottom:8px">Optie 1: de pop-up <span class="pill" style="margin-left:6px">Aanrader</span> <span class="sub">(Windows)</span></h3>
       <p>De pop-up zet je les 's ochtends en om 12:30 over je scherm en gaat pas weg als je hem hebt gedaan (één keer per dag 2 uur uitstellen mag). Hij werkt zichzelf bij; je installeert hem één keer.</p>
@@ -359,40 +393,14 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
     </section>
   </div>
 
-  <div id="mij" hidden>
-    <div class="kpis" id="kpis"></div>
-    <section class="twee">
-      <div class="stapel">
-        <div class="paneel"><div class="paneel-kop"><div><h2>Wat gaat goed, wat minder</h2><p class="sub">Je eigen score naast je resultaten op de lessen die erover gingen. Klik op een vaardigheid voor de lessen.</p></div></div><div id="signalen"></div></div>
-        <div class="paneel"><div class="paneel-kop"><div><h2>Activiteit</h2><p class="sub" id="kal-sub"></p></div></div><div class="kal-box"><div class="kal" id="kal"></div></div><div class="kal-legenda" aria-hidden="true"><i></i>geen les <i class="een"></i>1 les <i class="twee"></i>2 lessen</div><p class="sub">Klik op een gekleurd vakje om de lessen van die dag terug te lezen.</p></div>
-        <div class="paneel" id="sb-instelling" hidden><div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Op het scorebord ziet het team alleen je naam, je aantal goed en je reeks. Nooit je skilllijst, vragen of antwoorden.</p></div></div>
-          <label class="schakel"><input type="checkbox" id="sb-zichtbaar" checked> Toon mij op het scorebord</label>
-          <p class="sub" id="sb-zichtbaar-status" role="status"></p>
-        </div>
-      </div>
-      <div class="stapel">
-        <div class="paneel"><div class="paneel-kop"><div><h2>Recent geleerd</h2><p class="sub">Je laatste drie lessen, met het kernpunt en je eigen antwoord (alleen voor jou). Klik op een les voor de volledige uitleg; alle lessen staan in de kennisbank.</p></div></div><div id="recent"></div></div>
-      </div>
-    </section>
-  </div>
-
   <div id="skilllijst" hidden>
-    <section class="paneel" id="vakken-paneel" style="margin-top:0" hidden>
-      <div class="paneel-kop"><div><h2>Wat wil je leren?</h2><p class="sub">Je eigen vak staat standaard aan. Zet er een ander vak bij als je daar ook meer van wilt weten: <b>hoog</b> komt vaker voorbij dan <b>laag</b>. Bij <b>uit</b> krijg je over dat vak geen lessen.</p></div></div>
-      <div id="vakken"></div>
-      <p class="sub" id="vakken-status" role="status"></p>
-    </section>
-    <section class="paneel">
+    <section class="paneel" style="margin-top:0">
       <div class="paneel-kop"><div><h2>Skilllijst</h2><p class="sub" id="mx-sub"></p></div><button class="knop zwart" type="button" id="mx-bijwerken">Skilllijst bijwerken</button></div>
       <p class="sub" id="mx-ronde" style="margin:0 0 12px"></p>
       <p class="sub" id="mx-klaar" role="status"></p>
+      <p class="sub" style="margin:0 0 12px">Welke vakken je leert en waar je je op richt, stel je in bij <button type="button" class="leslink" data-naar="instellingen">Instellingen</button>.</p>
       <div id="matrix"></div>
       <div class="legenda"><span><i class="sw"></i>Laatste score (gemiddeld, 1–5)</span><span><i class="sw tick"></i>Eerste meting</span></div>
-    </section>
-    <section class="paneel">
-      <div class="paneel-kop"><div><h2>Waar wil je je op richten?</h2><p class="sub">Je krijgt vooral lessen over wat je nog niet goed kent. Geef hier per hoofdgebied aan wat je nu belangrijk vindt: <b>hoog</b> komt ongeveer twee keer zo vaak voorbij, <b>laag</b> ongeveer een derde zo vaak (maar nooit helemaal niet). Herhalingen van wat je fout had blijven altijd komen. Je leidinggevende ziet je keuze, net als je skilllijst.</p></div></div>
-      <div id="prio"></div>
-      <p class="sub" id="prio-status" role="status"></p>
     </section>
     <section class="paneel" id="mx-form-paneel" hidden>
       <div class="paneel-kop"><div><h2 id="mx-form-titel">Skilllijst bijwerken</h2><p class="sub">Geef per vaardigheid je inschatting van nu, zonder naar vroeger te kijken: <b>1</b> = nieuw voor mij, <b>3</b> = ik kan het zelfstandig, <b>5</b> = ik kan het anderen leren. Typ een cijfer en je springt vanzelf naar de volgende; met de pijltjes ga je omhoog en omlaag.</p></div></div>

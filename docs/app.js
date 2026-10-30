@@ -395,14 +395,11 @@ function toonMij() {
 
   const antw = new Map((lid.antwoorden || []).map((a) => [String(a.id) + String(a.datum), a.antwoord]));
   $('recent').innerHTML = logs.length ? logs.slice(0, 3).map((l) => lesHtml(l, antw.get(l.id + l.datum))).join('') : '<p class="leeg">Nog geen lessen afgerond. Je eerste les verschijnt vanzelf op je laptop.</p>';
-  $('sb-instelling').hidden = !magLessen();
-  $('sb-zichtbaar').checked = SB.zichtbaar;
 }
 
 // ---------------------------------------------------------------- weergave: skilllijst
 function toonSkilllijst() {
   const lid = S.leden[S.mij]; if (!lid) return;
-  toonVakken(); toonPrioriteit();
   const maanden = maandenVan(lid), totaal = itemsVan(lid).length, r = ronde(lid);
   const open = vakkenVan(lid).filter((v) => !ingevuld(lid, v)), klaar = vakkenVan(lid).filter((v) => ingevuld(lid, v));
   $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
@@ -519,6 +516,14 @@ async function zetPrioriteit(n, k) {
 }
 $('prio').addEventListener('click', (e) => { const b = e.target.closest('button[data-prio]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetPrioriteit(b.dataset.prio, Number(b.dataset.waarde)); });
 
+// ---------------------------------------------------------------- instellingen (tandwiel rechtsboven)
+// Wat je leert, je prioriteiten, het scorebord en hoe je elke dag je les krijgt. Losse tab, zodat de andere tabs rustig blijven.
+function toonInstellingen() {
+  toonVakken(); toonPrioriteit();
+  $('sb-instelling').hidden = !magLessen(); $('sb-zichtbaar').checked = SB.zichtbaar;
+  $('snelkoppeling').hidden = !magLessen();
+}
+
 // ---------------------------------------------------------------- welke vakken je leert
 // Alle vakken uit instellingen.json; een vak zonder skilllijst staat erbij als "volgt nog". Uit = geen lessen over dat vak.
 function toonVakken() {
@@ -542,7 +547,7 @@ async function zetVak(vak, w) {
       ? `Opgeslagen: ${vakNaam(vak)} staat op ${PRIO[w].toLowerCase()}.${ingevuld(ik, vak) ? '' : ' Vul ook je skilllijst voor dit vak in, dan passen de lessen bij je niveau.'} De generator houdt er vanaf de volgende ochtend rekening mee.`
       : `Opgeslagen: je krijgt geen lessen meer over ${vakNaam(vak)}.`;
   } catch (e) { $('vakken-status').textContent = 'Opslaan mislukt: ' + e.message; }
-  toonSkilllijst(); toonMij();
+  toonInstellingen(); toonSkilllijst(); toonMij();
 }
 $('vakken').addEventListener('click', (e) => { const b = e.target.closest('button[data-vak]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetVak(b.dataset.vak, Number(b.dataset.waarde)); });
 $('mx-vakkeuze').addEventListener('click', (e) => { const b = e.target.closest('button[data-formvak]'); if (b && b.getAttribute('aria-pressed') !== 'true') toonSkillFormulier(b.dataset.formvak); });
@@ -1040,7 +1045,7 @@ function toonLesStatus() {
     $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div><h2>Eerst je skilllijst bijwerken</h2>`;
     $('les-inhoud').innerHTML = `<p>De halfjaarlijkse check had vóór ${esc(r.tekst)} gedaan moeten zijn. Geef in een paar minuten per vaardigheid aan hoe je er nu voor staat; daarna staat je les meteen klaar.</p>`;
     $('les-knoppen').innerHTML = knop('naar-skilllijst', 'Skilllijst bijwerken', 'zwart');
-    $('snelkoppeling').hidden = true; return;
+    $('snel-hint').hidden = true; return;
   }
   const st = L.status || {};
   const kop = st.volgende ? 'Les klaar: je tweede les staat klaar' : st.later ? 'Je ochtendles is klaar' : st.klaar ? 'Je lessen van vandaag zijn klaar' : 'Er staat nu geen nieuwe les klaar';
@@ -1053,7 +1058,7 @@ function toonLesStatus() {
   $('les-knoppen').innerHTML = (st.volgende ? knop('volgende-les', 'Naar je tweede les →', 'zwart') : knop('naar-mij', 'Bekijk je voortgang', 'zwart'))
     + (st.later && meldingStand() === 'default' ? knop('melding-aan', `Stuur me om ${MIDDAG} een melding`) : '')
     + (st.klaar && L.les ? knop('feedback-les', 'Feedback over deze les') : '');
-  $('snelkoppeling').hidden = false;
+  $('snel-hint').hidden = false;
 }
 
 // ---------------------------------------------------------------- melding om 12:30 (alleen als de website openstaat)
@@ -1093,7 +1098,7 @@ function startLes(les) {
   const ik = S.leden[S.mij], rk = reeks(ik.logs);
   $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">${esc(les.vakgebied || '')}${les.type ? ' · ' + esc(TYPE[les.type] || les.type) : ''}</span>
     <span class="sub">Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'}</span></div><h2>${esc(les.titel)}</h2>`;
-  $('snelkoppeling').hidden = true;
+  $('snel-hint').hidden = true;
   // Altijd eerst zelf nadenken: situatie → opdracht → waarom goed of fout → uitleg. Het oude veld 'volgorde'
   // (uitleg-eerst) wordt genegeerd: dan stond het antwoord al in beeld vóór de vraag.
   lesOpdracht();
@@ -1281,21 +1286,23 @@ $('maak-knop').addEventListener('click', async () => {
 });
 
 // ---------------------------------------------------------------- navigatie en start
-const TABS = ['vandaag', 'mij', 'skilllijst', 'scorebord', 'team', 'kennisbank', 'maken'];
+const TABS = ['vandaag', 'mij', 'skilllijst', 'scorebord', 'team', 'kennisbank', 'maken', 'instellingen'];
 const VIEWS = [...TABS, 'lesdetail', 'feedback'];
 function toonView(naam) {
   for (const v of VIEWS) $(v).hidden = v !== naam;
   document.querySelectorAll('#tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === naam)));
+  if (naam === 'instellingen') $('instellingen-knop').setAttribute('aria-current', 'page'); else $('instellingen-knop').removeAttribute('aria-current');
 }
 function magTab(t) {
   const ik = S.leden[S.mij];
-  return t === 'mij' || t === 'kennisbank' || (t === 'skilllijst' && !!ik?.sl) || (t === 'vandaag' && magLessen())
+  return t === 'mij' || t === 'kennisbank' || t === 'instellingen' || (t === 'skilllijst' && !!ik?.sl) || (t === 'vandaag' && magLessen())
     || (t === 'scorebord' && magLessen() && SB.zichtbaar) || (t === 'team' && teamLeden().length > 0) || (t === 'maken' && magLesMaken());
 }
 const standaardTab = () => (magLessen() && (L.status?.les || L.status?.geblokkeerd) ? 'vandaag' : !S.leden[S.mij]?.matrix && teamLeden().length ? 'team' : 'mij');
 function tab(naam) {
   NAV.huidig = naam; NAV.geduwd = false; toonView(naam);
   if (location.hash !== '#' + naam) history.replaceState(null, '', location.pathname + location.search + '#' + naam);
+  if (naam === 'instellingen') toonInstellingen();
   if (naam === 'scorebord') toonScorebord().catch((e) => { $('sb-tabel').innerHTML = `<tbody><tr><td class="fout">Scorebord laden mislukt: ${esc(e.message)}</td></tr></tbody>`; });
 }
 // Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback of een tab
@@ -1369,6 +1376,7 @@ $('fb-verstuur').addEventListener('click', async () => {
 });
 $('expert').addEventListener('input', zoekExperts);
 $('kb-zoek').addEventListener('input', toonKennisbank);
+$('instellingen-knop').addEventListener('click', () => { if (S.mij) tab('instellingen'); });
 $('uitloggen').addEventListener('click', async () => { await vergeetSessie(); location.replace(location.pathname + location.search); });
 $('vergeet').addEventListener('click', async () => { try { localStorage.removeItem('dl-uitnodiging'); } catch {} await vergeetSessie(); $('uitnodiging-rij').hidden = false; $('vergeet-rij').hidden = true; });
 for (const id of ['code', 'uitnodiging']) $(id).addEventListener('input', () => { $('login-fout').textContent = ''; });
