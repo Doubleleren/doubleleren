@@ -276,7 +276,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
           <input id="w-naam" class="veld" type="text" autocomplete="name" maxlength="80">
         </div>
         <div id="w-xlsx-rij" class="stappen">
-          <label for="w-xlsx" class="sub" style="margin:0">Je ingevulde skilllijst (Excel, .xlsx)</label>
+          <label for="w-xlsx" class="sub" style="margin:0">Je ingevulde skilllijst (Excel, .xlsx), optioneel</label>
           <input id="w-xlsx" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
           <p class="sub" style="margin:0" id="w-xlsx-info"></p>
           <p class="sub" style="margin:0">Het bestand wordt hier in je browser gelezen en versleuteld; het onversleutelde bestand gaat nergens naartoe.</p>
@@ -405,6 +405,8 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
     <section class="paneel" id="mx-form-paneel" hidden>
       <div class="paneel-kop"><div><h2 id="mx-form-titel">Skilllijst bijwerken</h2><p class="sub">Geef per vaardigheid je inschatting van nu, zonder naar vroeger te kijken: <b>1</b> = nieuw voor mij, <b>3</b> = ik kan het zelfstandig, <b>5</b> = ik kan het anderen leren. Typ een cijfer en je springt vanzelf naar de volgende; met de pijltjes ga je omhoog en omlaag.</p></div></div>
       <div class="prio-keuze" id="mx-vakkeuze" role="group" aria-label="Vak" style="margin-bottom:12px" hidden></div>
+      <p class="sub" style="margin:0 0 4px">Staat je skilllijst al in Excel? <label class="leslink" for="mx-xlsx" style="cursor:pointer">Upload hem</label> in plaats van alles over te typen.<input id="mx-xlsx" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden></p>
+      <p class="sub" id="mx-xlsx-info" role="status" style="margin:0 0 12px"></p>
       <form id="mx-form" autocomplete="off">
         <div id="mx-velden"></div>
         <div class="mx-sticky"><span class="sub num" id="mx-voortgang" role="status"></span><div class="les-knoppen"><button type="button" class="knop" id="mx-annuleer" style="background:var(--cool-50)">Annuleren</button><button type="button" class="knop zwart" id="mx-opslaan">Opslaan</button></div></div>

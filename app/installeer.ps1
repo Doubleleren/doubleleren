@@ -44,13 +44,17 @@ function Get-Leren($u) {
     if ($org.leden.($u.id).leren -eq 'optioneel') { 'optioneel' } else { 'verplicht' }
 }
 
-# Skilllijst importeren en versleuteld + ondertekend opslaan
-function Save-Skilllijst($o, $u, $s, $prive, [string]$xlsx) {
-    if (-not (Get-Command Import-DlSkilllijst -ErrorAction SilentlyContinue)) { throw 'Excel inlezen kan hier niet (geblokkeerd door een webfilter). Meld je aan via de website; daarna kun je hier de pop-up toevoegen.' }
-    # De skilllijst van je eigen vak (organogram); het standaardvak heeft kale id's, andere vakken 'vak:1.1.1'
+# De skilllijst van je eigen vak (organogram): vak en pad; Test-Path op het pad = of dat vak al een lijst heeft
+function Get-EigenSjabloon($o, $u) {
     $org = Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd
     $vak = if ($org.leden.($u.id).vak) { [string]$org.leden.($u.id).vak } else { [string]$inst.vakgebied }
-    $sjabloon = Join-Path $App "sjablonen\$vak\skilllijst.csv"
+    [pscustomobject]@{ vak = $vak; pad = (Join-Path $App "sjablonen\$vak\skilllijst.csv") }
+}
+
+# Skilllijst importeren en versleuteld + ondertekend opslaan (het standaardvak heeft kale id's, andere vakken 'vak:1.1.1')
+function Save-Skilllijst($o, $u, $s, $prive, [string]$xlsx) {
+    if (-not (Get-Command Import-DlSkilllijst -ErrorAction SilentlyContinue)) { throw 'Excel inlezen kan hier niet (geblokkeerd door een webfilter). Meld je aan via de website; daarna kun je hier de pop-up toevoegen.' }
+    $e = Get-EigenSjabloon $o $u; $vak = $e.vak; $sjabloon = $e.pad
     if (-not (Test-Path $sjabloon)) { throw "Voor jouw vak ($vak) is er nog geen skilllijst. Meld je aan zonder Excel-bestand; je vult hem later in op de website." }
     $import = Import-DlSkilllijst -Xlsx $xlsx -Sjabloon $sjabloon -Vak $(if ($vak -ne $inst.vakgebied) { $vak })
     $b = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'matrix')
@@ -79,7 +83,7 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
         $p = Read-DlOpslag $o.data "data/$($u.id)/prive.enc"; if ($p) { Remove-DlOpslag $o.data "data/$($u.id)/prive.enc" $p.sha }
     } else {
         $dk = Get-DlWillekeurig 32; $s = Get-DlSleutelsUitDk $dk
-        if (-not $xlsx -and $leren -eq 'verplicht') { throw 'Kies je ingevulde skilllijst (Excel).' }
+        # De skilllijst is nooit verplicht bij het aanmelden: later uploaden of invullen kan op de website
         $bp = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'profiel')
         Write-DlVersleuteld $o.data $u.id 'profiel' $s ([ordered]@{ v = 1; naam = $naam; sinds = (Get-Date).ToString('yyyy-MM-dd'); lessen = $lessen }) $(if ($bp) { $bp.sha }) $u.id $kp.prive | Out-Null
         if ($xlsx) { $gekoppeld = Save-Skilllijst $o $u $s $kp.prive $xlsx }
@@ -167,7 +171,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
         <TextBox x:Name="Naam" FontSize="14" Padding="8" Margin="0,4,0,14"/>
         <CheckBox x:Name="Lessen" FontSize="14" Margin="0,0,0,12" Visibility="Collapsed" IsChecked="False">Ik wil ook de dagelijkse lessen (vrijblijvend: een les overslaan kan altijd)</CheckBox>
         <StackPanel x:Name="XlsxRij">
-          <TextBlock x:Name="XlsxLabel" FontSize="13" Foreground="#5c5c5c">Je ingevulde skilllijst (Excel)</TextBlock>
+          <TextBlock x:Name="XlsxLabel" FontSize="13" Foreground="#5c5c5c">Je ingevulde skilllijst (Excel, optioneel: kan ook later op de website)</TextBlock>
           <DockPanel Margin="0,4,0,0">
             <Button x:Name="Kies" DockPanel.Dock="Right" Padding="14,6" Margin="8,0,0,0">Kies bestand</Button>
             <TextBox x:Name="Xlsx" FontSize="13" Padding="8" IsReadOnly="True"/>
@@ -229,16 +233,16 @@ $e.Volgende.Add_Click({
             1 {
                 $script:u = Split-Uitnodiging $e.Uitn.Text
                 $script:leren = Get-Leren $script:u
+                $script:heeftLijst = Test-Path (Get-EigenSjabloon (Get-Opslagen $script:u) $script:u).pad   # vak zonder skilllijst: geen Excel nodig
                 if ($e.KLaptop.IsChecked) { Toon 'P2b'; $script:fase = 21; if ($script:leren -eq 'optioneel') { $e.Lessen2.Visibility = 'Visible' } }
                 else {
-                    Toon 'P2'; $e.XlsxRij.Visibility = $(if ($e.KKwijt.IsChecked) { 'Collapsed' } else { 'Visible' }); $script:fase = 2
+                    Toon 'P2'; $e.XlsxRij.Visibility = $(if ($e.KKwijt.IsChecked -or -not $script:heeftLijst) { 'Collapsed' } else { 'Visible' }); $script:fase = 2
                     if ($script:leren -eq 'optioneel' -and -not $e.KKwijt.IsChecked) { $e.Lessen.Visibility = 'Visible'; $e.XlsxLabel.Text = 'Je skilllijst (Excel, optioneel: dan zie je ook je eigen voortgang)' }
                 }
                 $e.Stap.Text = 'Stap 2 van 3'
             }
             2 {
                 if (-not $e.Naam.Text.Trim()) { throw 'Vul je voornaam in.' }
-                if ($e.KNieuw.IsChecked -and $script:leren -ne 'optioneel' -and -not (Test-Path $e.Xlsx.Text)) { throw 'Kies je ingevulde skilllijst (Excel).' }
                 Werk 'Je sleutels worden gemaakt en je skilllijst versleuteld opgeslagen. Dit duurt even…'
                 $lessenKeuze = $(if ($script:leren -eq 'optioneel') { [bool]$e.Lessen.IsChecked } else { $true })
                 $r = Install-Nieuw $script:u $e.Naam.Text.Trim() $(if ($e.Xlsx.Text -and (Test-Path $e.Xlsx.Text)) { $e.Xlsx.Text } else { '' }) -herstel:([bool]$e.KKwijt.IsChecked) -lessen:$lessenKeuze

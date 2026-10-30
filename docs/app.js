@@ -448,7 +448,7 @@ function toonSkillFormulier(vak) {
     }).join('');
     return `<div class="mx-onderwerp"><h4>${esc(o)}</h4>${rijen}</div>`;
   }).join('')}</div>`).join('');
-  $('mx-fout').textContent = ''; $('mx-klaar').textContent = '';
+  $('mx-fout').textContent = ''; $('mx-klaar').textContent = ''; $('mx-xlsx-info').textContent = '';
   telSkillVelden();
   $('mx-form-paneel').hidden = false;
   $('mx-form-paneel').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -478,27 +478,48 @@ $('mx-velden').addEventListener('keydown', (e) => {
 });
 $('mx-velden').addEventListener('focusin', (e) => { if (e.target.classList?.contains('score-veld')) e.target.select(); });
 // Schrijft de huidige maand voor élke vaardigheid: zo telt het als je halfjaarlijkse inschatting
+// Nieuwe scores samenvoegen met je bestaande skilllijst (prioriteit en vakkenkeuze blijven staan) en alles verversen
+async function bewaarScores(nieuw, melding) {
+  const ik = S.leden[S.mij];
+  await werkBij(S.mij, 'matrix', ik.sl, (h) => {
+    const scores = {};
+    for (const [id, sc] of Object.entries(h?.scores || {})) if (sc && typeof sc === 'object') scores[id] = { ...sc };
+    for (const [id, sc] of Object.entries(nieuw)) scores[id] = { ...(scores[id] || {}), ...sc };
+    const prioriteit = schoonPrioriteit(h?.prioriteit), vakken = schoonVakken(h?.vakken);
+    return { v: 1, sjabloon: S.inst.vakgebied, scores, ...(Object.keys(prioriteit).length ? { prioriteit } : {}), ...(Object.keys(vakken).length ? { vakken } : {}) };
+  });
+  const lid = await laadLid(S.mij); if (lid) S.leden[S.mij] = lid;
+  $('mx-form-paneel').hidden = true;
+  toonMij(); toonSkilllijst(); toonRonde();
+  $('mx-klaar').textContent = melding;
+  if (L.status?.geblokkeerd) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 async function slaSkilllijstOp() {
-  const ik = S.leden[S.mij], maand = dagKey(nu()).slice(0, 7), keuze = {}, missend = [];
+  const maand = dagKey(nu()).slice(0, 7), keuze = {}, missend = [];
   for (const veld of skillVelden()) { const v = Number(veld.value); if (S.sjabloon.has(veld.dataset.id) && v >= 1 && v <= 5) keuze[veld.dataset.id] = v; else { missend.push(veld); veld.classList.add('mist'); } }
   if (missend.length) {
     missend[0].focus();
     throw new Error(`Vul nog ${missend.length} ${missend.length === 1 ? 'vaardigheid' : 'vaardigheden'} in (rood gemarkeerd).`);
   }
-  await werkBij(S.mij, 'matrix', ik.sl, (h) => {
-    const scores = {};
-    for (const [id, sc] of Object.entries(h?.scores || {})) if (sc && typeof sc === 'object') scores[id] = { ...sc };
-    for (const [id, n] of Object.entries(keuze)) scores[id] = { ...(scores[id] || {}), [maand]: n };
-    const prioriteit = schoonPrioriteit(h?.prioriteit), vakken = schoonVakken(h?.vakken);
-    return { v: 1, sjabloon: S.inst.vakgebied, scores, ...(Object.keys(prioriteit).length ? { prioriteit } : {}), ...(Object.keys(vakken).length ? { vakken } : {}) };
-  });
-  const nieuw = await laadLid(S.mij); if (nieuw) S.leden[S.mij] = nieuw;
-  $('mx-form-paneel').hidden = true;
-  toonMij(); toonSkilllijst(); toonRonde();
-  $('mx-klaar').textContent = `Opgeslagen: je inschatting${meerVakken() ? ` voor ${vakNaam(S.formVak)}` : ''} van ${fmtMaand(maand)} staat erin.`;
-  if (L.status?.geblokkeerd) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  await bewaarScores(Object.fromEntries(Object.entries(keuze).map(([id, n]) => [id, { [maand]: n }])),
+    `Opgeslagen: je inschatting${meerVakken() ? ` voor ${vakNaam(S.formVak)}` : ''} van ${fmtMaand(maand)} staat erin.`);
 }
+// Of je ingevulde Excel uploaden (zelfde opzet als bij het aanmelden): alle maanden uit de sheet komen erin
+async function uploadSkilllijst() {
+  const f = $('mx-xlsx').files?.[0]; if (!f) return;
+  const vak = S.formVak; $('mx-xlsx-info').textContent = 'Skilllijst lezen…';
+  try {
+    const { leesXlsx, importeerSkilllijst } = await import('./xlsx.js');
+    const res = importeerSkilllijst(await leesXlsx(f), new Map(itemsVan(null, vak).map((i) => [i.id, i])), S.inst.vakgebied);
+    if (!res.gekoppeld) throw new Error(`Geen vaardigheden met een score (1–5) gevonden. Is dit je skilllijst${meerVakken() ? ` van ${vakNaam(vak)}` : ''}?`);
+    $('mx-xlsx-info').textContent = 'Opslaan…';
+    await bewaarScores(res.matrix.scores, `Opgeslagen uit je Excel: ${res.gekoppeld} van ${res.totaal} vaardigheden${meerVakken() ? ` voor ${vakNaam(vak)}` : ''}.`);
+    $('mx-xlsx-info').textContent = '';
+  } catch (e) { $('mx-xlsx-info').textContent = e.message; }
+  finally { $('mx-xlsx').value = ''; }
+}
+$('mx-xlsx').addEventListener('change', uploadSkilllijst);
 
 // ---------------------------------------------------------------- eigen prioriteit per hoofdgebied
 const PRIO = { 1: 'Hoog', 2: 'Normaal', 3: 'Laag' };
@@ -930,9 +951,9 @@ function welkomFormulier(herstel) {
   $('w-hallo').textContent = herstel ? 'Nieuwe code aanmaken' : `Welkom${W.naam ? ' ' + W.naam : ''}!`;
   $('w-uitleg').textContent = herstel
     ? 'Je krijgt een nieuwe code van zes woorden. Je scores en voortgang blijven bewaard; je eigen antwoorden op open vragen kunnen niet terug (die kon alleen je oude code openen).'
-    : 'Vul je naam in en kies je ingevulde skilllijst. Daarna maakt je browser je persoonlijke code van zes woorden.';
+    : 'Vul je naam in. Heb je je skilllijst al in Excel, kies hem dan ook; anders vul je hem later in. Daarna maakt je browser je persoonlijke code van zes woorden.';
   $('w-naam').value = W.naam; $('w-naam-rij').hidden = herstel; $('w-xlsx-rij').hidden = herstel || !welkomItems().length;
-  $('w-xlsx').value = ''; $('w-xlsx-info').textContent = W.leren === 'optioneel' ? 'Optioneel: je kunt dit ook later nog doen.' : '';
+  $('w-xlsx').value = ''; $('w-xlsx-info').textContent = 'Optioneel: je kunt hem ook later uploaden of op de website invullen.';
   $('w-lessen-rij').hidden = herstel || W.leren !== 'optioneel';
   $('w-maak').textContent = herstel ? 'Nieuwe code aanmaken' : 'Account aanmaken';
   welkomStap('w-stap2');
@@ -952,7 +973,6 @@ async function welkomLeesXlsx() {
 async function welkomMaak() {
   const naam = $('w-naam').value.trim();
   if (!W.herstel && !naam) throw new Error('Vul je naam in.');
-  if (!W.herstel && W.leren === 'verplicht' && !W.matrix && welkomItems().length) throw new Error('Kies je ingevulde skilllijst (Excel).');
   if (!W.herstel && await beheerJson(`sleutels/${W.id}.json`)) throw new Error('Je bent al aangemeld. Log in met je code.');
   const status = (s) => { $('w-maak').textContent = s; };
   status('Sleutels maken…');
