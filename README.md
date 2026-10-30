@@ -111,7 +111,7 @@ Een token-houder kan bestanden van anderen verwijderen of een oude versie terugz
 | `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1`, `lokale-server.py` |
 
 ## Vakken
-Naast SEO kunnen andere vakken meedoen (CRO, SEA, Social ads, Content, Coderen met Claude & GitHub; lijst in `instellingen.json`). Een vak doet pas mee zodra `sjablonen/<vak>/skilllijst.csv` bestaat (zelfde kolommen als de SEO-lijst); tot die tijd ziet niemand er iets van.
+Naast SEO kunnen andere vakken meedoen (CRO, SEA, Social ads, Content, Coderen met AI en Interne zaken; lijst in `instellingen.json`). Een vak doet pas mee zodra `sjablonen/<vak>/skilllijst.csv` bestaat; tot die tijd staat het op de website als "Skilllijst volgt nog". Een Excel in de opzet van de SEO-sheet zet je om met `beheer\skilllijst-omzetten.ps1 -Xlsx <bestand> -Vak <vak>` (eerst met `-Toon` om te controleren).
 - Iedereen hoort bij één vak (organogram, standaard SEO) en kiest op de website onder *Skilllijst* welke vakken hij leert, met prioriteit hoog, normaal of laag. Je eigen vak staat standaard aan.
 - Vaardigheid-id's van SEO blijven `1.1.1`; die van andere vakken krijgen het vak ervoor (`cro:1.1.1`), ook in lessen (`matrix`).
 - Elk vak heeft een eigen head, die de voortgang ziet van iedereen die bij dat vak hoort. Cel- en projectleiders zien hun mensen, ongeacht het vak.

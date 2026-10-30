@@ -10,6 +10,7 @@
     { "id": "sea", "naam": "SEA" },
     { "id": "social-ads", "naam": "Social ads" },
     { "id": "content", "naam": "Content" },
-    { "id": "claude-code", "naam": "Coderen met Claude & GitHub" }
+    { "id": "coderen-met-ai", "naam": "Coderen met AI" },
+    { "id": "intern", "naam": "Interne zaken" }
   ]
 }

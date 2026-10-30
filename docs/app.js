@@ -106,7 +106,7 @@ async function beheerJson(p) {
 }
 
 // ---------------------------------------------------------------- state
-const S = { bron: null, mij: null, prive: null, ak: null, org: null, lessen: {}, sjabloon: new Map(), vakken: [], leden: {}, sleutels: new Map(), ongeldig: 0 };
+const S = { bron: null, mij: null, prive: null, ak: null, org: null, lessen: {}, sjabloon: new Map(), vakken: [], alleVakken: [], leden: {}, sleutels: new Map(), ongeldig: 0 };
 
 async function laadOpenbaar() {
   if (LOKAAL) { S.app = lokaleBron(params.get('app')); await S.app.init(); }
@@ -119,10 +119,12 @@ async function laadOpenbaar() {
   if (!K.sleutelVorm(S.vertrouwd)) throw new Error('de beheerder heeft DoubleLeren nog niet ingericht');
   const idx = await json(S.app, 'lessen/index.json');
   for (const l of idx?.lessen || []) if (/^[0-9a-z][0-9a-z-]{0,80}$/.test(l.id)) S.lessen[l.id] = l;
-  // Alle vakken uit instellingen.json die een skilllijst hebben; het standaardvak houdt kale id's (1.1.1), de rest 'cro:1.1.1'
+  // Alle vakken uit instellingen.json (S.alleVakken); alleen die met een skilllijst doen mee (S.vakken).
+  // Het standaardvak houdt kale id's (1.1.1), de rest 'cro:1.1.1'
   const lijst = (Array.isArray(S.inst.vakken) && S.inst.vakken.length ? S.inst.vakken : [{ id: S.inst.vakgebied }]).filter((v) => VAK_VORM.test(String(v?.id)));
   const csvs = await Promise.all(lijst.map((v) => S.app.bytes(`sjablonen/${v.id}/skilllijst.csv`).catch(() => null)));
   lijst.forEach((v, n) => {
+    S.alleVakken.push({ id: v.id, naam: String(v.naam || String(v.id).toUpperCase()), lijst: !!csvs[n] });
     if (!csvs[n]) return;
     const [kop, ...regels] = K.tekst.uitBytes(csvs[n]).replace(/^﻿/, '').trim().split(/\r?\n/).map((r) => r.split(';'));
     for (const r of regels) {
@@ -140,7 +142,7 @@ async function laadOpenbaar() {
 // Iedereen hoort bij één vak (organogram, standaard instellingen.vakgebied) en kiest zelf welke vakken hij leert,
 // met prioriteit 1 hoog, 2 normaal, 3 laag (matrix.vakken). Niets gekozen = alleen het eigen vak.
 const VAK_VORM = /^[a-z][a-z-]{0,30}$/;
-const vakNaam = (v) => S.vakken.find((x) => x.id === v)?.naam || String(v || '').toUpperCase();
+const vakNaam = (v) => S.alleVakken.find((x) => x.id === v)?.naam || String(v || '').toUpperCase();
 const meerVakken = () => S.vakken.length > 1;
 const hgSleutel = (id) => String(id).replace(/\.\d+\.\d+$/, '');      // hoofdgebied: '1' of 'cro:1'
 const eigenVak = (id) => { const v = S.org?.leden?.[id]?.vak; return typeof v === 'string' && VAK_VORM.test(v) ? v : S.inst.vakgebied; };
@@ -518,13 +520,15 @@ async function zetPrioriteit(n, k) {
 $('prio').addEventListener('click', (e) => { const b = e.target.closest('button[data-prio]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetPrioriteit(b.dataset.prio, Number(b.dataset.waarde)); });
 
 // ---------------------------------------------------------------- welke vakken je leert
-// Alleen zichtbaar als er meer dan één vak een skilllijst heeft. Uit = geen lessen over dat vak.
+// Alle vakken uit instellingen.json; een vak zonder skilllijst staat erbij als "volgt nog". Uit = geen lessen over dat vak.
 function toonVakken() {
   const lid = S.leden[S.mij];
-  $('vakken-paneel').hidden = !meerVakken() || !lid?.sl;
+  $('vakken-paneel').hidden = S.alleVakken.length < 2 || !lid?.sl;
   if ($('vakken-paneel').hidden) return;
   const k = gekozenVakken(lid), eigen = eigenVak(S.mij);
-  $('vakken').innerHTML = S.vakken.map((v) => `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="prio-keuze" role="group" aria-label="${esc(`Leren: ${v.naam}`)}">${[1, 2, 3, 0].map((w) => `<button type="button" class="knop" data-vak="${esc(v.id)}" data-waarde="${w}" aria-pressed="${(k[v.id] || 0) === w}">${w ? PRIO[w] : 'Uit'}</button>`).join('')}</span></div>`).join('');
+  $('vakken').innerHTML = S.alleVakken.map((v) => !v.lijst
+    ? `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="sub">Skilllijst volgt nog</span></div>`
+    : `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="prio-keuze" role="group" aria-label="${esc(`Leren: ${v.naam}`)}">${[1, 2, 3, 0].map((w) => `<button type="button" class="knop" data-vak="${esc(v.id)}" data-waarde="${w}" aria-pressed="${(k[v.id] || 0) === w}">${w ? PRIO[w] : 'Uit'}</button>`).join('')}</span></div>`).join('');
 }
 async function zetVak(vak, w) {
   const ik = S.leden[S.mij], nieuw = { ...gekozenVakken(ik) };
