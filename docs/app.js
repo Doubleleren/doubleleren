@@ -106,7 +106,7 @@ async function beheerJson(p) {
 }
 
 // ---------------------------------------------------------------- state
-const S = { bron: null, mij: null, prive: null, ak: null, org: null, lessen: {}, sjabloon: new Map(), leden: {}, sleutels: new Map(), ongeldig: 0 };
+const S = { bron: null, mij: null, prive: null, ak: null, org: null, lessen: {}, sjabloon: new Map(), vakken: [], leden: {}, sleutels: new Map(), ongeldig: 0 };
 
 async function laadOpenbaar() {
   if (LOKAAL) { S.app = lokaleBron(params.get('app')); await S.app.init(); }
@@ -119,11 +119,39 @@ async function laadOpenbaar() {
   if (!K.sleutelVorm(S.vertrouwd)) throw new Error('de beheerder heeft DoubleLeren nog niet ingericht');
   const idx = await json(S.app, 'lessen/index.json');
   for (const l of idx?.lessen || []) if (/^[0-9a-z][0-9a-z-]{0,80}$/.test(l.id)) S.lessen[l.id] = l;
-  const csv = K.tekst.uitBytes((await S.app.bytes(`sjablonen/${S.inst.vakgebied}/skilllijst.csv`)) || new Uint8Array());
-  const [kop, ...regels] = csv.replace(/^﻿/, '').trim().split(/\r?\n/).map((r) => r.split(';'));
-  for (const r of regels) { const o = Object.fromEntries(kop.map((k, i) => [k, r[i] || ''])); if (/^\d+\.\d+\.\d+$/.test(o.id)) S.sjabloon.set(o.id, o); }
-  $('vak').textContent = String(S.inst.vakgebied).toUpperCase();
+  // Alle vakken uit instellingen.json die een skilllijst hebben; het standaardvak houdt kale id's (1.1.1), de rest 'cro:1.1.1'
+  const lijst = (Array.isArray(S.inst.vakken) && S.inst.vakken.length ? S.inst.vakken : [{ id: S.inst.vakgebied }]).filter((v) => VAK_VORM.test(String(v?.id)));
+  const csvs = await Promise.all(lijst.map((v) => S.app.bytes(`sjablonen/${v.id}/skilllijst.csv`).catch(() => null)));
+  lijst.forEach((v, n) => {
+    if (!csvs[n]) return;
+    const [kop, ...regels] = K.tekst.uitBytes(csvs[n]).replace(/^﻿/, '').trim().split(/\r?\n/).map((r) => r.split(';'));
+    for (const r of regels) {
+      const o = Object.fromEntries(kop.map((k, i) => [k, r[i] || '']));
+      if (!/^\d+\.\d+\.\d+$/.test(o.id)) continue;
+      const id = v.id === S.inst.vakgebied ? o.id : `${v.id}:${o.id}`;
+      S.sjabloon.set(id, { ...o, id, nr: o.id, vak: v.id });
+    }
+    S.vakken.push({ id: v.id, naam: String(v.naam || String(v.id).toUpperCase()) });
+  });
+  $('vak').textContent = vakNaam(S.inst.vakgebied);
 }
+
+// ---------------------------------------------------------------- vakken
+// Iedereen hoort bij één vak (organogram, standaard instellingen.vakgebied) en kiest zelf welke vakken hij leert,
+// met prioriteit 1 hoog, 2 normaal, 3 laag (matrix.vakken). Niets gekozen = alleen het eigen vak.
+const VAK_VORM = /^[a-z][a-z-]{0,30}$/;
+const vakNaam = (v) => S.vakken.find((x) => x.id === v)?.naam || String(v || '').toUpperCase();
+const meerVakken = () => S.vakken.length > 1;
+const hgSleutel = (id) => String(id).replace(/\.\d+\.\d+$/, '');      // hoofdgebied: '1' of 'cro:1'
+const eigenVak = (id) => { const v = S.org?.leden?.[id]?.vak; return typeof v === 'string' && VAK_VORM.test(v) ? v : S.inst.vakgebied; };
+const headVanVak = (v) => S.org?.heads?.[v] || (v === S.inst.vakgebied ? S.org?.head : null) || null;
+const headVakken = (id) => S.vakken.map((x) => x.id).filter((v) => headVanVak(v) === id);
+const schoonVakken = (p) => Object.fromEntries(Object.entries(p && typeof p === 'object' ? p : {}).filter(([k, v]) => S.vakken.some((x) => x.id === k) && [1, 2, 3].includes(v)));
+function gekozenVakken(lid) { const k = schoonVakken(lid?.vakken); if (Object.keys(k).length) return k; const e = eigenVak(lid?.id); return S.vakken.some((x) => x.id === e) ? { [e]: 1 } : {}; }
+const vakkenVan = (lid) => Object.entries(gekozenVakken(lid)).sort((a, b) => a[1] - b[1]).map(([v]) => v);
+const itemsVan = (lid, vak) => { const vk = vak ? [vak] : vakkenVan(lid); return [...S.sjabloon.values()].filter((it) => vk.includes(it.vak)); };
+const hgNaam = (it) => (meerVakken() ? `${vakNaam(it.vak)} · ${it.hoofdgebied}` : it.hoofdgebied);
+const ingevuld = (lid, vak) => itemsVan(lid, vak).some((it) => lid?.matrix?.has(it.id));
 
 async function verbind(uitnodiging) {
   const m = UITNODIGING.exec(uitnodiging.trim());
@@ -237,9 +265,9 @@ function schoonMatrix(m) {
   }
   return uit;
 }
-// Eigen prioriteit per hoofdgebied (sleutel = eerste cijfer van de vaardigheid-id): 1 hoog, 2 normaal, 3 laag
-const schoonPrioriteit = (p) => Object.fromEntries(Object.entries(p && typeof p === 'object' ? p : {}).filter(([k, v]) => /^\d{1,2}$/.test(k) && [1, 2, 3].includes(v)));
-function hoofdgebieden() { const m = new Map(); for (const it of S.sjabloon.values()) { const n = it.id.split('.')[0]; if (!m.has(n)) m.set(n, it.hoofdgebied); } return m; }
+// Eigen prioriteit per hoofdgebied (sleutel = vaardigheid-id zonder de laatste twee cijfers: '1' of 'cro:1'): 1 hoog, 2 normaal, 3 laag
+const schoonPrioriteit = (p) => Object.fromEntries(Object.entries(p && typeof p === 'object' ? p : {}).filter(([k, v]) => /^(?:[a-z][a-z-]{0,30}:)?\d{1,2}$/.test(k) && [1, 2, 3].includes(v)));
+function hoofdgebieden(lid) { const m = new Map(); for (const it of lid ? itemsVan(lid) : S.sjabloon.values()) { const n = hgSleutel(it.id); if (!m.has(n)) m.set(n, hgNaam(it)); } return m; }
 function schoonLog(r) {
   if (!r || typeof r !== 'object' || !/^\d{4}-\d{2}-\d{2}T/.test(String(r.datum))) return null;
   return { datum: String(r.datum), id: String(r.id || ''), resultaat: RES[r.resultaat] ? r.resultaat : null, niveau: ['basis', 'gevorderd', 'expert'].includes(r.niveau) ? r.niveau : 'basis',
@@ -257,7 +285,7 @@ async function laadLid(id) {
   const sl = await K.sleutelsUitDk(await K.pakUit(S.prive, K.b64u.dec(kopie)));
   const profiel = await leesEnc(id, 'profiel', sl);
   const lid = { id, naam: String(S.org.leden[id]?.naam || profiel?.naam || id), sinds: typeof profiel?.sinds === 'string' ? profiel.sinds : null, matrix: null, logs: [] };
-  const m = await leesEnc(id, 'matrix', sl); if (m) { lid.matrix = schoonMatrix(m); lid.prioriteit = schoonPrioriteit(m.prioriteit); }
+  const m = await leesEnc(id, 'matrix', sl); if (m) { const mx = schoonMatrix(m); lid.matrix = mx.size ? mx : null; lid.prioriteit = schoonPrioriteit(m.prioriteit); lid.vakken = schoonVakken(m.vakken); }
   for (const mnd of await Promise.all(logMaanden(id).map((x) => leesEnc(id, `log-${x}`, sl)))) for (const r of mnd?.regels || []) { const s = schoonLog(r); if (s) lid.logs.push(s); }
   lid.logs.sort((a, b) => (a.datum < b.datum ? 1 : -1));
   if (id === S.mij) { lid.sl = sl; lid.profiel = profiel; }
@@ -301,11 +329,12 @@ function signalen(lid) {
   const orde = { overschat: 0, onderschat: 1, groeit: 2, bevestigd: 3 };
   return [...uit, ...groei.filter((g) => !uit.some((u) => u.id === g.id))].sort((x, y) => orde[x.s] - orde[y.s]);
 }
-function groepeer(lid) {
+function groepeer(lid, vakken = vakkenVan(lid)) {
   const g = new Map();
-  for (const it of S.sjabloon.values()) {
-    if (!g.has(it.hoofdgebied)) g.set(it.hoofdgebied, new Map());
-    const o = g.get(it.hoofdgebied); if (!o.has(it.onderwerp)) o.set(it.onderwerp, []);
+  for (const it of [...S.sjabloon.values()].filter((i) => vakken.includes(i.vak))) {
+    const hg = hgNaam(it);
+    if (!g.has(hg)) g.set(hg, new Map());
+    const o = g.get(hg); if (!o.has(it.onderwerp)) o.set(it.onderwerp, []);
     o.get(it.onderwerp).push({ ...it, scores: scoresVan(lid, it.id) });
   }
   return g;
@@ -316,8 +345,8 @@ const gem = (xs) => { const v = xs.filter((x) => typeof x === 'number'); return 
 function toonMij() {
   const lid = S.leden[S.mij], logs = lid.logs;
   const tel = { goed: 0, deels: 0, fout: 0 }; logs.forEach((l) => { if (l.resultaat) tel[l.resultaat]++; });
-  const beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = S.sjabloon.size;
-  const items = [...(lid.matrix?.values() || [])];
+  const mijnItems = itemsVan(lid), beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = mijnItems.length;
+  const items = mijnItems.map((it) => lid.matrix?.get(it.id)).filter(Boolean);
   const opNiveau = items.filter((s) => (laatste(s)?.s || 0) >= 3).length, start = items.filter((s) => (eerste(s) || 0) >= 3).length;
   const delta = pct(opNiveau, totaal) - pct(start, totaal), rk = reeks(logs);
   $('kpis').innerHTML =
@@ -371,35 +400,48 @@ function toonMij() {
 // ---------------------------------------------------------------- weergave: skilllijst
 function toonSkilllijst() {
   const lid = S.leden[S.mij]; if (!lid) return;
-  toonPrioriteit();
-  const maanden = maandenVan(lid), totaal = S.sjabloon.size, r = ronde(lid);
+  toonVakken(); toonPrioriteit();
+  const maanden = maandenVan(lid), totaal = itemsVan(lid).length, r = ronde(lid);
+  const open = vakkenVan(lid).filter((v) => !ingevuld(lid, v)), klaar = vakkenVan(lid).filter((v) => ingevuld(lid, v));
   $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
   $('mx-ronde').textContent = r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
     : r.vrij ? `Je skilllijst is nog vers; de eerste halfjaarlijkse check is vóór ${r.volgende}.`
     : `Halfjaarlijkse check: werk je skilllijst bij vóór ${r.tekst}${r.teLaat ? '. De deadline is voorbij: tot je hem bijwerkt, kun je geen lessen doen' : ''}.`;
+  $('mx-bijwerken').hidden = !totaal;
+  if (!totaal) {
+    $('mx-sub').textContent = '';
+    $('matrix').innerHTML = '<p class="leeg">Voor jouw vak is er nog geen skilllijst. Zodra die er is, vul je hem hier in.</p>';
+    return;
+  }
   if (!lid.matrix) {
     $('mx-sub').textContent = `${totaal} vaardigheden`;
     $('matrix').innerHTML = '<p class="leeg">Je hebt nog geen skilllijst. Klik op <b>Skilllijst invullen</b> en geef per vaardigheid aan hoe goed je hem nu beheerst.</p>';
     return;
   }
+  const nogDoen = open.length ? `<p class="leeg">Nog niet ingevuld: ${open.map((v) => `<b>${esc(vakNaam(v))}</b> <button type="button" class="leslink" data-naar="skilllijst" data-formulier="1" data-vak="${esc(v)}">vul in</button>`).join(' · ')}. Tot dan krijg je daarin lessen op beginnersniveau.</p>` : '';
   $('mx-sub').textContent = maanden.length ? `${totaal} vaardigheden · laatste meting ${fmtMaand(maanden[maanden.length - 1])}. Klik op een onderwerp voor details.` : 'Nog geen scores.';
   const sig = signalen(lid), b = bewijs(lid), sigPer = new Map(sig.map((x) => [x.id, x.s]));
-  $('matrix').innerHTML = [...groepeer(lid)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
+  $('matrix').innerHTML = nogDoen + [...groepeer(lid, klaar)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
     const nuG = gem(its.map((i) => laatste(i.scores)?.s)), startG = gem(its.map((i) => eerste(i.scores)));
     return `<details class="mx"><summary><span class="mx-naam"><i class="pijl"></i>${esc(o)}</span><span class="balk" data-tip="${esc(`${o}: ${komma(nuG)}${maanden.length > 1 ? ` (eerste meting ${komma(startG)})` : ''}`)}"><i style="width:${((nuG / 5) * 100).toFixed(1)}%"></i>${maanden.length > 1 ? `<b style="left:calc(${((startG / 5) * 100).toFixed(1)}% - 1px)"></b>` : ''}</span><span class="mx-score num">${komma(nuG)}</span></summary><div class="mx-items">${its.map((i) => {
       const hist = Object.keys(i.scores).sort().map((m) => Number(i.scores[m])).join(' → '); const bi = b.get(i.id);
-      return `<div class="mx-item"><span class="id num">${esc(i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
+      return `<div class="mx-item"><span class="id num">${esc(i.nr || i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
     }).join('')}</div></details>`;
   }).join('')}</div>`).join('');
 }
 // Bewust leeg: je eerdere score staat er niet bij, zodat je echt opnieuw inschat. Typ 1–5 en je springt naar de volgende.
-function toonSkillFormulier() {
+function toonSkillFormulier(vak) {
   const lid = S.leden[S.mij]; if (!lid?.sl) return;
-  $('mx-velden').innerHTML = [...groepeer(lid)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
+  const vk = vakkenVan(lid); if (!vk.length) return;
+  S.formVak = vk.includes(vak) ? vak : vk.find((v) => !ingevuld(lid, v)) || vk[0];
+  $('mx-vakkeuze').hidden = vk.length < 2;
+  $('mx-vakkeuze').innerHTML = vk.length < 2 ? '' : vk.map((v) => `<button type="button" class="knop" data-formvak="${esc(v)}" aria-pressed="${v === S.formVak}">${esc(vakNaam(v))}${ingevuld(lid, v) ? '' : ' (nieuw)'}</button>`).join('');
+  $('mx-form-titel').textContent = meerVakken() ? `Skilllijst ${vakNaam(S.formVak)} bijwerken` : 'Skilllijst bijwerken';
+  $('mx-velden').innerHTML = [...groepeer(lid, [S.formVak])].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
     let context = '';
     const rijen = its.map((i) => {
       const kop = i.context && i.context !== context ? `<div class="mx-context">${esc(i.context)}</div>` : ''; context = i.context;
-      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.id)}</span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
+      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.nr || i.id)}</span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
     }).join('');
     return `<div class="mx-onderwerp"><h4>${esc(o)}</h4>${rijen}</div>`;
   }).join('')}</div>`).join('');
@@ -444,13 +486,13 @@ async function slaSkilllijstOp() {
     const scores = {};
     for (const [id, sc] of Object.entries(h?.scores || {})) if (sc && typeof sc === 'object') scores[id] = { ...sc };
     for (const [id, n] of Object.entries(keuze)) scores[id] = { ...(scores[id] || {}), [maand]: n };
-    const prioriteit = schoonPrioriteit(h?.prioriteit);
-    return { v: 1, sjabloon: S.inst.vakgebied, scores, ...(Object.keys(prioriteit).length ? { prioriteit } : {}) };
+    const prioriteit = schoonPrioriteit(h?.prioriteit), vakken = schoonVakken(h?.vakken);
+    return { v: 1, sjabloon: S.inst.vakgebied, scores, ...(Object.keys(prioriteit).length ? { prioriteit } : {}), ...(Object.keys(vakken).length ? { vakken } : {}) };
   });
   const nieuw = await laadLid(S.mij); if (nieuw) S.leden[S.mij] = nieuw;
   $('mx-form-paneel').hidden = true;
   toonMij(); toonSkilllijst(); toonRonde();
-  $('mx-klaar').textContent = `Opgeslagen: je inschatting van ${fmtMaand(maand)} staat erin.`;
+  $('mx-klaar').textContent = `Opgeslagen: je inschatting${meerVakken() ? ` voor ${vakNaam(S.formVak)}` : ''} van ${fmtMaand(maand)} staat erin.`;
   if (L.status?.geblokkeerd) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -460,7 +502,7 @@ const PRIO = { 1: 'Hoog', 2: 'Normaal', 3: 'Laag' };
 function toonPrioriteit() {
   const lid = S.leden[S.mij], p = lid?.prioriteit || {};
   $('prio').innerHTML = lid?.matrix
-    ? [...hoofdgebieden()].map(([n, naam]) => `<div class="rij"><span>${esc(naam)}</span><span class="prio-keuze" role="group" aria-label="${esc(`Prioriteit ${naam}`)}">${[1, 2, 3].map((k) => `<button type="button" class="knop" data-prio="${esc(n)}" data-waarde="${k}" aria-pressed="${(p[n] || 2) === k}">${PRIO[k]}</button>`).join('')}</span></div>`).join('')
+    ? [...hoofdgebieden(lid)].map(([n, naam]) => `<div class="rij"><span>${esc(naam)}</span><span class="prio-keuze" role="group" aria-label="${esc(`Prioriteit ${naam}`)}">${[1, 2, 3].map((k) => `<button type="button" class="knop" data-prio="${esc(n)}" data-waarde="${k}" aria-pressed="${(p[n] || 2) === k}">${PRIO[k]}</button>`).join('')}</span></div>`).join('')
     : '<p class="leeg">Vul eerst je skilllijst in; daarna kies je hier waar je je op wilt richten.</p>';
 }
 async function zetPrioriteit(n, k) {
@@ -474,6 +516,32 @@ async function zetPrioriteit(n, k) {
   toonPrioriteit();
 }
 $('prio').addEventListener('click', (e) => { const b = e.target.closest('button[data-prio]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetPrioriteit(b.dataset.prio, Number(b.dataset.waarde)); });
+
+// ---------------------------------------------------------------- welke vakken je leert
+// Alleen zichtbaar als er meer dan één vak een skilllijst heeft. Uit = geen lessen over dat vak.
+function toonVakken() {
+  const lid = S.leden[S.mij];
+  $('vakken-paneel').hidden = !meerVakken() || !lid?.sl;
+  if ($('vakken-paneel').hidden) return;
+  const k = gekozenVakken(lid), eigen = eigenVak(S.mij);
+  $('vakken').innerHTML = S.vakken.map((v) => `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="prio-keuze" role="group" aria-label="${esc(`Leren: ${v.naam}`)}">${[1, 2, 3, 0].map((w) => `<button type="button" class="knop" data-vak="${esc(v.id)}" data-waarde="${w}" aria-pressed="${(k[v.id] || 0) === w}">${w ? PRIO[w] : 'Uit'}</button>`).join('')}</span></div>`).join('');
+}
+async function zetVak(vak, w) {
+  const ik = S.leden[S.mij], nieuw = { ...gekozenVakken(ik) };
+  if (w) nieuw[vak] = w; else delete nieuw[vak];
+  if (!Object.keys(nieuw).length) { $('vakken-status').textContent = 'Je leert altijd minstens één vak.'; return; }
+  $('vakken').querySelectorAll('button').forEach((b) => { b.disabled = true; }); $('vakken-status').textContent = 'Opslaan…';
+  try {
+    await werkBij(S.mij, 'matrix', ik.sl, (h) => ({ ...(h || { v: 1, sjabloon: S.inst.vakgebied, scores: {} }), vakken: nieuw }));
+    ik.vakken = nieuw;
+    $('vakken-status').textContent = w
+      ? `Opgeslagen: ${vakNaam(vak)} staat op ${PRIO[w].toLowerCase()}.${ingevuld(ik, vak) ? '' : ' Vul ook je skilllijst voor dit vak in, dan passen de lessen bij je niveau.'} De generator houdt er vanaf de volgende ochtend rekening mee.`
+      : `Opgeslagen: je krijgt geen lessen meer over ${vakNaam(vak)}.`;
+  } catch (e) { $('vakken-status').textContent = 'Opslaan mislukt: ' + e.message; }
+  toonSkilllijst(); toonMij();
+}
+$('vakken').addEventListener('click', (e) => { const b = e.target.closest('button[data-vak]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetVak(b.dataset.vak, Number(b.dataset.waarde)); });
+$('mx-vakkeuze').addEventListener('click', (e) => { const b = e.target.closest('button[data-formvak]'); if (b && b.getAttribute('aria-pressed') !== 'true') toonSkillFormulier(b.dataset.formvak); });
 
 // ---------------------------------------------------------------- halfjaarlijkse check van de skilllijst
 // Twee rondes per jaar: januari (deadline 31 januari) en juli (deadline 31 juli). Gedaan = een score uit dat halfjaar.
@@ -518,16 +586,17 @@ function lesHtml(l, antwoord) {
 const HEAT = ['#F8F6FD', '#E1D3EF', '#C4A8E0', '#9C7CC4', '#6B4E9B'];
 function teamLeden() { return Object.values(S.leden).filter((l) => l.id !== S.mij && (l.matrix || l.logs.length)); }
 function rolTitel() {
-  if (S.org.head === S.mij) return `Heel ${String(S.inst.vakgebied).toUpperCase()}`;
+  const hv = headVakken(S.mij); if (hv.length) return `Heel ${hv.map(vakNaam).join(' & ')}`;
   const cel = S.org.cellen.find((c) => c.leider === S.mij); if (cel) return `Cel ${cel.naam}`;
   const p = S.org.cellen.flatMap((c) => c.projecten).find((x) => x.leider === S.mij); if (p) return p.naam;
   return 'Mijn team';
 }
 function plekVan(id) {
   const l = S.org.leden[id] || {};
-  if (S.org.head === id) return 'Head';   // ook als de head in een cel staat (dan ziet die celleider hem)
+  const hv = headVakken(id);
+  if (hv.length) return meerVakken() ? `Head ${hv.map(vakNaam).join(' & ')}` : 'Head';   // ook als de head in een cel staat (dan ziet die celleider hem)
   for (const c of S.org.cellen) { if (l.cel === c.id) return String(c.naam); const p = c.projecten.find((x) => x.id === l.project); if (p) return String(p.naam); }
-  return S.org.head === id ? 'Head' : '';
+  return '';
 }
 function toonTeam() {
   // Jezelf bovenaan, zodat je je eigen stand naast die van je team ziet
@@ -535,8 +604,13 @@ function toonTeam() {
   const leden = zelf.concat(teamLeden().sort((a, b) => plekVan(a.id).localeCompare(plekVan(b.id)) || a.naam.localeCompare(b.naam)));
   const naamVan = (l) => esc(l.naam) + (l.id === S.mij ? ' <span class="sub" style="font-weight:400">(jij)</span>' : '');
   $('team-titel').textContent = rolTitel();
-  const hgs = [...new Set([...S.sjabloon.values()].map((i) => i.hoofdgebied))];
-  const gemHg = (lid, hg) => gem([...S.sjabloon.values()].filter((i) => i.hoofdgebied === hg).map((i) => laatste(scoresVan(lid, i.id))?.s));
+  // Eén vak tegelijk: standaard het vak waarvan je head bent, anders je eigen vak
+  const vak = S.vakken.some((x) => x.id === S.teamVak) ? S.teamVak : headVakken(S.mij)[0] || eigenVak(S.mij);
+  $('team-vak').hidden = !meerVakken();
+  $('team-vak').innerHTML = S.vakken.map((v) => `<option value="${esc(v.id)}"${v.id === vak ? ' selected' : ''}>${esc(v.naam)}</option>`).join('');
+  const vakItems = itemsVan(null, vak);
+  const hgs = [...new Set(vakItems.map((i) => i.hoofdgebied))];
+  const gemHg = (lid, hg) => gem(vakItems.filter((i) => i.hoofdgebied === hg).map((i) => laatste(scoresVan(lid, i.id))?.s));
   $('heatmap').innerHTML = `<thead><tr><th style="width:150px"></th>${hgs.map((h) => `<th title="${esc(h)}">${esc(h)}</th>`).join('')}</tr></thead><tbody>${leden.map((l) => `<tr><td class="naam"><button type="button" data-lid="${esc(l.id)}">${naamVan(l)}</button><br><span class="sub" style="font-weight:400">${esc(plekVan(l.id))}</span></td>${hgs.map((h) => { const v = gemHg(l, h); const i = Math.max(0, Math.min(4, Math.round(v) - 1)); return v ? `<td style="background:${HEAT[i]};color:${i >= 3 ? '#fff' : '#000'}" data-tip="${esc(`${l.naam} · ${h}: ${komma(v)}`)}">${komma(v)}</td>` : '<td style="background:var(--cool-50)">–</td>'; }).join('')}</tr>`).join('')}</tbody>`;
   $('hm-legenda').innerHTML = [1, 2, 3, 4, 5].map((s) => `<span><i class="sw" style="background:${HEAT[s - 1]};border:1px solid var(--cool)"></i>${s}</span>`).join('') + '<span>gemiddelde laatste score</span>';
 
@@ -554,7 +628,7 @@ function zoekExperts() {
   const iedereen = teamLeden().concat(S.leden[S.mij] ? [S.leden[S.mij]] : []);
   const items = [...S.sjabloon.values()].filter((i) => `${i.vaardigheid} ${i.onderwerp} ${i.context}`.toLowerCase().includes(q)).slice(0, 12);
   const rijen = items.map((i) => ({ i, wie: iedereen.map((l) => ({ l, s: laatste(scoresVan(l, i.id))?.s || 0 })).filter((x) => x.s >= 4).sort((a, b) => b.s - a.s) })).filter((r) => r.wie.length);
-  $('experts').innerHTML = rijen.length ? rijen.map((r) => `<div class="rij"><span><b>${esc(r.i.vaardigheid)}</b><br><span class="sub">${esc(r.i.onderwerp)}</span></span><span style="text-align:right">${r.wie.map((x) => `${esc(x.l.naam)} <b class="num">${Number(x.s)}</b>`).join('<br>')}</span></div>`).join('') : `<p class="leeg">Niemand in je team scoort 4 of 5 op "${esc(q)}".</p>`;
+  $('experts').innerHTML = rijen.length ? rijen.map((r) => `<div class="rij"><span><b>${esc(r.i.vaardigheid)}</b><br><span class="sub">${meerVakken() ? `${esc(vakNaam(r.i.vak))} · ` : ''}${esc(r.i.onderwerp)}</span></span><span style="text-align:right">${r.wie.map((x) => `${esc(x.l.naam)} <b class="num">${Number(x.s)}</b>`).join('<br>')}</span></div>`).join('') : `<p class="leeg">Niemand in je team scoort 4 of 5 op "${esc(q)}".</p>`;
 }
 function toonProfiel(id) {
   const l = S.leden[id]; if (!l) return;
@@ -812,7 +886,8 @@ const lokaleTijd = (d = nu()) => `${dagKey(d)}T${[d.getHours(), d.getMinutes(), 
 // Alles gebeurt in deze browser: sleutelpaar, code van zes woorden, kluis, datasleutel, versleuteld profiel en
 // skilllijst. Naar de privé-repo gaan alleen versleutelde bestanden en een aanvraag; beheer.ps1 -AutoGoedkeuren keurt
 // nieuwe aanvragen vanzelf goed. Alleen bij herstel (code kwijt) worden de controlewoorden via Teams vergeleken. Spiegelbeeld van Install-Nieuw in app/installeer.ps1.
-const W = { id: null, uitnodiging: null, leren: 'verplicht', naam: '', matrix: null, herstel: false };
+const W = { id: null, uitnodiging: null, leren: 'verplicht', naam: '', vak: null, matrix: null, herstel: false };
+const welkomItems = () => itemsVan(null, W.vak);
 function welkomStap(naam) {
   for (const s of ['w-stap1', 'w-stap2', 'w-stap3', 'w-bestaand', 'w-wacht']) $(s).hidden = s !== naam;
   $('w-fout').textContent = '';
@@ -824,6 +899,7 @@ async function welkomVerbind() {
   const lid = org?.leden?.[W.id];
   if (!lid) throw new Error('Deze uitnodiging is (nog) niet bekend. Vraag de beheerder om je toe te voegen.');
   W.leren = lid.leren === 'optioneel' ? 'optioneel' : 'verplicht'; W.naam = String(lid.naam || '');
+  W.vak = typeof lid.vak === 'string' && VAK_VORM.test(lid.vak) ? lid.vak : S.inst.vakgebied;
   if ($('w-onthoud').checked) { try { localStorage.setItem('dl-uitnodiging', uitnodiging); } catch {} }
   if (await beheerJson(`sleutels/${W.id}.json`)) { welkomStap('w-bestaand'); return; }
   const a = await json(S.data, `aanvragen/${W.id}.json`);
@@ -840,7 +916,7 @@ function welkomFormulier(herstel) {
   $('w-uitleg').textContent = herstel
     ? 'Je krijgt een nieuwe code van zes woorden. Je scores en voortgang blijven bewaard; je eigen antwoorden op open vragen kunnen niet terug (die kon alleen je oude code openen).'
     : 'Vul je naam in en kies je ingevulde skilllijst. Daarna maakt je browser je persoonlijke code van zes woorden.';
-  $('w-naam').value = W.naam; $('w-naam-rij').hidden = herstel; $('w-xlsx-rij').hidden = herstel;
+  $('w-naam').value = W.naam; $('w-naam-rij').hidden = herstel; $('w-xlsx-rij').hidden = herstel || !welkomItems().length;
   $('w-xlsx').value = ''; $('w-xlsx-info').textContent = W.leren === 'optioneel' ? 'Optioneel: je kunt dit ook later nog doen.' : '';
   $('w-lessen-rij').hidden = herstel || W.leren !== 'optioneel';
   $('w-maak').textContent = herstel ? 'Nieuwe code aanmaken' : 'Account aanmaken';
@@ -852,7 +928,7 @@ async function welkomLeesXlsx() {
   $('w-xlsx-info').textContent = 'Skilllijst lezen…';
   try {
     const { leesXlsx, importeerSkilllijst } = await import('./xlsx.js');
-    const res = importeerSkilllijst(await leesXlsx(f), S.sjabloon, S.inst.vakgebied);
+    const res = importeerSkilllijst(await leesXlsx(f), new Map(welkomItems().map((i) => [i.id, i])), S.inst.vakgebied);
     if (!res.gekoppeld) throw new Error('Geen vaardigheden met een score (1–5) gevonden. Is dit de skilllijst?');
     W.matrix = res.matrix;
     $('w-xlsx-info').textContent = `${res.gekoppeld} van ${res.totaal} vaardigheden herkend.` + (res.nietGevonden.length ? ` ${res.nietGevonden.length} regel(s) op volgorde gekoppeld.` : '');
@@ -861,7 +937,7 @@ async function welkomLeesXlsx() {
 async function welkomMaak() {
   const naam = $('w-naam').value.trim();
   if (!W.herstel && !naam) throw new Error('Vul je naam in.');
-  if (!W.herstel && W.leren === 'verplicht' && !W.matrix) throw new Error('Kies je ingevulde skilllijst (Excel).');
+  if (!W.herstel && W.leren === 'verplicht' && !W.matrix && welkomItems().length) throw new Error('Kies je ingevulde skilllijst (Excel).');
   if (!W.herstel && await beheerJson(`sleutels/${W.id}.json`)) throw new Error('Je bent al aangemeld. Log in met je code.');
   const status = (s) => { $('w-maak').textContent = s; };
   status('Sleutels maken…');
@@ -1144,7 +1220,7 @@ $('vandaag').addEventListener('input', (e) => {
 // ---------------------------------------------------------------- les toevoegen (head of SEO en lesmakers)
 // De les gaat ondertekend naar doubleleren-data/voorstellen/. De volgende generatorrun controleert de handtekening en
 // de les (beheer/voorstellen-opnemen.ps1) en zet hem in de kennisbank; daarna kan hij in wachtrijen komen.
-const magLesMaken = () => !!S.mij && !!S.teken && (S.org?.head === S.mij || (Array.isArray(S.org?.lesmakers) && S.org.lesmakers.includes(S.mij)));
+const magLesMaken = () => !!S.mij && !!S.teken && (headVakken(S.mij).length > 0 || S.org?.head === S.mij || (Array.isArray(S.org?.lesmakers) && S.org.lesmakers.includes(S.mij)));
 const slug = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50).replace(/-+$/, '') || 'les';
 function verzamelLes() {
   const v = (id) => $(id).value.trim();
@@ -1175,7 +1251,7 @@ function verzamelLes() {
   if (!les.uitleg) fouten.push('Vul de uitleg in.');
   if (!les.kernpunt) fouten.push('Vul het kernpunt in.');
   const onbekend = les.matrix.filter((m) => !S.sjabloon.has(m));
-  if (onbekend.length) fouten.push(`Onbekende vaardigheid-id's: ${onbekend.join(', ')} (zie de skilllijst, bijv. 1.3.3).`);
+  if (onbekend.length) fouten.push(`Onbekende vaardigheid-id's: ${onbekend.join(', ')} (zie de skilllijst, bijv. 1.3.3${meerVakken() ? ' of voor een ander vak cro:1.3.3' : ''}).`);
   if (JSON.stringify(les).length > 20000) fouten.push('De les is te lang.');
   return { les, fouten };
 }
@@ -1234,6 +1310,7 @@ async function naInloggen() {
   SB.zichtbaar = ik?.profiel?.scorebord !== false;
   $('wie').hidden = false; $('tabs').hidden = false;
   $('wie-naam').textContent = `Ingelogd als ${ik?.naam || S.mij}`;
+  $('vak').textContent = vakNaam(eigenVak(S.mij));
   $('feedback-knop').hidden = !S.teken;
   $('tab-team').hidden = !magTab('team');
   if (ik) { toonMij(); toonSkilllijst(); }
@@ -1258,7 +1335,7 @@ document.addEventListener('click', (e) => {
   const les = e.target.closest('[data-les]');
   if (les) { e.preventDefault(); $('tip').hidden = true; openLes(les.dataset.les, les.dataset.datum); return; }
   const naar = e.target.closest('[data-naar]');
-  if (naar && magTab(naar.dataset.naar)) { tab(naar.dataset.naar); if (naar.dataset.formulier && naar.dataset.naar === 'skilllijst') toonSkillFormulier(); }
+  if (naar && magTab(naar.dataset.naar)) { tab(naar.dataset.naar); if (naar.dataset.formulier && naar.dataset.naar === 'skilllijst') toonSkillFormulier(naar.dataset.vak); }
 });
 window.addEventListener('popstate', () => { if (S.org) route(); });
 $('tabs').addEventListener('click', (e) => { const b = e.target.closest('button[data-tab]'); if (b) tab(b.dataset.tab); });
@@ -1268,7 +1345,8 @@ $('ld-knoppen').addEventListener('click', (e) => {
   const b = e.target.closest('button[data-actie]'); if (!b) return;
   if (b.dataset.actie === 'terug') terugUitDetail(); else if (b.dataset.actie === 'feedback-les') openFeedback(NAV.les);
 });
-$('mx-bijwerken').addEventListener('click', toonSkillFormulier);
+$('mx-bijwerken').addEventListener('click', () => toonSkillFormulier());
+$('team-vak').addEventListener('change', (e) => { S.teamVak = e.target.value; toonTeam(); });
 $('mx-annuleer').addEventListener('click', () => { $('mx-form-paneel').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); });
 $('mx-form').addEventListener('submit', (e) => e.preventDefault());
 $('mx-opslaan').addEventListener('click', async () => {

@@ -6,7 +6,7 @@
 param([string]$DataMap, [string]$Thuis, [string]$Uit, [switch]$Proef)   # -Proef: voorstellen niet verwerken in de data-repo
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
-foreach ($l in 'krypto', 'opslag', 'lid', 'geheim') { . (Join-Path $App "app\lib\$l.ps1") }
+foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'organisatie') { . (Join-Path $App "app\lib\$l.ps1") }
 $inst = Get-Content (Join-Path $App 'instellingen.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if (-not $Thuis) { $Thuis = Join-Path (Get-DlThuis) 'beheer' }
 if (-not $Uit) { $Uit = Join-Path $Thuis 'generator' }
@@ -23,6 +23,8 @@ $V = (Get-Content (Join-Path $App 'vertrouwd.json') -Raw -Encoding UTF8 | Conver
 $org = Read-DlBeheer $d 'organisatie.json' $V
 $pub = New-DlSleutelbron $d $V
 
+# Vakken die echt meedoen: in instellingen.json en met een skilllijst in sjablonen/<vak>/
+$vakIds = @(@($(if ($inst.vakken) { $inst.vakken.id } else { $inst.vakgebied })) | Where-Object { Test-Path (Join-Path $App "sjablonen\$_\skilllijst.csv") })
 $leden = [ordered]@{}; $script:ongeldig = 0; $script:lidOvergeslagen = 0
 $stat = [ordered]@{}     # per les: hoe vaak goed, deels en fout (alle deelnemers, alle maanden)
 foreach ($id in @($org.leden.PSObject.Properties.Name)) {
@@ -51,12 +53,17 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     }
     $scores = [ordered]@{}
     if ($matrix) { foreach ($p in $matrix.obj.scores.PSObject.Properties) { $laatste = @($p.Value.PSObject.Properties | Sort-Object Name)[-1]; if ($laatste) { $scores[$p.Name] = [int]$laatste.Value } } }
-    # Eigen prioriteit per hoofdgebied (eerste cijfer van de vaardigheid-id): 1 hoog, 2 normaal (standaard), 3 laag
+    # Eigen prioriteit per hoofdgebied (vaardigheid-id zonder de laatste twee cijfers, bijv. 1 of cro:2): 1 hoog, 2 normaal (standaard), 3 laag
     $prioriteit = [ordered]@{}
-    if ($matrix -and $matrix.obj.prioriteit) { foreach ($p in $matrix.obj.prioriteit.PSObject.Properties) { if ($p.Name -match '^\d{1,2}$' -and @(1, 2, 3) -contains [int]$p.Value) { $prioriteit[$p.Name] = [int]$p.Value } } }
+    if ($matrix -and $matrix.obj.prioriteit) { foreach ($p in $matrix.obj.prioriteit.PSObject.Properties) { if ($p.Name -match '^([a-z][a-z-]{0,30}:)?\d{1,2}$' -and @(1, 2, 3) -contains [int]$p.Value) { $prioriteit[$p.Name] = [int]$p.Value } } }
+    # Welke vakken iemand wil leren, met prioriteit 1 hoog, 2 normaal, 3 laag (zelf gekozen op de website); niets gekozen = alleen het eigen vak
+    $eigenVak = Get-DlVakVanLid $org $id
+    $vakken = [ordered]@{}
+    if ($matrix -and $matrix.obj.vakken) { foreach ($p in $matrix.obj.vakken.PSObject.Properties) { if ($vakIds -contains $p.Name -and @(1, 2, 3) -contains [int]$p.Value) { $vakken[$p.Name] = [int]$p.Value } } }
+    if (-not $vakken.Count -and $vakIds -contains $eigenVak) { $vakken[$eigenVak] = 1 }   # eigen vak zonder skilllijst: (nog) geen lessen
     if ($script:lidOngeldig) { $script:lidOvergeslagen++; continue }
     $leden[$id] = [ordered]@{
-        project = $org.leden.$id.project; cel = $org.leden.$id.cel
+        project = $org.leden.$id.project; cel = $org.leden.$id.cel; vak = $eigenVak; vakken = $vakken
         focus = $(if ($profiel) { $profiel.obj.focus }); leerdoelen = $(if ($profiel) { $profiel.obj.leerdoelen })
         scores = $scores; prioriteit = $prioriteit; resultaten = $resultaten; gedaan = @($gedaan | Sort-Object -Unique); wachtrij = @($(if ($wachtrij) { $wachtrij.obj.lessen }))
     }
@@ -71,5 +78,5 @@ foreach ($naam in @(Get-DlOpslagLijst $d 'feedback' | ForEach-Object { $_ -repla
         if ($f) { $feedback += [ordered]@{ id = $f.bestand; soort = $f.soort; les = $f.les; datum = $f.datum; tekst = ($f.tekst -replace '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\u200E\u200F\u202A-\u202E\u2066-\u2069]', '') } }
     } catch { $fbOverslaan++ }
 }
-[IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; leden = $leden; lesstatistiek = $stat; feedback = @($feedback) } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
+[IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; vakken = @($vakIds); leden = $leden; lesstatistiek = $stat; feedback = @($feedback) } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
 Write-Host "Context voor $($leden.Count) deelnemer(s), $($stat.Count) les(sen) met resultaten, $($feedback.Count) feedbackbericht(en)$(if ($fbOverslaan) { " ($fbOverslaan niet leesbaar)" }): $pad$(if ($script:ongeldig) { " · $($script:ongeldig) bestand(en) niet te controleren, $($script:lidOvergeslagen) deelnemer(s) vandaag overgeslagen" })"

@@ -2,6 +2,7 @@
 #   $r = Import-DlSkilllijst -Xlsx 'C:\...\SEO kennis.xlsx' -Sjabloon 'sjablonen\seo\skilllijst.csv'
 #   $r.matrix  -> @{ v=1; sjabloon='seo'; scores = @{ '1.1.1' = @{ '2026-06' = 2 } } }
 #   $r.gekoppeld, $r.nietGevonden
+# Ander vak dan het standaardvak: -Vak cro geeft id's als 'cro:1.1.1' (het standaardvak houdt kale id's).
 # Opzet sheet: A = hoofdgebied, B = onderwerp, C = vaardigheid (of een inleidende zin zonder score),
 # D..I = maand 1..6 (D1 = datum van maand 1), J = huidige score.
 
@@ -40,7 +41,7 @@ function Repair-DlTekst([string]$T) {
 }
 function Get-DlSleutelTekst([string]$T) { ((Repair-DlTekst $T).ToLower() -replace '^[-\s]+', '' -replace '[^a-z0-9ëïéèäöü]+', ' ').Trim() }
 
-function Import-DlSkilllijst([string]$Xlsx, [string]$Sjabloon) {
+function Import-DlSkilllijst([string]$Xlsx, [string]$Sjabloon, [string]$Vak) {
     $sj = @(Import-Csv $Sjabloon -Delimiter ';' -Encoding UTF8)
     $index = @{}; foreach ($s in $sj) { $index["$(Get-DlSleutelTekst $s.onderwerp)|$(Get-DlSleutelTekst $s.vaardigheid)"] = $s.id }
 
@@ -69,7 +70,7 @@ function Import-DlSkilllijst([string]$Xlsx, [string]$Sjabloon) {
         $s = [ordered]@{}
         foreach ($k in $maandKol.Keys) { if ("$($c[$k])" -match '^([1-5])(\.0+)?$') { $s[$maandKol[$k]] = [int]$Matches[1] } }
         if ($s.Count -eq 0 -and "$($c.J)" -match '^([1-5])(\.0+)?$') { $s[$nu] = [int]$Matches[1] }
-        $scores[$id] = $s
+        $scores[$(if ($Vak) { "$Vak`:$id" } else { $id })] = $s
     }
     [pscustomobject]@{
         matrix       = [ordered]@{ v = 1; sjabloon = (Split-Path (Split-Path $Sjabloon) -Leaf); scores = $scores }

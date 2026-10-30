@@ -2,20 +2,22 @@
 # ondertekend met de beheersleutel (de publieke helft staat in vertrouwd.json in de openbare app-repo).
 #
 #   beheer.ps1 -Init                                             eenmalig: beheersleutel; vraagt je beheertoken (niet zichtbaar)
-#   beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Optioneel] [-Beheerder]
+#   beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Vak cro] [-Optioneel] [-Beheerder]
 #   beheer.ps1 -Aanvragen                                        openstaande aanmeldingen
 #   beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f"
 #   beheer.ps1 -AutoGoedkeuren                                   nieuwe aanmeldingen zonder controlewoorden (herstel niet)
-#   beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal     (of -Cel leadgen) en toegang meteen bijwerken
+#   beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal     (of -Cel leadgen, en/of -Vak cro) en toegang meteen bijwerken
+#   beheer.ps1 -Head lid-xxxxxx -Vak cro                         head van een vak maken (ziet de voortgang van dat vak)
 #   beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht|optioneel
 #   beheer.ps1 -Bijwerken                                        toegang opnieuw berekenen
 #   beheer.ps1 -Controleer                                       overzicht: wie ziet wie
 #   beheer.ps1 -NieuweGeneratorsleutel                           aparte sleutel voor de lesgenerator (hervatbaar)
 #   beheer.ps1 -Migreer -VanMap <map>                            eenmalig: oude beheer-repo (onondertekend) overzetten
-# Rollen: lid (met -Project of -Cel), projectleider (-Project), celleider (-Cel), head.
+# Rollen: lid (met -Project of -Cel), projectleider (-Project), celleider (-Cel), head (van -Vak, standaard het standaardvak).
+# Vakken staan in instellingen.json; zonder -Vak hoort een lid bij het standaardvak (vakgebied).
 param(
     [switch]$Init, [switch]$Uitnodigen, [switch]$Aanvragen, [switch]$AutoGoedkeuren, [string]$Goedkeuren, [switch]$Bijwerken, [switch]$Controleer,
-    [string]$Wijzig, [string]$Verplaats, [switch]$Migreer, [string]$VanMap, [switch]$NieuweGeneratorsleutel,
+    [string]$Wijzig, [string]$Verplaats, [string]$Head, [string]$Vak, [switch]$Migreer, [string]$VanMap, [switch]$NieuweGeneratorsleutel,
     [string]$Naam, [ValidateSet('lid', 'projectleider', 'celleider', 'head')][string]$Rol = 'lid', [string]$Project, [string]$Cel,
     [string]$Controlewoorden, [switch]$Optioneel, [switch]$Beheerder,
     [ValidateSet('', 'verplicht', 'optioneel')][string]$Leren = '',
@@ -79,6 +81,22 @@ $d = DataOpslag
 $V = Vertrouwd
 $org = Read-DlBeheer $d 'organisatie.json' $V
 if (-not $org -and -not $Migreer) { $org = Get-Content (Join-Path $App 'sjablonen\organisatie-sjabloon.json') -Raw -Encoding UTF8 | ConvertFrom-Json }
+
+$standaardVak = [string]$inst.vakgebied
+$vakIds = @($(if ($inst.vakken) { $inst.vakken.id } else { $standaardVak }))
+if ($Vak -and $vakIds -notcontains $Vak) { throw "Onbekend vak '$Vak' ($($vakIds -join ', '))" }
+if ($org -and -not $org.vakgebied) { $org | Add-Member -NotePropertyName vakgebied -NotePropertyValue $standaardVak -Force }
+# Head van een vak vastleggen: het standaardvak in head (zoals altijd), andere vakken in heads.<vak>
+# (let op: geen variabele $v, PowerShell ziet die als $V, de beheersleutel)
+function Set-Head([string]$id, [string]$welkVak) {
+    if (-not $welkVak -or $welkVak -eq $org.vakgebied) { $org.head = $id; return }
+    if (-not $org.heads) { $org | Add-Member -NotePropertyName heads -NotePropertyValue ([pscustomobject]@{}) -Force }
+    $org.heads | Add-Member -NotePropertyName $welkVak -NotePropertyValue $id -Force
+}
+function Set-LidVak($l, [string]$welkVak) {
+    if (-not $welkVak) { return }
+    if ($welkVak -eq $org.vakgebied) { $l.PSObject.Properties.Remove('vak') } else { $l | Add-Member -NotePropertyName vak -NotePropertyValue $welkVak -Force }
+}
 
 function Save-Org { Write-DlBeheer $d 'organisatie.json' $script:org (BeheerPrive) }
 function Naam($id) { if ($id -eq 'generator') { return 'generator' }; $n = $org.leden.$id.naam; if ($n) { "$n ($id)" } else { $id } }
@@ -167,7 +185,7 @@ elseif ($Uitnodigen) {
     $lid = [ordered]@{ naam = $Naam }
     $alleProjecten = @($org.cellen | ForEach-Object { $_.projecten })
     switch ($Rol) {
-        'head' { $org.head = $id }
+        'head' { Set-Head $id $Vak }
         'celleider' {
             $c = @($org.cellen | Where-Object id -eq $Cel)[0]; if (-not $c) { throw "Onbekende cel '$Cel' ($(($org.cellen.id) -join ', '))" }
             $c.leider = $id; $lid.cel = $Cel
@@ -181,11 +199,12 @@ elseif ($Uitnodigen) {
             elseif ($Rol -eq 'projectleider') { throw 'Een projectleider heeft -Project nodig' }
         }
     }
+    if ($Vak -and $Vak -ne $org.vakgebied) { $lid.vak = $Vak }
     if ($Optioneel) { $lid.leren = 'optioneel' }
     if ($Beheerder) { $org.beheerders = @(@($org.beheerders) + $id | Where-Object { $_ }) }
     $org.leden | Add-Member -NotePropertyName $id -NotePropertyValue ([pscustomobject]$lid)
     Save-Org
-    Write-Host "Uitnodiging voor $Naam ($id, $Rol$(if ($Optioneel) { ', lessen optioneel' }))" -ForegroundColor Green
+    Write-Host "Uitnodiging voor $Naam ($id, $Rol$(if ($Vak) { ", $Vak" })$(if ($Optioneel) { ', lessen optioneel' }))" -ForegroundColor Green
     $url = 'https://github.com/settings/personal-access-tokens/new?name=' + [Uri]::EscapeDataString("DoubleLeren $Naam") + '&description=' + [Uri]::EscapeDataString("DoubleLeren $id") + "&target_name=$($inst.eigenaar)&contents=write"
     Write-Host "1. Token maken (vooraf ingevuld; kies bij Repository access alleen $($inst.dataRepo)):"
     Write-Host "   $url"
@@ -200,9 +219,19 @@ elseif ($Verplaats) {
     } elseif ($Cel) {
         if (-not @($org.cellen | Where-Object id -eq $Cel).Count) { throw "Onbekende cel '$Cel'" }
         $l | Add-Member -NotePropertyName cel -NotePropertyValue $Cel -Force; $l.PSObject.Properties.Remove('project')
-    } else { throw 'Geef -Project of -Cel' }
+    } elseif (-not $Vak) { throw 'Geef -Project, -Cel en/of -Vak' }
+    Set-LidVak $l $Vak
     Save-Org
-    Write-Host "$(Naam $Verplaats) verplaatst."
+    Write-Host "$(Naam $Verplaats) verplaatst$(if ($Vak) { " (vak $Vak)" })."
+    $Bijwerken = $true
+}
+
+elseif ($Head) {
+    if (-not $org.leden.$Head) { throw "Onbekend: $Head" }
+    $headVak = if ($Vak) { $Vak } else { $org.vakgebied }
+    Set-Head $Head $headVak
+    Save-Org
+    Write-Host "$(Naam $Head) is nu head van $headVak."
     $Bijwerken = $true
 }
 
@@ -288,14 +317,15 @@ if ($Bijwerken) {
 }
 
 if ($Controleer) {
-    Write-Host ("{0,-30} {1,-20} {2,-22} {3}" -f 'Deelnemer', 'Rol', 'Project / cel', 'Zichtbaar voor')
+    Write-Host ("{0,-30} {1,-20} {2,-12} {3,-22} {4}" -f 'Deelnemer', 'Rol', 'Vak', 'Project / cel', 'Zichtbaar voor')
     foreach ($id in @($org.leden.PSObject.Properties.Name)) {
         $l = $org.leden.$id; $plek = if ($l.project) { $l.project } elseif ($l.cel) { "cel $($l.cel)" } else { '-' }
-        $rolTekst = if ($org.head -eq $id) { 'head' } elseif (@($org.cellen | Where-Object leider -eq $id).Count) { 'celleider' } elseif (@($org.cellen.projecten | Where-Object leider -eq $id).Count) { 'projectleider' } else { 'lid' }
+        $headVan = @($vakIds | Where-Object { (Get-DlHeadVanVak $org $_) -eq $id })
+        $rolTekst = if ($headVan.Count) { "head $($headVan -join '/')" } elseif (@($org.cellen | Where-Object leider -eq $id).Count) { 'celleider' } elseif (@($org.cellen.projecten | Where-Object leider -eq $id).Count) { 'projectleider' } else { 'lid' }
         if ($l.leren -eq 'optioneel') { $rolTekst += ' (opt.)' }
         $t = Read-DlBeheer $d "toegang/$id.json" $V
         $kijkers = if ($t) { @($t.kopieen.PSObject.Properties.Name | Where-Object { $_ -ne $id }) | ForEach-Object { Naam $_ } } else { @('(nog niet goedgekeurd)') }
-        Write-Host ("{0,-30} {1,-20} {2,-22} {3}" -f (Naam $id), $rolTekst, $plek, ($kijkers -join ', '))
+        Write-Host ("{0,-30} {1,-20} {2,-12} {3,-22} {4}" -f (Naam $id), $rolTekst, (Get-DlVakVanLid $org $id), $plek, ($kijkers -join ', '))
     }
 }
 

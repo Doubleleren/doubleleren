@@ -32,7 +32,7 @@ Alles gaat in de browser; je hoeft niets te installeren.
 | Deelnemer | ja | ja | alleen het scorebord: naam, aantal goed en reeks per maand (wie zich verbergt niet) |
 | Projectleider | ja | alleen eigen | scorebord + scores en resultaten van het eigen project |
 | Celleider | ja | alleen eigen | scorebord + scores en resultaten van de eigen cel |
-| Head of SEO | ja | alleen eigen | scorebord + scores en resultaten van heel SEO |
+| Head van een vak (bijv. head of SEO) | ja | alleen eigen | scorebord + scores en resultaten van iedereen in dat vak |
 | Beheerder en generator | via sleutelbeheer: scores en resultaten (de generator krijgt geen namen) | nee | de beheerder leest ook de feedback, met naam; de generator zonder naam |
 
 ## Hoe het veilig is
@@ -110,15 +110,22 @@ Een token-houder kan bestanden van anderen verwijderen of een oude versie terugz
 | `sjablonen/` | `seo/skilllijst.csv`, `seo/curriculum.md`, `organisatie-sjabloon.json` (leeg) |
 | `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1`, `lokale-server.py` |
 
+## Vakken
+Naast SEO kunnen andere vakken meedoen (CRO, SEA, Social ads, Content, Coderen met Claude & GitHub; lijst in `instellingen.json`). Een vak doet pas mee zodra `sjablonen/<vak>/skilllijst.csv` bestaat (zelfde kolommen als de SEO-lijst); tot die tijd ziet niemand er iets van.
+- Iedereen hoort bij één vak (organogram, standaard SEO) en kiest op de website onder *Skilllijst* welke vakken hij leert, met prioriteit hoog, normaal of laag. Je eigen vak staat standaard aan.
+- Vaardigheid-id's van SEO blijven `1.1.1`; die van andere vakken krijgen het vak ervoor (`cro:1.1.1`), ook in lessen (`matrix`).
+- Elk vak heeft een eigen head, die de voortgang ziet van iedereen die bij dat vak hoort. Cel- en projectleiders zien hun mensen, ongeacht het vak.
+
 ## Beheerder: draaiboek
 De beheersleutel en je beheertoken staan met DPAPI in `%USERPROFILE%\.doubleleren\beheer\beheer.dpapi`. Wijzigingen gaan direct en ondertekend naar `doubleleren-data/beheer/`.
 
 ```
 beheer\beheer.ps1 -Init                               # eenmalig; vraagt je beheertoken verborgen; daarna vertrouwd.json committen en pushen
-beheer\beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Optioneel]
+beheer\beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Vak cro] [-Optioneel]
 beheer\beheer.ps1 -Aanvragen
 beheer\beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f"
-beheer\beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal
+beheer\beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal   # of -Cel leadgen, en/of -Vak cro
+beheer\beheer.ps1 -Head lid-xxxxxx -Vak cro              # head van een vak
 beheer\beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht
 beheer\beheer.ps1 -Controleer
 beheer\beheer.ps1 -NieuweGeneratorsleutel             # eenmalig: aparte generatorsleutel (hervatbaar; beheersleutel blijft gelijk)

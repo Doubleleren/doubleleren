@@ -3,5 +3,13 @@
   "eigenaar": "doubleleren",
   "appRepo": "doubleleren",
   "dataRepo": "doubleleren-data",
-  "vakgebied": "seo"
+  "vakgebied": "seo",
+  "vakken": [
+    { "id": "seo", "naam": "SEO" },
+    { "id": "cro", "naam": "CRO" },
+    { "id": "sea", "naam": "SEA" },
+    { "id": "social-ads", "naam": "Social ads" },
+    { "id": "content", "naam": "Content" },
+    { "id": "claude-code", "naam": "Coderen met Claude & GitHub" }
+  ]
 }

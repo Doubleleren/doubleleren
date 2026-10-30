@@ -47,7 +47,12 @@ function Get-Leren($u) {
 # Skilllijst importeren en versleuteld + ondertekend opslaan
 function Save-Skilllijst($o, $u, $s, $prive, [string]$xlsx) {
     if (-not (Get-Command Import-DlSkilllijst -ErrorAction SilentlyContinue)) { throw 'Excel inlezen kan hier niet (geblokkeerd door een webfilter). Meld je aan via de website; daarna kun je hier de pop-up toevoegen.' }
-    $import = Import-DlSkilllijst -Xlsx $xlsx -Sjabloon (Join-Path $App "sjablonen\$($inst.vakgebied)\skilllijst.csv")
+    # De skilllijst van je eigen vak (organogram); het standaardvak heeft kale id's, andere vakken 'vak:1.1.1'
+    $org = Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd
+    $vak = if ($org.leden.($u.id).vak) { [string]$org.leden.($u.id).vak } else { [string]$inst.vakgebied }
+    $sjabloon = Join-Path $App "sjablonen\$vak\skilllijst.csv"
+    if (-not (Test-Path $sjabloon)) { throw "Voor jouw vak ($vak) is er nog geen skilllijst. Meld je aan zonder Excel-bestand; je vult hem later in op de website." }
+    $import = Import-DlSkilllijst -Xlsx $xlsx -Sjabloon $sjabloon -Vak $(if ($vak -ne $inst.vakgebied) { $vak })
     $b = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'matrix')
     Write-DlVersleuteld $o.data $u.id 'matrix' $s $import.matrix $(if ($b) { $b.sha }) $u.id $prive | Out-Null
     "$($import.gekoppeld) van $($import.totaal)"
