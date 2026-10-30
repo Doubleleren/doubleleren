@@ -122,9 +122,11 @@ async function laadOpenbaar() {
   // Alle vakken uit instellingen.json (S.alleVakken); alleen die met een skilllijst doen mee (S.vakken).
   // Het standaardvak houdt kale id's (1.1.1), de rest 'cro:1.1.1'
   const lijst = (Array.isArray(S.inst.vakken) && S.inst.vakken.length ? S.inst.vakken : [{ id: S.inst.vakgebied }]).filter((v) => VAK_VORM.test(String(v?.id)));
-  const csvs = await Promise.all(lijst.map((v) => S.app.bytes(`sjablonen/${v.id}/skilllijst.csv`).catch(() => null)));
+  // soort: discipline (standaard; eigen vak en leren), groep (alleen eigen vak in het organogram, bijv. Base), onderwerp (alleen leren)
+  const soortVan = (v) => (['groep', 'onderwerp'].includes(v.soort) ? v.soort : 'discipline');
+  const csvs = await Promise.all(lijst.map((v) => (soortVan(v) === 'groep' ? null : S.app.bytes(`sjablonen/${v.id}/skilllijst.csv`).catch(() => null))));
   lijst.forEach((v, n) => {
-    S.alleVakken.push({ id: v.id, naam: String(v.naam || String(v.id).toUpperCase()), lijst: !!csvs[n] });
+    S.alleVakken.push({ id: v.id, naam: String(v.naam || String(v.id).toUpperCase()), lijst: !!csvs[n], soort: soortVan(v) });
     if (!csvs[n]) return;
     const [kop, ...regels] = K.tekst.uitBytes(csvs[n]).replace(/^﻿/, '').trim().split(/\r?\n/).map((r) => r.split(';'));
     for (const r of regels) {
@@ -409,7 +411,9 @@ function toonSkilllijst() {
   $('mx-bijwerken').hidden = !totaal;
   if (!totaal) {
     $('mx-sub').textContent = '';
-    $('matrix').innerHTML = '<p class="leeg">Voor jouw vak is er nog geen skilllijst. Zodra die er is, vul je hem hier in.</p>';
+    $('matrix').innerHTML = isGroep(eigenVak(S.mij)) && !Object.keys(lid.vakken || {}).length
+      ? '<p class="leeg">Je hebt nog geen vak gekozen om te leren. Kies er een bij <button type="button" class="leslink" data-naar="instellingen">Instellingen</button>; daarna vul je hier de skilllijst in.</p>'
+      : '<p class="leeg">Voor jouw vak is er nog geen skilllijst. Zodra die er is, vul je hem hier in.</p>';
     return;
   }
   if (!lid.matrix) {
@@ -525,13 +529,15 @@ function toonInstellingen() {
 }
 
 // ---------------------------------------------------------------- welke vakken je leert
-// Alle vakken uit instellingen.json; een vak zonder skilllijst staat erbij als "volgt nog". Uit = geen lessen over dat vak.
+// Alle vakken uit instellingen.json die je kunt leren (geen groepen zoals Base); een vak zonder skilllijst staat erbij als
+// "volgt nog". Uit = geen lessen over dat vak. Wie bij een groep hoort, heeft geen standaardvak en kiest zelf.
+const isGroep = (v) => S.alleVakken.find((x) => x.id === v)?.soort === 'groep';
 function toonVakken() {
-  const lid = S.leden[S.mij];
-  $('vakken-paneel').hidden = S.alleVakken.length < 2 || !lid?.sl;
+  const lid = S.leden[S.mij], leerbaar = S.alleVakken.filter((v) => v.soort !== 'groep');
+  $('vakken-paneel').hidden = leerbaar.length < 2 || !lid?.sl;
   if ($('vakken-paneel').hidden) return;
   const k = gekozenVakken(lid), eigen = eigenVak(S.mij);
-  $('vakken').innerHTML = S.alleVakken.map((v) => !v.lijst
+  $('vakken').innerHTML = (isGroep(eigen) ? `<p class="sub" style="margin:0 0 6px">Bij ${esc(vakNaam(eigen))} hoort geen vak met eigen lessen. Zet hieronder aan wat je wilt leren.</p>` : '') + leerbaar.map((v) => !v.lijst
     ? `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="sub">Skilllijst volgt nog</span></div>`
     : `<div class="rij"><span>${esc(v.naam)}${v.id === eigen ? ' <span class="sub">(jouw vak)</span>' : ''}</span><span class="prio-keuze" role="group" aria-label="${esc(`Leren: ${v.naam}`)}">${[1, 2, 3, 0].map((w) => `<button type="button" class="knop" data-vak="${esc(v.id)}" data-waarde="${w}" aria-pressed="${(k[v.id] || 0) === w}">${w ? PRIO[w] : 'Uit'}</button>`).join('')}</span></div>`).join('');
 }
@@ -614,7 +620,7 @@ function toonTeam() {
   const naamVan = (l) => esc(l.naam) + (l.id === S.mij ? ' <span class="sub" style="font-weight:400">(jij)</span>' : '');
   $('team-titel').textContent = rolTitel();
   // Eén vak tegelijk: standaard het vak waarvan je head bent, anders je eigen vak
-  const vak = S.vakken.some((x) => x.id === S.teamVak) ? S.teamVak : headVakken(S.mij)[0] || eigenVak(S.mij);
+  const vak = [S.teamVak, ...headVakken(S.mij), eigenVak(S.mij)].find((v) => S.vakken.some((x) => x.id === v)) || S.vakken[0]?.id;
   $('team-vak').hidden = !meerVakken();
   $('team-vak').innerHTML = S.vakken.map((v) => `<option value="${esc(v.id)}"${v.id === vak ? ' selected' : ''}>${esc(v.naam)}</option>`).join('');
   const vakItems = itemsVan(null, vak);

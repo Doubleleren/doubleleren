@@ -85,6 +85,8 @@ if (-not $org -and -not $Migreer) { $org = Get-Content (Join-Path $App 'sjablone
 $standaardVak = [string]$inst.vakgebied
 $vakIds = @($(if ($inst.vakken) { $inst.vakken.id } else { $standaardVak }))
 if ($Vak -and $vakIds -notcontains $Vak) { throw "Onbekend vak '$Vak' ($($vakIds -join ', '))" }
+# Een onderwerp (bijv. Coderen met AI) kun je leren, maar het is niemands eigen vak; een groep (Base) wel, zonder lessen
+if ($Vak -and @($inst.vakken | Where-Object { $_.id -eq $Vak -and $_.soort -eq 'onderwerp' }).Count) { throw "'$Vak' is een onderwerp om te leren, geen eigen vak. Kies een discipline of groep." }
 if ($org -and -not $org.vakgebied) { $org | Add-Member -NotePropertyName vakgebied -NotePropertyValue $standaardVak -Force }
 # Head van een vak vastleggen: het standaardvak in head (zoals altijd), andere vakken in heads.<vak>
 # (let op: geen variabele $v, PowerShell ziet die als $V, de beheersleutel)

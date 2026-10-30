@@ -1,4 +1,4 @@
-# Zet een skilllijst-Excel (zelfde opzet als de SEO-sheet) om naar sjablonen/<vak>/skilllijst.csv, zodat het vak meedoet.
+﻿# Zet een skilllijst-Excel (zelfde opzet als de SEO-sheet) om naar sjablonen/<vak>/skilllijst.csv, zodat het vak meedoet.
 #   beheer\skilllijst-omzetten.ps1 -Xlsx "C:\...\CRO skills.xlsx" -Vak cro            schrijft sjablonen\cro\skilllijst.csv
 #   beheer\skilllijst-omzetten.ps1 -Xlsx ... -Vak cro -Toon                              alleen laten zien, niets schrijven
 # Opzet sheet: rij 1 = kop; A = hoofdgebied, B = onderwerp, C = vaardigheid met een streepje ervoor ("- met GA4"),
@@ -10,6 +10,7 @@ $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
 . (Join-Path $App 'app\lib\skilllijst.ps1')
 $inst = Get-Content (Join-Path $App 'instellingen.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+if (@($inst.vakken | Where-Object { $_.id -eq $Vak -and $_.soort -eq 'groep' }).Count) { throw "'$Vak' is een groep in het organogram, zonder eigen lessen of skilllijst." }
 if (@($inst.vakken.id) -notcontains $Vak) { throw "Onbekend vak '$Vak'. Voeg het eerst toe aan instellingen.json ($(@($inst.vakken.id) -join ', '))." }
 $uit = Join-Path $App "sjablonen\$Vak\skilllijst.csv"
 
