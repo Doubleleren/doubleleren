@@ -301,7 +301,20 @@ try {
             $k = Nieuw-Knop 'Later (2 uur)' { Stel-Uit }
             $k.Margin = Rand 0 0 8 0
             [void]$linksKnoppen.Children.Add($k)
+        } elseif ($c) {
+            # Al een keer uitgesteld: niet nog eens, wel de les zelf in de browser doen wanneer het uitkomt
+            $k = Nieuw-Knop 'Beantwoord in de browser' { Stel-UitNaarBrowser }
+            $k.Margin = Rand 0 0 8 0; $k.ToolTip = 'De pop-up komt dit dagdeel niet meer terug. Doe de les op de website wanneer het jou uitkomt.'
+            [void]$linksKnoppen.Children.Add($k)
         }
+    }
+    function Stel-UitNaarBrowser {
+        # Pop-up weg tot het einde van dit dagdeel (ochtend tot 12:30, middag tot het eind van de dag)
+        $tot = if ($slot -eq 'ochtend') { (Get-Date).Date.AddHours(12).AddMinutes(30) } else { (Get-Date).Date.AddDays(1).AddSeconds(-1) }
+        if (-not $Test) { Schrijf-Status $script:aantal $slot $tot.ToString('s') }
+        $url = "https://$($c.cfg.eigenaar).github.io/$($c.cfg.appRepo)/#vandaag"
+        if (Test-WebAdres $url) { Start-Process $url }
+        $script:magSluiten = $true; $win.Close()
     }
     function Voeg-WegKnop {
         $k = Nieuw-Knop 'Venster even weg' { $win.WindowState = 'Minimized' }
