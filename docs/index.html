@@ -76,7 +76,12 @@ details.mx summary { list-style: none; cursor: pointer; display: grid; grid-temp
 details.mx summary::-webkit-details-marker { display: none; }
 .mx-naam { font-weight: 500; display: flex; gap: 8px; align-items: center; min-width: 0; overflow-wrap: anywhere; }
 .pijl { width: 8px; height: 8px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(-45deg); flex: none; transition: transform .15s; }
-details[open] .pijl { transform: rotate(45deg); }
+details[open] > summary .pijl { transform: rotate(45deg); }
+details.mx-vak { border: 1px solid var(--cool); border-radius: 14px; padding: 0 16px; }
+details.mx-vak + details.mx-vak { margin-top: 10px; }
+details.mx-vak > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto 40px; gap: 14px; align-items: center; padding: 14px 0; font-size: 17px; font-weight: 600; }
+details.mx-vak > summary::-webkit-details-marker { display: none; }
+.mx-vak-inhoud { padding-bottom: 14px; }
 .balk { position: relative; height: 10px; background: var(--cool-50); border-radius: 5px; }
 .balk i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--smart-ink); border-radius: 0 5px 5px 0; }
 .balk b { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--ink); }

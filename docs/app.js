@@ -333,10 +333,11 @@ function signalen(lid) {
   const orde = { overschat: 0, onderschat: 1, groeit: 2, bevestigd: 3 };
   return [...uit, ...groei.filter((g) => !uit.some((u) => u.id === g.id))].sort((x, y) => orde[x.s] - orde[y.s]);
 }
-function groepeer(lid, vakken = vakkenVan(lid)) {
+// kaal: hoofdgebied zonder vaknaam ervoor (als het al binnen een blok per vak staat)
+function groepeer(lid, vakken = vakkenVan(lid), kaal = false) {
   const g = new Map();
   for (const it of [...S.sjabloon.values()].filter((i) => vakken.includes(i.vak))) {
-    const hg = hgNaam(it);
+    const hg = kaal ? it.hoofdgebied : hgNaam(it);
     if (!g.has(hg)) g.set(hg, new Map());
     const o = g.get(hg); if (!o.has(it.onderwerp)) o.set(it.onderwerp, []);
     o.get(it.onderwerp).push({ ...it, scores: scoresVan(lid, it.id) });
@@ -424,13 +425,20 @@ function toonSkilllijst() {
   const nogDoen = open.length ? `<p class="leeg">Nog niet ingevuld: ${open.map((v) => `<b>${esc(vakNaam(v))}</b> <button type="button" class="leslink" data-naar="skilllijst" data-formulier="1" data-vak="${esc(v)}">vul in</button>`).join(' · ')}. Tot dan krijg je daarin lessen op beginnersniveau.</p>` : '';
   $('mx-sub').textContent = maanden.length ? `${totaal} vaardigheden · laatste meting ${fmtMaand(maanden[maanden.length - 1])}. Klik op een onderwerp voor details.` : 'Nog geen scores.';
   const sig = signalen(lid), b = bewijs(lid), sigPer = new Map(sig.map((x) => [x.id, x.s]));
-  $('matrix').innerHTML = nogDoen + [...groepeer(lid, klaar)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
+  // Meer dan één vak: per vak een uitklapbaar blok (dicht), anders wordt het eindeloos scrollen
+  const perVak = (vk) => [...groepeer(lid, [vk], true)].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
     const nuG = gem(its.map((i) => laatste(i.scores)?.s)), startG = gem(its.map((i) => eerste(i.scores)));
     return `<details class="mx"><summary><span class="mx-naam"><i class="pijl"></i>${esc(o)}</span><span class="balk" data-tip="${esc(`${o}: ${komma(nuG)}${maanden.length > 1 ? ` (eerste meting ${komma(startG)})` : ''}`)}"><i style="width:${((nuG / 5) * 100).toFixed(1)}%"></i>${maanden.length > 1 ? `<b style="left:calc(${((startG / 5) * 100).toFixed(1)}% - 1px)"></b>` : ''}</span><span class="mx-score num">${komma(nuG)}</span></summary><div class="mx-items">${its.map((i) => {
       const hist = Object.keys(i.scores).sort().map((m) => Number(i.scores[m])).join(' → '); const bi = b.get(i.id);
       return `<div class="mx-item"><span class="id num">${esc(i.nr || i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
     }).join('')}</div></details>`;
   }).join('')}</div>`).join('');
+  $('matrix').innerHTML = nogDoen + (klaar.length > 1
+    ? klaar.map((vk) => {
+      const its = itemsVan(lid, vk), g = gem(its.map((i) => laatste(scoresVan(lid, i.id))?.s));
+      return `<details class="mx-vak"><summary><span class="mx-naam"><i class="pijl"></i>${esc(vakNaam(vk))}</span><span class="sub">${its.length} vaardigheden</span><span class="mx-score num">${komma(g)}</span></summary><div class="mx-vak-inhoud">${perVak(vk)}</div></details>`;
+    }).join('')
+    : perVak(klaar[0]));
 }
 // Bewust leeg: je eerdere score staat er niet bij, zodat je echt opnieuw inschat. Typ 1–5 en je springt naar de volgende.
 function toonSkillFormulier(vak) {
