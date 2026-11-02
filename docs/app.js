@@ -357,7 +357,7 @@ function toonMij() {
   const delta = pct(opNiveau, totaal) - pct(start, totaal), rk = reeks(logs, lid.werkdagen);
   $('kpis').innerHTML =
     `<div class="kpi accent"><span class="label">Lessen afgerond</span><span class="waarde num">${logs.length}</span><span class="toel">${logs.filter((l) => l.datum.startsWith(dagKey(nu()).slice(0, 7))).length} deze maand</span></div>` +
-    `<div class="kpi"><span class="label">Reeks</span><span class="waarde num">${rk}<small> ${rk === 1 ? 'dag' : 'dagen'}</small></span><span class="toel">Weekenden tellen niet als onderbreking</span></div>` +
+    `<div class="kpi"><span class="label">Reeks</span><span class="waarde num">${rk}<small> ${rk === 1 ? 'dag' : 'dagen'}</small></span><span class="toel">Weekend en vrije dagen breken je reeks niet</span></div>` +
     `<div class="kpi"><span class="label">Goed beantwoord</span><span class="waarde num">${pct(tel.goed, beoordeeld)}<small>%</small></span><span class="toel num">${tel.goed} goed · ${tel.deels} deels · ${tel.fout} fout</span></div>` +
     (lid.matrix
       ? `<div class="kpi"><span class="label">Skilllijst op niveau</span><span class="waarde num">${pct(opNiveau, totaal)}<small>%</small></span><span class="toel num">${opNiveau} van ${totaal} op 3–5${maanden.length > 1 ? ` · ${delta >= 0 ? '+' : ''}${delta} pt sinds ${esc(fmtMaand(maanden[0]))}` : maanden.length ? ` · meting ${esc(fmtMaand(maanden[0]))}` : ''}</span></div>`
