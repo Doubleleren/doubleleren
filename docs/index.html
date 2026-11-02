@@ -127,7 +127,8 @@ details.sig > summary:hover b { text-decoration: underline; text-underline-offse
 #instellingen-knop[aria-current="page"] { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--ink); }
 #sb-instelling[hidden] + #snelkoppeling { margin-top: 24px; }
 #mx-vakkeuze, #mx-modus { justify-content: flex-start; display: flex; }
-.maand { padding: 0; overflow: hidden; margin: 0 0 16px; }
+.maand { padding: 0; overflow: hidden; margin: -24px 0 16px; position: relative; }
+#maand-paneel:not([hidden]) + .kpis { margin-top: 0; }
 .maand-kop { background: var(--fun); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .maand-kop h2 { margin-top: 2px; }
 .maand-kop .knop { background: var(--white); }
