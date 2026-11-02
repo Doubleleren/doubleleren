@@ -200,7 +200,7 @@ function Write-DlScorebord($C, $Logs, [bool]$Zichtbaar = $true, [datetime]$Nu = 
             if ($maand -ne $nuM -and -not $st.lessen -and -not $oud) { break }
             $obj = if ($zichtbaar) {
                 [ordered]@{ v = 1; maand = $maand; zichtbaar = $true; goed = [int]$st.goed; langsteReeks = [int]$st.langsteReeks
-                    huidigeReeks = [int]$(if ($maand -eq $nuM) { Get-DlReeks $Logs $Nu $Werkdagen } else { $st.reeksAanEind }); laatsteDag = $st.laatsteDag
+                    huidigeReeks = [int]$st.reeksAanEind; laatsteDag = $st.laatsteDag
                     geldigTot = (Get-DlGeldigTot $st.laatsteDag $Werkdagen) }
             } else { [ordered]@{ v = 1; maand = $maand; zichtbaar = $false } }
             if ($oud) {
