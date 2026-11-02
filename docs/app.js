@@ -437,63 +437,76 @@ function toonMij() {
 }
 
 // ---------------------------------------------------------------- maandafsluiter
-// De eerste 10 dagen van een maand, bovenaan Mijn voortgang: terugblik op vorige maand en hooguit 3 voorstellen per kant om
-// een score aan te passen. Omhoog: vorige maand minstens 2x goed, in de twee maanden samen minstens 3x goed en nooit fout.
-// Omlaag: vorige maand minstens 2x fout, samen minstens 3x fout en hooguit 1x goed. Een score die je deze maand al aanpaste,
-// slaat hij over. "Gezien" en "Laat staan" gelden op deze computer tot de volgende maand.
+// De eerste 10 dagen van een maand, bovenaan Mijn voortgang: terugblik op vorige maand (cijfers, wat goed en minder ging) en
+// scoresuggesties. Een suggestie komt alleen bij een duidelijk patroon per onderwerp: vorige maand minstens 10 lessen met 80%
+// goed (of fout), of in twee maanden samen minstens 15 lessen met 80% goed (of fout). Het blijft een advies: overnemen zet
+// de scores van dat onderwerp één stap omhoog of omlaag. "Gezien" en "Laat staan" gelden op deze computer tot volgende maand.
+const PATROON = { min1: 10, min2: 15, aandeel: 0.8, dagen: 10 };
 const maandTerug = (d, n) => dagKey(new Date(d.getFullYear(), d.getMonth() - n, 1, 12)).slice(0, 7);
 const MAAND_SLEUTEL = () => `dl-maand-${S.mij}`;
 function maandStaat() { try { return JSON.parse(localStorage.getItem(MAAND_SLEUTEL()) || '{}') || {}; } catch { return {}; } }
 function bewaarMaandStaat(s) { try { localStorage.setItem(MAAND_SLEUTEL(), JSON.stringify(s)); } catch { /* geen opslag: dan komt hij terug */ } }
 function maandafsluiter(lid) {
-  const d = nu(); if (d.getDate() > 10) return null;
+  const d = nu(); if (d.getDate() > PATROON.dagen) return null;
   const nuM = dagKey(d).slice(0, 7), vorige = maandTerug(d, 1), daarvoor = maandTerug(d, 2);
   const staat = maandStaat(); if (staat.maand === vorige && staat.gezien) return null;
   const weg = staat.maand === vorige ? staat.weg || [] : [];
   const lv = lid.logs.filter((l) => l.datum.startsWith(vorige)); if (!lv.length) return null;
-  const mijn = new Set(itemsVan(lid).map((i) => i.id)), per = new Map(), ond = new Map();
+  const mijn = new Map(itemsVan(lid).map((i) => [i.id, i])), ond = new Map();
+  // Per onderwerp: elke les telt één keer, ook als hij meerdere vaardigheden van dat onderwerp raakt
   for (const l of lid.logs.filter((x) => x.datum.startsWith(vorige) || x.datum.startsWith(daarvoor))) {
     const vm = l.datum.startsWith(vorige);
-    for (const id of l.matrix) {
-      if (!mijn.has(id)) continue;
-      const p = per.get(id) || { gV: 0, fV: 0, g: 0, f: 0 };
-      if (l.resultaat === 'goed') { p.g++; if (vm) p.gV++; }
-      if (l.resultaat === 'fout') { p.f++; if (vm) p.fV++; }
-      per.set(id, p);
-      const o = S.sjabloon.get(id)?.onderwerp; if (vm && o) { const t = ond.get(o) || { g: 0, f: 0 }; if (l.resultaat === 'goed') t.g++; if (l.resultaat === 'fout') t.f++; ond.set(o, t); }
+    for (const k of new Set(l.matrix.filter((id) => mijn.has(id)).map((id) => `${mijn.get(id).vak}|${mijn.get(id).onderwerp}`))) {
+      const t = ond.get(k) || { naam: k.split('|')[1], nV: 0, gV: 0, fV: 0, n: 0, g: 0, f: 0 };
+      t.n++; if (l.resultaat === 'goed') t.g++; if (l.resultaat === 'fout') t.f++;
+      if (vm) { t.nV++; if (l.resultaat === 'goed') t.gV++; if (l.resultaat === 'fout') t.fV++; }
+      ond.set(k, t);
     }
   }
-  const omhoog = [], omlaag = [];
-  for (const [id, p] of per) {
-    const sc = scoresVan(lid, id), l = laatste(sc); if (!l || l.m === nuM || weg.includes(id)) continue;
-    if (l.s < 5 && p.gV >= 2 && p.g >= 3 && !p.f) omhoog.push({ id, zelf: l.s, naar: l.s + 1, n: p.g });
-    else if (l.s > 1 && p.fV >= 2 && p.f >= 3 && p.g <= 1) omlaag.push({ id, zelf: l.s, naar: l.s - 1, n: p.f });
+  const patroon = (t, x, xV) => (t.nV >= PATROON.min1 && xV / t.nV >= PATROON.aandeel) || (t.n >= PATROON.min2 && x / t.n >= PATROON.aandeel);
+  const suggesties = [];
+  for (const [k, t] of ond) {
+    if (weg.includes(k)) continue;
+    const ids = [...mijn.values()].filter((i) => `${i.vak}|${i.onderwerp}` === k).map((i) => i.id), sc = ids.map((id) => laatste(scoresVan(lid, id))).filter(Boolean);
+    if (!sc.length || sc.every((x) => x.m === nuM)) continue;   // geen scores, of deze maand al bijgewerkt
+    const g = gem(sc.map((x) => x.s));
+    if (patroon(t, t.g, t.gV) && g < 4.5) suggesties.push({ k, naam: t.naam, ids, richting: 1, g, uitleg: t.nV >= PATROON.min1 && t.gV / t.nV >= PATROON.aandeel ? `${t.gV} van ${t.nV} goed vorige maand` : `${t.g} van ${t.n} goed in twee maanden` });
+    else if (patroon(t, t.f, t.fV) && g > 1.5) suggesties.push({ k, naam: t.naam, ids, richting: -1, g, uitleg: t.nV >= PATROON.min1 && t.fV / t.nV >= PATROON.aandeel ? `${t.fV} van ${t.nV} fout vorige maand` : `${t.f} van ${t.n} fout in twee maanden` });
   }
-  const st = maandStand(lid.logs, vorige, lid.werkdagen);
-  const top = (fn) => [...ond].filter(([, t]) => fn(t)).sort((a, b) => (b[1].g - b[1].f) - (a[1].g - a[1].f)).map(([o]) => o);
-  return { vorige, naam: MAANDLANG[+vorige.slice(5) - 1], lessen: lv.length, goed: lv.filter((l) => l.resultaat === 'goed').length, reeks: st.langsteReeks,
-    sterk: top((t) => t.g >= 2 && t.f === 0).slice(0, 3), minder: top((t) => t.f >= 2).reverse().slice(0, 3),
-    omhoog: omhoog.sort((a, b) => b.n - a.n).slice(0, 3), omlaag: omlaag.sort((a, b) => b.n - a.n).slice(0, 3) };
+  const vorigeOnd = [...ond.values()].filter((t) => t.nV);
+  const st = maandStand(lid.logs, vorige, lid.werkdagen), goed = lv.filter((l) => l.resultaat === 'goed').length;
+  return { vorige, naam: MAANDLANG[+vorige.slice(5) - 1], lessen: lv.length, goed, pct: pct(goed, lv.filter((l) => l.resultaat).length), reeks: st.langsteReeks,
+    sterk: vorigeOnd.filter((t) => t.gV >= 2 && t.gV > t.fV).sort((x, y) => (y.gV - y.fV) - (x.gV - x.fV)).slice(0, 4),
+    minder: vorigeOnd.filter((t) => t.fV >= 2 && t.fV >= t.gV).sort((x, y) => (y.fV - y.gV) - (x.fV - x.gV)).slice(0, 4),
+    suggesties: suggesties.slice(0, 4) };
 }
 function toonMaandafsluiter(lid) {
   const m = maandafsluiter(lid), p = $('maand-paneel');
   p.hidden = !m; if (!m) return;
-  const voorstel = (x, omhoog) => { const it = S.sjabloon.get(x.id) || {}; return `<div class="rij"><span><b>${esc(it.vaardigheid || x.id)}</b><br><span class="sub">${esc(it.onderwerp || '')} · ${omhoog ? `${Number(x.n)} keer goed in de afgelopen twee maanden, nooit fout` : `${Number(x.n)} keer fout in de afgelopen twee maanden`}. Je score is ${Number(x.zelf)}.</span></span><span style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button type="button" class="knop zwart" data-sugg="${esc(x.id)}" data-naar="${Number(x.naar)}">Zet op ${Number(x.naar)}</button><button type="button" class="knop" style="background:var(--white)" data-sugg-weg="${esc(x.id)}">Laat staan</button></span></div>`; };
-  p.innerHTML = `<div class="paneel-kop"><div><h2>Zo ging ${esc(m.naam)}</h2><p class="sub">${m.lessen} ${m.lessen === 1 ? 'les' : 'lessen'} · ${m.goed} goed · langste reeks ${m.reeks} ${m.reeks === 1 ? 'dag' : 'dagen'}</p></div><button type="button" class="knop" style="background:var(--white)" data-maand-gezien="1">Gezien</button></div>`
-    + (m.sterk.length ? `<p style="margin:0 0 4px"><b>Ging goed:</b> ${m.sterk.map(esc).join(', ')}</p>` : '')
-    + (m.minder.length ? `<p style="margin:0 0 4px"><b>Ging minder:</b> ${m.minder.map(esc).join(', ')}</p>` : '')
-    + (m.omhoog.length ? `<h3 style="font-size:15px;margin:12px 0 4px">Klaar voor een hogere score?</h3>${m.omhoog.map((x) => voorstel(x, true)).join('')}` : '')
-    + (m.omlaag.length ? `<h3 style="font-size:15px;margin:12px 0 4px">Even kritisch kijken</h3>${m.omlaag.map((x) => voorstel(x, false)).join('')}` : '');
+  const lijst = (xs, soort) => xs.length ? `<ul class="maand-lijst">${xs.map((t) => `<li><span>${esc(t.naam)}</span><span class="sub num">${soort === 'goed' ? `${t.gV} goed` : `${t.fV} fout`} van ${t.nV}</span></li>`).join('')}</ul>` : '<p class="leeg" style="margin:0">Niets wat eruit sprong.</p>';
+  p.innerHTML = `<div class="maand-kop"><div><span class="sub">Maandafsluiter</span><h2>Zo ging ${esc(m.naam)}</h2></div><button type="button" class="knop" data-maand-gezien="1">Gezien</button></div>
+    <div class="maand-body">
+      <div class="maand-cijfers">
+        <div><b class="num">${m.lessen}</b><span>${m.lessen === 1 ? 'les' : 'lessen'}</span></div>
+        <div><b class="num">${m.pct}%</b><span>goed (${m.goed})</span></div>
+        <div><b class="num">${m.reeks}</b><span>langste reeks</span></div>
+      </div>
+      <div class="maand-twee"><div><h3>Ging goed</h3>${lijst(m.sterk, 'goed')}</div><div><h3>Ging minder</h3>${lijst(m.minder, 'fout')}</div></div>
+      <div><h3>Scoresuggesties</h3><p class="sub" style="margin:0 0 4px">Alleen bij een duidelijk patroon in je lessen, en het blijft een advies: jij beslist.</p>
+      ${m.suggesties.length ? m.suggesties.map((s) => `<div class="maand-sugg"><span class="maand-pijl ${s.richting > 0 ? 'op' : 'neer'}" aria-hidden="true">${s.richting > 0 ? '↑' : '↓'}</span><span><b>${esc(s.naam)}</b><br><span class="sub">${esc(s.uitleg)} · je score nu gemiddeld ${komma(s.g)}</span></span><span class="maand-knoppen"><button type="button" class="knop zwart" data-sugg="${esc(s.k)}" data-richting="${s.richting}">${s.richting > 0 ? 'Eén stap omhoog' : 'Eén stap omlaag'}</button><button type="button" class="knop" data-sugg-weg="${esc(s.k)}">Laat staan</button></span></div>`).join('')
+        : '<p class="leeg" style="margin:6px 0 0">Geen suggesties deze maand: er was geen duidelijk patroon.</p>'}</div>
+    </div>`;
 }
 $('maand-paneel').addEventListener('click', async (e) => {
   const lid = S.leden[S.mij], m = maandafsluiter(lid); if (!m) return;
   if (e.target.closest('[data-maand-gezien]')) { bewaarMaandStaat({ maand: m.vorige, gezien: true }); toonMaandafsluiter(lid); return; }
   const w = e.target.closest('[data-sugg-weg]');
   if (w) { const s = maandStaat(), weg = s.maand === m.vorige ? s.weg || [] : []; bewaarMaandStaat({ maand: m.vorige, weg: [...weg, w.dataset.suggWeg] }); toonMaandafsluiter(lid); return; }
-  const b = e.target.closest('[data-sugg]'); if (!b || b.disabled) return;
+  const b = e.target.closest('[data-sugg]'), sg = b && m.suggesties.find((x) => x.k === b.dataset.sugg); if (!sg || b.disabled) return;
   b.disabled = true;
-  const it = S.sjabloon.get(b.dataset.sugg) || {}, n = Number(b.dataset.naar);
-  try { await bewaarScores({ [b.dataset.sugg]: { [dagKey(nu()).slice(0, 7)]: n } }, `Opgeslagen: ${it.vaardigheid || b.dataset.sugg} staat nu op ${n}.`); tab('mij'); }
+  const maand = dagKey(nu()).slice(0, 7), nieuw = {};
+  for (const id of sg.ids) { const l = laatste(scoresVan(lid, id)); if (l) nieuw[id] = { [maand]: Math.max(1, Math.min(5, l.s + sg.richting)) }; }
+  try { await bewaarScores(nieuw, `Opgeslagen: ${sg.naam} staat een stap ${sg.richting > 0 ? 'hoger' : 'lager'}. Per vaardigheid aanpassen kan via Skilllijst bijwerken.`); tab('mij'); }
   catch (err) { b.disabled = false; alert('Opslaan mislukt: ' + err.message); }
 });
 

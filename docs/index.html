@@ -127,7 +127,25 @@ details.sig > summary:hover b { text-decoration: underline; text-underline-offse
 #instellingen-knop[aria-current="page"] { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--ink); }
 #sb-instelling[hidden] + #snelkoppeling { margin-top: 24px; }
 #mx-vakkeuze, #mx-modus { justify-content: flex-start; display: flex; }
-.mx-sugg { background: var(--fun-50); }
+.maand { padding: 0; overflow: hidden; margin: 0 0 16px; }
+.maand-kop { background: var(--fun); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.maand-kop h2 { margin-top: 2px; }
+.maand-kop .knop { background: var(--white); }
+.maand-body { padding: 18px 24px 20px; display: grid; gap: 20px; }
+.maand-body h3 { font-size: 15px; margin-bottom: 6px; }
+.maand-cijfers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.maand-cijfers > div { background: var(--cool-50); border-radius: 12px; padding: 10px 14px; display: grid; }
+.maand-cijfers b { font-size: 26px; font-weight: 700; line-height: 1.1; }
+.maand-cijfers span { font-size: 13px; color: var(--muted); }
+.maand-twee { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.maand-lijst { list-style: none; margin: 0; padding: 0; }
+.maand-lijst li { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px solid var(--cool); }
+.maand-sugg { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--cool); }
+.maand-pijl { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; }
+.maand-pijl.op { background: var(--fun-50); } .maand-pijl.neer { background: var(--cosy-50); }
+.maand-knoppen { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.maand-knoppen .knop:not(.zwart) { background: var(--cool-50); }
+@media (max-width: 620px) { .maand-twee { grid-template-columns: minmax(0, 1fr); } .maand-sugg { grid-template-columns: 32px minmax(0, 1fr); } .maand-knoppen { grid-column: 2; justify-content: flex-start; } }
 .mx-onderwerp { margin: 10px 0 14px; }
 .mx-onderwerp h4 { font-size: 15px; font-weight: 700; margin: 0 0 2px; padding-top: 8px; border-top: 1.6px solid var(--cool); }
 .score-veld { width: 46px; height: 38px; text-align: center; font: 700 18px var(--font); border: 1.6px solid var(--cool); border-radius: 8px; background: var(--white); }
@@ -337,7 +355,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   </div>
 
   <div id="mij" hidden>
-    <section class="paneel mx-sugg" id="maand-paneel" style="margin-top:0;margin-bottom:16px" hidden></section>
+    <section class="paneel maand" id="maand-paneel" hidden></section>
     <div class="kpis" id="kpis"></div>
     <section class="twee">
       <div class="stapel">
