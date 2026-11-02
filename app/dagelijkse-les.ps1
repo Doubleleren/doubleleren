@@ -4,7 +4,7 @@
 #   -Snapshot map  : elke fase als PNG renderen en stoppen (voor controle)
 #   -Opslaan       : met -Snapshot: de les ook echt afronden en opslaan (test van het opslaan)
 #   -Thuis map     : andere map met config en geheim (tests)
-#   -Datum         : alleen voor tests: doe alsof het deze dag is bij de halfjaarlijkse check van de skilllijst
+#   -Datum         : niet meer gebruikt (was voor de halfjaarlijkse check, die de pop-up niet meer blokkeert)
 param(
     [switch]$Test,
     [string]$LesBestand,
@@ -140,20 +140,10 @@ try {
     }
     if ($gedaanVandaag -gt $script:aantal) { $script:aantal = $gedaanVandaag }
 
-    # --- Halfjaarlijkse check: na 31 januari / 31 juli eerst de skilllijst bijwerken (op de website) ---
-    $script:skilllijstEerst = $null
-    if ($c -and -not $Test -and -not $LesBestand) {
-        try {
-            $mx = Read-DlVersleuteld $c.data $c.id 'matrix' $s $c.publiek
-            $pf = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek
-            $ronde = Get-DlRonde $(if ($mx) { $mx.obj }) $(if ($pf) { [string]$pf.obj.sinds }) $(if ($Datum) { [datetime]$Datum } else { Get-Date })
-            if ($ronde.teLaat) { $script:skilllijstEerst = $ronde }
-        } catch { Log-Fout "Halfjaarlijkse check overgeslagen: $($_.Exception.Message)" }
-    }
+    # Halfjaarlijkse check: geen blokkade meer; de website herinnert eraan en de leidinggevende ziet wie te laat is
 
     # --- Les kiezen: eerste uit je wachtrij die je nog niet deed, anders uit de gedeelde lessenpool ---
     if ($LesBestand) { $les = Lees-Json (Resolve-Path $LesBestand).Path }
-    elseif ($script:skilllijstEerst) { $les = [pscustomobject]@{ titel = 'Eerst je skilllijst bijwerken'; vakgebied = 'DoubleLeren'; type = 'Halfjaarlijkse check'; opdracht = [pscustomobject]@{ soort = 'skilllijst' } } }
     else {
         # Een les komt nooit twee keer: alle maanden van het logboek tellen mee
         $gedaan = @($logs | ForEach-Object { $_.id })
@@ -330,20 +320,6 @@ try {
         $script:magSluiten = $true; $win.Close()
     }
 
-    # Na de deadline van de halfjaarlijkse check: geen les, alleen de weg naar de skilllijst (telt niet als gedaan)
-    function Fase-Skilllijst {
-        Leeg
-        Toon-Label 'Halfjaarlijkse check'
-        Toon-Tekst ("Twee keer per jaar geef je opnieuw aan hoe je ervoor staat op de vaardigheden uit de skilllijst. De deadline van $($script:skilllijstEerst.tekst) is voorbij, dus eerst even je skilllijst bijwerken. Dat duurt een paar minuten en gaat op de website, onder **Skilllijst**.")
-        Toon-Tekst 'Daarna staat je les van vandaag weer voor je klaar.' 15 '#334155'
-        Voeg-UitstelKnop
-        [void]$knoppen.Children.Add((Nieuw-Knop 'Skilllijst bijwerken op de website' {
-            $url = "https://$($c.cfg.eigenaar).github.io/$($c.cfg.appRepo)/#skilllijst"
-            if (Test-WebAdres $url) { Start-Process $url }
-            $script:magSluiten = $true; $win.Close()
-        } -Primair))
-    }
-
     # --- Fasen ---------------------------------------------------------------
     $script:uitlegGetoond = $false
     $script:keuze = -1
@@ -518,7 +494,6 @@ try {
             $fs = [IO.File]::Create((Join-Path $Snapshot "$naam.png")); $enc.Save($fs); $fs.Close()
         }
         $kaart.Margin = Rand 0 0 0 0
-        if ($script:skilllijstEerst) { Fase-Skilllijst; Maak-Snapshot '0-skilllijst'; $script:magSluiten = $true; $win.Close(); exit }
         Fase-Opdracht; Maak-Snapshot '2-opdracht'
         if ($o.soort -eq 'meerkeuze') { $script:keuze = ([int]$o.juist + 1) % @($o.opties).Count }
         else { $script:antwoord = 'Voorbeeldantwoord van de gebruiker om de lay-out te testen.' }
@@ -540,7 +515,7 @@ try {
         $timer.Start()
     }
 
-    if ($script:skilllijstEerst) { Fase-Skilllijst } else { Fase-Opdracht }
+    Fase-Opdracht
 
     $app = New-Object Windows.Application
     $app.ShutdownMode = 'OnMainWindowClose'
