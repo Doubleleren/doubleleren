@@ -118,13 +118,13 @@ function New-DlSleutelbron($O, $Vertrouwd, [string]$EigenId, $EigenPrive) {
 # --- Scorebord: per maand aantal goed en reeks; zelfde rekenregels als maandStand()/reeks() in docs/app.js ---
 function Get-DlLogDagen($Logs) { @($Logs | ForEach-Object { "$($_.datum)" } | Where-Object { $_.Length -ge 10 } | ForEach-Object { $_.Substring(0, 10) } | Sort-Object -Unique) }
 function Test-DlWerkdag([datetime]$D) { $D.DayOfWeek -ne 'Saturday' -and $D.DayOfWeek -ne 'Sunday' }
-# Huidige reeks: vanaf vandaag (als er vandaag een les is) of gisteren terug; weekenden onderbreken niet
+# Huidige reeks: vanaf vandaag (als er vandaag een les is) of gisteren terug; weekenden tellen niet mee en onderbreken niet
 function Get-DlReeks($Logs, [datetime]$Nu = (Get-Date)) {
     $dagen = @{}; foreach ($d in (Get-DlLogDagen $Logs)) { $dagen[$d] = $true }
     $d = $Nu.Date; if (-not $dagen[$d.ToString('yyyy-MM-dd')]) { $d = $d.AddDays(-1) }
     $n = 0
     for ($i = 0; $i -lt 3650; $i++) {
-        if ($dagen[$d.ToString('yyyy-MM-dd')]) { $n++ } elseif (Test-DlWerkdag $d) { break }
+        if (Test-DlWerkdag $d) { if ($dagen[$d.ToString('yyyy-MM-dd')]) { $n++ } else { break } }
         $d = $d.AddDays(-1)
     }
     $n
@@ -135,7 +135,8 @@ function Get-DlMaandStand($Logs, [string]$Maand, [datetime]$Nu = (Get-Date)) {
     $d = [datetime]::ParseExact("$Maand-01", 'yyyy-MM-dd', $null); $tot = $Nu.ToString('yyyy-MM-dd'); $lang = 0; $cur = 0
     while ($d.ToString('yyyy-MM') -eq $Maand -and $d.ToString('yyyy-MM-dd') -le $tot) {
         $k = $d.ToString('yyyy-MM-dd')
-        if ($dagen[$k]) { $cur++; if ($cur -gt $lang) { $lang = $cur } } elseif ((Test-DlWerkdag $d) -and $k -ne $tot) { $cur = 0 }
+        if (-not (Test-DlWerkdag $d)) { }     # weekend: telt niet mee, onderbreekt niet
+        elseif ($dagen[$k]) { $cur++; if ($cur -gt $lang) { $lang = $cur } } elseif ($k -ne $tot) { $cur = 0 }
         $d = $d.AddDays(1)
     }
     $laatste = @($dagen.Keys | Sort-Object) | Select-Object -Last 1

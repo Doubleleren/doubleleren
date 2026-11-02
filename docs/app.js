@@ -273,7 +273,8 @@ function maandenVan(lid) { const s = new Set(); for (const v of lid.matrix?.valu
 function reeks(logs) {
   const dagen = new Set(logs.map((l) => l.datum.slice(0, 10))); const d = nu(); let n = 0;
   if (!dagen.has(dagKey(d))) d.setDate(d.getDate() - 1);
-  for (let i = 0; i < 3650; i++) { const w = d.getDay(); if (dagen.has(dagKey(d))) n++; else if (w !== 0 && w !== 6) break; d.setDate(d.getDate() - 1); }
+  // Weekenden tellen niet mee en onderbreken niet (in het weekend zijn er geen lessen)
+  for (let i = 0; i < 3650; i++) { const w = d.getDay(), werk = w !== 0 && w !== 6; if (werk && dagen.has(dagKey(d))) n++; else if (werk) break; d.setDate(d.getDate() - 1); }
   return n;
 }
 // Bewijs per vaardigheid: goed +1, deels 0, fout -1; gevorderd x1,5, expert x2; recenter weegt zwaarder (halfwaarde 60 dagen)
@@ -642,7 +643,7 @@ function maandStand(logs, maand) {
   const [j, m] = maand.split('-').map(Number), d = new Date(j, m - 1, 1, 12), tot = dagKey(nu());
   let lang = 0, cur = 0;
   while (d.getMonth() === m - 1 && dagKey(d) <= tot) {
-    if (dagen.has(dagKey(d))) { cur++; lang = Math.max(lang, cur); } else if (isWerkdag(d) && dagKey(d) !== tot) cur = 0;
+    if (!isWerkdag(d)) { /* weekend: telt niet mee, onderbreekt niet */ } else if (dagen.has(dagKey(d))) { cur++; lang = Math.max(lang, cur); } else if (dagKey(d) !== tot) cur = 0;
     d.setDate(d.getDate() + 1);
   }
   return { goed: inM.filter((l) => l.resultaat === 'goed').length, langsteReeks: lang, reeksAanEind: cur, laatsteDag: [...dagen].sort().pop() || null, lessen: inM.length };
@@ -939,6 +940,7 @@ async function kiesLes() {
   const middag = `${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}` >= MIDDAG;
   if (vandaagGedaan >= 2) return { klaar: true, aantal: vandaagGedaan };
   if (vandaagGedaan === 1 && !middag) return { klaar: true, later: true, aantal: 1 };
+  if (!isWerkdag(n)) return { weekend: true };   // in het weekend geen lessen (de reeks loopt gewoon door)
   if (ronde(ik).teLaat) return { geblokkeerd: true };
   const gedaan = new Set(ik.logs.map((l) => l.id));
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
@@ -963,10 +965,12 @@ function toonLesStatus() {
     $('snelkoppeling').hidden = true; return;
   }
   const st = L.status || {};
-  const kop = st.volgende ? 'Les klaar: je tweede les staat klaar' : st.later ? 'Je ochtendles is klaar' : st.klaar ? 'Je lessen van vandaag zijn klaar' : 'Er staat nu geen nieuwe les klaar';
-  const tekst = st.volgende ? 'Goed bezig. Je kunt meteen door met je tweede les van vandaag.'
+  const morgenVrij = !isWerkdag(new Date(nu().getTime() + 864e5)), morgen = morgenVrij ? 'Maandag' : 'Morgen';
+  const kop = st.weekend ? 'Weekend: geen les' : st.volgende ? 'Les klaar: je tweede les staat klaar' : st.later ? 'Je ochtendles is klaar' : st.klaar ? 'Je lessen van vandaag zijn klaar' : 'Er staat nu geen nieuwe les klaar';
+  const tekst = st.weekend ? 'In het weekend zijn er geen lessen, en je reeks loopt gewoon door. Maandag staat je les weer klaar.'
+    : st.volgende ? 'Goed bezig. Je kunt meteen door met je tweede les van vandaag.'
     : st.later ? `Goed bezig. Om ${MIDDAG}, na de lunch, staat je tweede les van vandaag klaar.`
-    : st.klaar ? 'Goed bezig: twee lessen vandaag. Morgen staan er weer twee voor je klaar.'
+    : st.klaar ? `Goed bezig: twee lessen vandaag. ${morgen} staan er weer twee voor je klaar.`
     : 'Je hebt alle beschikbare lessen gedaan. De generator vult ze aan; kijk morgen weer.';
   $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div><h2>${esc(kop)}</h2>`;
   $('les-inhoud').innerHTML = `<p>${esc(tekst)}</p>` + (st.later ? meldingUitleg() : '');
