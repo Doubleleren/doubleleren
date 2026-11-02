@@ -494,7 +494,8 @@ function toonMaandafsluiter(lid) {
       <div class="maand-twee"><div><h3>Ging goed</h3>${lijst(m.sterk, 'goed')}</div><div><h3>Ging minder</h3>${lijst(m.minder, 'fout')}</div></div>
       <div><h3>Scoresuggesties</h3><p class="sub" style="margin:0 0 4px">Alleen bij een duidelijk patroon in je lessen, en het blijft een advies: jij beslist.</p>
       ${m.suggesties.length ? m.suggesties.map((s) => `<div class="maand-sugg"><span class="maand-pijl ${s.richting > 0 ? 'op' : 'neer'}" aria-hidden="true">${s.richting > 0 ? '↑' : '↓'}</span><span><b>${esc(s.naam)}</b><br><span class="sub">${esc(s.uitleg)} · je score nu gemiddeld ${komma(s.g)}</span></span><span class="maand-knoppen"><button type="button" class="knop zwart" data-sugg="${esc(s.k)}" data-richting="${s.richting}">${s.richting > 0 ? 'Eén stap omhoog' : 'Eén stap omlaag'}</button><button type="button" class="knop" data-sugg-weg="${esc(s.k)}">Laat staan</button></span></div>`).join('')
-        : '<p class="leeg" style="margin:6px 0 0">Geen suggesties deze maand: er was geen duidelijk patroon.</p>'}</div>
+        : '<p class="leeg" style="margin:6px 0 0">Geen suggesties deze maand: er was geen duidelijk patroon.</p>'}
+      ${S.maandMelding ? `<p class="sub" role="status" style="margin:8px 0 0">${esc(S.maandMelding)}</p>` : ''}</div>
     </div>`;
 }
 $('maand-paneel').addEventListener('click', async (e) => {
@@ -506,8 +507,9 @@ $('maand-paneel').addEventListener('click', async (e) => {
   b.disabled = true;
   const maand = dagKey(nu()).slice(0, 7), nieuw = {};
   for (const id of sg.ids) { const l = laatste(scoresVan(lid, id)); if (l) nieuw[id] = { [maand]: Math.max(1, Math.min(5, l.s + sg.richting)) }; }
-  try { await bewaarScores(nieuw, `Opgeslagen: ${sg.naam} staat een stap ${sg.richting > 0 ? 'hoger' : 'lager'}. Per vaardigheid aanpassen kan via Skilllijst bijwerken.`); tab('mij'); }
-  catch (err) { b.disabled = false; alert('Opslaan mislukt: ' + err.message); }
+  S.maandMelding = `Opgeslagen: ${sg.naam} staat een stap ${sg.richting > 0 ? 'hoger' : 'lager'}. Per vaardigheid aanpassen kan via Skilllijst bijwerken.`;
+  try { await bewaarScores(nieuw, S.maandMelding); tab('mij'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  catch (err) { S.maandMelding = 'Opslaan mislukt: ' + err.message; b.disabled = false; toonMaandafsluiter(lid); }
 });
 
 // ---------------------------------------------------------------- weergave: skilllijst
