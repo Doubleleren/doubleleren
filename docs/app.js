@@ -517,10 +517,13 @@ function toonSkilllijst() {
   const lid = S.leden[S.mij]; if (!lid) return;
   const maanden = maandenVan(lid), totaal = itemsVan(lid).length, r = ronde(lid);
   const open = vakkenVan(lid).filter((v) => !ingevuld(lid, v)), klaar = vakkenVan(lid).filter((v) => ingevuld(lid, v));
-  $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
-  $('mx-ronde').textContent = r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
+  const meer = vakkenVan(lid).length > 1;
+  $('mx-bijwerken').textContent = lid.matrix ? (meer ? 'Skilllijsten bijwerken' : 'Skilllijst bijwerken') : (meer ? 'Skilllijsten invullen' : 'Skilllijst invullen');
+  const focusTekst = meer && r.verplicht ? ` Verplicht is alleen ${r.focus.map(vakNaam).join(' en ')} (Focus); vakken op Meeleren bijwerken mag, maar hoeft niet.` : '';
+  $('mx-ronde').textContent = !r.verplicht ? 'De halfjaarlijkse check geldt alleen voor vakken op Focus, en je hebt nu geen vak op Focus. Bijwerken mag altijd, maar hoeft niet.'
+    : (r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
     : r.vrij ? `Je skilllijst is nog vers; de eerste halfjaarlijkse check is vóór ${r.volgende}.`
-    : `Halfjaarlijkse check: werk je skilllijst bij vóór ${r.tekst}${r.teLaat ? '. De deadline is voorbij; je leidinggevende ziet dat hij nog openstaat' : ''}.`;
+    : `Halfjaarlijkse check: werk je skilllijst bij vóór ${r.tekst}${r.teLaat ? '. De deadline is voorbij; je leidinggevende ziet dat hij nog openstaat' : ''}.`) + focusTekst;
   $('mx-bijwerken').hidden = !totaal;
   if (!totaal) {
     $('mx-sub').textContent = '';
@@ -534,7 +537,7 @@ function toonSkilllijst() {
     $('matrix').innerHTML = '<p class="leeg">Je hebt nog geen skilllijst. Klik op <b>Skilllijst invullen</b> en geef per vaardigheid aan hoe goed je hem nu beheerst.</p>';
     return;
   }
-  const nogDoen = open.length ? `<p class="leeg">Nog niet ingevuld: ${open.map((v) => `<b>${esc(vakNaam(v))}</b> <button type="button" class="leslink" data-naar="skilllijst" data-formulier="1" data-vak="${esc(v)}">vul in</button>`).join(' · ')}. Tot dan krijg je daarin lessen op beginnersniveau.</p>` : '';
+  const nogDoen = open.length ? `<p class="leeg">Nog niet ingevuld: ${open.map((v) => `<b>${esc(vakNaam(v))}</b>${r.focus.includes(v) ? '' : ' (optioneel)'} <button type="button" class="leslink" data-naar="skilllijst" data-formulier="1" data-vak="${esc(v)}">vul in</button>`).join(' · ')}. Tot dan krijg je daarin lessen op beginnersniveau.</p>` : '';
   $('mx-sub').textContent = maanden.length ? `${totaal} vaardigheden · laatste meting ${fmtMaand(maanden[maanden.length - 1])}. Klik op een onderwerp voor details.` : 'Nog geen scores.';
   const sig = signalen(lid), b = bewijs(lid), sigPer = new Map(sig.map((x) => [x.id, x.s]));
   // Meer dan één vak: per vak een uitklapbaar blok (dicht), anders wordt het eindeloos scrollen
@@ -559,11 +562,12 @@ function toonSkilllijst() {
 function toonSkillFormulier(vak, modus) {
   const lid = S.leden[S.mij]; if (!lid?.sl) return;
   const vk = vakkenVan(lid); if (!vk.length) return;
-  S.formVak = vk.includes(vak) ? vak : vk.find((v) => !ingevuld(lid, v)) || vk[0];
+  const focus = focusVakken(lid);
+  S.formVak = vk.includes(vak) ? vak : focus.find((v) => !ingevuld(lid, v)) || focus[0] || vk[0];
   S.formModus = modus || (S.formVak !== eigenVak(S.mij) && !ingevuld(lid, S.formVak) ? 'snel' : 'detail');
   $('mx-modus').innerHTML = [['snel', 'Snel per hoofdgebied'], ['detail', 'Per vaardigheid']].map(([m, t]) => `<button type="button" class="knop" data-modus="${m}" aria-pressed="${S.formModus === m}">${t}</button>`).join('');
   $('mx-vakkeuze').hidden = vk.length < 2;
-  $('mx-vakkeuze').innerHTML = vk.length < 2 ? '' : vk.map((v) => `<button type="button" class="knop" data-formvak="${esc(v)}" aria-pressed="${v === S.formVak}">${esc(vakNaam(v))}${ingevuld(lid, v) ? '' : ' (nieuw)'}</button>`).join('');
+  $('mx-vakkeuze').innerHTML = vk.length < 2 ? '' : vk.map((v) => `<button type="button" class="knop" data-formvak="${esc(v)}" aria-pressed="${v === S.formVak}">${esc(vakNaam(v))}${focus.includes(v) ? '' : ' (optioneel)'}${ingevuld(lid, v) ? '' : ' (nieuw)'}</button>`).join('');
   $('mx-form-titel').textContent = meerVakken() ? `Skilllijst ${vakNaam(S.formVak)} bijwerken` : 'Skilllijst bijwerken';
   const sigPer = new Map(signalen(lid).filter((x) => x.s === 'overschat' || x.s === 'onderschat').map((x) => [x.id, x.s]));
   const nuScore = (id) => laatste(scoresVan(lid, id))?.s || '';
@@ -580,9 +584,9 @@ function toonSkillFormulier(vak, modus) {
   }).join('')}</div>`).join('');
   $('mx-fout').textContent = ''; $('mx-klaar').textContent = ''; $('mx-xlsx-info').textContent = '';
   const nSig = itemsVan(null, S.formVak).filter((i) => sigPer.has(i.id)).length;
-  $('mx-check-info').textContent = ingevuld(lid, S.formVak)
+  $('mx-check-info').textContent = (focus.includes(S.formVak) || vk.length < 2 ? '' : `Optioneel: ${vakNaam(S.formVak)} staat op Meeleren, bijwerken hoeft niet. `) + (ingevuld(lid, S.formVak)
     ? `Je vorige scores staan al ingevuld; pas aan wat veranderd is.${S.formModus === 'detail' && nSig ? ` Bij ${nSig} ${nSig === 1 ? 'vaardigheid zeggen' : 'vaardigheden zeggen'} je lesresultaten iets anders (gemarkeerd): kijk daar even goed naar.` : ''}`
-    : '';
+    : '');
   telSkillVelden();
   $('mx-form-paneel').hidden = false;
   $('mx-form-paneel').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -776,22 +780,24 @@ $('mx-modus').addEventListener('click', (e) => { const b = e.target.closest('but
 $('mx-vakkeuze').addEventListener('click', (e) => { const b = e.target.closest('button[data-formvak]'); if (b && b.getAttribute('aria-pressed') !== 'true') toonSkillFormulier(b.dataset.formvak); });
 
 // ---------------------------------------------------------------- halfjaarlijkse check van de skilllijst
-// Twee rondes per jaar: januari (deadline 31 januari) en juli (deadline 31 juli). Gedaan = een score uit dat halfjaar.
-// Wie zijn eerste meting of zijn aanmelding minder dan ~3 maanden voor de deadline deed, slaat die ronde over.
-// Na de deadline: geen lessen tot de skilllijst is bijgewerkt.
+// Twee rondes per jaar: januari (deadline 31 januari) en juli (deadline 31 juli). De check geldt alleen voor je vakken op
+// Focus; Meeleren-vakken bijwerken mag, maar hoeft nooit. Gedaan = minstens 80% van je ingevulde Focus-vaardigheden kreeg in
+// dat halfjaar een score. Wie zijn eerste meting of aanmelding minder dan ~3 maanden voor de deadline deed, slaat die ronde
+// over. Na de deadline: een herinnering (geen blokkade), en de leidinggevende ziet 'Te laat'.
+const focusVakken = (lid) => Object.entries(gekozenVakken(lid)).filter(([, w]) => stand(w) === 1).map(([v]) => v);
 const MAANDLANG = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 function ronde(lid, d = nu()) {
   const j = d.getFullYear(), h2 = d.getMonth() >= 6, start = `${j}-${h2 ? '07' : '01'}`, eind = `${j}-${h2 ? '12' : '06'}`;
-  const maanden = [...new Set([...(lid?.matrix?.values() || [])].flatMap((s) => Object.keys(s)))].sort();
-  // Gedaan = minstens 80% van je ingevulde vaardigheden kreeg in dit halfjaar een score (één overgenomen suggestie telt niet)
-  const scores = [...(lid?.matrix?.values() || [])].filter((s) => Object.keys(s).length);
+  const focus = lid ? focusVakken(lid) : [], verplicht = focus.length > 0;
+  const scores = [...(lid?.matrix || [])].filter(([id, s]) => focus.includes(S.sjabloon.get(id)?.vak) && Object.keys(s).length).map(([, s]) => s);
+  const maanden = [...new Set(scores.flatMap((s) => Object.keys(s)))].sort();
   const recent = scores.filter((s) => Object.keys(s).some((m) => m >= start && m <= eind)).length;
   const voldaan = scores.length > 0 && recent >= 0.8 * scores.length;
   const sinds = /^\d{4}-\d{2}/.test(String(lid?.sinds)) ? String(lid.sinds).slice(0, 7) : null, grens = dagKey(new Date(j, (h2 ? 6 : 0) - 2, 1)).slice(0, 7);
   const vrij = !voldaan && ((!!maanden[0] && maanden[0] >= grens) || (!!sinds && sinds >= grens));
   const deadline = new Date(j, h2 ? 6 : 0, 31, 23, 59, 59);
   return { naam: `${MAANDLANG[h2 ? 6 : 0]} ${j}`, tekst: `31 ${MAANDLANG[h2 ? 6 : 0]}`, volgende: `31 ${MAANDLANG[h2 ? 0 : 6]}${h2 ? ` ${j + 1}` : ''}`,
-    voldaan, vrij, nodig: !voldaan && !vrij, teLaat: !voldaan && !vrij && d > deadline };
+    focus, verplicht, voldaan, vrij, nodig: verplicht && !voldaan && !vrij, teLaat: verplicht && !voldaan && !vrij && d > deadline };
 }
 function toonRonde() {
   const b = $('ronde-banner'), ik = S.leden[S.mij];
@@ -799,7 +805,7 @@ function toonRonde() {
   if (!r?.nodig) { b.hidden = true; return; }
   b.className = 'banner' + (r.teLaat ? ' laat' : '');
   b.innerHTML = `<span>${r.teLaat ? `<b>Je halfjaarlijkse check staat nog open</b> (deadline ${esc(r.tekst)}). Je vorige scores staan al ingevuld: pas alleen aan wat veranderd is.` : `<b>Halfjaarlijkse check:</b> hoe sta je er nu voor? Je vorige scores staan al ingevuld: pas aan wat veranderd is, vóór ${esc(r.tekst)}.`}</span>`
-    + '<button type="button" class="knop zwart" data-naar="skilllijst" data-formulier="1">Skilllijst bijwerken</button>';
+    + `<button type="button" class="knop zwart" data-naar="skilllijst" data-formulier="1">${r.focus.length > 1 ? 'Skilllijsten bijwerken' : 'Skilllijst bijwerken'}</button>`;
   b.hidden = false;
 }
 
@@ -853,7 +859,7 @@ function toonTeam() {
   $('aandacht').innerHTML = aandacht.length ? aandacht.map((x) => `<div class="rij"><span><b>${esc(x.h)}</b> · gemiddeld ${komma(x.v)}<br><span class="sub">${x.sterk.length ? `Sterk: ${x.sterk.map((l) => esc(l.naam)).join(', ')} (kennis delen?)` : 'Niemand scoort hier hoog: training of kennissessie?'}</span></span><span class="chip deels">Aandacht</span></div>`).join('') : '<p class="leeg">Geen hoofdgebieden onder de 2,5. Mooi.</p>';
 
   const maand = dagKey(nu()).slice(0, 7);
-  const skillChip = (l) => { const r = ronde(l); return r.voldaan ? '<span class="chip goed"><i></i>Bijgewerkt</span>' : r.vrij ? '<span class="sub">Nieuw</span>' : `<span class="chip ${r.teLaat ? 'fout' : 'deels'}" data-tip="${esc(`Deadline ${r.tekst}`)}"><i></i>${r.teLaat ? 'Te laat' : 'Nog doen'}</span>`; };
+  const skillChip = (l) => { const r = ronde(l); return !r.verplicht ? '<span class="sub">–</span>' : r.voldaan ? '<span class="chip goed"><i></i>Bijgewerkt</span>' : r.vrij ? '<span class="sub">Nieuw</span>' : `<span class="chip ${r.teLaat ? 'fout' : 'deels'}" data-tip="${esc(`Deadline ${r.tekst}`)}"><i></i>${r.teLaat ? 'Te laat' : 'Nog doen'}</span>`; };
   $('activiteit').innerHTML = `<thead><tr><th>Naam</th><th>Plek</th><th class="r">Deze maand</th><th class="r">Reeks</th><th class="r">Goed</th><th>Laatste les</th><th>Skilllijst</th></tr></thead><tbody>${leden.map((l) => { const t = l.logs.filter((x) => x.resultaat); return `<tr><td><button type="button" class="leslink" data-lid="${esc(l.id)}">${naamVan(l)}</button></td><td>${esc(plekVan(l.id))}</td><td class="r num">${l.logs.filter((x) => x.datum.startsWith(maand)).length}</td><td class="r num">${reeks(l.logs, l.werkdagen)}</td><td class="r num">${t.length ? pct(t.filter((x) => x.resultaat === 'goed').length, t.length) + '%' : '–'}</td><td class="num">${l.logs[0] ? esc(fmtDatum(l.logs[0].datum)) : '–'}</td><td>${skillChip(l)}</td></tr>`; }).join('')}</tbody>`;
   zoekExperts();
 }
