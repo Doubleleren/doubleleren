@@ -1,0 +1,29 @@
+{
+  "id": "20261102-gsc-bigquery-site-of-url-tabel",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "SQL op de Search Console-export: site-tabel of URL-tabel?",
+  "matrix": ["5.3.1", "4.1.2"],
+  "titel": "20% meer vertoningen in BigQuery dan in Search Console: wie telt fout?",
+  "intro": "Je bouwt voor een webshop een rapport op de bulkexport van Search Console in BigQuery. Een collega telt met SUM(impressions) de vertoningen van september op uit de tabel searchdata_url_impression. Hij komt ruim 20% hoger uit dan het totaal in het Prestatierapport. Op veel zoekopdrachten staan twee URL's van de webshop tegelijk in de zoekresultaten.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke verklaring en aanpak kloppen?",
+    "opties": [
+      "De export bevat dubbele rijen door een fout in BigQuery; tel daarom met COUNT(DISTINCT url) in plaats van met SUM.",
+      "De URL-tabel telt per URL, dus twee URL's in één resultaat zijn twee vertoningen; neem totalen uit de site-tabel.",
+      "Het Prestatierapport rondt per dag af op hele duizendtallen; het BigQuery-getal is preciezer en dus het juiste totaal.",
+      "De URL-tabel bevat ook geanonimiseerde zoekopdrachten en het rapport niet; filter is_anonymized_query er dus uit."
+    ],
+    "juist": 1
+  },
+  "toelichting": "De export heeft twee tabellen met een andere telwijze:\n\n- **searchdata_site_impression** is samengevoegd per property, net als de grafiek in het Prestatierapport. Staan er twee URL's van de site in één zoekresultaat, dan is dat één vertoning.\n- **searchdata_url_impression** is samengevoegd per URL. Elke URL in dat resultaat telt dan apart mee.\n\nWil je totalen die aansluiten op de grafiek, gebruik dan de site-tabel. COUNT(DISTINCT url) telt URL's, geen vertoningen. Het rapport rondt niet af op duizendtallen. En geanonimiseerde zoekopdrachten zitten ook in de totalen van het rapport; in de export zijn ze gemarkeerd, niet weggelaten.",
+  "uitleg": "De bulkexport van Search Console zet je prestatiedata dagelijks in BigQuery. Zo kom je voorbij de limiet van 1.000 rijen in de interface. Maar je moet weten wat je optelt.\n\n**Twee tabellen, twee telwijzen:**\n- **searchdata_site_impression**: per property. Gebruik hem voor totalen per dag, land, apparaat of zoekopdracht. Hij heeft sum_top_position: de hoogste positie van de site.\n- **searchdata_url_impression**: per URL. Gebruik hem als je per pagina wilt rapporteren. Hij heeft sum_position: de hoogste positie van die specifieke URL.\n\nHetzelfde verschil zie je in de interface: groepeer je op Pagina's, dan telt Search Console per pagina, en kloppen de totalen niet meer met de grafiek.\n\n**Altijd optellen:** de data staat er met herhaalde sleutels in, dus tel metrics altijd op met SUM en GROUP BY. Bereken de gemiddelde positie als de som van de posities gedeeld door de som van de vertoningen (plus 1), nooit als gewoon gemiddelde.\n\n**Geanonimiseerde zoekopdrachten** krijgen is_anonymized_query = true en hebben geen zoekopdracht. Haal je ze eruit, dan klopt je totaal juist niet meer met het rapport.",
+  "kernpunt": "Totalen haal je uit searchdata_site_impression (per property), cijfers per pagina uit searchdata_url_impression (per URL). Tel ze niet door elkaar op.",
+  "toepassing": "Controleer in het eerste BigQuery-rapport van een klant uit welke tabel de totalen komen, en vergelijk één dag met de grafiek in het Prestatierapport.",
+  "bron": {
+    "titel": "Table guidelines and reference - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/12917991"
+  }
+}

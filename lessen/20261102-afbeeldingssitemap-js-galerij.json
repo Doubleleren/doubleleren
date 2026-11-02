@@ -1,0 +1,24 @@
+{
+  "id": "20261102-afbeeldingssitemap-js-galerij",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Image sitemaps: wanneer ze helpen en wat erin moet",
+  "matrix": ["1.4.3", "2.1.14"],
+  "titel": "Een fotograaf die je niet terugvindt in Google Afbeeldingen",
+  "intro": "Een trouwfotograaf toont zijn portfolio in een galerij die de foto's pas met JavaScript ophaalt. De foto's staan op een CDN met een eigen domein. In Google Afbeeldingen vind je bijna niets van zijn werk terug. Zijn webbouwer heeft gehoord van een 'image sitemap', maar weet niet of die hier zin heeft.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Google Search Central op wanneer een image sitemap helpt, welke tags verplicht zijn, en of de afbeeldingen op een ander domein mogen staan. Schrijf in een paar zinnen je advies aan de webbouwer: heeft een image sitemap hier zin, en wat moet hij dan regelen?",
+    "minTekens": 120,
+    "hint": "Zoek op 'image sitemaps Google Search Central'. Lees goed wat er staat over afbeeldingen die je met JavaScript laadt, en over andere domeinen."
+  },
+  "modelantwoord": "**De kern:** ja, hier helpt een image sitemap, want Google vindt foto's die pas met JavaScript laden misschien niet. Zet per pagina de foto's erin met image:image en image:loc. Het CDN-domein mag, als je beide domeinen in Search Console verifieert en robots.txt van het CDN de foto's niet blokkeert.\n\nUitgebreider:\n- Verplicht zijn alleen **image:image** (één blok per foto) en **image:loc** (de URL van de foto). Per pagina kunnen er tot 1.000 foto's in.\n- Tags als caption, title en license staan niet meer in de documentatie van Google. Die hoeven er dus niet in.\n- Een sitemap helpt Google de foto's te vinden, maar de pagina blijft belangrijk: zet de foto's het liefst ook als gewone img-elementen met een goede alt-tekst in de HTML.\n\nVeelgemaakte fout: denken dat een image sitemap ervoor zorgt dat foto's beter ranken. Hij helpt alleen bij het vinden.",
+  "uitleg": "Google vindt afbeeldingen vooral via de img-elementen in de HTML van je pagina's. Een **image sitemap** is een extra manier om Google te vertellen welke afbeeldingen er op een pagina staan. Volgens Google helpt dat vooral bij afbeeldingen die Google anders misschien niet vindt, zoals foto's die je met JavaScript laadt.\n\nDe opbouw is eenvoudig. Je gebruikt een gewone XML-sitemap met een extra namespace, en zet bij elke pagina-URL de bijbehorende afbeeldingen:\n- **image:image** omsluit de gegevens van één afbeelding.\n- **image:loc** geeft de URL van de afbeelding.\n- Per pagina mogen er tot **1.000** afbeeldingen in.\n\nJe kunt de afbeeldingen ook toevoegen aan je bestaande sitemap; een aparte sitemap is niet nodig.\n\nStaan je afbeeldingen op een **ander domein**, zoals een CDN? Dat mag. Verifieer dan wel beide domeinen in Search Console, en zorg dat de robots.txt van dat domein de afbeeldingen niet blokkeert.\n\nVroeger had een image sitemap ook tags voor onder meer caption, title en license. Die heeft Google uit de documentatie gehaald. Wil je licentie-informatie tonen, gebruik dan structured data of IPTC-metadata.",
+  "kernpunt": "Een image sitemap helpt Google afbeeldingen te vinden die het anders mist, zoals foto's die met JavaScript laden. Verplicht zijn alleen image:image en image:loc, en een CDN-domein mag als je het verifieert.",
+  "toepassing": "Zoek bij een klant met veel beeld (portfolio, webshop, recepten) uit of de belangrijkste foto's als img-element in de gerenderde HTML staan. Zo niet, zet dan een image sitemap op de backlog.",
+  "bron": {
+    "titel": "Image sitemaps | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps"
+  }
+}

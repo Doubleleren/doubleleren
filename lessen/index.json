@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-10-30T05:28:14",
+    "bijgewerkt":  "2026-11-02T05:31:56",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -137,7 +137,8 @@
                                      "url":  "https://www.youtube.com/watch?v=iB7_i4giItw"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261020-afbeelding-metadata-licentie",
@@ -285,7 +286,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261020-ga4-eventmodel",
@@ -534,7 +535,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261020-penguin-realtime",
@@ -613,7 +614,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261020-rel-canonical",
@@ -1099,7 +1100,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TrAVBTFiDQ0"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261022-inline-validatie-formulier",
@@ -1119,7 +1121,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261022-inp-veldattributie-claude",
@@ -1207,7 +1209,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261022-peeking-ab-test",
@@ -1430,7 +1433,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261023-ttfb-fcp-geen-core-web-vital",
@@ -1999,7 +2003,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261028-klikdiepte-sitestructuur",
@@ -2516,7 +2521,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261029-p-waarde-kans-variant-beter",
@@ -2798,6 +2803,227 @@
                        "bron":  {
                                     "titel":  "Troubleshoot Google Search crawling errors | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-afbeeldingssitemap-js-galerij",
+                       "titel":  "Een fotograaf die je niet terugvindt in Google Afbeeldingen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Image sitemaps: wanneer ze helpen en wat erin moet",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.4.3",
+                                      "2.1.14"
+                                  ],
+                       "kernpunt":  "Een image sitemap helpt Google afbeeldingen te vinden die het anders mist, zoals foto\u0027s die met JavaScript laden. Verplicht zijn alleen image:image en image:loc, en een CDN-domein mag als je het verifieert.",
+                       "bron":  {
+                                    "titel":  "Image sitemaps | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-canonical-signalen-tegenstrijdig",
+                       "titel":  "Canonical, noindex én de sitemap zeggen elk iets anders",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Canonicalisatie: tegenstrijdige signalen van canonical, noindex en sitemap",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "1.3.3",
+                                      "1.3.1"
+                                  ],
+                       "kernpunt":  "Google kiest de canonical op alle signalen samen. Laat canonical, sitemap en interne links naar dezelfde URL wijzen, en gebruik geen noindex of robots.txt om de canonical te sturen.",
+                       "bron":  {
+                                    "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-checkout-formuliervelden",
+                       "titel":  "16 velden in de checkout en één sprint developertijd",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Checkout: minder formuliervelden zonder minder gegevens",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "De meeste checkouts kunnen met zo\u0027n 8 velden toe. Voeg velden samen, zet het factuuradres standaard gelijk aan het bezorgadres en zet optionele velden en de kortingscode achter een link.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: Checkout Optimization: 5 Ways to Minimize Form Fields in Checkout",
+                                    "url":  "https://baymard.com/blog/checkout-flow-average-form-fields"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-contentbrief-prompt-context",
+                       "titel":  "Een contentbrief van Claude die voor elk bedrijf had kunnen zijn",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Prompt-anatomie: context geven bij een contentbrief",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.5"
+                                  ],
+                       "kernpunt":  "Een vage prompt geeft een gemiddeld antwoord. Geef Claude context zoals je een nieuwe collega zou briefen: klant, lezer, doel, criteria en het format dat je terug wilt.",
+                       "bron":  {
+                                    "titel":  "Prompting best practices | Claude Docs",
+                                    "url":  "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-crawlbudget-kleine-site",
+                       "titel":  "€ 3.000 voor een crawlbudget-analyse van 1.400 pagina\u0027s: doen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Crawlbudget: wanneer is een log-analyse de moeite waard?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.1.3",
+                                      "1.1.1"
+                                  ],
+                       "kernpunt":  "Crawlbudget is vooral een probleem voor grote of snel veranderende sites. Worden nieuwe pagina\u0027s binnen een dag gecrawld, dan levert een crawlbudget-analyse weinig op.",
+                       "bron":  {
+                                    "titel":  "Crawl Budget Management For Large Sites | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-cwv-rapport-28-dagen",
+                       "titel":  "LCP-fix maandag live, woensdag nog steeds rood in Search Console",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Het Core Web Vitals-rapport: waarom een fix niet meteen groen wordt",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.2",
+                                      "5.2.1"
+                                  ],
+                       "kernpunt":  "Het Core Web Vitals-rapport gebruikt velddata over 28 dagen, dus een fix wordt pas na weken zichtbaar. Start de validatie en beoordeel na vier weken, niet na twee dagen.",
+                       "bron":  {
+                                    "titel":  "Core Web Vitals report - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/9205520"
+                                },
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-ga4-rapportage-identiteit",
+                       "titel":  "User-ID staat live, maar GA4 telt nog net zoveel gebruikers",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: de rapportage-identiteit kiezen (Blended, Observed, Device-based)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.5"
+                                  ],
+                       "kernpunt":  "Een User-ID helpt alleen als de rapportage-identiteit hem gebruikt: kies Blended of Observed, niet Device-based. De keuze verandert de verzamelde data niet.",
+                       "bron":  {
+                                    "titel":  "Reporting identity - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/10976610"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-gedeeld-ai-trainingstoken",
+                       "titel":  "Eén robots.txt-regel tegen AI-training voor iedereen: nu al overstappen?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Eén robots.txt-regel tegen AI-training: het gedeelde token __usage_ai-training",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "Het gedeelde token __usage_ai-training wordt pas vanaf 2027 gelezen en is geen crawlinstructie. Voeg het gerust toe, maar houd de regels voor GPTBot en Google-Extended tot die tijd aan.",
+                       "bron":  {
+                                    "titel":  "Supporting a shared AI training control for websites | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2026/10/ai-training-control"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-gsc-bigquery-site-of-url-tabel",
+                       "titel":  "20% meer vertoningen in BigQuery dan in Search Console: wie telt fout?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "SQL op de Search Console-export: site-tabel of URL-tabel?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.3.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Totalen haal je uit searchdata_site_impression (per property), cijfers per pagina uit searchdata_url_impression (per URL). Tel ze niet door elkaar op.",
+                       "bron":  {
+                                    "titel":  "Table guidelines and reference - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/12917991"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-meer-laden-knop-producten",
+                       "titel":  "Sinds de knop \u0027Meer laden\u0027 verdwijnen producten uit Google",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Een \u0027Meer laden\u0027-knop in plaats van paginering: vindt Google de producten nog?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.9",
+                                      "1.3.4"
+                                  ],
+                       "kernpunt":  "Google klikt niet op \u0027Meer laden\u0027. Geef elke set producten een eigen URL en link ernaar met een gewone \u003ca href\u003e, met een eigen canonical per pagina.",
+                       "bron":  {
+                                    "titel":  "Pagination, incremental page loading, and their impact on Google Search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-reviewanalyse-citaten-claude",
+                       "titel":  "\u002742% twijfelt over de proefperiode\u0027: waar haalt Claude dat vandaan?",
+                       "vakgebied":  "CRO × Claude",
+                       "onderwerp":  "Klantreviews analyseren met Claude zonder verzonnen cijfers",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "7.1.5",
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Laat Claude elke bevinding uit klantfeedback onderbouwen met letterlijke citaten, schrap wat geen citaat heeft, en tel aantallen zelf na voordat je ze presenteert.",
+                       "bron":  {
+                                    "titel":  "Reduce hallucinations | Claude Docs",
+                                    "url":  "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

@@ -11,12 +11,12 @@
     "soort": "meerkeuze",
     "vraag": "Wat adviseer je de klant?",
     "opties": [
-      "Samenvoegen tot sterke dienstpagina's plus één pagina over het werkgebied; alleen een aparte plaatspagina waar je daar echt iets eigens te bieden hebt, en de rest doorsturen",
-      "De pagina's laten staan, maar alle 180 teksten door AI laten herschrijven, zodat geen twee pagina's meer hetzelfde zijn",
-      "Uitbreiden naar alle 400 plaatsen in de provincie, want elke extra plaatsnaam is een extra lokale zoekopdracht",
-      "Op elke pagina een alinea over de plaats zelf toevoegen, zoals het inwonertal en een paar bezienswaardigheden"
+      "Alle 180 teksten door AI laten herschrijven, zodat elke pagina unieke content heeft en Google ze niet als kopie ziet",
+      "Uitbreiden naar alle 400 plaatsen in de provincie, omdat elke extra plaatsnaam een extra lokale zoekopdracht oplevert",
+      "Samenvoegen tot pagina's per dienst plus één werkgebiedpagina, en alleen plaatsen met echt eigen inhoud apart houden",
+      "Per pagina een alinea over de plaats zelf toevoegen, zoals inwonertal en bezienswaardigheden, zodat elke pagina verschilt"
     ],
-    "juist": 0
+    "juist": 2
   },
   "toelichting": "Dit is een schoolvoorbeeld van **doorway abuse**: veel bijna gelijke pagina's die gemaakt zijn om op net iets andere zoekopdrachten te ranken en bezoekers naar één plek te leiden. Herschrijven met AI maakt de tekst anders, maar niet nuttiger. Op grote schaal pagina's maken om rankings te sturen is **scaled content abuse**, ook als elke tekst uniek is. Meer plaatsen maakt het probleem groter. Een alinea over het inwonertal helpt iemand met een lekkage niet. Samenvoegen en alleen houden wat echt iets toevoegt, lost het op.",
   "uitleg": "**Dunne content** is content die de bezoeker weinig of niets biedt. Bij plaatspagina's gaat het vaak een stap verder: dan valt het onder Googles spambeleid.\n\nGoogle noemt **doorway abuse**: pagina's die zijn gemaakt om op specifieke, vergelijkbare zoekopdrachten te ranken. Voorbeelden uit het beleid:\n- pagina's die bezoekers naar het eigenlijke, bruikbare deel van de site leiden;\n- veel sterk vergelijkbare pagina's die meer op zoekresultaten lijken dan op een duidelijke, doorklikbare structuur.\n\nDaarnaast is er **scaled content abuse**: veel pagina's maken, vooral om rankings te sturen en niet om bezoekers te helpen. Hoe ze gemaakt zijn (met AI, sjablonen of mensen) maakt daarbij niet uit.\n\nWanneer is een plaatspagina wél zinvol? Als er per plaats echt iets anders te vertellen of te bieden is: een vestiging, een eigen team, eigen projecten met foto's, andere tarieven of voorrijkosten, echte reviews van klanten daar. Dan is het geen kopie met een andere plaatsnaam.\n\nPraktische aanpak:\n- Maak sterke pagina's per dienst (lekkage, cv-ketel, riool).\n- Maak één pagina over het werkgebied, met een kaart of lijst van plaatsen.\n- Houd alleen plaatspagina's met eigen inhoud, en stuur de rest met een 301 door naar de best passende pagina.",
@@ -25,5 +25,7 @@
   "bron": {
     "titel": "Spam Policies for Google Web Search | Google Search Central",
     "url": "https://developers.google.com/search/docs/essentials/spam-policies"
-  }
+  },
+  "herzien": "2026-11-02",
+  "wijziging": "Opties even lang gemaakt."
 }

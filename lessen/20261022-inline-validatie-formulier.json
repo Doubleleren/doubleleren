@@ -13,10 +13,10 @@
     "soort": "meerkeuze",
     "vraag": "Welke manier van inline valideren werkt volgens usability-onderzoek het best?",
     "opties": [
-      "Elk veld controleren vanaf de eerste toetsaanslag, zodat de bezoeker meteen ziet wat er nog mis is.",
-      "Alleen foutmeldingen tonen, pas na een klik op 'Verstuur', maar dan naast het veld in plaats van bovenaan.",
-      "Controleren zodra de bezoeker naar het volgende veld gaat, en de foutmelding pas weghalen bij opnieuw versturen.",
-      "Controleren als de bezoeker het veld verlaat, de foutmelding weghalen zodra de invoer klopt, en goede velden een vinkje geven."
+      "Elk veld vanaf de eerste toetsaanslag controleren, zodat de bezoeker direct ziet wat er nog niet goed is.",
+      "Alleen na een klik op 'Verstuur' controleren, maar de foutmelding dan naast het veld zetten in plaats van bovenaan.",
+      "Controleren zodra de bezoeker het veld verlaat, en de foutmelding pas weghalen als hij opnieuw op 'Verstuur' klikt.",
+      "Controleren bij het verlaten van het veld, de fout weghalen zodra de invoer klopt en goede velden een vinkje geven."
     ],
     "juist": 3
   },
@@ -27,5 +27,7 @@
   "bron": {
     "titel": "Baymard Institute: Usability Testing of Inline Form Validation",
     "url": "https://baymard.com/blog/inline-form-validation"
-  }
+  },
+  "herzien": "2026-11-02",
+  "wijziging": "Opties even lang gemaakt."
 }

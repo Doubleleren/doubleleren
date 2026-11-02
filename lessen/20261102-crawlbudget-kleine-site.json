@@ -1,0 +1,29 @@
+{
+  "id": "20261102-crawlbudget-kleine-site",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawlbudget: wanneer is een log-analyse de moeite waard?",
+  "matrix": ["1.1.3", "1.1.1"],
+  "titel": "€ 3.000 voor een crawlbudget-analyse van 1.400 pagina's: doen?",
+  "intro": "Een B2B-installateur heeft een site van zo'n 1.400 pagina's, die een paar keer per maand verandert. Nieuwe pagina's staan meestal binnen een dag in Google, en het rapport Pagina-indexering laat geen opvallende problemen zien. Een freelancer biedt voor € 3.000 een server log-analyse aan 'om het crawlbudget te optimaliseren'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de klant?",
+    "opties": [
+      "Doen, want elke site heeft een crawlbudget en pagina's die Googlebot minder vaak bezoekt, ranken daardoor slechter.",
+      "Niet nodig: bij een kleine site die snel geïndexeerd wordt, is crawlbudget geen knelpunt. Besteed het geld anders.",
+      "Doen, maar geef eerst alle onbelangrijke pagina's een noindex, zodat Googlebot daar geen crawltijd meer aan kwijt is.",
+      "Niet nodig, want een ingediende XML-sitemap zorgt er al voor dat Google het crawlbudget van de site verhoogt."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Google schrijft zijn handleiding over crawlbudget voor **grote sites**: ruwweg 1 miljoen+ pagina's die wekelijks veranderen, of 10.000+ pagina's die dagelijks veranderen, en sites met veel URL's op 'Gevonden – momenteel niet geïndexeerd'. Worden je pagina's dezelfde dag gecrawld, dan heb je die handleiding volgens Google niet nodig.\n\n- Vaker gecrawld worden is geen rankingvoordeel.\n- **noindex** spaart geen crawltijd: Google vraagt de pagina nog steeds op en laat hem pas daarna vallen.\n- Een **sitemap** helpt Google URL's te vinden, maar verhoogt het crawlbudget niet.",
+  "uitleg": "**Crawlbudget** is de tijd en moeite die Google aan het crawlen van je site besteedt. Het hangt af van twee dingen:\n- **Crawlcapaciteit:** hoeveel je server aankan. Gaat de site trager reageren of geeft hij 5xx-fouten of een 429, dan schroeft Google terug.\n- **Crawlvraag:** hoeveel Google wil crawlen, op basis van de grootte van de site, hoe vaak er iets verandert, kwaliteit en populariteit.\n\nBij de meeste sites is er ruim genoeg budget. Het wordt pas een knelpunt als er veel meer URL's zijn dan Google wil ophalen, bijvoorbeeld door filters, parameters of een enorme catalogus.\n\nWanneer is een log-analyse dan wél nuttig?\n- Bij grote webshops en platforms, waar Googlebot zich kan verliezen in filter- en parameter-URL's.\n- Na een migratie, om te zien of Google de nieuwe URL's oppakt.\n- Als veel belangrijke URL's lang op 'Gevonden – momenteel niet geïndexeerd' blijven staan.\n\nWat Google aanraadt bij echte problemen: dubbele en onnodige URL's opruimen, onbelangrijke URL's blokkeren in robots.txt (niet met noindex), 304-antwoorden ondersteunen, en een snelle, stabiele server. robots.txt gebruik je niet om crawlbudget tijdelijk te verschuiven.",
+  "kernpunt": "Crawlbudget is vooral een probleem voor grote of snel veranderende sites. Worden nieuwe pagina's binnen een dag gecrawld, dan levert een crawlbudget-analyse weinig op.",
+  "toepassing": "Kijk bij een klant in Search Console onder Instellingen > Crawlstatistieken hoeveel verzoeken Google per dag doet, en vergelijk dat met het aantal URL's dat je wilt laten indexeren. Pas als dat flink scheef zit, is een log-analyse het overwegen waard.",
+  "bron": {
+    "titel": "Crawl Budget Management For Large Sites | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget"
+  }
+}

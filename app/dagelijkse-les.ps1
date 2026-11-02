@@ -87,6 +87,7 @@ try {
     $uitstelTot = if ($status -and $status.datum -eq $vandaag) { [string]$status.uitstelTot } else { '' }
     $script:uitstelGebruikt = ($uitstelSlot -eq $slot)
     if (-not $Test -and -not $Snapshot) {
+        if ((Get-Date).DayOfWeek -in 'Saturday', 'Sunday') { exit }     # in het weekend geen lessen
         if ($script:aantal -ge $maxNu) { exit }
         if ($script:uitstelGebruikt -and $uitstelTot -and (Get-Date) -lt [datetime]$uitstelTot) { exit }
     }
@@ -180,12 +181,13 @@ try {
     }
     $o = $les.opdracht
 
-    # --- Reeks (weekenden onderbreken niet) en aantal deze maand ---
+    # --- Reeks (weekenden tellen niet mee en onderbreken niet) en aantal deze maand ---
     $dagen = @($logs | ForEach-Object { "$($_.datum)".Substring(0, 10) } | Sort-Object -Unique)
     $reeks = 0; $d = (Get-Date).Date.AddDays(-1)
     while ($true) {
-        if ($dagen -contains $d.ToString('yyyy-MM-dd')) { $reeks++ }
-        elseif ($d.DayOfWeek -ne 'Saturday' -and $d.DayOfWeek -ne 'Sunday') { break }
+        $werk = $d.DayOfWeek -ne 'Saturday' -and $d.DayOfWeek -ne 'Sunday'
+        if ($werk -and $dagen -contains $d.ToString('yyyy-MM-dd')) { $reeks++ }
+        elseif ($werk) { break }
         $d = $d.AddDays(-1)
         if ($reeks -gt 3650) { break }
     }

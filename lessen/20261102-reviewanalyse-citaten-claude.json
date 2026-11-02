@@ -1,0 +1,29 @@
+{
+  "id": "20261102-reviewanalyse-citaten-claude",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO × Claude",
+  "onderwerp": "Klantreviews analyseren met Claude zonder verzonnen cijfers",
+  "matrix": ["7.1.5", "7.1.1"],
+  "titel": "'42% twijfelt over de proefperiode': waar haalt Claude dat vandaan?",
+  "intro": "Je laat Claude 1.800 productreviews en 400 antwoorden uit een exitsurvey van een matrassenwebshop analyseren, om hypotheses voor A/B-tests te vinden. In de samenvatting staat: '42% van de klanten twijfelt over de proefperiode van 100 nachten.' Als je zelf door de bestanden bladert, kom je dat onderwerp maar een handvol keer tegen. Morgen presenteer je de bevindingen aan de klant.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe pas je je werkwijze aan?",
+    "opties": [
+      "Claude dezelfde vraag nog eens laten beantwoorden en het percentage gebruiken als het de tweede keer ongeveer gelijk is.",
+      "Het percentage presenteren als schatting, omdat Claude alle reviews heeft gelezen en de orde van grootte dus wel klopt.",
+      "Per bevinding letterlijke citaten met review-ID laten geven, beweringen zonder citaat schrappen, en cijfers zelf natellen.",
+      "De prompt aanvullen met 'wees heel nauwkeurig met cijfers', zodat Claude bij de volgende analyse geen fouten meer maakt."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Een taalmodel kan een overtuigend cijfer geven dat nergens op gebaseerd is. Anthropic raadt aan om antwoorden **controleerbaar** te maken: laat Claude bij elke bewering een letterlijk citaat geven, en laat het een bewering terugtrekken als er geen citaat voor is. Tellen doe je daarna zelf, bijvoorbeeld in een spreadsheet.\n\n- Twee keer hetzelfde antwoord bewijst niets: twee keer dezelfde fout kan ook.\n- 'Orde van grootte klopt vast' is precies de aanname die je klant op het verkeerde spoor zet.\n- 'Wees nauwkeurig' helpt weinig zonder een manier om het te controleren.",
+  "uitleg": "Reviews, surveys en chatlogs zijn goud voor CRO: ze vertellen **waarom** bezoekers twijfelen. Claude kan duizenden antwoorden snel ordenen in thema's. Maar bij lange stukken tekst kan het ook dingen samenvatten die er niet (zo vaak) staan.\n\nTechnieken uit de documentatie van Anthropic om dat te voorkomen:\n- **Eerst citaten, dan analyse.** Laat Claude bij lange documenten eerst letterlijke citaten verzamelen en de analyse daarop baseren.\n- **Citaten bij elke bewering.** Vind Claude geen citaat, dan schrapt het de bewering.\n- **Ruimte voor 'weet ik niet'.** Geef expliciet toestemming om te zeggen dat de data iets niet laten zien.\n- **Alleen de aangeleverde bronnen.** Vraag Claude om geen algemene kennis toe te voegen.\n\nVoor een CRO-analyse werkt deze volgorde goed:\n1. Laat Claude thema's voorstellen, met per thema 3 tot 5 letterlijke citaten en de ID's.\n2. Tel de aantallen zelf, bijvoorbeeld door Claude per review één thema te laten toekennen in een tabel die je kunt filteren.\n3. Maak pas dan hypotheses: 'Als we X veranderen, verwachten we Y, omdat klanten zeggen Z.'\n\nZo kun je in de presentatie elke bevinding met een echte klantzin onderbouwen.",
+  "kernpunt": "Laat Claude elke bevinding uit klantfeedback onderbouwen met letterlijke citaten, schrap wat geen citaat heeft, en tel aantallen zelf na voordat je ze presenteert.",
+  "toepassing": "Neem een analyse van klantfeedback die je recent met AI hebt gemaakt. Kies het cijfer waar je het meest op bouwt en zoek drie letterlijke voorbeelden in de brondata. Vind je ze niet, pas de analyse dan aan.",
+  "bron": {
+    "titel": "Reduce hallucinations | Claude Docs",
+    "url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "20261102-contentbrief-prompt-context",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Prompt-anatomie: context geven bij een contentbrief",
+  "matrix": ["2.1.5"],
+  "titel": "Een contentbrief van Claude die voor elk bedrijf had kunnen zijn",
+  "intro": "Je hebt voor een installatiebedrijf in Noord-Brabant een blog nodig over het onderhoud van warmtepompen. Je vraagt Claude: 'Maak een contentbrief voor warmtepomp onderhoud.' Je krijgt een nette brief terug, maar je kunt er weinig mee: hij richt zich op doe-het-zelvers en had net zo goed voor een concurrent kunnen zijn.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing aan je prompt helpt het meest om een bruikbare brief te krijgen?",
+    "opties": [
+      "Context geven: voor welk bedrijf, welke lezer, waarvoor de brief dient en in welk format je hem terug wilt hebben.",
+      "Er 'Je bent de beste SEO-expert ter wereld' boven zetten, zodat Claude zijn kennis beter inzet en scherper schrijft.",
+      "Dezelfde korte prompt een paar keer in nieuwe chats stellen en dan de brief kiezen die je het meest aanspreekt.",
+      "De opdracht in hoofdletters zetten met 'BELANGRIJK', zodat Claude beter snapt dat de brief specifiek moet zijn."
+    ],
+    "juist": 0
+  },
+  "toelichting": "Claude kan alleen werken met wat in de prompt staat. Weet het niet voor wie de brief is en wie hem leest, dan maakt het een gemiddelde brief.\n\n- Een **rol** kan helpen, maar 'de beste ter wereld' geeft geen informatie over dit bedrijf of deze lezer.\n- Dezelfde vage prompt herhalen is gokken: elke versie mist dezelfde context.\n- Hoofdletters en 'BELANGRIJK' maken een opdracht niet duidelijker. Uitleggen **waarom** iets belangrijk is, werkt beter.",
+  "uitleg": "In de prompting-richtlijnen van Anthropic staat een handige toets: laat je prompt lezen door een collega die niets van de opdracht weet. Snapt die niet wat je wilt, dan snapt Claude het ook niet. Behandel Claude als een slimme nieuwe collega die je klanten en werkwijze nog niet kent.\n\nVoor een contentbrief betekent dat:\n- **Wie is de klant?** Bedrijf, regio, diensten, wat hen onderscheidt.\n- **Wie is de lezer?** Hier: huiseigenaren met een warmtepomp die twijfelen over onderhoud, niet doe-het-zelvers.\n- **Waarvoor is het?** Een blog die moet leiden tot aanvragen voor een onderhoudscontract.\n- **Wat is goed?** Zoekwoorden, vragen die beantwoord moeten worden, lengte, toon.\n- **Welk format?** Plak je vaste sjabloon of een voorbeeld van een goede brief erbij.\n\nGeef bij een instructie ook de reden. 'Geen prijzen noemen, want die verschillen per installatie' werkt beter dan alleen 'geen prijzen'. Claude kan dan zelf afleiden wat in de geest van je vraag ligt.\n\nWerkt de prompt goed? Bewaar hem dan als sjabloon of maak er een skill van, zodat je hem voor elke klant opnieuw kunt gebruiken.",
+  "kernpunt": "Een vage prompt geeft een gemiddeld antwoord. Geef Claude context zoals je een nieuwe collega zou briefen: klant, lezer, doel, criteria en het format dat je terug wilt.",
+  "toepassing": "Pak de laatste prompt die je deze week voor een klant gebruikte en doe de collega-toets: wat zou een nieuwe collega nog moeten vragen? Voeg die antwoorden toe en vergelijk het resultaat.",
+  "bron": {
+    "titel": "Prompting best practices | Claude Docs",
+    "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+  }
+}
