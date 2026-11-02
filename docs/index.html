@@ -127,7 +127,7 @@ details.sig > summary:hover b { text-decoration: underline; text-underline-offse
 #instellingen-knop[aria-current="page"] { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--ink); }
 #sb-instelling[hidden] + #snelkoppeling { margin-top: 24px; }
 #mx-vakkeuze, #mx-modus { justify-content: flex-start; display: flex; }
-.mx-sugg { background: var(--fun-50); border-radius: 14px; padding: 12px 16px; margin: 0 0 14px; }
+.mx-sugg { background: var(--fun-50); }
 .mx-onderwerp { margin: 10px 0 14px; }
 .mx-onderwerp h4 { font-size: 15px; font-weight: 700; margin: 0 0 2px; padding-top: 8px; border-top: 1.6px solid var(--cool); }
 .score-veld { width: 46px; height: 38px; text-align: center; font: 700 18px var(--font); border: 1.6px solid var(--cool); border-radius: 8px; background: var(--white); }
@@ -337,6 +337,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   </div>
 
   <div id="mij" hidden>
+    <section class="paneel mx-sugg" id="maand-paneel" style="margin-top:0;margin-bottom:16px" hidden></section>
     <div class="kpis" id="kpis"></div>
     <section class="twee">
       <div class="stapel">
@@ -410,7 +411,6 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <p class="sub" id="mx-ronde" style="margin:0 0 12px"></p>
       <p class="sub" id="mx-klaar" role="status"></p>
       <p class="sub" style="margin:0 0 12px">Welke vakken je leert en waar je je op richt, stel je in bij <button type="button" class="leslink" data-naar="instellingen">Instellingen</button>.</p>
-      <div id="mx-suggesties" class="mx-sugg" hidden></div>
       <div id="matrix"></div>
       <div class="legenda"><span><i class="sw"></i>Laatste score (gemiddeld, 1–5)</span><span><i class="sw tick"></i>Eerste meting</span></div>
     </section>

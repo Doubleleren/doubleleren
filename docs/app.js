@@ -384,6 +384,7 @@ const gem = (xs) => { const v = xs.filter((x) => typeof x === 'number'); return 
 // ---------------------------------------------------------------- weergave: mij
 function toonMij() {
   const lid = S.leden[S.mij], logs = lid.logs;
+  toonMaandafsluiter(lid);
   const tel = { goed: 0, deels: 0, fout: 0 }; logs.forEach((l) => { if (l.resultaat) tel[l.resultaat]++; });
   const mijnItems = itemsVan(lid), beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = mijnItems.length;
   const items = mijnItems.map((it) => lid.matrix?.get(it.id)).filter(Boolean);
@@ -435,36 +436,70 @@ function toonMij() {
   $('recent').innerHTML = logs.length ? logs.slice(0, 3).map((l) => lesHtml(l, antw.get(l.id + l.datum))).join('') : '<p class="leeg">Nog geen lessen afgerond. Je eerste les verschijnt vanzelf op je laptop.</p>';
 }
 
-// ---------------------------------------------------------------- suggesties tussendoor
-// Zegt je bewijs uit de lessen iets anders dan je score (overschat/onderschat), dan stelt de site één stap omhoog of omlaag
-// voor. Jij beslist; "Laat staan" verbergt de suggestie op deze computer zolang je score gelijk blijft.
-const SUGG_SLEUTEL = () => `dl-sugg-weg-${S.mij}`;
-function suggestiesWeg() { try { return JSON.parse(localStorage.getItem(SUGG_SLEUTEL()) || '{}') || {}; } catch { return {}; } }
-function suggesties(lid) {
-  const mijn = new Set(itemsVan(lid).map((i) => i.id)), weg = suggestiesWeg();
-  return signalen(lid).filter((x) => (x.s === 'overschat' || x.s === 'onderschat') && x.n >= 2 && mijn.has(x.id) && weg[x.id] !== x.zelf)
-    .map((x) => ({ ...x, naar: x.s === 'overschat' ? Math.max(1, x.zelf - 1) : Math.min(5, x.zelf + 1) })).slice(0, 5);
+// ---------------------------------------------------------------- maandafsluiter
+// De eerste 10 dagen van een maand, bovenaan Mijn voortgang: terugblik op vorige maand en hooguit 3 voorstellen per kant om
+// een score aan te passen. Omhoog: vorige maand minstens 2x goed, in de twee maanden samen minstens 3x goed en nooit fout.
+// Omlaag: vorige maand minstens 2x fout, samen minstens 3x fout en hooguit 1x goed. Een score die je deze maand al aanpaste,
+// slaat hij over. "Gezien" en "Laat staan" gelden op deze computer tot de volgende maand.
+const maandTerug = (d, n) => dagKey(new Date(d.getFullYear(), d.getMonth() - n, 1, 12)).slice(0, 7);
+const MAAND_SLEUTEL = () => `dl-maand-${S.mij}`;
+function maandStaat() { try { return JSON.parse(localStorage.getItem(MAAND_SLEUTEL()) || '{}') || {}; } catch { return {}; } }
+function bewaarMaandStaat(s) { try { localStorage.setItem(MAAND_SLEUTEL(), JSON.stringify(s)); } catch { /* geen opslag: dan komt hij terug */ } }
+function maandafsluiter(lid) {
+  const d = nu(); if (d.getDate() > 10) return null;
+  const nuM = dagKey(d).slice(0, 7), vorige = maandTerug(d, 1), daarvoor = maandTerug(d, 2);
+  const staat = maandStaat(); if (staat.maand === vorige && staat.gezien) return null;
+  const weg = staat.maand === vorige ? staat.weg || [] : [];
+  const lv = lid.logs.filter((l) => l.datum.startsWith(vorige)); if (!lv.length) return null;
+  const mijn = new Set(itemsVan(lid).map((i) => i.id)), per = new Map(), ond = new Map();
+  for (const l of lid.logs.filter((x) => x.datum.startsWith(vorige) || x.datum.startsWith(daarvoor))) {
+    const vm = l.datum.startsWith(vorige);
+    for (const id of l.matrix) {
+      if (!mijn.has(id)) continue;
+      const p = per.get(id) || { gV: 0, fV: 0, g: 0, f: 0 };
+      if (l.resultaat === 'goed') { p.g++; if (vm) p.gV++; }
+      if (l.resultaat === 'fout') { p.f++; if (vm) p.fV++; }
+      per.set(id, p);
+      const o = S.sjabloon.get(id)?.onderwerp; if (vm && o) { const t = ond.get(o) || { g: 0, f: 0 }; if (l.resultaat === 'goed') t.g++; if (l.resultaat === 'fout') t.f++; ond.set(o, t); }
+    }
+  }
+  const omhoog = [], omlaag = [];
+  for (const [id, p] of per) {
+    const sc = scoresVan(lid, id), l = laatste(sc); if (!l || l.m === nuM || weg.includes(id)) continue;
+    if (l.s < 5 && p.gV >= 2 && p.g >= 3 && !p.f) omhoog.push({ id, zelf: l.s, naar: l.s + 1, n: p.g });
+    else if (l.s > 1 && p.fV >= 2 && p.f >= 3 && p.g <= 1) omlaag.push({ id, zelf: l.s, naar: l.s - 1, n: p.f });
+  }
+  const st = maandStand(lid.logs, vorige, lid.werkdagen);
+  const top = (fn) => [...ond].filter(([, t]) => fn(t)).sort((a, b) => (b[1].g - b[1].f) - (a[1].g - a[1].f)).map(([o]) => o);
+  return { vorige, naam: MAANDLANG[+vorige.slice(5) - 1], lessen: lv.length, goed: lv.filter((l) => l.resultaat === 'goed').length, reeks: st.langsteReeks,
+    sterk: top((t) => t.g >= 2 && t.f === 0).slice(0, 3), minder: top((t) => t.f >= 2).reverse().slice(0, 3),
+    omhoog: omhoog.sort((a, b) => b.n - a.n).slice(0, 3), omlaag: omlaag.sort((a, b) => b.n - a.n).slice(0, 3) };
 }
-function toonSuggesties(lid) {
-  const sg = suggesties(lid), p = $('mx-suggesties');
-  p.hidden = !sg.length; if (!sg.length) return;
-  p.innerHTML = `<h3 style="font-size:15px;margin-bottom:4px">Suggesties</h3><p class="sub" style="margin:0 0 6px">Je lesresultaten zeggen hier iets anders dan je eigen score.</p>`
-    + sg.map((x) => { const it = S.sjabloon.get(x.id) || {}; return `<div class="rij"><span><b>${esc(it.vaardigheid || x.id)}</b><br><span class="sub">${esc(it.onderwerp || '')} · jij ${Number(x.zelf)}, je resultaten wijzen eerder op ${Number(x.naar)} (${Number(x.n)} ${x.n === 1 ? 'les' : 'lessen'})</span></span><span style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button type="button" class="knop zwart" data-sugg=""${esc(x.id)}" data-naar="${Number(x.naar)}">Zet op ${Number(x.naar)}</button><button type="button" class="knop" style="background:var(--white)" data-sugg-weg=""${esc(x.id)}" data-zelf="${Number(x.zelf)}">Laat staan</button></span></div>`; }).join('');
+function toonMaandafsluiter(lid) {
+  const m = maandafsluiter(lid), p = $('maand-paneel');
+  p.hidden = !m; if (!m) return;
+  const voorstel = (x, omhoog) => { const it = S.sjabloon.get(x.id) || {}; return `<div class="rij"><span><b>${esc(it.vaardigheid || x.id)}</b><br><span class="sub">${esc(it.onderwerp || '')} · ${omhoog ? `${Number(x.n)} keer goed in de afgelopen twee maanden, nooit fout` : `${Number(x.n)} keer fout in de afgelopen twee maanden`}. Je score is ${Number(x.zelf)}.</span></span><span style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button type="button" class="knop zwart" data-sugg="${esc(x.id)}" data-naar="${Number(x.naar)}">Zet op ${Number(x.naar)}</button><button type="button" class="knop" style="background:var(--white)" data-sugg-weg="${esc(x.id)}">Laat staan</button></span></div>`; };
+  p.innerHTML = `<div class="paneel-kop"><div><h2>Zo ging ${esc(m.naam)}</h2><p class="sub">${m.lessen} ${m.lessen === 1 ? 'les' : 'lessen'} · ${m.goed} goed · langste reeks ${m.reeks} ${m.reeks === 1 ? 'dag' : 'dagen'}</p></div><button type="button" class="knop" style="background:var(--white)" data-maand-gezien="1">Gezien</button></div>`
+    + (m.sterk.length ? `<p style="margin:0 0 4px"><b>Ging goed:</b> ${m.sterk.map(esc).join(', ')}</p>` : '')
+    + (m.minder.length ? `<p style="margin:0 0 4px"><b>Ging minder:</b> ${m.minder.map(esc).join(', ')}</p>` : '')
+    + (m.omhoog.length ? `<h3 style="font-size:15px;margin:12px 0 4px">Klaar voor een hogere score?</h3>${m.omhoog.map((x) => voorstel(x, true)).join('')}` : '')
+    + (m.omlaag.length ? `<h3 style="font-size:15px;margin:12px 0 4px">Even kritisch kijken</h3>${m.omlaag.map((x) => voorstel(x, false)).join('')}` : '');
 }
-$('mx-suggesties').addEventListener('click', async (e) => {
+$('maand-paneel').addEventListener('click', async (e) => {
+  const lid = S.leden[S.mij], m = maandafsluiter(lid); if (!m) return;
+  if (e.target.closest('[data-maand-gezien]')) { bewaarMaandStaat({ maand: m.vorige, gezien: true }); toonMaandafsluiter(lid); return; }
   const w = e.target.closest('[data-sugg-weg]');
-  if (w) { const weg = suggestiesWeg(); weg[w.dataset.suggWeg] = Number(w.dataset.zelf); try { localStorage.setItem(SUGG_SLEUTEL(), JSON.stringify(weg)); } catch {} toonSuggesties(S.leden[S.mij]); return; }
+  if (w) { const s = maandStaat(), weg = s.maand === m.vorige ? s.weg || [] : []; bewaarMaandStaat({ maand: m.vorige, weg: [...weg, w.dataset.suggWeg] }); toonMaandafsluiter(lid); return; }
   const b = e.target.closest('[data-sugg]'); if (!b || b.disabled) return;
   b.disabled = true;
-  const it = S.sjabloon.get(b.dataset.sugg) || {}, maand = dagKey(nu()).slice(0, 7), n = Number(b.dataset.naar);
-  try { await bewaarScores({ [b.dataset.sugg]: { [maand]: n } }, `Opgeslagen: ${it.vaardigheid || b.dataset.sugg} staat nu op ${n}.`); }
-  catch (err) { b.disabled = false; $('mx-klaar').textContent = 'Opslaan mislukt: ' + err.message; }
+  const it = S.sjabloon.get(b.dataset.sugg) || {}, n = Number(b.dataset.naar);
+  try { await bewaarScores({ [b.dataset.sugg]: { [dagKey(nu()).slice(0, 7)]: n } }, `Opgeslagen: ${it.vaardigheid || b.dataset.sugg} staat nu op ${n}.`); tab('mij'); }
+  catch (err) { b.disabled = false; alert('Opslaan mislukt: ' + err.message); }
 });
 
 // ---------------------------------------------------------------- weergave: skilllijst
 function toonSkilllijst() {
   const lid = S.leden[S.mij]; if (!lid) return;
-  toonSuggesties(lid);
   const maanden = maandenVan(lid), totaal = itemsVan(lid).length, r = ronde(lid);
   const open = vakkenVan(lid).filter((v) => !ingevuld(lid, v)), klaar = vakkenVan(lid).filter((v) => ingevuld(lid, v));
   $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
