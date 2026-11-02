@@ -324,8 +324,8 @@ function isMijnWerkdag(wd, d) {
   const w = d.getDay(); if (w === 0 || w === 6) return false;
   return dagenVoorWeek(wd, weekSleutel(d)).includes(w);
 }
-// Een week ligt vast vanaf vrijdag 00:00 de week ervoor: tot en met donderdag pas je volgende week nog aan
-function eersteVrijeWeek(d = nu()) { const m = maandagVan(d); m.setDate(m.getDate() + (d.getDay() === 5 || d.getDay() === 6 || d.getDay() === 0 ? 14 : 7)); return m; }
+// Een week ligt vast vanaf zaterdag 00:00 de week ervoor: tot en met vrijdag pas je volgende week nog aan
+function eersteVrijeWeek(d = nu()) { const m = maandagVan(d); m.setDate(m.getDate() + (d.getDay() === 6 || d.getDay() === 0 ? 14 : 7)); return m; }
 function reeks(logs, wd) {
   const dagen = new Set(logs.map((l) => l.datum.slice(0, 10))); const d = nu(); let n = 0;
   if (!dagen.has(dagKey(d))) d.setDate(d.getDate() - 1);
@@ -622,7 +622,7 @@ function toonWerkdagen() {
   for (let i = 0; i < 4; i++) {
     const ma = maandagVan(nu()); ma.setDate(ma.getDate() + 7 * i); const vr = new Date(ma); vr.setDate(vr.getDate() + 4);
     const k = weekSleutel(ma), eigen = wd.weken[k], vast = k < vrij, dagen = dagenVoorWeek(wd, k);
-    const grens = new Date(ma); grens.setDate(grens.getDate() - 4);   // donderdag de week ervoor
+    const grens = new Date(ma); grens.setDate(grens.getDate() - 3);   // vrijdag de week ervoor
     const stand = vast ? 'ligt vast' : `${eigen ? `aangepast · <button type="button" class="leslink" data-wd-terug="${esc(k)}">terug naar standaard</button>` : 'standaard'} · aan te passen t/m ${esc(fmtDatum(dagKey(grens)))}`;
     rijen.push(`<div class="rij"><span>${['Deze week', 'Volgende week', 'Over twee weken', 'Over drie weken'][i]} <span class="sub">${esc(fmtDatum(dagKey(ma)))} – ${esc(fmtDatum(dagKey(vr)))} · ${stand}</span></span>${knoppen(k, dagen, vast)}</div>`);
   }
@@ -631,7 +631,7 @@ function toonWerkdagen() {
 async function zetWerkdag(sleutel, dag, terug) {
   const ik = S.leden[S.mij], wd = ik.werkdagen ? JSON.parse(JSON.stringify(ik.werkdagen)) : { standaard: [...STD_WERK], weken: {}, eerder: [] };
   const vrijMa = eersteVrijeWeek(), vrij = weekSleutel(vrijMa);
-  if (sleutel !== 'standaard' && sleutel < vrij) { $('werkdagen-status').textContent = 'Deze week ligt al vast: aanpassen kan tot vrijdag 00:00 de week ervoor.'; toonWerkdagen(); return; }
+  if (sleutel !== 'standaard' && sleutel < vrij) { $('werkdagen-status').textContent = 'Deze week ligt al vast: aanpassen kan tot en met vrijdag de week ervoor.'; toonWerkdagen(); return; }
   if (terug) delete wd.weken[sleutel];
   else if (sleutel === 'standaard') {
     // De oude standaard blijft gelden voor alle weken die al vastliggen (nooit met terugwerkende kracht)
