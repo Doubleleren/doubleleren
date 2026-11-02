@@ -1,0 +1,29 @@
+{
+  "id": "20261102-canonical-signalen-tegenstrijdig",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "Canonicalisatie: tegenstrijdige signalen van canonical, noindex en sitemap",
+  "matrix": ["1.3.3", "1.3.1"],
+  "titel": "Canonical, noindex én de sitemap zeggen elk iets anders",
+  "intro": "Een elektronicawinkel heeft per product een URL met en zonder kleurparameter. De varianten met parameter hebben een canonical naar de hoofd-URL én, 'voor de zekerheid', een noindex. De XML-sitemap komt uit het feedsysteem en bevat juist de parameter-URL's. Bij een deel van de producten kiest Google in de URL-inspectietool de parameter-URL als canonieke versie.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste aanpak?",
+    "opties": [
+      "De noindex houden en de canonical weghalen, want noindex is een bevel en daarmee een sterker signaal dan een canonical.",
+      "De parameter-URL's in robots.txt blokkeren, zodat Google ze niet meer crawlt en vanzelf voor de hoofd-URL kiest.",
+      "Alles laten staan en de hoofd-URL's product voor product via URL-inspectie opnieuw laten indexeren in Search Console.",
+      "Signalen gelijktrekken: noindex weg, canonical naar de hoofd-URL houden, en alleen hoofd-URL's in de sitemap zetten."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Google kiest de canonieke URL op basis van **alle signalen samen**. Hier spreken ze elkaar tegen: de canonical wijst naar de hoofd-URL, maar de sitemap noemt juist de parameter-URL's.\n\n- **noindex** raadt Google af om binnen een site een canonical te kiezen: het haalt een pagina helemaal uit de zoekresultaten en is geen manier om signalen samen te voegen.\n- **robots.txt** is niet bedoeld voor canonicalisatie. Google kan de canonical dan niet meer lezen, en kan geblokkeerde URL's alsnog zonder inhoud indexeren.\n- **URL-inspectie** verandert niets aan tegenstrijdige signalen; Google kiest daarna gewoon opnieuw.",
+  "uitleg": "Bij dubbele pagina's kiest Google zelf welke URL de **canonieke** wordt, op basis van signalen. Google noemt ze in volgorde van kracht:\n- **Redirects:** een sterk signaal.\n- **rel=\"canonical\"** in de HTML of de HTTP-header: een sterk signaal.\n- **Opname in de sitemap:** een zwak signaal.\n\nSignalen versterken elkaar als ze hetzelfde zeggen. Spreken ze elkaar tegen, dan wordt de keuze van Google onvoorspelbaar. Een paar regels uit de documentatie:\n- Geef voor dezelfde pagina niet via verschillende methoden verschillende canonieke URL's op.\n- Gebruik geen **noindex** om binnen een site de keuze van de canonical te sturen. noindex haalt een pagina helemaal uit de zoekresultaten.\n- Gebruik **robots.txt** niet voor canonicalisatie.\n\nIn de praktijk ontstaan zulke conflicten vaak doordat verschillende systemen elk hun eigen deel doen: het CMS zet de canonical, een plugin de noindex en het feedsysteem de sitemap. Kijk daarom bij een vreemde canonicalkeuze altijd naar het hele plaatje: canonical, sitemap, interne links, redirects en hreflang. Laat alles naar dezelfde URL wijzen. Interne links naar de hoofd-URL helpen daarbij ook.",
+  "kernpunt": "Google kiest de canonical op alle signalen samen. Laat canonical, sitemap en interne links naar dezelfde URL wijzen, en gebruik geen noindex of robots.txt om de canonical te sturen.",
+  "toepassing": "Neem bij een klant drie URL's waarbij Google in URL-inspectie een andere canonical kiest dan de jouwe. Noteer per URL wat de canonical, de sitemap en de interne links zeggen, en zoek het signaal dat afwijkt.",
+  "bron": {
+    "titel": "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+  }
+}

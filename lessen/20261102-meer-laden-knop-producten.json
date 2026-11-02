@@ -1,0 +1,29 @@
+{
+  "id": "20261102-meer-laden-knop-producten",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Een 'Meer laden'-knop in plaats van paginering: vindt Google de producten nog?",
+  "matrix": ["1.1.9", "1.3.4"],
+  "titel": "Sinds de knop 'Meer laden' verdwijnen producten uit Google",
+  "intro": "Een webshop in kinderkleding heeft de genummerde pagina's op categoriepagina's (?page=2, ?page=3) vervangen door een knop 'Meer laden'. Die haalt met JavaScript telkens 24 producten op. De oude paginalinks zijn weg. Twee maanden later krijgen producten die diep in de categorieën staan bijna geen vertoningen meer.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak, en wat los je op?",
+    "opties": [
+      "Googlebot rendert geen JavaScript; zet de hele categoriepagina om naar server-side rendering, dan is het opgelost.",
+      "De producten ontbreken in de sitemap; zet ze daar alsnog in, dan zijn interne links naar die producten niet meer nodig.",
+      "Google klikt niet op knoppen; geef elke set producten een eigen URL en link ernaar met een gewone <a href>.",
+      "Google ziet de bijgeladen producten als dubbele content; zet op de categoriepagina een canonical naar pagina 1."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google rendert JavaScript wel, maar **klikt niet op knoppen** en voert meestal geen functies uit die een gebruikersactie nodig hebben. Alles wat pas na een klik op 'Meer laden' verschijnt, ziet Google dus niet, en de links naar die producten ook niet.\n\n- Server-side rendering helpt niet zolang de producten pas na een klik worden opgehaald.\n- Een sitemap helpt Google URL's te vinden, maar vervangt geen interne links: die geven context en laten zien wat belangrijk is.\n- Een canonical naar pagina 1 raadt Google juist af: elke pagina in de reeks hoort een eigen canonical te hebben.",
+  "uitleg": "Een knop 'Meer laden' of infinite scroll is prettig voor bezoekers, maar wordt vrijwel altijd met JavaScript gebouwd. Google klikt niet en scrolt niet zoals een bezoeker. Zonder extra werk ziet Google alleen de eerste set producten.\n\nWat Google aanraadt bij paginering en bijladen:\n- **Eigen URL per pagina**, bijvoorbeeld met ?page=2. Geen #-fragmenten: Google negeert alles na het hekje en slaat zo'n link mogelijk over.\n- **Gewone links** met <a href> van elke pagina naar de volgende, en eventueel terug naar pagina 1.\n- **Eigen canonical per pagina**, niet allemaal naar pagina 1.\n\nJe kunt beide combineren: de knop blijft voor bezoekers, en daarnaast staan er echte links naar ?page=2 enzovoort. Laat de knop bij het bijladen de URL bijwerken, zodat een gedeelde link ook naar de juiste plek gaat.\n\nControleer het met de URL-inspectietool: staan de links naar volgende pagina's in de gerenderde HTML? En crawl de categorie met Screaming Frog met JavaScript-rendering aan. Vindt de crawler de diepere producten niet, dan vindt Google ze waarschijnlijk ook niet.",
+  "kernpunt": "Google klikt niet op 'Meer laden'. Geef elke set producten een eigen URL en link ernaar met een gewone <a href>, met een eigen canonical per pagina.",
+  "toepassing": "Open bij een webshopklant een grote categorie en kijk of er onder de producten echte links naar volgende pagina's staan. Is er alleen een knop, controleer dan met URL-inspectie of de diepere producten in de gerenderde HTML voorkomen.",
+  "bron": {
+    "titel": "Pagination, incremental page loading, and their impact on Google Search | Google Search Central",
+    "url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+  }
+}
