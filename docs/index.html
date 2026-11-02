@@ -123,6 +123,8 @@ details.sig > summary:hover b { text-decoration: underline; text-underline-offse
 .prio-keuze .knop { background: var(--cool-50); padding: 5px 12px; font-size: 13px; }
 .prio-keuze .knop[aria-pressed="true"] { background: var(--ink); color: var(--white); }
 #vakken-paneel[hidden] + .paneel { margin-top: 0; }
+.start { margin-top: 0; background: var(--fun-50); border-color: var(--fun); }
+#start-paneel:not([hidden]) + #vakken-paneel { margin-top: 24px !important; }
 #instellingen-knop { display: inline-flex; align-items: center; gap: 6px; }
 #instellingen-knop[aria-current="page"] { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--ink); }
 #sb-instelling[hidden] + #snelkoppeling { margin-top: 24px; }
@@ -370,6 +372,18 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   </div>
 
   <div id="instellingen" hidden>
+    <section class="paneel start" id="start-paneel" hidden>
+      <h2>Welkom<span id="start-naam"></span>!</h2>
+      <p>Zet eerst even alles goed, dan passen je lessen meteen bij jou. Loop deze pagina van boven naar beneden door:</p>
+      <ol class="stappen-lijst">
+        <li><b>Wat wil je leren?</b> Je eigen vak staat al aan; zet er gerust een ander vak bij.</li>
+        <li><b>Werkdagen:</b> werk je parttime, zet dan je vrije dagen uit.</li>
+        <li><b>Elke dag vanzelf je les:</b> installeer de pop-up (Windows) of maak een snelkoppeling.</li>
+        <li><b>Scorebord:</b> kies of je erop wilt staan.</li>
+      </ol>
+      <div class="les-knoppen" style="justify-content:flex-start"><button type="button" class="knop zwart" id="start-klaar">Klaar, naar mijn eerste les →</button></div>
+      <p class="sub" id="start-status" role="status"></p>
+    </section>
     <section class="paneel" id="vakken-paneel" style="margin-top:0" hidden>
       <div class="paneel-kop"><div><h2>Wat wil je leren?</h2><p class="sub">Je eigen vak staat standaard aan. <b>Meeleren</b>: af en toe een les over dat vak. <b>Focus</b>: daar gaan de meeste lessen over. Voor een extra vak hoef je geen skilllijst in te vullen.</p></div></div>
       <div id="vakken"></div>

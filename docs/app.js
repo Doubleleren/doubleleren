@@ -691,10 +691,25 @@ $('prio').addEventListener('click', (e) => { const b = e.target.closest('button[
 // ---------------------------------------------------------------- instellingen (tandwiel rechtsboven)
 // Wat je leert, je prioriteiten, het scorebord en hoe je elke dag je les krijgt. Losse tab, zodat de andere tabs rustig blijven.
 function toonInstellingen() {
+  const ik = S.leden[S.mij];
+  $('start-paneel').hidden = !moetInrichten();
+  if (!$('start-paneel').hidden) $('start-naam').textContent = ik?.naam ? ` ${ik.naam}` : '';
   toonVakken(); toonPrioriteit(); toonWerkdagen();
   $('sb-instelling').hidden = !magLessen(); $('sb-zichtbaar').checked = SB.zichtbaar;
   $('snelkoppeling').hidden = !magLessen();
 }
+
+// Welkom: na het doorlopen van de instellingen één klik naar je eerste les (bewaard in je eigen profiel)
+$('start-klaar').addEventListener('click', async () => {
+  const ik = S.leden[S.mij], b = $('start-klaar'); b.disabled = true; $('start-status').textContent = 'Opslaan…';
+  try {
+    await werkBij(S.mij, 'profiel', ik.sl, (h) => ({ ...(h && typeof h === 'object' ? h : { v: 1 }), ingericht: true }));
+    ik.profiel = { ...(ik.profiel || {}), ingericht: true };
+    $('start-paneel').hidden = true; $('start-status').textContent = '';
+    tab('vandaag'); window.scrollTo({ top: 0 });
+  } catch (e) { $('start-status').textContent = 'Opslaan mislukt: ' + e.message; }
+  finally { b.disabled = false; }
+});
 
 // ---------------------------------------------------------------- werkdagen (parttime)
 // Standaard ma–vr; per week aan te passen voor deze en de komende twee weken. Vrij = je reeks breekt niet (een les mag wel).
@@ -1536,7 +1551,9 @@ function magTab(t) {
   return t === 'mij' || t === 'kennisbank' || t === 'instellingen' || (t === 'skilllijst' && !!ik?.sl) || (t === 'vandaag' && magLessen())
     || (t === 'scorebord' && magLessen() && SB.zichtbaar) || (t === 'team' && teamLeden().length > 0) || (t === 'maken' && magLesMaken());
 }
-const standaardTab = () => (magLessen() && L.status?.les ? 'vandaag' : !S.leden[S.mij]?.matrix && teamLeden().length ? 'team' : 'mij');
+// Eerste keer (nog geen les gedaan en instellingen niet afgerond): eerst naar Instellingen
+const moetInrichten = () => { const ik = S.leden[S.mij]; return !!ik?.sl && magLessen() && !ik.logs.length && ik.profiel?.ingericht !== true; };
+const standaardTab = () => (moetInrichten() ? 'instellingen' : magLessen() && L.status?.les ? 'vandaag' : !S.leden[S.mij]?.matrix && teamLeden().length ? 'team' : 'mij');
 function tab(naam) {
   NAV.huidig = naam; NAV.geduwd = false; toonView(naam);
   if (location.hash !== '#' + naam) history.replaceState(null, '', location.pathname + location.search + '#' + naam);
@@ -1548,7 +1565,7 @@ function route() {
   let h = ''; try { h = decodeURIComponent(location.hash.slice(1)); } catch { /* kapot adres: standaardtab */ }
   if (h.startsWith('les/') && LES_ID.test(h.slice(4))) { if (NAV.huidig !== 'lesdetail' && NAV.huidig !== 'feedback') NAV.vorige = NAV.huidig; toonLesDetail(h.slice(4)); }
   else if (h === 'feedback') openFeedback();
-  else tab(magTab(h) ? h : standaardTab());
+  else tab(magTab(h) && !(moetInrichten() && ['vandaag', 'mij', ''].includes(h)) ? h : standaardTab());
 }
 async function naInloggen() {
   $('login').hidden = true; $('voet').textContent = 'Gegevens worden ontsleuteld en gecontroleerd…';
