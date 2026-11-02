@@ -384,6 +384,7 @@ const gem = (xs) => { const v = xs.filter((x) => typeof x === 'number'); return 
 // ---------------------------------------------------------------- weergave: mij
 function toonMij() {
   const lid = S.leden[S.mij], logs = lid.logs;
+  toonMaandafsluiter(lid);
   const tel = { goed: 0, deels: 0, fout: 0 }; logs.forEach((l) => { if (l.resultaat) tel[l.resultaat]++; });
   const mijnItems = itemsVan(lid), beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = mijnItems.length;
   const items = mijnItems.map((it) => lid.matrix?.get(it.id)).filter(Boolean);
@@ -435,6 +436,82 @@ function toonMij() {
   $('recent').innerHTML = logs.length ? logs.slice(0, 3).map((l) => lesHtml(l, antw.get(l.id + l.datum))).join('') : '<p class="leeg">Nog geen lessen afgerond. Je eerste les verschijnt vanzelf op je laptop.</p>';
 }
 
+// ---------------------------------------------------------------- maandafsluiter
+// De eerste 10 dagen van een maand, bovenaan Mijn voortgang: terugblik op vorige maand (cijfers, wat goed en minder ging) en
+// scoresuggesties. Een suggestie komt alleen bij een duidelijk patroon per onderwerp: vorige maand minstens 10 lessen met 80%
+// goed (of fout), of in twee maanden samen minstens 15 lessen met 80% goed (of fout). Het blijft een advies: overnemen zet
+// de scores van dat onderwerp één stap omhoog of omlaag. "Gezien" en "Laat staan" gelden op deze computer tot volgende maand.
+const PATROON = { min1: 10, min2: 15, aandeel: 0.8, dagen: 10 };
+const maandTerug = (d, n) => dagKey(new Date(d.getFullYear(), d.getMonth() - n, 1, 12)).slice(0, 7);
+const MAAND_SLEUTEL = () => `dl-maand-${S.mij}`;
+function maandStaat() { try { return JSON.parse(localStorage.getItem(MAAND_SLEUTEL()) || '{}') || {}; } catch { return {}; } }
+function bewaarMaandStaat(s) { try { localStorage.setItem(MAAND_SLEUTEL(), JSON.stringify(s)); } catch { /* geen opslag: dan komt hij terug */ } }
+function maandafsluiter(lid) {
+  const d = nu(); if (d.getDate() > PATROON.dagen) return null;
+  const nuM = dagKey(d).slice(0, 7), vorige = maandTerug(d, 1), daarvoor = maandTerug(d, 2);
+  const staat = maandStaat(); if (staat.maand === vorige && staat.gezien) return null;
+  const weg = staat.maand === vorige ? staat.weg || [] : [];
+  const lv = lid.logs.filter((l) => l.datum.startsWith(vorige)); if (!lv.length) return null;
+  const mijn = new Map(itemsVan(lid).map((i) => [i.id, i])), ond = new Map();
+  // Per onderwerp: elke les telt één keer, ook als hij meerdere vaardigheden van dat onderwerp raakt
+  for (const l of lid.logs.filter((x) => x.datum.startsWith(vorige) || x.datum.startsWith(daarvoor))) {
+    const vm = l.datum.startsWith(vorige);
+    for (const k of new Set(l.matrix.filter((id) => mijn.has(id)).map((id) => `${mijn.get(id).vak}|${mijn.get(id).onderwerp}`))) {
+      const t = ond.get(k) || { naam: k.split('|')[1], nV: 0, gV: 0, fV: 0, n: 0, g: 0, f: 0 };
+      t.n++; if (l.resultaat === 'goed') t.g++; if (l.resultaat === 'fout') t.f++;
+      if (vm) { t.nV++; if (l.resultaat === 'goed') t.gV++; if (l.resultaat === 'fout') t.fV++; }
+      ond.set(k, t);
+    }
+  }
+  const patroon = (t, x, xV) => (t.nV >= PATROON.min1 && xV / t.nV >= PATROON.aandeel) || (t.n >= PATROON.min2 && x / t.n >= PATROON.aandeel);
+  const suggesties = [];
+  for (const [k, t] of ond) {
+    if (weg.includes(k)) continue;
+    const ids = [...mijn.values()].filter((i) => `${i.vak}|${i.onderwerp}` === k).map((i) => i.id), sc = ids.map((id) => laatste(scoresVan(lid, id))).filter(Boolean);
+    if (!sc.length || sc.every((x) => x.m === nuM)) continue;   // geen scores, of deze maand al bijgewerkt
+    const g = gem(sc.map((x) => x.s));
+    if (patroon(t, t.g, t.gV) && g < 4.5) suggesties.push({ k, naam: t.naam, ids, richting: 1, g, uitleg: t.nV >= PATROON.min1 && t.gV / t.nV >= PATROON.aandeel ? `${t.gV} van ${t.nV} goed vorige maand` : `${t.g} van ${t.n} goed in twee maanden` });
+    else if (patroon(t, t.f, t.fV) && g > 1.5) suggesties.push({ k, naam: t.naam, ids, richting: -1, g, uitleg: t.nV >= PATROON.min1 && t.fV / t.nV >= PATROON.aandeel ? `${t.fV} van ${t.nV} fout vorige maand` : `${t.f} van ${t.n} fout in twee maanden` });
+  }
+  const vorigeOnd = [...ond.values()].filter((t) => t.nV);
+  const st = maandStand(lid.logs, vorige, lid.werkdagen), goed = lv.filter((l) => l.resultaat === 'goed').length;
+  return { vorige, naam: MAANDLANG[+vorige.slice(5) - 1], lessen: lv.length, goed, pct: pct(goed, lv.filter((l) => l.resultaat).length), reeks: st.langsteReeks,
+    sterk: vorigeOnd.filter((t) => t.gV >= 2 && t.gV > t.fV).sort((x, y) => (y.gV - y.fV) - (x.gV - x.fV)).slice(0, 4),
+    minder: vorigeOnd.filter((t) => t.fV >= 2 && t.fV >= t.gV).sort((x, y) => (y.fV - y.gV) - (x.fV - x.gV)).slice(0, 4),
+    suggesties: suggesties.slice(0, 4) };
+}
+function toonMaandafsluiter(lid) {
+  const m = maandafsluiter(lid), p = $('maand-paneel');
+  p.hidden = !m; if (!m) return;
+  const lijst = (xs, soort) => xs.length ? `<ul class="maand-lijst">${xs.map((t) => `<li><span>${esc(t.naam)}</span><span class="sub num">${soort === 'goed' ? `${t.gV} goed` : `${t.fV} fout`} van ${t.nV}</span></li>`).join('')}</ul>` : '<p class="leeg" style="margin:0">Niets wat eruit sprong.</p>';
+  p.innerHTML = `<div class="maand-kop"><div><span class="sub">Maandafsluiter</span><h2>Zo ging ${esc(m.naam)}</h2></div><button type="button" class="knop" data-maand-gezien="1">Gezien</button></div>
+    <div class="maand-body">
+      <div class="maand-cijfers">
+        <div><b class="num">${m.lessen}</b><span>${m.lessen === 1 ? 'les' : 'lessen'}</span></div>
+        <div><b class="num">${m.pct}%</b><span>goed (${m.goed})</span></div>
+        <div><b class="num">${m.reeks}</b><span>langste reeks</span></div>
+      </div>
+      <div class="maand-twee"><div><h3>Ging goed</h3>${lijst(m.sterk, 'goed')}</div><div><h3>Ging minder</h3>${lijst(m.minder, 'fout')}</div></div>
+      <div><h3>Scoresuggesties</h3><p class="sub" style="margin:0 0 4px">Alleen bij een duidelijk patroon in je lessen, en het blijft een advies: jij beslist.</p>
+      ${m.suggesties.length ? m.suggesties.map((s) => `<div class="maand-sugg"><span class="maand-pijl ${s.richting > 0 ? 'op' : 'neer'}" aria-hidden="true">${s.richting > 0 ? '↑' : '↓'}</span><span><b>${esc(s.naam)}</b><br><span class="sub">${esc(s.uitleg)} · je score nu gemiddeld ${komma(s.g)}</span></span><span class="maand-knoppen"><button type="button" class="knop zwart" data-sugg="${esc(s.k)}" data-richting="${s.richting}">${s.richting > 0 ? 'Eén stap omhoog' : 'Eén stap omlaag'}</button><button type="button" class="knop" data-sugg-weg="${esc(s.k)}">Laat staan</button></span></div>`).join('')
+        : '<p class="leeg" style="margin:6px 0 0">Geen suggesties deze maand: er was geen duidelijk patroon.</p>'}
+      ${S.maandMelding ? `<p class="sub" role="status" style="margin:8px 0 0">${esc(S.maandMelding)}</p>` : ''}</div>
+    </div>`;
+}
+$('maand-paneel').addEventListener('click', async (e) => {
+  const lid = S.leden[S.mij], m = maandafsluiter(lid); if (!m) return;
+  if (e.target.closest('[data-maand-gezien]')) { bewaarMaandStaat({ maand: m.vorige, gezien: true }); toonMaandafsluiter(lid); return; }
+  const w = e.target.closest('[data-sugg-weg]');
+  if (w) { const s = maandStaat(), weg = s.maand === m.vorige ? s.weg || [] : []; bewaarMaandStaat({ maand: m.vorige, weg: [...weg, w.dataset.suggWeg] }); toonMaandafsluiter(lid); return; }
+  const b = e.target.closest('[data-sugg]'), sg = b && m.suggesties.find((x) => x.k === b.dataset.sugg); if (!sg || b.disabled) return;
+  b.disabled = true;
+  const maand = dagKey(nu()).slice(0, 7), nieuw = {};
+  for (const id of sg.ids) { const l = laatste(scoresVan(lid, id)); if (l) nieuw[id] = { [maand]: Math.max(1, Math.min(5, l.s + sg.richting)) }; }
+  S.maandMelding = `Opgeslagen: ${sg.naam} staat een stap ${sg.richting > 0 ? 'hoger' : 'lager'}. Per vaardigheid aanpassen kan via Skilllijst bijwerken.`;
+  try { await bewaarScores(nieuw, S.maandMelding); tab('mij'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  catch (err) { S.maandMelding = 'Opslaan mislukt: ' + err.message; b.disabled = false; toonMaandafsluiter(lid); }
+});
+
 // ---------------------------------------------------------------- weergave: skilllijst
 function toonSkilllijst() {
   const lid = S.leden[S.mij]; if (!lid) return;
@@ -443,7 +520,7 @@ function toonSkilllijst() {
   $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
   $('mx-ronde').textContent = r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
     : r.vrij ? `Je skilllijst is nog vers; de eerste halfjaarlijkse check is vóór ${r.volgende}.`
-    : `Halfjaarlijkse check: werk je skilllijst bij vóór ${r.tekst}${r.teLaat ? '. De deadline is voorbij: tot je hem bijwerkt, kun je geen lessen doen' : ''}.`;
+    : `Halfjaarlijkse check: werk je skilllijst bij vóór ${r.tekst}${r.teLaat ? '. De deadline is voorbij; je leidinggevende ziet dat hij nog openstaat' : ''}.`;
   $('mx-bijwerken').hidden = !totaal;
   if (!totaal) {
     $('mx-sub').textContent = '';
@@ -475,7 +552,8 @@ function toonSkilllijst() {
     }).join('')
     : perVak(klaar[0]));
 }
-// Bewust leeg: je eerdere score staat er niet bij, zodat je echt opnieuw inschat. Typ 1–5 en je springt naar de volgende.
+// Je vorige score staat al ingevuld: pas aan wat veranderd is. Waar je lesresultaten iets anders zeggen dan je score, staat een
+// markering (zelfde signalen als op Mijn voortgang). Typ 1–5 en je springt naar de volgende.
 // Twee manieren: per vaardigheid, of snel per hoofdgebied (die score geldt dan voor elke vaardigheid eronder).
 // Standaard snel voor een extra vak dat je nog niet invulde; per vaardigheid voor je eigen vak.
 function toonSkillFormulier(vak, modus) {
@@ -487,18 +565,24 @@ function toonSkillFormulier(vak, modus) {
   $('mx-vakkeuze').hidden = vk.length < 2;
   $('mx-vakkeuze').innerHTML = vk.length < 2 ? '' : vk.map((v) => `<button type="button" class="knop" data-formvak="${esc(v)}" aria-pressed="${v === S.formVak}">${esc(vakNaam(v))}${ingevuld(lid, v) ? '' : ' (nieuw)'}</button>`).join('');
   $('mx-form-titel').textContent = meerVakken() ? `Skilllijst ${vakNaam(S.formVak)} bijwerken` : 'Skilllijst bijwerken';
+  const sigPer = new Map(signalen(lid).filter((x) => x.s === 'overschat' || x.s === 'onderschat').map((x) => [x.id, x.s]));
+  const nuScore = (id) => laatste(scoresVan(lid, id))?.s || '';
   if (S.formModus === 'snel') {
-    const hg = new Map(); for (const it of itemsVan(null, S.formVak)) { const n = hgSleutel(it.id); if (!hg.has(n)) hg.set(n, { naam: it.hoofdgebied, n: 0 }); hg.get(n).n++; }
-    $('mx-velden').innerHTML = `<div class="mx-groep">${[...hg].map(([n, x]) => `<div class="mx-rij"><span class="id num">${esc(n.split(':').pop())}</span><label for="h-${esc(n)}">${esc(x.naam)} <span class="noot">${x.n} vaardigheden</span></label><input class="score-veld num" id="h-${esc(n)}" data-hg="${esc(n)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${x.naam}`)}"></div>`).join('')}</div>`;
+    const hg = new Map(); for (const it of itemsVan(null, S.formVak)) { const n = hgSleutel(it.id); if (!hg.has(n)) hg.set(n, { naam: it.hoofdgebied, n: 0, sc: [] }); hg.get(n).n++; const s = nuScore(it.id); if (s) hg.get(n).sc.push(s); }
+    $('mx-velden').innerHTML = `<div class="mx-groep">${[...hg].map(([n, x]) => `<div class="mx-rij"><span class="id num">${esc(n.split(':').pop())}</span><label for="h-${esc(n)}">${esc(x.naam)} <span class="noot">${x.n} vaardigheden</span></label><input class="score-veld num" id="h-${esc(n)}" data-hg="${esc(n)}" value="${x.sc.length ? Math.round(gem(x.sc)) : ''}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${x.naam}`)}"></div>`).join('')}</div>`;
   } else $('mx-velden').innerHTML = [...groepeer(lid, [S.formVak])].map(([hg, onderwerpen]) => `<div class="mx-groep"><h3>${esc(hg)}</h3>${[...onderwerpen].map(([o, its]) => {
     let context = '';
     const rijen = its.map((i) => {
       const kop = i.context && i.context !== context ? `<div class="mx-context">${esc(i.context)}</div>` : ''; context = i.context;
-      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.nr || i.id)}</span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
+      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.nr || i.id)}</span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" value="${nuScore(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
     }).join('');
     return `<div class="mx-onderwerp"><h4>${esc(o)}</h4>${rijen}</div>`;
   }).join('')}</div>`).join('');
   $('mx-fout').textContent = ''; $('mx-klaar').textContent = ''; $('mx-xlsx-info').textContent = '';
+  const nSig = itemsVan(null, S.formVak).filter((i) => sigPer.has(i.id)).length;
+  $('mx-check-info').textContent = ingevuld(lid, S.formVak)
+    ? `Je vorige scores staan al ingevuld; pas aan wat veranderd is.${S.formModus === 'detail' && nSig ? ` Bij ${nSig} ${nSig === 1 ? 'vaardigheid zeggen' : 'vaardigheden zeggen'} je lesresultaten iets anders (gemarkeerd): kijk daar even goed naar.` : ''}`
+    : '';
   telSkillVelden();
   $('mx-form-paneel').hidden = false;
   $('mx-form-paneel').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -542,7 +626,6 @@ async function bewaarScores(nieuw, melding) {
   $('mx-form-paneel').hidden = true;
   toonMij(); toonSkilllijst(); toonRonde();
   $('mx-klaar').textContent = melding;
-  if (L.status?.geblokkeerd) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 async function slaSkilllijstOp() {
@@ -700,7 +783,10 @@ const MAANDLANG = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli
 function ronde(lid, d = nu()) {
   const j = d.getFullYear(), h2 = d.getMonth() >= 6, start = `${j}-${h2 ? '07' : '01'}`, eind = `${j}-${h2 ? '12' : '06'}`;
   const maanden = [...new Set([...(lid?.matrix?.values() || [])].flatMap((s) => Object.keys(s)))].sort();
-  const voldaan = maanden.some((m) => m >= start && m <= eind);
+  // Gedaan = minstens 80% van je ingevulde vaardigheden kreeg in dit halfjaar een score (één overgenomen suggestie telt niet)
+  const scores = [...(lid?.matrix?.values() || [])].filter((s) => Object.keys(s).length);
+  const recent = scores.filter((s) => Object.keys(s).some((m) => m >= start && m <= eind)).length;
+  const voldaan = scores.length > 0 && recent >= 0.8 * scores.length;
   const sinds = /^\d{4}-\d{2}/.test(String(lid?.sinds)) ? String(lid.sinds).slice(0, 7) : null, grens = dagKey(new Date(j, (h2 ? 6 : 0) - 2, 1)).slice(0, 7);
   const vrij = !voldaan && ((!!maanden[0] && maanden[0] >= grens) || (!!sinds && sinds >= grens));
   const deadline = new Date(j, h2 ? 6 : 0, 31, 23, 59, 59);
@@ -712,7 +798,7 @@ function toonRonde() {
   const r = ik && magLessen() ? ronde(ik) : null;
   if (!r?.nodig) { b.hidden = true; return; }
   b.className = 'banner' + (r.teLaat ? ' laat' : '');
-  b.innerHTML = `<span>${r.teLaat ? `<b>De deadline van ${esc(r.tekst)} is voorbij.</b> Werk eerst je skilllijst bij; daarna kun je weer lessen doen.` : `<b>Halfjaarlijkse check:</b> hoe sta je er nu voor? Werk je skilllijst bij vóór ${esc(r.tekst)}.`}</span>`
+  b.innerHTML = `<span>${r.teLaat ? `<b>Je halfjaarlijkse check staat nog open</b> (deadline ${esc(r.tekst)}). Je vorige scores staan al ingevuld: pas alleen aan wat veranderd is.` : `<b>Halfjaarlijkse check:</b> hoe sta je er nu voor? Je vorige scores staan al ingevuld: pas aan wat veranderd is, vóór ${esc(r.tekst)}.`}</span>`
     + '<button type="button" class="knop zwart" data-naar="skilllijst" data-formulier="1">Skilllijst bijwerken</button>';
   b.hidden = false;
 }
@@ -1174,7 +1260,6 @@ async function kiesLes() {
   if (vandaagGedaan >= 2) return { klaar: true, aantal: vandaagGedaan };
   if (vandaagGedaan === 1 && !middag) return { klaar: true, later: true, aantal: 1 };
   if (!isWerkdag(n)) return { weekend: true };   // in het weekend geen lessen (de reeks loopt gewoon door)
-  if (ronde(ik).teLaat) return { geblokkeerd: true };
   const gedaan = new Set(ik.logs.map((l) => l.id));
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
   // Je wachtrij (klaargezet door de generator) altijd; uit de gedeelde kennisbank alleen lessen van vakken die je leert
@@ -1192,13 +1277,6 @@ function toonLesStatus() {
   const ik = S.leden[S.mij], rk = reeks(ik.logs, ik.werkdagen);
   const reeksTekst = `Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'} · ${ik.logs.length} ${ik.logs.length === 1 ? 'les' : 'lessen'} afgerond`;
   if (L.status?.les) return startLes(L.status.les);
-  if (L.status?.geblokkeerd) {
-    const r = ronde(ik);
-    $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div><h2>Eerst je skilllijst bijwerken</h2>`;
-    $('les-inhoud').innerHTML = `<p>De halfjaarlijkse check had vóór ${esc(r.tekst)} gedaan moeten zijn. Geef in een paar minuten per vaardigheid aan hoe je er nu voor staat; daarna staat je les meteen klaar.</p>`;
-    $('les-knoppen').innerHTML = knop('naar-skilllijst', 'Skilllijst bijwerken', 'zwart');
-    $('snel-hint').hidden = true; return;
-  }
   const st = L.status || {};
   const morgenVrij = !isWerkdag(new Date(nu().getTime() + 864e5)), morgen = morgenVrij ? 'Maandag' : 'Morgen';
   const kop = st.weekend ? 'Weekend: geen les' : st.volgende ? 'Les klaar: je tweede les staat klaar' : st.later ? 'Je ochtendles is klaar' : st.klaar ? 'Je lessen van vandaag zijn klaar' : 'Er staat nu geen nieuwe les klaar';
@@ -1452,7 +1530,7 @@ function magTab(t) {
   return t === 'mij' || t === 'kennisbank' || t === 'instellingen' || (t === 'skilllijst' && !!ik?.sl) || (t === 'vandaag' && magLessen())
     || (t === 'scorebord' && magLessen() && SB.zichtbaar) || (t === 'team' && teamLeden().length > 0) || (t === 'maken' && magLesMaken());
 }
-const standaardTab = () => (magLessen() && (L.status?.les || L.status?.geblokkeerd) ? 'vandaag' : !S.leden[S.mij]?.matrix && teamLeden().length ? 'team' : 'mij');
+const standaardTab = () => (magLessen() && L.status?.les ? 'vandaag' : !S.leden[S.mij]?.matrix && teamLeden().length ? 'team' : 'mij');
 function tab(naam) {
   NAV.huidig = naam; NAV.geduwd = false; toonView(naam);
   if (location.hash !== '#' + naam) history.replaceState(null, '', location.pathname + location.search + '#' + naam);

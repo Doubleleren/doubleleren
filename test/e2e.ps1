@@ -215,9 +215,9 @@ New-DlFeedback $dO $ids.Foxtrot $cg.prive @{ beheer = $V } 'goed' 'Vals namens F
 $fbUit3 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
 Controleer ($fbUit3 -match '1 overgeslagen' -and -not ($fbUit3 -match 'Vals namens')) 'Feedback met een valse handtekening wordt overgeslagen en gemeld'
 
-# Halfjaarlijkse check: na de deadline toont de pop-up geen les maar de weg naar de skilllijst, en telt niets mee
-& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde" -Opslaan -Datum '2027-02-03' -Thuis "$T\Echo"
-Controleer ((Test-Path "$Werk\snap-ronde\0-skilllijst.png") -and -not (Test-Path "$Werk\snap-ronde\2-opdracht.png") -and -not (Test-Path "$D\data\$($ids.Echo)\log-$maand.enc")) 'Na 31 januari zonder bijgewerkte skilllijst: geen les, niets opgeslagen'
+# Halfjaarlijkse check: blokkeert de pop-up niet meer (de website herinnert eraan); er komt gewoon een les
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde" -Thuis "$T\Echo"
+Controleer ((Test-Path "$Werk\snap-ronde\2-opdracht.png") -and -not (Test-Path "$Werk\snap-ronde\0-skilllijst.png")) 'Halfjaarlijkse check blokkeert de pop-up niet: gewoon een les'
 & powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde2" -Datum '2027-01-15' -Thuis "$T\Echo"
 Controleer ((Test-Path "$Werk\snap-ronde2\2-opdracht.png") -and -not (Test-Path "$Werk\snap-ronde2\0-skilllijst.png")) 'Vóór de deadline: gewoon de les (de website toont een melding)'
 $rD = Get-DlRonde ([pscustomobject]@{ scores = [pscustomobject]@{ '1.1.1' = [pscustomobject]@{ '2027-01' = 3 } } }) '2026-10-19' ([datetime]'2027-02-03')

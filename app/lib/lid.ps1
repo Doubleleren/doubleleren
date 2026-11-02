@@ -225,7 +225,10 @@ function Get-DlRonde($Matrix, [string]$Sinds, [datetime]$D = (Get-Date)) {
     $maanden = @()
     if ($Matrix -and $Matrix.scores) { foreach ($p in $Matrix.scores.PSObject.Properties) { if ($p.Value) { $maanden += @($p.Value.PSObject.Properties.Name) } } }
     $maanden = @($maanden | Where-Object { $_ -match '^\d{4}-(0[1-9]|1[0-2])$' } | Sort-Object -Unique)
-    $voldaan = [bool]@($maanden | Where-Object { $_ -ge $start -and $_ -le $eind }).Count
+    # Gedaan = minstens 80% van de ingevulde vaardigheden kreeg in dit halfjaar een score (zelfde regel als ronde() in docs/app.js)
+    $totaal = 0; $recent = 0
+    if ($Matrix -and $Matrix.scores) { foreach ($p in $Matrix.scores.PSObject.Properties) { $ms = @($(if ($p.Value) { $p.Value.PSObject.Properties.Name })); if ($ms.Count) { $totaal++; if (@($ms | Where-Object { $_ -ge $start -and $_ -le $eind }).Count) { $recent++ } } } }
+    $voldaan = $totaal -gt 0 -and $recent -ge 0.8 * $totaal
     $grens = (New-Object DateTime($D.Year, $mnd, 1)).AddMonths(-2).ToString('yyyy-MM')
     $sindsM = if ($Sinds -match '^\d{4}-\d{2}') { $Sinds.Substring(0, 7) } else { $null }
     $vrij = [bool]((-not $voldaan) -and (($maanden.Count -and $maanden[0] -ge $grens) -or ($sindsM -and $sindsM -ge $grens)))
