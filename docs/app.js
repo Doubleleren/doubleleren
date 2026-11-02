@@ -288,7 +288,7 @@ async function laadLid(id) {
   if (!kopie) return null;
   const sl = await K.sleutelsUitDk(await K.pakUit(S.prive, K.b64u.dec(kopie)));
   const profiel = await leesEnc(id, 'profiel', sl);
-  const lid = { id, naam: String(S.org.leden[id]?.naam || profiel?.naam || id), sinds: typeof profiel?.sinds === 'string' ? profiel.sinds : null, matrix: null, logs: [] };
+  const lid = { id, naam: String(S.org.leden[id]?.naam || profiel?.naam || id), sinds: typeof profiel?.sinds === 'string' ? profiel.sinds : null, werkdagen: schoonWerkdagen(profiel?.werkdagen), matrix: null, logs: [] };
   const m = await leesEnc(id, 'matrix', sl); if (m) { const mx = schoonMatrix(m); lid.matrix = mx.size ? mx : null; lid.prioriteit = schoonPrioriteit(m.prioriteit); lid.vakken = schoonVakken(m.vakken); }
   for (const mnd of await Promise.all(logMaanden(id).map((x) => leesEnc(id, `log-${x}`, sl)))) for (const r of mnd?.regels || []) { const s = schoonLog(r); if (s) lid.logs.push(s); }
   lid.logs.sort((a, b) => (a.datum < b.datum ? 1 : -1));
@@ -302,12 +302,41 @@ const scoresVan = (lid, id) => lid.matrix?.get(id) || {};
 function laatste(scores) { const m = Object.keys(scores).sort(); return m.length ? { s: scores[m[m.length - 1]], m: m[m.length - 1] } : null; }
 function eerste(scores) { const m = Object.keys(scores).sort(); return m.length ? scores[m[0]] : null; }
 function maandenVan(lid) { const s = new Set(); for (const v of lid.matrix?.values() || []) Object.keys(v).forEach((m) => s.add(m)); return [...s].sort(); }
-function reeks(logs) {
+// Eigen werkdagen (profiel.werkdagen): standaard ma–vr, per ISO-week aan te passen ({ standaard: [1..5], weken: { '2026-W45': [1, 3] } }).
+// Een werkdag zonder les breekt de reeks; een vrije doordeweekse dag niet (een les telt dan wel mee); het weekend telt nooit.
+// Zelfde regels als app/lib/lid.ps1.
+const STD_WERK = [1, 2, 3, 4, 5];
+function weekSleutel(d) {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())), dag = t.getUTCDay() || 7;
+  t.setUTCDate(t.getUTCDate() + 4 - dag);
+  return `${t.getUTCFullYear()}-W${String(Math.ceil(((t - Date.UTC(t.getUTCFullYear(), 0, 1)) / 864e5 + 1) / 7)).padStart(2, '0')}`;
+}
+const schoonDagen = (x) => (Array.isArray(x) ? [...new Set(x.map(Number).filter((n) => STD_WERK.includes(n)))].sort() : null);
+function schoonWerkdagen(w) {
+  if (!w || typeof w !== 'object') return null;
+  const weken = {}; for (const [k, v] of Object.entries(w.weken && typeof w.weken === 'object' ? w.weken : {})) { const d = schoonDagen(v); if (/^\d{4}-W\d{2}$/.test(k) && d) weken[k] = d; }
+  return { standaard: schoonDagen(w.standaard) || STD_WERK, weken };
+}
+function isMijnWerkdag(wd, d) {
+  const w = d.getDay(); if (w === 0 || w === 6) return false;
+  return (wd?.weken?.[weekSleutel(d)] || wd?.standaard || STD_WERK).includes(w);
+}
+function reeks(logs, wd) {
   const dagen = new Set(logs.map((l) => l.datum.slice(0, 10))); const d = nu(); let n = 0;
   if (!dagen.has(dagKey(d))) d.setDate(d.getDate() - 1);
-  // Weekenden tellen niet mee en onderbreken niet (in het weekend zijn er geen lessen)
-  for (let i = 0; i < 3650; i++) { const w = d.getDay(), werk = w !== 0 && w !== 6; if (werk && dagen.has(dagKey(d))) n++; else if (werk) break; d.setDate(d.getDate() - 1); }
+  for (let i = 0; i < 3650; i++) {
+    const w = d.getDay();
+    if (w === 0 || w === 6) { /* weekend */ } else if (dagen.has(dagKey(d))) n++; else if (isMijnWerkdag(wd, d)) break;
+    d.setDate(d.getDate() - 1);
+  }
   return n;
+}
+// Tot en met welke dag de huidige reeks blijft staan zonder les: de eerstvolgende eigen werkdag na de laatste lesdag
+function geldigTot(laatsteDag, wd) {
+  if (!laatsteDag) return null;
+  const d = new Date(laatsteDag + 'T12:00:00');
+  for (let i = 1; i <= 70; i++) { d.setDate(d.getDate() + 1); if (isMijnWerkdag(wd, d)) return dagKey(d); }
+  return dagKey(d);
 }
 // Bewijs per vaardigheid: goed +1, deels 0, fout -1; gevorderd x1,5, expert x2; recenter weegt zwaarder (halfwaarde 60 dagen)
 function bewijs(lid) {
@@ -354,7 +383,7 @@ function toonMij() {
   const mijnItems = itemsVan(lid), beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = mijnItems.length;
   const items = mijnItems.map((it) => lid.matrix?.get(it.id)).filter(Boolean);
   const opNiveau = items.filter((s) => (laatste(s)?.s || 0) >= 3).length, start = items.filter((s) => (eerste(s) || 0) >= 3).length;
-  const delta = pct(opNiveau, totaal) - pct(start, totaal), rk = reeks(logs);
+  const delta = pct(opNiveau, totaal) - pct(start, totaal), rk = reeks(logs, lid.werkdagen);
   $('kpis').innerHTML =
     `<div class="kpi accent"><span class="label">Lessen afgerond</span><span class="waarde num">${logs.length}</span><span class="toel">${logs.filter((l) => l.datum.startsWith(dagKey(nu()).slice(0, 7))).length} deze maand</span></div>` +
     `<div class="kpi"><span class="label">Reeks</span><span class="waarde num">${rk}<small> ${rk === 1 ? 'dag' : 'dagen'}</small></span><span class="toel">Weekenden tellen niet als onderbreking</span></div>` +
@@ -570,10 +599,51 @@ $('prio').addEventListener('click', (e) => { const b = e.target.closest('button[
 // ---------------------------------------------------------------- instellingen (tandwiel rechtsboven)
 // Wat je leert, je prioriteiten, het scorebord en hoe je elke dag je les krijgt. Losse tab, zodat de andere tabs rustig blijven.
 function toonInstellingen() {
-  toonVakken(); toonPrioriteit();
+  toonVakken(); toonPrioriteit(); toonWerkdagen();
   $('sb-instelling').hidden = !magLessen(); $('sb-zichtbaar').checked = SB.zichtbaar;
   $('snelkoppeling').hidden = !magLessen();
 }
+
+// ---------------------------------------------------------------- werkdagen (parttime)
+// Standaard ma–vr; per week aan te passen voor deze en de komende twee weken. Vrij = je reeks breekt niet (een les mag wel).
+const DAGNAAM = { 1: 'Ma', 2: 'Di', 3: 'Wo', 4: 'Do', 5: 'Vr' };
+function maandagVan(d) { const m = new Date(d); m.setHours(12, 0, 0, 0); m.setDate(m.getDate() - ((m.getDay() + 6) % 7)); return m; }
+function toonWerkdagen() {
+  const ik = S.leden[S.mij]; $('werkdagen-paneel').hidden = !ik?.sl || !magLessen();
+  if ($('werkdagen-paneel').hidden) return;
+  const wd = ik.werkdagen || { standaard: STD_WERK, weken: {} };
+  const knoppen = (sleutel, dagen) => `<span class="prio-keuze" role="group">${STD_WERK.map((n) => `<button type="button" class="knop" data-wd="${esc(sleutel)}" data-dag="${n}" aria-pressed="${dagen.includes(n)}">${DAGNAAM[n]}</button>`).join('')}</span>`;
+  const rijen = [`<div class="rij"><span><b>Standaard</b></span>${knoppen('standaard', wd.standaard)}</div>`];
+  for (let i = 0; i < 3; i++) {
+    const ma = maandagVan(nu()); ma.setDate(ma.getDate() + 7 * i); const vr = new Date(ma); vr.setDate(vr.getDate() + 4);
+    const k = weekSleutel(ma), eigen = wd.weken[k];
+    rijen.push(`<div class="rij"><span>${['Deze week', 'Volgende week', 'Over twee weken'][i]} <span class="sub">${esc(fmtDatum(dagKey(ma)))} – ${esc(fmtDatum(dagKey(vr)))}${eigen ? ` · <button type="button" class="leslink" data-wd-terug="${esc(k)}">terug naar standaard</button>` : ' · standaard'}</span></span>${knoppen(k, eigen || wd.standaard)}</div>`);
+  }
+  $('werkdagen').innerHTML = rijen.join('');
+}
+async function zetWerkdag(sleutel, dag, terug) {
+  const ik = S.leden[S.mij], wd = ik.werkdagen ? JSON.parse(JSON.stringify(ik.werkdagen)) : { standaard: [...STD_WERK], weken: {} };
+  if (terug) delete wd.weken[sleutel];
+  else {
+    const huidig = sleutel === 'standaard' ? wd.standaard : wd.weken[sleutel] || wd.standaard;
+    const nieuw = huidig.includes(dag) ? huidig.filter((n) => n !== dag) : [...huidig, dag].sort();
+    if (sleutel === 'standaard') wd.standaard = nieuw; else wd.weken[sleutel] = nieuw;
+  }
+  const grens = weekSleutel(new Date(nu().getTime() - 21 * 864e5));   // oude weken opruimen
+  for (const k of Object.keys(wd.weken)) if (k < grens) delete wd.weken[k];
+  $('werkdagen').querySelectorAll('button').forEach((b) => { b.disabled = true; }); $('werkdagen-status').textContent = 'Opslaan…';
+  try {
+    await werkBij(S.mij, 'profiel', ik.sl, (h) => ({ ...(h && typeof h === 'object' ? h : { v: 1 }), werkdagen: wd }));
+    ik.werkdagen = schoonWerkdagen(wd);
+    $('werkdagen-status').textContent = 'Opgeslagen. Op je vrije dagen breekt je reeks niet; een les doen mag wel en telt mee.';
+    werkScorebordBij().catch(() => {});
+  } catch (e) { $('werkdagen-status').textContent = 'Opslaan mislukt: ' + e.message; }
+  toonWerkdagen(); toonMij();
+}
+$('werkdagen').addEventListener('click', (e) => {
+  const t = e.target.closest('[data-wd-terug]'); if (t) { zetWerkdag(t.dataset.wdTerug, 0, true); return; }
+  const b = e.target.closest('button[data-wd]'); if (b && !b.disabled) zetWerkdag(b.dataset.wd, Number(b.dataset.dag), false);
+});
 
 // ---------------------------------------------------------------- welke vakken je leert
 // Alle vakken uit instellingen.json die je kunt leren (geen groepen zoals Base); een vak zonder skilllijst staat erbij als
@@ -686,7 +756,7 @@ function toonTeam() {
 
   const maand = dagKey(nu()).slice(0, 7);
   const skillChip = (l) => { const r = ronde(l); return r.voldaan ? '<span class="chip goed"><i></i>Bijgewerkt</span>' : r.vrij ? '<span class="sub">Nieuw</span>' : `<span class="chip ${r.teLaat ? 'fout' : 'deels'}" data-tip="${esc(`Deadline ${r.tekst}`)}"><i></i>${r.teLaat ? 'Te laat' : 'Nog doen'}</span>`; };
-  $('activiteit').innerHTML = `<thead><tr><th>Naam</th><th>Plek</th><th class="r">Deze maand</th><th class="r">Reeks</th><th class="r">Goed</th><th>Laatste les</th><th>Skilllijst</th></tr></thead><tbody>${leden.map((l) => { const t = l.logs.filter((x) => x.resultaat); return `<tr><td><button type="button" class="leslink" data-lid="${esc(l.id)}">${naamVan(l)}</button></td><td>${esc(plekVan(l.id))}</td><td class="r num">${l.logs.filter((x) => x.datum.startsWith(maand)).length}</td><td class="r num">${reeks(l.logs)}</td><td class="r num">${t.length ? pct(t.filter((x) => x.resultaat === 'goed').length, t.length) + '%' : '–'}</td><td class="num">${l.logs[0] ? esc(fmtDatum(l.logs[0].datum)) : '–'}</td><td>${skillChip(l)}</td></tr>`; }).join('')}</tbody>`;
+  $('activiteit').innerHTML = `<thead><tr><th>Naam</th><th>Plek</th><th class="r">Deze maand</th><th class="r">Reeks</th><th class="r">Goed</th><th>Laatste les</th><th>Skilllijst</th></tr></thead><tbody>${leden.map((l) => { const t = l.logs.filter((x) => x.resultaat); return `<tr><td><button type="button" class="leslink" data-lid="${esc(l.id)}">${naamVan(l)}</button></td><td>${esc(plekVan(l.id))}</td><td class="r num">${l.logs.filter((x) => x.datum.startsWith(maand)).length}</td><td class="r num">${reeks(l.logs, l.werkdagen)}</td><td class="r num">${t.length ? pct(t.filter((x) => x.resultaat === 'goed').length, t.length) + '%' : '–'}</td><td class="num">${l.logs[0] ? esc(fmtDatum(l.logs[0].datum)) : '–'}</td><td>${skillChip(l)}</td></tr>`; }).join('')}</tbody>`;
   zoekExperts();
 }
 function zoekExperts() {
@@ -702,7 +772,7 @@ function toonProfiel(id) {
   const sig = signalen(l), p = $('profiel');
   const ond = [...groepeer(l)].flatMap(([hg, os]) => [...os].map(([o, its]) => ({ hg, o, v: gem(its.map((i) => laatste(i.scores)?.s)) }))).sort((a, b) => a.v - b.v);
   p.hidden = false;
-  p.innerHTML = `<div class="paneel-kop"><div><h2>${esc(l.naam)}</h2><p class="sub">${esc(plekVan(id))} · ${l.logs.length} lessen · reeks ${reeks(l.logs)} · scores en resultaten, geen antwoorden</p>${(() => { const hg = hoofdgebieden(), p = l.prioriteit || {}; const t = (k) => Object.keys(p).filter((n) => p[n] === k && hg.has(n)).map((n) => esc(hg.get(n))).join(', '); return t(1) || t(3) ? `<p class="sub">${t(1) ? `Wil zich richten op: <b>${t(1)}</b>` : ''}${t(1) && t(3) ? ' · ' : ''}${t(3) ? `Minder prioriteit: ${t(3)}` : ''}</p>` : ''; })()}</div><button class="knop" type="button" id="profiel-sluit" style="background:var(--cool-50)">Sluiten</button></div>
+  p.innerHTML = `<div class="paneel-kop"><div><h2>${esc(l.naam)}</h2><p class="sub">${esc(plekVan(id))} · ${l.logs.length} lessen · reeks ${reeks(l.logs, l.werkdagen)} · scores en resultaten, geen antwoorden</p>${(() => { const hg = hoofdgebieden(), p = l.prioriteit || {}; const t = (k) => Object.keys(p).filter((n) => p[n] === k && hg.has(n)).map((n) => esc(hg.get(n))).join(', '); return t(1) || t(3) ? `<p class="sub">${t(1) ? `Wil zich richten op: <b>${t(1)}</b>` : ''}${t(1) && t(3) ? ' · ' : ''}${t(3) ? `Minder prioriteit: ${t(3)}` : ''}</p>` : ''; })()}</div><button class="knop" type="button" id="profiel-sluit" style="background:var(--cool-50)">Sluiten</button></div>
   <div class="twee"><div><h3 style="font-size:15px;margin-bottom:6px">Laagste onderwerpen</h3>${ond.slice(0, 6).map((x) => `<div class="rij"><span>${esc(x.o)}<br><span class="sub">${esc(x.hg)}</span></span><b class="num">${komma(x.v)}</b></div>`).join('')}
   <h3 style="font-size:15px;margin:16px 0 6px">Sterkste onderwerpen</h3>${ond.slice(-4).reverse().map((x) => `<div class="rij"><span>${esc(x.o)}</span><b class="num">${komma(x.v)}</b></div>`).join('')}</div>
   <div><h3 style="font-size:15px;margin-bottom:6px">Signalen</h3>${sig.length ? sig.slice(0, 6).map((x) => `<div class="rij"><span>${esc(S.sjabloon.get(x.id)?.vaardigheid || x.id)}</span>${sigChip(x.s)}</div>`).join('') : '<p class="leeg">Nog geen signalen.</p>'}
@@ -777,13 +847,13 @@ const sbPad = (maand, id) => `scorebord/${maand}/${id}.json`;
 const sbPaden = () => (S.data.paden || []).filter((p) => SB_PAD.test(p));
 const telBaar = (x, max) => Number.isInteger(x) && x >= 0 && x <= max;
 const isWerkdag = (d) => d.getDay() !== 0 && d.getDay() !== 6;
-// Goed en langste reeks binnen één maand (zelfde weekendregel als reeks()); reeksAanEind = de reeks op de laatste dag
-function maandStand(logs, maand) {
+// Goed en langste reeks binnen één maand (zelfde regels als reeks()); reeksAanEind = de reeks op de laatste dag
+function maandStand(logs, maand, wd) {
   const inM = logs.filter((l) => l.datum.startsWith(maand)), dagen = new Set(inM.map((l) => l.datum.slice(0, 10)));
   const [j, m] = maand.split('-').map(Number), d = new Date(j, m - 1, 1, 12), tot = dagKey(nu());
   let lang = 0, cur = 0;
   while (d.getMonth() === m - 1 && dagKey(d) <= tot) {
-    if (!isWerkdag(d)) { /* weekend: telt niet mee, onderbreekt niet */ } else if (dagen.has(dagKey(d))) { cur++; lang = Math.max(lang, cur); } else if (dagKey(d) !== tot) cur = 0;
+    if (!isWerkdag(d)) { /* weekend: telt niet mee, onderbreekt niet */ } else if (dagen.has(dagKey(d))) { cur++; lang = Math.max(lang, cur); } else if (dagKey(d) !== tot && isMijnWerkdag(wd, d)) cur = 0;
     d.setDate(d.getDate() + 1);
   }
   return { goed: inM.filter((l) => l.resultaat === 'goed').length, langsteReeks: lang, reeksAanEind: cur, laatsteDag: [...dagen].sort().pop() || null, lessen: inM.length };
@@ -791,6 +861,8 @@ function maandStand(logs, maand) {
 // De opgeslagen huidige reeks is 0 als er sinds de laatste lesdag een werkdag zonder les was (tot en met gisteren)
 function actueleReeks(s) {
   if (!s.laatsteDag) return 0;
+  if (s.geldigTot) return dagKey(nu()) > s.geldigTot ? 0 : s.huidigeReeks;   // eigen werkdagen van die persoon
+
   const d = new Date(s.laatsteDag + 'T12:00:00'), vandaag = dagKey(nu());
   for (d.setDate(d.getDate() + 1); dagKey(d) < vandaag; d.setDate(d.getDate() + 1)) if (isWerkdag(d)) return 0;
   return s.huidigeReeks;
@@ -807,8 +879,8 @@ async function leesScore(pad) {
         for (const pub of await sleutelsVan(env.door)) if (await K.verifieer(pub, `scorebord|${maand}|${id}`, env.door, env.inhoud, env.sig)) { s = JSON.parse(env.inhoud); break; }
       }
       if (s?.v === 1 && s.maand === maand && s.zichtbaar === false) uit = { id, maand, zichtbaar: false };
-      else if (s?.v === 1 && s.maand === maand && s.zichtbaar === true && telBaar(s.goed, 5000) && telBaar(s.langsteReeks, 31) && telBaar(s.huidigeReeks, 3650) && (s.laatsteDag === null || /^\d{4}-\d{2}-\d{2}$/.test(s.laatsteDag)))
-        uit = { id, maand, zichtbaar: true, goed: s.goed, langsteReeks: s.langsteReeks, huidigeReeks: s.huidigeReeks, laatsteDag: s.laatsteDag };
+      else if (s?.v === 1 && s.maand === maand && s.zichtbaar === true && telBaar(s.goed, 5000) && telBaar(s.langsteReeks, 31) && telBaar(s.huidigeReeks, 3650) && (s.laatsteDag === null || /^\d{4}-\d{2}-\d{2}$/.test(s.laatsteDag)) && (s.geldigTot == null || /^\d{4}-\d{2}-\d{2}$/.test(s.geldigTot)))
+        uit = { id, maand, zichtbaar: true, goed: s.goed, langsteReeks: s.langsteReeks, huidigeReeks: s.huidigeReeks, laatsteDag: s.laatsteDag, geldigTot: s.geldigTot || null };
       else S.ongeldig++;
     }
   } catch { S.ongeldig++; }
@@ -843,14 +915,14 @@ async function werkScorebordBij(alleMaanden = false) {
     ? [...new Set([...sbPaden().map((p) => SB_PAD.exec(p)).filter((m) => m[2] === S.mij).map((m) => m[1]), ...ik.logs.map((l) => l.datum.slice(0, 7)), nuM])].filter((m) => m <= nuM).sort()
     : [dagKey(v).slice(0, 7), nuM];
   for (const maand of maanden) {
-    const pad = sbPad(maand, S.mij), st = maandStand(ik.logs, maand), bestaat = (S.data.paden || []).includes(pad);
+    const pad = sbPad(maand, S.mij), st = maandStand(ik.logs, maand, ik.werkdagen), bestaat = (S.data.paden || []).includes(pad);
     if (maand !== nuM && !st.lessen && !bestaat) continue;
     if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(maand)) continue;
     const obj = SB.zichtbaar
-      ? { v: 1, maand, zichtbaar: true, goed: st.goed, langsteReeks: st.langsteReeks, huidigeReeks: maand === nuM ? reeks(ik.logs) : st.reeksAanEind, laatsteDag: st.laatsteDag }
+      ? { v: 1, maand, zichtbaar: true, goed: st.goed, langsteReeks: st.langsteReeks, huidigeReeks: maand === nuM ? reeks(ik.logs, ik.werkdagen) : st.reeksAanEind, laatsteDag: st.laatsteDag, geldigTot: geldigTot(st.laatsteDag, ik.werkdagen) }
       : { v: 1, maand, zichtbaar: false };
     const oud = bestaat ? await leesScore(pad) : null;
-    if (oud && ['zichtbaar', 'goed', 'langsteReeks', 'huidigeReeks', 'laatsteDag'].every((k) => oud[k] === obj[k])) continue;
+    if (oud && ['zichtbaar', 'goed', 'langsteReeks', 'huidigeReeks', 'laatsteDag', 'geldigTot'].every((k) => (oud[k] ?? null) === (obj[k] ?? null))) continue;
     await schrijfOndertekend(pad, `scorebord|${maand}|${S.mij}`, { ...obj, bijgewerkt: lokaleTijd() });
     SB.cache.set(pad, { id: S.mij, ...obj });
   }
@@ -1105,7 +1177,7 @@ async function kiesLes() {
 }
 
 function toonLesStatus() {
-  const ik = S.leden[S.mij], rk = reeks(ik.logs);
+  const ik = S.leden[S.mij], rk = reeks(ik.logs, ik.werkdagen);
   const reeksTekst = `Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'} · ${ik.logs.length} ${ik.logs.length === 1 ? 'les' : 'lessen'} afgerond`;
   if (L.status?.les) return startLes(L.status.les);
   if (L.status?.geblokkeerd) {
@@ -1165,7 +1237,7 @@ function startMiddagWekker() {
 }
 function startLes(les) {
   Object.assign(L, { les, keuze: -1, antwoord: '', resultaat: '', uitlegGetoond: false });
-  const ik = S.leden[S.mij], rk = reeks(ik.logs);
+  const ik = S.leden[S.mij], rk = reeks(ik.logs, ik.werkdagen);
   $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">${esc(les.vakgebied || '')}${les.type ? ' · ' + esc(TYPE[les.type] || les.type) : ''}</span>
     <span class="sub">Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'}</span></div><h2>${esc(les.titel)}</h2>`;
   $('snel-hint').hidden = true;

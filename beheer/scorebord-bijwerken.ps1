@@ -29,7 +29,7 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
             $r = Read-DlVersleuteld $d $id ($b -replace '\.enc$', '') $s $pub; if ($r) { $logs += @($r.obj.regels) }
         }
         $zichtbaar = -not ($profiel -and $profiel.obj.scorebord -eq $false)
-        Write-DlScorebord @{ data = $d; id = $id } $logs $zichtbaar (Get-Date) 'generator' $geheim.generatorPrive
+        Write-DlScorebord @{ data = $d; id = $id } $logs $zichtbaar (Get-Date) 'generator' $geheim.generatorPrive $(if ($profiel) { $profiel.obj.werkdagen })
         $n++
     } catch { $fout++ }
 }

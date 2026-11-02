@@ -181,16 +181,10 @@ try {
     }
     $o = $les.opdracht
 
-    # --- Reeks (weekenden tellen niet mee en onderbreken niet) en aantal deze maand ---
-    $dagen = @($logs | ForEach-Object { "$($_.datum)".Substring(0, 10) } | Sort-Object -Unique)
-    $reeks = 0; $d = (Get-Date).Date.AddDays(-1)
-    while ($true) {
-        $werk = $d.DayOfWeek -ne 'Saturday' -and $d.DayOfWeek -ne 'Sunday'
-        if ($werk -and $dagen -contains $d.ToString('yyyy-MM-dd')) { $reeks++ }
-        elseif ($werk) { break }
-        $d = $d.AddDays(-1)
-        if ($reeks -gt 3650) { break }
-    }
+    # --- Reeks (eigen werkdagen; weekend en vrije dagen onderbreken niet) en aantal deze maand ---
+    $script:werkdagen = $null
+    if ($c) { try { $pfW = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek; if ($pfW) { $script:werkdagen = $pfW.obj.werkdagen } } catch {} }
+    $reeks = Get-DlReeks $logs (Get-Date) $script:werkdagen
     $dezeMaand = @($logs | Where-Object { "$($_.datum)".StartsWith((Get-Date).ToString('yyyy-MM')) }).Count
 
     # --- UI ------------------------------------------------------------------
@@ -504,7 +498,7 @@ try {
             return
         }
         # Scorebord: alleen goed en reeks, ondertekend; lukt het niet, dan werkt de website het later bij
-        try { Write-DlScorebord $c (@($logs) + @([pscustomobject]$script:teBewaren.regel)) (Get-DlScorebordZichtbaar $c (Get-DlEigenSleutels $c)) }
+        try { Write-DlScorebord $c (@($logs) + @([pscustomobject]$script:teBewaren.regel)) (Get-DlScorebordZichtbaar $c (Get-DlEigenSleutels $c)) (Get-Date) '' $null $script:werkdagen }
         catch { Log-Fout "Scorebord bijwerken mislukt: $($_.Exception.Message)" }
     }
 

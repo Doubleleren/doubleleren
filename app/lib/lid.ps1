@@ -118,25 +118,45 @@ function New-DlSleutelbron($O, $Vertrouwd, [string]$EigenId, $EigenPrive) {
 # --- Scorebord: per maand aantal goed en reeks; zelfde rekenregels als maandStand()/reeks() in docs/app.js ---
 function Get-DlLogDagen($Logs) { @($Logs | ForEach-Object { "$($_.datum)" } | Where-Object { $_.Length -ge 10 } | ForEach-Object { $_.Substring(0, 10) } | Sort-Object -Unique) }
 function Test-DlWerkdag([datetime]$D) { $D.DayOfWeek -ne 'Saturday' -and $D.DayOfWeek -ne 'Sunday' }
-# Huidige reeks: vanaf vandaag (als er vandaag een les is) of gisteren terug; weekenden tellen niet mee en onderbreken niet
-function Get-DlReeks($Logs, [datetime]$Nu = (Get-Date)) {
+# Eigen werkdagen (profiel.werkdagen): standaard @(1..5) (1 = maandag), per ISO-week aan te passen: weken.'2026-W45' = @(1,3).
+# Een werkdag zonder les breekt de reeks; een vrije doordeweekse dag niet (een les telt dan wel mee); weekend telt nooit.
+function Get-DlWeekSleutel([datetime]$D) { $dag = [int]$D.DayOfWeek; if ($dag -eq 0) { $dag = 7 }; $do = $D.Date.AddDays(4 - $dag); '{0}-W{1:00}' -f $do.Year, [math]::Ceiling($do.DayOfYear / 7) }
+function Test-DlMijnWerkdag($Werkdagen, [datetime]$D) {
+    if (-not (Test-DlWerkdag $D)) { return $false }
+    $lijst = $null
+    if ($Werkdagen -and $Werkdagen.weken) { $p = $Werkdagen.weken.PSObject.Properties[(Get-DlWeekSleutel $D)]; if ($p) { $lijst = @($p.Value) } }
+    if ($null -eq $lijst -and $Werkdagen -and $null -ne $Werkdagen.standaard) { $lijst = @($Werkdagen.standaard) }
+    if ($null -eq $lijst) { $lijst = 1..5 }
+    @($lijst | ForEach-Object { [int]$_ }) -contains [int]$D.DayOfWeek
+}
+# Tot en met welke dag de huidige reeks blijft staan zonder les: je eerstvolgende werkdag na de laatste lesdag
+function Get-DlGeldigTot([string]$LaatsteDag, $Werkdagen) {
+    if (-not $LaatsteDag) { return $null }
+    $d = [datetime]::ParseExact($LaatsteDag, 'yyyy-MM-dd', $null)
+    for ($i = 1; $i -le 70; $i++) { $x = $d.AddDays($i); if (Test-DlMijnWerkdag $Werkdagen $x) { return $x.ToString('yyyy-MM-dd') } }
+    $d.AddDays(70).ToString('yyyy-MM-dd')
+}
+# Huidige reeks: vanaf vandaag (als er vandaag een les is) of gisteren terug; weekenden tellen niet mee en onderbreken niet,
+# een vrije doordeweekse dag (eigen werkdagen) telt mee als je een les deed en onderbreekt niet
+function Get-DlReeks($Logs, [datetime]$Nu = (Get-Date), $Werkdagen = $null) {
     $dagen = @{}; foreach ($d in (Get-DlLogDagen $Logs)) { $dagen[$d] = $true }
     $d = $Nu.Date; if (-not $dagen[$d.ToString('yyyy-MM-dd')]) { $d = $d.AddDays(-1) }
     $n = 0
     for ($i = 0; $i -lt 3650; $i++) {
-        if (Test-DlWerkdag $d) { if ($dagen[$d.ToString('yyyy-MM-dd')]) { $n++ } else { break } }
+        if (-not (Test-DlWerkdag $d)) { }
+        elseif ($dagen[$d.ToString('yyyy-MM-dd')]) { $n++ } elseif (Test-DlMijnWerkdag $Werkdagen $d) { break }
         $d = $d.AddDays(-1)
     }
     $n
 }
-function Get-DlMaandStand($Logs, [string]$Maand, [datetime]$Nu = (Get-Date)) {
+function Get-DlMaandStand($Logs, [string]$Maand, [datetime]$Nu = (Get-Date), $Werkdagen = $null) {
     $inM = @($Logs | Where-Object { "$($_.datum)".StartsWith($Maand) })
     $dagen = @{}; foreach ($d in (Get-DlLogDagen $inM)) { $dagen[$d] = $true }
     $d = [datetime]::ParseExact("$Maand-01", 'yyyy-MM-dd', $null); $tot = $Nu.ToString('yyyy-MM-dd'); $lang = 0; $cur = 0
     while ($d.ToString('yyyy-MM') -eq $Maand -and $d.ToString('yyyy-MM-dd') -le $tot) {
         $k = $d.ToString('yyyy-MM-dd')
         if (-not (Test-DlWerkdag $d)) { }     # weekend: telt niet mee, onderbreekt niet
-        elseif ($dagen[$k]) { $cur++; if ($cur -gt $lang) { $lang = $cur } } elseif ($k -ne $tot) { $cur = 0 }
+        elseif ($dagen[$k]) { $cur++; if ($cur -gt $lang) { $lang = $cur } } elseif ($k -ne $tot -and (Test-DlMijnWerkdag $Werkdagen $d)) { $cur = 0 }
         $d = $d.AddDays(1)
     }
     $laatste = @($dagen.Keys | Sort-Object) | Select-Object -Last 1
@@ -162,7 +182,7 @@ function Get-DlScorebordZichtbaar($C, [hashtable]$Sleutels) {
 # Stand bijwerken voor deze maand en (als daar lessen in zaten) de vorige. Schrijft alleen als er iets veranderde.
 # Normaal ondertekent het lid zelf; de generator (-Door generator) werkt elke ochtend ieders stand bij, zodat ook wie de
 # website niet opende of een oude pop-up heeft op het bord staat.
-function Write-DlScorebord($C, $Logs, [bool]$Zichtbaar = $true, [datetime]$Nu = (Get-Date), [string]$Door, $DoorPrive) {
+function Write-DlScorebord($C, $Logs, [bool]$Zichtbaar = $true, [datetime]$Nu = (Get-Date), [string]$Door, $DoorPrive, $Werkdagen = $null) {
     $id = $C.id; $zichtbaar = $Zichtbaar
     if (-not $Door) { $Door = $id; $DoorPrive = $C.prive }
     $nuM = $Nu.ToString('yyyy-MM')
@@ -170,15 +190,16 @@ function Write-DlScorebord($C, $Logs, [bool]$Zichtbaar = $true, [datetime]$Nu = 
         $pad = "scorebord/$maand/$id.json"
         for ($poging = 1; $poging -le 3; $poging++) {
             $oud = Read-DlOpslag $C.data $pad
-            $st = Get-DlMaandStand $Logs $maand $Nu
+            $st = Get-DlMaandStand $Logs $maand $Nu $Werkdagen
             if ($maand -ne $nuM -and -not $st.lessen -and -not $oud) { break }
             $obj = if ($zichtbaar) {
                 [ordered]@{ v = 1; maand = $maand; zichtbaar = $true; goed = [int]$st.goed; langsteReeks = [int]$st.langsteReeks
-                    huidigeReeks = [int]$(if ($maand -eq $nuM) { Get-DlReeks $Logs $Nu } else { $st.reeksAanEind }); laatsteDag = $st.laatsteDag }
+                    huidigeReeks = [int]$(if ($maand -eq $nuM) { Get-DlReeks $Logs $Nu $Werkdagen } else { $st.reeksAanEind }); laatsteDag = $st.laatsteDag
+                    geldigTot = (Get-DlGeldigTot $st.laatsteDag $Werkdagen) }
             } else { [ordered]@{ v = 1; maand = $maand; zichtbaar = $false } }
             if ($oud) {
                 $o = $null; try { $o = ($script:DlUtf8.GetString($oud.bytes).Trim() | ConvertFrom-Json).inhoud | ConvertFrom-Json } catch {}
-                if ($o -and -not @('zichtbaar', 'goed', 'langsteReeks', 'huidigeReeks', 'laatsteDag' | Where-Object { "$($o.$_)" -ne "$($obj[$_])" })) { break }
+                if ($o -and -not @('zichtbaar', 'goed', 'langsteReeks', 'huidigeReeks', 'laatsteDag', 'geldigTot' | Where-Object { "$($o.$_)" -ne "$($obj[$_])" })) { break }
             }
             $obj.bijgewerkt = $Nu.ToString('s')
             $inhoud = ConvertTo-Json -InputObject $obj -Compress
