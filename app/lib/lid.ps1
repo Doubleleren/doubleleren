@@ -118,13 +118,19 @@ function New-DlSleutelbron($O, $Vertrouwd, [string]$EigenId, $EigenPrive) {
 # --- Scorebord: per maand aantal goed en reeks; zelfde rekenregels als maandStand()/reeks() in docs/app.js ---
 function Get-DlLogDagen($Logs) { @($Logs | ForEach-Object { "$($_.datum)" } | Where-Object { $_.Length -ge 10 } | ForEach-Object { $_.Substring(0, 10) } | Sort-Object -Unique) }
 function Test-DlWerkdag([datetime]$D) { $D.DayOfWeek -ne 'Saturday' -and $D.DayOfWeek -ne 'Sunday' }
-# Eigen werkdagen (profiel.werkdagen): standaard @(1..5) (1 = maandag), per ISO-week aan te passen: weken.'2026-W45' = @(1,3).
+# Eigen werkdagen (profiel.werkdagen): standaard @(1..5) (1 = maandag), per ISO-week aan te passen: weken.'2026-W45' = @(1,3);
+# eerder = oude standaarden (@{ tot = '2026-W45'; dagen = ... }, geldt voor weken t/m tot), zodat een nieuwe standaard nooit terugwerkt.
 # Een werkdag zonder les breekt de reeks; een vrije doordeweekse dag niet (een les telt dan wel mee); weekend telt nooit.
 function Get-DlWeekSleutel([datetime]$D) { $dag = [int]$D.DayOfWeek; if ($dag -eq 0) { $dag = 7 }; $do = $D.Date.AddDays(4 - $dag); '{0}-W{1:00}' -f $do.Year, [math]::Ceiling($do.DayOfYear / 7) }
 function Test-DlMijnWerkdag($Werkdagen, [datetime]$D) {
     if (-not (Test-DlWerkdag $D)) { return $false }
     $lijst = $null
-    if ($Werkdagen -and $Werkdagen.weken) { $p = $Werkdagen.weken.PSObject.Properties[(Get-DlWeekSleutel $D)]; if ($p) { $lijst = @($p.Value) } }
+    $k = Get-DlWeekSleutel $D
+    if ($Werkdagen -and $Werkdagen.weken) { $p = $Werkdagen.weken.PSObject.Properties[$k]; if ($p) { $lijst = @($p.Value) } }
+    if ($null -eq $lijst -and $Werkdagen -and $Werkdagen.eerder) {
+        $e = @($Werkdagen.eerder | Where-Object { "$($_.tot)" -match '^\d{4}-W\d{2}$' -and [string]::CompareOrdinal($k, "$($_.tot)") -le 0 } | Sort-Object { "$($_.tot)" })[0]
+        if ($e) { $lijst = @($e.dagen) }
+    }
     if ($null -eq $lijst -and $Werkdagen -and $null -ne $Werkdagen.standaard) { $lijst = @($Werkdagen.standaard) }
     if ($null -eq $lijst) { $lijst = 1..5 }
     @($lijst | ForEach-Object { [int]$_ }) -contains [int]$D.DayOfWeek

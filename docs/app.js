@@ -312,15 +312,20 @@ function weekSleutel(d) {
   return `${t.getUTCFullYear()}-W${String(Math.ceil(((t - Date.UTC(t.getUTCFullYear(), 0, 1)) / 864e5 + 1) / 7)).padStart(2, '0')}`;
 }
 const schoonDagen = (x) => (Array.isArray(x) ? [...new Set(x.map(Number).filter((n) => STD_WERK.includes(n)))].sort() : null);
+// eerder: oude standaarden ([{ tot: '2026-W45', dagen }]: geldt voor weken t/m tot), zodat een nieuwe standaard nooit terugwerkt
 function schoonWerkdagen(w) {
   if (!w || typeof w !== 'object') return null;
   const weken = {}; for (const [k, v] of Object.entries(w.weken && typeof w.weken === 'object' ? w.weken : {})) { const d = schoonDagen(v); if (/^\d{4}-W\d{2}$/.test(k) && d) weken[k] = d; }
-  return { standaard: schoonDagen(w.standaard) || STD_WERK, weken };
+  const eerder = (Array.isArray(w.eerder) ? w.eerder : []).filter((e) => /^\d{4}-W\d{2}$/.test(String(e?.tot)) && schoonDagen(e.dagen)).map((e) => ({ tot: e.tot, dagen: schoonDagen(e.dagen) })).sort((a, b) => (a.tot < b.tot ? -1 : 1));
+  return { standaard: schoonDagen(w.standaard) || STD_WERK, weken, eerder };
 }
+const dagenVoorWeek = (wd, k) => wd?.weken?.[k] || (wd?.eerder || []).find((e) => k <= e.tot)?.dagen || wd?.standaard || STD_WERK;
 function isMijnWerkdag(wd, d) {
   const w = d.getDay(); if (w === 0 || w === 6) return false;
-  return (wd?.weken?.[weekSleutel(d)] || wd?.standaard || STD_WERK).includes(w);
+  return dagenVoorWeek(wd, weekSleutel(d)).includes(w);
 }
+// Een week ligt vast vanaf vrijdag 00:00 de week ervoor: tot en met donderdag pas je volgende week nog aan
+function eersteVrijeWeek(d = nu()) { const m = maandagVan(d); m.setDate(m.getDate() + (d.getDay() === 5 || d.getDay() === 6 || d.getDay() === 0 ? 14 : 7)); return m; }
 function reeks(logs, wd) {
   const dagen = new Set(logs.map((l) => l.datum.slice(0, 10))); const d = nu(); let n = 0;
   if (!dagen.has(dagKey(d))) d.setDate(d.getDate() - 1);
@@ -611,26 +616,33 @@ function maandagVan(d) { const m = new Date(d); m.setHours(12, 0, 0, 0); m.setDa
 function toonWerkdagen() {
   const ik = S.leden[S.mij]; $('werkdagen-paneel').hidden = !ik?.sl || !magLessen();
   if ($('werkdagen-paneel').hidden) return;
-  const wd = ik.werkdagen || { standaard: STD_WERK, weken: {} };
-  const knoppen = (sleutel, dagen) => `<span class="prio-keuze" role="group">${STD_WERK.map((n) => `<button type="button" class="knop" data-wd="${esc(sleutel)}" data-dag="${n}" aria-pressed="${dagen.includes(n)}">${DAGNAAM[n]}</button>`).join('')}</span>`;
-  const rijen = [`<div class="rij"><span><b>Standaard</b></span>${knoppen('standaard', wd.standaard)}</div>`];
-  for (let i = 0; i < 3; i++) {
+  const wd = ik.werkdagen || { standaard: STD_WERK, weken: {}, eerder: [] }, vrij = weekSleutel(eersteVrijeWeek());
+  const knoppen = (sleutel, dagen, vast) => `<span class="prio-keuze" role="group">${STD_WERK.map((n) => `<button type="button" class="knop" data-wd="${esc(sleutel)}" data-dag="${n}" aria-pressed="${dagen.includes(n)}"${vast ? ' disabled' : ''}>${DAGNAAM[n]}</button>`).join('')}</span>`;
+  const rijen = [`<div class="rij"><span><b>Standaard</b> <span class="sub">· een wijziging geldt vanaf ${esc(fmtDatum(dagKey(eersteVrijeWeek())))}</span></span>${knoppen('standaard', wd.standaard, false)}</div>`];
+  for (let i = 0; i < 4; i++) {
     const ma = maandagVan(nu()); ma.setDate(ma.getDate() + 7 * i); const vr = new Date(ma); vr.setDate(vr.getDate() + 4);
-    const k = weekSleutel(ma), eigen = wd.weken[k];
-    rijen.push(`<div class="rij"><span>${['Deze week', 'Volgende week', 'Over twee weken'][i]} <span class="sub">${esc(fmtDatum(dagKey(ma)))} – ${esc(fmtDatum(dagKey(vr)))}${eigen ? ` · <button type="button" class="leslink" data-wd-terug="${esc(k)}">terug naar standaard</button>` : ' · standaard'}</span></span>${knoppen(k, eigen || wd.standaard)}</div>`);
+    const k = weekSleutel(ma), eigen = wd.weken[k], vast = k < vrij, dagen = dagenVoorWeek(wd, k);
+    const grens = new Date(ma); grens.setDate(grens.getDate() - 4);   // donderdag de week ervoor
+    const stand = vast ? 'ligt vast' : `${eigen ? `aangepast · <button type="button" class="leslink" data-wd-terug="${esc(k)}">terug naar standaard</button>` : 'standaard'} · aan te passen t/m ${esc(fmtDatum(dagKey(grens)))}`;
+    rijen.push(`<div class="rij"><span>${['Deze week', 'Volgende week', 'Over twee weken', 'Over drie weken'][i]} <span class="sub">${esc(fmtDatum(dagKey(ma)))} – ${esc(fmtDatum(dagKey(vr)))} · ${stand}</span></span>${knoppen(k, dagen, vast)}</div>`);
   }
   $('werkdagen').innerHTML = rijen.join('');
 }
 async function zetWerkdag(sleutel, dag, terug) {
-  const ik = S.leden[S.mij], wd = ik.werkdagen ? JSON.parse(JSON.stringify(ik.werkdagen)) : { standaard: [...STD_WERK], weken: {} };
+  const ik = S.leden[S.mij], wd = ik.werkdagen ? JSON.parse(JSON.stringify(ik.werkdagen)) : { standaard: [...STD_WERK], weken: {}, eerder: [] };
+  const vrijMa = eersteVrijeWeek(), vrij = weekSleutel(vrijMa);
+  if (sleutel !== 'standaard' && sleutel < vrij) { $('werkdagen-status').textContent = 'Deze week ligt al vast: aanpassen kan tot vrijdag 00:00 de week ervoor.'; toonWerkdagen(); return; }
   if (terug) delete wd.weken[sleutel];
-  else {
-    const huidig = sleutel === 'standaard' ? wd.standaard : wd.weken[sleutel] || wd.standaard;
-    const nieuw = huidig.includes(dag) ? huidig.filter((n) => n !== dag) : [...huidig, dag].sort();
-    if (sleutel === 'standaard') wd.standaard = nieuw; else wd.weken[sleutel] = nieuw;
+  else if (sleutel === 'standaard') {
+    // De oude standaard blijft gelden voor alle weken die al vastliggen (nooit met terugwerkende kracht)
+    const vorige = new Date(vrijMa); vorige.setDate(vorige.getDate() - 7); const tot = weekSleutel(vorige);
+    wd.eerder = wd.eerder || [];
+    if (!wd.eerder.some((e) => e.tot >= tot)) wd.eerder.push({ tot, dagen: [...wd.standaard] });
+    wd.standaard = wd.standaard.includes(dag) ? wd.standaard.filter((n) => n !== dag) : [...wd.standaard, dag].sort();
+  } else {
+    const huidig = dagenVoorWeek(wd, sleutel);
+    wd.weken[sleutel] = huidig.includes(dag) ? huidig.filter((n) => n !== dag) : [...huidig, dag].sort();
   }
-  const grens = weekSleutel(new Date(nu().getTime() - 21 * 864e5));   // oude weken opruimen
-  for (const k of Object.keys(wd.weken)) if (k < grens) delete wd.weken[k];
   $('werkdagen').querySelectorAll('button').forEach((b) => { b.disabled = true; }); $('werkdagen-status').textContent = 'Opslaan…';
   try {
     await werkBij(S.mij, 'profiel', ik.sl, (h) => ({ ...(h && typeof h === 'object' ? h : { v: 1 }), werkdagen: wd }));
