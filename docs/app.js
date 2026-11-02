@@ -931,7 +931,7 @@ async function werkScorebordBij(alleMaanden = false) {
     if (maand !== nuM && !st.lessen && !bestaat) continue;
     if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(maand)) continue;
     const obj = SB.zichtbaar
-      ? { v: 1, maand, zichtbaar: true, goed: st.goed, langsteReeks: st.langsteReeks, huidigeReeks: maand === nuM ? reeks(ik.logs, ik.werkdagen) : st.reeksAanEind, laatsteDag: st.laatsteDag, geldigTot: geldigTot(st.laatsteDag, ik.werkdagen) }
+      ? { v: 1, maand, zichtbaar: true, goed: st.goed, langsteReeks: st.langsteReeks, huidigeReeks: st.reeksAanEind, laatsteDag: st.laatsteDag, geldigTot: geldigTot(st.laatsteDag, ik.werkdagen) }
       : { v: 1, maand, zichtbaar: false };
     const oud = bestaat ? await leesScore(pad) : null;
     if (oud && ['zichtbaar', 'goed', 'langsteReeks', 'huidigeReeks', 'laatsteDag', 'geldigTot'].every((k) => (oud[k] ?? null) === (obj[k] ?? null))) continue;
