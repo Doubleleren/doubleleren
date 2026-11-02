@@ -13,10 +13,10 @@
     "soort": "meerkeuze",
     "vraag": "Wat is de meest waarschijnlijke verklaring, en hoe controleer je wat de echte Googlebot krijgt?",
     "opties": [
-      "De site blokkeert Googlebot. Zet de botbescherming direct uit, anders valt de site binnen een paar dagen uit de index.",
-      "De botbescherming herkent je crawler als nep-Googlebot, omdat het verzoek niet van een IP-adres van Google komt. Controleer met de live test van de URL-inspectietool en met geverifieerde Googlebot-verzoeken in de serverlogs wat Google echt krijgt.",
-      "robots.txt verbiedt Googlebot de toegang. Een 403 is de statuscode die bij een Disallow hoort.",
-      "Screaming Frog kan geen JavaScript renderen als Googlebot. Zet JavaScript-rendering aan en crawl opnieuw."
+      "De site blokkeert ook de echte Googlebot. Zet de botbescherming uit en controleer daarna of Screaming Frog wel alles kan crawlen.",
+      "Je crawler komt niet van een Google-IP en wordt als nep geweerd. Kijk met de live test in URL-inspectie wat Google echt krijgt.",
+      "robots.txt verbiedt Googlebot de toegang, want een Disallow geeft een 403. Check het robots.txt-rapport in Search Console.",
+      "Screaming Frog rendert als Googlebot geen JavaScript. Zet rendering aan, crawl opnieuw en vergelijk de statuscodes met de eerste crawl."
     ],
     "juist": 1
   },
@@ -27,5 +27,7 @@
   "bron": {
     "titel": "Verify requests from Google crawlers and fetchers | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot"
-  }
+  },
+  "herzien": "2026-11-02",
+  "wijziging": "Opties even lang gemaakt."
 }

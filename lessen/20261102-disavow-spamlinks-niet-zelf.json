@@ -1,0 +1,29 @@
+{
+  "id": "20261102-disavow-spamlinks-niet-zelf",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Linkspam na Penguin: wanneer disavow je links (en meestal niet)?",
+  "matrix": ["10.1.2"],
+  "titel": "400 casinolinks uit het niets: vandaag nog een disavow-bestand?",
+  "intro": "Een klant ziet in Ahrefs opeens 400 nieuwe backlinks van onbekende buitenlandse sites vol casinoteksten. Hij heeft er zelf niets voor gedaan en nooit links gekocht of laten plaatsen. Rankings en verkeer zijn stabiel, en in Search Console staat geen handmatige actie. Hij wil 'voor de zekerheid' vandaag een disavow-bestand indienen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je?",
+    "opties": [
+      "Indienen, want spamlinks die je niet afwijst, leveren vroeg of laat een handmatige actie voor de hele site op.",
+      "Niet nodig: Google negeert zulke links meestal zelf. Disavow is voor kunstmatige links die je zelf liet maken.",
+      "Indienen, maar dan via een Domein-property, zodat ook alle subdomeinen en http-varianten meteen zijn afgedekt.",
+      "Niet indienen, maar bij elke site een verwijderverzoek sturen, want Google telt elke spamlink als minpunt."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Google zegt dat het **in de meeste gevallen zelf kan beoordelen welke links te vertrouwen zijn**. Disavow is bedoeld voor sites met een flink aantal spammy, kunstmatige of slechte links naar de site, **en** waarbij die links een handmatige actie hebben veroorzaakt of dat waarschijnlijk gaan doen, bijvoorbeeld omdat je zelf of een ingehuurde SEO links heeft gekocht.\n\nHier is niets gekocht, er is geen handmatige actie en de cijfers zijn stabiel: geen reden om in te grijpen.\n\n- **Een handmatige actie 'vroeg of laat'** volgt niet automatisch uit links die je niet zelf hebt gemaakt.\n- **Een Domein-property** wordt door de disavow-tool juist niet ondersteund; je dient per URL-voorvoegsel-property in.\n- **Verwijderverzoeken naar 400 spamsites** kosten veel tijd en zijn hier niet nodig.",
+  "uitleg": "Sinds 2016 is **Penguin** een realtime onderdeel van het kernalgoritme. Google devalueert spamlinks: ze tellen niet mee, in plaats van dat de hele site wordt gestraft. Dezelfde gedachte zit in de latere link spam updates.\n\nDe **disavow-tool** in Search Console is volgens Google een geavanceerde functie die je voorzichtig gebruikt. Wanneer wel:\n- je hebt veel kunstmatige links, bijvoorbeeld gekocht of via linkruil, **en**\n- die hebben geleid of gaan waarschijnlijk leiden tot een handmatige actie.\n\nGoogle raadt aan eerst zoveel mogelijk van die links te laten verwijderen, en pas daarna de rest te disavowen.\n\nPraktische regels als je het toch doet:\n- een .txt-bestand in UTF-8 of 7-bit ASCII, één URL of domein per regel\n- hele domeinen met domain:voorbeeld.nl, opmerkingen met #\n- maximaal 100.000 regels en 2 MB\n- het geldt per property (en onderliggende properties); een nieuwe upload vervangt de oude lijst\n\nVoor de klant hier is het beste advies: niets indienen, wel de handmatige acties en de cijfers in de gaten houden.",
+  "kernpunt": "Google negeert de meeste spamlinks zelf. Disavow is alleen voor veel kunstmatige links waar je zelf verantwoordelijk voor bent en die een handmatige actie (dreigen te) veroorzaken.",
+  "toepassing": "Kijk bij een klant met een disavow-bestand of er een reden voor was (gekochte links of een handmatige actie). Staat er niets van in de historie, bespreek dan of de lijst nog nodig is.",
+  "bron": {
+    "titel": "Disavow links to your site - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/2648487"
+  }
+}

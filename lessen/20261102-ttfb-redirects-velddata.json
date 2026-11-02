@@ -1,0 +1,34 @@
+{
+  "id": "20261102-ttfb-redirects-velddata",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "TTFB: waarom velddata slechter zijn dan het lab bij redirects",
+  "matrix": ["5.2.10", "5.2.11"],
+  "titel": "Lighthouse zegt 'snelle server', de velddata zeggen TTFB 1,9 seconde",
+  "intro": "Een webshop krijgt de helft van zijn bezoekers via advertenties en nieuwsbrieven. In PageSpeed Insights geeft Lighthouse de homepage een snelle serverrespons, maar de velddata tonen een TTFB van 1,9 seconde. De links in advertenties en nieuwsbrieven gaan eerst via een klikteller, daarna van http naar https en van het domein zonder www naar www.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke verklaring voor het verschil, en wat doe je eerst?",
+    "opties": [
+      "De velddata zijn vertekend door trage mobiele netwerken. Baseer je advies op Lighthouse, dat onder vaste omstandigheden meet.",
+      "De server is te zwak voor de drukte van echte bezoekers. Verhuis naar zwaardere hosting met meer geheugen en meet opnieuw.",
+      "In het veld tellen de redirects mee in de TTFB, in het lab niet. Geef adverteerders de eind-URL en schrap eigen redirects.",
+      "CrUX meet vooral bezoeken met een lege cache. Laat een script elke nacht de cache vullen, zodat de eerste bezoeker niet wacht."
+    ],
+    "juist": 2
+  },
+  "toelichting": "TTFB is de optelsom van onder meer **redirecttijd**, DNS, verbinding en het verzoek zelf. Een echte bezoeker doorloopt de hele keten: klikteller, http naar https, zonder www naar www. Labtools meten volgens web.dev meestal de **eind-URL** en missen die vertraging; de Lighthouse-audit voor serverrespons laat redirects en DNS zelfs helemaal weg. web.dev noemt sites met veel bezoekers uit advertenties en nieuwsbrieven expliciet als risicogroep.\n\n- **Velddata negeren** is de verkeerde kant op: ze laten zien wat bezoekers echt meemaken.\n- **Zwaardere hosting** haalt geen enkele redirect weg; de server is in het lab juist snel.\n- **Een lege cache** verklaart niet waarom het verschil zo groot is, en CrUX meet geen 'eerste bezoek van de dag'.",
+  "uitleg": "**Time to First Byte (TTFB)** meet hoe lang het duurt tot de eerste byte van de HTML binnen is. Volgens web.dev is dat de som van: redirecttijd, opstarten van een service worker, DNS-lookup, verbinding en TLS, en het verzoek tot de eerste byte. Goed is **0,8 seconde of minder**, slecht is **meer dan 1,8 seconde**. TTFB is geen Core Web Vital, maar een trage TTFB vertraagt alles daarna, zoals FCP en LCP.\n\nWaarom lab en veld hier zo verschillen: in het lab test je meestal direct de eind-URL. Een bezoeker uit een advertentie begint bij de klikteller en springt daarna nog twee keer door. Elke stap kost een extra verzoek, soms met een nieuwe verbinding.\n\nZo pak je het aan:\n- **Eigen redirects schrappen** (same-origin): link en adverteer direct naar https://www.… Daar heb je volledige controle over.\n- **De eind-URL aan adverteerders en de nieuwsbrieftool geven.** Een klikteller van een ander domein (cross-origin) kun je vaak niet weghalen, maar je kunt voorkomen dat er daarna nog redirects volgen.\n- **HSTS instellen**, zodat browsers bij een volgend bezoek meteen naar https gaan; met HSTS-preload ook bij het eerste bezoek.\n\nControleer de keten met een redirectchecker en vergelijk daarna opnieuw de velddata.",
+  "kernpunt": "TTFB in het veld telt redirects mee, labtools meten meestal de eind-URL. Komt veel verkeer via advertenties of nieuwsbrieven, geef dan de eind-URL door en schrap eigen redirects.",
+  "toepassing": "Klik deze week bij een klant op een link uit de laatste nieuwsbrief en een advertentie, en noteer met een redirectchecker hoeveel stappen er tussen de klik en de landingspagina zitten.",
+  "bron": {
+    "titel": "Optimize Time to First Byte | web.dev",
+    "url": "https://web.dev/articles/optimize-ttfb"
+  },
+  "video": {
+    "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+    "kanaal": "Matt Diggity",
+    "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
+  }
+}

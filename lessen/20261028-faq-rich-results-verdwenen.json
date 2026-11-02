@@ -13,10 +13,10 @@
     "soort": "meerkeuze",
     "vraag": "Wat adviseer je?",
     "opties": [
-      "Niet in investeren: Google toont sinds mei 2026 voor geen enkele site nog FAQ-rich results. Het FAQ-blok zelf houd je als het bezoekers helpt.",
-      "Niet doen, omdat FAQ-rich results alleen worden getoond voor bekende overheids- en zorgwebsites.",
+      "Niet doen: sinds mei 2026 toont Google voor geen enkele site nog FAQ-rich results in de zoekresultaten.",
+      "Niet doen: FAQ-rich results verschijnen alleen voor bekende overheids- en zorgwebsites, en dit bedrijf is dat niet.",
       "Wel doen, maar alleen op pagina's met minstens drie vragen, want daaronder toont Google het uitklapblok niet.",
-      "Gebruik QAPage-markup in plaats van FAQPage, want die levert nog wel een uitklapblok op."
+      "Wel doen, maar met QAPage-markup in plaats van FAQPage, want die levert in Google nog wel een uitklapblok op."
     ],
     "juist": 0
   },
@@ -27,5 +27,7 @@
   "bron": {
     "titel": "Latest Google Search Documentation Updates | Google Search Central",
     "url": "https://developers.google.com/search/updates"
-  }
+  },
+  "herzien": "2026-11-02",
+  "wijziging": "Opties even lang gemaakt."
 }

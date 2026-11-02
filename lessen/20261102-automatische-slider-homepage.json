@@ -1,0 +1,24 @@
+{
+  "id": "20261102-automatische-slider-homepage",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Automatisch wisselende sliders (carrousels) bovenaan de homepage",
+  "matrix": ["7.1.1"],
+  "titel": "Vijf banners die elke vier seconden wisselen: 'zo krijgt alles een plekje'",
+  "intro": "Een fietsenwinkel wil bovenaan de homepage een slider met vijf banners die elke vier seconden automatisch wisselen: de najaarsactie, gratis bezorging, een nieuwe e-bike, de werkplaats en een vacature. 'Zo krijgt alles een plekje bovenaan,' zegt de marketeer. Jij wordt gevraagd om mee te kijken voordat de developer begint.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat adviseer je, en waarom? Zeg ook wat je in plaats daarvan zou doen.",
+    "minTekens": 100,
+    "hint": "Denk aan hoe vaak elke banner echt in beeld is, en aan bezoekers die rustig lezen."
+  },
+  "modelantwoord": "**De kern:** geen automatische slider. Elke banner staat maar een vijfde van de tijd in beeld, bewegende blokken worden vaak voor reclame aangezien, en wie rustig leest, haalt de tekst niet. Kies één boodschap bovenaan en zet de rest eronder.\n\nWaarom:\n- **Minder zichtbaarheid:** met vijf wisselende banners is elke boodschap maar ongeveer 20% van de tijd te zien.\n- **Lijkt op reclame:** iets wat beweegt en op een banner lijkt, slaan bezoekers vaak over.\n- **Te snel:** wie langzaam leest of in een tweede taal leest, is na vier seconden nog niet klaar.\n- **Controle en toegankelijkheid:** onverwachte beweging frustreert, en is lastig voor mensen met een motorische beperking.\n\nBeter: maak de belangrijkste boodschap (nu de najaarsactie) de vaste bovenkant, en zet de andere als losse blokken eronder. Moet het toch een carrousel zijn, laat hem dan alleen wisselen als de bezoeker klikt.\n\nVeelgemaakte fout: alleen de wisseltijd verlengen of pijltjes toevoegen, en verder alles laten zoals het is.",
+  "uitleg": "Een slider voelt als een compromis: iedereen krijgt zijn boodschap bovenaan. Voor de bezoeker werkt het meestal slechter. Jakob Nielsen (NN/g) zag in gebruikerstests dat automatisch wisselende carrousels om een paar redenen tegenvallen:\n\n- **Elke boodschap krijgt minder aandacht**, omdat ze om de beurt in beeld zijn.\n- **Bezoekers negeren bewegende blokken**, omdat ze die voor advertenties aanzien.\n- **De tekst verdwijnt te snel**, vooral voor wie minder vlot leest.\n- **Bezoekers verliezen de controle**: net als je wilt klikken, is de banner weg.\n\nNN/g adviseert: laat een carrousel alleen naar het volgende paneel gaan als de bezoeker daarom vraagt, en laat hem verder stilstaan. Ook WCAG vraagt een manier om te pauzeren bij content die automatisch langer dan vijf seconden beweegt.\n\nHoe overtuig je de marketeer? Met data:\n- kijk in Clarity of Hotjar hoeveel klikken de huidige banners krijgen, per positie;\n- of test een vaste hero tegen de slider, als er genoeg verkeer is.\n\nDe echte vraag achter de slider is bijna altijd: wat is nú de belangrijkste boodschap? Dat is een keuze, en die maak je liever zelf dan dat een timer het doet.",
+  "kernpunt": "Automatisch wisselende sliders verlagen de zichtbaarheid van elke boodschap en worden vaak genegeerd. Kies één vaste boodschap bovenaan en laat een carrousel alleen wisselen als de bezoeker klikt.",
+  "toepassing": "Bekijk deze week de homepage van een klant met een slider en zoek in Clarity of Hotjar op hoeveel bezoekers op de tweede tot en met laatste banner klikken.",
+  "bron": {
+    "titel": "Auto-Forwarding Carousels and Accordions Annoy Users and Reduce Visibility | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/auto-forwarding/"
+  }
+}

@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-02T05:31:56",
+    "bijgewerkt":  "2026-11-02T10:24:18",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1051,7 +1051,8 @@
                                      "url":  "https://www.youtube.com/watch?v=fzH-P1feVz8"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261022-fcp-render-blocking",
@@ -1355,7 +1356,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261023-news-sitemap-regels",
@@ -1474,7 +1475,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261026-auteursinformatie-claude",
@@ -1827,7 +1828,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261027-ongeldig-element-in-head",
@@ -1926,7 +1927,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261028-featured-snippet-afmelden",
@@ -1984,7 +1985,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-02"
                    },
                    {
                        "id":  "20261028-kannibalisatie-gsc-claude",
@@ -2829,6 +2830,45 @@
                        "herkomst":  "generator"
                    },
                    {
+                       "id":  "20261102-ai-overviews-in-search-console",
+                       "titel":  "Een aparte regel \u0027AI Overviews\u0027 in het maandrapport: waar haal je die vandaan?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "AI Overviews en AI Mode in het Prestatierapport van Search Console",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "12.1.1"
+                                  ],
+                       "kernpunt":  "AI Overviews en AI Mode tellen in Search Console mee in het zoektype Web, samen met de gewone resultaten. Een aparte AI-regel haal je daar niet uit; combineer daarom met GA4 en een tool voor AI-zichtbaarheid.",
+                       "bron":  {
+                                    "titel":  "AI features and your website | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/ai-features"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-automatische-slider-homepage",
+                       "titel":  "Vijf banners die elke vier seconden wisselen: \u0027zo krijgt alles een plekje\u0027",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Automatisch wisselende sliders (carrousels) bovenaan de homepage",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Automatisch wisselende sliders verlagen de zichtbaarheid van elke boodschap en worden vaak genegeerd. Kies één vaste boodschap bovenaan en laat een carrousel alleen wisselen als de bezoeker klikt.",
+                       "bron":  {
+                                    "titel":  "Auto-Forwarding Carousels and Accordions Annoy Users and Reduce Visibility | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/auto-forwarding/"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261102-canonical-signalen-tegenstrijdig",
                        "titel":  "Canonical, noindex én de sitemap zeggen elk iets anders",
                        "vakgebied":  "SEO",
@@ -2907,6 +2947,25 @@
                        "herkomst":  "generator"
                    },
                    {
+                       "id":  "20261102-ctr-bots-klikmanipulatie",
+                       "titel":  "\u0027Wij laten bots op je resultaat klikken, dan stijg je vanzelf\u0027",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "User signals: een \u0027CTR-boost\u0027 met bots die zoeken en klikken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.4"
+                                  ],
+                       "kernpunt":  "Klikken of zoekopdrachten laten nabootsen door bots is machine-generated traffic en valt onder het spambeleid van Google. Verdien echte klikken met een passende title, een goede pagina en lokale zichtbaarheid.",
+                       "bron":  {
+                                    "titel":  "Spam policies for Google web search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261102-cwv-rapport-28-dagen",
                        "titel":  "LCP-fix maandag live, woensdag nog steeds rood in Search Console",
                        "vakgebied":  "SEO",
@@ -2927,6 +2986,45 @@
                                      "kanaal":  "Matt Diggity",
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-disavow-spamlinks-niet-zelf",
+                       "titel":  "400 casinolinks uit het niets: vandaag nog een disavow-bestand?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Linkspam na Penguin: wanneer disavow je links (en meestal niet)?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.2"
+                                  ],
+                       "kernpunt":  "Google negeert de meeste spamlinks zelf. Disavow is alleen voor veel kunstmatige links waar je zelf verantwoordelijk voor bent en die een handmatige actie (dreigen te) veroorzaken.",
+                       "bron":  {
+                                    "titel":  "Disavow links to your site - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/2648487"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-ga4-key-events",
+                       "titel":  "Het event generate_lead komt binnen, maar het rapport toont geen leads",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: een event als key event markeren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.6",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "In GA4 wordt een event pas een doelactie als je het markeert als key event (belangrijke gebeurtenis). De route is event → key event → eventueel conversie in Google Ads.",
+                       "bron":  {
+                                    "titel":  "About key events - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/13965727"
+                                },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    },
@@ -3010,6 +3108,25 @@
                        "herkomst":  "generator"
                    },
                    {
+                       "id":  "20261102-og-image-cache-sharing-debugger",
+                       "titel":  "Nieuwe Black Friday-afbeelding, maar Facebook toont nog de oude",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "OG-tags: een nieuwe deelafbeelding die niet verschijnt",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.1.11"
+                                  ],
+                       "kernpunt":  "Facebook cachet een og:image op de URL. Een nieuwe deelafbeelding krijgt daarom een nieuwe bestandsnaam, en met de Sharing Debugger laat je de pagina opnieuw ophalen.",
+                       "bron":  {
+                                    "titel":  "Sharing for Webmasters | Meta for Developers",
+                                    "url":  "https://developers.facebook.com/docs/sharing/webmasters/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
                        "id":  "20261102-reviewanalyse-citaten-claude",
                        "titel":  "\u002742% twijfelt over de proefperiode\u0027: waar haalt Claude dat vandaan?",
                        "vakgebied":  "CRO × Claude",
@@ -3026,6 +3143,50 @@
                                     "url":  "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
                                 },
                        "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-skill-maandrapport-claude",
+                       "titel":  "Elke maand dezelfde prompt van 400 woorden: maak er een skill van",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Van prompt naar skill: een herbruikbaar maandrapport",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.2",
+                                      "4.1.1"
+                                  ],
+                       "kernpunt":  "Een skill legt een vaste werkwijze vast die Claude zelf oppakt. Claude kiest hem alleen op name en description, dus de description zegt wat de skill doet én wanneer je hem gebruikt.",
+                       "bron":  {
+                                    "titel":  "Agent Skills | Claude Docs",
+                                    "url":  "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261102-ttfb-redirects-velddata",
+                       "titel":  "Lighthouse zegt \u0027snelle server\u0027, de velddata zeggen TTFB 1,9 seconde",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "TTFB: waarom velddata slechter zijn dan het lab bij redirects",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.10",
+                                      "5.2.11"
+                                  ],
+                       "kernpunt":  "TTFB in het veld telt redirects mee, labtools meten meestal de eind-URL. Komt veel verkeer via advertenties of nieuwsbrieven, geef dan de eind-URL door en schrap eigen redirects.",
+                       "bron":  {
+                                    "titel":  "Optimize Time to First Byte | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-ttfb"
+                                },
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    }

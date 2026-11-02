@@ -1,0 +1,24 @@
+{
+  "id": "20261102-skill-maandrapport-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Van prompt naar skill: een herbruikbaar maandrapport",
+  "matrix": ["4.1.2", "4.1.1"],
+  "titel": "Elke maand dezelfde prompt van 400 woorden: maak er een skill van",
+  "intro": "Je maakt elke maand voor zes klanten een Search Console-rapport met Claude. Elke keer plak je dezelfde prompt van 400 woorden: welke cijfers, branded apart, vergelijken met vorig jaar, drie vaste blokken. Je wilt er een skill van maken. Een skill is een map met een bestand SKILL.md: bovenaan een name en een description, daaronder de instructies.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf de name en de description voor de bovenkant van SKILL.md. Leg daarna in één zin uit waarom juist de description zo belangrijk is.",
+    "minTekens": 120,
+    "hint": "Bedenk wanneer Claude de instructies onder de description pas leest."
+  },
+  "modelantwoord": "**De kern:** de description zegt wat de skill doet én wanneer Claude hem moet gebruiken. Claude kiest een skill namelijk alleen op basis van de name en de description.\n\nEen voorbeeld:\n- name: gsc-maandrapport\n- description: Maakt het maandelijkse SEO-rapport uit Search Console-data: klikken, vertoningen, CTR en positie, branded en non-branded apart, vergeleken met dezelfde maand vorig jaar, in drie vaste blokken. Gebruik dit als iemand vraagt om een maandrapport, SEO-rapportage of GSC-overzicht voor een klant.\n\nWaarom: bij het opstarten laadt Claude van elke skill alleen de name en de description. De instructies in de rest van SKILL.md leest hij pas als je vraag bij die description past. Een vage description als 'rapport-skill' wordt dus niet, of op het verkeerde moment, gebruikt.\n\nVeelgemaakte fouten:\n- alleen beschrijven wat de skill doet, en niet wanneer\n- de hele werkwijze in de description stoppen; die hoort in de instructies eronder\n- hoofdletters of spaties in de name: alleen kleine letters, cijfers en koppeltekens, en niet het woord 'claude'",
+  "uitleg": "Een **prompt** geldt voor één gesprek. Een **skill** legt een werkwijze vast die Claude zelf oppakt als die past. Zo hoef je niet elke maand dezelfde uitleg te plakken, en werkt iedereen in het team op dezelfde manier.\n\nEen skill wordt in drie lagen geladen:\n- **Name en description** (altijd): Claude laadt ze bij het opstarten, zo'n 100 tokens per skill. Daarop beslist hij of de skill past.\n- **De instructies in SKILL.md** (bij gebruik): de werkwijze, bijvoorbeeld welke cijfers, welke vergelijking en welke opmaak.\n- **Extra bestanden** (als het nodig is): een voorbeeldrapport, een lijst met merktermen per klant of een script.\n\nRegels voor de bovenkant: de name is maximaal 64 tekens, alleen kleine letters, cijfers en koppeltekens. De description is maximaal 1.024 tekens en noemt wat de skill doet en wanneer je hem gebruikt.\n\nWaar zet je hem neer? In Claude Code in ~/.claude/skills/ (voor jezelf) of .claude/skills/ in een project (voor het team). In claude.ai upload je hem als zip via de instellingen; daar is hij alleen voor jou. Skills synchroniseren niet tussen die omgevingen.\n\nGebruik skills alleen van bronnen die je vertrouwt: een skill kan Claude ook code laten uitvoeren.",
+  "kernpunt": "Een skill legt een vaste werkwijze vast die Claude zelf oppakt. Claude kiest hem alleen op name en description, dus de description zegt wat de skill doet én wanneer je hem gebruikt.",
+  "toepassing": "Kies deze week één prompt die je elke week of maand opnieuw plakt, en schrijf er een name en description voor. Test of Claude de skill oppakt als je de vraag in je eigen woorden stelt.",
+  "bron": {
+    "titel": "Agent Skills | Claude Docs",
+    "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview"
+  }
+}

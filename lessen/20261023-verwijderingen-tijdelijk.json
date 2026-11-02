@@ -13,10 +13,10 @@
     "soort": "meerkeuze",
     "vraag": "De klant vindt het klaar. Wat adviseer je?",
     "opties": [
-      "Klaar: een goedgekeurd verzoek haalt de URL's definitief uit de index van Google.",
-      "Nog niet: zet Disallow: / in de robots.txt van de staging. Dan blijven de URL's ook na afloop van het verzoek weg.",
-      "Nog niet: dien het verzoek elke maand opnieuw in, want het verloopt na 30 dagen.",
-      "Nog niet: het verzoek verbergt de URL's maar ongeveer zes maanden. Zet de staging achter een wachtwoord, of laat hij een noindex of 404/410 geven."
+      "Klaar: een goedgekeurd verzoek haalt de URL's definitief uit de index, ook als de staging zelf openblijft.",
+      "Nog niet: zet Disallow: / in de robots.txt van de staging, dan blijven de URL's na afloop van het verzoek weg.",
+      "Nog niet: het verzoek verloopt na 30 dagen, dus dien het elke maand opnieuw in tot Google de URL's vergeet.",
+      "Nog niet: het verzoek verbergt de URL's tijdelijk. Zet de staging achter een wachtwoord, dan blijven ze weg."
     ],
     "juist": 3
   },
@@ -27,5 +27,7 @@
   "bron": {
     "titel": "Removals and SafeSearch reports Tool - Search Console Help",
     "url": "https://support.google.com/webmasters/answer/9689846"
-  }
+  },
+  "herzien": "2026-11-02",
+  "wijziging": "Opties even lang gemaakt."
 }

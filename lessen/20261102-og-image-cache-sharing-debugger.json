@@ -1,0 +1,29 @@
+{
+  "id": "20261102-og-image-cache-sharing-debugger",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "OG-tags: een nieuwe deelafbeelding die niet verschijnt",
+  "matrix": ["2.1.11"],
+  "titel": "Nieuwe Black Friday-afbeelding, maar Facebook toont nog de oude",
+  "intro": "Een webwinkel heeft voor de Black Friday-actie een nieuwe deelafbeelding laten maken. De developer heeft het bestand /img/share.jpg op de server overschreven met de nieuwe versie; de og:image-tag is niet veranderd. Wie de actiepagina nu op Facebook deelt, ziet nog steeds de oude afbeelding. De actie start overmorgen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste aanpak?",
+    "opties": [
+      "Wacht een paar dagen: Facebook haalt deelafbeeldingen elke 24 uur opnieuw op, dus de nieuwe versie verschijnt vanzelf.",
+      "Voeg twitter:image toe met dezelfde URL; Facebook gebruikt die tag als die nieuwer is dan og:image.",
+      "Leeg de cache van de CDN en van de browser, zodat Facebook bij de volgende keer delen de nieuwe afbeelding ziet.",
+      "Zet de nieuwe afbeelding op een nieuwe URL in og:image en laat de pagina opnieuw ophalen via de Sharing Debugger."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Meta schrijft dat afbeeldingen worden **gecachet op basis van de URL** en niet worden bijgewerkt zolang de URL hetzelfde blijft. Een overschreven bestand op hetzelfde adres ziet Facebook dus niet. Geef de afbeelding een nieuwe URL (bijvoorbeeld share-blackfriday.jpg), pas og:image aan, en laat de pagina opnieuw ophalen met de **Sharing Debugger**.\n\n- **Elke 24 uur opnieuw ophalen** klopt niet; juist daarom bestaat de Sharing Debugger.\n- **twitter:image** is voor X. Facebook kijkt naar og:image.\n- **De CDN- en browsercache legen** helpt niet: het probleem zit in de cache van Facebook zelf, die aan de URL hangt.",
+  "uitleg": "Een deelpreview op Facebook, LinkedIn of in een chat-app komt uit de **Open Graph-tags** van de pagina. Het platform haalt de pagina op met een eigen crawler, maakt de preview en bewaart die. Daarom zie je een wijziging niet altijd meteen.\n\nDe basis-tags volgens Meta:\n- **og:url**: de canonieke URL, zonder sessie- of trackingparameters\n- **og:title**: de titel, zonder merknaam erachter\n- **og:description**: een korte beschrijving van een paar zinnen\n- **og:image**: de URL van de afbeelding, liefst met **og:image:width** en **og:image:height**, zodat hij al bij de eerste keer delen goed laadt\n\nZo voorkom je dit soort problemen:\n- **Nieuwe afbeelding = nieuwe bestandsnaam.** Overschrijf nooit een deelafbeelding op hetzelfde adres.\n- **Controleer vóór de lancering** met de Sharing Debugger van Meta (en de Post Inspector van LinkedIn) wat de crawler ziet. Die tools halen de pagina ook opnieuw op.\n- **Per pagina eigen tags**, niet één sitebrede afbeelding.\n\nOG-tags zijn geen rankingfactor in Google, maar bepalen wel hoe aantrekkelijk een gedeelde link eruitziet, en dus hoeveel mensen erop klikken.",
+  "kernpunt": "Facebook cachet een og:image op de URL. Een nieuwe deelafbeelding krijgt daarom een nieuwe bestandsnaam, en met de Sharing Debugger laat je de pagina opnieuw ophalen.",
+  "toepassing": "Haal vóór de volgende actie van een klant de actiepagina door de Sharing Debugger en controleer of titel, beschrijving en afbeelding kloppen.",
+  "bron": {
+    "titel": "Sharing for Webmasters | Meta for Developers",
+    "url": "https://developers.facebook.com/docs/sharing/webmasters/"
+  }
+}

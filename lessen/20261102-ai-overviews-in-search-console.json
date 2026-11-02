@@ -1,0 +1,29 @@
+{
+  "id": "20261102-ai-overviews-in-search-console",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "AI Overviews en AI Mode in het Prestatierapport van Search Console",
+  "matrix": ["12.1.6", "12.1.1"],
+  "titel": "Een aparte regel 'AI Overviews' in het maandrapport: waar haal je die vandaan?",
+  "intro": "Een klant ziet steeds vaker AI Overviews boven zijn belangrijkste zoekwoorden. Hij wil in het maandrapport een aparte regel: klikken en vertoningen uit AI Overviews en AI Mode. Een collega gaat in het Prestatierapport van Search Console op zoek naar de juiste instelling.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat klopt er over AI Overviews en AI Mode in Search Console?",
+    "opties": [
+      "Ze hebben een eigen zoektype 'AI' naast Web, Afbeeldingen en Video, zodat je ze apart kunt rapporteren.",
+      "Ze tellen niet mee in Search Console, omdat een citaat in een AI-antwoord geen echte vertoning is.",
+      "Ze tellen mee in het zoektype Web, samen met de gewone resultaten van dezelfde zoekopdrachten.",
+      "Je vindt ze onder Zoekopmaak (Search appearance) als 'AI Overview', net als andere rich results."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google schrijft in zijn documentatie over AI-functies dat AI Overviews en AI Mode worden gerapporteerd in het **Prestatierapport, binnen het zoektype Web**, en dat ze meetellen in de totale data van Search Console.\n\n- Een **eigen zoektype 'AI'** bestaat niet; de zoektypen zijn onder meer Web, Afbeeldingen, Video en Nieuws.\n- **Niet meetellen** klopt niet: een vertoning of klik vanuit een AI-functie telt gewoon mee.\n- Onder **Zoekopmaak** staat geen aparte optie 'AI Overview' waarmee je deze resultaten kunt isoleren.",
+  "uitleg": "AI Overviews en AI Mode horen voor Search Console bij Google Search. Daarom komen hun vertoningen en klikken in hetzelfde **Prestatierapport**, onder **Web**, samen met de gewone blauwe links.\n\nWat betekent dat voor je rapportage?\n- **Geen aparte AI-regel uit Search Console.** Leg de klant uit dat AI-verkeer van Google in de gewone cijfers zit.\n- **Kijk naar patronen.** Stijgen de vertoningen terwijl de CTR daalt, vooral bij informatieve zoekopdrachten, dan kan een AI Overview een deel van de klikken wegnemen. Dat is een aanwijzing, geen bewijs.\n- **Combineer met andere data.** Google raadt zelf aan conversies en tijd op de site te volgen in een tool als Google Analytics. Voor de vraag of je merk wordt geciteerd, gebruik je een aparte tool voor AI-zichtbaarheid.\n- **Andere AI-assistenten** zoals ChatGPT en Perplexity zitten helemaal niet in Search Console. Die zie je als verwijzingen in GA4, bijvoorbeeld in een eigen kanaalgroep.\n\nVolgens Google zijn klikken vanuit AI Overviews van hogere kwaliteit: bezoekers blijven langer. Dat kun je per klant controleren door naar conversies te kijken in plaats van alleen naar klikken.",
+  "kernpunt": "AI Overviews en AI Mode tellen in Search Console mee in het zoektype Web, samen met de gewone resultaten. Een aparte AI-regel haal je daar niet uit; combineer daarom met GA4 en een tool voor AI-zichtbaarheid.",
+  "toepassing": "Zet in het maandrapport van één klant een korte uitleg dat AI-verkeer van Google in de Search Console-cijfers zit, en voeg de AI-verwijzingen uit GA4 als aparte regel toe.",
+  "bron": {
+    "titel": "AI features and your website | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/ai-features"
+  }
+}
