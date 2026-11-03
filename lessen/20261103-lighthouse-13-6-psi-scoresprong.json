@@ -1,0 +1,37 @@
+{
+  "id": "20261103-lighthouse-13-6-psi-scoresprong",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "PageSpeed Insights: scoresprong door een nieuwe Lighthouse-versie",
+  "matrix": [
+    "5.2.1",
+    "4.1.1"
+  ],
+  "titel": "PageSpeed-score van 58 naar 74, terwijl er niets is veranderd",
+  "intro": "Een klant mailt blij: de mobiele PageSpeed Insights-score van de homepage ging deze week van 58 naar 74. Het developmentteam heeft de afgelopen maand niets aan de site gedaan. De klant wil de stijging graag in het kwartaalrapport voor de directie zetten.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat zeg je tegen de klant, en wat komt er in het rapport?",
+    "opties": [
+      "Neem de stijging op als winst: een hogere labscore betekent dat echte bezoekers de site nu ook sneller ervaren.",
+      "PageSpeed Insights draait sinds eind oktober een nieuwe Lighthouse-versie die anders simuleert; beoordeel op velddata.",
+      "Vraag direct een herberekening aan in Search Console, zodat het Core Web Vitals-rapport de nieuwe score ook overneemt.",
+      "Wacht 28 dagen: de labscore loopt altijd een maand achter op de velddata, dus deze stijging gaat over september."
+    ],
+    "juist": 1
+  },
+  "toelichting": "PageSpeed Insights gebruikt sinds eind oktober 2026 Lighthouse 13.6.0. Die versie simuleert het laden van een pagina anders, waardoor de gesimuleerde FCP en LCP vaak beter uitvallen. De site zelf is niet sneller geworden.\n\n- Een hogere **labscore** zegt niets over echte bezoekers. Daarvoor kijk je naar de **velddata** (CrUX) bovenaan het rapport.\n- Search Console neemt geen labscores over. Het Core Web Vitals-rapport gebruikt alleen velddata van echte Chrome-gebruikers.\n- De labscore loopt niet achter: hij is een momentopname. De velddata beslaan juist de afgelopen 28 dagen.",
+  "uitleg": "**Kort gezegd:** de meetlat is veranderd, niet de site. Vergelijk dus nooit scores van twee verschillende Lighthouse-versies.\n\nOp 27 oktober 2026 verscheen **Lighthouse 13.6.0**, en PageSpeed Insights draait er al op. Lighthouse laadt een pagina op volle snelheid en rekent daarna uit hoe dat op een trage verbinding zou gaan. Die rekenmachine (Lantern) is aangepast:\n- Of een bestand het renderen blokkeert, leest Lighthouse nu uit Chrome zelf, in plaats van het af te leiden uit de prioriteit.\n- Is het LCP-element tekst die tegelijk met de eerste content verschijnt, dan schat Lighthouse de LCP nu met dezelfde bestanden als de FCP.\n\nVolgens Chrome levert dat nauwkeuriger en meestal **hogere** scores op, vooral bij sites met veel JavaScript. In Chrome DevTools komt 13.6 pas met Chrome 159, naar verwachting op 8 december. Tot die tijd kunnen DevTools en PageSpeed Insights dus verschillende scores geven.\n\nWat betekent dit voor je rapportages?\n- Kijk onderaan het rapport welke Lighthouse-versie is gebruikt.\n- Zet bij grafieken met labscores een notitie bij eind oktober.\n- Beoordeel vooruitgang op **velddata**: de Core Web Vitals op het 75e percentiel, over 28 dagen.",
+  "kernpunt": "Een sprong in de PageSpeed-score na 27 oktober 2026 komt vaak door Lighthouse 13.6, niet door de site. Vergelijk alleen scores van dezelfde versie en beoordeel snelheid op velddata.",
+  "toepassing": "Zet deze week in elk dashboard of rapport met PageSpeed-scores een notitie bij eind oktober 2026: 'nieuwe Lighthouse-versie'. Check bij één klant of de velddata in dezelfde periode echt veranderd zijn.",
+  "bron": {
+    "titel": "Search Engine Journal: PageSpeed Insights Scores May Rise After Lighthouse Update",
+    "url": "https://www.searchenginejournal.com/pagespeed-insights-scores-lighthouse-update/595698/"
+  },
+  "video": {
+    "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+    "kanaal": "Matt Diggity",
+    "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
+  }
+}

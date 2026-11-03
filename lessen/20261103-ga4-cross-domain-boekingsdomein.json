@@ -1,0 +1,32 @@
+{
+  "id": "20261103-ga4-cross-domain-boekingsdomein",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: cross-domain measurement bij een apart boekingsdomein",
+  "matrix": [
+    "3.1.2",
+    "3.1.4"
+  ],
+  "titel": "Bijna alle boekingen komen van je eigen site als 'referral'",
+  "intro": "Een vakantiepark heeft zijn site op voorbeeldpark.nl, maar boeken gaat via boeken-voorbeeldpark.nl, een tweede domein van dezelfde klant. Beide domeinen hebben dezelfde GA4-tag. In GA4 komen bijna alle boekingen binnen met als bron 'voorbeeldpark.nl / referral', en het aantal gebruikers ligt opvallend hoog.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de oorzaak, en wat stel je in?",
+    "opties": [
+      "De tag op het boekingsdomein is dubbel geplaatst; haal één van de twee tags weg, dan verdwijnt de referral vanzelf.",
+      "GA4 kan geen twee domeinen in één property meten; maak voor het boekingsdomein een eigen property met een eigen G-ID.",
+      "Bezoekers zijn op het tweede domein een nieuwe gebruiker; stel cross-domain measurement in voor beide domeinen.",
+      "Zet het eigen domein op de lijst met ongewenste verwijzingen, dan telt GA4 gebruikers op beide domeinen als één persoon."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Zonder cross-domain measurement ziet GA4 één bezoeker op twee domeinen als **twee gebruikers en twee sessies**. De tweede sessie begint met de eerste site als verwijzer, dus krijgt je eigen site het krediet voor de boeking. Cross-domain measurement geeft de ID's mee van het ene naar het andere domein.\n\n- Een dubbele tag geeft dubbele events, geen referral van je eigen site.\n- Eén property kan prima meerdere domeinen meten. Een aparte property maakt de klantreis juist onzichtbaar.\n- Ongewenste verwijzingen haalt de verwijzer weg, maar koppelt de gebruikers niet aan elkaar.",
+  "uitleg": "**Kort gezegd:** GA4 herkent een bezoeker aan een cookie, en een cookie hoort bij één domein. Gaat iemand naar een ander domein, dan moet je GA4 vertellen dat het dezelfde persoon is.\n\nDat doe je met **cross-domain measurement**. Zo stel je het in, volgens de GA4-help:\n- Ga naar Beheer → Gegevensverzameling en -aanpassing → Gegevensstreams en kies je webstream.\n- Klik op Taginstellingen configureren → Je domeinen configureren.\n- Voeg elk domein toe als voorwaarde. Je kunt er tot 100 toevoegen, en je hebt de rol Bewerker nodig.\n\nGA4 plakt daarna bij links en formulieren naar het andere domein de parameter **_gl** aan de URL. Daarin zitten de ID's, zodat de cookies op het tweede domein dezelfde waarden krijgen. Voorwaarde: op elke pagina staat dezelfde Google-tag (dezelfde G-ID uit dezelfde webstream).\n\nWaar het vaak misgaat:\n- Een **redirect** op het boekingsdomein haalt de _gl-parameter weg. Laat de parameter bij redirects staan.\n- Gaat de overstap via **JavaScript** in plaats van een klik op een link, dan werkt de koppeling niet.\n\nTesten: klik zelf door naar het boekingsdomein en kijk of _gl in de URL staat. Controleer daarna in DebugView of je sessie doorloopt.",
+  "kernpunt": "Twee domeinen in één klantreis? Stel cross-domain measurement in met dezelfde G-ID op beide domeinen. Anders wordt één bezoeker twee gebruikers en krijgt je eigen site het krediet als referral.",
+  "toepassing": "Kijk deze week bij een klant met een apart boekings-, betaal- of offertedomein in Verkeersacquisitie of het eigen domein als referral voorkomt. Zo ja: check de domeininstellingen van de webstream.",
+  "bron": {
+    "titel": "[GA4] Set up cross-domain measurement - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/10071811"
+  }
+}

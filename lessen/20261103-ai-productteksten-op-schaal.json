@@ -1,0 +1,32 @@
+{
+  "id": "20261103-ai-productteksten-op-schaal",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "AI-gegenereerde content: Googles standpunt en scaled content abuse",
+  "matrix": [
+    "2.1.7",
+    "2.1.5"
+  ],
+  "titel": "6.000 productteksten in één weekend met AI: goed plan?",
+  "intro": "Een webshop in badkamerartikelen heeft 6.000 producten met alleen de tekst van de leverancier. De marketeer wil met AI in één weekend voor alle producten een nieuwe beschrijving maken en die direct publiceren. 'Google straft AI-tekst toch niet meer?'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is je advies aan de marketeer?",
+    "opties": [
+      "Niet doen: Google herkent AI-tekst en zet pagina's met gegenereerde content standaard lager, ook als de tekst klopt.",
+      "AI mag, maar alleen als het waarde toevoegt: laat het op echte productdata leunen en controleer feiten vóór publicatie.",
+      "Prima, mits je onder elke tekst vermeldt dat hij met AI is gemaakt; dat label is voor Google de voorwaarde om te ranken.",
+      "Doen, en liefst nog meer varianten per product: hoe meer unieke tekst op de site, hoe beter Google de webshop beoordeelt."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Google verbiedt AI-content niet, maar die moet voldoen aan de Search Essentials en het spambeleid. Veel pagina's laten genereren zonder waarde voor de gebruiker kan onder **scaled content abuse** vallen. En Google vraagt je AI-content vóór publicatie te controleren op juistheid.\n\n- Google zet AI-tekst niet automatisch lager. Het gaat om de kwaliteit, niet om hoe de tekst gemaakt is.\n- Vertellen hoe content is gemaakt kan lezers helpen, maar het is geen voorwaarde om te ranken.\n- Meer tekst is niet beter. Massa zonder waarde is juist het risico.",
+  "uitleg": "**Kort gezegd:** niet het gereedschap telt, maar wat de lezer eraan heeft.\n\nWat Google Search Central zegt over generatieve AI:\n- Je content moet voldoen aan de **Search Essentials** en het **spambeleid**.\n- Met AI of vergelijkbare tools veel pagina's maken **zonder waarde voor gebruikers** kan in strijd zijn met het beleid tegen scaled content abuse.\n- Richt je op **juistheid, kwaliteit en relevantie**, en controleer alle AI-content zelf voordat je hem publiceert.\n- Die controle geldt ook voor **metadata**: title, meta description, structured data en alt-teksten. Ook die kunnen in de zoekresultaten verschijnen.\n- Lezers vertellen hoe content is gemaakt, kan helpen voor context.\n\nVoor webshops met **Merchant Center** gelden extra regels. AI-afbeeldingen moeten IPTC-metadata bevatten (DigitalSourceType: TrainedAlgorithmicMedia). Door AI gemaakte titels en beschrijvingen in de productfeed moeten apart worden opgegeven en als AI-gegenereerd worden gemarkeerd.\n\nEen verstandig plan voor deze webshop: begin met de best verkopende producten. Laat de AI werken vanuit echte specificaties (maten, materiaal, montage), controleer steekproefsgewijs op fouten en meet het effect voordat je opschaalt.",
+  "kernpunt": "AI-content mag van Google, zolang het juist is en waarde toevoegt. Massaal pagina's genereren zonder controle en zonder meerwaarde kan scaled content abuse zijn.",
+  "toepassing": "Vraag deze week bij een klant die met AI teksten maakt hoe de controle vóór publicatie geregeld is. Leg in één alinea vast wie de feiten checkt.",
+  "bron": {
+    "titel": "Google Search's guidance on using generative AI content on your website | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content"
+  }
+}

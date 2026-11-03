@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-02T10:24:18",
+    "bijgewerkt":  "2026-11-03T05:28:41",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -329,7 +329,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-03"
                    },
                    {
                        "id":  "20261020-ga-certificering",
@@ -452,7 +452,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-03"
                    },
                    {
                        "id":  "20261020-paginering-zonder-prev-next",
@@ -473,7 +473,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-03"
                    },
                    {
                        "id":  "20261020-paid-social-campagnestructuur",
@@ -594,7 +594,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-03"
                    },
                    {
                        "id":  "20261020-ratings-eigen-reviews",
@@ -696,7 +696,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "juistLangst":  true
+                       "herzien":  "2026-11-03"
                    },
                    {
                        "id":  "20261020-ttfb-verbeteren",
@@ -2261,7 +2261,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-03"
                    },
                    {
                        "id":  "20261029-een-of-twee-landingspaginas",
@@ -3187,6 +3188,188 @@
                                      "kanaal":  "Matt Diggity",
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-ab-test-segment-achteraf",
+                       "titel":  "Geen winnaar, behalve op de iPad: alleen daar uitrollen?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testen: segmenten achteraf en het probleem van meervoudig testen",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "7.2.2",
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Segmenten achteraf zijn extra tests: bij 20 segmenten vind je met 5% significantie gemiddeld één \u0027winnaar\u0027 door toeval. Zie zo\u0027n uitkomst als hypothese en test hem opnieuw.",
+                       "bron":  {
+                                    "titel":  "How Do I Avoid Common A/B Testing Mistakes? | Adobe Target (Experience League)",
+                                    "url":  "https://experienceleague.adobe.com/en/docs/target/using/activities/abtest/common-ab-testing-pitfalls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-ai-productteksten-op-schaal",
+                       "titel":  "6.000 productteksten in één weekend met AI: goed plan?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "AI-gegenereerde content: Googles standpunt en scaled content abuse",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.7",
+                                      "2.1.5"
+                                  ],
+                       "kernpunt":  "AI-content mag van Google, zolang het juist is en waarde toevoegt. Massaal pagina\u0027s genereren zonder controle en zonder meerwaarde kan scaled content abuse zijn.",
+                       "bron":  {
+                                    "titel":  "Google Search\u0027s guidance on using generative AI content on your website | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-anthropic-crawlers-robots-txt",
+                       "titel":  "Niet in de training van Claude, wél te vinden in Claude: kan dat?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "AI-crawlers van Anthropic: ClaudeBot, Claude-SearchBot en Claude-User",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "12.1.3"
+                                  ],
+                       "kernpunt":  "Anthropic heeft drie bots: ClaudeBot (training), Claude-SearchBot (zoeken) en Claude-User (ophalen op verzoek). Blokkeer alleen ClaudeBot als je uit de training wilt maar wel vindbaar wilt blijven in Claude.",
+                       "bron":  {
+                                    "titel":  "Does Anthropic crawl data from the web, and how can site owners block the crawler? | Claude Help Center",
+                                    "url":  "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-claude-search-console-koppeling",
+                       "titel":  "Claude noemt de pagina\u0027s met het grootste klikverlies. Waar komt dat vandaan?",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "MCP-koppelingen: Claude toegang geven tot Search Console-data",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Zonder koppeling of bestand heeft Claude geen Search Console-data, en cijfers in zijn antwoord zijn dan verzonnen. Koppel via een MCP-connector of geef een export mee, en controleer welke vraag er aan de data is gesteld.",
+                       "bron":  {
+                                    "titel":  "What is the Model Context Protocol (MCP)? | Model Context Protocol",
+                                    "url":  "https://modelcontextprotocol.io/docs/getting-started/intro"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-dashboard-ctr-gemiddelde",
+                       "titel":  "CTR 6,2% in het dashboard, 2,5% in Search Console: welke klopt?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Rapportagedashboard: CTR in een totaalregel goed berekenen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.5",
+                                      "4.1.1"
+                                  ],
+                       "kernpunt":  "Een totale CTR is de som van de klikken gedeeld door de som van de vertoningen, nooit het gemiddelde van losse CTR\u0027s. Hetzelfde geldt voor conversieratio en andere percentages.",
+                       "bron":  {
+                                    "titel":  "Performance report (Search results) - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/7576553"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-ga4-cross-domain-boekingsdomein",
+                       "titel":  "Bijna alle boekingen komen van je eigen site als \u0027referral\u0027",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: cross-domain measurement bij een apart boekingsdomein",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.2",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "Twee domeinen in één klantreis? Stel cross-domain measurement in met dezelfde G-ID op beide domeinen. Anders wordt één bezoeker twee gebruikers en krijgt je eigen site het krediet als referral.",
+                       "bron":  {
+                                    "titel":  "[GA4] Set up cross-domain measurement - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/10071811"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-lighthouse-13-6-psi-scoresprong",
+                       "titel":  "PageSpeed-score van 58 naar 74, terwijl er niets is veranderd",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "PageSpeed Insights: scoresprong door een nieuwe Lighthouse-versie",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.1",
+                                      "4.1.1"
+                                  ],
+                       "kernpunt":  "Een sprong in de PageSpeed-score na 27 oktober 2026 komt vaak door Lighthouse 13.6, niet door de site. Vergelijk alleen scores van dezelfde versie en beoordeel snelheid op velddata.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: PageSpeed Insights Scores May Rise After Lighthouse Update",
+                                    "url":  "https://www.searchenginejournal.com/pagespeed-insights-scores-lighthouse-update/595698/"
+                                },
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-tijdelijke-redirect-302",
+                       "titel":  "Zes weken een 301 naar \u0027Binnenkort weer leverbaar\u0027: wat gaat er mis?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Statuscodes: permanente en tijdelijke redirects (301, 302, 307, 308)",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "301 en 308 zijn permanent en maken de doel-URL de canonieke kandidaat. Komt een pagina terug, gebruik dan een 302 of 307, of laat hem bestaan met een melding.",
+                       "bron":  {
+                                    "titel":  "Redirects and Google Search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261103-x-robots-tag-pdf-prijslijst",
+                       "titel":  "Dealerprijslijsten als pdf in Google: hoe haal je ze eruit?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Meta robots en X-Robots-Tag: pdf\u0027s uit de index houden",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.3.1",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "Bestanden zonder HTML, zoals pdf\u0027s, houd je uit de index met de HTTP-header X-Robots-Tag: noindex. Laat ze wel crawlbaar, anders ziet Google die header nooit.",
+                       "bron":  {
+                                    "titel":  "Robots meta tag, data-nosnippet, and X-Robots-Tag specifications | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
+                                },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    }

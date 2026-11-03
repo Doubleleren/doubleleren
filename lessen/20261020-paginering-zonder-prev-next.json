@@ -16,12 +16,12 @@
     "soort": "meerkeuze",
     "vraag": "Wat adviseer je de developer uit het voorbeeld?",
     "opties": [
-      "Geef elke pagina een eigen URL (?page=2) met een eigen canonical en gewone <a href>-links naar de volgende pagina.",
-      "Voer het voorstel uit: met canonicals naar pagina 1 vindt Google alle producten via één pagina.",
-      "Voeg alleen rel=prev/next toe; daarmee ziet Google de 12 pagina's als één geheel.",
-      "Laad pagina 2 tot en met 12 via #page=2, zodat er geen dubbele URL's ontstaan."
+      "Voer het voorstel uit: met rel=prev/next en canonicals naar pagina 1 vindt Google alle producten via één URL.",
+      "Zet alleen rel=prev/next op alle pagina's: daarmee ziet Google de 12 pagina's als één geheel en geen duplicaten.",
+      "Laad pagina 2 tot en met 12 via #page=2 op dezelfde URL, zodat er nergens dubbele URL's in de index komen.",
+      "Geef elke pagina een eigen URL en een eigen canonical, en link met een gewone <a href> naar de volgende pagina."
     ],
-    "juist": 0
+    "juist": 3
   },
   "toelichting": "Google gebruikt rel=prev/next niet meer en ziet elke pagina als een losse pagina. Canonicals naar pagina 1 vertellen Google dat pagina 2–12 duplicaten zijn, waardoor producten die alleen daar gelinkt staan slechter gevonden worden. Fragmenten (#) worden genegeerd, dus pagina 2+ bestaat dan voor Google niet.",
   "kernpunt": "Google gebruikt rel=prev/next niet meer (bevestigd maart 2019). Geef elke gepagineerde pagina een eigen URL, een eigen canonical en gewone links naar de volgende pagina.",
@@ -29,5 +29,7 @@
   "bron": {
     "titel": "Pagination, incremental page loading, and their impact on Google Search",
     "url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

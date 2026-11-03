@@ -15,12 +15,12 @@
     "soort": "meerkeuze",
     "vraag": "Welke aanpak is de juiste basis voor deze klant?",
     "opties": [
-      "Een Google-tag met de G-ID uit de webdatastream op de trigger Initialization - All Pages; testen in Preview en DebugView, en daarna publiceren als benoemde versie.",
-      "Een 'Google Analytics: GA4 Event'-tag met eventnaam page_view op de trigger All Pages, zodat elke paginaweergave zeker gemeten wordt.",
-      "De gtag.js-code in een Custom HTML-tag plakken en de hardcoded GA-code in de header laten staan als back-up.",
-      "Een Google-tag met de container-ID (GTM-…) als Tag ID, en direct publiceren: Preview is alleen nodig voor event-tags."
+      "Een GA4 Event-tag met eventnaam page_view op de trigger All Pages, zodat elke paginaweergave zeker en volledig gemeten wordt.",
+      "Een Google-tag met de container-ID (GTM-…) als Tag ID en direct publiceren, want Preview is eigenlijk alleen nodig voor event-tags.",
+      "Een Google-tag met de G-ID op Initialization - All Pages, testen in Preview en DebugView en dan publiceren als benoemde versie.",
+      "De gtag.js-code in een Custom HTML-tag plakken en de hardcoded GA-code in de header laten staan als back-up voor uitval."
     ],
-    "juist": 0
+    "juist": 2
   },
   "toelichting": "De Google-tag met de G-ID op Initialization - All Pages is de basis; daarna test je in Preview en DebugView en publiceer je een benoemde versie. Een losse page_view-eventtag zorgt naast de Google-tag en enhanced measurement voor dubbele paginaweergaven. Een back-up met hardcoded code meet ook dubbel. En de GTM-container-ID is geen GA4-tag-ID.",
   "kernpunt": "Basis-GA4 via GTM = Google-tag met de G-ID op Initialization - All Pages, enhanced measurement voor standaardevents, GA4 Event-tags voor de rest, en altijd eerst Preview/DebugView.",
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Set up Google Analytics in Tag Manager",
     "url": "https://support.google.com/tagmanager/answer/9442095"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }
