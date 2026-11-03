@@ -15,7 +15,7 @@
     "vraag": "Welk advies geef je over dit kruimelpad?",
     "opties": [
       "Laten zo: een pad op basis van de route van de bezoeker is persoonlijker en converteert daardoor beter dan een vaste structuur.",
-      "Toon de plek in de sitestructuur (Home > E-bikes > Stadsfietsen > Gazelle Ultimate), maak de huidige pagina geen link, en houd het op mobiel kort, bijvoorbeeld alleen het laatste niveau of twee.",
+      "Toon de plek in de sitestructuur, maak de huidige pagina geen link en houd het op mobiel kort, zodat het pad overzicht geeft.",
       "Schrap het kruimelpad: op mobiel heeft niemand er iets aan, en Google gebruikt het niet meer.",
       "Vervang het hoofdmenu door het kruimelpad, zodat er minder links op de pagina staan en de belangrijke links meer waarde krijgen."
     ],
@@ -29,5 +29,7 @@
   "bron": {
     "titel": "Breadcrumbs: 11 Design Guidelines for Desktop and Mobile | Nielsen Norman Group",
     "url": "https://www.nngroup.com/articles/breadcrumbs/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

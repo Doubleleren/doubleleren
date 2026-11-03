@@ -14,7 +14,7 @@
       "Gebruikersacquisitie filtert bots eruit en Verkeersacquisitie niet, dus het lagere getal is het betrouwbare",
       "Verkeersacquisitie bevat gemodelleerde data uit Consent Mode, Gebruikersacquisitie alleen geobserveerde data",
       "Gebruikersacquisitie telt alleen ingelogde gebruikers met een User-ID, Verkeersacquisitie iedereen",
-      "Gebruikersacquisitie laat zien via welk kanaal nieuwe gebruikers de eerste keer kwamen, Verkeersacquisitie per sessie waar die sessie vandaan kwam"
+      "Gebruikersacquisitie toont het eerste kanaal van nieuwe gebruikers, Verkeersacquisitie de bron van elke sessie"
     ],
     "juist": 3
   },
@@ -31,5 +31,7 @@
     "titel": "Acquisition Report in GA4 | How to Use & Get Insights in Google Analytics 4",
     "kanaal": "Clicks Don't Lie",
     "url": "https://www.youtube.com/watch?v=aKoZSzvVu6k"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

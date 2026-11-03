@@ -16,7 +16,7 @@
     "opties": [
       "De hero-afbeelding omzetten naar AVIF en lazy laden, zodat er bij de eerste paint minder te downloaden is.",
       "Overstappen naar snellere hosting met een CDN, zodat de TTFB en daarmee elke volgende stap korter wordt.",
-      "Kritieke CSS inline zetten, het testscript niet-blokkerend laden en tekst tonen terwijl de fonts laden.",
+      "Kritieke CSS inline, het testscript niet-blokkerend en font-display: swap, zodat de eerste paint niet wacht.",
       "Een preload toevoegen voor alle drie de CSS-bestanden, zodat de browser ze eerder ontdekt en ophaalt."
     ],
     "juist": 2
@@ -35,6 +35,6 @@
     "kanaal": "Beyond Fireship",
     "url": "https://www.youtube.com/watch?v=0fONene3OIA"
   },
-  "herzien": "2026-10-30",
-  "wijziging": "Opties even lang gemaakt."
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

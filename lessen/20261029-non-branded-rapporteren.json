@@ -14,7 +14,7 @@
       "Het totaal aan organische klikken, want het filter voor branded zoekopdrachten beïnvloedt ook hoe Google je pagina's rankt.",
       "Alleen de gemiddelde positie over alle zoekopdrachten, want die beweegt niet mee met extra merkzoekopdrachten door tv.",
       "Branded klikken, want een stijging daar laat zien dat de SEO-aanpak het merk sterker maakt in Google.",
-      "Non-branded klikken en vertoningen via het filter voor branded zoekopdrachten, met het branded verkeer apart ernaast."
+      "Non-branded klikken en vertoningen, met branded apart ernaast, want die laten het SEO-effect zien zonder de ruis van de tv-campagne."
     ],
     "juist": 3
   },
@@ -26,5 +26,7 @@
   "bron": {
     "titel": "Introducing the branded queries filter in Search Console | Google Search Central Blog",
     "url": "https://developers.google.com/search/blog/2025/11/search-console-branded-filter"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

@@ -16,7 +16,7 @@
       "Alle drie: de browser downloadt ze allemaal voordat hij iets laat zien.",
       "main.css en print.css. Alleen wide.css wordt overgeslagen, omdat het scherm te smal is.",
       "Geen enkele: stylesheets in de head blokkeren nooit, alleen scripts doen dat.",
-      "Alleen main.css."
+      "Alleen main.css: print.css en wide.css gelden hier niet, dus die blokkeren het beeld niet."
     ],
     "juist": 3
   },
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Render blocking CSS | web.dev",
     "url": "https://web.dev/articles/critical-rendering-path/render-blocking-css"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

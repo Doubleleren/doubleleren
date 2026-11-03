@@ -15,7 +15,7 @@
     "opties": [
       "Nu meteen alle pagina's met verlies herschrijven, zodat Google de verbeteringen bij de volgende crawl al meeneemt.",
       "Een heroverwegingsverzoek indienen in Search Console, omdat de daling na zo'n update als handmatige maatregel geldt.",
-      "Minstens een week na afronding wachten en dan de week erna vergelijken met de week vóór de uitrol.",
+      "Een week na afronding wachten en dan vergelijken met de week vóór de uitrol, want tijdens de uitrol schommelt alles.",
       "Twee dagen vóór en twee dagen na de afronding vergelijken, want daarna mengen andere factoren zich in de data."
     ],
     "juist": 2
@@ -33,5 +33,7 @@
     "titel": "Recover From ANY Google Algorithm Update",
     "kanaal": "Rank Math SEO",
     "url": "https://www.youtube.com/watch?v=Qcd_2W5na60"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

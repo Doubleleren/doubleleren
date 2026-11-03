@@ -12,7 +12,7 @@
     "vraag": "De klant vraagt welk van de twee getallen niet klopt. Wat antwoord je?",
     "opties": [
       "Search Console klopt niet: het rondt posities altijd af naar de beste waarde van de maand",
-      "Allebei kunnen kloppen: Search Console middelt over alle echte vertoningen, de rank tracker is één meting per dag op één plek",
+      "Allebei kunnen kloppen: GSC middelt alle echte vertoningen, de rank tracker meet één keer per dag",
       "De rank tracker meet alleen desktop en Search Console alleen mobiel, daarom verschillen ze",
       "Search Console loopt twee dagen achter, en daardoor zie je een andere positie"
     ],
@@ -26,5 +26,7 @@
   "bron": {
     "titel": "What are impressions, position, and clicks? - Search Console Help",
     "url": "https://support.google.com/webmasters/answer/7042828"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

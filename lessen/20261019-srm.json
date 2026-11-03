@@ -14,7 +14,7 @@
     "vraag": "Wat doe je voordat er iets wordt uitgerold?",
     "opties": [
       "Uitrollen: 97% haalt de significantiedrempel die vooraf is afgesproken, en daar gaat het om",
-      "Eerst toetsen of 50.000 tegen 48.500 nog bij toeval past, en zo niet de oorzaak zoeken",
+      "Eerst checken of 50.000 tegen 48.500 nog toeval kan zijn, want anders is de test niet te vertrouwen",
       "Niets extra: 3% verschil in bezoekers is te klein om de conversie-uitkomst te beïnvloeden",
       "De test laten doorlopen tot variant B ook 50.000 bezoekers heeft, zodat de groepen gelijk zijn"
     ],
@@ -30,6 +30,6 @@
     "url": "https://www.lukasvermeer.nl/srm/"
   },
   "niveau": "basis",
-  "herzien": "2026-10-30",
-  "wijziging": "Opties even lang gemaakt."
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

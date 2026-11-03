@@ -16,7 +16,7 @@
     "opties": [
       "Het is goed zo: Google leest elke regel in robots.txt en houdt zich eraan, zolang de regel onder User-agent: * staat.",
       "Blokkeer Googlebot in robots.txt. Dat is de enige manier om training te stoppen, en via de sitemap blijven de artikelen in Search.",
-      "Voeg een blok toe voor User-agent: Google-Extended met Disallow: /. Dat regelt het gebruik voor Gemini-training en grounding, zonder gevolgen voor Google Search.",
+      "Voeg User-agent: Google-Extended met Disallow: / toe. Dat regelt Gemini-training en grounding, zonder gevolgen voor Search.",
       "Zet noindex op alle artikelen. Dan worden ze niet voor AI-training gebruikt en blijven ze wel vindbaar in Search."
     ],
     "juist": 2
@@ -29,5 +29,7 @@
   "bron": {
     "titel": "Search Engine Journal: Google Explains The Limit Of Robots.txt For AI Content Use",
     "url": "https://www.searchenginejournal.com/google-illyes-robots-txt-crawling-ai-training/593957/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

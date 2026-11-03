@@ -15,7 +15,7 @@
     "vraag": "Wat zeg je tegen de klant, en wat komt er in het rapport?",
     "opties": [
       "Neem de stijging op als winst: een hogere labscore betekent dat echte bezoekers de site nu ook sneller ervaren.",
-      "PageSpeed Insights draait sinds eind oktober een nieuwe Lighthouse-versie die anders simuleert; beoordeel op velddata.",
+      "De sprong komt door een nieuwe Lighthouse-versie in PageSpeed Insights, dus beoordeel de site op velddata in plaats van labdata.",
       "Vraag direct een herberekening aan in Search Console, zodat het Core Web Vitals-rapport de nieuwe score ook overneemt.",
       "Wacht 28 dagen: de labscore loopt altijd een maand achter op de velddata, dus deze stijging gaat over september."
     ],
@@ -34,5 +34,7 @@
     "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
     "kanaal": "Matt Diggity",
     "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

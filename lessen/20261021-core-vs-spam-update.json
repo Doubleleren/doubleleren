@@ -15,7 +15,7 @@
     "vraag": "Welk antwoord klopt volgens Google?",
     "opties": [
       "Ja, na een disavow herstelt de ranking bij de eerstvolgende core update volledig.",
-      "Nee, de waarde die die links gaven is verdwenen en komt niet terug. Herstel komt van nieuwe, verdiende signalen, en dat kan maanden duren.",
+      "Nee, de waarde van die links is weg en komt niet terug. Herstel komt van nieuwe, verdiende signalen.",
       "Ja, als je een heroverwegingsverzoek indient in Search Console, worden de posities binnen een week hersteld.",
       "Nee, want een spam update raakt alleen sites met AI-content, dus de links zijn niet de oorzaak."
     ],
@@ -34,5 +34,7 @@
     "titel": "Recover From ANY Google Algorithm Update",
     "kanaal": "Rank Math SEO",
     "url": "https://www.youtube.com/watch?v=Qcd_2W5na60"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

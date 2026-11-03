@@ -15,7 +15,7 @@
     "vraag": "Wat is de meest waarschijnlijke oorzaak?",
     "opties": [
       "robots.txt blokkeert de site toch, want Search Console meldt een geblokkeerde site altijd als noindex.",
-      "De instelling bij Instellingen → Lezen om zoekmachines te ontmoedigen de site te indexeren staat nog aan vanuit de testomgeving. WordPress zet dan een robots-metatag met noindex op elke pagina.",
+      "'Zoekmachines ontmoedigen' onder Instellingen → Lezen staat nog aan vanuit de test, dus WordPress zet noindex op elke pagina.",
       "Google indexeert nieuwe sites pas na een paar maanden. Tot die tijd krijgen pagina's de status 'Uitgesloten door noindex-tag'.",
       "Zonder SEO-plugin heeft WordPress geen canonical-tags, en daarom weigert Google de pagina's."
     ],
@@ -29,5 +29,7 @@
   "bron": {
     "titel": "Changes to prevent search engines indexing sites | Make WordPress Core",
     "url": "https://make.wordpress.org/core/2019/09/02/changes-to-prevent-search-engines-indexing-sites/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

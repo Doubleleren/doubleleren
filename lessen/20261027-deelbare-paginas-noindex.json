@@ -16,7 +16,7 @@
     "opties": [
       "Direct Disallow: /deel/ in robots.txt, zodat Google de pagina's niet meer ziet en ze vanzelf uit de index verdwijnen.",
       "Op elke gedeelde pagina een rel=canonical naar de homepage, zodat de waarde naar de homepage gaat.",
-      "Gedeelde pagina's standaard een noindex geven (meta robots of X-Robots-Tag), ze crawlbaar laten tot ze uit de index zijn, en het aantal nieuwe pagina's en indexeringspieken bewaken.",
+      "Standaard een noindex (meta robots of X-Robots-Tag), crawlbaar laten tot ze uit de index zijn, en indexeringspieken bewaken.",
       "Alle URL's onder /deel/ verbergen met de tool Verwijderingen in Search Console en verder niets veranderen."
     ],
     "juist": 2
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Prevent user-generated spam on your site and platform | Google Search Central",
     "url": "https://developers.google.com/search/docs/monitor-debug/prevent-abuse"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

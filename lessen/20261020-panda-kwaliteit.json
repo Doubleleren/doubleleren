@@ -16,7 +16,7 @@
     "vraag": "Wat is het beste advies aan deze klant?",
     "opties": [
       "Een heroverwegingsverzoek indienen in Search Console, omdat een kwaliteitsdaling als handmatige actie geldt.",
-      "De getroffen pagina's eerlijk toetsen op originaliteit en meerwaarde tegenover concurrenten, en ze verbeteren.",
+      "De getroffen pagina's toetsen op originaliteit en meerwaarde en verbeteren, want Panda weegt de hele site.",
       "Wachten op de volgende Panda-refresh, want daarna wordt de kwaliteitsstraf voor de site automatisch opgeheven.",
       "In één keer de helft van de oudste artikelen verwijderen, zodat de site er voor Google weer 'verser' uitziet."
     ],
@@ -34,6 +34,6 @@
     "kanaal": "Rank Math SEO",
     "url": "https://www.youtube.com/watch?v=wYAa4BHXUPA"
   },
-  "herzien": "2026-11-02",
-  "wijziging": "Opties even lang gemaakt."
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

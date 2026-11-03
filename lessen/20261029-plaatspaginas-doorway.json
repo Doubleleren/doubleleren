@@ -13,7 +13,7 @@
     "opties": [
       "Alle 180 teksten door AI laten herschrijven, zodat elke pagina unieke content heeft en Google ze niet als kopie ziet",
       "Uitbreiden naar alle 400 plaatsen in de provincie, omdat elke extra plaatsnaam een extra lokale zoekopdracht oplevert",
-      "Samenvoegen tot pagina's per dienst plus één werkgebiedpagina, en alleen plaatsen met echt eigen inhoud apart houden",
+      "Samenvoegen tot pagina's per dienst plus één werkgebiedpagina, omdat bijna-identieke plaatspagina's als doorway pages gelden",
       "Per pagina een alinea over de plaats zelf toevoegen, zoals inwonertal en bezienswaardigheden, zodat elke pagina verschilt"
     ],
     "juist": 2
@@ -27,6 +27,6 @@
     "titel": "Spam Policies for Google Web Search | Google Search Central",
     "url": "https://developers.google.com/search/docs/essentials/spam-policies"
   },
-  "herzien": "2026-11-02",
-  "wijziging": "Opties even lang gemaakt."
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }
