@@ -814,7 +814,7 @@ async function toonScorebord() {
   for (const s of standen) {
     if (!s?.zichtbaar || verborgen.has(s.id) || !S.org.leden[s.id]) continue;
     const t = per.get(s.id) || { id: s.id, goed: 0, punten: 0, reeks: 0, nu: 0 };
-    t.goed += s.goed; t.punten += s.goed + s.langsteReeks; t.reeks = Math.max(t.reeks, s.langsteReeks); if (s.maand === nuM) t.nu = actueleReeks(s);
+    t.goed += s.goed; t.punten += s.goed + s.langsteReeks; t.reeks = Math.max(t.reeks, s.langsteReeks); if (s.maand === nuM) t.nu = Math.min(actueleReeks(s), s.langsteReeks);   // vangnet: een oude pop-up kan de reeks over de maandgrens heen schrijven
     per.set(s.id, t);
   }
   const rij = [...per.values()].sort((a, b) => b.punten - a.punten || b.goed - a.goed || String(S.org.leden[a.id].naam).localeCompare(String(S.org.leden[b.id].naam)));
