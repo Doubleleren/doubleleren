@@ -393,8 +393,25 @@ try {
             Toon-Kader $script:antwoord '#F8FAFC' '#94A3B8' 'Jouw antwoord'
             if ($les.modelantwoord) { Toon-Kader $les.modelantwoord '#EEF2FF' '#6366F1' 'Zo zou een expert het doen' }
         }
+        # "In gewone taal" direct na het antwoord (veld kort, of '**Kort gezegd:**' aan het begin van de uitleg);
+        # dan is de volledige uitleg uitklapbaar. Zelfde regel als kortEnRest() in docs/app.js.
+        $kort = ''; $rest = [string]$les.uitleg
+        if ($les.kort -and "$($les.kort)".Trim()) { $kort = "$($les.kort)".Trim() }
+        elseif ($rest -match '^\s*\*\*Kort gezegd:?\*\*:?\s*([\s\S]*?)(?:\r?\n\s*\r?\n|$)([\s\S]*)$') { $kort = $Matches[1].Trim(); $rest = $Matches[2].Trim() }
+        if ($kort) { Toon-Kader $kort '#F2FDE0' '#84CC16' 'In gewone taal' }
         if ($les.toelichting) { Toon-Tekst $les.toelichting }
-        if (-not $script:uitlegGetoond) { Toon-Label 'Uitleg'; Toon-Tekst $les.uitleg; $script:uitlegGetoond = $true }
+        if (-not $script:uitlegGetoond) {
+            if ($kort) {
+                if ($rest) {
+                    $exp = New-Object Windows.Controls.Expander
+                    $exp.Header = 'Lees de volledige uitleg'; $exp.FontSize = 14; $exp.Margin = Rand 0 4 0 10; $exp.Foreground = Kleur '#4338CA'
+                    $paneel = New-Object Windows.Controls.StackPanel; $paneel.Margin = Rand 0 8 0 0
+                    $hoofd = $inhoud; $inhoud = $paneel; Toon-Tekst $rest; $inhoud = $hoofd
+                    $exp.Content = $paneel; [void]$inhoud.Children.Add($exp)
+                }
+            } else { Toon-Label 'Uitleg'; Toon-Tekst $rest }
+            $script:uitlegGetoond = $true
+        }
         if ($les.kernpunt) { Toon-Kader $les.kernpunt '#FFFBEB' '#D97706' 'Onthoud' }
         if ($les.toepassing) { Toon-Kader $les.toepassing '#F0F9FF' '#0284C7' 'Probeer vandaag' }
         if ($les.bron -and $les.bron.url -and (Test-WebAdres $les.bron.url)) {

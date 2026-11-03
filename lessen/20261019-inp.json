@@ -21,6 +21,7 @@
     ],
     "juist": 1
   },
+  "kort": "Snel laden betekent nog niet dat je site snel reageert. INP is de meting voor hoe snel een pagina reageert als je klikt, tikt of typt, en kijkt naar het hele bezoek. Een pagina kan dus vlot laden en toch traag reageren op een klik op In winkelwagen. Meestal komt dat door zware scripts die de browser bezighouden.",
   "uitleg": "Sinds **12 maart 2024** is **INP** de officiële Core Web Vital voor responsiviteit. Het verving FID. FID mat alleen de vertraging vóór de *eerste* interactie. INP kijkt naar (bijna) álle klikken, tikken en toetsaanslagen tijdens het hele bezoek en rapporteert grofweg de traagste.\n\nDe drempels (75e percentiel van echte gebruikersdata uit CrUX):\n- Goed: 200 ms of minder\n- Verbetering nodig: 200 tot 500 ms\n- Slecht: meer dan 500 ms\n\nEen snelle laadtijd zegt dus niets over INP. Een pagina kan in 1,2 seconde laden en toch traag reageren op een klik op 'In winkelwagen' door zware JavaScript, lange taken op de main thread of third-party scripts (chatwidgets, tag managers, A/B-testtools).\n\nTBT is een *lab*-metric in Lighthouse die vaak samenhangt met INP, maar het is geen Core Web Vital.",
   "kernpunt": "INP (≤ 200 ms) meet hoe snel een pagina reageert op alle interacties, niet hoe snel hij laadt. Boosdoener is meestal JavaScript op de main thread.",
   "toepassing": "Open PageSpeed Insights voor een productpagina van een klant en kijk naar het INP-blok onder 'Ontdek wat je echte gebruikers ervaren'. Zit het boven 200 ms? Dan heb je meteen een CRO- én SEO-gesprek.",

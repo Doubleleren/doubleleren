@@ -218,6 +218,9 @@ kbd, code { font: 600 13px/1.4 ui-monospace, Consolas, monospace; background: va
 .kader.model { background: var(--smart-20); border-color: var(--smart-ink); }
 .kader.onthoud { background: #FFF6E0; border-color: var(--deels); }
 .kader.probeer { background: var(--open-50); border-color: #5B8DB8; }
+.kader.simpel { background: var(--fun-50); border-color: var(--fun); font-size: 17px; }
+.meer-uitleg { margin: 4px 0 14px; }
+.meer-uitleg > summary { cursor: pointer; font-weight: 600; padding: 6px 0; color: var(--smart-ink, inherit); }
 .opties { display: grid; gap: 8px; margin-top: 8px; }
 .optie { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 14px; border: 1.6px solid var(--cool); border-radius: var(--r-sm); cursor: pointer; }
 .optie:has(input:checked) { border-color: var(--ink); background: var(--smart-20); }
@@ -557,6 +560,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
           <label class="veld-label">Minimaal aantal tekens in het antwoord<input id="m-min" class="veld" type="number" min="20" max="1000" value="100"></label>
           <label class="veld-label">Modelantwoord: zo zou een expert het doen<textarea id="m-model" class="antwoord" rows="4" maxlength="4000"></textarea></label>
         </div>
+        <label class="veld-label">In gewone taal: 2–4 korte zinnen zonder vakjargon, staat direct na het antwoord<textarea id="m-kort" class="antwoord" rows="3" maxlength="600"></textarea></label>
         <label class="veld-label">Uitleg: de kern van de les (120–250 woorden)<textarea id="m-uitleg" class="antwoord" rows="8" maxlength="6000"></textarea></label>
         <label class="veld-label">Kernpunt: 1–2 zinnen om te onthouden<textarea id="m-kernpunt" class="antwoord" rows="2" maxlength="600"></textarea></label>
         <label class="veld-label">Probeer vandaag (optioneel): één concrete actie<textarea id="m-toepassing" class="antwoord" rows="2" maxlength="600"></textarea></label>

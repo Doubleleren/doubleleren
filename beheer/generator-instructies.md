@@ -65,6 +65,8 @@ Per soort feedback:
 
 **Modelantwoord in bestaande lessen.** Plan je een eigen open, zoek-op- of maak-met-claude-les opnieuw in en begint het `modelantwoord` nog niet met `**De kern:**`? Herschrijf het dan eerst volgens de regel in stap 3, met `herzien` en `wijziging: "Modelantwoord eenvoudiger gemaakt."`.
 
+**"In gewone taal" bij bestaande lessen** (feedback november 2026: "de uitleg is nog erg lastig, graag een Jip-en-Janneke-alinea"). Een eigen les zonder `kort` vul je aan wanneer je hem opnieuw inplant: schrijf `kort` volgens 'Begrijpelijk schrijven', en begint de `uitleg` met een alinea `**Kort gezegd:** ...`, haal die dan uit de uitleg en zet hem (zo nodig eenvoudiger) in `kort`. Zet `herzien` (vandaag) en `wijziging: "In gewone taal toegevoegd."`. Vul daarnaast elke run tot 10 andere eigen lessen zonder `kort` aan, te beginnen met lessen waarover feedback kwam dat de uitleg lastig is, daarna lessen die het vaakst in wachtrijen staan. Lessen van het team pas je niet aan.
+
 **Video bij bestaande lessen.** Plan je een eigen les zonder `video` opnieuw in, kijk dan of er in `sjablonen\<vak>\videos.json` van het vak van de les inmiddels een video staat die volgens de regel in stap 3 past. Zo ja, voeg hem toe, met `herzien` (vandaag) en `wijziging: "Kennisvideo toegevoegd."`. Een les met een video laat je zoals hij is.
 
 **Resultaten per les** (`lesstatistiek`, pas vanaf `n` ≥ 4):
@@ -142,7 +144,8 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
   "opdracht": { "soort": "meerkeuze | open | zoek-op | maak-met-claude", "vraag": "...", "opties": ["4 bij meerkeuze"], "juist": 0, "minTekens": 100, "hint": "optioneel" },
   "toelichting": "optioneel, vooral bij meerkeuze",
   "modelantwoord": "bij open/zoek-op/maak-met-claude",
-  "uitleg": "de kern van de les, 120–250 woorden",
+  "kort": "In gewone taal: 2–4 korte zinnen zonder vakjargon (zie 'Begrijpelijk schrijven'), staat direct na het antwoord",
+  "uitleg": "de verdieping, 100–150 woorden (hooguit 180); staat uitklapbaar onder 'kort'",
   "kernpunt": "1–2 zinnen om te onthouden",
   "toepassing": "1 concrete actie voor deze week bij een klant",
   "bron": { "titel": "...", "url": "https://..." },
@@ -151,7 +154,13 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
 ```
 Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJJ-MM-DD"`, `"wijziging": "korte reden"` en eventueel `"actief": false` bij.
 
-**Opbouw: eerst zelf nadenken, dan de uitleg.** Een les verschijnt altijd in deze volgorde: `intro` (de situatie) → `opdracht` → bij meerkeuze goed/fout met `toelichting`, anders het `modelantwoord` → `uitleg`, `kernpunt` en `toepassing`. De deelnemer ziet de uitleg dus pas **na** zijn antwoord. Daarom:
+**Begrijpelijk schrijven** (geldt voor elke les, ook voor gevorderd en expert: ook ervaren collega's lezen liever eenvoudig):
+- **`kort` ("In gewone taal")**: 2–4 korte zinnen die zeggen wat het antwoord is en waarom, alsof je het aan een nieuwe collega bij de koffieautomaat uitlegt. Geen vakjargon; is een woord echt nodig, leg het dan in dezelfde zin uit. Geen opsommingen, geen opmaak. Dit is wat de deelnemer als eerste leest na zijn antwoord.
+- **Elk vakbegrip leg je uit bij de eerste keer** dat het in de les voorkomt, in gewone woorden (bijv. "long-tail zoekopdrachten (lange, specifieke zoekopdrachten die weinig mensen typen)"). Begin de `toelichting` niet met een term die je pas later uitlegt.
+- **Korte zinnen**: gemiddeld hooguit 15 woorden, één gedachte per zin. Liever twee zinnen dan één met drie bijzinnen.
+- **De `uitleg` is verdieping**, 100–150 woorden (hooguit 180), met korte alinea's of een korte opsomming. Wat al in `kort` staat, hoef je niet te herhalen.
+
+**Opbouw: eerst zelf nadenken, dan de uitleg.** Een les verschijnt altijd in deze volgorde: `intro` (de situatie) → `opdracht` → bij meerkeuze goed/fout, anders het `modelantwoord` → `kort` (In gewone taal) → `toelichting` → `uitleg` (uitklapbaar), `kernpunt` en `toepassing`. De deelnemer ziet de uitleg dus pas **na** zijn antwoord. Daarom:
 - **De intro schetst alleen de situatie** (klant, cijfers, wat er speelt), in maximaal ~60 woorden. Geen regels, geen oplossingsrichting, geen opsomming van opties en geen begrippen die het antwoord weggeven.
 - **Spoilertoets** vóór het opslaan: kan iemand die het onderwerp niet kent de vraag goed beantwoorden met alleen de intro en de vraag? Dan verraadt de les zichzelf: herschrijf hem. Hetzelfde geldt voor de `hint`: die wijst een richting aan, maar geeft geen antwoord.
 - **Toepassen, niet navertellen.** Vraag om een keuze, afweging, diagnose of prioriteit in de situatie ("welk van deze filters laat je indexeren, en waarom?"), liever dan om een opsomming die je uit de uitleg kunt overnemen ("noem vijf punten").
