@@ -695,7 +695,7 @@ async function toonLesDetail(id, datum) {
   let h = (les.intro ? `<div class="zacht">${tekstHtml(les.intro)}</div>` : '') + lesLabel(label) + `<div class="vraag">${tekstHtml(o.vraag)}</div>`;
   // Een les die je zelf nog niet had (bijv. vanuit een teamprofiel): antwoord en uitleg pas na een klik
   const opties = (markeer) => `<div class="opties">${o.opties.map((t, i) => { const j = markeer && i === juist; return `<div class="optie stil${j ? ' juist' : ''}"><span aria-hidden="true">${j ? '✓' : '·'}</span><span>${esc(t)}${j ? ' <span class="sub">(juist)</span>' : ''}</span></div>`; }).join('')}</div>`;
-  const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + tekstHtml(les.toelichting) + lesLabel('Uitleg') + tekstHtml(les.uitleg) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron) + videoHtml(les.video);
+  const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + gewoneTaal(les) + tekstHtml(les.toelichting) + uitlegHtml(les) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron) + videoHtml(les.video);
   // Bijgewerkt na feedback of resultaten (door de generator): laat zien wanneer en waarom
   if (/^\d{4}-\d{2}-\d{2}$/.test(String(les.herzien || ''))) h = `<p class="sub">${les.actief === false ? 'Uit de roulatie gehaald' : 'Bijgewerkt'} op ${esc(fmtDatum(les.herzien))}${typeof les.wijziging === 'string' && les.wijziging ? ': ' + esc(les.wijziging.slice(0, 300)) : ''}</p>` + h;
   if (o.soort === 'meerkeuze') h += opties(!!log);
@@ -1004,6 +1004,20 @@ function tekstHtml(t) {
 }
 const kader = (tekst, soort, label) => (tekst ? `<div class="kader ${soort}">${label ? `<div class="kader-label">${esc(label)}</div>` : ''}${tekstHtml(tekst)}</div>` : '');
 const lesLabel = (t) => `<div class="les-label">${esc(t)}</div>`;
+// "In gewone taal": het veld kort, of (oudere lessen) de alinea '**Kort gezegd:** ...' aan het begin van de uitleg.
+// Met een korte versie staat die direct na je antwoord en is de volledige uitleg uitklapbaar.
+function kortEnRest(les) {
+  const u = String(les.uitleg || '');
+  if (typeof les.kort === 'string' && les.kort.trim()) return { kort: les.kort.trim(), rest: u };
+  const m = /^\s*\*\*Kort gezegd:?\*\*:?\s*([\s\S]*?)(?:\r?\n\s*\r?\n|$)([\s\S]*)$/.exec(u);
+  return m ? { kort: m[1].trim(), rest: m[2].trim() } : { kort: '', rest: u };
+}
+function uitlegHtml(les) {
+  const { kort, rest } = kortEnRest(les);
+  if (!kort) return lesLabel('Uitleg') + tekstHtml(rest);
+  return rest ? `<details class="meer-uitleg"><summary>Lees de volledige uitleg</summary>${tekstHtml(rest)}</details>` : '';
+}
+const gewoneTaal = (les) => kader(kortEnRest(les).kort, 'simpel', 'In gewone taal');
 const knop = (actie, tekst, extra = '') => `<button type="button" class="knop ${extra}" data-actie="${actie}">${esc(tekst)}</button>`;
 
 function magLessen() {
@@ -1134,8 +1148,8 @@ function lesAfronding() {
   } else {
     h += kader(L.antwoord, 'neutraal', 'Jouw antwoord') + kader(les.modelantwoord, 'model', 'Zo zou een expert het doen');
   }
-  h += tekstHtml(les.toelichting);
-  if (!L.uitlegGetoond) h += lesLabel('Uitleg') + tekstHtml(les.uitleg);
+  h += gewoneTaal(les) + tekstHtml(les.toelichting);
+  if (!L.uitlegGetoond) h += uitlegHtml(les);
   h += kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer vandaag') + bronHtml(les.bron) + videoHtml(les.video);
   if (o.soort !== 'meerkeuze') {
     h += lesLabel('Hoe ging het?') + `<div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
@@ -1242,7 +1256,7 @@ function verzamelLes() {
     id: `${dagKey(nu()).replace(/-/g, '')}-${slug(v('m-titel'))}`, herkomst: 'team',
     type: v('m-type'), niveau: v('m-niveau'), vakgebied: v('m-vakgebied'), onderwerp: v('m-onderwerp'),
     matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'),
-    opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt')
+    opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt'), ...(v('m-kort') ? { kort: v('m-kort') } : {})
   };
   for (const [veld, id] of [['intro', 'm-intro'], ['toelichting', 'm-toelichting'], ['modelantwoord', 'm-model'], ['toepassing', 'm-toepassing']]) if (v(id)) les[veld] = v(id);
   if (v('m-hint')) les.opdracht.hint = v('m-hint');
