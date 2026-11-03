@@ -14,7 +14,7 @@
     "vraag": "Hoe lever je dit het best op?",
     "opties": [
       "Stuur de volledige spreadsheet vrijdag op, zodat de klant alles ziet en de developer zelf de volgorde kan kiezen.",
-      "Zet bovenaan de vijf à tien acties met de meeste impact per uur werk, en stuur de rest als bijlage mee.",
+      "Zet de tien acties met de meeste impact per uur werk bovenaan en de rest als bijlage, zodat de developer direct kan starten.",
       "Vraag uitstel tot je alle 140 punten hebt uitgewerkt, want een half rapport komt onprofessioneel over bij de klant.",
       "Lever alleen de bevindingen die de tool als kritiek markeert, zodat de developer met de zwaarste fouten begint."
     ],
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Using Prioritization Matrices to Inform UX Decisions | Nielsen Norman Group",
     "url": "https://www.nngroup.com/articles/prioritization-matrices/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

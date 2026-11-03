@@ -17,7 +17,7 @@
       "Een filter voor intern verkeer instellen op het domein van de betaalprovider, zodat die sessies niet meer meetellen.",
       "Het attributiemodel van de property wijzigen, zodat de aankoop weer aan de oorspronkelijke bron wordt toegekend.",
       "In elke rapportage de betaalprovider als sessiebron wegfilteren, zodat ook de oude data weer klopt.",
-      "Het domein van de betaalprovider toevoegen aan de lijst met ongewenste verwijzingen in de datastream."
+      "Het domein van de betaalprovider toevoegen aan de ongewenste verwijzingen, zodat de aankoop zijn eigen bron houdt."
     ],
     "juist": 3
   },
@@ -29,5 +29,7 @@
   "bron": {
     "titel": "Identify unwanted referrals - Analytics Help",
     "url": "https://support.google.com/analytics/answer/10327750"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

@@ -53,7 +53,7 @@ Per soort feedback:
 
 **Spoilers in bestaande lessen.** Lessen verschijnen nu altijd met de opdracht eerst (zie "Opbouw" in stap 3). Wil je een eigen les hergebruiken, doe er dan eerst de spoilertoets op. Verraadt de intro of de hint het antwoord, of is de vraag zonder de uitleg niet te begrijpen, herzie de les dan (met `herzien` en `wijziging`) voordat je hem inplant.
 
-**Te raden meerkeuze.** Staat bij een les in `lessen\index.json` `"juistLangst": true`, dan is het juiste antwoord ruim de langste optie: dan is de les te raden zonder het onderwerp te kennen. Herzie zo'n eigen les eerst voordat je hem inplant. Pas de opties aan volgens de regel voor meerkeuze in stap 3, met `herzien` en `wijziging: "Opties even lang gemaakt."`. Herzie daarnaast elke run tot 5 van zulke lessen, ook als je ze niet inplant, tot er geen meer over zijn.
+**Te raden meerkeuze.** Staat bij een les in `lessen\index.json` `"juistLangst": true` of `"vormAfwijkend": true`, dan valt het juiste antwoord op door lengte of vorm (ruim de langste, duidelijk de kortste, of als enige met of zonder reden): dan is de les te raden zonder het onderwerp te kennen. Herzie zo'n eigen les eerst voordat je hem inplant. Pas de opties aan volgens de regel voor meerkeuze in stap 3, met `herzien` en `wijziging: "Opties even lang gemaakt."` (of `"Opties dezelfde vorm gegeven."`). Herzie daarnaast elke run tot 5 van zulke lessen, ook als je ze niet inplant, tot er geen meer over zijn.
 
 **Modelantwoord in bestaande lessen.** Plan je een eigen open, zoek-op- of maak-met-claude-les opnieuw in en begint het `modelantwoord` nog niet met `**De kern:**`? Herschrijf het dan eerst volgens de regel in stap 3, met `herzien` en `wijziging: "Modelantwoord eenvoudiger gemaakt."`.
 
@@ -167,6 +167,7 @@ Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJ
   - 65% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
     - **Het juiste antwoord valt niet op.** Alle vier opties zijn ongeveer even lang en even precies. Geef de afleiders net zoveel detail en nuance als het juiste antwoord, bijvoorbeeld een reden ("omdat …") of een voorwaarde. Zet woorden als "altijd" en "nooit" niet alleen in de foute opties.
     - Het juiste antwoord is in de meeste lessen **niet** de langste optie, en nooit meer dan 10% langer dan elke andere optie (zo'n les krijgt `juistLangst` in `lessen\index.json`). Soms mag het wel de langste zijn, anders wordt "nooit de langste" het nieuwe trucje.
+    - **Alle vier dezelfde vorm.** Geven de foute opties een reden ("want …", "omdat …", "zodat …", ", dus …"), dan geeft het juiste antwoord er ook een, en andersom. Een kaal juist antwoord tussen drie beredeneerde afleiders (of een beredeneerd juist antwoord tussen drie kale) is net zo te raden als een lang juist antwoord (feedback november 2026). Ook mag het juiste antwoord niet duidelijk de kortste zijn. Zo'n les krijgt `vormAfwijkend` in `lessen\index.json`.
     - **Raadtoets** vóór het opslaan: kun je het antwoord kiezen zonder de vraag te lezen, alleen op lengte, toon of stelligheid? Herschrijf dan de opties.
   - 15% open: minimaal 80–150 tekens
   - 10% zoek-op: minimaal 100–150 tekens, met een hint

@@ -15,7 +15,7 @@
     "vraag": "Wat doe je in Search Console?",
     "opties": [
       "Open de robots.txt-tester, plak het nieuwe bestand erin en klik op Verzenden, zodat Google de versie overneemt.",
-      "Open het robots.txt-rapport, controleer of de nieuwe versie is opgehaald en vraag zo nodig een nieuwe crawl aan.",
+      "Bekijk het robots.txt-rapport en vraag zo nodig een nieuwe crawl aan, zodat Google de nieuwe versie snel ophaalt.",
       "Dien de XML-sitemap opnieuw in, want daarmee haalt Google ook robots.txt direct opnieuw op voor de hele site.",
       "Vraag voor elke belangrijke URL indexering aan in URL-inspectie, zodat Google die pagina's als eerste opnieuw crawlt."
     ],
@@ -29,5 +29,7 @@
   "bron": {
     "titel": "robots.txt report - Search Console Help",
     "url": "https://support.google.com/webmasters/answer/6062598?hl=en"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

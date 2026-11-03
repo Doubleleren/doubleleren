@@ -16,7 +16,7 @@
       "Op de oude server overal een 301-redirect naar de nieuwe server zetten, zodat Google de nieuwe locatie snel oppikt.",
       "Na het omzetten een adreswijziging indienen in Search Console, zodat Google weet dat de site verhuisd is.",
       "Op de nieuwe server tijdelijk alles blokkeren in robots.txt tot de overstap klaar is, zodat Google geen halve site ziet.",
-      "Minstens een week vooraf de TTL verlagen en de oude server laten draaien tot daar geen verkeer meer binnenkomt."
+      "Een week vooraf de TTL verlagen en de oude server laten draaien, zodat niemand tijdens de overstap een dode site ziet."
     ],
     "juist": 3
   },
@@ -29,6 +29,6 @@
     "titel": "Changing Your Web Hosting and SEO | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes"
   },
-  "herzien": "2026-11-02",
-  "wijziging": "Opties even lang gemaakt."
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

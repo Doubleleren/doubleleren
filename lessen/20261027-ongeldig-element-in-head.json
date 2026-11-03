@@ -15,7 +15,7 @@
     "opties": [
       "De meta robots moet direct na de title staan; Google leest alleen de eerste drie elementen van de head.",
       "Google negeert een noindex in een meta-tag en volgt alleen een X-Robots-Tag in de HTTP-header.",
-      "Het img-element hoort niet in de head. Google beschouwt de head daar als afgelopen en negeert de noindex en de canonical die erna komen.",
+      "Het img-element hoort niet in de head. Google ziet de head daar als afgelopen en mist de noindex en canonical erna.",
       "De pagina heeft ook een canonical; bij een conflict tussen canonical en noindex kiest Google altijd de canonical."
     ],
     "juist": 2
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Use valid HTML to specify page metadata | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/valid-page-metadata"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

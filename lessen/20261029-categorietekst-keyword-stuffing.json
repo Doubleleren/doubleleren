@@ -13,7 +13,7 @@
     "opties": [
       "Laten staan: hoe vaker het zoekwoord en hoe meer plaatsen erin staan, hoe meer zoekopdrachten de pagina kan raken",
       "Uitbreiden naar 1.500 woorden met meer varianten van het zoekwoord, want een langere tekst rankt beter",
-      "Het plaatsenblok schrappen en de tekst herschrijven tot wat een koper helpt kiezen, met het zoekwoord waar het vanzelf past",
+      "Het plaatsenblok schrappen en de tekst herschrijven voor de koper, want het zoekwoord valt dan vanzelf op de juiste plekken",
       "Het plaatsenblok met CSS verbergen, zodat Google het nog leest maar bezoekers er geen last van hebben"
     ],
     "juist": 2
@@ -26,5 +26,7 @@
   "bron": {
     "titel": "Spam Policies for Google Web Search | Google Search Central",
     "url": "https://developers.google.com/search/docs/essentials/spam-policies"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

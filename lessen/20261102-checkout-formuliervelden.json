@@ -14,7 +14,7 @@
       "Alle velden laten staan, maar de checkout over vier stappen verdelen, zodat elke stap korter oogt en minder afschrikt.",
       "Alle optionele velden schrappen en het telefoonnummer verplicht maken, zodat de klantenservice altijd kan terugbellen.",
       "Het kortingscodeveld juist groter en bovenaan zetten, zodat bezoekers de checkout niet verlaten om een code te zoeken.",
-      "Eén naamveld, factuuradres standaard gelijk aan bezorgadres, en optionele velden en de kortingscode achter een link."
+      "Eén naamveld, factuur- gelijk aan bezorgadres, optionele velden en kortingscode achter een link, zodat er minder te typen is."
     ],
     "juist": 3
   },
@@ -26,5 +26,7 @@
   "bron": {
     "titel": "Baymard Institute: Checkout Optimization: 5 Ways to Minimize Form Fields in Checkout",
     "url": "https://baymard.com/blog/checkout-flow-average-form-fields"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

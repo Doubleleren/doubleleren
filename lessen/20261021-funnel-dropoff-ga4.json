@@ -16,7 +16,7 @@
     "vraag": "De funnel laat zien: op mobiel gaat 62% van begin_checkout naar purchase verloren, op desktop 28%. De andere stappen zijn vergelijkbaar. Wat is de beste volgende stap?",
     "opties": [
       "Toch de homepage vernieuwen, want daar beginnen de meeste bezoekers",
-      "De mobiele checkout onderzoeken, bijvoorbeeld met session recordings en een test van het mobiele afrekenproces",
+      "De mobiele checkout onderzoeken, want daar zit het grote verschil met desktop",
       "Meer mobiel verkeer inkopen, zodat er absoluut meer verkopen komen",
       "De funnel omzetten naar een open funnel, zodat het verschil kleiner wordt"
     ],
@@ -35,5 +35,7 @@
     "titel": "The BEST Conversion Rate Optimization Tutorial for Ecommerce in 2025",
     "kanaal": "ThrillX",
     "url": "https://www.youtube.com/watch?v=eWWOJL1y8Qw"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

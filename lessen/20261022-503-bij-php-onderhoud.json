@@ -14,7 +14,7 @@
     "vraag": "Welke instelling adviseer je voor die onderhoudspagina?",
     "opties": [
       "Statuscode 200, zodat Google ziet dat de server gewoon bereikbaar is en niets uit de index haalt.",
-      "Statuscode 503 met een Retry-After-header op alle pagina's, maar niet op robots.txt.",
+      "Statuscode 503 met Retry-After op elke pagina behalve robots.txt, zodat Google weet dat het tijdelijk is.",
       "Statuscode 404 op alle pagina's, want die zijn tijdelijk niet beschikbaar voor bezoekers.",
       "Statuscode 503 voor de hele site, robots.txt inbegrepen, zodat Googlebot drie uur niets crawlt."
     ],
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Search Engine Journal: Google Reminds Sites To Serve A 503 During PHP Patch Downtime",
     "url": "https://www.searchenginejournal.com/google-reminds-sites-to-serve-503s-during-server-downtime/593873/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

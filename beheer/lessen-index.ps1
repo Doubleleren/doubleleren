@@ -16,6 +16,16 @@ $lessen = foreach ($f in Get-ChildItem (Join-Path $App 'lessen') -Filter *.json 
         $len = @($l.opdracht.opties | ForEach-Object { "$_".Length }); $j = [int]$l.opdracht.juist
         $rest = (@(0..3 | Where-Object { $_ -ne $j } | ForEach-Object { $len[$_] }) | Measure-Object -Maximum).Maximum
         if ($len[$j] -gt 1.1 * $rest) { $r.juistLangst = $true }
+        # Ook te raden op vorm: het juiste antwoord als enige met (of zonder) reden, of duidelijk de kortste.
+        # Een reden is een voegwoord als 'want', een uitleg na een dubbele punt of puntkomma, of een tweede zin.
+        $reden = @($l.opdracht.opties | ForEach-Object { "$_" -match '\b(want|omdat|doordat|zodat|waardoor|daardoor|dus)\b|[:;] \S|\.\s+\S' })
+        $andere = @(0..3 | Where-Object { $_ -ne $j })
+        $redenAnders = @($andere | Where-Object { $reden[$_] }).Count
+        $kortste = ($andere | ForEach-Object { $len[$_] } | Measure-Object -Minimum).Minimum
+        $gem = ($andere | ForEach-Object { $len[$_] } | Measure-Object -Average).Average
+        if (($reden[$j] -and $redenAnders -eq 0) -or (-not $reden[$j] -and $redenAnders -eq 3) -or ($len[$j] -lt $kortste -and $len[$j] -lt 0.7 * $gem)) {
+            $r.vormAfwijkend = $true
+        }
     }
     $r
 }

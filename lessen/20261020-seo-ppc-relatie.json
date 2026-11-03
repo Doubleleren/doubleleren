@@ -16,7 +16,7 @@
     "opties": [
       "Ja, een beetje: wie flink adverteert, krijgt van Google een kleine boost in de organische resultaten.",
       "Indirect wel: de Quality Score van je advertenties telt bij Google ook mee als organisch rankingsignaal.",
-      "Nee, Ads en organisch zijn gescheiden, maar ze delen wel dezelfde zoekers, zoekwoorddata en SERP.",
+      "Nee: Ads en organisch zijn gescheiden, maar ze delen wel dezelfde zoekers, zoekwoorddata en ruimte in de SERP.",
       "Nee, het werkt zelfs andersom: wie adverteert, wordt organisch lager getoond tegen dubbele vermeldingen."
     ],
     "juist": 2
@@ -36,5 +36,5 @@
     "url": "https://www.youtube.com/watch?v=hLFYOS_lGOE"
   },
   "herzien": "2026-11-03",
-  "wijziging": "Opties even lang gemaakt."
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

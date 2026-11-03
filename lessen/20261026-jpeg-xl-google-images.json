@@ -14,7 +14,7 @@
     "vraag": "Wat adviseer je?",
     "opties": [
       "Doen: Googlebot rendert met een actuele Chrome-versie, dus alles wat Chrome kan tonen, kan Google ook indexeren.",
-      "Gebruik JPEG XL alleen als source in een picture-element. Zet een JPEG, WebP of AVIF in de img src, en ook in og:image en de structured data.",
+      "JPEG XL alleen als source in een picture-element, want in img src, og:image en structured data hoort JPEG, WebP of AVIF.",
       "Doen, maar voeg een image sitemap toe met alle .jxl-URL's. Dan pakt Google Images ze vanzelf op.",
       "Niet aan beginnen: kleinere afbeeldingen leveren geen enkel voordeel op voor SEO of conversie."
     ],
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "Search Engine Journal: Google Images & Discover Previews Don't Support JPEG XL",
     "url": "https://www.searchenginejournal.com/google-images-discover-previews-dont-support-jpeg-xl/593816/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

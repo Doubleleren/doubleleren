@@ -14,7 +14,7 @@
       "Wacht een paar dagen: Facebook haalt deelafbeeldingen elke 24 uur opnieuw op, dus de nieuwe versie verschijnt vanzelf.",
       "Voeg twitter:image toe met dezelfde URL; Facebook gebruikt die tag als die nieuwer is dan og:image.",
       "Leeg de cache van de CDN en van de browser, zodat Facebook bij de volgende keer delen de nieuwe afbeelding ziet.",
-      "Zet de nieuwe afbeelding op een nieuwe URL in og:image en laat de pagina opnieuw ophalen via de Sharing Debugger."
+      "Zet de nieuwe afbeelding op een nieuwe URL en laat hem ophalen via de Sharing Debugger, want Facebook cachet per URL."
     ],
     "juist": 3
   },
@@ -26,5 +26,7 @@
   "bron": {
     "titel": "Sharing for Webmasters | Meta for Developers",
     "url": "https://developers.facebook.com/docs/sharing/webmasters/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

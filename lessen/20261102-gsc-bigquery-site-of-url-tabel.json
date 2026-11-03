@@ -12,7 +12,7 @@
     "vraag": "Welke verklaring en aanpak kloppen?",
     "opties": [
       "De export bevat dubbele rijen door een fout in BigQuery; tel daarom met COUNT(DISTINCT url) in plaats van met SUM.",
-      "De URL-tabel telt per URL, dus twee URL's in één resultaat zijn twee vertoningen; neem totalen uit de site-tabel.",
+      "De URL-tabel telt per URL: twee URL's in één resultaat zijn twee vertoningen. Neem totalen uit de site-tabel.",
       "Het Prestatierapport rondt per dag af op hele duizendtallen; het BigQuery-getal is preciezer en dus het juiste totaal.",
       "De URL-tabel bevat ook geanonimiseerde zoekopdrachten en het rapport niet; filter is_anonymized_query er dus uit."
     ],
@@ -26,5 +26,7 @@
   "bron": {
     "titel": "Table guidelines and reference - Search Console Help",
     "url": "https://support.google.com/webmasters/answer/12917991"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }
