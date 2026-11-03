@@ -36,17 +36,19 @@ const nu = () => { const d = new Date(); if (NU) d.setFullYear(NU[0], NU[1] - 1,
 // Storing bij GitHub (5xx of geen verbinding): twee keer opnieuw proberen, daarna een LaadFout. Die telt nooit als
 // ongeldige handtekening en leidt nooit tot een deadline of een overschreven bestand.
 class LaadFout extends Error {}
+// Storing: 5xx, of een rate limit van GitHub (429, of 403 met de limiet-headers). Een gewone 403 is geen toegang.
+const isStoring = (r) => r.status >= 500 || r.status === 429 || (r.status === 403 && (r.headers.get('x-ratelimit-remaining') === '0' || r.headers.has('retry-after')));
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 async function haal(u, opties) {
   for (let poging = 0; ; poging++) {
-    try { const r = await fetch(u, opties); if (r.status < 500 || poging >= 2) return r; }
+    try { const r = await fetch(u, opties); if (!isStoring(r) || poging >= 2) return r; }
     catch (e) { if (poging >= 2) throw new LaadFout(`GitHub is even niet bereikbaar (${e.message}). Probeer het over een paar minuten opnieuw.`); }
     await wacht(700 * 3 ** poging);
   }
 }
 async function leesBytes(r, p) {
   if (r.status === 404) return null;
-  if (r.status >= 500) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
+  if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
   if (!r.ok) throw new Error(`${p}: ${r.status}`);
   return new Uint8Array(await r.arrayBuffer());
 }
@@ -62,6 +64,9 @@ function metKopie(ruw) {
   const bewaar = (p, sha, b) => { if (!aan || !sha || !b) return; kopie.set(p, { p, sha, b }); kopieDb('readwrite', (s) => s.put({ p, sha, b }, p)).catch(() => {}); };
   const vergeet = (p) => { if (kopie.delete(p)) kopieDb('readwrite', (s) => s.delete(p)).catch(() => {}); };
   const bewaarBoom = () => { if (aan && paden && !offline) kopieDb('readwrite', (s) => s.put({ p: BOOM, paden, shas: [...shas] }, BOOM)).catch(() => {}); };
+  const zetBoom = (boom) => { paden = boom.paden; shas.clear(); boom.shas.forEach((v, k) => shas.set(k, v)); };
+  // Was GitHub bij het openen weg: bij de eerste schrijfactie de boom opnieuw proberen, zodat opslaan weer lukt zodra het kan
+  const herstel = async () => { const boom = await ruw.boom(); offline = false; zetBoom(boom); bewaarBoom(); };
   const zetSha = (p, sha) => { if (sha) shas.set(p, sha); else { shas.delete(p); vergeet(p); } bewaarBoom(); };
   return {
     get paden() { return paden; },
@@ -76,11 +81,13 @@ function metKopie(ruw) {
         if (!(e instanceof LaadFout) || !oud) throw e;
         offline = true; boom = { paden: oud.paden, shas: new Map(oud.shas) };
       }
-      paden = boom.paden; shas.clear(); boom.shas.forEach((v, k) => shas.set(k, v));
+      zetBoom(boom);
       if (aan && !offline) { bewaarBoom(); for (const p of [...kopie.keys()]) if (p !== BOOM && kopie.get(p).sha !== shas.get(p)) vergeet(p); }
     },
     // Na inloggen met 'onthoud mij' aangevinkt: vanaf nu bewaren
     bewaarVoortaan() { aan = true; bewaarBoom(); },
+    // Offline begonnen: opnieuw proberen (gooit als GitHub nog weg is)
+    async online() { if (offline) await herstel(); },
     async bytes(p) {
       const k = kopie.get(p), sha = shas.get(p);
       if (k && sha && k.sha === sha) return k.b.slice();
@@ -91,7 +98,7 @@ function metKopie(ruw) {
     // Nieuwste versie en sha ophalen (na een conflict: een andere laptop schreef net)
     async ververs(p) { const r = await ruw.ververs(p); zetSha(p, r?.sha); if (r) bewaar(p, r.sha, r.b); return r ? r.b : null; },
     async schrijf(p, b) {
-      if (offline) throw new Error('GitHub is even niet bereikbaar: opslaan lukt nu niet. Probeer het over een paar minuten opnieuw.');
+      if (offline) await herstel().catch(() => { throw new Error('GitHub is even niet bereikbaar: opslaan lukt nu niet. Probeer het over een paar minuten opnieuw.'); });
       const sha = await ruw.schrijf(p, b, shas.get(p));
       if (paden && !paden.includes(p)) paden.push(p);
       zetSha(p, sha); bewaar(p, sha, b);
@@ -140,8 +147,9 @@ function apiBron(eigenaar, repo, token) {
   return metKopie({
     async boom() {
       const r = await haal(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+      if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (r.status === 401 || r.status === 403 || r.status === 404) throw new Error('UITNODIGING');
-      if (!r.ok) throw new LaadFout(`GitHub is even niet bereikbaar (${r.status}). Probeer het over een paar minuten opnieuw.`);
+      if (!r.ok) throw new Error(`GitHub gaf een onverwachte fout (${r.status}). Neem contact op met de beheerder.`);
       const blobs = (await r.json()).tree.filter((t) => t.type === 'blob');
       return { paden: blobs.map((t) => t.path), shas: new Map(blobs.map((t) => [t.path, t.sha])) };
     },
@@ -149,7 +157,7 @@ function apiBron(eigenaar, repo, token) {
     async ververs(p) {
       const r = await haal(vers(p, 'ref=main&'), { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (r.status === 404) return null;
-      if (r.status >= 500) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
+      if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (!r.ok) throw new Error(`${p}: ${r.status}`);
       const j = await r.json();
       return { sha: j.sha, b: K.b64u.dec(String(j.content).replace(/\s/g, '').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')) };
@@ -897,6 +905,9 @@ async function zetZichtbaar(aan) {
   $('sb-zichtbaar').disabled = true; $('sb-zichtbaar-status').textContent = 'Opslaan…';
   try {
     const ik = S.leden[S.mij];
+    // Anders zou het profiel wel veranderen, maar blijven de openbare scorebordbestanden staan
+    await S.data.online().catch(() => {});
+    if (S.onvolledig.has(S.mij) || S.data.offline) throw new Error('door een storing bij GitHub zijn niet al je gegevens geladen. Ververs de pagina over een paar minuten en probeer het opnieuw.');
     await werkBij(S.mij, 'profiel', ik.sl, (h) => ({ ...(h && typeof h === 'object' ? h : { v: 1 }), scorebord: aan }));
     ik.profiel = { ...(ik.profiel || {}), scorebord: aan }; SB.zichtbaar = aan;
     await werkScorebordBij(true);
