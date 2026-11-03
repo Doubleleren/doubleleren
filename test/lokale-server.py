@@ -1,7 +1,9 @@
 # Testserver voor de website op localhost: serveert de e2e-testmap en laat de website schrijven in data/
 # (PUT en DELETE), zoals de GitHub-API dat in productie doet. Alleen voor tests, alleen op 127.0.0.1.
 #   python test/lokale-server.py 8765 %TEMP%\doubleleren-e2e
-import http.server, os, sys
+# GET /data/.boom geeft per bestand een sha (zoals de git-boom van GitHub), zodat de bewaarde kopie te testen is.
+# Bestaat <testmap>/.storing, dan geeft alles onder /data/ een 500 (storing bij GitHub nabootsen).
+import hashlib, http.server, json, os, sys
 
 poort = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
 basis = os.path.realpath(sys.argv[2] if len(sys.argv) > 2 else '.')
@@ -18,6 +20,24 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return None
         f = os.path.realpath(os.path.join(basis, pad.lstrip('/')))
         return f if f.startswith(data + os.sep) else None
+
+    def do_GET(self):
+        pad = self.path.split('?', 1)[0]
+        if pad.startswith('/data/') and os.path.exists(os.path.join(basis, '.storing')):
+            self.send_error(500); return
+        if pad == '/data/.boom':
+            boom = {}
+            for map_, _, bestanden in os.walk(data):
+                for b in bestanden:
+                    if b.startswith('.'):
+                        continue
+                    f = os.path.join(map_, b)
+                    with open(f, 'rb') as h:
+                        boom[os.path.relpath(f, data).replace(os.sep, '/')] = hashlib.sha1(h.read()).hexdigest()
+            body = json.dumps(boom).encode()
+            self.send_response(200); self.send_header('Content-Type', 'application/json'); self.send_header('Content-Length', str(len(body))); self.end_headers()
+            self.wfile.write(body); return
+        super().do_GET()
 
     def do_PUT(self):
         f = self.doel()

@@ -33,21 +33,96 @@ const NU = LOKAAL && /^\d{4}-\d{2}-\d{2}$/.test(params.get('vandaag') || '') ? p
 const TIJD = LOKAAL && /^\d{2}:\d{2}$/.test(params.get('tijd') || '') ? params.get('tijd').split(':').map(Number) : null;   // ?tijd=HH:MM
 const nu = () => { const d = new Date(); if (NU) d.setFullYear(NU[0], NU[1] - 1, NU[2]); if (TIJD) d.setHours(TIJD[0], TIJD[1]); return d; };
 
-// Lokaal schrijven gaat naar test/lokale-server.py (alleen localhost, alleen de testmap).
-function lokaleBron(basis) {
-  let paden = null;
+// Storing bij GitHub (5xx of geen verbinding): twee keer opnieuw proberen, daarna een LaadFout. Die telt nooit als
+// ongeldige handtekening en leidt nooit tot een deadline of een overschreven bestand.
+class LaadFout extends Error {}
+const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
+async function haal(u, opties) {
+  for (let poging = 0; ; poging++) {
+    try { const r = await fetch(u, opties); if (r.status < 500 || poging >= 2) return r; }
+    catch (e) { if (poging >= 2) throw new LaadFout(`GitHub is even niet bereikbaar (${e.message}). Probeer het over een paar minuten opnieuw.`); }
+    await wacht(700 * 3 ** poging);
+  }
+}
+async function leesBytes(r, p) {
+  if (r.status === 404) return null;
+  if (r.status >= 500) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
+  if (!r.ok) throw new Error(`${p}: ${r.status}`);
+  return new Uint8Array(await r.arrayBuffer());
+}
+
+// Om de databron heen: paden en git-sha's uit de boom en, alleen met 'onthoud mij', een bewaarde kopie per bestand in
+// deze browser. Zelfde sha als de vorige keer = uit de kopie, zonder GitHub; zo haalt een refresh alleen wat veranderde.
+// Is GitHub even weg, dan toont de site de laatst bewaarde stand (offline) en schrijft hij niets. De kopie bevat precies
+// wat GitHub levert (versleuteld of ondertekend) en wordt na het lezen gewoon weer gecontroleerd. Weg bij Uitloggen.
+const KOPIE = 'doubleleren-kopie', BOOM = '~boom';
+const kopieDb = (mode, fn) => idb(mode, fn, KOPIE);
+function metKopie(ruw) {
+  let paden = null, offline = false, aan = false; const shas = new Map(), kopie = new Map();
+  const bewaar = (p, sha, b) => { if (!aan || !sha || !b) return; kopie.set(p, { p, sha, b }); kopieDb('readwrite', (s) => s.put({ p, sha, b }, p)).catch(() => {}); };
+  const vergeet = (p) => { if (kopie.delete(p)) kopieDb('readwrite', (s) => s.delete(p)).catch(() => {}); };
+  const bewaarBoom = () => { if (aan && paden && !offline) kopieDb('readwrite', (s) => s.put({ p: BOOM, paden, shas: [...shas] }, BOOM)).catch(() => {}); };
+  const zetSha = (p, sha) => { if (sha) shas.set(p, sha); else { shas.delete(p); vergeet(p); } bewaarBoom(); };
   return {
-    async init() { try { const r = await fetch(`${basis}/.lijst.json`, { cache: 'no-store' }); if (r.ok) paden = await r.json(); } catch { /* geen lijst */ } },
     get paden() { return paden; },
-    async bytes(p) { const r = await fetch(`${basis}/${p}`, { cache: 'no-store' }); if (r.status === 404) return null; if (!r.ok) throw new Error(`${p}: ${r.status}`); return new Uint8Array(await r.arrayBuffer()); },
-    async ververs(p) { return this.bytes(p); },
-    async schrijf(p, b) { const r = await fetch(`${basis}/${p}`, { method: 'PUT', body: b }); if (!r.ok) throw new Error(`${p}: ${r.status}`); if (paden && !paden.includes(p)) paden.push(p); },
-    async verwijder(p) { await fetch(`${basis}/${p}`, { method: 'DELETE' }); if (paden) paden = paden.filter((x) => x !== p); }
+    get offline() { return offline; },
+    async init(bewaren = false) {
+      aan = bewaren;
+      if (aan) { try { for (const k of await kopieDb('readonly', (s) => s.getAll())) if (k?.p) kopie.set(k.p, k); } catch { aan = false; } }
+      let boom;
+      try { boom = await ruw.boom(); }
+      catch (e) {
+        const oud = kopie.get(BOOM);
+        if (!(e instanceof LaadFout) || !oud) throw e;
+        offline = true; boom = { paden: oud.paden, shas: new Map(oud.shas) };
+      }
+      paden = boom.paden; shas.clear(); boom.shas.forEach((v, k) => shas.set(k, v));
+      if (aan && !offline) { bewaarBoom(); for (const p of [...kopie.keys()]) if (p !== BOOM && kopie.get(p).sha !== shas.get(p)) vergeet(p); }
+    },
+    // Na inloggen met 'onthoud mij' aangevinkt: vanaf nu bewaren
+    bewaarVoortaan() { aan = true; bewaarBoom(); },
+    async bytes(p) {
+      const k = kopie.get(p), sha = shas.get(p);
+      if (k && sha && k.sha === sha) return k.b.slice();
+      if (offline) { if (paden && !sha) return null; throw new LaadFout('GitHub is even niet bereikbaar en dit bestand is niet bewaard. Probeer het over een paar minuten opnieuw.'); }
+      const b = await ruw.bytes(p); if (b && sha) bewaar(p, sha, b);
+      return b;
+    },
+    // Nieuwste versie en sha ophalen (na een conflict: een andere laptop schreef net)
+    async ververs(p) { const r = await ruw.ververs(p); zetSha(p, r?.sha); if (r) bewaar(p, r.sha, r.b); return r ? r.b : null; },
+    async schrijf(p, b) {
+      if (offline) throw new Error('GitHub is even niet bereikbaar: opslaan lukt nu niet. Probeer het over een paar minuten opnieuw.');
+      const sha = await ruw.schrijf(p, b, shas.get(p));
+      if (paden && !paden.includes(p)) paden.push(p);
+      zetSha(p, sha); bewaar(p, sha, b);
+    },
+    async verwijder(p) {
+      const sha = shas.get(p); if (!ruw.lokaal && !sha) return;
+      await ruw.verwijder(p, sha); if (paden) paden = paden.filter((x) => x !== p); zetSha(p, null);
+    }
   };
+}
+
+// Lokaal schrijven gaat naar test/lokale-server.py (alleen localhost, alleen de testmap). .boom geeft per bestand een sha.
+function lokaleBron(basis) {
+  const ruw = {
+    lokaal: true,
+    async boom() {
+      const r = await haal(`${basis}/.boom`, { cache: 'no-store' }).catch(() => null);
+      if (r?.status >= 500) throw new LaadFout(`GitHub is even niet bereikbaar (testserver: ${r.status}). Probeer het over een paar minuten opnieuw.`);
+      if (r?.ok) { const b = await r.json(); return { paden: Object.keys(b), shas: new Map(Object.entries(b)) }; }
+      try { const l = await fetch(`${basis}/.lijst.json`, { cache: 'no-store' }); if (l.ok) return { paden: await l.json(), shas: new Map() }; } catch { /* geen lijst */ }
+      return { paden: null, shas: new Map() };
+    },
+    async bytes(p) { return leesBytes(await haal(`${basis}/${p}`, { cache: 'no-store' }), p); },
+    async ververs(p) { const b = await this.bytes(p); return b ? { b, sha: null } : null; },
+    async schrijf(p, b) { const r = await fetch(`${basis}/${p}`, { method: 'PUT', body: b }); if (!r.ok) throw new Error(`${p}: ${r.status}`); return null; },
+    async verwijder(p) { await fetch(`${basis}/${p}`, { method: 'DELETE' }); }
+  };
+  return metKopie(ruw);
 }
 const b64 = (bytes) => { const s = K.b64u.enc(bytes).replace(/-/g, '+').replace(/_/g, '/'); return s + '==='.slice((s.length + 3) % 4); };
 function apiBron(eigenaar, repo, token) {
-  let paden = null; const shas = new Map();
   const kop = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.raw+json', 'X-GitHub-Api-Version': '2022-11-28' };
   const url = (p) => `https://api.github.com/repos/${eigenaar}/${repo}/contents/${p.split('/').map(encodeURIComponent).join('/')}`;
   // Elke leesactie een eigen adres: een bedrijfsproxy (bijv. Cisco Umbrella) negeert 'Vary: Accept' en gaf anders het ruwe
@@ -62,38 +137,29 @@ function apiBron(eigenaar, repo, token) {
     if (!r.ok) throw new Error(`Opslaan mislukt (${r.status})`);
     return r.status === 204 ? null : r.json();
   };
-  return {
-    async init() {
-      const r = await fetch(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+  return metKopie({
+    async boom() {
+      const r = await haal(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (r.status === 401 || r.status === 403 || r.status === 404) throw new Error('UITNODIGING');
-      if (r.ok) { const blobs = (await r.json()).tree.filter((t) => t.type === 'blob'); paden = blobs.map((t) => t.path); blobs.forEach((t) => shas.set(t.path, t.sha)); }
+      if (!r.ok) throw new LaadFout(`GitHub is even niet bereikbaar (${r.status}). Probeer het over een paar minuten opnieuw.`);
+      const blobs = (await r.json()).tree.filter((t) => t.type === 'blob');
+      return { paden: blobs.map((t) => t.path), shas: new Map(blobs.map((t) => [t.path, t.sha])) };
     },
-    get paden() { return paden; },
-    async bytes(p) {
-      const r = await fetch(vers(p), { headers: kop, cache: 'no-store' });
-      if (r.status === 404) return null; if (!r.ok) throw new Error(`${p}: ${r.status}`); return new Uint8Array(await r.arrayBuffer());
-    },
-    // Nieuwste versie en sha ophalen (na een conflict: een andere laptop schreef net)
+    async bytes(p) { return leesBytes(await haal(vers(p), { headers: kop, cache: 'no-store' }), p); },
     async ververs(p) {
-      const r = await fetch(vers(p, 'ref=main&'), { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
-      if (r.status === 404) { shas.delete(p); return null; }
+      const r = await haal(vers(p, 'ref=main&'), { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+      if (r.status === 404) return null;
+      if (r.status >= 500) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (!r.ok) throw new Error(`${p}: ${r.status}`);
-      const j = await r.json(); shas.set(p, j.sha);
-      return K.b64u.dec(String(j.content).replace(/\s/g, '').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+      const j = await r.json();
+      return { sha: j.sha, b: K.b64u.dec(String(j.content).replace(/\s/g, '').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')) };
     },
-    async schrijf(p, b) {
-      const sha = shas.get(p);
-      const res = await verstuur('PUT', p, { content: b64(b), ...(sha ? { sha } : {}) });
-      shas.set(p, res.content.sha); if (paden && !paden.includes(p)) paden.push(p);
-    },
-    async verwijder(p) {
-      const sha = shas.get(p); if (!sha) return;
-      await verstuur('DELETE', p, { sha }); shas.delete(p); if (paden) paden = paden.filter((x) => x !== p);
-    }
-  };
+    async schrijf(p, b, sha) { return (await verstuur('PUT', p, { content: b64(b), ...(sha ? { sha } : {}) })).content.sha; },
+    async verwijder(p, sha) { await verstuur('DELETE', p, { sha }); }
+  });
 }
 function rawBron(eigenaar, repo) {
-  return { paden: null, async init() {}, async bytes(p) { const r = await fetch(`https://raw.githubusercontent.com/${eigenaar}/${repo}/main/${p}`, { cache: 'no-cache' }); if (r.status === 404) return null; if (!r.ok) throw new Error(`${p}: ${r.status}`); return new Uint8Array(await r.arrayBuffer()); } };
+  return { paden: null, async init() {}, async bytes(p) { return leesBytes(await haal(`https://raw.githubusercontent.com/${eigenaar}/${repo}/main/${p}`, { cache: 'no-cache' }), p); } };
 }
 const json = async (bron, p) => { const b = await bron.bytes(p); return b ? JSON.parse(K.tekst.uitBytes(b)) : null; };
 // Beheerbestand lezen en de handtekening van de beheersleutel controleren; vervalst = fout, ontbreekt = null
@@ -106,7 +172,7 @@ async function beheerJson(p) {
 }
 
 // ---------------------------------------------------------------- state
-const S = { bron: null, mij: null, prive: null, ak: null, org: null, lessen: {}, sjabloon: new Map(), leden: {}, sleutels: new Map(), ongeldig: 0 };
+const S = { bron: null, mij: null, prive: null, ak: null, org: null, lessen: {}, sjabloon: new Map(), leden: {}, sleutels: new Map(), ongeldig: 0, mislukt: 0, onvolledig: new Set() };
 
 async function laadOpenbaar() {
   if (LOKAAL) { S.app = lokaleBron(params.get('app')); await S.app.init(); }
@@ -125,11 +191,11 @@ async function laadOpenbaar() {
   $('vak').textContent = String(S.inst.vakgebied).toUpperCase();
 }
 
-async function verbind(uitnodiging) {
+async function verbind(uitnodiging, bewaren = false) {
   const m = UITNODIGING.exec(uitnodiging.trim());
   if (!m) throw new Error('De uitnodigingscode klopt niet. Je vindt hem in het Teams-bericht van de beheerder.');
   S.data = LOKAAL ? lokaleBron(params.get('data')) : apiBron(S.eigenaar, S.inst.dataRepo, m[2]);
-  try { await S.data.init(); }
+  try { await S.data.init(bewaren); }
   catch (e) { if (e.message === 'UITNODIGING') throw new Error('Deze uitnodigingscode heeft geen toegang (meer). Vraag de beheerder om een nieuwe.'); throw e; }
   return m[1];
 }
@@ -155,9 +221,9 @@ async function gebruikSleutel(id, jwk) {
 // uitleesbaar is (WebCrypto, niet-exporteerbaar), en samen in IndexedDB van deze site bewaard. Je code van zes woorden
 // wordt nooit bewaard. Na 30 dagen, bij Uitloggen of als je sleutel is vervangen (code kwijt) vraagt de site hem weer.
 const SESSIE_DAGEN = 30;
-function idb(mode, fn) {
+function idb(mode, fn, naam = 'doubleleren') {
   return new Promise((ok, nee) => {
-    const open = indexedDB.open('doubleleren', 1);
+    const open = indexedDB.open(naam, 1);
     open.onupgradeneeded = () => open.result.createObjectStore('kv');
     open.onerror = () => nee(open.error);
     open.onsuccess = () => {
@@ -167,7 +233,7 @@ function idb(mode, fn) {
     };
   });
 }
-const vergeetSessie = () => idb('readwrite', (s) => s.delete('sessie')).catch(() => {});
+const vergeetSessie = () => Promise.all([idb('readwrite', (s) => s.delete('sessie')).catch(() => {}), kopieDb('readwrite', (s) => s.clear()).catch(() => {})]);
 async function bewaarSessie(id, jwk, uitnodiging) {
   try {
     const apparaat = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
@@ -186,7 +252,7 @@ async function probeerSessie() {
   catch { await vergeetSessie(); return false; }
   $('login').hidden = true; $('voet').textContent = 'Automatisch inloggen…';
   try {
-    if (await verbind(inhoud.uitnodiging) !== inhoud.id) throw new Error('sleutel');
+    if (await verbind(inhoud.uitnodiging, true) !== inhoud.id) throw new Error('sleutel');
     const sl = await beheerJson(`sleutels/${inhoud.id}.json`);
     if (!sl || sl.publiek?.n !== inhoud.jwk.n) throw new Error('sleutel');   // vervangen na 'code kwijt'
     await gebruikSleutel(inhoud.id, inhoud.jwk);
@@ -203,12 +269,13 @@ async function probeerSessie() {
 // Publieke sleutels (huidig + eerdere) voor het controleren van handtekeningen
 // Generatorsleutel uit beheer/generator.json (ondertekend door de beheerder); null = nog geen aparte generatorsleutel
 async function generatorSleutel() {
-  if (S.generator === undefined) { const g = await beheerJson('generator.json').catch(() => null); S.generator = K.sleutelVorm(g?.publiek) ? g.publiek : null; }
+  if (S.generator === undefined) { const g = await beheerJson('generator.json').catch((e) => { if (e instanceof LaadFout) throw e; return null; }); S.generator = K.sleutelVorm(g?.publiek) ? g.publiek : null; }
   return S.generator;
 }
+// Bij een storing wordt niets onthouden: de volgende keer opnieuw proberen
 async function sleutelsVan(id) {
   if (id === 'generator') return [await generatorSleutel(), S.vertrouwd].filter(Boolean);   // beheersleutel: van vóór de aparte generatorsleutel
-  if (!S.sleutels.has(id)) { const s = await beheerJson(`sleutels/${id}.json`).catch(() => null); S.sleutels.set(id, s ? [s.publiek, ...(Array.isArray(s.eerdere) ? s.eerdere : [])].filter(Boolean) : []); }
+  if (!S.sleutels.has(id)) { const s = await beheerJson(`sleutels/${id}.json`).catch((e) => { if (e instanceof LaadFout) throw e; return null; }); S.sleutels.set(id, s ? [s.publiek, ...(Array.isArray(s.eerdere) ? s.eerdere : [])].filter(Boolean) : []); }
   return S.sleutels.get(id);
 }
 // Ontsleutelen + handtekening controleren; ongeldig = fout
@@ -219,11 +286,10 @@ async function openEnc(id, soort, sl, b) {
   for (const pub of await sleutelsVan(env.door)) if (await K.verifieer(pub, `${id}|${soort}`, env.door, env.inhoud, env.sig)) return JSON.parse(env.inhoud);
   throw new Error(`${soort}: ongeldige handtekening`);
 }
-// Bij het tonen: ongeldig overslaan en tellen
+// Bij het tonen: ongeldig overslaan en tellen. Niet geladen (storing) telt apart en maakt dat lid 'onvolledig'.
 async function leesEnc(id, soort, sl) {
-  const b = await S.data.bytes(`data/${id}/${soort}.enc`);
-  if (!b) return null;
-  try { return await openEnc(id, soort, sl, b); } catch { S.ongeldig++; return null; }
+  try { const b = await S.data.bytes(`data/${id}/${soort}.enc`); return b ? await openEnc(id, soort, sl, b) : null; }
+  catch (e) { if (e instanceof LaadFout) { S.mislukt++; S.onvolledig.add(id); } else S.ongeldig++; return null; }
 }
 
 // Opschonen: alleen verwachte vormen en waarden komen in de weergave
@@ -410,7 +476,8 @@ function toonSkilllijst() {
   toonPrioriteit();
   const maanden = maandenVan(lid), totaal = S.sjabloon.size, r = ronde(lid);
   $('mx-bijwerken').textContent = lid.matrix ? 'Skilllijst bijwerken' : 'Skilllijst invullen';
-  $('mx-ronde').textContent = r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
+  $('mx-ronde').textContent = S.onvolledig.has(S.mij) ? 'Je skilllijst kon niet geladen worden door een storing bij GitHub. Ververs de pagina over een paar minuten.'
+    : r.voldaan ? `Halfjaarlijkse check van ${r.naam}: gedaan. De volgende is vóór ${r.volgende}.`
     : r.vrij ? `Je skilllijst is nog vers; de eerste halfjaarlijkse check is vóór ${r.volgende}.`
     : `Halfjaarlijkse check: werk je skilllijst bij vóór ${r.tekst}${r.teLaat ? '. De deadline is voorbij: tot je hem bijwerkt, kun je geen lessen doen' : ''}.`;
   if (!lid.matrix) {
@@ -576,7 +643,7 @@ function ronde(lid, d = nu()) {
 }
 function toonRonde() {
   const b = $('ronde-banner'), ik = S.leden[S.mij];
-  const r = ik && magLessen() ? ronde(ik) : null;
+  const r = ik && magLessen() && !S.onvolledig.has(S.mij) ? ronde(ik) : null;   // skilllijst niet geladen (storing): geen melding
   if (!r?.nodig) { b.hidden = true; return; }
   b.className = 'banner' + (r.teLaat ? ' laat' : '');
   b.innerHTML = `<span>${r.teLaat ? `<b>De deadline van ${esc(r.tekst)} is voorbij.</b> Werk eerst je skilllijst bij; daarna kun je weer lessen doen.` : `<b>Halfjaarlijkse check:</b> hoe sta je er nu voor? Werk je skilllijst bij vóór ${esc(r.tekst)}.`}</span>`
@@ -756,7 +823,7 @@ async function leesScore(pad) {
         uit = { id, maand, zichtbaar: true, goed: s.goed, langsteReeks: s.langsteReeks, huidigeReeks: s.huidigeReeks, laatsteDag: s.laatsteDag, geldigTot: s.geldigTot || null };
       else S.ongeldig++;
     }
-  } catch { S.ongeldig++; }
+  } catch (e) { if (e instanceof LaadFout) { S.mislukt++; return null; } S.ongeldig++; }   // storing: niet onthouden
   SB.cache.set(pad, uit); return uit;
 }
 // Wie zich verborg: per lid telt het nieuwste GELDIGE bestand (maanden na deze maand tellen niet mee). Bij verbergen
@@ -782,7 +849,7 @@ async function schrijfOndertekend(pad, context, obj) {
 // Eigen stand bijwerken voor deze en (als daar lessen in zaten) de vorige maand; alleen schrijven als er iets veranderde.
 // Na het aan- of uitzetten (alleMaanden): elke maand met een eigen bestand of lessen, zodat verbergen nergens cijfers laat staan.
 async function werkScorebordBij(alleMaanden = false) {
-  const ik = S.leden[S.mij]; if (!ik?.sl || !S.teken || !magLessen()) return;
+  const ik = S.leden[S.mij]; if (!ik?.sl || !S.teken || !magLessen() || S.onvolledig.has(S.mij) || S.data.offline) return;   // nooit op basis van half geladen gegevens
   const nuM = dagKey(nu()).slice(0, 7), v = nu(); v.setDate(1); v.setMonth(v.getMonth() - 1);
   const maanden = alleMaanden
     ? [...new Set([...sbPaden().map((p) => SB_PAD.exec(p)).filter((m) => m[2] === S.mij).map((m) => m[1]), ...ik.logs.map((l) => l.datum.slice(0, 7)), nuM])].filter((m) => m <= nuM).sort()
@@ -1040,7 +1107,7 @@ async function kiesLes() {
   if (vandaagGedaan >= 2) return { klaar: true, aantal: vandaagGedaan };
   if (vandaagGedaan === 1 && !middag) return { klaar: true, later: true, aantal: 1 };
   if (!isWerkdag(n)) return { weekend: true };   // in het weekend geen lessen (de reeks loopt gewoon door)
-  if (ronde(ik).teLaat) return { geblokkeerd: true };
+  if (!S.onvolledig.has(S.mij) && ronde(ik).teLaat) return { geblokkeerd: true };   // skilllijst niet geladen (storing): niet blokkeren
   const gedaan = new Set(ik.logs.map((l) => l.id));
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
   const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen)];
@@ -1331,7 +1398,7 @@ function route() {
 async function naInloggen() {
   $('login').hidden = true; $('voet').textContent = 'Gegevens worden ontsleuteld en gecontroleerd…';
   S.org = await beheerJson('organisatie.json');
-  const geladen = await Promise.all(Object.keys(S.org.leden || {}).map((id) => laadLid(id).catch(() => null)));
+  const geladen = await Promise.all(Object.keys(S.org.leden || {}).map((id) => laadLid(id).catch((e) => { if (e instanceof LaadFout) { S.mislukt++; S.onvolledig.add(id); } return null; })));
   S.leden = Object.fromEntries(geladen.filter(Boolean).map((l) => [l.id, l]));
   const ik = S.leden[S.mij];
   SB.zichtbaar = ik?.profiel?.scorebord !== false;
@@ -1340,7 +1407,9 @@ async function naInloggen() {
   $('feedback-knop').hidden = !S.teken;
   $('tab-team').hidden = !magTab('team');
   if (ik) { toonMij(); toonSkilllijst(); }
-  else $('kpis').innerHTML = '<div class="kpi" style="grid-column:1/-1"><span class="label">Geen eigen gegevens</span><span class="toel">Je account is nog niet volledig ingericht. Neem contact op met de beheerder.</span></div>';
+  else $('kpis').innerHTML = S.onvolledig.has(S.mij)
+    ? '<div class="kpi" style="grid-column:1/-1"><span class="label">GitHub is even niet bereikbaar</span><span class="toel">Je gegevens zijn niet kwijt, ze konden alleen niet geladen worden. Ververs de pagina over een paar minuten.</span></div>'
+    : '<div class="kpi" style="grid-column:1/-1"><span class="label">Geen eigen gegevens</span><span class="toel">Je account is nog niet volledig ingericht. Neem contact op met de beheerder.</span></div>';
   if (teamLeden().length) toonTeam();
   toonKennisbank();
   const lessen = magLessen();
@@ -1349,7 +1418,7 @@ async function naInloggen() {
   toonRonde();
   route();
   const n = Object.keys(S.leden).length;
-  $('voet').textContent = `Gegevens ontsleuteld en gecontroleerd in je browser · ${n} ${n === 1 ? 'persoon' : 'personen'} zichtbaar voor jou${S.ongeldig ? ` · ${S.ongeldig} bestand(en) genegeerd: ongeldige handtekening` : ''}. Antwoorden zijn alleen zichtbaar voor de persoon zelf.`;
+  $('voet').textContent = `Gegevens ontsleuteld en gecontroleerd in je browser · ${n} ${n === 1 ? 'persoon' : 'personen'} zichtbaar voor jou${S.data.offline ? ' · GitHub is even niet bereikbaar: je ziet de laatst bewaarde stand' : ''}${S.mislukt ? ` · ${S.mislukt} bestand(en) niet geladen door een storing bij GitHub; ververs over een paar minuten` : ''}${S.ongeldig ? ` · ${S.ongeldig} bestand(en) genegeerd: ongeldige handtekening` : ''}. Antwoorden zijn alleen zichtbaar voor de persoon zelf.`;
   werkScorebordBij().catch(() => {});   // eigen stand bijwerken (bijv. na een les in de pop-up of op een andere laptop)
 }
 
@@ -1409,6 +1478,7 @@ $('login-form').addEventListener('submit', async (e) => {
     if ($('onthoud').checked) {
       try { localStorage.setItem('dl-uitnodiging', uitnodiging.trim()); } catch {}
       await bewaarSessie(id, jwk, uitnodiging.trim());
+      S.data.bewaarVoortaan();
     }
     $('code').value = ''; $('uitnodiging').value = '';
     await naInloggen();
