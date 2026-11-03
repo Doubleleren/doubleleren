@@ -15,8 +15,8 @@
     "soort": "meerkeuze",
     "vraag": "Welke omschrijving van RankBrain komt overeen met hoe Google het systeem zelf beschrijft?",
     "opties": [
-      "Een spamfilter uit 2012 dat pagina's met gekochte links en keyword stuffing lager zet.",
-      "Een AI-systeem uit 2015 dat begrijpt hoe woorden samenhangen met concepten, zodat Google relevante pagina's kan rangschikken die niet alle exacte zoekwoorden bevatten.",
+      "Een spamfilter uit 2012 dat pagina's met gekochte links en keyword stuffing in de resultaten lager zet.",
+      "Een AI-systeem uit 2015 dat woorden koppelt aan concepten, ook als een pagina de exacte zoekwoorden mist.",
       "Een taalmodel uit 2019 dat vooral kleine woorden zoals voorzetsels in lange zoekopdrachten beter begrijpt.",
       "Een systeem dat meet hoe lang bezoekers op je pagina blijven en de volgorde van de resultaten daarop baseert."
     ],
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "How AI powers great search results",
     "url": "https://blog.google/products/search/how-ai-powers-great-search-results/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

@@ -14,10 +14,10 @@
     "soort": "meerkeuze",
     "vraag": "Wat is de meest waarschijnlijke oorzaak, en wat los je dus als eerste op?",
     "opties": [
-      "De H1 is te lang: LinkedIn pakt dan automatisch de eerste afbeelding en de sitenaam.",
-      "De blog mist Article-structured data; zonder JSON-LD kan LinkedIn geen preview maken.",
-      "De Open Graph-tags ontbreken of zijn sitebreed hetzelfde: zet per pagina een eigen og:title, og:image (met og:image:alt) en og:url.",
-      "De afbeelding heeft geen alt-tekst in de HTML, waardoor LinkedIn hem overslaat."
+      "De H1 is te lang: LinkedIn valt dan terug op de eerste afbeelding in de header en op de title van de homepage.",
+      "De blog mist Article-structured data: zonder JSON-LD met headline en image kan LinkedIn geen eigen preview opbouwen.",
+      "De Open Graph-tags ontbreken of zijn sitebreed gelijk: zet per pagina een eigen og:title, og:image en og:url.",
+      "De headerfoto heeft geen alt-tekst in de HTML, en zonder alt-tekst slaat LinkedIn een afbeelding bij het delen over."
     ],
     "juist": 2
   },
@@ -28,5 +28,7 @@
   "bron": {
     "titel": "The Open Graph protocol",
     "url": "https://ogp.me/"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

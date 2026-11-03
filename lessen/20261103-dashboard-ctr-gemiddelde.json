@@ -1,0 +1,32 @@
+{
+  "id": "20261103-dashboard-ctr-gemiddelde",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Rapportagedashboard: CTR in een totaalregel goed berekenen",
+  "matrix": [
+    "4.1.5",
+    "4.1.1"
+  ],
+  "titel": "CTR 6,2% in het dashboard, 2,5% in Search Console: welke klopt?",
+  "intro": "In het maanddashboard van een klant staat een tabel met vijf paginagroepen, elk met klikken, vertoningen en CTR. Onderaan heeft een collega een totaalregel gemaakt. Daar staat als CTR het gemiddelde van de vijf CTR's: 6,2%. Search Console geeft voor dezelfde periode en dezelfde pagina's een CTR van 2,5%.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "De groepen: Blog 20.000 klikken op 1.000.000 vertoningen (2%), Categorie 6.000 op 200.000 (3%), Product 4.000 op 100.000 (4%), Merk 2.000 op 20.000 (10%), Contact 600 op 5.000 (12%). Welke CTR hoort in de totaalregel, en waarom?",
+    "opties": [
+      "6,2%: het gemiddelde van de groepen is eerlijker, omdat elke paginagroep dan even zwaar meetelt in het totaal.",
+      "Allebei fout: CTR kun je niet optellen of middelen, dus laat je de totaalregel voor CTR leeg en toon je alleen klikken.",
+      "6,2%: Search Console rekent geanonimiseerde zoekopdrachten mee in het totaal, en die drukken daar de CTR omlaag.",
+      "2,5%: tel alle klikken en alle vertoningen op en deel die; groepen met veel vertoningen wegen dan terecht zwaarder."
+    ],
+    "juist": 3
+  },
+  "toelichting": "CTR is **klikken gedeeld door vertoningen**. Voor het totaal tel je dus eerst alle klikken op (32.600) en alle vertoningen (1.325.000), en dan deel je: 2,5%. Het gemiddelde van vijf percentages laat de kleine groep Contact (5.000 vertoningen) even zwaar meetellen als Blog (1.000.000 vertoningen). Dat geeft een veel te hoge CTR.\n\n- Een totale CTR kun je wel berekenen, alleen niet door percentages te middelen.\n- Geanonimiseerde zoekopdrachten verklaren een verschil in klikken tussen een tabel met zoekopdrachten en het totaal. Hier gaat het om paginagroepen en een rekenfout.",
+  "uitleg": "**Kort gezegd:** een percentage over een groep reken je altijd opnieuw uit vanuit de totalen. Je neemt nooit het gemiddelde van de percentages.\n\nSearch Console definieert de CTR als het aantal klikken gedeeld door het aantal vertoningen. In een totaalregel wil je weten welk deel van álle vertoningen een klik opleverde. Dan moet een groep met veel vertoningen ook zwaarder meetellen.\n\nHet gemiddelde van percentages gaat vooral mis als de groepen erg verschillen in grootte. Kleine groepen met een hoge CTR, zoals merk- of contactpagina's, trekken het gemiddelde dan omhoog.\n\nDezelfde fout zie je vaak bij:\n- **conversieratio** per kanaal of per maand;\n- **gemiddelde positie** per paginagroep (Search Console weegt die naar vertoningen);\n- **bouncepercentage** of **engagementpercentage** per pagina.\n\nIn je dashboard los je het zo op:\n- Maak voor de totaalregel een berekend veld: som van de klikken gedeeld door de som van de vertoningen.\n- Controleer elk nieuw dashboard één keer tegen de cijfers in Search Console zelf.\n- Staat er toch een gemiddelde in, noem het dan ook zo, en niet 'totaal'.",
+  "kernpunt": "Een totale CTR is de som van de klikken gedeeld door de som van de vertoningen, nooit het gemiddelde van losse CTR's. Hetzelfde geldt voor conversieratio en andere percentages.",
+  "toepassing": "Zoek deze week in één klantdashboard een totaal- of gemiddelderegel met een percentage, en reken na of die uit de totalen komt.",
+  "bron": {
+    "titel": "Performance report (Search results) - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/7576553"
+  }
+}

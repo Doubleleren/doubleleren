@@ -14,10 +14,10 @@
     "soort": "meerkeuze",
     "vraag": "Wat is het juiste antwoord aan de klant?",
     "opties": [
-      "Ja: adverteerders met een hoog budget krijgen een kleine boost in de organische resultaten.",
-      "Indirect wel: Google gebruikt de Quality Score van je advertenties ook als organisch rankingsignaal.",
-      "Nee: adverteren heeft geen effect op je organische posities, maar SEO en PPC delen wel dezelfde zoekresultatenpagina, dezelfde zoekers en dezelfde zoekwoorddata.",
-      "Nee, en het werkt zelfs andersom: wie op een zoekwoord adverteert, wordt daar organisch lager getoond om dubbele vermeldingen te voorkomen."
+      "Ja, een beetje: wie flink adverteert, krijgt van Google een kleine boost in de organische resultaten.",
+      "Indirect wel: de Quality Score van je advertenties telt bij Google ook mee als organisch rankingsignaal.",
+      "Nee, Ads en organisch zijn gescheiden, maar ze delen wel dezelfde zoekers, zoekwoorddata en SERP.",
+      "Nee, het werkt zelfs andersom: wie adverteert, wordt organisch lager getoond tegen dubbele vermeldingen."
     ],
     "juist": 2
   },
@@ -33,5 +33,7 @@
     "titel": "The Absolute Beginner's Guide to Google Ads 2025",
     "kanaal": "Aaron Young",
     "url": "https://www.youtube.com/watch?v=hLFYOS_lGOE"
-  }
+  },
+  "herzien": "2026-11-03",
+  "wijziging": "Opties even lang gemaakt."
 }

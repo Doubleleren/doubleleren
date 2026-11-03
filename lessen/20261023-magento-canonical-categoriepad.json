@@ -13,10 +13,10 @@
     "soort": "meerkeuze",
     "vraag": "Welke aanpassing adviseer je als eerste?",
     "opties": [
-      "Zet 'Use Canonical Link Meta Tag For Products' op Yes, zodat elke productpagina een canonical krijgt naar domein/product-url-key.",
-      "Zet in robots.txt een Disallow op /sale/, zodat Google die productpagina's niet meer kan bereiken.",
+      "Zet 'Use Canonical Link Meta Tag For Products' aan, zodat elke productpagina naar de korte product-URL wijst.",
+      "Zet in robots.txt een Disallow op /sale/, zodat Google de productpagina's met dat pad niet meer crawlt en indexeert.",
       "Maak in URL Rewrites voor elke product-URL met een categoriepad een 302-redirect naar de URL zonder categoriepad.",
-      "Zet de sale-categoriepagina op noindex en laat de productpagina's verder zoals ze zijn."
+      "Zet de sale-categoriepagina op noindex, zodat Google de producten in die categorie niet meer als canonical kiest."
     ],
     "juist": 0
   },
@@ -27,5 +27,7 @@
   "bron": {
     "titel": "Meta data | Adobe Commerce (Experience League)",
     "url": "https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/meta-data"
-  }
+  },
+  "herzien": "2026-11-02",
+  "wijziging": "Opties even lang gemaakt."
 }

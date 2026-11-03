@@ -1,0 +1,26 @@
+{
+  "id": "20261103-tijdelijke-redirect-302",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Statuscodes: permanente en tijdelijke redirects (301, 302, 307, 308)",
+  "matrix": [
+    "5.1.2"
+  ],
+  "titel": "Zes weken een 301 naar 'Binnenkort weer leverbaar': wat gaat er mis?",
+  "intro": "Een fietsenwinkel haalt de categorie e-bikes zes weken offline, omdat er een nieuwe leverancier komt. De developer stuurt /e-bikes in die periode met een 301 door naar een pagina 'Binnenkort weer leverbaar'. Daarna komt de categorie terug op dezelfde URL.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de documentatie van Google Search Central op hoe Google permanente en tijdelijke redirects behandelt. Welke redirect adviseer je hier, en wat kan er misgaan met de 301?",
+    "minTekens": 100,
+    "hint": "Kijk naar wat een redirect zegt over welke URL Google als de 'echte' (canonieke) versie moet zien."
+  },
+  "modelantwoord": "**De kern:** gebruik een tijdelijke redirect (302 of 307), want de categorie komt terug. Met een 301 zeg je tegen Google dat de 'binnenkort'-pagina de nieuwe vaste URL is. Dan kan die pagina in de zoekresultaten komen in plaats van /e-bikes.\n\nWaarom: Google ziet 301 en 308 als permanent. De nieuwe URL wordt dan een signaal voor de canonieke versie. 302, 303 en 307 zijn tijdelijk: Google volgt ze, maar gebruikt ze niet als signaal dat de doel-URL canoniek is. De oude URL kan dus in de index blijven.\n\nNog beter is vaak: laat /e-bikes gewoon bestaan met status 200 en een duidelijke melding dat de fietsen binnenkort weer leverbaar zijn. Dan blijft de pagina zelf zichtbaar.\n\nVeelgemaakte fout: denken dat 301 en 302 'voor SEO hetzelfde zijn'. Voor het doorgeven van signalen maakt het weinig uit, maar wel voor welke URL Google in de resultaten toont.",
+  "uitleg": "Een redirect stuurt bezoekers en Googlebot van de ene URL naar de andere. Google maakt onderscheid tussen **permanent** en **tijdelijk**:\n\n- **Permanent:** 301 en 308. Googlebot volgt de redirect, en de indexering ziet hem als signaal dat de doel-URL de canonieke versie is. Gebruik deze alleen als je zeker weet dat je hem niet terugdraait, zoals bij een migratie.\n- **Tijdelijk:** 302, 303 en 307. Googlebot volgt de redirect ook, maar ziet hem níet als signaal voor de canonieke versie. De oorspronkelijke URL kan in de resultaten blijven staan.\n\nGoogle noemt zelf dit soort situatie als voorbeeld: een dienst is tijdelijk niet beschikbaar en je stuurt bezoekers naar een uitlegpagina, zonder de zoekresultaten van de originele URL te beïnvloeden.\n\nAndere vormen:\n- Een **meta refresh** met 0 seconden ziet Google als permanent, met een vertraging als tijdelijk.\n- Een **JavaScript-redirect** gebruik je alleen als het niet anders kan. Google ziet hem pas na het renderen, en dat kan mislukken.\n\nCheck bij elke redirect dus twee dingen: komt de pagina terug, en welke URL wil je in Google zien?",
+  "kernpunt": "301 en 308 zijn permanent en maken de doel-URL de canonieke kandidaat. Komt een pagina terug, gebruik dan een 302 of 307, of laat hem bestaan met een melding.",
+  "toepassing": "Controleer deze week met een redirectchecker of Screaming Frog bij één klant welke tijdelijke acties of seizoenspagina's met een 301 doorsturen, en of die echt permanent bedoeld zijn.",
+  "bron": {
+    "titel": "Redirects and Google Search | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
+  }
+}

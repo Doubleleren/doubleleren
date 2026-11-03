@@ -1,0 +1,31 @@
+{
+  "id": "20261103-claude-search-console-koppeling",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "MCP-koppelingen: Claude toegang geven tot Search Console-data",
+  "matrix": [
+    "4.1.2"
+  ],
+  "titel": "Claude noemt de pagina's met het grootste klikverlies. Waar komt dat vandaan?",
+  "intro": "Een collega vraagt Claude in een nieuwe chat: 'Welke pagina's van onze klant verloren deze maand de meeste klikken in Search Console?' Claude antwoordt met een nette tabel met URL's en percentages. Er zijn in die chat geen bestanden geüpload.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is hier aan de hand, en hoe krijg je wel een betrouwbaar antwoord?",
+    "opties": [
+      "De lijst klopt als je Claude vraagt om te 'zoeken op het web'; dan haalt hij de cijfers op uit het Search Console-account.",
+      "Claude heeft via Google toegang tot openbare Search Console-data; de lijst klopt, maar is een paar dagen oud.",
+      "Claude heeft deze data niet en vult het gat in; koppel Search Console via een MCP-connector of geef een export mee.",
+      "Claude geeft schattingen op basis van Ahrefs-data in zijn training; vraag om bronvermelding, dan worden de cijfers exact."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Search Console-data zijn privé: alleen wie toegang heeft tot de property kan ze zien. Zonder koppeling of bestand heeft Claude die cijfers dus niet, en een tabel met URL's en percentages is dan verzonnen. Je lost het op door Search Console te koppelen via een **MCP-connector**, of door zelf een export mee te geven.\n\n- Op het web zoeken helpt niet: Search Console-cijfers staan niet openbaar online.\n- Er bestaat geen openbare Search Console-data.\n- Om bronvermelding vragen maakt verzonnen cijfers niet ineens echt.",
+  "uitleg": "**Kort gezegd:** Claude kan alleen werken met data die je hem geeft of waar je hem een koppeling naartoe geeft.\n\n**MCP** (Model Context Protocol) is een open standaard om AI-apps zoals Claude te koppelen aan andere systemen: bestanden, databases en tools. De makers vergelijken het met een USB-C-poort: één standaardaansluiting voor allerlei apparaten. Een **MCP-server** (in Claude vaak een connector genoemd) geeft Claude toegang tot één systeem, bijvoorbeeld Search Console, Ahrefs of DataForSEO.\n\nMet zo'n koppeling kan Claude zelf een vraag aan Search Console stellen, zoals: klikken per pagina deze maand, vergeleken met vorige maand. Dan krijg je echte cijfers.\n\nLet daarbij op:\n- **Controleer de vraag die Claude stelt**: welke periode, welk land, welk zoektype, welke filters?\n- Search Console zelf heeft ook beperkingen, zoals geanonimiseerde zoekopdrachten en limieten op het aantal rijen.\n- **Toegang**: koppel alleen accounts waar je toegang toe mag hebben, en geef liefst alleen leesrechten.\n\nGeen koppeling beschikbaar? Exporteer de data uit Search Console en geef die mee. En vraag Claude om erbij te zeggen als hij iets niet weet.",
+  "kernpunt": "Zonder koppeling of bestand heeft Claude geen Search Console-data, en cijfers in zijn antwoord zijn dan verzonnen. Koppel via een MCP-connector of geef een export mee, en controleer welke vraag er aan de data is gesteld.",
+  "toepassing": "Kijk deze week welke connectors er in jouw Claude-omgeving beschikbaar zijn. Probeer er één uit met een vraag waarvan je het antwoord al weet, en vergelijk de uitkomst met Search Console zelf.",
+  "bron": {
+    "titel": "What is the Model Context Protocol (MCP)? | Model Context Protocol",
+    "url": "https://modelcontextprotocol.io/docs/getting-started/intro"
+  }
+}
