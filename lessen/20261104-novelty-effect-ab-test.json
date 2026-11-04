@@ -1,0 +1,25 @@
+{
+  "id": "20261104-novelty-effect-ab-test",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO",
+  "onderwerp": "Nieuwigheidseffect (novelty effect) in A/B-tests",
+  "matrix": ["7.2.2", "7.2.1"],
+  "titel": "+25%, +19%, +12%, +8%, +6%: uitrollen na vijf dagen?",
+  "intro": "Een webshop test een nieuw ontwerp voor de productpagina. Na vijf dagen staat de variant op +14% add-to-cart, en de testtool noemt dat significant. Per dag was het verschil: +25%, +19%, +12%, +8% en +6%. Zo'n 70% van de bezoekers komt vaker terug. De klant wil vandaag stoppen en het nieuwe ontwerp uitrollen.",
+  "opdracht": {
+    "soort": "open",
+    "vraag": "Wat adviseer je de klant, en waarom? Noem ook wat je in de data wilt bekijken voordat je beslist.",
+    "minTekens": 120,
+    "hint": "Kijk naar het verloop per dag, en bedenk voor welke bezoekers het ontwerp echt 'nieuw' is."
+  },
+  "modelantwoord": "**De kern:** nog niet uitrollen. Het effect zakt elke dag, dus vaste bezoekers klikken waarschijnlijk vooral uit nieuwsgierigheid. Laat de test langer lopen en vergelijk nieuwe met terugkerende bezoekers.\n\nWaarom:\n- Een effect dat elke dag kleiner wordt, past bij een **nieuwigheidseffect**: mensen proberen iets nieuws uit, en dat slijt.\n- Vijf dagen is minder dan een volle week. Werkdagen en weekend kunnen anders uitpakken.\n- Stoppen zodra de tool 'significant' zegt, vergroot de kans op een toevalstreffer.\n\nWat je bekijkt:\n- Het effect per dag over minstens twee volle weken: zakt het verder of wordt het stabiel?\n- Nieuwe tegenover terugkerende bezoekers. Voor nieuwe bezoekers is er geen 'oud' ontwerp, dus daar speelt nieuwigheid minder.\n- Niet alleen add-to-cart, maar ook aankopen en omzet.",
+  "kort": "Het verschil wordt elke dag kleiner. Dat wijst erop dat vaste bezoekers vooral uit nieuwsgierigheid op het nieuwe ontwerp klikken, en dat slijt. Laat de test daarom minstens twee volle weken lopen. Kijk ook apart naar nieuwe bezoekers: voor hen is er geen oud ontwerp, dus zij laten het eerlijkste beeld zien.",
+  "uitleg": "Bij een A/B-test kan het effect in de loop van de tijd veranderen. Microsoft noemt in zijn onderzoek naar online experimenten twee **leereffecten**:\n- **Nieuwigheidseffect (novelty):** bezoekers gebruiken iets nieuws uit nieuwsgierigheid. Het lijkt een succes, maar de winst slijt.\n- **Gewenningseffect (primacy):** bezoekers moeten wennen aan iets nieuws. Eerst lijkt het slechter, later trekt het bij.\n\nHoe je het herkent:\n- **Zet het effect per dag in een grafiek.** Een duidelijke trend omhoog of omlaag wijst op een leereffect.\n- **Splits naar nieuwe en terugkerende bezoekers.** Een groot verschil tussen die groepen is een sterk signaal.\n\nWat je doet:\n- Laat een test minstens een volle week lopen, en bij veel terugkerende bezoekers liever langer.\n- Leg looptijd en steekproef vooraf vast.\n- Twijfel je na uitrol, meet dan door met een kleine controlegroep die het oude ontwerp houdt.",
+  "kernpunt": "Wordt het effect van een A/B-test elke dag kleiner, denk dan aan een nieuwigheidseffect. Laat de test langer lopen en vergelijk nieuwe met terugkerende bezoekers voordat je uitrolt.",
+  "toepassing": "Zet bij de eerstvolgende A/B-test van een klant het effect per dag in een grafiek, en splits het resultaat vooraf naar nieuwe en terugkerende bezoekers.",
+  "bron": {
+    "titel": "External Validity of Online Experiments: Can We Predict the Future? - Microsoft Research",
+    "url": "https://www.microsoft.com/en-us/research/articles/external-validity-of-online-experiments-can-we-predict-the-future/"
+  }
+}

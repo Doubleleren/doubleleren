@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-03T13:01:37",
+    "bijgewerkt":  "2026-11-04T05:30:47",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1726,7 +1726,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-04"
                    },
                    {
                        "id":  "20261027-eeat-geen-rankingfactor",
@@ -3380,6 +3380,207 @@
                        "bron":  {
                                     "titel":  "Robots meta tag, data-nosnippet, and X-Robots-Tag specifications | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-ab-hypotheses-uit-reviews-claude",
+                       "titel":  "\u0027Maak de knop groen\u0027: betere A/B-testideeën uit 400 reviews halen",
+                       "vakgebied":  "CRO × Claude",
+                       "onderwerp":  "Claude voor A/B-testhypotheses uit klantdata",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.2.1",
+                                      "7.1.5"
+                                  ],
+                       "kernpunt":  "Laat Claude A/B-hypotheses maken met doel, context en een vast format (wijziging, verwacht effect, reden uit de data), en vraag citaten met een nummer zodat je kunt nakijken of het echt in de data staat.",
+                       "bron":  {
+                                    "titel":  "Prompting best practices - Claude Docs",
+                                    "url":  "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "maak-met-claude",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-gtm-versie-terugzetten",
+                       "titel":  "Sinds de GTM-publicatie van maandag telt GA4 elke aankoop dubbel",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GTM: terug naar een eerdere containerversie",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.1",
+                                      "3.2.2"
+                                  ],
+                       "kernpunt":  "Gaat er na een GTM-publicatie iets mis, publiceer dan de vorige versie opnieuw via Versies. \u0027Instellen als nieuwste versie\u0027 maakt er alleen een concept van; live verandert dan nog niets.",
+                       "bron":  {
+                                    "titel":  "Publishing, versions, and approvals - Tag Manager Help",
+                                    "url":  "https://support.google.com/tagmanager/answer/6107163"
+                                },
+                       "video":  null,
+                       "soort":  "zoek-op",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-inner-join-verliest-paginas",
+                       "titel":  "4.200 URL\u0027s gecrawld, 2.900 over na het koppelen: waar zijn de rest?",
+                       "vakgebied":  "SEO × Claude",
+                       "onderwerp":  "Python en SQL: inner join of left join bij het koppelen van exports",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.5",
+                                      "5.3.1"
+                                  ],
+                       "kernpunt":  "Zoek je wat ontbreekt (pagina\u0027s zonder klikken, links of vertoningen), gebruik dan een left join. De standaard inner join gooit precies die pagina\u0027s weg.",
+                       "bron":  {
+                                    "titel":  "pandas.merge - pandas documentation",
+                                    "url":  "https://pandas.pydata.org/docs/reference/api/pandas.merge.html"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-logs-304-http-caching",
+                       "titel":  "Googlebot haalt elke dag 18.000 artikelen op, terwijl er 300 wijzigen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Logfile-analyse: HTTP-caching (ETag, Last-Modified en 304) voor Googlebot",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.1.3",
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "Stuur ETag (en Last-Modified) mee, dan kan de server Googlebot bij ongewijzigde pagina\u0027s een 304 geven in plaats van de hele pagina. Crawl-delay en de oude crawlsnelheid-instelling werken niet bij Google.",
+                       "bron":  {
+                                    "titel":  "Overview of Google crawlers and fetchers (user agents) | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-novelty-effect-ab-test",
+                       "titel":  "+25%, +19%, +12%, +8%, +6%: uitrollen na vijf dagen?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Nieuwigheidseffect (novelty effect) in A/B-tests",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "7.2.2",
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Wordt het effect van een A/B-test elke dag kleiner, denk dan aan een nieuwigheidseffect. Laat de test langer lopen en vergelijk nieuwe met terugkerende bezoekers voordat je uitrolt.",
+                       "bron":  {
+                                    "titel":  "External Validity of Online Experiments: Can We Predict the Future? - Microsoft Research",
+                                    "url":  "https://www.microsoft.com/en-us/research/articles/external-validity-of-online-experiments-can-we-predict-the-future/"
+                                },
+                       "video":  null,
+                       "soort":  "open",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-perplexity-bots-robots-txt",
+                       "titel":  "PerplexityBot geblokkeerd, toch Perplexity in de logs",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Perplexity-crawlers: PerplexityBot en Perplexity-User",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "12.1.3",
+                                      "12.1.6"
+                                  ],
+                       "kernpunt":  "PerplexityBot zorgt dat je in Perplexity gevonden wordt; Perplexity-User haalt pagina\u0027s op voor vragen van gebruikers en negeert robots.txt meestal. Wie PerplexityBot blokkeert, wordt minder vaak als bron gevonden.",
+                       "bron":  {
+                                    "titel":  "Perplexity Crawlers - Perplexity Docs",
+                                    "url":  "https://docs.perplexity.ai/guides/bots"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-placeholder-als-label",
+                       "titel":  "Bezoekers klikken terug in ingevulde velden en wissen alles",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Formulieren: placeholdertekst als label",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Gebruik placeholdertekst nooit als enige label: hij verdwijnt bij het typen, waardoor bezoekers hun invoer niet meer kunnen nakijken. Zet vaste labels boven de velden.",
+                       "bron":  {
+                                    "titel":  "Placeholders in Form Fields Are Harmful - Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/form-design-placeholders/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-popup-script-blokkeren-robots",
+                       "titel":  "De screenshot van Google toont alleen de leeftijdscheck",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Eén JavaScript-bestand blokkeren in robots.txt: wanneer mag dat?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.1.8",
+                                      "5.3.3"
+                                  ],
+                       "kernpunt":  "Een los script blokkeren in robots.txt mag als de pagina zonder dat script goed werkt, zoals een script dat alleen een pop-up laadt. Scripts die de pagina opbouwen, blokkeer je nooit.",
+                       "bron":  {
+                                    "titel":  "Robots.txt Introduction and Guide | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-productmarkup-via-gtm",
+                       "titel":  "Productmarkup via een GTM-tag op 3.000 pagina\u0027s: goed idee?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Product-markup via JavaScript of Google Tag Manager",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.9",
+                                      "2.2.1",
+                                      "3.2.3"
+                                  ],
+                       "kernpunt":  "Google leest structured data die met JavaScript of GTM is geplaatst, maar voor Product-markup met prijs en voorraad is server-HTML beter: dynamische markup maakt Shopping-crawls minder frequent en betrouwbaar.",
+                       "bron":  {
+                                    "titel":  "Generate Structured Data with JavaScript | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/generate-structured-data-with-javascript"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261104-rankingsystemen-actief-of-gestopt",
+                       "titel":  "\u0027Getroffen door Panda, en we optimaliseren voor BERT\u0027: klopt dat?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Googles rankingsystemen: welke zijn actief en welke opgegaan in de kern",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "10.1.3",
+                                      "10.1.4",
+                                      "10.1.5"
+                                  ],
+                       "kernpunt":  "Panda en Penguin zijn al jaren onderdeel van Googles kernsystemen; BERT en RankBrain zijn nog actief, maar je optimaliseert er niet apart voor. Toets claims in audits aan Googles eigen overzicht van rankingsystemen.",
+                       "bron":  {
+                                    "titel":  "A guide to Google Search ranking systems | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

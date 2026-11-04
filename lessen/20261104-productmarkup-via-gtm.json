@@ -1,0 +1,30 @@
+{
+  "id": "20261104-productmarkup-via-gtm",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Product-markup via JavaScript of Google Tag Manager",
+  "matrix": ["2.2.9", "2.2.1", "3.2.3"],
+  "titel": "Productmarkup via een GTM-tag op 3.000 pagina's: goed idee?",
+  "intro": "Een webshop draait op een oud CMS waarin je geen code in de templates kwijt kunt. Het bureau zet daarom Product-markup met prijs en voorraad via een Custom HTML-tag in Google Tag Manager op 3.000 productpagina's. De prijzen veranderen dagelijks. De Rich Results Test met de URL toont geldige Product-markup.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is je advies aan de klant?",
+    "opties": [
+      "Prima zo: Google leest JSON-LD uit de gerenderde pagina, dus via GTM werkt de markup even goed als in de broncode zelf.",
+      "Niet doen: Google negeert structured data die met JavaScript is toegevoegd, dus de geldige test zegt hier eigenlijk niets.",
+      "Het werkt, maar zet prijs en voorraad liever in de HTML: markup via JavaScript maakt Shopping-crawls minder vaak en betrouwbaar.",
+      "Het werkt alleen als de tag op 'Window Loaded' afgaat, want anders staat de markup er nog niet als Google de pagina rendert."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google kan structured data lezen die pas na het renderen in de pagina staat, ook als GTM hem plaatst. De markup telt dus mee. Maar Google waarschuwt dat **dynamisch gegenereerde markup Shopping-crawls minder frequent en minder betrouwbaar** maakt. Juist bij prijs en voorraad, die vaak veranderen, wil je dat Google steeds de actuele waarde ziet.\n\n- **Even goed als in de broncode** klopt dus niet helemaal: voor productgegevens is server-HTML betrouwbaarder.\n- **Google negeert JavaScript-markup** is onjuist: Google leest wat in de gerenderde pagina staat.\n- **Window Loaded** is geen eis van Google. Het gaat erom dat de markup er staat als Google rendert.",
+  "kort": "Google kan productgegevens lezen die via Tag Manager in de pagina komen, dus de code werkt. Toch raadt Google dit af voor prijzen en voorraad. Google haalt die gegevens dan minder vaak en minder zeker op. Bij prijzen die elke dag veranderen, zet je ze daarom liever direct in de pagina zelf.",
+  "uitleg": "Structured data (code die zoekmachines vertelt wat er op een pagina staat) kun je op twee manieren plaatsen:\n- **In de HTML van de server.** Google ziet de markup meteen bij het ophalen.\n- **Met JavaScript**, bijvoorbeeld via een Custom HTML-tag in GTM. Google ziet de markup pas na het renderen.\n\nVoor de meeste soorten markup werken beide. Bij **Product-markup** noemt Google een nadeel: Shopping-crawls worden minder frequent en minder betrouwbaar. Dan kan een oude prijs of voorraad blijven hangen.\n\nPraktisch advies:\n- Kan het CMS echt niet anders, dan is GTM een noodoplossing. Plan een betere oplossing, zoals een plug-in of een feed via Merchant Center.\n- Test met de **Rich Results Test op de URL**, niet met geplakte code. Bij geplakte code werkt JavaScript beperkt.\n- Controleer steekproefsgewijs of prijs en voorraad in de markup gelijk zijn aan de pagina.",
+  "kernpunt": "Google leest structured data die met JavaScript of GTM is geplaatst, maar voor Product-markup met prijs en voorraad is server-HTML beter: dynamische markup maakt Shopping-crawls minder frequent en betrouwbaar.",
+  "toepassing": "Kijk deze week bij een webshopklant of de Product-markup in de broncode staat (Bron weergeven) of pas na het renderen verschijnt. Staat hij er alleen na het renderen, zet dat dan op de technische roadmap.",
+  "bron": {
+    "titel": "Generate Structured Data with JavaScript | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/generate-structured-data-with-javascript"
+  }
+}

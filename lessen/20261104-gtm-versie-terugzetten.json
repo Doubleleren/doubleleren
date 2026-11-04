@@ -1,0 +1,25 @@
+{
+  "id": "20261104-gtm-versie-terugzetten",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GTM: terug naar een eerdere containerversie",
+  "matrix": ["3.2.1", "3.2.2"],
+  "titel": "Sinds de GTM-publicatie van maandag telt GA4 elke aankoop dubbel",
+  "intro": "Een collega heeft maandag een nieuwe versie van de GTM-container van een webshop gepubliceerd. Sindsdien telt GA4 elke aankoop twee keer. De collega is op vakantie en niemand weet precies wat er is veranderd. De klant wil vandaag terug naar de situatie van vóór maandag.",
+  "opdracht": {
+    "soort": "zoek-op",
+    "vraag": "Zoek in de Tag Manager-help op hoe je zo snel mogelijk terug kunt naar de situatie van vóór maandag. Welke stappen zet je? En wat is het verschil tussen een oude versie publiceren en een oude versie instellen als nieuwste versie?",
+    "minTekens": 120,
+    "hint": "Kijk in de help bij het onderdeel over publiceren en versies."
+  },
+  "modelantwoord": "**De kern:** ga naar Versies, kies de versie van vóór maandag en publiceer die. Dan staat de oude situatie meteen weer live. 'Instellen als nieuwste versie' zet de oude versie alleen in je werkruimte als concept. Live verandert er dan nog niets tot je publiceert.\n\nStappen:\n- Open de container en ga naar **Versies**.\n- Kijk in de publicatiegeschiedenis welke versie vóór maandag live stond.\n- Klik op die versie, kies **Actie** en dan **Publiceren**.\n- Controleer in GA4 (Realtime of DebugView) of een testaankoop nog maar één keer binnenkomt.\n\nDaarna zoek je rustig uit wat er misging. Vergelijk de twee versies, of zet de oude versie als nieuwste versie in je werkruimte en voer de goede wijzigingen van maandag opnieuw door.\n\nVeelgemaakte fout: de nieuwe tag handmatig proberen te repareren onder tijdsdruk, zonder te weten wat er nog meer is gewijzigd.",
+  "kort": "Tag Manager bewaart elke gepubliceerde versie, dus je kunt altijd terug. Publiceer de versie van vóór maandag opnieuw, dan werkt alles meteen weer zoals toen. Kies je 'instellen als nieuwste versie', dan zet je die oude versie alleen klaar om aan te werken. Op de site verandert dan nog niets.",
+  "uitleg": "Elke keer dat iemand in GTM publiceert, bewaart Tag Manager een **versie**: een momentopname van alle tags, triggers en variabelen. Daarnaast is er een **publicatiegeschiedenis** met wie wat wanneer live zette. Dat maakt fouten herstelbaar.\n\nTwee manieren om een oude versie te gebruiken:\n- **Publiceren:** de oude versie gaat direct live. Dit is de noodknop.\n- **Instellen als nieuwste versie:** de inhoud wordt je nieuwe concept in de werkruimte. Je kunt hem aanpassen en later publiceren. Goed om vanaf een schone basis verder te werken.\n\nZo voorkom je dit soort situaties:\n- Geef elke versie een duidelijke naam en beschrijving, bijvoorbeeld 'purchase-tag naar dataLayer-event omgezet'.\n- Test vóór het publiceren in de voorbeeldmodus.\n- Publiceer niet vlak voor een vakantie of weekend.",
+  "kernpunt": "Gaat er na een GTM-publicatie iets mis, publiceer dan de vorige versie opnieuw via Versies. 'Instellen als nieuwste versie' maakt er alleen een concept van; live verandert dan nog niets.",
+  "toepassing": "Open deze week bij één klant de versies in GTM. Kijk of elke versie een naam en beschrijving heeft, en spreek met je team af dat dat voortaan verplicht is.",
+  "bron": {
+    "titel": "Publishing, versions, and approvals - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/6107163"
+  }
+}

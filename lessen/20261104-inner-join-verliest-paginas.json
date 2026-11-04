@@ -1,0 +1,30 @@
+{
+  "id": "20261104-inner-join-verliest-paginas",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO × Claude",
+  "onderwerp": "Python en SQL: inner join of left join bij het koppelen van exports",
+  "matrix": ["5.3.5", "5.3.1"],
+  "titel": "4.200 URL's gecrawld, 2.900 over na het koppelen: waar zijn de rest?",
+  "intro": "Je wilt weten welke indexeerbare pagina's geen enkele klik uit Google krijgen. Claude schrijft een Python-script dat een Screaming Frog-export (4.200 URL's) koppelt aan een Search Console-export met klikken per pagina. De kernregel is: resultaat = pd.merge(crawl, gsc, on='url'). Het resultaat telt 2.900 rijen, en geen enkele pagina heeft 0 klikken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Waarom levert het script de lijst niet op, en wat pas je aan?",
+    "opties": [
+      "merge gebruikt standaard een outer join, waardoor rijen dubbel tellen; zet how='inner' zodat elke URL één keer meetelt.",
+      "merge gebruikt standaard een inner join, dus URL's zonder rij in Search Console vallen weg; zet how='left' in de merge.",
+      "merge koppelt standaard alleen op de index, dus de kolom url wordt genegeerd; zet url eerst als index van beide tabellen.",
+      "merge verwijdert standaard dubbele URL's uit de crawl, dus de telling klopt niet; zet drop_duplicates() vóór de merge."
+    ],
+    "juist": 1
+  },
+  "toelichting": "pd.merge gebruikt standaard **how='inner'**: alleen URL's die in **beide** tabellen staan, blijven over. Een pagina zonder klikken staat meestal niet in de Search Console-export, en valt er dus uit. Precies de pagina's die je zocht.\n\nMet **how='left'** houd je alle 4.200 URL's uit de crawl. Pagina's zonder Search Console-gegevens krijgen dan een lege waarde bij klikken.\n\n- De standaard is geen outer join, en een outer join verdubbelt geen rijen.\n- Met on='url' koppelt merge wel degelijk op die kolom.\n- merge haalt geen dubbele rijen weg.",
+  "kort": "Het script houdt alleen pagina's over die in allebei de lijsten staan. Een pagina zonder klikken staat niet in de lijst van Search Console, dus die valt eruit. Dat zijn juist de pagina's die je zocht. Zeg in het script dat het alle pagina's uit de crawl moet houden: een left join.",
+  "uitleg": "Een **join** koppelt twee tabellen op een gedeelde kolom, hier de URL. In Python (pandas) en in SQL werkt dat hetzelfde:\n- **Inner join:** alleen rijen die in beide tabellen voorkomen.\n- **Left join:** alle rijen uit de linkertabel, aangevuld waar mogelijk.\n- **Outer join:** alle rijen uit beide tabellen.\n\nBij SEO-analyses zoek je vaak juist wat **ontbreekt**: pagina's zonder klikken, zonder interne links of niet in de sitemap. Dan heb je bijna altijd een left join nodig.\n\nHandig in pandas: **indicator=True**. Dan krijg je een kolom die per rij zegt of hij 'left_only', 'right_only' of in 'both' voorkomt.\n\nLet ook op de URL's zelf. Een slash aan het eind, http of https, of hoofdletters zorgen dat dezelfde pagina niet wordt gekoppeld. Maak de URL's eerst gelijk.\n\nVraag Claude bij zo'n script altijd: hoeveel rijen verwacht je erin en eruit?",
+  "kernpunt": "Zoek je wat ontbreekt (pagina's zonder klikken, links of vertoningen), gebruik dan een left join. De standaard inner join gooit precies die pagina's weg.",
+  "toepassing": "Kijk deze week in een script of spreadsheetkoppeling die je gebruikt welke join erin zit, en controleer of het aantal rijen na het koppelen klopt met wat je verwacht.",
+  "bron": {
+    "titel": "pandas.merge - pandas documentation",
+    "url": "https://pandas.pydata.org/docs/reference/api/pandas.merge.html"
+  }
+}

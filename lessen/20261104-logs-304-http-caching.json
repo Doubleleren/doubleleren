@@ -1,0 +1,30 @@
+{
+  "id": "20261104-logs-304-http-caching",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Logfile-analyse: HTTP-caching (ETag, Last-Modified en 304) voor Googlebot",
+  "matrix": ["1.1.3", "5.1.2"],
+  "titel": "Googlebot haalt elke dag 18.000 artikelen op, terwijl er 300 wijzigen",
+  "intro": "Een kennisbank heeft 50.000 artikelen. In de serverlogs zie je dat Googlebot elke dag zo'n 20.000 URL's opvraagt. 90% krijgt een 200 met de volledige HTML. Volgens het CMS wijzigen er maar zo'n 300 artikelen per dag. De server wordt 's ochtends traag. In de responses staan geen ETag- of Last-Modified-headers.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing ontlast de server het meest, zonder dat Google wijzigingen mist?",
+    "opties": [
+      "Stel in robots.txt een crawl-delay in voor Googlebot, want dan spreidt Google zijn verzoeken netjes over de hele dag.",
+      "Zet ongewijzigde artikelen tijdelijk op noindex, want dan slaat Googlebot ze over tot ze weer worden bijgewerkt.",
+      "Verlaag de crawlsnelheid in de instellingen van Search Console, want daar bepaal je hoeveel Googlebot per dag ophaalt.",
+      "Stuur ETag en Last-Modified mee, want dan kan de server bij ongewijzigde pagina's met 304 antwoorden, zonder HTML."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Google's crawlers ondersteunen **HTTP-caching**. Stuurt de server een **ETag** of **Last-Modified** mee, dan vraagt Googlebot de volgende keer: 'is dit nog hetzelfde?'. Is het antwoord ja, dan stuurt de server een korte **304 Not Modified** in plaats van de hele pagina. Dat scheelt rekenwerk en dataverkeer, en wijzigingen komen gewoon door.\n\n- **crawl-delay** in robots.txt ondersteunt Google niet.\n- **noindex** haalt artikelen uit Google en vermindert het crawlen niet direct.\n- **De instelling voor crawlsnelheid** in Search Console bestaat sinds begin 2024 niet meer.",
+  "kort": "Googlebot haalt elke dag duizenden artikelen opnieuw helemaal op, ook als er niets aan veranderd is. Laat de server bij elke pagina meesturen wanneer hij voor het laatst is gewijzigd. Dan kan de server bij ongewijzigde pagina's kort antwoorden met 'niets veranderd' (code 304). Dat scheelt de server veel werk.",
+  "uitleg": "Volgens Google ondersteunen de crawlers twee soorten caching-headers:\n- **ETag** met **If-None-Match**: een soort vingerafdruk van de pagina.\n- **Last-Modified** met **If-Modified-Since**: de datum van de laatste wijziging.\n\nGoogle gebruikt ETag als beide er staan, omdat daar geen problemen met datumnotaties bij zijn. Google raadt toch aan om **beide** in te stellen, omdat ook andere systemen ze gebruiken. Optioneel kun je met **Cache-Control: max-age** aangeven hoe lang een pagina hetzelfde blijft.\n\nIn de logs zie je het effect: na de invoering zou een groot deel van de Googlebot-verzoeken een **304** moeten krijgen in plaats van een 200. Ook het rapport Crawlstatistieken in Search Console toont 304-responses apart.\n\nLet op: de ETag moet echt veranderen als de inhoud verandert. Anders mist Google je updates. Voor de technische invoering ga je naar de hostingpartij of CMS-leverancier.",
+  "kernpunt": "Stuur ETag (en Last-Modified) mee, dan kan de server Googlebot bij ongewijzigde pagina's een 304 geven in plaats van de hele pagina. Crawl-delay en de oude crawlsnelheid-instelling werken niet bij Google.",
+  "toepassing": "Kijk deze week in het rapport Crawlstatistieken van een grote klantsite welk deel van de verzoeken een 304 krijgt. Is dat bijna niets, check dan met de developer of de server ETag of Last-Modified meestuurt.",
+  "bron": {
+    "titel": "Overview of Google crawlers and fetchers (user agents) | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers"
+  }
+}
