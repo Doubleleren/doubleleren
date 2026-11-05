@@ -1,0 +1,30 @@
+{
+  "id": "20261105-hreflang-m-dot-mobiel-naar-mobiel",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Aparte mobiele site (m-dot) en hreflang",
+  "matrix": ["8.2.2", "1.3.5"],
+  "titel": "Belgische mobiele zoekers landen op de Nederlandse m-dot-site",
+  "intro": "Een webshop heeft naast www.shop.nl en www.shop.be een aparte mobiele site: m.shop.nl en m.shop.be. De mobiele pagina's hebben een canonical naar hun desktopversie. De developer heeft overal hreflang toegevoegd. Op de mobiele pagina's verwijst die naar www.shop.nl en www.shop.be, 'want dat zijn de canonieke versies'. Toch krijgen Belgische mobiele zoekers vaak de Nederlandse pagina te zien.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat pas je aan in de hreflang op de mobiele pagina's?",
+    "opties": [
+      "Laat de hreflang staan en geef de mobiele pagina's een canonical naar hun eigen m-URL, want dan zijn het volwaardige versies.",
+      "Haal de hreflang van de mobiele pagina's weg, want Google leest hreflang alleen op de desktoppagina's die als canonical gelden.",
+      "Laat de mobiele pagina's alleen naar de andere mobiele versies verwijzen, want mobiel en desktop krijgen elk een eigen set.",
+      "Laat elke mobiele pagina naar de mobiele én de desktopversies verwijzen, want dan ziet Google alle varianten in één cluster."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Bij een aparte mobiele site (een **m-dot-site**) geeft Google een duidelijke regel: de hreflang op mobiele URL's wijst naar mobiele URL's, en die op desktop-URL's naar desktop-URL's. Dus m.shop.be noemt m.shop.nl, en www.shop.be noemt www.shop.nl.\n\n- **Een canonical naar de eigen m-URL** is fout. Bij m-dot is de desktop-URL altijd de canonical en de mobiele URL het alternatief.\n- **Hreflang weghalen op mobiel** klopt niet. Google indexeert mobile-first, dus juist de mobiele versie moet de hreflang goed hebben.\n- **Mobiel en desktop door elkaar** maakt de set onduidelijk. Google wil twee aparte, kloppende sets.",
+  "kort": "Een m-dot-site is een aparte mobiele website, zoals m.shop.be naast www.shop.be. De taalverwijzingen (hreflang) moeten dan binnen hun eigen soort blijven: mobiele pagina's verwijzen naar andere mobiele pagina's, desktoppagina's naar desktoppagina's. Hier wezen de mobiele pagina's naar desktop, en dan raakt Google de draad kwijt.",
+  "uitleg": "Een m-dot-site vraagt drie soorten verwijzingen, en die halen developers vaak door elkaar:\n\n- **Canonical:** de mobiele pagina wijst naar de desktoppagina. De desktoppagina wijst naar zichzelf.\n- **Alternate:** de desktoppagina wijst met rel=\"alternate\" en een media-attribuut voor kleine schermen naar de mobiele pagina.\n- **Hreflang:** blijft per soort. Mobiel naar mobiel, desktop naar desktop. Elke versie noemt ook zichzelf, en alle versies verwijzen naar elkaar terug.\n\nControleer het in de praktijk met een crawl als smartphone-user-agent (bijvoorbeeld in Screaming Frog). Kijk per mobiele pagina of alle hreflang-URL's met m. beginnen.\n\nGoogle raadt voor nieuwe sites responsive design aan: één URL voor alle apparaten. Dan heb je dit hele probleem niet. Bij een bestaande m-dot-site is overstappen een groot project. Zorg tot die tijd dat de verwijzingen kloppen.",
+  "kernpunt": "Bij een aparte mobiele site wijst hreflang op mobiele pagina's naar mobiele URL's en op desktoppagina's naar desktop-URL's. De canonical wijst wel altijd van mobiel naar desktop.",
+  "toepassing": "Heeft een klant een m-dot-site in meer landen of talen? Crawl deze week tien mobiele pagina's als smartphone en controleer of alle hreflang-URL's naar de mobiele versies wijzen.",
+  "bron": {
+    "titel": "Mobile site and mobile-first indexing best practices | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+  }
+}

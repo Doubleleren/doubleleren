@@ -1,0 +1,30 @@
+{
+  "id": "20261105-ai-gebruik-transparant-eeat",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "E-E-A-T: transparant zijn over wie en hoe (AI-gebruik)",
+  "matrix": ["11.1.5", "11.1.4"],
+  "titel": "AI schrijft mee aan de blogs. Moet je dat laten zien?",
+  "intro": "Een accountantskantoor publiceert elke week een blog over belastingregels. Een AI-tool schrijft de eerste versie. Daarna controleert een belastingadviseur van het kantoor de tekst en voegt hij eigen voorbeelden toe. Onder de artikelen staat nu alleen 'Redactie'. De marketeer wil het AI-gebruik liever niet noemen, uit angst dat Google de artikelen dan lager zet.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je, in lijn met wat Google zelf aanraadt?",
+    "opties": [
+      "Het AI-gebruik verzwijgen, want Google straft elke tekst af die met AI is gemaakt, ook als een expert hem nakijkt.",
+      "De artikelen op noindex zetten, want AI-teksten over belasting zijn YMYL en die wil Google niet in de resultaten.",
+      "De adviseur als auteur noemen en uitleggen hoe AI is gebruikt, want lezers willen weten wie het schreef en hoe.",
+      "Een externe expert met foto als auteur noemen, want een bekend gezicht verhoogt de E-E-A-T, ook als hij niet meeschreef."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google vraagt makers om drie vragen over hun content: **wie** maakte het, **hoe** is het gemaakt, en **waarom**. Bij 'wie' raadt Google een kloppende auteursnaam aan, met een link naar meer over die persoon. Bij 'hoe' hoort ook AI: maak duidelijk dat en hoe AI is gebruikt, vooral waar lezers zich dat kunnen afvragen.\n\n- **Verzwijgen** is niet nodig. Google kijkt naar de kwaliteit en het doel van content, niet naar of er AI bij kwam kijken. Wel tegen de regels: AI vooral gebruiken om rankings te manipuleren.\n- **noindex** is te ver doorgeschoten. YMYL (onderwerpen die je geld, gezondheid of veiligheid raken) betekent: extra streng op betrouwbaarheid, niet: verboden.\n- **Een expert die niet meeschreef** als auteur noemen is misleidend. Google noemt verzonnen of onjuiste makers juist onbetrouwbaar.",
+  "kort": "Google wil dat lezers kunnen zien wie een tekst schreef en hoe die tot stand kwam. Noem dus de echte adviseur als auteur en vertel eerlijk dat AI een eerste versie maakte. Met AI werken mag; het gaat erom dat de tekst goed is en mensen helpt. Een auteur noemen die niet meeschreef, maakt de site juist minder betrouwbaar.",
+  "uitleg": "E-E-A-T staat voor ervaring, expertise, autoriteit en betrouwbaarheid. Google noemt **betrouwbaarheid** (trust) het belangrijkste. Bij YMYL-onderwerpen zoals belastingen weegt het extra zwaar.\n\nZo vertaal je 'wie en hoe' naar de praktijk:\n- **Byline:** de naam van de adviseur die de inhoud controleert, met een link naar een auteurspagina. Zet daar zijn rol, ervaring en specialisme.\n- **Korte uitleg over werkwijze:** bijvoorbeeld 'Eerste versie met AI, inhoud gecontroleerd en aangevuld door [naam], belastingadviseur'. Dat mag onder het artikel of op een pagina over de redactie.\n- **Datum van controle:** belastingregels veranderen elk jaar. Laat zien wanneer de tekst voor het laatst is nagekeken.\n- **Bronnen:** verwijs naar de Belastingdienst of de wettekst.\n\nE-E-A-T is geen score die je met één byline omhoog krikt. Het is wat Google probeert te herkennen. Echte expertise en eerlijkheid zijn het fundament.",
+  "kernpunt": "Wees open over wie een tekst maakte en hoe, ook als AI meeschreef. Een echte, controlerende expert als auteur plus een korte uitleg van de werkwijze past bij wat Google aanraadt; een auteur noemen die niet meeschreef is misleidend.",
+  "toepassing": "Kijk deze week bij een klant met YMYL-content (geld, gezondheid, recht) wat er onder de artikelen staat. Staat er alleen 'Redactie', stel dan een byline met auteurspagina en een korte werkwijze voor.",
+  "bron": {
+    "titel": "Creating helpful, reliable, people-first content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  }
+}

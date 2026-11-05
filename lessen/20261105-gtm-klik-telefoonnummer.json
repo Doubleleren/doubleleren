@@ -1,0 +1,35 @@
+{
+  "id": "20261105-gtm-klik-telefoonnummer",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Event tracking in GTM: klikken op een belknop meten",
+  "matrix": ["3.2.4"],
+  "titel": "Hoe vaak bellen bezoekers vanaf de site? Kies de juiste trigger",
+  "intro": "Een loodgieter krijgt de meeste klussen via de telefoon. Op elke pagina staat een knop 'Bel direct'. In de HTML is dat een link: <a href=\"tel:0201234567\">. GA4 draait al via Google Tag Manager (GTM). Je maakt in GTM een GA4-eventtag met de naam klik_telefoon. Nu moet je kiezen wanneer die tag afgaat: de trigger.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke trigger geef je de tag klik_telefoon?",
+    "opties": [
+      "Een paginaweergave op pagina's met een tel:-link, want zo telt GA4 hoe vaak bezoekers de belknop te zien krijgen.",
+      "Een Just Links-klik met de voorwaarde Click URL begint met tel:, want dan vuurt de tag alleen bij de belknop.",
+      "Een All Elements-klik zonder voorwaarde, want een belknop is geen gewone link en valt anders buiten de meting.",
+      "Een formulierverzending op alle pagina's, want een klik op een belknop telt in GTM als een verstuurd formulier."
+    ],
+    "juist": 1
+  },
+  "toelichting": "De belknop is in de HTML een gewone link (een <a>-element) met een adres dat begint met tel:. De kliktrigger **Just Links** luistert precies naar klikken op zulke links. Met de voorwaarde **Click URL begint met tel:** gaat de tag alleen af bij belknoppen, en niet bij elke andere link.\n\n- **Paginaweergave** meet hoe vaak een pagina geladen wordt, ook als er een tel:-link op staat. Of iemand op de knop klikt, zie je daar niet in.\n- **All Elements zonder voorwaarde** gaat af bij élke klik op de pagina, ook op tekst en plaatjes. Je telt dan veel te veel.\n- **Formulierverzending** reageert op het versturen van een formulier. Een klik op een link is dat niet.",
+  "kort": "De belknop is gewoon een link die met tel: begint. In Tag Manager kies je daarom een trigger die alleen op klikken op links let, met de regel: het adres begint met tel:. Zo telt GA4 alleen de klikken op de belknop, en niet elke andere klik of elke pagina die geladen wordt.",
+  "uitleg": "Een event meten in GTM bestaat altijd uit drie delen:\n\n- **Tag:** wat er gebeurt. Hier: stuur het event klik_telefoon naar GA4.\n- **Trigger:** wanneer. Hier: een klik op een link waarvan de URL met tel: begint.\n- **Variabelen:** welke informatie je gebruikt. Hier Click URL. Zie je die niet bij de keuzes, zet hem dan aan onder Variabelen → Configureren.\n\nTips voor deze klus:\n- Zet **Click URL** gerust als parameter in de tag. Dan zie je in GA4 welk nummer gebeld werd, handig bij meerdere vestigingen.\n- Test in de **Preview**-modus van GTM. Klik op de knop en kijk of de tag afgaat. Controleer daarna in GA4 bij DebugView of het event binnenkomt.\n- Wil de klant dit als conversie zien? Markeer klik_telefoon in GA4 als key event.\n\nLet op: een klik is nog geen gesprek. Wil je echte gesprekken meten, dan heb je een belmeettool nodig.",
+  "kernpunt": "Klikken op een tel:-link meet je in GTM met een Just Links-kliktrigger met de voorwaarde Click URL begint met tel:. Test altijd eerst in Preview en DebugView.",
+  "toepassing": "Kies deze week een klant met belknoppen op de site. Check in GA4 of klikken daarop al gemeten worden. Zo niet, zet de tag en trigger op en test ze in Preview.",
+  "bron": {
+    "titel": "Click trigger - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/7679320"
+  },
+  "video": {
+    "titel": "Track custom events with Google Analytics 4",
+    "kanaal": "Analytics Mania",
+    "url": "https://www.youtube.com/watch?v=HyFZhvPZUNM"
+  }
+}

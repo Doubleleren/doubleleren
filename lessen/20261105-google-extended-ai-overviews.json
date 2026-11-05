@@ -1,0 +1,30 @@
+{
+  "id": "20261105-google-extended-ai-overviews",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Uit AI Overviews blijven: wat werkt wel en wat niet",
+  "matrix": ["12.1.1", "12.1.6"],
+  "titel": "Google-Extended geblokkeerd, toch nog in AI Overviews",
+  "intro": "Een receptensite krijgt minder klikken sinds Google bovenaan veel recepten samenvat in AI Overviews (de AI-samenvattingen boven de zoekresultaten). De eigenaar wil niet meer in die samenvattingen staan, maar wel gewoon in de zoekresultaten. De developer heeft daarom in robots.txt gezet:\n\nUser-agent: Google-Extended\nDisallow: /\n\nTwee weken later staan de recepten nog steeds als bron in AI Overviews.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe verklaar je dit aan de eigenaar?",
+    "opties": [
+      "Logisch, want Google-Extended gaat over Gemini-training en grounding; AI Overviews horen bij Search en volgen de Search-regels.",
+      "Het duurt gewoon langer, want Google moet alle recepten eerst opnieuw crawlen voordat de regel in AI Overviews werkt.",
+      "De regel staat op de verkeerde plek, want Google-Extended werkt alleen als meta-tag op elke pagina, niet in robots.txt.",
+      "De regel is te breed, want met Disallow: / blokkeert Google-Extended ook de zoekresultaten, en dan negeert Google hem."
+    ],
+    "juist": 0
+  },
+  "toelichting": "**Google-Extended** is een naam (token) in robots.txt waarmee je bepaalt of Google je content mag gebruiken om Gemini-modellen te trainen, en voor grounding in Gemini. Google zegt erbij dat het token geen invloed heeft op opname in Google Search. AI Overviews en AI Mode zijn onderdeel van Search. Daarvoor gelden dus de gewone regels voor Googlebot en voor snippets.\n\n- **Langer wachten** helpt niet. De regel gaat over iets anders dan AI Overviews.\n- **Een meta-tag** bestaat niet voor Google-Extended. Het werkt juist alleen via robots.txt.\n- **Te breed** klopt niet. Disallow: / onder Google-Extended raakt de gewone zoekresultaten niet.",
+  "kort": "Google-Extended is een regel die zegt: gebruik mijn teksten niet om Gemini te trainen. AI Overviews horen bij de gewone Google-zoekmachine, en daar heeft die regel geen invloed op. Wil je minder in AI Overviews komen, dan moet je beperken hoeveel tekst Google uit je pagina mag tonen. Dat geldt dan ook voor je gewone zoekresultaat.",
+  "uitleg": "Wat kan de eigenaar wél doen? Google noemt voor AI-functies in Search dezelfde knoppen als voor gewone snippets:\n\n- **nosnippet:** Google toont geen tekst uit de pagina, ook niet in het gewone zoekresultaat.\n- **max-snippet:** je stelt een maximum aantal tekens in dat Google mag tonen.\n- **data-nosnippet:** je sluit losse stukken tekst uit, bijvoorbeeld de bereidingswijze.\n- **noindex:** de pagina verdwijnt helemaal uit Google.\n\nElke optie kost dus ook iets in de gewone zoekresultaten. Een minder opvallend snippet kan minder klikken opleveren. Bespreek die afweging met de klant voordat je iets aanpast.\n\nControleer na een wijziging met de URL-inspectie in Search Console of Googlebot de regel ziet. Volgens Google kan het daarna dagen tot maanden duren voordat alle pagina's opnieuw gecrawld zijn.",
+  "kernpunt": "Google-Extended regelt training en grounding voor Gemini, niet AI Overviews. AI-functies in Search volg je met de gewone instellingen voor snippets, zoals nosnippet en max-snippet, en die raken ook je gewone zoekresultaat.",
+  "toepassing": "Vraagt een klant om 'uit AI Overviews' te gaan? Leg deze week de afweging op papier: welke pagina's, welke snippet-instelling, en wat dat kan kosten in klikken uit de gewone resultaten.",
+  "bron": {
+    "titel": "AI features and your website | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/ai-features"
+  }
+}

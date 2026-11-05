@@ -1,0 +1,35 @@
+{
+  "id": "20261105-404-na-opruimen-pagina-indexering",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Pagina-indexering: 404's na het opruimen van pagina's",
+  "matrix": ["1.5.3", "1.5.1"],
+  "titel": "600 keer 'Niet gevonden (404)' in Search Console: paniek?",
+  "intro": "Een webshop heeft 600 oude actiepagina's verwijderd. Er is geen vervangende pagina voor. De links in het menu, de sitemap en de blogs zijn al weggehaald. Twee weken later staan de URL's in Search Console in het rapport Pagina-indexering, onder 'Niet gevonden (404)'. De klant mailt: \"Dat zijn 600 fouten. Dat kost ons vast posities!\"",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de klant?",
+    "opties": [
+      "Alle 600 URL's naar de homepage redirecten, want zo blijft de linkwaarde behouden en verdwijnen ze uit het rapport.",
+      "De URL's indienen bij de tool Verwijderingen, want anders blijft Google ze crawlen en zakt de rest van de site weg.",
+      "De pagina's een 200-status met 'actie voorbij' geven, want Google ziet een 404 als een technische fout op de site.",
+      "Niets doen aan deze 404's, want verwijderde pagina's zonder vervanging horen een 404 te geven en schaden de site niet."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Google zegt het zelf in de uitleg bij het rapport: een 404 is **niet per se een probleem** als een pagina zonder vervanging is verwijderd. Herstel alleen 404's waar je zelf naar linkt of die in je sitemap staan. Is een pagina verhuisd, gebruik dan een 301-redirect naar de nieuwe plek.\n\n- **Alles naar de homepage** helpt niet. Google ziet zo'n redirect naar een pagina die niet over hetzelfde gaat vaak als een *soft 404*: een pagina die eigenlijk 'niet gevonden' is.\n- **De tool Verwijderingen** verbergt URL's maar tijdelijk uit de zoekresultaten. Hij is niet bedoeld voor opruimen, en 404's schaden de rest van de site niet.\n- **Een 200 met 'actie voorbij'** is precies een soft 404. Dat moet je in het rapport juist oplossen.",
+  "kort": "Een 404 betekent gewoon: deze pagina bestaat niet meer. Als je een pagina bewust weghaalt en er is geen vervanger, dan is dat het juiste antwoord van de server. Het kost de rest van de site geen posities. Let alleen op 404's waar je zelf nog naar linkt, en redirect pagina's die naar een nieuwe plek zijn verhuisd.",
+  "uitleg": "Het rapport **Pagina-indexering** (vroeger Index Status en Crawl Errors) laat per reden zien waarom pagina's niet in de index staan. Niet elke reden is een fout. Zo lees je de drie die het vaakst vragen oproepen:\n\n- **Niet gevonden (404):** prima voor pagina's die bewust weg zijn. Controleer alleen of je er niet meer intern naar linkt en of ze niet in de sitemap staan.\n- **Soft 404:** de pagina zegt 'niet gevonden' of is bijna leeg, maar de server geeft een 200. Geef een echte 404 of 410, of maak de pagina waardevol.\n- **Serverfout (5xx):** Googlebot kon de pagina niet ophalen. Dit moet je wél uitzoeken. Kijk ook naar de hoststatus in Crawlstatistieken.\n\nGoogle blijft oude 404-URL's nog een tijd af en toe bezoeken. Dat is normaal en kost een gewone site geen crawlbudget van betekenis.",
+  "kernpunt": "Een 404 voor een bewust verwijderde pagina zonder vervanger is correct en schaadt de site niet. Herstel alleen 404's waar je zelf naar linkt of die in de sitemap staan, en redirect verhuisde pagina's met een 301.",
+  "toepassing": "Open deze week bij een klant het rapport Pagina-indexering en filter 'Niet gevonden (404)'. Sorteer op URL's die nog in de sitemap staan of intern gelinkt worden: alleen die hoeven actie.",
+  "bron": {
+    "titel": "Page indexing report - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/7440203"
+  },
+  "video": {
+    "titel": "Google Search Console Indexing Report - How To Understand How Google Indexes Your Website",
+    "kanaal": "Patrick Rice",
+    "url": "https://www.youtube.com/watch?v=O9xkp0X0eJY"
+  }
+}
