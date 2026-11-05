@@ -22,14 +22,14 @@ function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body) {
     if ($Methode -eq 'GET') { $url += "?ref=$($O.tak)&t=$([DateTime]::UtcNow.Ticks)" }   # eigen adres per keer: een bedrijfsproxy geeft anders een verouderde versie
     $p = @{ Uri = $url; Method = $Methode; Headers = $kop; UseBasicParsing = $true; TimeoutSec = 30 }
     if ($Body) { $p.Body = $script:DlUtf8.GetBytes(($Body | ConvertTo-Json -Depth 5 -Compress)); $p.ContentType = 'application/json' }
-    # Lezen bij een storing van GitHub (5xx of geen verbinding) twee keer opnieuw proberen; schrijven niet (kan al gelukt zijn)
+    # Lezen bij een storing van GitHub (5xx, rate limit 429 of geen verbinding) twee keer opnieuw proberen; schrijven niet (kan al gelukt zijn)
     for ($poging = 0; ; $poging++) {
         try { return (Invoke-RestMethod @p) }
         catch {
             $status = 0; try { $status = [int]$_.Exception.Response.StatusCode } catch {}
             if ($status -eq 404) { return $null }
             if ($status -eq 409 -or $status -eq 422) { throw 'conflict' }
-            if ($Methode -eq 'GET' -and ($status -ge 500 -or $status -eq 0) -and $poging -lt 2) { Start-Sleep -Milliseconds (700 * [math]::Pow(3, $poging)); $p.Uri = $url -replace 't=\d+$', "t=$([DateTime]::UtcNow.Ticks)"; continue }
+            if ($Methode -eq 'GET' -and ($status -ge 500 -or $status -eq 0 -or $status -eq 429) -and $poging -lt 2) { Start-Sleep -Milliseconds (700 * [math]::Pow(3, $poging)); $p.Uri = $url -replace 't=\d+$', "t=$([DateTime]::UtcNow.Ticks)"; continue }
             throw "GitHub ($Methode $Pad): $status $($_.Exception.Message)"
         }
     }
