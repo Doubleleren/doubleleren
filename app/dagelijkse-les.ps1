@@ -137,10 +137,16 @@ try {
             if (-not $Test -and -not $Snapshot) { exit }
         }
     }
+    # Eigen profiel één keer lezen: halfjaarcheck, werkdagen en scorebord-zichtbaarheid. Lukt dat niet, dan geen
+    # halfjaarcheck en geen scorebord (zichtbaarheid onbekend: nooit per ongeluk iemand zichtbaar maken).
+    $script:profiel = $null; $script:profielGelezen = $false
+    if ($c -and $s) { try { $pr = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek; if ($pr) { $script:profiel = $pr.obj }; $script:profielGelezen = $true } catch { Log-Fout "Profiel lezen mislukt: $($_.Exception.Message)" } }
+    $script:werkdagen = if ($script:profiel) { $script:profiel.werkdagen } else { $null }
+
     # Weekend: na het versturen alleen het scorebord bijwerken, zodat je reeks maandagochtend klopt; geen les
     if ($script:weekend -and -not $Test -and -not $Snapshot) {
-        if ($verstuurd) {
-            try { $pfW = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek; Write-DlScorebord $c @($logs) (Get-DlScorebordZichtbaar $c $s) (Get-Date) '' $null $(if ($pfW) { $pfW.obj.werkdagen }) }
+        if ($verstuurd -and $script:profielGelezen) {
+            try { Write-DlScorebord $c @($logs) (-not ($script:profiel -and $script:profiel.scorebord -eq $false)) (Get-Date) '' $null $script:werkdagen }
             catch { Log-Fout "Scorebord bijwerken (weekend) mislukt: $($_.Exception.Message)" }
         }
         exit
@@ -156,8 +162,8 @@ try {
     if ($c -and -not $Test -and -not $LesBestand) {
         try {
             $mx = Read-DlVersleuteld $c.data $c.id 'matrix' $s $c.publiek
-            $pf = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek
-            $ronde = Get-DlRonde $(if ($mx) { $mx.obj }) $(if ($pf) { [string]$pf.obj.sinds }) $(if ($Datum) { [datetime]$Datum } else { Get-Date })
+            if (-not $script:profielGelezen) { throw 'profiel niet gelezen' }
+            $ronde = Get-DlRonde $(if ($mx) { $mx.obj }) $(if ($script:profiel) { [string]$script:profiel.sinds }) $(if ($Datum) { [datetime]$Datum } else { Get-Date })
             if ($ronde.teLaat) { $script:skilllijstEerst = $ronde }
         } catch { Log-Fout "Halfjaarlijkse check overgeslagen: $($_.Exception.Message)" }
     }
@@ -186,8 +192,6 @@ try {
     $o = $les.opdracht
 
     # --- Reeks (eigen werkdagen; weekend en vrije dagen onderbreken niet) en aantal deze maand ---
-    $script:werkdagen = $null
-    if ($c) { try { $pfW = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek; if ($pfW) { $script:werkdagen = $pfW.obj.werkdagen } } catch {} }
     $reeks = Get-DlReeks $logs (Get-Date) $script:werkdagen
     $dezeMaand = @($logs | Where-Object { "$($_.datum)".StartsWith((Get-Date).ToString('yyyy-MM')) }).Count
 
@@ -423,9 +427,10 @@ try {
         }
         # "In gewone taal" direct na het antwoord (veld kort, of '**Kort gezegd:**' aan het begin van de uitleg);
         # dan is de volledige uitleg uitklapbaar. Zelfde regel als kortEnRest() in docs/app.js.
+        # Met een veld kort valt een 'Kort gezegd'-alinea weg uit de rest: nooit twee keer dezelfde tekst
         $kort = ''; $rest = [string]$les.uitleg
+        if ($rest -match '^\s*\*\*Kort gezegd:?\*\*:?\s*([\s\S]*?)(?:\r?\n\s*\r?\n|$)([\s\S]*)$') { $kort = $Matches[1].Trim(); $rest = $Matches[2].Trim() }
         if ($les.kort -and "$($les.kort)".Trim()) { $kort = "$($les.kort)".Trim() }
-        elseif ($rest -match '^\s*\*\*Kort gezegd:?\*\*:?\s*([\s\S]*?)(?:\r?\n\s*\r?\n|$)([\s\S]*)$') { $kort = $Matches[1].Trim(); $rest = $Matches[2].Trim() }
         if ($kort) { Toon-Kader $kort '#F2FDE0' '#84CC16' 'In gewone taal' }
         if ($les.toelichting) { Toon-Tekst $les.toelichting }
         if (-not $script:uitlegGetoond) {
@@ -519,7 +524,7 @@ try {
             return
         }
         # Scorebord: alleen goed en reeks, ondertekend; lukt het niet, dan werkt de website het later bij
-        try { Write-DlScorebord $c (@($logs) + @([pscustomobject]$script:teBewaren.regel)) (Get-DlScorebordZichtbaar $c (Get-DlEigenSleutels $c)) (Get-Date) '' $null $script:werkdagen }
+        try { Write-DlScorebord $c (@($logs) + @([pscustomobject]$script:teBewaren.regel)) (Get-DlScorebordZichtbaar $c $s) (Get-Date) '' $null $script:werkdagen }
         catch { Log-Fout "Scorebord bijwerken mislukt: $($_.Exception.Message)" }
     }
 
