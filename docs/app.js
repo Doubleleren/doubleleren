@@ -606,23 +606,30 @@ function toonWerkdagen() {
   $('werkdagen').innerHTML = rijen.join('');
 }
 async function zetWerkdag(sleutel, dag, terug) {
-  const ik = S.leden[S.mij], wd = ik.werkdagen ? JSON.parse(JSON.stringify(ik.werkdagen)) : { standaard: [...STD_WERK], weken: {}, eerder: [] };
+  const ik = S.leden[S.mij];
   const vrijMa = eersteVrijeWeek(), vrij = weekSleutel(vrijMa);
   if (sleutel !== 'standaard' && sleutel < vrij) { $('werkdagen-status').textContent = 'Deze week ligt al vast: aanpassen kan tot en met vrijdag de week ervoor.'; toonWerkdagen(); return; }
-  if (terug) delete wd.weken[sleutel];
-  else if (sleutel === 'standaard') {
-    // De oude standaard blijft gelden voor alle weken die al vastliggen (nooit met terugwerkende kracht)
-    const vorige = new Date(vrijMa); vorige.setDate(vorige.getDate() - 7); const tot = weekSleutel(vorige);
-    wd.eerder = wd.eerder || [];
-    if (!wd.eerder.some((e) => e.tot >= tot)) wd.eerder.push({ tot, dagen: [...wd.standaard] });
-    wd.standaard = wd.standaard.includes(dag) ? wd.standaard.filter((n) => n !== dag) : [...wd.standaard, dag].sort();
-  } else {
-    const huidig = dagenVoorWeek(wd, sleutel);
-    wd.weken[sleutel] = huidig.includes(dag) ? huidig.filter((n) => n !== dag) : [...huidig, dag].sort();
-  }
+  if (S.onvolledig.has(S.mij)) { $('werkdagen-status').textContent = 'Je werkdagen konden niet geladen worden door een storing bij GitHub. Ververs de pagina over een paar minuten en probeer het opnieuw.'; return; }
+  // De klik wordt toegepast op de verse versie uit werkBij, niet op wat bij het laden in het geheugen stond:
+  // zo blijft alles staan wat intussen op een andere laptop is ingesteld
+  const pasToe = (oud) => {
+    const wd = oud ? JSON.parse(JSON.stringify(oud)) : { standaard: [...STD_WERK], weken: {}, eerder: [] };
+    if (terug) delete wd.weken[sleutel];
+    else if (sleutel === 'standaard') {
+      // De oude standaard blijft gelden voor alle weken die al vastliggen (nooit met terugwerkende kracht)
+      const vorige = new Date(vrijMa); vorige.setDate(vorige.getDate() - 7); const tot = weekSleutel(vorige);
+      if (!wd.eerder.some((e) => e.tot >= tot)) wd.eerder.push({ tot, dagen: [...wd.standaard] });
+      wd.standaard = wd.standaard.includes(dag) ? wd.standaard.filter((n) => n !== dag) : [...wd.standaard, dag].sort();
+    } else {
+      const huidig = dagenVoorWeek(wd, sleutel);
+      wd.weken[sleutel] = huidig.includes(dag) ? huidig.filter((n) => n !== dag) : [...huidig, dag].sort();
+    }
+    return wd;
+  };
   $('werkdagen').querySelectorAll('button').forEach((b) => { b.disabled = true; }); $('werkdagen-status').textContent = 'Opslaan…';
   try {
-    await werkBij(S.mij, 'profiel', ik.sl, (h) => ({ ...(h && typeof h === 'object' ? h : { v: 1 }), werkdagen: wd }));
+    let wd = null;
+    await werkBij(S.mij, 'profiel', ik.sl, (h) => { wd = pasToe(schoonWerkdagen(h?.werkdagen)); return { ...(h && typeof h === 'object' ? h : { v: 1 }), werkdagen: wd }; });
     ik.werkdagen = schoonWerkdagen(wd);
     $('werkdagen-status').textContent = 'Opgeslagen. Op je vrije dagen breekt je reeks niet; een les doen mag wel en telt mee.';
     werkScorebordBij().catch(() => {});
