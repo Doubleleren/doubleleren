@@ -87,7 +87,9 @@ try {
     $uitstelTot = if ($status -and $status.datum -eq $vandaag) { [string]$status.uitstelTot } else { '' }
     $script:uitstelGebruikt = ($uitstelSlot -eq $slot)
     if (-not $Test -and -not $Snapshot) {
-        if ((Get-Date).DayOfWeek -in 'Saturday', 'Sunday') { exit }     # in het weekend geen lessen
+        # In het weekend geen lessen; wel nog niet verstuurde resultaten versturen (zie verderop)
+        $script:weekend = $(if ($Datum) { [datetime]$Datum } else { Get-Date }).DayOfWeek -in 'Saturday', 'Sunday'
+        if ($script:weekend -and -not (Test-Path (Join-Path $WachtMap '*.dpapi'))) { exit }
         if ($script:aantal -ge $maxNu) { exit }
         if ($script:uitstelGebruikt -and $uitstelTot -and (Get-Date) -lt [datetime]$uitstelTot) { exit }
     }
@@ -113,9 +115,10 @@ try {
     }
 
     # Eerder niet verstuurde resultaten (bijv. offline) alsnog versturen
+    $verstuurd = 0
     if ($c -and (Test-Path $WachtMap)) {
         foreach ($f in Get-ChildItem $WachtMap -Filter *.dpapi | Sort-Object Name) {
-            try { $w = Read-DlGeheim $f.FullName; Opslaan-Resultaat $c $w.regel $w.antwoord; Remove-Item $f.FullName }
+            try { $w = Read-DlGeheim $f.FullName; Opslaan-Resultaat $c $w.regel $w.antwoord; Remove-Item $f.FullName; $verstuurd++ }
             catch { Log-Fout "Wachtend resultaat nog niet verstuurd: $($_.Exception.Message)" }
         }
     }
@@ -133,6 +136,14 @@ try {
             Log-Fout "Logboek lezen mislukt (offline of nog niet goedgekeurd?): $($_.Exception.Message)"
             if (-not $Test -and -not $Snapshot) { exit }
         }
+    }
+    # Weekend: na het versturen alleen het scorebord bijwerken, zodat je reeks maandagochtend klopt; geen les
+    if ($script:weekend -and -not $Test -and -not $Snapshot) {
+        if ($verstuurd) {
+            try { $pfW = Read-DlVersleuteld $c.data $c.id 'profiel' $s $c.publiek; Write-DlScorebord $c @($logs) (Get-DlScorebordZichtbaar $c $s) (Get-Date) '' $null $(if ($pfW) { $pfW.obj.werkdagen }) }
+            catch { Log-Fout "Scorebord bijwerken (weekend) mislukt: $($_.Exception.Message)" }
+        }
+        exit
     }
     $gedaanVandaag = @($logs | Where-Object { "$($_.datum)".StartsWith($vandaag) }).Count
     if (-not $Test -and -not $Snapshot -and $gedaanVandaag -ge $maxNu) {
