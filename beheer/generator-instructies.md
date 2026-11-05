@@ -29,7 +29,7 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die
 - **Verdeling**: over de week ongeveer naar stand, met gewicht 3 voor focus en 1 voor meeleren. Heeft iemand één vak, dan gaat alles daarover. Het eigen vak staat standaard op focus.
 - **Geen scores in een vak** (net aangezet; een skilllijst invullen is voor een extra vak niet nodig): behandel hem als beginner in dat vak (score 1–2), dus fundamenten op `basis`-niveau, en laat de resultaten het niveau bijsturen: na een paar keer goed op `basis` mag het naar `gevorderd`. Een hele hoofdgebied met dezelfde score is meestal een snelle inschatting per hoofdgebied: neem die als ruwe indicatie.
 - **Bronnen per vak**: elk vak heeft eigen betrouwbare bronnen. Gebruik voor een vak zonder `curriculum.md` de gangbare vakliteratuur en officiële documentatie (bijv. Google Ads-help voor SEA, Meta-hulpcentrum voor social ads, GitHub Docs voor GitHub).
-- Het SEO-curriculum (CRO en werken met Claude als derde van de SEO-lessen) geldt alleen voor wie SEO leert.
+- Het SEO-curriculum (CRO als ongeveer een kwart, werken met Claude hooguit 1 op de 10 SEO-lessen) geldt alleen voor wie SEO leert.
 
 ## Stap 1: Nieuws checken
 Haal de RSS-feeds op van de afgelopen ~4 dagen:
