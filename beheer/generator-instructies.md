@@ -77,7 +77,7 @@ Doel: **elke deelnemer heeft 5 lessen klaar** die hij of zij nog niet deed (niet
 |---|---|---|
 | `basis` | Een basisvraag over één vaardigheid uit de skilllijst | Vooral vaardigheden waarop de deelnemer laag scoort |
 | `verdieping` | Een moeilijkere vraag over een vaardigheid die de deelnemer eerder **goed** had: een praktijkcase, randgeval, afweging of misvatting, op een hoger `niveau` dan de les die goed ging | Op een **willekeurig** moment tussen 14 en 35 dagen na dat goede resultaat (zie hieronder). Óók meteen, zonder wachttijd, bij een vaardigheid waarop de deelnemer zich **4 of 5** geeft: die wil je niet eerst een basisvraag laten maken |
-| `herhaling` | Toetst of de deelnemer het nu wél (of nog steeds) weet. **Altijd een andere vraagstelling:** een nieuwe klantsituatie, andere antwoordopties en bij voorkeur een ander soort opdracht (was het meerkeuze, maak er dan een open vraag of een zoek-op van). Nooit dezelfde vraag, ook niet licht herschreven. Hetzelfde kernbegrip mag wel. | Vaardigheid met `fout` of `deels`, op een **willekeurig** moment tussen 14 en 35 dagen erna (zie hieronder). Ging de herhaling weer fout of deels, dan volgt later een nieuwe herhaling, weer minstens 14 dagen erna |
+| `herhaling` | Toetst of de deelnemer het nu wél (of nog steeds) weet. **Altijd een andere vraagstelling:** een nieuwe klantsituatie en andere antwoordopties. Meerkeuze blijft ook hier de standaard (zie 'Soort opdracht' in stap 3). Nooit dezelfde vraag, ook niet licht herschreven. Hetzelfde kernbegrip mag wel. | Vaardigheid met `fout` of `deels`, op een **willekeurig** moment tussen 14 en 35 dagen erna (zie hieronder). Ging de herhaling weer fout of deels, dan volgt later een nieuwe herhaling, weer minstens 14 dagen erna |
 | `nieuws` | Relevant nieuws voor het vak (zie stap 1) | Iedereen, vooraan in de wachtrij |
 
 **Onvoorspelbaar plannen (herhaling en verdieping).** Een deelnemer mag niet kunnen verwachten wanneer een herhaling of verdieping komt. Nooit eerder dan 14 dagen na het resultaat waar hij op voortbouwt. Daarna bepaal je per vaardigheid of hij vandaag aan de beurt is met een echte loting: draai bijvoorbeeld `python -c "import random; print(random.random())"` en plan hem in als de uitkomst onder (dagen sinds het resultaat − 13) / 22 ligt. Na 35 dagen is hij dus altijd aan de beurt. Gebruik geen vaste dagen en geen vaste weekdagen.
@@ -92,7 +92,7 @@ Doel: **elke deelnemer heeft 5 lessen klaar** die hij of zij nog niet deed (niet
 
 Een ervaren collega die een basisvraag krijgt over iets wat hij al jaren doet, haakt af. Een te moeilijke vraag corrigeert zichzelf via de resultaten. Ging een verdieping fout of deels, dan volgt later een `herhaling`, en de vaardigheid telt als mogelijk overschat.
 
-**Wachtrij vervangen mag.** Staan er in iemands `wachtrij` lessen die duidelijk te makkelijk zijn voor dit niveau, dan mag je ze vervangen in plaats van alleen aanvullen. Nieuws- en teamlessen blijf je vooraan zetten.
+**Wachtrij vervangen mag.** Staan er in iemands `wachtrij` lessen die duidelijk te makkelijk zijn voor dit niveau, dan mag je ze vervangen in plaats van alleen aanvullen. Hetzelfde geldt voor schrijfopdrachten (open, zoek-op, maak-met-claude) die niet passen bij de regels voor 'Soort opdracht' in stap 3: vervang die door een meerkeuzeles over dezelfde vaardigheid. Nieuws- en teamlessen blijf je vooraan zetten.
 
 Werk verder zo:
 1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. "Past" betekent ook: het `niveau` sluit aan bij de persoon. Een les met `"actief": false` gebruik je nooit. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
@@ -102,7 +102,8 @@ Werk verder zo:
    - score 3: praktijkcases (`niveau: "gevorderd"`)
    - score 4–5: alleen af en toe, en dan randgevallen of nieuw onderzoek (`niveau: "expert"`)
    - vaardigheden met een `notitie` in de skilllijst (verouderd): wat ervoor in de plaats kwam
-   - CRO en werken met Claude: ongeveer een derde, uit `curriculum.md`
+   - CRO: ongeveer een kwart, uit `curriculum.md`
+   - werken met Claude (`SEO × Claude`, `CRO × Claude`): hooguit 1 op de 10 lessen. Ook die lessen zijn meestal meerkeuze over de inhoud (wat werkt, wat niet, en waarom), geen opdracht om iets aan Claude te vragen
    - wissel af tussen hoofdgebieden
    - **eigen prioriteit** (`prioriteit` in de context) weegt mee bij `basis` en `verdieping`: een hoofdgebied met prioriteit 1 krijgt ongeveer twee keer zo vaak een les als normaal, prioriteit 3 ongeveer een derde zo vaak. Laag betekent nooit nul: ook die onderwerpen komen af en toe voorbij. `herhaling` (na fout of deels) en `nieuws` gaan altijd door, ongeacht de prioriteit.
 4. Een vaardigheid waarop een deelnemer zich hoog scoort maar recent fout antwoordde, is een goede kandidaat voor `basis` of `herhaling`: zo wordt de skilllijst organisch bijgesteld.
@@ -162,16 +163,17 @@ Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJ
 - Het oude veld `volgorde` gebruik je niet meer; website en pop-up negeren het.
 
 **Formats variëren:**
-- **Soort opdracht**, ongeveer in deze verhouding (feedback oktober 2026: schrijfopdrachten kosten veel tijd, ook om daarna je eigen antwoord na te kijken):
-  - **Per persoon nooit twee schrijfopdrachten (open, zoek-op, maak-met-claude) achter elkaar** in de wachtrij. Na een schrijfopdracht volgt minstens één meerkeuzeles.
-  - 65% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
+- **Soort opdracht: meerkeuze is de basis.** Feedback oktober en november 2026: schrijfopdrachten kosten veel tijd, ook om daarna je eigen antwoord na te kijken. Collega's krijgen ook te vaak een opdracht die ze met Claude moeten invullen. Ze willen inhoudelijke vragen over het vak. Een andere soort dan meerkeuze kies je alleen als die **voor deze persoon echt iets toevoegt** wat vier opties niet kunnen. Twijfel je, kies dan meerkeuze. Hergebruik je een bestaande les (stap 2), kies dan ook bij voorkeur een meerkeuzeles. Ongeveer in deze verhouding:
+  - **Per persoon hooguit één schrijfopdracht (open, zoek-op, maak-met-claude) per 5 lessen** in de wachtrij, en nooit twee achter elkaar.
+  - ongeveer 85% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
     - **Het juiste antwoord valt niet op.** Alle vier opties zijn ongeveer even lang en even precies. Geef de afleiders net zoveel detail en nuance als het juiste antwoord, bijvoorbeeld een reden ("omdat …") of een voorwaarde. Zet woorden als "altijd" en "nooit" niet alleen in de foute opties.
     - Het juiste antwoord is in de meeste lessen **niet** de langste optie, en nooit meer dan 10% langer dan elke andere optie (zo'n les krijgt `juistLangst` in `lessen\index.json`). Soms mag het wel de langste zijn, anders wordt "nooit de langste" het nieuwe trucje.
     - **Alle vier dezelfde vorm.** Geven de foute opties een reden ("want …", "omdat …", "zodat …", ", dus …"), dan geeft het juiste antwoord er ook een, en andersom. Een kaal juist antwoord tussen drie beredeneerde afleiders (of een beredeneerd juist antwoord tussen drie kale) is net zo te raden als een lang juist antwoord (feedback november 2026). Ook mag het juiste antwoord niet duidelijk de kortste zijn. Zo'n les krijgt `vormAfwijkend` in `lessen\index.json`.
     - **Raadtoets** vóór het opslaan: kun je het antwoord kiezen zonder de vraag te lezen, alleen op lengte, toon of stelligheid? Herschrijf dan de opties.
-  - 15% open: minimaal 80–150 tekens
-  - 10% zoek-op: minimaal 100–150 tekens, met een hint
-  - 10% maak-met-claude: minimaal 120–200 tekens; gebruik koppelingen zoals Search Console, Ahrefs en DataForSEO
+  - ongeveer 8% open: minimaal 80–150 tekens. Alleen als het om een afweging of uitleg gaat die je niet in vier opties vangt, vooral op `gevorderd` en `expert`
+  - ongeveer 5% zoek-op: minimaal 100–150 tekens, met een hint
+  - hooguit 2% maak-met-claude: minimaal 120–200 tekens; gebruik koppelingen zoals Search Console, Ahrefs en DataForSEO. **Per persoon hooguit één per twee weken**, en alleen als werken met Claude in iemands `focus` of `leerdoelen` staat. Ook dan maak je er liever een meerkeuzevraag over de inhoud van.
+    - **De opdracht is concreet** (feedback november 2026: "vaag wat er van me gevraagd werd"). De `vraag` zegt in gewone taal: wat je precies maakt (bijv. "een prompt die …" of "een lijst van …"), voor welke klant of situatie, waar je het in de praktijk voor gebruikt, en waar een goed antwoord aan voldoet. Toets: kan een collega na één keer lezen meteen beginnen, zonder te vragen "wat moet ik nou inleveren?"? Zo niet, herschrijf de vraag.
 
 **Opmaak in tekstvelden:**
 - `\n\n` voor een nieuwe alinea

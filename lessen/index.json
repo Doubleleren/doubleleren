@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-05T05:29:19",
+    "bijgewerkt":  "2026-11-05T08:19:27",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -247,7 +247,8 @@
                                  },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30"
+                       "herzien":  "2026-10-30",
+                       "actief":  false
                    },
                    {
                        "id":  "20261020-faceted-navigatie",
