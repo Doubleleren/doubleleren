@@ -1345,9 +1345,9 @@ const lesLabel = (t) => `<div class="les-label">${esc(t)}</div>`;
 // "In gewone taal": het veld kort, of (oudere lessen) de alinea '**Kort gezegd:** ...' aan het begin van de uitleg.
 // Met een korte versie staat die direct na je antwoord en is de volledige uitleg uitklapbaar.
 function kortEnRest(les) {
-  const u = String(les.uitleg || '');
-  if (typeof les.kort === 'string' && les.kort.trim()) return { kort: les.kort.trim(), rest: u };
-  const m = /^\s*\*\*Kort gezegd:?\*\*:?\s*([\s\S]*?)(?:\r?\n\s*\r?\n|$)([\s\S]*)$/.exec(u);
+  const u = String(les.uitleg || ''), m = /^\s*\*\*Kort gezegd:?\*\*:?\s*([\s\S]*?)(?:\r?\n\s*\r?\n|$)([\s\S]*)$/.exec(u);
+  // Met een veld kort valt een 'Kort gezegd'-alinea weg uit de rest: nooit twee keer dezelfde gewone-taaltekst
+  if (typeof les.kort === 'string' && les.kort.trim()) return { kort: les.kort.trim(), rest: m ? m[2].trim() : u };
   return m ? { kort: m[1].trim(), rest: m[2].trim() } : { kort: '', rest: u };
 }
 function uitlegHtml(les) {

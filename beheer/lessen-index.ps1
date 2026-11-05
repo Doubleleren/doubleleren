@@ -18,7 +18,11 @@ $lessen = foreach ($f in Get-ChildItem (Join-Path $App 'lessen') -Filter *.json 
         if ($len[$j] -gt 1.1 * $rest) { $r.juistLangst = $true }
         # Ook te raden op vorm: het juiste antwoord als enige met (of zonder) reden, of duidelijk de kortste.
         # Een reden is een voegwoord als 'want', een uitleg na een dubbele punt of puntkomma, of een tweede zin.
-        $reden = @($l.opdracht.opties | ForEach-Object { "$_" -match '\b(want|omdat|doordat|zodat|waardoor|daardoor|dus)\b|[:;] \S|\.\s+\S' })
+        # Afkortingen (bijv., o.a.) en een label vooraan (Let op:) tellen niet als reden.
+        $reden = @($l.opdracht.opties | ForEach-Object {
+            $o = "$_" -replace '(?i)\b(bijv|bv|o\.a|m\.a\.w|d\.w\.z|i\.p\.v|t\.o\.v|e\.d|enz|incl|excl|ca|nl|vs)\.', '' -replace '(?i)^\s*(let op|tip|let wel|nb)\s*:\s*', ''
+            $o -match '\b(want|omdat|doordat|zodat|waardoor|daardoor|dus)\b|[:;] \S|\.\s+\S'
+        })
         $andere = @(0..3 | Where-Object { $_ -ne $j })
         $redenAnders = @($andere | Where-Object { $reden[$_] }).Count
         $kortste = ($andere | ForEach-Object { $len[$_] } | Measure-Object -Minimum).Minimum

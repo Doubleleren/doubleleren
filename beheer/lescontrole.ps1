@@ -5,6 +5,7 @@ function Test-DlLes($l, [string]$Id, [int]$Lengte) {
     if ($l.id -ne $Id -or $l.id -notmatch '^[0-9a-z][0-9a-z\-]{2,80}$') { $fouten += 'id moet gelijk zijn aan de bestandsnaam (a-z, 0-9, -)' }
     foreach ($veld in 'titel', 'uitleg', 'vakgebied') { if (-not $l.$veld) { $fouten += "$veld ontbreekt" } }
     if ($null -ne $l.kort -and ($l.kort -isnot [string] -or $l.kort.Length -gt 600)) { $fouten += 'kort moet tekst zijn (hooguit 600 tekens)' }
+    if ($l.kort -and "$($l.uitleg)" -match '^\s*\*\*Kort gezegd') { $fouten += "kort en een 'Kort gezegd'-alinea in de uitleg: kies er één (de gewone-taaltekst staat anders dubbel)" }
     if ($l.opdracht.soort -notin 'meerkeuze', 'open', 'zoek-op', 'maak-met-claude') { $fouten += 'onbekende opdrachtsoort' }
     if ($l.opdracht.soort -eq 'meerkeuze' -and (@($l.opdracht.opties).Count -ne 4 -or [int]$l.opdracht.juist -notin 0..3)) { $fouten += 'meerkeuze heeft 4 opties en juist 0-3 nodig' }
     if ($l.bron -and $l.bron.url) {
