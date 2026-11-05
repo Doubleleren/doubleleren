@@ -1,0 +1,25 @@
+{
+  "id": "20261104-ab-hypotheses-uit-reviews-claude",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO × Claude",
+  "onderwerp": "Claude voor A/B-testhypotheses uit klantdata",
+  "matrix": ["7.2.1", "7.1.5"],
+  "titel": "'Maak de knop groen': betere A/B-testideeën uit 400 reviews halen",
+  "intro": "Een fietsenwebshop heeft je een export gegeven van 400 klantreviews en 120 antwoorden op een exit-poll ('Waarom bestel je vandaag niet?'). Een collega gaf Claude deze bestanden met de prompt: 'Geef 10 A/B-testideeën voor deze webshop.' Het resultaat: algemene tips zoals 'maak de knop groen' en 'voeg een countdown-timer toe'.",
+  "opdracht": {
+    "soort": "maak-met-claude",
+    "vraag": "Schrijf een betere prompt voor Claude. Zorg dat de hypotheses echt uit deze data komen en dat je ze kunt testen.",
+    "minTekens": 150,
+    "hint": "Denk aan wat Claude moet weten over de klant en het doel, hoe een bruikbare hypothese eruitziet, en hoe je kunt controleren of iets echt in de data staat."
+  },
+  "modelantwoord": "**De kern:** geef Claude het doel, de context en een vast format. Per hypothese: wat je verandert, welk effect je verwacht op welk cijfer, en welke citaten uit de reviews of poll dat onderbouwen. Laat Claude niets voorstellen wat niet in de data staat.\n\nVoorbeeldprompt:\n\"Je helpt me A/B-tests kiezen voor een fietsenwebshop. Het doel is meer bestellingen op productpagina's. In de bijlagen staan 400 reviews en 120 antwoorden op de vraag 'Waarom bestel je vandaag niet?'.\n\n1. Zoek de 5 bezwaren of twijfels die het vaakst terugkomen. Tel hoe vaak.\n2. Schrijf per bezwaar één hypothese: 'Als we [wijziging] doen op [pagina], dan stijgt [cijfer], omdat [bezwaar uit de data].'\n3. Geef bij elke hypothese 2 letterlijke citaten met het nummer van de review of het antwoord.\n4. Stel geen ideeën voor die niet in de data te vinden zijn. Kun je iets niet onderbouwen, zeg dat dan.\n\nGeef het resultaat als tabel.\"\n\nWaarom: zonder doel en format valt Claude terug op algemene tips. Met citaten kun je zelf nakijken of een bezwaar echt in de data staat.",
+  "kort": "De eerste prompt was te vaag, dus gaf Claude algemene tips die voor elke webshop gelden. Vertel Claude wat het doel is, waar de data over gaat en hoe een goede hypothese eruitziet. Vraag bij elk idee om citaten uit de reviews. Zo kun je zelf controleren of het idee echt uit de klantdata komt.",
+  "uitleg": "Een goede A/B-testhypothese heeft drie delen: **wat je verandert**, **welk effect je verwacht** op welk cijfer, en **waarom** je dat verwacht. Dat 'waarom' moet uit onderzoek komen, zoals reviews, polls of opnames. Anders test je op de gok.\n\nAnthropic geeft in zijn richtlijnen voor prompts een paar handvatten die hier helpen:\n- **Zie Claude als een slimme nieuwe collega** die je klant niet kent. Leg uit wat het doel is en waarom.\n- **Wees specifiek over de output:** het format, het aantal en de stappen.\n- **De toets:** zou een collega zonder voorkennis je prompt kunnen volgen? Zo niet, dan Claude ook niet.\n\nVraag daarnaast altijd om **citaten met een nummer**. Dan zie je snel of een bezwaar echt vaak voorkomt, of dat Claude het heeft aangevuld. Tellen hoe vaak iets terugkomt helpt je om te kiezen wat je eerst test.",
+  "kernpunt": "Laat Claude A/B-hypotheses maken met doel, context en een vast format (wijziging, verwacht effect, reden uit de data), en vraag citaten met een nummer zodat je kunt nakijken of het echt in de data staat.",
+  "toepassing": "Neem deze week de reviews of poll-antwoorden van één klant, laat Claude met zo'n prompt drie hypotheses maken, en controleer bij elke hypothese twee citaten in de bron.",
+  "bron": {
+    "titel": "Prompting best practices - Claude Docs",
+    "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+  }
+}

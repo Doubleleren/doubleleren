@@ -1,0 +1,30 @@
+{
+  "id": "20261105-robots-txt-503-crawlstop",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawlstatistieken: hoststatus en een onbereikbare robots.txt",
+  "matrix": ["1.5.4", "1.3.6"],
+  "titel": "Het hele weekend een 503 op robots.txt: wat deed Googlebot?",
+  "intro": "Een B2B-site verhuisde vrijdagmiddag naar een nieuwe server. Door een verkeerde firewallregel gaf alleen /robots.txt het hele weekend een 503 terug (de server zegt: tijdelijk niet beschikbaar). Alle andere pagina's werkten gewoon. Maandag ziet de SEO-specialist in Search Console, onder Instellingen → Crawlstatistieken, een rode hoststatus.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat deed Googlebot waarschijnlijk in de eerste uren nadat robots.txt een 503 begon te geven?",
+    "opties": [
+      "Gewoon doorcrawlen zonder beperkingen, want een robots.txt die niet laadt betekent voor Google dat alles mag.",
+      "Stoppen met crawlen, want Google wil eerst weten wat niet mag voordat het weer pagina's van de site ophaalt.",
+      "Doorcrawlen met de regels van de vorige versie, want Google negeert een korte storing van robots.txt helemaal.",
+      "De pagina's uit de index halen, want een serverfout op robots.txt geldt voor Google als een fout op de hele site."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Volgens Google stopt Googlebot met crawlen als robots.txt een serverfout geeft. Het blijft wel steeds proberen het bestand op te halen. Daarna gaat het zo:\n\n- **Eerste 12 uur:** Google crawlt niet.\n- **Van 12 uur tot 30 dagen:** Google gebruikt de laatste versie van robots.txt die wel lukte.\n- **Na 30 dagen:** is de homepage bereikbaar, dan crawlt Google zonder beperkingen. Anders blijft het stil.\n\nWaarom de andere opties niet kloppen:\n- **Doorcrawlen alsof alles mag** geldt voor een **404** op robots.txt. Een ontbrekend bestand is voor Google een geldig antwoord, een 503 niet.\n- **De vorige versie gebruiken** gebeurt pas ná de eerste 12 uur.\n- **Uit de index halen** gebeurt niet door een tijdelijke storing van robots.txt.",
+  "kort": "Robots.txt is het bestand waarin staat wat Google niet mag bezoeken. Geeft dat bestand een serverfout, dan weet Google niet wat er mag. Daarom stopt Google eerst met crawlen, en na 12 uur gebruikt het de laatste versie die het nog kent. Een 404 is anders: dan gaat Google ervan uit dat alles mag.",
+  "uitleg": "Het rapport **Crawlstatistieken** in Search Console laat bij hoststatus drie onderdelen zien:\n\n- **robots.txt ophalen:** hoe vaak het opvragen van robots.txt mislukte.\n- **DNS-resolutie:** of de domeinnaam wel werd gevonden.\n- **Serververbinding:** of de server antwoordde.\n\nElke grafiek heeft een rode stippellijn. Komt het aantal fouten op een dag daarboven, dan telt dat als probleem. Een probleem in de afgelopen week geeft een rode status. Was het langer geleden, maar binnen 90 dagen, dan zie je 'problemen in het verleden'.\n\nWat dit betekent na een serververhuizing:\n- Controleer direct na de livegang of /robots.txt een **200** of een **404** geeft, niet een 5xx of time-out.\n- Kijk ook naar firewalls en botbeveiliging. Die blokkeren soms juist Googlebot.\n- Een kort crawlgat herstelt zich meestal vanzelf. Een storing die dagen duurt, kost nieuwe en gewijzigde pagina's wel tijd.",
+  "kernpunt": "Geeft robots.txt een serverfout, dan stopt Google eerst met crawlen en gebruikt het na 12 uur de laatst bekende versie. Een 404 op robots.txt betekent juist dat alles gecrawld mag worden.",
+  "toepassing": "Zet bij de volgende serververhuizing of CDN-wijziging van een klant 'statuscode van /robots.txt controleren' op de checklist voor de livegang, en kijk een dag later naar de hoststatus in Crawlstatistieken.",
+  "bron": {
+    "titel": "Crawl Stats report - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/9679690"
+  }
+}

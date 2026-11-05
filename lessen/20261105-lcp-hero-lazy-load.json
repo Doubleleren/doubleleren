@@ -1,0 +1,30 @@
+{
+  "id": "20261105-lcp-hero-lazy-load",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: LCP verbeteren bij een grote headerfoto",
+  "matrix": ["5.2.3", "5.2.2"],
+  "titel": "De grote foto bovenaan laadt als laatste. Wat pas je aan?",
+  "intro": "Een fietsenwinkel heeft bovenaan elke categoriepagina een grote foto. PageSpeed Insights noemt die foto het LCP-element. LCP (Largest Contentful Paint) meet wanneer het grootste stuk inhoud in beeld staat. Op mobiel is de LCP 4,1 seconde. In de HTML staat: <img src=\"header.jpg\" loading=\"lazy\">. Een plugin heeft loading=\"lazy\" op álle afbeeldingen van de site gezet.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing is hier het beste voor de LCP?",
+    "opties": [
+      "Lazy loading op alle afbeeldingen uitzetten, want lazy loading vertraagt elke foto, ook de foto's verder op de pagina.",
+      "De foto als achtergrond in de CSS zetten, want dan laadt de browser hem tegelijk met de stylesheet van de pagina.",
+      "Een preload voor alle productfoto's toevoegen, want dan haalt de browser alle belangrijke foto's eerder op.",
+      "Bij deze ene foto loading=\"lazy\" weghalen en fetchpriority=\"high\" zetten, want dan haalt de browser hem meteen op."
+    ],
+    "juist": 3
+  },
+  "toelichting": "**loading=\"lazy\"** zegt tegen de browser: haal deze afbeelding pas op als zeker is dat hij in beeld komt. Voor de foto bovenaan betekent dat: later beginnen met laden. web.dev zegt het kort: lazy-load nooit je LCP-afbeelding. Met **fetchpriority=\"high\"** krijgt de foto daarnaast voorrang op andere bestanden.\n\n- **Alles uitzetten** lost het probleem met de bovenste foto ook op, maar kost iets. Lazy loading is juist nuttig voor foto's verder op de pagina, want die hoeven niet meteen te laden.\n- **Een CSS-achtergrond** maakt het erger. De browser ontdekt zo'n foto pas als de CSS binnen is.\n- **Alles preloaden** werkt averechts. Krijgen veel bestanden voorrang, dan heeft eigenlijk niets meer voorrang.",
+  "kort": "De foto bovenaan is het grootste wat de bezoeker ziet. Door de instelling 'lazy' wacht de browser met het laden ervan, en dat maakt de pagina traag. Haal die instelling bij deze ene foto weg en geef hem voorrang met fetchpriority=\"high\". Voor foto's verder op de pagina mag lazy loading blijven staan.",
+  "uitleg": "LCP is goed bij **2,5 seconde of minder**, gemeten bij 75% van de bezoeken. Bij een foto als LCP-element let je op vier dingen:\n\n- **Vindbaar in de HTML:** zet de foto als gewone <img> in de HTML, niet alleen in CSS of JavaScript. Kan dat niet, gebruik dan een preload voor die ene foto.\n- **Geen lazy loading:** alleen voor foto's die bij het openen in beeld staan. Lager op de pagina is lazy loading prima.\n- **Voorrang:** fetchpriority=\"high\" op één, hooguit twee afbeeldingen.\n- **Klein bestand:** een modern formaat zoals WebP of AVIF, en een formaat dat past bij het scherm (srcset).\n\nVeel WordPress- en Shopify-plugins zetten lazy loading op alles. Controleer na het installeren van zo'n plugin altijd de bovenste afbeelding. In PageSpeed Insights zie je dit als waarschuwing bij het LCP-element.",
+  "kernpunt": "Lazy-load nooit de afbeelding die het LCP-element is. Haal loading=\"lazy\" daar weg en geef hem fetchpriority=\"high\". Foto's verder op de pagina mogen lazy laden.",
+  "toepassing": "Draai deze week PageSpeed Insights op de belangrijkste categoriepagina van een klant. Is een afbeelding het LCP-element, kijk dan in de HTML of daar loading=\"lazy\" op staat.",
+  "bron": {
+    "titel": "Optimize Largest Contentful Paint | web.dev",
+    "url": "https://web.dev/articles/optimize-lcp"
+  }
+}

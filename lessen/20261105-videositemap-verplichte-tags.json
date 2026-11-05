@@ -1,0 +1,30 @@
+{
+  "id": "20261105-videositemap-verplichte-tags",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Videositemap: welke tags zijn verplicht",
+  "matrix": ["1.4.3", "2.2.2"],
+  "titel": "De videositemap is bijna af, zegt de developer. Klopt dat?",
+  "intro": "Een keukenmerk heeft 80 instructievideo's op zijn productpagina's, in een eigen videospeler. Een developer maakt een videositemap (een sitemap speciaal voor video's). Per video levert hij: de pagina-URL, een titel, een beschrijving, de duur in seconden en de publicatiedatum. Verder niets, 'want de rest staat al in de pagina'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat moet er minimaal nog bij voordat de videositemap aan Googles eisen voldoet?",
+    "opties": [
+      "Alleen een thumbnail-URL, want met de duur en de publicatiedatum kan Google de video zelf al vinden en afspelen.",
+      "Niets meer, want Google haalt de thumbnail en het videobestand zelf uit de pagina zodra die in de sitemap staat.",
+      "Een thumbnail-URL plus een link naar het videobestand of naar de speler, want die horen bij de verplichte tags.",
+      "Een link naar het videobestand én een link naar de speler, want Google wil beide hebben om de video te tonen."
+    ],
+    "juist": 2
+  },
+  "toelichting": "Google noemt voor elke video in een videositemap deze tags verplicht:\n\n- video:thumbnail_loc (de URL van de thumbnail)\n- video:title\n- video:description\n- video:content_loc (het videobestand) **of** video:player_loc (de speler). Eén van de twee is genoeg.\n\nDe duur (video:duration) en de publicatiedatum zijn optioneel. Die heeft de developer wel, maar de thumbnail en de link naar video of speler ontbreken.\n\n- **Alleen een thumbnail** is niet genoeg: de link naar het bestand of de speler blijft verplicht.\n- **Niets meer** klopt niet: een sitemap zonder verplichte tags voldoet niet aan de eisen.\n- **Beide links** mag, maar het hoeft niet.",
+  "kort": "Een videositemap is een lijst waarmee je Google je video's laat vinden. Per video moet er een titel, een beschrijving en een plaatje (thumbnail) in staan. Daarnaast een link naar het videobestand óf naar de videospeler. De duur en de datum zijn handig, maar niet verplicht.",
+  "uitleg": "Een videositemap helpt vooral als Google je video's moeilijk zelf vindt. Bijvoorbeeld omdat ze in een eigen speler zitten of pas laden met JavaScript.\n\nEen paar dingen om op te letten:\n- **Thumbnail:** Google moet het plaatje kunnen ophalen. Blokkeer de map met thumbnails dus niet in robots.txt.\n- **content_loc of player_loc:** content_loc wijst naar het videobestand zelf, bijvoorbeeld een .mp4. player_loc wijst naar de speler, zoals een embed-URL. Zet hier niet de URL van de pagina zelf neer.\n- **Optioneel maar nuttig:** duur, publicatiedatum en een verloopdatum voor video's die offline gaan.\n- **Combineren mag:** de video-tags mogen in je gewone sitemap staan, of in een aparte videositemap.\n\nVideo-markup (VideoObject) op de pagina zelf is een aanvulling. Daarmee geef je Google dezelfde informatie, en meer, zoals hoofdstukken in een video.",
+  "kernpunt": "Verplicht in een videositemap: thumbnail, titel, beschrijving en een link naar het videobestand óf de speler. Duur en publicatiedatum zijn optioneel.",
+  "toepassing": "Heeft een klant eigen video's die slecht in Google Video's verschijnen? Controleer deze week of er een videositemap is, en of elke video daarin een thumbnail en een content_loc of player_loc heeft.",
+  "bron": {
+    "titel": "Video sitemaps | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps"
+  }
+}

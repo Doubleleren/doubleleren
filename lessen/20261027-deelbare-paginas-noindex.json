@@ -22,6 +22,7 @@
     "juist": 2
   },
   "toelichting": "Google vraagt platforms waar gebruikers pagina's kunnen delen of laten genereren om zich af te vragen of die content bedoeld is om via zoekmachines gevonden te worden. Is hij bedoeld voor delen, samenwerken of gebruik, dan hoort er standaard een **noindex** op.\n\nWaarom de andere opties niet kloppen:\n- **Meteen Disallow** voorkomt dat Google de pagina's nog crawlt. Dan ziet Google ook geen noindex, en URL's die al bekend zijn kunnen in de index blijven staan, alleen zonder beschrijving. Een robots.txt-blokkade is een prima standaard voor nieuwe pagina's, maar niet om al geïndexeerde URL's op te ruimen.\n- **Een canonical naar de homepage** is een misleidend signaal: de pagina's zijn geen duplicaat van de homepage. Google negeert zo'n canonical waarschijnlijk, en de spam blijft vindbaar.\n- **Verwijderingen** verbergt URL's maar tijdelijk (ongeveer zes maanden) en lost niets op bij de bron.",
+  "kort": "Offertes die gebruikers met elkaar delen, zijn niet bedoeld om via Google gevonden te worden. Zet er daarom standaard een noindex op: een regel in de code die zegt 'niet in Google opnemen'. Google moet de pagina's wel kunnen blijven bezoeken, anders ziet het die regel niet. Houd daarnaast in de gaten of er ineens veel nieuwe pagina's bijkomen, want dat wijst op spam.",
   "uitleg": "Op 26 oktober 2026 vulde Google zijn gids over het voorkomen van misbruik aan met een nieuw onderdeel: **indexeer alleen content die voor Search bedoeld is**. Het gaat om tools waarmee gebruikers gedeelde pagina's, gegenereerde content of web-apps publiceren, zoals offertes, wensenlijstjes, ontwerpen of AI-uitvoer.\n\nHet advies:\n- Bepaal per type pagina of hij gevonden moet worden via zoekmachines, of alleen bedoeld is voor wie de link heeft.\n- Zo niet: zet standaard een **noindex** (meta robots of X-Robots-Tag), of blokkeer het crawlen standaard in robots.txt.\n\nDie twee sluiten elkaar uit op dezelfde URL: een noindex werkt alleen als Google de pagina mag crawlen. Staan er al pagina's in de index, laat ze dan eerst crawlbaar met noindex tot ze verdwenen zijn.\n\nGoogle noemt ook hoe je misbruik vroeg ziet:\n- Search Console geverifieerd houden voor meldingen over handmatige acties en beveiliging\n- het rapport Pagina-indexering en het prestatierapport controleren op onverwachte pieken\n- op het platform zelf het aantal nieuwe openbare pagina's bijhouden, met een alarm bij plotselinge sprongen of als een paar gebruikers de meeste indexeerbare URL's maken",
   "kernpunt": "Pagina's die gebruikers maken om te delen, horen standaard niet in Google: geef ze een noindex. Wat al geïndexeerd is, laat je crawlbaar tot het eruit is, en je bewaakt pieken in nieuwe pagina's.",
   "toepassing": "Check deze week bij een klant met accounts, wensenlijstjes of een deelfunctie of die pagina's openbaar zijn. Zoek met site: en in Pagina-indexering of ze in Google staan.",
@@ -29,6 +30,6 @@
     "titel": "Prevent user-generated spam on your site and platform | Google Search Central",
     "url": "https://developers.google.com/search/docs/monitor-debug/prevent-abuse"
   },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties even lang gemaakt."
+  "herzien": "2026-11-04",
+  "wijziging": "In gewone taal toegevoegd."
 }
