@@ -30,6 +30,8 @@ $lessen = foreach ($f in Get-ChildItem (Join-Path $App 'lessen') -Filter *.json 
         if (($reden[$j] -and $redenAnders -eq 0) -or (-not $reden[$j] -and $redenAnders -eq 3) -or ($len[$j] -lt $kortste -and $len[$j] -lt 0.7 * $gem)) {
             $r.vormAfwijkend = $true
         }
+        # Nog niet in de vaste opbouw na het antwoord (kern, afleiders, begrippen): de generator zet hem om
+        if (-not $l.afleiders) { $r.oudeUitleg = $true }
     }
     $r
 }

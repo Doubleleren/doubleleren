@@ -165,6 +165,7 @@ details.spoiler > summary { cursor: pointer; color: var(--smart-ink); font-weigh
 tr.ik td { background: var(--fun-50); }
 .sb-kies { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .sb-kies .veld { width: auto; padding: 8px 14px; font-size: 15px; }
+.sb-kies .knop { background: var(--cool-50); }
 
 .les { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-top: 1px solid var(--cool); }
 .les:first-child { border-top: 0; padding-top: 0; }
@@ -219,6 +220,7 @@ kbd, code { font: 600 13px/1.4 ui-monospace, Consolas, monospace; background: va
 .kader.onthoud { background: #FFF6E0; border-color: var(--deels); }
 .kader.probeer { background: var(--open-50); border-color: #5B8DB8; }
 .kader.simpel { background: var(--fun-50); border-color: var(--fun); font-size: 17px; }
+.kader.begrippen { font-size: 14px; }
 .meer-uitleg { margin: 4px 0 14px; }
 .meer-uitleg > summary { cursor: pointer; font-weight: 600; padding: 6px 0; color: var(--smart-ink, inherit); }
 .opties { display: grid; gap: 8px; margin-top: 8px; }
@@ -468,9 +470,10 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   <div id="scorebord" hidden>
     <section class="paneel" style="margin-top:0">
       <div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Elke maand een nieuwe ronde. Punten = aantal goed + je langste reeks van die maand (weekenden onderbreken een reeks niet).</p></div>
-        <div class="sb-kies"><span class="prio-keuze" id="sb-groep" role="group" aria-label="Wie" hidden></span><label for="sb-keuze" class="sub" style="margin:0">Periode</label><select id="sb-keuze" class="veld"></select></div></div>
+        <div class="sb-kies"><span class="prio-keuze" id="sb-groep" role="group" aria-label="Wie" hidden></span><label for="sb-keuze" class="sub" style="margin:0">Periode</label><select id="sb-keuze" class="veld"></select><button type="button" class="knop" id="sb-vernieuw">Vernieuwen</button></div></div>
       <div class="tabel"><table id="sb-tabel"></table></div>
       <p class="sub" id="sb-sub"></p>
+      <p class="fout" id="sb-fout" role="alert"></p>
     </section>
   </div>
 
@@ -554,16 +557,22 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
           <label class="optie"><input type="radio" name="m-juist" value="1" aria-label="Antwoord B is juist"><input id="m-optie1" class="veld" maxlength="400" placeholder="Antwoord B"></label>
           <label class="optie"><input type="radio" name="m-juist" value="2" aria-label="Antwoord C is juist"><input id="m-optie2" class="veld" maxlength="400" placeholder="Antwoord C"></label>
           <label class="optie"><input type="radio" name="m-juist" value="3" aria-label="Antwoord D is juist"><input id="m-optie3" class="veld" maxlength="400" placeholder="Antwoord D"></label>
-          <label class="veld-label">Toelichting bij het juiste antwoord (optioneel)<textarea id="m-toelichting" class="antwoord" rows="2" maxlength="2000"></textarea></label>
+          <label class="veld-label">De kern: één zin achter "Goed!" (herhaal het juiste antwoord niet letterlijk)<input id="m-kern" class="veld" maxlength="200"></label>
+          <p class="sub" style="margin:0">Waarom klopt elk fout antwoord niet? Eén zin per optie, begin met een korte naam in vet, bijv. <code>**Zwaardere hosting:** de server is al snel.</code> Laat het juiste antwoord leeg.</p>
+          <input id="m-afl0" class="veld" maxlength="300" placeholder="Waarom A niet klopt">
+          <input id="m-afl1" class="veld" maxlength="300" placeholder="Waarom B niet klopt">
+          <input id="m-afl2" class="veld" maxlength="300" placeholder="Waarom C niet klopt">
+          <input id="m-afl3" class="veld" maxlength="300" placeholder="Waarom D niet klopt">
         </div>
         <div id="m-open" class="stappen" hidden>
           <label class="veld-label">Minimaal aantal tekens in het antwoord<input id="m-min" class="veld" type="number" min="20" max="1000" value="100"></label>
           <label class="veld-label">Modelantwoord: zo zou een expert het doen<textarea id="m-model" class="antwoord" rows="4" maxlength="4000"></textarea></label>
         </div>
-        <label class="veld-label">In gewone taal: 2–4 korte zinnen zonder vakjargon, staat direct na het antwoord<textarea id="m-kort" class="antwoord" rows="3" maxlength="600"></textarea></label>
-        <label class="veld-label">Uitleg: de kern van de les (120–250 woorden)<textarea id="m-uitleg" class="antwoord" rows="8" maxlength="6000"></textarea></label>
-        <label class="veld-label">Kernpunt: 1–2 zinnen om te onthouden<textarea id="m-kernpunt" class="antwoord" rows="2" maxlength="600"></textarea></label>
-        <label class="veld-label">Probeer vandaag (optioneel): één concrete actie<textarea id="m-toepassing" class="antwoord" rows="2" maxlength="600"></textarea></label>
+        <label class="veld-label">Zo werkt het: 2–5 korte zinnen zonder vakjargon, met één vergelijking uit het dagelijks leven<textarea id="m-kort" class="antwoord" rows="3" maxlength="600"></textarea></label>
+        <label class="veld-label">Begrippen (optioneel): hooguit vier, één per regel als <code>term: uitleg</code>, alleen woorden die in de les voorkomen<textarea id="m-begrippen" class="antwoord" rows="3" maxlength="1000" placeholder="TTFB: tijd tot het eerste stukje van de pagina binnenkomt"></textarea></label>
+        <label class="veld-label">Volledige uitleg (uitklapbaar): de verdieping, 100–180 woorden<textarea id="m-uitleg" class="antwoord" rows="8" maxlength="6000"></textarea></label>
+        <label class="veld-label">Onthoud: één vuistregel<textarea id="m-kernpunt" class="antwoord" rows="2" maxlength="600"></textarea></label>
+        <label class="veld-label">Probeer vandaag (optioneel): iets van hooguit 10 minuten<textarea id="m-toepassing" class="antwoord" rows="2" maxlength="600"></textarea></label>
         <div class="velden-rij">
           <label class="veld-label">Bron, titel (optioneel)<input id="m-bron-titel" class="veld" maxlength="200"></label>
           <label class="veld-label">Bron, link (https)<input id="m-bron-url" class="veld" type="url" maxlength="500" placeholder="https://"></label>

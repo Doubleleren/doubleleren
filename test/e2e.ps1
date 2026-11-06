@@ -299,6 +299,14 @@ Controleer ($ctx.lesstatistiek.'20261019-srm'.n -ge 1 -and $ctx.lesstatistiek.'2
 Controleer (@($fbC | Where-Object tekst -eq 'Na de omzetting').Count -eq 1 -and -not ($fbC | Where-Object { $_.PSObject.Properties.Name -contains 'door' }) -and -not ((ConvertTo-Json $fbC -Depth 4) -match 'lid-[0-9a-f]{6}')) 'Context: feedback zonder afzender en zonder pseudoniemen'
 Controleer (-not ($fbC | Where-Object tekst -eq 'Vals namens Foxtrot') -and -not ($fbC | Where-Object tekst -match 'Afronden reageert')) 'Context: vervalste feedback en feedback zonder generatorkopie overgeslagen'
 Remove-Item "$T\beheer\generator\context.json"
+# Vaste beginstand voor de checks hieronder: les 20261019-srm zoals hij oorspronkelijk was (nooit herzien, het juiste
+# antwoord ruim het langst). Zo hangt de test niet af van wat de generator later aan de echte les verandert.
+$srm = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+foreach ($v in 'herzien', 'wijziging', 'actief') { $srm.PSObject.Properties.Remove($v) }
+$jSrm = [int]$srm.opdracht.juist
+$maxSrm = (@(0..3 | Where-Object { $_ -ne $jSrm } | ForEach-Object { "$($srm.opdracht.opties[$_])".Length }) | Measure-Object -Maximum).Maximum
+while ("$($srm.opdracht.opties[$jSrm])".Length -le 1.1 * $maxSrm) { $srm.opdracht.opties[$jSrm] += ', ook als het verschil klein lijkt' }
+[IO.File]::WriteAllText("$A\lessen\20261019-srm.json", ($srm | ConvertTo-Json -Depth 6), (New-Object Text.UTF8Encoding($false)))
 # Controle van herzien-velden
 $basis = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
 $l1 = $basis.PSObject.Copy(); $l1 | Add-Member actief $false -Force

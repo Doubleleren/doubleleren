@@ -1,0 +1,30 @@
+{
+  "id": "20261106-cls-promobalk-ruimte-reserveren",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: CLS verbeteren bij een balk die later verschijnt",
+  "matrix": ["5.2.7", "5.2.6"],
+  "titel": "De promobalk duwt de koopknop weg: hoe los je dat op?",
+  "intro": "Een webshop in tuinmeubelen heeft volgens Search Console een CLS van 0,24 op mobiel. CLS (Cumulative Layout Shift) meet hoeveel de inhoud verspringt terwijl je kijkt. Bij het openen van een productpagina verschijnt na een seconde bovenaan een balk met 'Gratis bezorging vanaf € 50'. Productfoto en koopknop schuiven dan een stuk naar beneden. Lighthouse geeft dezelfde pagina een CLS van 0,02.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste oplossing voor dit verspringen?",
+    "opties": [
+      "De balk via JavaScript pas laden als de rest klaar is, want dan staat de productfoto al in beeld als de balk verschijnt.",
+      "Alle afbeeldingen een vaste breedte en hoogte geven, want ontbrekende afmetingen zijn de bekendste oorzaak van CLS.",
+      "Vooraf ruimte voor de balk vrijhouden met een vaste hoogte, want dan schuift er niets op als de tekst binnenkomt.",
+      "De CLS van Search Console laten voor wat hij is, want Lighthouse meet op dezelfde pagina een goede score van 0,02."
+    ],
+    "juist": 2
+  },
+  "toelichting": "De balk komt binnen nadat de pagina al getekend is. Er is geen plek voor gereserveerd, dus alles eronder schuift op. Geef de plek van de balk vooraf een vaste hoogte (min-height in de CSS). Dan verschijnt de tekst in ruimte die er al was.\n\n- **Later laden** maakt het niet beter. De balk duwt de inhoud dan nog steeds weg, alleen op een later moment.\n- **Afmetingen bij afbeeldingen** zijn verstandig, maar hier is de balk de oorzaak, niet de foto's.\n- **Lighthouse** meet alleen het laden in een testomgeving. Search Console gebruikt velddata: metingen bij echte bezoekers, over hun hele bezoek. Die tellen.",
+  "kort": "De balk verschijnt pas als de pagina er al staat, en duwt dan alles naar beneden. Houd daarom vooraf een vaste ruimte vrij waar de balk in komt. Dan verspringt er niets meer. Een goede score in Lighthouse zegt hier weinig, want echte bezoekers zien het verspringen wel.",
+  "uitleg": "CLS is goed bij **0,1 of lager**, gemeten bij 75% van de bezoeken. De bekendste oorzaken en oplossingen volgens web.dev:\n\n- **Afbeeldingen en video's zonder afmetingen:** zet width en height, of aspect-ratio in de CSS.\n- **Advertenties, embeds en balken die later laden:** reserveer ruimte met min-height. Laat die ruimte niet inklappen als er niets komt.\n- **Inhoud boven bestaande inhoud invoegen:** hoe hoger op het scherm, hoe erger. Kan het niet anders, zet het dan lager of als overlay over de pagina heen.\n- **Webfonts:** een vervangend lettertype met andere maten laat tekst verspringen. Kies een lettertype dat erop lijkt en laad belangrijke fonts vooraf.\n- **Animaties:** gebruik transform in plaats van top of left.\n\nVerschuivingen binnen 0,5 seconde na een klik of tik tellen niet mee. Een menu dat openklapt na een klik is dus geen probleem.",
+  "kernpunt": "Iets wat later op de pagina verschijnt, krijgt vooraf een vaste plek (bijv. min-height). Beoordeel CLS op velddata uit Search Console of CrUX, niet alleen op Lighthouse.",
+  "toepassing": "Open deze week een productpagina van een klant op je telefoon en kijk of er na het laden nog een balk, banner of melding bovenaan verschijnt. Zo ja, vraag de developer om daar vooraf ruimte voor te reserveren.",
+  "bron": {
+    "titel": "Optimize Cumulative Layout Shift | web.dev",
+    "url": "https://web.dev/articles/optimize-cls"
+  }
+}

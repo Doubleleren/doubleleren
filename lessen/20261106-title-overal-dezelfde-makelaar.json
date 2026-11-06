@@ -1,0 +1,30 @@
+{
+  "id": "20261106-title-overal-dezelfde-makelaar",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Meta title: unieke, beschrijvende titles in plaats van één sjabloon",
+  "matrix": ["2.1.8"],
+  "titel": "300 woningpagina's met precies dezelfde title",
+  "intro": "Een makelaarskantoor heeft 300 woningpagina's. Ze hebben allemaal dezelfde title: 'Makelaar Van Dijk | Wonen in Utrecht | Huizen te koop | Hypotheekadvies | Taxatie'. Een SEO-tool meldt bij elke pagina: 'Title langer dan 60 tekens'. De klant wil de titles verbeteren, maar heeft maar een paar uur developertijd.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de belangrijkste verbetering voor deze titles?",
+    "opties": [
+      "Alle titles inkorten tot maximaal 60 tekens, want Google negeert een langere title en kiest dan zelf een andere tekst.",
+      "In elke title 'huis kopen Utrecht' zetten, want als die woorden op elke pagina staan, wordt de site sterker op die zoekterm.",
+      "De merknaam uit de titles halen, want Google toont de naam van de site al apart boven elk resultaat in de zoekresultaten.",
+      "Elke pagina een eigen title geven met het adres van de woning, want nu zegt geen enkele title wat er op die pagina staat."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Het grootste probleem is niet de lengte, maar dat alle 300 titles hetzelfde zijn. Google vraagt om een title die per pagina beschrijft wat erop staat. Een sjabloon met het adres, de plaats en het type woning lost dat in één keer op, voor alle pagina's.\n\n- **Een limiet van 60 tekens** bestaat niet. Google kort een lange title af waar nodig, vaak op de breedte van het scherm. Kort is wel prettiger om te lezen.\n- **Overal dezelfde zoekwoorden** maakt de titles alleen meer gelijk. Google noemt herhaling van woorden zelfs iets wat er spammy uitziet.\n- **De merknaam** mag blijven: Google raadt aan om de naam van de site aan het begin of eind te zetten, gescheiden door een streepje of een |.",
+  "kort": "Alle woningpagina's hebben nu dezelfde title, dus Google en zoekers zien niet waar een pagina over gaat. Geef elke pagina een eigen title met het adres van de woning. Dat regel je met één sjabloon. De lengte is minder belangrijk: Google kort een te lange title zelf af.",
+  "uitleg": "Google maakt de titel in de zoekresultaten (de 'title link') automatisch. Het kijkt vooral naar de title, maar ook naar de grootste kop op de pagina (H1), og:title en linkteksten naar de pagina. Wijkt de title sterk af van de pagina, of is hij overal gelijk, dan kiest Google vaker zelf een andere tekst.\n\nEen goede title:\n\n- is **uniek per pagina** en beschrijft de inhoud;\n- is **kort en duidelijk**, zonder rijtjes zoekwoorden;\n- heeft de **merknaam** hooguit één keer, aan het begin of eind;\n- past bij de **zichtbare kop** op de pagina.\n\nOp de homepage mag de title iets meer over het bedrijf vertellen. Bij veel gelijksoortige pagina's maak je de title met een sjabloon uit de data, zoals adres, plaats en type woning. Dat kost weinig developertijd.",
+  "kernpunt": "Geef elke pagina een eigen title die zegt wat erop staat, bij veel pagina's via een sjabloon uit de data. Een vaste tekenlimiet bestaat niet; Google kort zelf af.",
+  "toepassing": "Exporteer deze week de titles van een klant uit Screaming Frog en filter op 'Duplicate'. Kies het paginatype met de meeste dubbele titles en stel een sjabloon voor met gegevens die per pagina verschillen.",
+  "bron": {
+    "titel": "Influencing your title links in search results | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/title-link"
+  }
+}

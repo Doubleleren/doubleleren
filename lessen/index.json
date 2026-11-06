@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-05T08:19:27",
+    "bijgewerkt":  "2026-11-06T08:54:29",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -49,7 +49,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261019-nep-urgentie",
@@ -113,7 +114,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261019-striking-distance",
@@ -223,7 +225,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30"
+                       "herzien":  "2026-10-30",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-cls-verbeteren",
@@ -287,7 +290,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02"
+                       "herzien":  "2026-11-02",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-ga4-eventmodel",
@@ -310,7 +314,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-ga4-via-gtm",
@@ -330,7 +335,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-ga-certificering",
@@ -453,7 +459,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-paginering-zonder-prev-next",
@@ -474,7 +481,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-paid-social-campagnestructuur",
@@ -493,7 +501,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-paid-social-steunt-seo",
@@ -536,7 +545,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-penguin-realtime",
@@ -595,7 +605,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-ratings-eigen-reviews",
@@ -615,7 +626,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02"
+                       "herzien":  "2026-11-02",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-rel-canonical",
@@ -635,7 +647,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29"
+                       "herzien":  "2026-10-29",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-robots-txt-rapport",
@@ -673,7 +686,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-seo-ppc-relatie",
@@ -697,7 +711,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-ttfb-verbeteren",
@@ -721,7 +736,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29"
+                       "herzien":  "2026-10-29",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261020-user-signals-bounce-rate",
@@ -807,7 +823,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261021-funnel-dropoff-ga4",
@@ -832,7 +849,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261021-ga4-debugview-controle",
@@ -852,7 +870,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29"
+                       "herzien":  "2026-10-29",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261021-gsc-bigquery-sql",
@@ -964,7 +983,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30"
+                       "herzien":  "2026-10-30",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261021-zero-click-ai-samenvatting",
@@ -1008,7 +1028,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261022-crawlstatistieken-hoststatus",
@@ -1079,7 +1100,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261022-geo-pakket-beoordelen",
@@ -1124,7 +1146,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02"
+                       "herzien":  "2026-11-02",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261022-inp-veldattributie-claude",
@@ -1192,7 +1215,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261022-orphan-pages-claude",
@@ -1253,7 +1277,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29"
+                       "herzien":  "2026-10-29",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261023-checkout-verrassingskosten",
@@ -1292,7 +1317,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261023-gecrawld-of-gevonden-niet-geindexeerd",
@@ -1359,7 +1385,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02"
+                       "herzien":  "2026-11-02",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261023-news-sitemap-regels",
@@ -1418,7 +1445,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261023-steekproefgrootte-mde-claude",
@@ -1478,7 +1506,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02"
+                       "herzien":  "2026-11-02",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261026-auteursinformatie-claude",
@@ -1522,7 +1551,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30"
+                       "herzien":  "2026-10-30",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261026-garantie-top3-verwachtingen",
@@ -1586,7 +1616,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261026-organization-markup-logo",
@@ -1646,7 +1677,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261026-sponsored-ugc-nofollow",
@@ -1665,7 +1697,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261026-url-parameters-zonder-tool-claude",
@@ -1706,7 +1739,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261027-deelbare-paginas-noindex",
@@ -1727,7 +1761,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-04"
+                       "herzien":  "2026-11-04",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261027-eeat-geen-rankingfactor",
@@ -1771,7 +1806,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261027-json-ld-syntax-claude",
@@ -1831,7 +1867,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02"
+                       "herzien":  "2026-11-02",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261027-ongeldig-element-in-head",
@@ -1851,7 +1888,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261027-sitemap-vervuild",
@@ -1930,7 +1968,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02"
+                       "herzien":  "2026-11-02",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261028-featured-snippet-afmelden",
@@ -1988,7 +2027,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261028-kannibalisatie-gsc-claude",
@@ -2029,7 +2069,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30"
+                       "herzien":  "2026-10-30",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261028-linkbuildingrapport-freelancer",
@@ -2109,7 +2150,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-ai-citatieonderzoek-correlatie",
@@ -2187,7 +2229,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-boven-de-vouw-aandacht",
@@ -2226,7 +2269,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-crawlverspilling-screaming-frog-claude",
@@ -2267,7 +2311,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-een-of-twee-landingspaginas",
@@ -2330,7 +2375,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-kickoff-gespreksleidraad-claude",
@@ -2449,7 +2495,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-merk-categoriepaginas-indexeren",
@@ -2489,7 +2536,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-openai-searchbot-vs-gptbot",
@@ -2509,7 +2557,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-plaatspaginas-doorway",
@@ -2529,7 +2578,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-p-waarde-kans-variant-beter",
@@ -2549,7 +2599,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-ranktracker-vs-gsc-positie",
@@ -2570,7 +2621,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-redirectmap-delegeren",
@@ -2611,7 +2663,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261029-schemaplugin-losse-blokken",
@@ -2737,7 +2790,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261030-ga4-betaalprovider-als-verwijzing",
@@ -2758,7 +2812,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261030-ga4-bewaartermijn-verkenningen",
@@ -2817,7 +2872,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-afbeeldingssitemap-js-galerij",
@@ -2857,7 +2913,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-automatische-slider-homepage",
@@ -2896,7 +2953,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-checkout-formuliervelden",
@@ -2916,7 +2974,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-contentbrief-prompt-context",
@@ -2935,7 +2994,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-crawlbudget-kleine-site",
@@ -2955,7 +3015,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-ctr-bots-klikmanipulatie",
@@ -2974,7 +3035,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-cwv-rapport-28-dagen",
@@ -2998,7 +3060,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-disavow-spamlinks-niet-zelf",
@@ -3017,7 +3080,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-ga4-key-events",
@@ -3037,7 +3101,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-ga4-rapportage-identiteit",
@@ -3056,7 +3121,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-gedeeld-ai-trainingstoken",
@@ -3076,7 +3142,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-gsc-bigquery-site-of-url-tabel",
@@ -3097,7 +3164,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-meer-laden-knop-producten",
@@ -3117,7 +3185,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-og-image-cache-sharing-debugger",
@@ -3137,7 +3206,8 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-reviewanalyse-citaten-claude",
@@ -3157,7 +3227,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261102-skill-maandrapport-claude",
@@ -3190,7 +3261,7 @@
                                       "5.2.10",
                                       "5.2.11"
                                   ],
-                       "kernpunt":  "TTFB in het veld telt redirects mee, labtools meten meestal de eind-URL. Komt veel verkeer via advertenties of nieuwsbrieven, geef dan de eind-URL door en schrap eigen redirects.",
+                       "kernpunt":  "Wijkt velddata af van labdata, kijk dan eerst wat de echte bezoeker onderweg tegenkomt.",
                        "bron":  {
                                     "titel":  "Optimize Time to First Byte | web.dev",
                                     "url":  "https://web.dev/articles/optimize-ttfb"
@@ -3201,7 +3272,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-ab-test-segment-achteraf",
@@ -3221,7 +3293,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261103-ai-productteksten-op-schaal",
@@ -3241,7 +3314,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261103-anthropic-crawlers-robots-txt",
@@ -3261,7 +3335,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261103-claude-search-console-koppeling",
@@ -3280,7 +3355,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261103-dashboard-ctr-gemiddelde",
@@ -3300,7 +3376,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261103-ga4-cross-domain-boekingsdomein",
@@ -3320,7 +3397,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261103-lighthouse-13-6-psi-scoresprong",
@@ -3345,7 +3423,8 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03"
+                       "herzien":  "2026-11-03",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261103-tijdelijke-redirect-302",
@@ -3384,7 +3463,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261104-ab-hypotheses-uit-reviews-claude",
@@ -3444,7 +3524,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261104-logs-304-http-caching",
@@ -3464,7 +3545,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261104-novelty-effect-ab-test",
@@ -3504,7 +3586,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261104-placeholder-als-label",
@@ -3523,7 +3606,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261104-popup-script-blokkeren-robots",
@@ -3543,7 +3627,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261104-productmarkup-via-gtm",
@@ -3564,7 +3649,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261104-rankingsystemen-actief-of-gestopt",
@@ -3585,7 +3671,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-404-na-opruimen-pagina-indexering",
@@ -3609,7 +3696,8 @@
                                      "url":  "https://www.youtube.com/watch?v=O9xkp0X0eJY"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-ai-gebruik-transparant-eeat",
@@ -3629,7 +3717,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-google-extended-ai-overviews",
@@ -3649,7 +3738,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-gtm-klik-telefoonnummer",
@@ -3672,7 +3762,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-hreflang-m-dot-mobiel-naar-mobiel",
@@ -3692,7 +3783,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-lcp-hero-lazy-load",
@@ -3712,7 +3804,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-robots-txt-503-crawlstop",
@@ -3732,7 +3825,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    },
                    {
                        "id":  "20261105-videositemap-verplichte-tags",
@@ -3752,7 +3846,172 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-cls-promobalk-ruimte-reserveren",
+                       "titel":  "De promobalk duwt de koopknop weg: hoe los je dat op?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: CLS verbeteren bij een balk die later verschijnt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.7",
+                                      "5.2.6"
+                                  ],
+                       "kernpunt":  "Iets wat later op de pagina verschijnt, krijgt vooraf een vaste plek (bijv. min-height). Beoordeel CLS op velddata uit Search Console of CrUX, niet alleen op Lighthouse.",
+                       "bron":  {
+                                    "titel":  "Optimize Cumulative Layout Shift | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-cls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-gsc-klikpiek-bots-november",
+                       "titel":  "Zes keer zoveel klikken in Search Console, en niemand weet waarom",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Search Console: een klikpiek begin november 2026 die niet echt is",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.2",
+                                      "4.1.1"
+                                  ],
+                       "kernpunt":  "Stijgen klikken sterk terwijl de vertoningen gelijk blijven, dan is het vrijwel zeker geen echt verkeer. Begin november 2026 had een deel van de sites zo\u0027n piek: filter hem uit je rapport en verander niets aan de site.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: November Click Spikes In Google Search Console Are Bot Traffic – How To Filter Your Reports",
+                                    "url":  "https://www.searchenginejournal.com/november-click-spikes-in-google-search-console-are-bot-traffic-how-to-filter-your-reports/595834/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-inp-filterklik-werk-uitstellen",
+                       "titel":  "Een filterklik van 480 ms: wat moet de developer als eerste doen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: INP verbeteren door werk na een klik uit te stellen",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.5",
+                                      "5.2.4"
+                                  ],
+                       "kernpunt":  "Laat een klik eerst alleen het zichtbare antwoord tekenen en schuif de rest van het werk naar een latere taak. INP meet tot het eerstvolgende beeld, dus daar win je de meeste tijd.",
+                       "bron":  {
+                                    "titel":  "Optimize Interaction to Next Paint | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-inp"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-kannibalisatie-twee-blogs-samenvoegen",
+                       "titel":  "Twee blogs over zonneschermen kiezen, allebei op positie 14",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Keyword-kannibalisatie: twee blogs over dezelfde vraag",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.3"
+                                  ],
+                       "kernpunt":  "Beantwoorden twee pagina\u0027s dezelfde vraag en scoren ze allebei matig, voeg ze dan samen en stuur de oude URL door met een 301. noindex, een canonical of het zoekwoord weghalen lossen het niet goed op.",
+                       "bron":  {
+                                    "titel":  "Keyword Cannibalization: What It (Really) Is \u0026 How to Fix It | Ahrefs",
+                                    "url":  "https://ahrefs.com/blog/keyword-cannibalization/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-meta-description-andere-snippet",
+                       "titel":  "Google toont niet de meta description die we schreven. Kapot?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Meta description: waarom Google soms andere tekst toont",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.9"
+                                  ],
+                       "kernpunt":  "Google maakt snippets vooral uit de pagina zelf en gebruikt de meta description alleen als die beter beschrijft. Schrijf hem uniek en specifiek, maar zie een andere snippet niet als fout.",
+                       "bron":  {
+                                    "titel":  "Control your snippets in search results | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/snippet"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-orphan-pages-alleen-in-sitemap",
+                       "titel":  "120 cursussen in de sitemap, 85 in de crawl: waar zijn de rest?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Orphan pages: pagina\u0027s die wel in de sitemap staan, maar niet in de crawl",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.1",
+                                      "1.2.6"
+                                  ],
+                       "kernpunt":  "Een pagina die in de sitemap staat maar niet in een crawl, heeft meestal geen enkele interne link. Vergelijk de crawl met sitemap, GA en Search Console om ze te vinden, en link waardevolle pagina\u0027s weer aan.",
+                       "bron":  {
+                                    "titel":  "How To Find Orphan Pages | Screaming Frog",
+                                    "url":  "https://www.screamingfrog.co.uk/seo-spider/tutorials/find-orphan-pages/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-title-overal-dezelfde-makelaar",
+                       "titel":  "300 woningpagina\u0027s met precies dezelfde title",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Meta title: unieke, beschrijvende titles in plaats van één sjabloon",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.8"
+                                  ],
+                       "kernpunt":  "Geef elke pagina een eigen title die zegt wat erop staat, bij veel pagina\u0027s via een sjabloon uit de data. Een vaste tekenlimiet bestaat niet; Google kort zelf af.",
+                       "bron":  {
+                                    "titel":  "Influencing your title links in search results | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/title-link"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
+                   },
+                   {
+                       "id":  "20261106-zoeken-geen-resultaten-pagina",
+                       "titel":  "\u0027Geen resultaten gevonden\u0027: het eindstation van je webshop?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Zoekfunctie op de site: de pagina \u0027Geen resultaten\u0027",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Een pagina \u0027Geen resultaten\u0027 mag nooit doodlopen. Toon passende categorieën, andere zoektermen en hulp, en los veelvoorkomende zoekopdrachten zonder resultaat op in de zoekfunctie zelf.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: Search UX: 5 Proven Strategies for Improving \u0027No Results\u0027 Pages",
+                                    "url":  "https://baymard.com/research-articles/no-results-page"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "oudeUitleg":  true
                    }
                ]
 }

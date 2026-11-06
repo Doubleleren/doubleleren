@@ -1,0 +1,30 @@
+{
+  "id": "20261106-inp-filterklik-werk-uitstellen",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: INP verbeteren door werk na een klik uit te stellen",
+  "matrix": ["5.2.5", "5.2.4"],
+  "titel": "Een filterklik van 480 ms: wat moet de developer als eerste doen?",
+  "intro": "Een kledingwebshop heeft op mobiel een INP van 480 ms, vooral op categoriepagina's. INP (Interaction to Next Paint) meet hoe snel een pagina zichtbaar reageert op een klik of tik. Uit de velddata blijkt dat de klik op een filter de trage interactie is. Bij die klik draait één script dat de producten ophaalt, de lijst opnieuw opbouwt, een event naar GA4 stuurt en de URL bijwerkt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de developer als eerste?",
+    "opties": [
+      "Eerst alleen de knop en een laadicoon bijwerken en de rest later doen, want INP meet tot het eerstvolgende beeld.",
+      "Het GA4-event uit het script halen, want trackingcode is op de meeste webshops de grootste oorzaak van een trage INP.",
+      "De productfoto's op de pagina kleiner maken, want zware afbeeldingen houden de browser na elke klik bezig.",
+      "Een snellere server en een CDN nemen, want dan komen de producten na een klik op het filter sneller binnen."
+    ],
+    "juist": 0
+  },
+  "toelichting": "INP meet de tijd van de klik tot het **eerstvolgende beeld** dat de browser tekent. Doet het script alles in één keer, dan tekent de browser pas iets als alles klaar is. Laat het script daarom eerst alleen het zichtbare antwoord geven: de knop staat aan en er draait een laadicoon. Het ophalen, opbouwen, meten en de URL bijwerken mag in een volgende taak.\n\n- **Het GA4-event schrappen** scheelt een beetje, maar je verliest data. Uitstellen is beter.\n- **Kleinere foto's** helpen de laadtijd (LCP), niet de reactie op een klik.\n- **Een snellere server** helpt weinig. Het wachten op het netwerk houdt de browser niet bezig, dus dat telt nauwelijks mee in INP.",
+  "kort": "INP meet hoe lang het duurt voordat de bezoeker na een klik iets ziet gebeuren. Laat de pagina daarom eerst meteen reageren, bijvoorbeeld met een laadicoon. Het zware werk, zoals de lijst opnieuw opbouwen en meten, doe je daarna. Zo voelt de site direct snel, ook als de producten nog even onderweg zijn.",
+  "uitleg": "INP is goed bij **200 ms of minder**. Elke interactie heeft drie delen, en voor elk deel is er een andere oplossing:\n\n- **Input delay** (wachten tot het script mag beginnen): de browser is nog bezig met ander werk, vaak scripts tijdens het laden. Houd lange taken bij het laden kort.\n- **Processing duration** (het script zelf): doe in de klik alleen wat nodig is voor het volgende beeld en schuif de rest door, bijvoorbeeld met setTimeout. web.dev noemt dit 'yielding': de browser even ruimte geven.\n- **Presentation delay** (het tekenen): een grote DOM (veel HTML-elementen) maakt elk nieuw beeld duurder. Bouw minder elementen tegelijk op, of gebruik content-visibility voor wat buiten beeld staat.\n\nLet ook op **layout thrashing**: een script dat stijlen wijzigt en direct daarna maten opvraagt, dwingt de browser steeds opnieuw te rekenen.",
+  "kernpunt": "Laat een klik eerst alleen het zichtbare antwoord tekenen en schuif de rest van het werk naar een latere taak. INP meet tot het eerstvolgende beeld, dus daar win je de meeste tijd.",
+  "toepassing": "Zoek deze week in de velddata (bijv. via PageSpeed Insights of een RUM-tool) welke interactie bij een klant de slechtste INP heeft. Vraag de developer of de code bij die klik meer doet dan nodig is voor het eerste beeld.",
+  "bron": {
+    "titel": "Optimize Interaction to Next Paint | web.dev",
+    "url": "https://web.dev/articles/optimize-inp"
+  }
+}

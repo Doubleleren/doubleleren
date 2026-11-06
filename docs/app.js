@@ -88,6 +88,15 @@ function metKopie(ruw) {
     bewaarVoortaan() { aan = true; bewaarBoom(); },
     // Offline begonnen: opnieuw proberen (gooit als GitHub nog weg is)
     async online() { if (offline) await herstel(); },
+    // Alleen de paden waarvoor wel(p) geldt opnieuw uit de boom (bijv. het scorebord vernieuwen); de rest blijft zoals geladen
+    async vernieuw(wel) {
+      if (offline) return herstel();
+      const boom = await ruw.boom(); if (!boom.paden) return;
+      paden = [...(paden || []).filter((p) => !wel(p)), ...boom.paden.filter(wel)];
+      for (const p of [...shas.keys()]) if (wel(p) && !boom.shas.has(p)) { shas.delete(p); vergeet(p); }
+      boom.shas.forEach((v, p) => { if (wel(p)) shas.set(p, v); });
+      bewaarBoom();
+    },
     async bytes(p) {
       const k = kopie.get(p), sha = shas.get(p);
       if (k && sha && k.sha === sha) return k.b.slice();
@@ -146,7 +155,7 @@ function apiBron(eigenaar, repo, token) {
   };
   return metKopie({
     async boom() {
-      const r = await haal(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+      const r = await haal(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1&t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (r.status === 401 || r.status === 403 || r.status === 404) throw new Error('UITNODIGING');
       if (!r.ok) throw new Error(`GitHub gaf een onverwachte fout (${r.status}). Neem contact op met de beheerder.`);
@@ -1023,7 +1032,7 @@ async function toonLesDetail(id, datum) {
   let h = (les.intro ? `<div class="zacht">${tekstHtml(les.intro)}</div>` : '') + lesLabel(label) + `<div class="vraag">${tekstHtml(o.vraag)}</div>`;
   // Een les die je zelf nog niet had (bijv. vanuit een teamprofiel): antwoord en uitleg pas na een klik
   const opties = (markeer) => `<div class="opties">${o.opties.map((t, i) => { const j = markeer && i === juist; return `<div class="optie stil${j ? ' juist' : ''}"><span aria-hidden="true">${j ? '✓' : '·'}</span><span>${esc(t)}${j ? ' <span class="sub">(juist)</span>' : ''}</span></div>`; }).join('')}</div>`;
-  const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + gewoneTaal(les) + tekstHtml(les.toelichting) + uitlegHtml(les) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron) + videoHtml(les.video);
+  const uitleg = (o.soort === 'meerkeuze' && !log ? opties(true) : '') + (o.soort === 'meerkeuze' && kernVan(les) ? kader(`**De kern:** ${kernVan(les)}`, 'goed', '') : '') + gewoneTaal(les) + tekstHtml(les.toelichting) + afleidersHtml(les) + begrippenHtml(les) + uitlegHtml(les) + kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer') + bronHtml(les.bron) + videoHtml(les.video);
   // Bijgewerkt na feedback of resultaten (door de generator): laat zien wanneer en waarom
   if (/^\d{4}-\d{2}-\d{2}$/.test(String(les.herzien || ''))) h = `<p class="sub">${les.actief === false ? 'Uit de roulatie gehaald' : 'Bijgewerkt'} op ${esc(fmtDatum(les.herzien))}${typeof les.wijziging === 'string' && les.wijziging ? ': ' + esc(les.wijziging.slice(0, 300)) : ''}</p>` + h;
   if (o.soort === 'meerkeuze') h += opties(!!log);
@@ -1159,6 +1168,13 @@ async function toonScorebord() {
   $('sb-sub').textContent = soort === 'j' ? `Jaarstand ${w}: punten en goed opgeteld over de maanden, langste reeks = de beste maand.` : huidig ? 'Deze maand loopt nog. Je stand wordt bijgewerkt zodra je een les afrondt.' : '';
 }
 $('sb-groep').addEventListener('click', (e) => { const b = e.target.closest('button[data-groep]'); if (b && b.getAttribute('aria-pressed') !== 'true') { SB.groep = b.dataset.groep; toonScorebord(); } });
+// Knop Vernieuwen: alleen de scorebordbestanden opnieuw ophalen (nieuwe boom, cache leeg) en het bord opnieuw tekenen
+async function vernieuwScorebord() {
+  const k = $('sb-vernieuw'); k.disabled = true; k.textContent = 'Vernieuwen…'; $('sb-fout').textContent = '';
+  try { await S.data.vernieuw((p) => SB_PAD.test(p)); SB.cache.clear(); await toonScorebord(); }
+  catch (e) { $('sb-fout').textContent = `Vernieuwen lukt nu niet: ${e.message}`; }
+  finally { k.disabled = false; k.textContent = 'Vernieuwen'; }
+}
 // De keuze staat in je eigen profiel (versleuteld en door jou ondertekend), niet in de openbare scorebordbestanden
 async function zetZichtbaar(aan) {
   $('sb-zichtbaar').disabled = true; $('sb-zichtbaar-status').textContent = 'Opslaan…';
@@ -1355,7 +1371,21 @@ function uitlegHtml(les) {
   if (!kort) return lesLabel('Uitleg') + tekstHtml(rest);
   return rest ? `<details class="meer-uitleg"><summary>Lees de volledige uitleg</summary>${tekstHtml(rest)}</details>` : '';
 }
-const gewoneTaal = (les) => kader(kortEnRest(les).kort, 'simpel', 'In gewone taal');
+const gewoneTaal = (les) => kader(kortEnRest(les).kort, 'simpel', 'Zo werkt het');
+// Vaste opbouw na het antwoord (zie generator-instructies, 'Na het antwoord'): kern, afleiders en begrippen zijn
+// optioneel, zodat oudere lessen (met alleen een toelichting) er hetzelfde uitzien als voorheen.
+const kernVan = (les) => (typeof les.kern === 'string' ? les.kern.trim() : '');
+// Per foute optie één zin, in de volgorde van de opties; koos je zelf een foute optie, dan staat die bovenaan
+function afleidersHtml(les, keuze = -1) {
+  const o = les.opdracht, a = Array.isArray(les.afleiders) ? les.afleiders : [], juist = Number(o?.juist);
+  if (o?.soort !== 'meerkeuze') return '';
+  const rij = [0, 1, 2, 3].filter((i) => i !== juist && typeof a[i] === 'string' && a[i].trim()).sort((x, y) => (y === keuze) - (x === keuze));
+  return rij.length ? kader(rij.map((i) => `- ${a[i].trim().replace(/\s*\n+\s*/g, ' ')}${i === keuze ? ' *(jouw keuze)*' : ''}`).join('\n'), 'andere', 'Waarom de andere antwoorden niet kloppen') : '';
+}
+function begrippenHtml(les) {
+  const b = (Array.isArray(les.begrippen) ? les.begrippen : []).filter((x) => typeof x?.term === 'string' && x.term.trim() && typeof x.uitleg === 'string' && x.uitleg.trim()).slice(0, 4);
+  return b.length ? kader(b.map((x) => `- **${x.term.trim()}:** ${x.uitleg.trim().replace(/\s*\n+\s*/g, ' ')}`).join('\n'), 'begrippen', 'Begrippen') : '';
+}
 const knop = (actie, tekst, extra = '') => `<button type="button" class="knop ${extra}" data-actie="${actie}">${esc(tekst)}</button>`;
 
 function magLessen() {
@@ -1478,11 +1508,14 @@ function lesAfronding() {
   if (o.soort === 'meerkeuze') {
     const juist = Number(o.juist); L.antwoord = String(o.opties[L.keuze]);
     L.resultaat = L.keuze === juist ? 'goed' : 'fout';
-    h += L.resultaat === 'goed' ? kader(`**Goed!** ${o.opties[juist]}`, 'goed', '') : kader(`**Niet helemaal.** Jij koos: ${L.antwoord}\n\n**Juist is:** ${o.opties[juist]}`, 'fout', '');
+    // Met een kern staat achter 'Goed!' de kern in één zin, niet nog eens de hele optie (die zag je net al).
+    // Met afleiders staat jouw keuze met de reden in 'Waarom de andere antwoorden niet kloppen'.
+    const kern = kernVan(les), afl = Array.isArray(les.afleiders) && les.afleiders.length;
+    h += L.resultaat === 'goed' ? kader(`**Goed!** ${kern || o.opties[juist]}`, 'goed', '') : kader(`**Niet helemaal.**${afl ? '' : ` Jij koos: ${L.antwoord}\n\n`} **Juist is:** ${o.opties[juist]}${kern ? `\n\n${kern}` : ''}`, 'fout', '');
   } else {
     h += kader(L.antwoord, 'neutraal', 'Jouw antwoord') + kader(les.modelantwoord, 'model', 'Zo zou een expert het doen');
   }
-  h += gewoneTaal(les) + tekstHtml(les.toelichting);
+  h += gewoneTaal(les) + tekstHtml(les.toelichting) + afleidersHtml(les, L.keuze) + begrippenHtml(les);
   if (!L.uitlegGetoond) h += uitlegHtml(les);
   h += kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer vandaag') + bronHtml(les.bron) + videoHtml(les.video);
   if (o.soort !== 'meerkeuze') {
@@ -1592,13 +1625,24 @@ function verzamelLes() {
     matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'),
     opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt'), ...(v('m-kort') ? { kort: v('m-kort') } : {})
   };
-  for (const [veld, id] of [['intro', 'm-intro'], ['toelichting', 'm-toelichting'], ['modelantwoord', 'm-model'], ['toepassing', 'm-toepassing']]) if (v(id)) les[veld] = v(id);
+  for (const [veld, id] of [['intro', 'm-intro'], ['modelantwoord', 'm-model'], ['toepassing', 'm-toepassing']]) if (v(id)) les[veld] = v(id);
   if (v('m-hint')) les.opdracht.hint = v('m-hint');
+  // Begrippen: één per regel als 'term: uitleg', hooguit vier
+  const begrippen = v('m-begrippen').split(/\r?\n/).map((r) => r.trim()).filter(Boolean).map((r) => { const i = r.indexOf(':'); return i < 1 ? {} : { term: r.slice(0, i).trim(), uitleg: r.slice(i + 1).trim() }; });
+  if (begrippen.some((b) => !b.term || !b.uitleg)) fouten.push('Schrijf elk begrip als "term: uitleg", één per regel.');
+  else if (begrippen.some((b) => b.term.length > 60 || b.uitleg.length > 200)) fouten.push('Houd elk begrip kort: term hooguit 60 tekens, uitleg hooguit 200.');
+  else if (begrippen.length > 4) fouten.push('Geef hooguit vier begrippen.');
+  else if (begrippen.length) les.begrippen = begrippen;
   if (soort === 'meerkeuze') {
     les.opdracht.opties = [0, 1, 2, 3].map((i) => v('m-optie' + i));
     les.opdracht.juist = Number(document.querySelector('input[name="m-juist"]:checked')?.value ?? -1);
     if (les.opdracht.opties.some((o) => !o)) fouten.push('Vul alle vier de antwoordopties in.');
     if (!(les.opdracht.juist >= 0 && les.opdracht.juist <= 3)) fouten.push('Kies welk antwoord juist is.');
+    else {
+      les.afleiders = [0, 1, 2, 3].map((i) => (i === les.opdracht.juist ? '' : v('m-afl' + i)));
+      if (les.afleiders.some((a, i) => i !== les.opdracht.juist && !a)) fouten.push('Schrijf bij elk fout antwoord in één zin waarom het niet klopt.');
+    }
+    if (v('m-kern')) les.kern = v('m-kern');
   } else {
     les.opdracht.minTekens = Math.min(1000, Math.max(20, Number(v('m-min')) || 80));
     if (!les.modelantwoord) fouten.push('Geef een modelantwoord: zo zou een expert het doen.');
@@ -1721,6 +1765,7 @@ $('mx-opslaan').addEventListener('click', async () => {
   try { await slaSkilllijstOp(); } catch (e) { $('mx-fout').textContent = e.message; } finally { k.disabled = false; k.textContent = 'Opslaan'; }
 });
 $('sb-keuze').addEventListener('change', () => toonScorebord().catch(() => {}));
+$('sb-vernieuw').addEventListener('click', vernieuwScorebord);
 $('sb-zichtbaar').addEventListener('change', (e) => zetZichtbaar(e.target.checked));
 $('feedback-knop').addEventListener('click', () => openFeedback(NAV.huidig === 'lesdetail' ? NAV.les : undefined));
 $('fb-form').addEventListener('submit', (e) => e.preventDefault());
