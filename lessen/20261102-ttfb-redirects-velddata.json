@@ -18,11 +18,25 @@
     ],
     "juist": 2
   },
-  "toelichting": "TTFB is de optelsom van onder meer **redirecttijd**, DNS, verbinding en het verzoek zelf. Een echte bezoeker doorloopt de hele keten: klikteller, http naar https, zonder www naar www. Labtools meten volgens web.dev meestal de **eind-URL** en missen die vertraging; de Lighthouse-audit voor serverrespons laat redirects en DNS zelfs helemaal weg. web.dev noemt sites met veel bezoekers uit advertenties en nieuwsbrieven expliciet als risicogroep.\n\n- **Velddata negeren** is de verkeerde kant op: ze laten zien wat bezoekers echt meemaken.\n- **Zwaardere hosting** haalt geen enkele redirect weg; de server is in het lab juist snel.\n- **Een lege cache** verklaart niet waarom het verschil zo groot is, en CrUX meet geen 'eerste bezoek van de dag'.",
-  "kort": "TTFB is de tijd tot het eerste stukje van je pagina binnen is. Bezoekers uit advertenties en nieuwsbrieven gaan eerst via een paar doorverwijzingen (redirects) naar de pagina, en die tijd telt mee. Een test als Lighthouse meet meestal meteen het eindadres en slaat die omwegen over. Geef adverteerders dus het eindadres en haal je eigen doorverwijzingen weg.",
-  "uitleg": "**Time to First Byte (TTFB)** meet hoe lang het duurt tot de eerste byte van de HTML binnen is. Volgens web.dev is dat de som van: redirecttijd, opstarten van een service worker, DNS-lookup, verbinding en TLS, en het verzoek tot de eerste byte. Goed is **0,8 seconde of minder**, slecht is **meer dan 1,8 seconde**. TTFB is geen Core Web Vital, maar een trage TTFB vertraagt alles daarna, zoals FCP en LCP.\n\nWaarom lab en veld hier zo verschillen: in het lab test je meestal direct de eind-URL. Een bezoeker uit een advertentie begint bij de klikteller en springt daarna nog twee keer door. Elke stap kost een extra verzoek, soms met een nieuwe verbinding.\n\nZo pak je het aan:\n- **Eigen redirects schrappen** (same-origin): link en adverteer direct naar https://www.… Daar heb je volledige controle over.\n- **De eind-URL aan adverteerders en de nieuwsbrieftool geven.** Een klikteller van een ander domein (cross-origin) kun je vaak niet weghalen, maar je kunt voorkomen dat er daarna nog redirects volgen.\n- **HSTS instellen**, zodat browsers bij een volgend bezoek meteen naar https gaan; met HSTS-preload ook bij het eerste bezoek.\n\nControleer de keten met een redirectchecker en vergelijk daarna opnieuw de velddata.",
-  "kernpunt": "TTFB in het veld telt redirects mee, labtools meten meestal de eind-URL. Komt veel verkeer via advertenties of nieuwsbrieven, geef dan de eind-URL door en schrap eigen redirects.",
-  "toepassing": "Klik deze week bij een klant op een link uit de laatste nieuwsbrief en een advertentie, en noteer met een redirectchecker hoeveel stappen er tussen de klik en de landingspagina zitten.",
+  "kern": "Echte bezoekers worden onderweg doorgestuurd, een test niet.",
+  "afleiders": [
+    "**Velddata negeren:** velddata is wat echte bezoekers meemaken. Dat is juist de waarheid, ook als het lab mooiere cijfers geeft.",
+    "**Zwaardere hosting:** de server is in het lab al snel. Een snellere server haalt geen enkele doorverwijzing weg.",
+    "",
+    "**Lege cache:** dat verklaart niet zo'n groot verschil, en CrUX meet geen apart 'eerste bezoek van de dag'."
+  ],
+  "kort": "Je belt een bedrijf en wordt twee keer doorverbonden voordat je de juiste persoon spreekt. Die wachttijd voel jij als beller, ook al neemt die laatste persoon razendsnel op. Zo gaat het ook met een bezoeker uit een advertentie of nieuwsbrief: eerst langs de klikteller, dan van http naar https, dan naar www. Pas daarna komt de pagina, en al die stappen tellen mee in de TTFB. Een test als Lighthouse belt direct het juiste toestel en ziet dus alleen een snelle server.",
+  "begrippen": [
+    { "term": "TTFB", "uitleg": "Time to First Byte: de tijd tot het eerste stukje van de pagina binnenkomt." },
+    { "term": "Labdata", "uitleg": "een test die je zelf draait, zoals Lighthouse of de score in PageSpeed Insights." },
+    { "term": "Velddata", "uitleg": "metingen bij echte Chrome-bezoekers (CrUX), het deel bovenaan PageSpeed Insights." },
+    { "term": "Redirect", "uitleg": "een automatische doorverwijzing naar een ander adres." }
+  ],
+  "uitleg": "Volgens web.dev is TTFB de som van: redirecttijd, opstarten van een service worker, DNS-lookup, verbinding en TLS, en het verzoek tot de eerste byte. Goed is **0,8 seconde of minder**, slecht is **meer dan 1,8 seconde**. TTFB is geen Core Web Vital, maar een trage TTFB vertraagt alles daarna, zoals FCP en LCP.\n\nLabtools meten meestal direct de eind-URL; de Lighthouse-audit voor serverrespons laat redirects en DNS zelfs helemaal weg. web.dev noemt sites met veel bezoekers uit advertenties en nieuwsbrieven daarom expliciet als risicogroep.\n\nZo pak je het aan:\n- **Eigen redirects schrappen** (same-origin): link en adverteer direct naar https://www.… Daar heb je volledige controle over.\n- **De eind-URL aan adverteerders en de nieuwsbrieftool geven.** Een klikteller van een ander domein (cross-origin) kun je vaak niet weghalen, maar je kunt voorkomen dat er daarna nog redirects volgen.\n- **HSTS instellen**, zodat browsers bij een volgend bezoek meteen naar https gaan; met HSTS-preload ook bij het eerste bezoek.",
+  "kernpunt": "Wijkt velddata af van labdata, kijk dan eerst wat de echte bezoeker onderweg tegenkomt.",
+  "toepassing": "Klik bij een klant op een link uit de laatste nieuwsbrief en tel met een redirectchecker hoeveel stappen er zijn voordat je op de pagina bent.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Optimize Time to First Byte | web.dev",
     "url": "https://web.dev/articles/optimize-ttfb"

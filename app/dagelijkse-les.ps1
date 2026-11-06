@@ -411,28 +411,46 @@ try {
 
     function Fase-Afronding {
         Leeg
+        # Vaste opbouw na het antwoord, zelfde als lesAfronding() in docs/app.js: kern, afleiders en begrippen zijn
+        # optioneel, zodat oudere lessen (met alleen een toelichting) er hetzelfde uitzien als voorheen
+        $kern = if ($les.kern -is [string]) { $les.kern.Trim() } else { '' }
+        $afleiders = if ($les.afleiders) { @($les.afleiders) } else { @() }
         if ($o.soort -eq 'meerkeuze') {
             $juist = [int]$o.juist
             $script:antwoord = [string]$o.opties[$script:keuze]
             if ($script:keuze -eq $juist) {
                 $script:resultaat = 'goed'
-                Toon-Kader ('**Goed!** ' + $o.opties[$juist]) '#F0FDF4' '#16A34A'
+                Toon-Kader ('**Goed!** ' + $(if ($kern) { $kern } else { $o.opties[$juist] })) '#F0FDF4' '#16A34A'
             } else {
                 $script:resultaat = 'fout'
-                Toon-Kader ("**Niet helemaal.** Jij koos: " + $script:antwoord + "`n`n**Juist is:** " + $o.opties[$juist]) '#FEF2F2' '#DC2626'
+                # Met afleiders staat jouw keuze met de reden in 'Waarom de andere antwoorden niet kloppen'
+                $tekst = '**Niet helemaal.** ' + $(if ($afleiders.Count) { '' } else { 'Jij koos: ' + $script:antwoord + "`n`n" }) + '**Juist is:** ' + $o.opties[$juist]
+                if ($kern) { $tekst += "`n`n" + $kern }
+                Toon-Kader $tekst '#FEF2F2' '#DC2626'
             }
         } else {
             Toon-Kader $script:antwoord '#F8FAFC' '#94A3B8' 'Jouw antwoord'
             if ($les.modelantwoord) { Toon-Kader $les.modelantwoord '#EEF2FF' '#6366F1' 'Zo zou een expert het doen' }
         }
-        # "In gewone taal" direct na het antwoord (veld kort, of '**Kort gezegd:**' aan het begin van de uitleg);
+        # "Zo werkt het" direct na het antwoord (veld kort, of '**Kort gezegd:**' aan het begin van de uitleg);
         # dan is de volledige uitleg uitklapbaar. Zelfde regel als kortEnRest() in docs/app.js.
         # Met een veld kort valt een 'Kort gezegd'-alinea weg uit de rest: nooit twee keer dezelfde tekst
         $kort = ''; $rest = [string]$les.uitleg
         if ($rest -match '^\s*\*\*Kort gezegd:?\*\*:?\s*([\s\S]*?)(?:\r?\n\s*\r?\n|$)([\s\S]*)$') { $kort = $Matches[1].Trim(); $rest = $Matches[2].Trim() }
         if ($les.kort -and "$($les.kort)".Trim()) { $kort = "$($les.kort)".Trim() }
-        if ($kort) { Toon-Kader $kort '#F2FDE0' '#84CC16' 'In gewone taal' }
+        if ($kort) { Toon-Kader $kort '#F2FDE0' '#84CC16' 'Zo werkt het' }
         if ($les.toelichting) { Toon-Tekst $les.toelichting }
+        # Per foute optie één zin, in de volgorde van de opties; koos je zelf een foute optie, dan staat die bovenaan
+        if ($o.soort -eq 'meerkeuze' -and $afleiders.Count) {
+            $volgorde = @(0..3 | Where-Object { $_ -ne $juist -and $afleiders[$_] -is [string] -and $afleiders[$_].Trim() } | Sort-Object { $_ -ne $script:keuze }, { $_ })
+            if ($volgorde.Count) {
+                Toon-Kader (($volgorde | ForEach-Object { '- ' + ($afleiders[$_].Trim() -replace '\s*\r?\n+\s*', ' ') + $(if ($_ -eq $script:keuze) { ' *(jouw keuze)*' } else { '' }) }) -join "`n") '#F8FAFC' '#94A3B8' 'Waarom de andere antwoorden niet kloppen'
+            }
+        }
+        $begrippen = @($les.begrippen | Where-Object { $_.term -is [string] -and $_.term.Trim() -and $_.uitleg -is [string] -and $_.uitleg.Trim() } | Select-Object -First 4)
+        if ($begrippen.Count) {
+            Toon-Kader (($begrippen | ForEach-Object { '- **' + $_.term.Trim() + ':** ' + ($_.uitleg.Trim() -replace '\s*\r?\n+\s*', ' ') }) -join "`n") '#F8FAFC' '#CBD5E1' 'Begrippen'
+        }
         if (-not $script:uitlegGetoond) {
             if ($kort) {
                 if ($rest) {
