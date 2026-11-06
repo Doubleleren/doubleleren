@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-06T08:54:29",
+    "bijgewerkt":  "2026-11-06T13:13:54",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -38,7 +38,7 @@
                                       "5.2.4",
                                       "5.2.5"
                                   ],
-                       "kernpunt":  "INP (≤ 200 ms) meet hoe snel een pagina reageert op alle interacties, niet hoe snel hij laadt. Boosdoener is meestal JavaScript op de main thread.",
+                       "kernpunt":  "Zegt een klant dat zijn site snel laadt, kijk dan ook naar INP: 200 ms of minder is goed.",
                        "bron":  {
                                     "titel":  "web.dev: Interaction to Next Paint (INP)",
                                     "url":  "https://web.dev/articles/inp"
@@ -50,7 +50,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261019-nep-urgentie",
@@ -106,7 +106,7 @@
                                       "7.2.1",
                                       "7.2.2"
                                   ],
-                       "kernpunt":  "Controleer bij elke A/B-test eerst of de bezoekersverdeling klopt (SRM-check). Pas daarna kijk je naar de conversie.",
+                       "kernpunt":  "Is een test klaar, check dan eerst de verdeling van de bezoekers en kijk pas daarna wie er wint.",
                        "bron":  {
                                     "titel":  "Lukas Vermeer: SRM Checker",
                                     "url":  "https://www.lukasvermeer.nl/srm/"
@@ -114,8 +114,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261019-striking-distance",
@@ -213,7 +212,7 @@
                        "matrix":  [
                                       "5.2.6"
                                   ],
-                       "kernpunt":  "CLS is goed bij ≤ 0,1 (75e percentiel, velddata). Lighthouse ziet alleen shifts tijdens het laden; velddata zien het hele bezoek. Beoordeel dus op velddata en debug in het lab.",
+                       "kernpunt":  "Verschillen lab en veld, beoordeel dan op de velddata en zoek de oorzaak in het lab.",
                        "bron":  {
                                     "titel":  "Cumulative Layout Shift (CLS) | Articles | web.dev",
                                     "url":  "https://web.dev/articles/cls"
@@ -225,8 +224,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-cls-verbeteren",
@@ -282,7 +280,7 @@
                        "matrix":  [
                                       "3.1.5"
                                   ],
-                       "kernpunt":  "Cross-device meten in GA4 doe je met een User-ID: een eigen niet-herleidbare klant-ID na inloggen, null bij uitloggen, en de rapportage-identiteit op Blended of Observed.",
+                       "kernpunt":  "Heeft een klant inlogaccounts, check dan of er een user_id binnenkomt en of de rapportage-identiteit niet op Device-based staat.",
                        "bron":  {
                                     "titel":  "Send user IDs | Google Analytics",
                                     "url":  "https://developers.google.com/analytics/devguides/collection/ga4/user-id"
@@ -290,8 +288,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-ga4-eventmodel",
@@ -303,7 +300,7 @@
                        "matrix":  [
                                       "3.1.6"
                                   ],
-                       "kernpunt":  "GA4 kent geen hit types en geen Category/Action/Label meer: alles is een event met parameters, en sessies worden afgeleid uit events (session_start).",
+                       "kernpunt":  "Zet je een oud UA-event over, kies dan eerst een aanbevolen eventnaam en zet de details in parameters.",
                        "bron":  {
                                     "titel":  "About events - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/9322688"
@@ -315,7 +312,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-ga4-via-gtm",
@@ -327,7 +324,7 @@
                        "matrix":  [
                                       "3.2.2"
                                   ],
-                       "kernpunt":  "Basis-GA4 via GTM = Google-tag met de G-ID op Initialization - All Pages, enhanced measurement voor standaardevents, GA4 Event-tags voor de rest, en altijd eerst Preview/DebugView.",
+                       "kernpunt":  "Staat GA4 via GTM live, zoek dan meteen naar oude meetcode in de site en haal die weg.",
                        "bron":  {
                                     "titel":  "Set up Google Analytics in Tag Manager",
                                     "url":  "https://support.google.com/tagmanager/answer/9442095"
@@ -335,8 +332,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-ga-certificering",
@@ -451,7 +447,7 @@
                        "matrix":  [
                                       "2.1.11"
                                   ],
-                       "kernpunt":  "De deelpreview komt uit de Open Graph-tags: og:title, og:type, og:image en og:url zijn verplicht, en ze moeten per pagina kloppen, niet sitebreed hetzelfde zijn.",
+                       "kernpunt":  "Ziet een gedeelde link er verkeerd uit, kijk dan eerst naar de og:-tags in de bron, niet naar de inhoud van de pagina.",
                        "bron":  {
                                     "titel":  "The Open Graph protocol",
                                     "url":  "https://ogp.me/"
@@ -459,8 +455,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-paginering-zonder-prev-next",
@@ -473,7 +468,7 @@
                                       "1.3.4",
                                       "1.3.3"
                                   ],
-                       "kernpunt":  "Google gebruikt rel=prev/next niet meer (bevestigd maart 2019). Geef elke gepagineerde pagina een eigen URL, een eigen canonical en gewone links naar de volgende pagina.",
+                       "kernpunt":  "Heeft een categorie meerdere pagina\u0027s, laat dan elke pagina naar zichzelf canonicaliseren en met een gewone link naar de volgende verwijzen.",
                        "bron":  {
                                     "titel":  "Pagination, incremental page loading, and their impact on Google Search",
                                     "url":  "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
@@ -481,8 +476,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-paid-social-campagnestructuur",
@@ -494,7 +488,7 @@
                        "matrix":  [
                                       "9.1.1"
                                   ],
-                       "kernpunt":  "Meta werkt met drie niveaus: campagne (doel), ad set (doelgroep, plaatsing, budget, planning) en advertentie (format en creative). Doelgroepen test je met aparte ad sets.",
+                       "kernpunt":  "Wil je iets vergelijken, zet het dan op de laag waar het wordt ingesteld: doelgroepen in aparte ad sets, creatives in aparte advertenties.",
                        "bron":  {
                                     "titel":  "What are the advertising levels in Meta Ads Manager? | Meta Business Help Center",
                                     "url":  "https://www.facebook.com/business/help/621956575422138"
@@ -502,7 +496,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-paid-social-steunt-seo",
@@ -533,7 +527,7 @@
                        "matrix":  [
                                       "10.1.3"
                                   ],
-                       "kernpunt":  "Panda is sinds 2015 onderdeel van Googles kernsystemen, het helpful content system sinds maart 2024. Een kwaliteitsdaling los je niet op met wachten of een verzoek, maar met betere content.",
+                       "kernpunt":  "Noemt een klant een \u0027Panda-straf\u0027, leg dan zijn zwakste pagina\u0027s naast de zelfbeoordelingsvragen van Google.",
                        "bron":  {
                                     "titel":  "A guide to Google Search ranking systems",
                                     "url":  "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
@@ -545,8 +539,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-penguin-realtime",
@@ -597,7 +590,7 @@
                        "matrix":  [
                                       "10.1.5"
                                   ],
-                       "kernpunt":  "RankBrain (2015) was Googles eerste deep learning-systeem in Search en helpt woorden aan concepten te koppelen. Je \u0027optimaliseert\u0027 ervoor door een onderwerp volledig en natuurlijk te behandelen.",
+                       "kernpunt":  "Belooft iemand te optimaliseren voor RankBrain, vraag dan wat hij anders doet dan een onderwerp volledig en natuurlijk behandelen.",
                        "bron":  {
                                     "titel":  "How AI powers great search results",
                                     "url":  "https://blog.google/products/search/how-ai-powers-great-search-results/"
@@ -605,8 +598,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-ratings-eigen-reviews",
@@ -618,7 +610,7 @@
                        "matrix":  [
                                       "2.2.3"
                                   ],
-                       "kernpunt":  "Sterren via Review- of AggregateRating-markup krijg je niet voor reviews over je eigen bedrijf op je eigen site (LocalBusiness/Organization), ook niet via een widget. Wel voor bijvoorbeeld producten, met zichtbare reviews van echte gebruikers.",
+                       "kernpunt":  "Wil een klant sterren, vraag dan eerst waar de reviews over gaan: over een product kan, over het eigen bedrijf niet.",
                        "bron":  {
                                     "titel":  "Review Snippet (Review, AggregateRating) Structured Data | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/review-snippet"
@@ -626,8 +618,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-rel-canonical",
@@ -639,7 +630,7 @@
                        "matrix":  [
                                       "1.3.3"
                                   ],
-                       "kernpunt":  "rel=canonical is een sterk signaal (geen bevel) voor welke van meerdere dubbele URL\u0027s in Google moet verschijnen. Het blokkeert geen crawl, is geen noindex en geen redirect.",
+                       "kernpunt":  "Kiest Google een andere canonical dan jij, zoek dan eerst naar tegenstrijdige signalen, zoals interne links of de sitemap.",
                        "bron":  {
                                     "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
@@ -647,8 +638,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-robots-txt-rapport",
@@ -679,7 +669,7 @@
                        "matrix":  [
                                       "1.1.8"
                                   ],
-                       "kernpunt":  "In robots.txt wint de meest specifieke (langste) regel, ongeacht de volgorde; bij gelijke lengte wint Allow. robots.txt stuurt het crawlen, niet het indexeren.",
+                       "kernpunt":  "Wil je één pagina openzetten in een geblokkeerde map, schrijf dan een Allow met het langere pad; de volgorde doet er niet toe.",
                        "bron":  {
                                     "titel":  "How Google interprets the robots.txt specification",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
@@ -687,7 +677,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-seo-ppc-relatie",
@@ -699,7 +689,7 @@
                        "matrix":  [
                                       "9.2.1"
                                   ],
-                       "kernpunt":  "Betalen voor Google Ads heeft geen invloed op je organische ranking. SEO en PPC versterken elkaar via gedeelde zoekwoorddata, landingspagina\u0027s en zichtbaarheid in dezelfde SERP.",
+                       "kernpunt":  "Vraagt een klant of Ads zijn SEO helpt, laat dan met zijn eigen zoekwoorddata zien hoe de twee elkaar slimmer maken.",
                        "bron":  {
                                     "titel":  "Do You Need an SEO? Tips for Hiring an SEO | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/do-i-need-seo"
@@ -711,8 +701,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-ttfb-verbeteren",
@@ -724,7 +713,7 @@
                        "matrix":  [
                                       "5.2.11"
                                   ],
-                       "kernpunt":  "TTFB (goed is ≤ 0,8 s) gaat over hoe snel de server de eerste byte HTML levert. Je verbetert hem met hosting, CDN, caching en minder redirects, niet met beeld- of CSS-optimalisatie.",
+                       "kernpunt":  "Is de TTFB hoog, vraag dan eerst of de HTML uit een cache komt, voordat je naar de bestanden op de pagina kijkt.",
                        "bron":  {
                                     "titel":  "Optimize Time to First Byte",
                                     "url":  "https://web.dev/articles/optimize-ttfb"
@@ -736,8 +725,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261020-user-signals-bounce-rate",
@@ -811,7 +799,7 @@
                        "matrix":  [
                                       "10.1.1"
                                   ],
-                       "kernpunt":  "Een core update herbeoordeelt kwaliteit (geen \u0027fout\u0027 om te herstellen); een spam update straft overtredingen. Waarde van spamlinks die door een link spam update is geneutraliseerd, komt nooit terug.",
+                       "kernpunt":  "Daalt het verkeer, zoek dan eerst uit of het een core of een spam update was, want de aanpak verschilt.",
                        "bron":  {
                                     "titel":  "Google Search spam updates and your site | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/spam-updates"
@@ -823,8 +811,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261021-funnel-dropoff-ga4",
@@ -837,7 +824,7 @@
                                       "7.1.1",
                                       "3.1.3"
                                   ],
-                       "kernpunt":  "Zoek eerst wáár bezoekers afhaken (funnelverkenning, uitgesplitst naar apparaat of kanaal), daarna waarom (kwalitatieve data), en pas dan wat je verandert.",
+                       "kernpunt":  "Wil een klant een redesign, laat dan eerst met een funnel zien waar bezoekers afhaken, en kies pas daarna wat je verandert.",
                        "bron":  {
                                     "titel":  "[GA4] Funnel exploration - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/9327974"
@@ -849,8 +836,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261021-ga4-debugview-controle",
@@ -862,7 +848,7 @@
                        "matrix":  [
                                       "3.1.1"
                                   ],
-                       "kernpunt":  "Controleer een GA4-implementatie live met DebugView via Tag Assistant of GTM Preview. Debug-events vervuilen je rapporten niet; zie je niets, check dan ook de consent.",
+                       "kernpunt":  "Staat een event niet in de rapporten, test het dan eerst live in DebugView voordat je de implementatie laat aanpassen.",
                        "bron":  {
                                     "titel":  "Monitor events in DebugView - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/7201382"
@@ -870,8 +856,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261021-gsc-bigquery-sql",
@@ -971,7 +956,7 @@
                        "matrix":  [
                                       "1.1.9"
                                   ],
-                       "kernpunt":  "Google volgt alleen \u003ca href=\"echte-url\"\u003e. Links zonder href of met javascript: zie je als bezoeker wel, maar Googlebot niet betrouwbaar: handig voor filters, rampzalig voor je menu.",
+                       "kernpunt":  "Moet Google een link volgen, geef hem dan een echte URL in href; wil je een link verbergen, reken dan niet op JavaScript alleen.",
                        "bron":  {
                                     "titel":  "Link best practices for Google | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
@@ -983,8 +968,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261021-zero-click-ai-samenvatting",
@@ -1020,7 +1004,7 @@
                        "matrix":  [
                                       "5.1.2"
                                   ],
-                       "kernpunt":  "Ligt een site kort plat, serveer dan een 503 met Retry-After, maar niet op robots.txt. Houd het onder 1–2 dagen, anders kunnen URL\u0027s uit de index vallen.",
+                       "kernpunt":  "Moet een site even plat, regel dan vooraf dat de webserver of het CDN de 503 geeft, niet PHP zelf.",
                        "bron":  {
                                     "titel":  "Search Engine Journal: Google Reminds Sites To Serve A 503 During PHP Patch Downtime",
                                     "url":  "https://www.searchenginejournal.com/google-reminds-sites-to-serve-503s-during-server-downtime/593873/"
@@ -1028,8 +1012,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261022-crawlstatistieken-hoststatus",
@@ -1088,7 +1071,7 @@
                                       "5.2.9",
                                       "5.2.8"
                                   ],
-                       "kernpunt":  "Is de TTFB goed en de FCP slecht, dan zit de vertraging in wat het renderen blokkeert: CSS, synchrone scripts en fonts in de head. Afbeeldingen en hosting zijn dan zelden de oplossing.",
+                       "kernpunt":  "Is de TTFB goed en de FCP slecht, zoek dan eerst in de head naar alles waar het renderen op wacht.",
                        "bron":  {
                                     "titel":  "First Contentful Paint (FCP) | web.dev",
                                     "url":  "https://web.dev/articles/fcp"
@@ -1100,8 +1083,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261022-geo-pakket-beoordelen",
@@ -1138,7 +1120,7 @@
                        "matrix":  [
                                       "7.1.1"
                                   ],
-                       "kernpunt":  "Goede inline validatie controleert een veld als de bezoeker het verlaat, haalt een fout weg zodra die is verbeterd en bevestigt goede velden met een vinkje. Te vroeg valideren werkt averechts.",
+                       "kernpunt":  "Haken bezoekers af na \u0027Verstuur\u0027, kijk dan eerst wanneer het formulier zijn fouten laat zien.",
                        "bron":  {
                                     "titel":  "Baymard Institute: Usability Testing of Inline Form Validation",
                                     "url":  "https://baymard.com/blog/inline-form-validation"
@@ -1146,8 +1128,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261022-inp-veldattributie-claude",
@@ -1208,7 +1189,7 @@
                                       "1.3.1",
                                       "1.3.6"
                                   ],
-                       "kernpunt":  "noindex werkt alleen als Google de pagina mag crawlen. robots.txt regelt het crawlen, niet het indexeren: blokkeer dus nooit een URL die je met noindex uit de index wilt halen.",
+                       "kernpunt":  "Moet een pagina uit Google, kijk dan eerst of robots.txt hem blokkeert, en pas daarna naar de noindex.",
                        "bron":  {
                                     "titel":  "Block Search indexing with noindex | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/block-indexing"
@@ -1216,7 +1197,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261022-orphan-pages-claude",
@@ -1269,7 +1250,7 @@
                        "matrix":  [
                                       "2.2.1"
                                   ],
-                       "kernpunt":  "Merchant listings zijn voor pagina\u0027s waar je het product zelf verkoopt, product snippets voor pagina\u0027s over een product zonder directe aankoop, zoals reviews. Wat de pagina doet, bepaalt welk resultaat kan.",
+                       "kernpunt":  "Wil je weten welk productresultaat kan, kijk dan eerst of de bezoeker op die pagina zelf kan afrekenen.",
                        "bron":  {
                                     "titel":  "Intro to Product structured data on Google | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/product"
@@ -1277,8 +1258,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-29",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261023-checkout-verrassingskosten",
@@ -1309,7 +1289,7 @@
                        "matrix":  [
                                       "5.3.6"
                                   ],
-                       "kernpunt":  "CSS blokkeert het renderen, tenzij een media-attribuut zegt dat de stylesheet nu niet geldt. De browser downloadt zo\u0027n bestand wel, maar wacht er niet op.",
+                       "kernpunt":  "Zie je losse print- of desktop-CSS in de head, controleer dan eerst of er een media-attribuut bij staat.",
                        "bron":  {
                                     "titel":  "Render blocking CSS | web.dev",
                                     "url":  "https://web.dev/articles/critical-rendering-path/render-blocking-css"
@@ -1317,8 +1297,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261023-gecrawld-of-gevonden-niet-geindexeerd",
@@ -1377,7 +1356,7 @@
                        "matrix":  [
                                       "5.1.7"
                                   ],
-                       "kernpunt":  "Zet in Magento de canonical voor producten aan, zodat elke productpagina naar domein/product-url-key wijst. Trek daarna de interne links gelijk, anders kiest Google toch een andere URL.",
+                       "kernpunt":  "Kiest Google een andere canonical dan jij wilt, kijk dan eerst waar je eigen menu, sitemap en categoriepagina\u0027s naartoe linken.",
                        "bron":  {
                                     "titel":  "Meta data | Adobe Commerce (Experience League)",
                                     "url":  "https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/meta-data"
@@ -1385,8 +1364,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261023-news-sitemap-regels",
@@ -1437,7 +1415,7 @@
                                       "12.1.6",
                                       "1.3.6"
                                   ],
-                       "kernpunt":  "robots.txt regelt wie mag crawlen, niet wat er met de content gebeurt. Voor Gemini-training en grounding gebruik je het token Google-Extended; dat raakt Google Search niet.",
+                       "kernpunt":  "Wil een klant AI-gebruik beperken, noem dan per AI-partij het eigen user-agent-token, en reken nooit op zelfbedachte regels.",
                        "bron":  {
                                     "titel":  "Search Engine Journal: Google Explains The Limit Of Robots.txt For AI Content Use",
                                     "url":  "https://www.searchenginejournal.com/google-illyes-robots-txt-crawling-ai-training/593957/"
@@ -1445,8 +1423,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261023-steekproefgrootte-mde-claude",
@@ -1498,7 +1475,7 @@
                        "matrix":  [
                                       "1.5.2"
                                   ],
-                       "kernpunt":  "Verwijderingen verbergt URL\u0027s maar ongeveer zes maanden. Blijvend weg krijg je ze alleen met een wachtwoord, noindex of een 404/410, niet met robots.txt.",
+                       "kernpunt":  "Moet iets uit Google, neem dan eerst de oorzaak weg met een wachtwoord, noindex of 404/410, en gebruik Verwijderingen alleen om de tussentijd te overbruggen.",
                        "bron":  {
                                     "titel":  "Removals and SafeSearch reports Tool - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/9689846"
@@ -1506,8 +1483,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261026-auteursinformatie-claude",
@@ -1543,7 +1519,7 @@
                        "matrix":  [
                                       "7.1.1"
                                   ],
-                       "kernpunt":  "Maak gast-afrekenen de opvallendste keuze en bied het account pas na de bestelling aan, als alleen een wachtwoord nog nodig is.",
+                       "kernpunt":  "Zie je in de checkout veel uitval na de eerste stap, kijk dan eerst of daar een account wordt geëist.",
                        "bron":  {
                                     "titel":  "Baymard Institute: Save Account Creation for the Confirmation Step",
                                     "url":  "https://baymard.com/blog/delayed-account-creation"
@@ -1551,8 +1527,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261026-garantie-top3-verwachtingen",
@@ -1608,7 +1583,7 @@
                        "matrix":  [
                                       "2.1.14"
                                   ],
-                       "kernpunt":  "Google Images en Discover ondersteunen JPEG XL (nog) niet. Serveer het alleen via een picture-element, met JPEG, WebP of AVIF in de img src, og:image en structured data.",
+                       "kernpunt":  "Komt er een nieuw beeldformaat, kijk dan eerst of het in Googles lijst met ondersteunde formaten staat, voordat je het in de img src zet.",
                        "bron":  {
                                     "titel":  "Search Engine Journal: Google Images \u0026 Discover Previews Don\u0027t Support JPEG XL",
                                     "url":  "https://www.searchenginejournal.com/google-images-discover-previews-dont-support-jpeg-xl/593816/"
@@ -1616,8 +1591,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261026-organization-markup-logo",
@@ -1669,7 +1643,7 @@
                                       "5.1.6",
                                       "1.1.8"
                                   ],
-                       "kernpunt":  "Op Shopify pas je robots.txt aan via de template robots.txt.liquid, met Liquid bovenop de standaardregels. Geen vaste tekst en geen Cloudflare-workaround.",
+                       "kernpunt":  "Zie je op Shopify een robots.txt-workaround buiten het thema, verplaats die regels dan eerst naar robots.txt.liquid.",
                        "bron":  {
                                     "titel":  "Editing robots.txt.liquid | Shopify Help Center",
                                     "url":  "https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt"
@@ -1677,8 +1651,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261026-sponsored-ugc-nofollow",
@@ -1690,7 +1663,7 @@
                        "matrix":  [
                                       "1.3.2"
                                   ],
-                       "kernpunt":  "Betaald = sponsored, gebruikerscontent = ugc, en nofollow alleen als de andere twee niet passen. Combineren mag, en een gekwalificeerde link houdt een pagina niet uit Google.",
+                       "kernpunt":  "Twijfel je welk label een link krijgt, vraag dan eerst: is ervoor betaald, of plaatste een bezoeker hem? Pas als het allebei nee is, kies je nofollow.",
                        "bron":  {
                                     "titel":  "Qualify your outbound links to Google | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
@@ -1698,7 +1671,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261026-url-parameters-zonder-tool-claude",
@@ -1731,7 +1704,7 @@
                                       "7.1.2",
                                       "1.2.5"
                                   ],
-                       "kernpunt":  "Een kruimelpad toont de plek in de sitestructuur, nooit de route van de bezoeker. Het vult de navigatie aan, de huidige pagina is geen link, en op mobiel houd je het kort.",
+                       "kernpunt":  "Staat een product in meerdere categorieën, kies dan één vaste route voor het kruimelpad en laat de markup daarmee overeenkomen.",
                        "bron":  {
                                     "titel":  "Breadcrumbs: 11 Design Guidelines for Desktop and Mobile | Nielsen Norman Group",
                                     "url":  "https://www.nngroup.com/articles/breadcrumbs/"
@@ -1739,8 +1712,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261027-deelbare-paginas-noindex",
@@ -1753,7 +1725,7 @@
                                       "1.3.1",
                                       "1.5.1"
                                   ],
-                       "kernpunt":  "Pagina\u0027s die gebruikers maken om te delen, horen standaard niet in Google: geef ze een noindex. Wat al geïndexeerd is, laat je crawlbaar tot het eruit is, en je bewaakt pieken in nieuwe pagina\u0027s.",
+                       "kernpunt":  "Bouwt een klant een functie waarmee gebruikers pagina\u0027s publiceren, spreek dan vóór de lancering af of die pagina\u0027s in Google horen.",
                        "bron":  {
                                     "titel":  "Prevent user-generated spam on your site and platform | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/monitor-debug/prevent-abuse"
@@ -1761,8 +1733,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-04",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261027-eeat-geen-rankingfactor",
@@ -1799,7 +1770,7 @@
                                       "1.3.5",
                                       "2.1.17"
                                   ],
-                       "kernpunt":  "hreflang kan via HTML, HTTP-header of sitemap, en Google ziet ze als gelijkwaardig. Voor pdf\u0027s en andere bestanden zonder HTML gebruik je de HTTP-header of de sitemap.",
+                       "kernpunt":  "Toont Google de verkeerde taalversie van een bestand, kijk dan eerst of dat bestand wel een head heeft waarin hreflang kan staan.",
                        "bron":  {
                                     "titel":  "Tell Google about localized versions of your page | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/specialty/international/localized-versions"
@@ -1807,7 +1778,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261027-json-ld-syntax-claude",
@@ -1859,7 +1830,7 @@
                        "matrix":  [
                                       "1.1.6"
                                   ],
-                       "kernpunt":  "Een crawler met de Googlebot-user-agent is niet Google: wat op IP-adres gebeurt, zie je er niet mee. Bevestig met de live test in de URL-inspectietool en met geverifieerde Googlebot-regels in de logs.",
+                       "kernpunt":  "Geeft je crawl als Googlebot rare statuscodes, controleer dan eerst met de live test wat de echte Google krijgt, voordat je iets aan de beveiliging verandert.",
                        "bron":  {
                                     "titel":  "Verify requests from Google crawlers and fetchers | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot"
@@ -1867,8 +1838,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261027-ongeldig-element-in-head",
@@ -1880,7 +1850,7 @@
                        "matrix":  [
                                       "5.3.2"
                                   ],
-                       "kernpunt":  "Een img, iframe of ander ongeldig element in de head sluit hem voor Google af: alles daarna, zoals noindex, canonical of hreflang, wordt genegeerd. Controleer de gerenderde HTML, niet alleen de broncode.",
+                       "kernpunt":  "Ziet Google een tag niet die wel in je broncode staat, kijk dan eerst in de gerenderde HTML of hij nog in de head staat.",
                        "bron":  {
                                     "titel":  "Use valid HTML to specify page metadata | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/valid-page-metadata"
@@ -1888,8 +1858,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261027-sitemap-vervuild",
@@ -1960,7 +1929,7 @@
                        "matrix":  [
                                       "2.2.4"
                                   ],
-                       "kernpunt":  "Google toont sinds 7 mei 2026 voor geen enkele site nog FAQ-rich results. Investeer niet in FAQ-markup om de zoekresultaten; houd een FAQ-blok alleen als het bezoekers echt helpt.",
+                       "kernpunt":  "Belooft iemand een speciaal zoekresultaat door markup, kijk dan eerst in de changelog van Google Search Central of dat resultaat nog bestaat.",
                        "bron":  {
                                     "titel":  "Latest Google Search Documentation Updates | Google Search Central",
                                     "url":  "https://developers.google.com/search/updates"
@@ -1968,8 +1937,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-02",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261028-featured-snippet-afmelden",
@@ -2019,7 +1987,7 @@
                        "matrix":  [
                                       "5.1.1"
                                   ],
-                       "kernpunt":  "Bij een hostingwissel zonder URL-wijziging verlaag je de TTL minstens een week vooraf, laat je de oude server draaien tot er geen verkeer meer komt, en zie je een korte crawldip als normaal.",
+                       "kernpunt":  "Wisselt een klant van hosting, vraag dan eerst naar de huidige TTL en de opzegdatum van de oude server.",
                        "bron":  {
                                     "titel":  "Changing Your Web Hosting and SEO | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes"
@@ -2027,8 +1995,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261028-kannibalisatie-gsc-claude",
@@ -2061,7 +2028,7 @@
                                       "1.2.2",
                                       "1.1.10"
                                   ],
-                       "kernpunt":  "Klikdiepte laat zien hoe makkelijk Google een pagina vindt en hoe belangrijk de site hem lijkt te vinden. Je verkleint hem met een plattere structuur en betere interne links, niet met een sitemap, canonical of robots.txt.",
+                       "kernpunt":  "Staan veel pagina\u0027s op \u0027Gevonden, momenteel niet geïndexeerd\u0027, kijk dan eerst hoeveel klikken ze van de homepage af zitten.",
                        "bron":  {
                                     "titel":  "Ecommerce Website Navigation Structure | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
@@ -2069,8 +2036,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-10-30",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261028-linkbuildingrapport-freelancer",
@@ -2142,7 +2108,7 @@
                                       "5.1.4",
                                       "5.1.3"
                                   ],
-                       "kernpunt":  "De WordPress-instelling om zoekmachines te ontmoedigen zet sinds versie 5.3 een noindex-metatag op elke pagina, niet meer een Disallow in robots.txt. Check hem bij elke livegang.",
+                       "kernpunt":  "Gaat een WordPress-site live vanaf een testomgeving, controleer dan eerst Instellingen → Lezen.",
                        "bron":  {
                                     "titel":  "Changes to prevent search engines indexing sites | Make WordPress Core",
                                     "url":  "https://make.wordpress.org/core/2019/09/02/changes-to-prevent-search-engines-indexing-sites/"
@@ -2150,8 +2116,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-ai-citatieonderzoek-correlatie",
@@ -2221,7 +2186,7 @@
                        "matrix":  [
                                       "6.3.4"
                                   ],
-                       "kernpunt":  "Lever een audit op als prioriteitenlijst: bovenaan de acties met de meeste impact voor de minste moeite, de rest als bijlage. De ernst die een tool geeft, is geen prioriteit.",
+                       "kernpunt":  "Lever je een audit op, begin dan met één pagina: wat eerst moet, waarom, en hoeveel tijd het kost.",
                        "bron":  {
                                     "titel":  "Using Prioritization Matrices to Inform UX Decisions | Nielsen Norman Group",
                                     "url":  "https://www.nngroup.com/articles/prioritization-matrices/"
@@ -2229,8 +2194,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-boven-de-vouw-aandacht",
@@ -2261,7 +2225,7 @@
                        "matrix":  [
                                       "2.1.13"
                                   ],
-                       "kernpunt":  "Een tekst vol herhalingen of plaatsnamen is keyword stuffing, en lengte alleen helpt niet. Schrijf de categorietekst voor de koper; het zoekwoord komt er dan vanzelf in.",
+                       "kernpunt":  "Staat er een SEO-tekst onder een categorie, vraag je dan eerst af of een koper er iets aan heeft.",
                        "bron":  {
                                     "titel":  "Spam Policies for Google Web Search | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
@@ -2269,8 +2233,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-crawlverspilling-screaming-frog-claude",
@@ -2303,7 +2266,7 @@
                                       "4.1.5",
                                       "4.1.2"
                                   ],
-                       "kernpunt":  "Tabellen met zoekopdrachten missen de geanonimiseerde zoekopdrachten, het totaal niet. Haal totalen dus uit een tegel zonder de dimensie zoekopdracht en tel nooit rijen op.",
+                       "kernpunt":  "Moet je een totaal tonen, haal het dan uit een tegel zonder zoekopdrachten en tel nooit rijen bij elkaar op.",
                        "bron":  {
                                     "titel":  "A deep dive into Search Console performance data filtering and limits | Google Search Central Blog",
                                     "url":  "https://developers.google.com/search/blog/2022/10/performance-data-deep-dive"
@@ -2311,8 +2274,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-een-of-twee-landingspaginas",
@@ -2363,7 +2325,7 @@
                        "matrix":  [
                                       "4.1.3"
                                   ],
-                       "kernpunt":  "Gebruikersacquisitie = via welk kanaal nieuwe gebruikers de eerste keer kwamen. Verkeersacquisitie = waar elke sessie vandaan kwam. Kies het rapport bij de vraag, en vergelijk geen gebruikers met sessies.",
+                       "kernpunt":  "Zet je een GA4-kanaalcijfer in een rapport, kies dan eerst het rapport dat bij de vraag past: nieuwe klanten of bezoeken.",
                        "bron":  {
                                     "titel":  "User acquisition report vs. Traffic acquisition report - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/14731736?hl=en"
@@ -2375,8 +2337,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-kickoff-gespreksleidraad-claude",
@@ -2488,7 +2449,7 @@
                                       "5.1.5",
                                       "1.3.3"
                                   ],
-                       "kernpunt":  "Wil je in Lightspeed dat Google één van meerdere gelijke productpagina\u0027s toont, zet dan Custom canonical URLs aan en vul per variant de canonical in. Verbergen, robots.txt of URL\u0027s wijzigen lost iets anders op.",
+                       "kernpunt":  "Zet je in Lightspeed een canonical, laat dan ook de interne links en de sitemap naar dezelfde versie wijzen.",
                        "bron":  {
                                     "titel":  "Managing product SEO data | Lightspeed eCom (C-Series) Help Center",
                                     "url":  "https://ecom-support.lightspeedhq.com/hc/en-us/articles/220661107-Managing-product-SEO-data"
@@ -2496,7 +2457,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-merk-categoriepaginas-indexeren",
@@ -2528,7 +2489,7 @@
                                       "4.1.1",
                                       "4.1.2"
                                   ],
-                       "kernpunt":  "Rapporteer het effect van SEO op non-branded zoekverkeer, met branded apart ernaast. Merkzoekopdrachten door campagnes of PR kleuren anders je totale klikken, CTR en gemiddelde positie.",
+                       "kernpunt":  "Loopt er een campagne, PR-actie of seizoenspiek, rapporteer SEO-groei dan op non-branded en zet branded ernaast als context.",
                        "bron":  {
                                     "titel":  "Introducing the branded queries filter in Search Console | Google Search Central Blog",
                                     "url":  "https://developers.google.com/search/blog/2025/11/search-console-branded-filter"
@@ -2536,8 +2497,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-openai-searchbot-vs-gptbot",
@@ -2550,7 +2510,7 @@
                                       "12.1.6",
                                       "12.1.3"
                                   ],
-                       "kernpunt":  "GPTBot (training) en OAI-SearchBot (ChatGPT search) stuur je los van elkaar. Wie alle OpenAI-bots blokkeert, verdwijnt ook uit de antwoorden van ChatGPT search.",
+                       "kernpunt":  "Wil een klant AI-bots blokkeren, vraag dan eerst waartegen: training, zichtbaarheid in AI-zoeken, of allebei.",
                        "bron":  {
                                     "titel":  "OpenAI: Overview of OpenAI Crawlers",
                                     "url":  "https://developers.openai.com/api/docs/bots"
@@ -2558,7 +2518,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-plaatspaginas-doorway",
@@ -2570,7 +2530,7 @@
                        "matrix":  [
                                       "2.1.7"
                                   ],
-                       "kernpunt":  "Bijna gelijke plaatspagina\u0027s die alleen bedoeld zijn om te ranken, zijn doorway abuse, en ze laten herschrijven verandert daar niets aan. Houd alleen plaatspagina\u0027s met echt eigen inhoud.",
+                       "kernpunt":  "Wil een klant op plaatsnamen gevonden worden, vraag dan eerst wat hij per plaats echt anders te bieden heeft.",
                        "bron":  {
                                     "titel":  "Spam Policies for Google Web Search | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
@@ -2578,8 +2538,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-p-waarde-kans-variant-beter",
@@ -2592,7 +2551,7 @@
                                       "7.2.2",
                                       "7.2.1"
                                   ],
-                       "kernpunt":  "Een p-waarde zegt hoe verrassend je data zijn als er geen verschil is, niet hoe groot de kans is dat de variant beter is. Rapporteer daarom ook het effect met een interval.",
+                       "kernpunt":  "Rapporteer je een A/B-test, noem dan altijd het gemeten effect met een onder- en bovengrens, niet alleen de p-waarde.",
                        "bron":  {
                                     "titel":  "American Statistical Association: Statement on Statistical Significance and P-Values (2016)",
                                     "url":  "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf"
@@ -2600,7 +2559,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-ranktracker-vs-gsc-positie",
@@ -2613,7 +2572,7 @@
                                       "4.1.4",
                                       "4.1.2"
                                   ],
-                       "kernpunt":  "Search Console middelt de hoogste positie over alle echte vertoningen; een rank tracker is één vaste meting. Ze verschillen bijna altijd, vooral bij lokale zoekopdrachten, en dat is geen fout.",
+                       "kernpunt":  "Zet je posities in een rapport, vermeld dan bij elk getal of het uit de rank tracker of uit Search Console komt.",
                        "bron":  {
                                     "titel":  "What are impressions, position, and clicks? - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/7042828"
@@ -2621,8 +2580,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-redirectmap-delegeren",
@@ -2655,7 +2613,7 @@
                                       "1.5.5",
                                       "1.1.7"
                                   ],
-                       "kernpunt":  "Een herstelde robots.txt controleer je in het robots.txt-rapport. Daar vraag je in noodgevallen ook een nieuwe crawl aan. De oude tester bestaat niet meer; per URL test je met URL-inspectie.",
+                       "kernpunt":  "Is er live gezet, controleer dan eerst of robots.txt nog het juiste bestand is en niet dat van de testomgeving.",
                        "bron":  {
                                     "titel":  "robots.txt report - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/6062598?hl=en"
@@ -2663,8 +2621,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261029-schemaplugin-losse-blokken",
@@ -2778,7 +2735,7 @@
                        "matrix":  [
                                       "10.1.1"
                                   ],
-                       "kernpunt":  "Analyseer een core update pas minstens een week na de afronding: de week erna tegen de week vóór de uitrol. Het is geen straf, en herstel na verbeteringen kan maanden duren.",
+                       "kernpunt":  "Daalt een site na een core update, zoek dan eerst een patroon in paginatypes of onderwerpen voordat je iets herschrijft.",
                        "bron":  {
                                     "titel":  "Google Search\u0027s Core Updates | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/core-updates"
@@ -2790,8 +2747,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261030-ga4-betaalprovider-als-verwijzing",
@@ -2804,7 +2760,7 @@
                                       "3.1.2",
                                       "3.1.4"
                                   ],
-                       "kernpunt":  "Komen klanten via een betaalprovider of ander extern domein terug op je site, zet dat domein dan op de lijst met ongewenste verwijzingen. Anders krijgt dat domein het krediet voor je aankopen.",
+                       "kernpunt":  "Wisselt een klant van betaalprovider of boekingssysteem, zet dan meteen het nieuwe domein op de lijst met ongewenste verwijzingen.",
                        "bron":  {
                                     "titel":  "Identify unwanted referrals - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/10327750"
@@ -2812,8 +2768,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261030-ga4-bewaartermijn-verkenningen",
@@ -2865,7 +2820,7 @@
                        "matrix":  [
                                       "5.1.2"
                                   ],
-                       "kernpunt":  "Een 301 alleen als er een duidelijke vervanger is, anders een 404 of 410 (voor Google gelijk). Nooit een foutmelding met status 200 en nooit alles naar de homepage.",
+                       "kernpunt":  "Haal je producten weg, kijk dan per URL of de bezoeker op de nieuwe pagina vindt wat hij zocht. Zo niet, geef dan een echte 404 of 410.",
                        "bron":  {
                                     "titel":  "Troubleshoot Google Search crawling errors | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors"
@@ -2873,7 +2828,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-afbeeldingssitemap-js-galerij",
@@ -2906,7 +2861,7 @@
                                       "12.1.6",
                                       "12.1.1"
                                   ],
-                       "kernpunt":  "AI Overviews en AI Mode tellen in Search Console mee in het zoektype Web, samen met de gewone resultaten. Een aparte AI-regel haal je daar niet uit; combineer daarom met GA4 en een tool voor AI-zichtbaarheid.",
+                       "kernpunt":  "Wil een klant AI-verkeer apart zien, combineer dan Search Console met GA4 en een tool voor AI-zichtbaarheid.",
                        "bron":  {
                                     "titel":  "AI features and your website | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/ai-features"
@@ -2914,7 +2869,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-automatische-slider-homepage",
@@ -2946,7 +2901,7 @@
                                       "1.3.3",
                                       "1.3.1"
                                   ],
-                       "kernpunt":  "Google kiest de canonical op alle signalen samen. Laat canonical, sitemap en interne links naar dezelfde URL wijzen, en gebruik geen noindex of robots.txt om de canonical te sturen.",
+                       "kernpunt":  "Kiest Google een andere canonical dan jij, zoek dan eerst welk systeem een afwijkend signaal geeft voordat je de canonical zelf aanpast.",
                        "bron":  {
                                     "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
@@ -2954,7 +2909,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-checkout-formuliervelden",
@@ -2966,7 +2921,7 @@
                        "matrix":  [
                                       "7.1.1"
                                   ],
-                       "kernpunt":  "De meeste checkouts kunnen met zo\u0027n 8 velden toe. Voeg velden samen, zet het factuuradres standaard gelijk aan het bezorgadres en zet optionele velden en de kortingscode achter een link.",
+                       "kernpunt":  "Telt een checkout meer dan 8 zichtbare velden, kijk dan eerst wat je kunt samenvoegen of achter een link kunt zetten.",
                        "bron":  {
                                     "titel":  "Baymard Institute: Checkout Optimization: 5 Ways to Minimize Form Fields in Checkout",
                                     "url":  "https://baymard.com/blog/checkout-flow-average-form-fields"
@@ -2974,8 +2929,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-contentbrief-prompt-context",
@@ -2987,7 +2941,7 @@
                        "matrix":  [
                                       "2.1.5"
                                   ],
-                       "kernpunt":  "Een vage prompt geeft een gemiddeld antwoord. Geef Claude context zoals je een nieuwe collega zou briefen: klant, lezer, doel, criteria en het format dat je terug wilt.",
+                       "kernpunt":  "Schrijf je een prompt voor klantwerk, vraag je dan eerst af wat een nieuwe collega nog zou moeten vragen, en zet dat erbij.",
                        "bron":  {
                                     "titel":  "Prompting best practices | Claude Docs",
                                     "url":  "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
@@ -2995,7 +2949,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-crawlbudget-kleine-site",
@@ -3008,7 +2962,7 @@
                                       "1.1.3",
                                       "1.1.1"
                                   ],
-                       "kernpunt":  "Crawlbudget is vooral een probleem voor grote of snel veranderende sites. Worden nieuwe pagina\u0027s binnen een dag gecrawld, dan levert een crawlbudget-analyse weinig op.",
+                       "kernpunt":  "Komt een crawlbudget-analyse op tafel, kijk dan eerst hoe snel nieuwe pagina\u0027s geïndexeerd worden. Gaat dat binnen een dag, besteed het geld dan anders.",
                        "bron":  {
                                     "titel":  "Crawl Budget Management For Large Sites | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget"
@@ -3016,7 +2970,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-ctr-bots-klikmanipulatie",
@@ -3028,7 +2982,7 @@
                        "matrix":  [
                                       "7.1.4"
                                   ],
-                       "kernpunt":  "Klikken of zoekopdrachten laten nabootsen door bots is machine-generated traffic en valt onder het spambeleid van Google. Verdien echte klikken met een passende title, een goede pagina en lokale zichtbaarheid.",
+                       "kernpunt":  "Bootst een dienst het gedrag van zoekers na in plaats van het te verdienen, zeg dan nee: het is een risico zonder opbrengst.",
                        "bron":  {
                                     "titel":  "Spam policies for Google web search | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
@@ -3036,7 +2990,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-cwv-rapport-28-dagen",
@@ -3049,7 +3003,7 @@
                                       "5.2.2",
                                       "5.2.1"
                                   ],
-                       "kernpunt":  "Het Core Web Vitals-rapport gebruikt velddata over 28 dagen, dus een fix wordt pas na weken zichtbaar. Start de validatie en beoordeel na vier weken, niet na twee dagen.",
+                       "kernpunt":  "Gaat er een snelheidsfix live, start dan meteen de validatie in Search Console en beoordeel het rapport pas na vier weken.",
                        "bron":  {
                                     "titel":  "Core Web Vitals report - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/9205520"
@@ -3061,7 +3015,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-disavow-spamlinks-niet-zelf",
@@ -3073,7 +3027,7 @@
                        "matrix":  [
                                       "10.1.2"
                                   ],
-                       "kernpunt":  "Google negeert de meeste spamlinks zelf. Disavow is alleen voor veel kunstmatige links waar je zelf verantwoordelijk voor bent en die een handmatige actie (dreigen te) veroorzaken.",
+                       "kernpunt":  "Ziet een klant opeens veel spamlinks, kijk dan eerst naar handmatige acties en de cijfers. Pas als daar iets mis is, denk je aan disavow.",
                        "bron":  {
                                     "titel":  "Disavow links to your site - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/2648487"
@@ -3081,7 +3035,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-ga4-key-events",
@@ -3094,7 +3048,7 @@
                                       "3.1.6",
                                       "3.1.4"
                                   ],
-                       "kernpunt":  "In GA4 wordt een event pas een doelactie als je het markeert als key event (belangrijke gebeurtenis). De route is event → key event → eventueel conversie in Google Ads.",
+                       "kernpunt":  "Zet je een nieuwe meting op, controleer dan drie dingen: komt het event binnen, is het een key event, en telt het niet dubbel?",
                        "bron":  {
                                     "titel":  "About key events - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/13965727"
@@ -3102,7 +3056,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-ga4-rapportage-identiteit",
@@ -3114,7 +3068,7 @@
                        "matrix":  [
                                       "3.1.5"
                                   ],
-                       "kernpunt":  "Een User-ID helpt alleen als de rapportage-identiteit hem gebruikt: kies Blended of Observed, niet Device-based. De keuze verandert de verzamelde data niet.",
+                       "kernpunt":  "Voert een klant een User-ID in, controleer dan meteen of de rapportage-identiteit hem ook gebruikt, en waarschuw dat het aantal gebruikers kan dalen.",
                        "bron":  {
                                     "titel":  "Reporting identity - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/10976610"
@@ -3122,7 +3076,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-gedeeld-ai-trainingstoken",
@@ -3135,7 +3089,7 @@
                                       "12.1.6",
                                       "1.3.6"
                                   ],
-                       "kernpunt":  "Het gedeelde token __usage_ai-training wordt pas vanaf 2027 gelezen en is geen crawlinstructie. Voeg het gerust toe, maar houd de regels voor GPTBot en Google-Extended tot die tijd aan.",
+                       "kernpunt":  "Komt er een nieuwe standaard voor robots.txt, haal de oude regels dan pas weg als de partijen hem echt ondersteunen.",
                        "bron":  {
                                     "titel":  "Supporting a shared AI training control for websites | Google Search Central Blog",
                                     "url":  "https://developers.google.com/search/blog/2026/10/ai-training-control"
@@ -3143,7 +3097,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-gsc-bigquery-site-of-url-tabel",
@@ -3156,7 +3110,7 @@
                                       "5.3.1",
                                       "4.1.2"
                                   ],
-                       "kernpunt":  "Totalen haal je uit searchdata_site_impression (per property), cijfers per pagina uit searchdata_url_impression (per URL). Tel ze niet door elkaar op.",
+                       "kernpunt":  "Wijkt een totaal uit BigQuery af van Search Console, kijk dan eerst uit welke tabel het komt: site-tabel voor totalen, URL-tabel per pagina.",
                        "bron":  {
                                     "titel":  "Table guidelines and reference - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/12917991"
@@ -3164,8 +3118,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-meer-laden-knop-producten",
@@ -3178,7 +3131,7 @@
                                       "1.1.9",
                                       "1.3.4"
                                   ],
-                       "kernpunt":  "Google klikt niet op \u0027Meer laden\u0027. Geef elke set producten een eigen URL en link ernaar met een gewone \u003ca href\u003e, met een eigen canonical per pagina.",
+                       "kernpunt":  "Bouwt een developer bijladen met een knop of scroll, vraag dan altijd ook om echte links naar genummerde pagina\u0027s.",
                        "bron":  {
                                     "titel":  "Pagination, incremental page loading, and their impact on Google Search | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
@@ -3186,7 +3139,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-og-image-cache-sharing-debugger",
@@ -3198,7 +3151,7 @@
                        "matrix":  [
                                       "2.1.11"
                                   ],
-                       "kernpunt":  "Facebook cachet een og:image op de URL. Een nieuwe deelafbeelding krijgt daarom een nieuwe bestandsnaam, en met de Sharing Debugger laat je de pagina opnieuw ophalen.",
+                       "kernpunt":  "Verander je een deelafbeelding, geef het bestand dan altijd een nieuwe naam en controleer het resultaat in de Sharing Debugger.",
                        "bron":  {
                                     "titel":  "Sharing for Webmasters | Meta for Developers",
                                     "url":  "https://developers.facebook.com/docs/sharing/webmasters/"
@@ -3206,8 +3159,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-reviewanalyse-citaten-claude",
@@ -3220,7 +3172,7 @@
                                       "7.1.5",
                                       "7.1.1"
                                   ],
-                       "kernpunt":  "Laat Claude elke bevinding uit klantfeedback onderbouwen met letterlijke citaten, schrap wat geen citaat heeft, en tel aantallen zelf na voordat je ze presenteert.",
+                       "kernpunt":  "Presenteer nooit een aantal uit een AI-analyse dat je niet zelf hebt nageteld.",
                        "bron":  {
                                     "titel":  "Reduce hallucinations | Claude Docs",
                                     "url":  "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
@@ -3228,7 +3180,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261102-skill-maandrapport-claude",
@@ -3286,7 +3238,7 @@
                                       "7.2.2",
                                       "7.2.1"
                                   ],
-                       "kernpunt":  "Segmenten achteraf zijn extra tests: bij 20 segmenten vind je met 5% significantie gemiddeld één \u0027winnaar\u0027 door toeval. Zie zo\u0027n uitkomst als hypothese en test hem opnieuw.",
+                       "kernpunt":  "Wil je segmenten bekijken, leg dan vóór de test vast welke. Zie alles wat je daarna pas ontdekt als hypothese.",
                        "bron":  {
                                     "titel":  "How Do I Avoid Common A/B Testing Mistakes? | Adobe Target (Experience League)",
                                     "url":  "https://experienceleague.adobe.com/en/docs/target/using/activities/abtest/common-ab-testing-pitfalls"
@@ -3294,7 +3246,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-ai-productteksten-op-schaal",
@@ -3307,7 +3259,7 @@
                                       "2.1.7",
                                       "2.1.5"
                                   ],
-                       "kernpunt":  "AI-content mag van Google, zolang het juist is en waarde toevoegt. Massaal pagina\u0027s genereren zonder controle en zonder meerwaarde kan scaled content abuse zijn.",
+                       "kernpunt":  "Wil een klant met AI opschalen, begin dan klein, met echte productdata en een vaste feitencheck vóór publicatie.",
                        "bron":  {
                                     "titel":  "Google Search\u0027s guidance on using generative AI content on your website | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content"
@@ -3315,7 +3267,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-anthropic-crawlers-robots-txt",
@@ -3328,7 +3280,7 @@
                                       "12.1.6",
                                       "12.1.3"
                                   ],
-                       "kernpunt":  "Anthropic heeft drie bots: ClaudeBot (training), Claude-SearchBot (zoeken) en Claude-User (ophalen op verzoek). Blokkeer alleen ClaudeBot als je uit de training wilt maar wel vindbaar wilt blijven in Claude.",
+                       "kernpunt":  "Wil een klant iets uitsluiten bij een AI-bedrijf, zoek dan eerst op welke bot welk doel heeft en blokkeer alleen die bot.",
                        "bron":  {
                                     "titel":  "Does Anthropic crawl data from the web, and how can site owners block the crawler? | Claude Help Center",
                                     "url":  "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
@@ -3336,7 +3288,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-claude-search-console-koppeling",
@@ -3348,7 +3300,7 @@
                        "matrix":  [
                                       "4.1.2"
                                   ],
-                       "kernpunt":  "Zonder koppeling of bestand heeft Claude geen Search Console-data, en cijfers in zijn antwoord zijn dan verzonnen. Koppel via een MCP-connector of geef een export mee, en controleer welke vraag er aan de data is gesteld.",
+                       "kernpunt":  "Noemt Claude cijfers uit een afgeschermd systeem, vraag dan eerst waar ze vandaan komen voordat je ze gebruikt.",
                        "bron":  {
                                     "titel":  "What is the Model Context Protocol (MCP)? | Model Context Protocol",
                                     "url":  "https://modelcontextprotocol.io/docs/getting-started/intro"
@@ -3356,7 +3308,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-dashboard-ctr-gemiddelde",
@@ -3369,7 +3321,7 @@
                                       "4.1.5",
                                       "4.1.1"
                                   ],
-                       "kernpunt":  "Een totale CTR is de som van de klikken gedeeld door de som van de vertoningen, nooit het gemiddelde van losse CTR\u0027s. Hetzelfde geldt voor conversieratio en andere percentages.",
+                       "kernpunt":  "Staat er een percentage in een totaalregel, reken het dan na uit de opgetelde aantallen. Dat geldt ook voor conversieratio.",
                        "bron":  {
                                     "titel":  "Performance report (Search results) - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/7576553"
@@ -3377,7 +3329,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-ga4-cross-domain-boekingsdomein",
@@ -3390,7 +3342,7 @@
                                       "3.1.2",
                                       "3.1.4"
                                   ],
-                       "kernpunt":  "Twee domeinen in één klantreis? Stel cross-domain measurement in met dezelfde G-ID op beide domeinen. Anders wordt één bezoeker twee gebruikers en krijgt je eigen site het krediet als referral.",
+                       "kernpunt":  "Loopt een klantreis over twee domeinen, zet dan eerst beide domeinen in de domeininstellingen van dezelfde webstream.",
                        "bron":  {
                                     "titel":  "[GA4] Set up cross-domain measurement - Analytics Help",
                                     "url":  "https://support.google.com/analytics/answer/10071811"
@@ -3398,7 +3350,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-lighthouse-13-6-psi-scoresprong",
@@ -3411,7 +3363,7 @@
                                       "5.2.1",
                                       "4.1.1"
                                   ],
-                       "kernpunt":  "Een sprong in de PageSpeed-score na 27 oktober 2026 komt vaak door Lighthouse 13.6, niet door de site. Vergelijk alleen scores van dezelfde versie en beoordeel snelheid op velddata.",
+                       "kernpunt":  "Springt een labscore terwijl er niets aan de site veranderde, kijk dan eerst welke Lighthouse-versie er gemeten heeft.",
                        "bron":  {
                                     "titel":  "Search Engine Journal: PageSpeed Insights Scores May Rise After Lighthouse Update",
                                     "url":  "https://www.searchenginejournal.com/pagespeed-insights-scores-lighthouse-update/595698/"
@@ -3423,8 +3375,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-03",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261103-tijdelijke-redirect-302",
@@ -3456,7 +3407,7 @@
                                       "1.3.1",
                                       "1.3.6"
                                   ],
-                       "kernpunt":  "Bestanden zonder HTML, zoals pdf\u0027s, houd je uit de index met de HTTP-header X-Robots-Tag: noindex. Laat ze wel crawlbaar, anders ziet Google die header nooit.",
+                       "kernpunt":  "Wil je iets uit de index halen, blokkeer het dan nooit tegelijk in robots.txt: Google moet de noindex kunnen zien.",
                        "bron":  {
                                     "titel":  "Robots meta tag, data-nosnippet, and X-Robots-Tag specifications | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
@@ -3464,7 +3415,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261104-ab-hypotheses-uit-reviews-claude",
@@ -3517,7 +3468,7 @@
                                       "5.3.5",
                                       "5.3.1"
                                   ],
-                       "kernpunt":  "Zoek je wat ontbreekt (pagina\u0027s zonder klikken, links of vertoningen), gebruik dan een left join. De standaard inner join gooit precies die pagina\u0027s weg.",
+                       "kernpunt":  "Zoek je wat ontbreekt, zoals pagina\u0027s zonder klikken of links, gebruik dan een left join en tel de rijen voor en na het koppelen.",
                        "bron":  {
                                     "titel":  "pandas.merge - pandas documentation",
                                     "url":  "https://pandas.pydata.org/docs/reference/api/pandas.merge.html"
@@ -3525,7 +3476,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261104-logs-304-http-caching",
@@ -3538,7 +3489,7 @@
                                       "1.1.3",
                                       "5.1.2"
                                   ],
-                       "kernpunt":  "Stuur ETag (en Last-Modified) mee, dan kan de server Googlebot bij ongewijzigde pagina\u0027s een 304 geven in plaats van de hele pagina. Crawl-delay en de oude crawlsnelheid-instelling werken niet bij Google.",
+                       "kernpunt":  "Wordt een server traag van Googlebot, kijk dan eerst of hij bij ongewijzigde pagina\u0027s een 304 kan geven.",
                        "bron":  {
                                     "titel":  "Overview of Google crawlers and fetchers (user agents) | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers"
@@ -3546,7 +3497,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261104-novelty-effect-ab-test",
@@ -3579,7 +3530,7 @@
                                       "12.1.3",
                                       "12.1.6"
                                   ],
-                       "kernpunt":  "PerplexityBot zorgt dat je in Perplexity gevonden wordt; Perplexity-User haalt pagina\u0027s op voor vragen van gebruikers en negeert robots.txt meestal. Wie PerplexityBot blokkeert, wordt minder vaak als bron gevonden.",
+                       "kernpunt":  "Wil een klant als bron in een AI-zoekmachine verschijnen, blokkeer dan nooit de bot die de zoekresultaten vult.",
                        "bron":  {
                                     "titel":  "Perplexity Crawlers - Perplexity Docs",
                                     "url":  "https://docs.perplexity.ai/guides/bots"
@@ -3587,7 +3538,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261104-placeholder-als-label",
@@ -3599,7 +3550,7 @@
                        "matrix":  [
                                       "7.1.1"
                                   ],
-                       "kernpunt":  "Gebruik placeholdertekst nooit als enige label: hij verdwijnt bij het typen, waardoor bezoekers hun invoer niet meer kunnen nakijken. Zet vaste labels boven de velden.",
+                       "kernpunt":  "Gebruik grijze tekst in een veld alleen als voorbeeld, nooit als enige naam van het veld.",
                        "bron":  {
                                     "titel":  "Placeholders in Form Fields Are Harmful - Nielsen Norman Group",
                                     "url":  "https://www.nngroup.com/articles/form-design-placeholders/"
@@ -3607,7 +3558,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261104-popup-script-blokkeren-robots",
@@ -3620,7 +3571,7 @@
                                       "1.1.8",
                                       "5.3.3"
                                   ],
-                       "kernpunt":  "Een los script blokkeren in robots.txt mag als de pagina zonder dat script goed werkt, zoals een script dat alleen een pop-up laadt. Scripts die de pagina opbouwen, blokkeer je nooit.",
+                       "kernpunt":  "Blokkeer je een script voor Google, draai dan meteen de live test en kijk of de screenshot de echte inhoud toont.",
                        "bron":  {
                                     "titel":  "Robots.txt Introduction and Guide | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
@@ -3628,7 +3579,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261104-productmarkup-via-gtm",
@@ -3642,7 +3593,7 @@
                                       "2.2.1",
                                       "3.2.3"
                                   ],
-                       "kernpunt":  "Google leest structured data die met JavaScript of GTM is geplaatst, maar voor Product-markup met prijs en voorraad is server-HTML beter: dynamische markup maakt Shopping-crawls minder frequent en betrouwbaar.",
+                       "kernpunt":  "Veranderen prijzen of voorraad vaak, zet de Product-markup dan in de HTML van de server en gebruik GTM alleen als noodoplossing.",
                        "bron":  {
                                     "titel":  "Generate Structured Data with JavaScript | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/generate-structured-data-with-javascript"
@@ -3650,7 +3601,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261104-rankingsystemen-actief-of-gestopt",
@@ -3664,7 +3615,7 @@
                                       "10.1.4",
                                       "10.1.5"
                                   ],
-                       "kernpunt":  "Panda en Penguin zijn al jaren onderdeel van Googles kernsystemen; BERT en RankBrain zijn nog actief, maar je optimaliseert er niet apart voor. Toets claims in audits aan Googles eigen overzicht van rankingsystemen.",
+                       "kernpunt":  "Noemt een audit een Google-update of -systeem bij naam, check die naam dan eerst in Googles eigen overzicht van rankingsystemen.",
                        "bron":  {
                                     "titel":  "A guide to Google Search ranking systems | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
@@ -3672,7 +3623,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-404-na-opruimen-pagina-indexering",
@@ -3685,7 +3636,7 @@
                                       "1.5.3",
                                       "1.5.1"
                                   ],
-                       "kernpunt":  "Een 404 voor een bewust verwijderde pagina zonder vervanger is correct en schaadt de site niet. Herstel alleen 404\u0027s waar je zelf naar linkt of die in de sitemap staan, en redirect verhuisde pagina\u0027s met een 301.",
+                       "kernpunt":  "Zie je 404\u0027s in Search Console, kijk dan eerst of je er zelf nog naar linkt of ze in de sitemap staan: alleen die vragen actie.",
                        "bron":  {
                                     "titel":  "Page indexing report - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/7440203"
@@ -3697,7 +3648,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-ai-gebruik-transparant-eeat",
@@ -3710,7 +3661,7 @@
                                       "11.1.5",
                                       "11.1.4"
                                   ],
-                       "kernpunt":  "Wees open over wie een tekst maakte en hoe, ook als AI meeschreef. Een echte, controlerende expert als auteur plus een korte uitleg van de werkwijze past bij wat Google aanraadt; een auteur noemen die niet meeschreef is misleidend.",
+                       "kernpunt":  "Staat er onder YMYL-content alleen \u0027Redactie\u0027, regel dan eerst een echte auteur met auteurspagina en één zin over de werkwijze.",
                        "bron":  {
                                     "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
@@ -3718,7 +3669,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-google-extended-ai-overviews",
@@ -3731,7 +3682,7 @@
                                       "12.1.1",
                                       "12.1.6"
                                   ],
-                       "kernpunt":  "Google-Extended regelt training en grounding voor Gemini, niet AI Overviews. AI-functies in Search volg je met de gewone instellingen voor snippets, zoals nosnippet en max-snippet, en die raken ook je gewone zoekresultaat.",
+                       "kernpunt":  "Wil een klant uit AI Overviews, bespreek dan eerst wat een snippet-beperking kost in gewone klikken, want dezelfde instelling raakt allebei.",
                        "bron":  {
                                     "titel":  "AI features and your website | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/ai-features"
@@ -3739,7 +3690,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-gtm-klik-telefoonnummer",
@@ -3763,7 +3714,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-hreflang-m-dot-mobiel-naar-mobiel",
@@ -3776,7 +3727,7 @@
                                       "8.2.2",
                                       "1.3.5"
                                   ],
-                       "kernpunt":  "Bij een aparte mobiele site wijst hreflang op mobiele pagina\u0027s naar mobiele URL\u0027s en op desktoppagina\u0027s naar desktop-URL\u0027s. De canonical wijst wel altijd van mobiel naar desktop.",
+                       "kernpunt":  "Heeft een site aparte mobiele URL\u0027s, controleer dan eerst per soort verwijzing (canonical, alternate, hreflang) welke kant hij op wijst.",
                        "bron":  {
                                     "titel":  "Mobile site and mobile-first indexing best practices | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
@@ -3784,7 +3735,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-lcp-hero-lazy-load",
@@ -3797,7 +3748,7 @@
                                       "5.2.3",
                                       "5.2.2"
                                   ],
-                       "kernpunt":  "Lazy-load nooit de afbeelding die het LCP-element is. Haal loading=\"lazy\" daar weg en geef hem fetchpriority=\"high\". Foto\u0027s verder op de pagina mogen lazy laden.",
+                       "kernpunt":  "Zet een plugin lazy loading op alle afbeeldingen, controleer dan eerst de bovenste foto: die moet meteen laden en voorrang krijgen.",
                        "bron":  {
                                     "titel":  "Optimize Largest Contentful Paint | web.dev",
                                     "url":  "https://web.dev/articles/optimize-lcp"
@@ -3805,7 +3756,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-robots-txt-503-crawlstop",
@@ -3818,7 +3769,7 @@
                                       "1.5.4",
                                       "1.3.6"
                                   ],
-                       "kernpunt":  "Geeft robots.txt een serverfout, dan stopt Google eerst met crawlen en gebruikt het na 12 uur de laatst bekende versie. Een 404 op robots.txt betekent juist dat alles gecrawld mag worden.",
+                       "kernpunt":  "Verhuist een klant naar een nieuwe server of CDN, controleer dan eerst of /robots.txt een 200 of 404 geeft, nooit een 5xx.",
                        "bron":  {
                                     "titel":  "Crawl Stats report - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/9679690"
@@ -3826,7 +3777,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261105-videositemap-verplichte-tags",
@@ -3839,7 +3790,7 @@
                                       "1.4.3",
                                       "2.2.2"
                                   ],
-                       "kernpunt":  "Verplicht in een videositemap: thumbnail, titel, beschrijving en een link naar het videobestand óf de speler. Duur en publicatiedatum zijn optioneel.",
+                       "kernpunt":  "Zitten video\u0027s in een eigen speler, controleer dan eerst of elke video in de sitemap een thumbnail en een link naar bestand of speler heeft.",
                        "bron":  {
                                     "titel":  "Video sitemaps | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps"
@@ -3847,7 +3798,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-cls-promobalk-ruimte-reserveren",
@@ -3860,7 +3811,7 @@
                                       "5.2.7",
                                       "5.2.6"
                                   ],
-                       "kernpunt":  "Iets wat later op de pagina verschijnt, krijgt vooraf een vaste plek (bijv. min-height). Beoordeel CLS op velddata uit Search Console of CrUX, niet alleen op Lighthouse.",
+                       "kernpunt":  "Is CLS in het veld slecht maar in Lighthouse goed, zoek dan eerst naar iets wat pas na het laden verschijnt.",
                        "bron":  {
                                     "titel":  "Optimize Cumulative Layout Shift | web.dev",
                                     "url":  "https://web.dev/articles/optimize-cls"
@@ -3868,7 +3819,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-gsc-klikpiek-bots-november",
@@ -3881,7 +3832,7 @@
                                       "4.1.2",
                                       "4.1.1"
                                   ],
-                       "kernpunt":  "Stijgen klikken sterk terwijl de vertoningen gelijk blijven, dan is het vrijwel zeker geen echt verkeer. Begin november 2026 had een deel van de sites zo\u0027n piek: filter hem uit je rapport en verander niets aan de site.",
+                       "kernpunt":  "Stijgen klikken zonder dat vertoningen meestijgen, kijk dan eerst naar apparaat, land en positie voordat je het succes aan je werk toeschrijft.",
                        "bron":  {
                                     "titel":  "Search Engine Journal: November Click Spikes In Google Search Console Are Bot Traffic – How To Filter Your Reports",
                                     "url":  "https://www.searchenginejournal.com/november-click-spikes-in-google-search-console-are-bot-traffic-how-to-filter-your-reports/595834/"
@@ -3889,7 +3840,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-inp-filterklik-werk-uitstellen",
@@ -3902,7 +3853,7 @@
                                       "5.2.5",
                                       "5.2.4"
                                   ],
-                       "kernpunt":  "Laat een klik eerst alleen het zichtbare antwoord tekenen en schuif de rest van het werk naar een latere taak. INP meet tot het eerstvolgende beeld, dus daar win je de meeste tijd.",
+                       "kernpunt":  "Is INP slecht, zoek dan eerst in de velddata welke interactie traag is, en vraag wat de code daar doet vóór het eerste nieuwe beeld.",
                        "bron":  {
                                     "titel":  "Optimize Interaction to Next Paint | web.dev",
                                     "url":  "https://web.dev/articles/optimize-inp"
@@ -3910,7 +3861,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-kannibalisatie-twee-blogs-samenvoegen",
@@ -3922,7 +3873,7 @@
                        "matrix":  [
                                       "1.2.3"
                                   ],
-                       "kernpunt":  "Beantwoorden twee pagina\u0027s dezelfde vraag en scoren ze allebei matig, voeg ze dan samen en stuur de oude URL door met een 301. noindex, een canonical of het zoekwoord weghalen lossen het niet goed op.",
+                       "kernpunt":  "Wisselen twee URL\u0027s elkaar af op hetzelfde zoekwoord, check dan eerst of ze dezelfde zoekintentie hebben voordat je iets samenvoegt.",
                        "bron":  {
                                     "titel":  "Keyword Cannibalization: What It (Really) Is \u0026 How to Fix It | Ahrefs",
                                     "url":  "https://ahrefs.com/blog/keyword-cannibalization/"
@@ -3930,7 +3881,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-meta-description-andere-snippet",
@@ -3942,7 +3893,7 @@
                        "matrix":  [
                                       "2.1.9"
                                   ],
-                       "kernpunt":  "Google maakt snippets vooral uit de pagina zelf en gebruikt de meta description alleen als die beter beschrijft. Schrijf hem uniek en specifiek, maar zie een andere snippet niet als fout.",
+                       "kernpunt":  "Slaat Google een description over, verbeter dan de tekst en niet de code: maak hem unieker en specifieker voor die ene pagina.",
                        "bron":  {
                                     "titel":  "Control your snippets in search results | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/snippet"
@@ -3950,7 +3901,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-orphan-pages-alleen-in-sitemap",
@@ -3963,7 +3914,7 @@
                                       "1.2.1",
                                       "1.2.6"
                                   ],
-                       "kernpunt":  "Een pagina die in de sitemap staat maar niet in een crawl, heeft meestal geen enkele interne link. Vergelijk de crawl met sitemap, GA en Search Console om ze te vinden, en link waardevolle pagina\u0027s weer aan.",
+                       "kernpunt":  "Vindt een crawl minder pagina\u0027s dan de sitemap, leg dan eerst beide lijsten naast elkaar en geef waardevolle ontbrekende pagina\u0027s weer een interne link.",
                        "bron":  {
                                     "titel":  "How To Find Orphan Pages | Screaming Frog",
                                     "url":  "https://www.screamingfrog.co.uk/seo-spider/tutorials/find-orphan-pages/"
@@ -3971,7 +3922,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-title-overal-dezelfde-makelaar",
@@ -3983,7 +3934,7 @@
                        "matrix":  [
                                       "2.1.8"
                                   ],
-                       "kernpunt":  "Geef elke pagina een eigen title die zegt wat erop staat, bij veel pagina\u0027s via een sjabloon uit de data. Een vaste tekenlimiet bestaat niet; Google kort zelf af.",
+                       "kernpunt":  "Hebben veel pagina\u0027s dezelfde title, los dan eerst het dubbele op met een sjabloon uit de data, en kijk pas daarna naar de lengte.",
                        "bron":  {
                                     "titel":  "Influencing your title links in search results | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/title-link"
@@ -3991,7 +3942,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    },
                    {
                        "id":  "20261106-zoeken-geen-resultaten-pagina",
@@ -4003,7 +3954,7 @@
                        "matrix":  [
                                       "7.1.1"
                                   ],
-                       "kernpunt":  "Een pagina \u0027Geen resultaten\u0027 mag nooit doodlopen. Toon passende categorieën, andere zoektermen en hulp, en los veelvoorkomende zoekopdrachten zonder resultaat op in de zoekfunctie zelf.",
+                       "kernpunt":  "Leveren veel zoekopdrachten niets op, los dan eerst de meest voorkomende op in de zoekfunctie zelf, met synoniemen en typfouten.",
                        "bron":  {
                                     "titel":  "Baymard Institute: Search UX: 5 Proven Strategies for Improving \u0027No Results\u0027 Pages",
                                     "url":  "https://baymard.com/research-articles/no-results-page"
@@ -4011,7 +3962,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "oudeUitleg":  true
+                       "herzien":  "2026-11-06"
                    }
                ]
 }

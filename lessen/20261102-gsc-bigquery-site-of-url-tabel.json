@@ -18,15 +18,27 @@
     ],
     "juist": 1
   },
-  "toelichting": "De export heeft twee tabellen met een andere telwijze:\n\n- **searchdata_site_impression** is samengevoegd per property, net als de grafiek in het Prestatierapport. Staan er twee URL's van de site in één zoekresultaat, dan is dat één vertoning.\n- **searchdata_url_impression** is samengevoegd per URL. Elke URL in dat resultaat telt dan apart mee.\n\nWil je totalen die aansluiten op de grafiek, gebruik dan de site-tabel. COUNT(DISTINCT url) telt URL's, geen vertoningen. Het rapport rondt niet af op duizendtallen. En geanonimiseerde zoekopdrachten zitten ook in de totalen van het rapport; in de export zijn ze gemarkeerd, niet weggelaten.",
-  "kort": "De export naar BigQuery (een database van Google) heeft twee tabellen die anders tellen. De ene telt per website: staan er twee pagina's van jou in één zoekresultaat, dan is dat één vertoning. De andere telt per pagina en telt die twee apart. Wil je totalen die kloppen met Search Console, neem dan de tabel per website.",
-  "uitleg": "De bulkexport van Search Console zet je prestatiedata dagelijks in BigQuery. Zo kom je voorbij de limiet van 1.000 rijen in de interface. Maar je moet weten wat je optelt.\n\n**Twee tabellen, twee telwijzen:**\n- **searchdata_site_impression**: per property. Gebruik hem voor totalen per dag, land, apparaat of zoekopdracht. Hij heeft sum_top_position: de hoogste positie van de site.\n- **searchdata_url_impression**: per URL. Gebruik hem als je per pagina wilt rapporteren. Hij heeft sum_position: de hoogste positie van die specifieke URL.\n\nHetzelfde verschil zie je in de interface: groepeer je op Pagina's, dan telt Search Console per pagina, en kloppen de totalen niet meer met de grafiek.\n\n**Altijd optellen:** de data staat er met herhaalde sleutels in, dus tel metrics altijd op met SUM en GROUP BY. Bereken de gemiddelde positie als de som van de posities gedeeld door de som van de vertoningen (plus 1), nooit als gewoon gemiddelde.\n\n**Geanonimiseerde zoekopdrachten** krijgen is_anonymized_query = true en hebben geen zoekopdracht. Haal je ze eruit, dan klopt je totaal juist niet meer met het rapport.",
-  "kernpunt": "Totalen haal je uit searchdata_site_impression (per property), cijfers per pagina uit searchdata_url_impression (per URL). Tel ze niet door elkaar op.",
+  "kern": "Je collega telt per pagina op, terwijl het Prestatierapport per website telt. Bij meerdere eigen pagina's in één zoekresultaat loopt dat uiteen.",
+  "afleiders": [
+    "**Dubbele rijen, dus COUNT(DISTINCT url):** er is geen fout in BigQuery. En COUNT(DISTINCT url) telt URL's, geen vertoningen.",
+    "",
+    "**Afronding in het rapport:** het Prestatierapport rondt niet af op duizendtallen. Het verschil komt door een andere telwijze, niet door precisie.",
+    "**Geanonimiseerde zoekopdrachten eruit:** die zitten ook in de totalen van het rapport. In de export zijn ze gemarkeerd, niet weggelaten. Haal je ze eruit, dan klopt je totaal juist niet meer."
+  ],
+  "kort": "Stel, een gezin van vier gaat naar de film. De bioscoop verkoopt vier kaartjes, maar er kwam één gezin op bezoek. Allebei klopt: ze tellen alleen iets anders. Zo werkt de export van Search Console ook: de ene tabel telt per website, de andere per pagina. Staan er twee pagina's van de shop in één zoekresultaat, dan telt de paginatabel die twee keer.",
+  "begrippen": [
+    { "term": "BigQuery", "uitleg": "een database van Google waarin je grote hoeveelheden data met SQL kunt bevragen." },
+    { "term": "Bulkexport", "uitleg": "de functie van Search Console die je prestatiedata elke dag automatisch naar BigQuery kopieert." },
+    { "term": "Vertoning", "uitleg": "een keer dat een URL van je site in de zoekresultaten verscheen." },
+    { "term": "SUM", "uitleg": "een SQL-functie die de waarden in een kolom optelt." }
+  ],
+  "uitleg": "De bulkexport zet je prestatiedata dagelijks in BigQuery. Zo kom je voorbij de limiet van 1.000 rijen in de interface. Maar je moet weten wat je optelt.\n\n**Twee tabellen, twee telwijzen:**\n- **searchdata_site_impression**: per property, net als de grafiek in het Prestatierapport. Gebruik hem voor totalen per dag, land, apparaat of zoekopdracht. Hij heeft sum_top_position: de hoogste positie van de site.\n- **searchdata_url_impression**: per URL. Gebruik hem als je per pagina wilt rapporteren. Hij heeft sum_position: de hoogste positie van die specifieke URL.\n\nHetzelfde verschil zie je in de interface: groepeer je op Pagina's, dan telt Search Console per pagina, en kloppen de totalen niet meer met de grafiek.\n\n**Altijd optellen:** de data staat er met herhaalde sleutels in, dus tel metrics altijd op met SUM en GROUP BY. Bereken de gemiddelde positie als de som van de posities gedeeld door de som van de vertoningen (plus 1), nooit als gewoon gemiddelde.\n\n**Geanonimiseerde zoekopdrachten** krijgen is_anonymized_query = true en hebben geen zoekopdracht.",
+  "kernpunt": "Wijkt een totaal uit BigQuery af van Search Console, kijk dan eerst uit welke tabel het komt: site-tabel voor totalen, URL-tabel per pagina.",
   "toepassing": "Controleer in het eerste BigQuery-rapport van een klant uit welke tabel de totalen komen, en vergelijk één dag met de grafiek in het Prestatierapport.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Table guidelines and reference - Search Console Help",
     "url": "https://support.google.com/webmasters/answer/12917991"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

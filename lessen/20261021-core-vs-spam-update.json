@@ -8,7 +8,6 @@
     "10.1.1"
   ],
   "titel": "Verkeer gekelderd na een spam update: wat zeg je tegen de klant?",
-  "volgorde": "opdracht-eerst",
   "intro": "Een klant kocht vorig jaar tientallen links op linkfarms. Tijdens een link spam update zakken de rankings flink. De klant vraagt: \"Als we die links nu disavowen, krijgen we onze posities dan terug?\"",
   "opdracht": {
     "soort": "meerkeuze",
@@ -21,11 +20,25 @@
     ],
     "juist": 1
   },
-  "toelichting": "Google schrijft dat de rankingvoordelen van spamlinks die door een link spam update zijn geneutraliseerd, niet terug te winnen zijn. Een heroverwegingsverzoek is alleen voor handmatige acties, niet voor algoritmische updates.",
-  "kort": "Nee, die posities komen niet terug. Google heeft de waarde van die gekochte links weggehaald, en die waarde krijg je niet terug door ze nu af te wijzen. Een verzoek om opnieuw te beoordelen helpt alleen als een medewerker van Google handmatig heeft ingegrepen. Herstel komt van nieuwe, eerlijk verdiende links, en dat kan maanden duren.",
-  "uitleg": "Google noemt twee soorten updates die je moet kunnen onderscheiden:\n\n**Core update**\n- Een brede wijziging in hoe Google relevantie en kwaliteit beoordeelt, **meerdere keren per jaar**.\n- Er is meestal niets 'kapot'. Andere pagina's worden simpelweg beter beoordeeld.\n- Advies: wacht minstens **een week na afronding** voor je analyseert, vermijd quick fixes en kijk kritisch of je content behulpzaam, betrouwbaar en people-first is.\n- Herstel kan dagen duren, maar ook maanden.\n\n**Spam update**\n- Een verbetering van de automatische spamdetectie (onder andere **SpamBrain**).\n- Raakt sites die het spambeleid overtreden, bijvoorbeeld met linkspam, scaled content abuse of cloaking.\n- Advies: zorg dat je aan het spambeleid voldoet. Systemen moeten dan **over een periode van maanden** leren dat je site in orde is.\n- Bij een **link spam update** is de waarde van de geneutraliseerde links definitief weg.\n\nDe eerste vraag bij een daling is dus: welk type update was het? Check dat in het Google Search Status Dashboard en leg de datums naast je verkeerscurve.",
-  "kernpunt": "Een core update herbeoordeelt kwaliteit (geen 'fout' om te herstellen); een spam update straft overtredingen. Waarde van spamlinks die door een link spam update is geneutraliseerd, komt nooit terug.",
+  "kern": "Google heeft die gekochte links al buiten spel gezet, dus afwijzen levert niets meer op en herstel moet uit nieuwe, eerlijke links komen.",
+  "afleiders": [
+    "**Disavow en wachten:** links afwijzen klinkt als het ongedaan maken van de fout. Maar de waarde die de update heeft geneutraliseerd, is niet terug te winnen.",
+    "",
+    "**Heroverwegingsverzoek:** dat lijkt de officiële weg terug. Maar zo'n verzoek is alleen voor handmatige acties, niet voor algoritmische updates.",
+    "**Alleen AI-content:** spam updates raken sites die het spambeleid overtreden, en linkspam hoort daarbij. Bij een link spam update zijn de links juist de oorzaak."
+  ],
+  "kort": "Vergelijk het met valse stempels op een spaarkaart. Ontdekt de winkel ze, dan worden ze doorgestreept. Zeggen dat je ze niet meer wilt, levert je die stempels niet terug. Je komt alleen verder met echte aankopen, en dat duurt even. Zo werkt het ook met gekochte links na een link spam update.",
+  "begrippen": [
+    { "term": "Link spam update", "uitleg": "een update waarmee Google spamlinks automatisch herkent en hun waarde neutraliseert." },
+    { "term": "Linkfarm", "uitleg": "een netwerk van sites dat vooral bestaat om links te verkopen of uit te wisselen." },
+    { "term": "Disavow", "uitleg": "Google via Search Console vragen bepaalde links naar je site niet mee te tellen." },
+    { "term": "Handmatige actie", "uitleg": "een straf die een medewerker van Google oplegt, met een melding in Search Console." }
+  ],
+  "uitleg": "Google noemt twee soorten updates die je moet kunnen onderscheiden.\n\n**Core update**\n- Een brede wijziging in hoe Google relevantie en kwaliteit beoordeelt, **meerdere keren per jaar**.\n- Er is meestal niets 'kapot'. Andere pagina's worden simpelweg beter beoordeeld.\n- Advies: wacht minstens **een week na afronding** voor je analyseert, vermijd quick fixes en kijk kritisch of je content behulpzaam, betrouwbaar en people-first is.\n- Herstel kan dagen duren, maar ook maanden.\n\n**Spam update**\n- Een verbetering van de automatische spamdetectie (onder andere **SpamBrain**).\n- Raakt sites die het spambeleid overtreden, bijvoorbeeld met linkspam, scaled content abuse of cloaking.\n- Advies: zorg dat je aan het spambeleid voldoet. Systemen moeten dan **over een periode van maanden** leren dat je site in orde is.\n\nIn het Google Search Status Dashboard zie je welke update wanneer liep.",
+  "kernpunt": "Daalt het verkeer, zoek dan eerst uit of het een core of een spam update was, want de aanpak verschilt.",
   "toepassing": "Zet bij een klant de datums van de laatste core- en spamupdates uit het Google Search Status Dashboard als annotaties in je rapportage, zodat je bij een daling direct ziet welk type update erbij hoort.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Google Search spam updates and your site | Google Search Central",
     "url": "https://developers.google.com/search/docs/appearance/spam-updates"
@@ -34,7 +47,5 @@
     "titel": "Recover From ANY Google Algorithm Update",
     "kanaal": "Rank Math SEO",
     "url": "https://www.youtube.com/watch?v=Qcd_2W5na60"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

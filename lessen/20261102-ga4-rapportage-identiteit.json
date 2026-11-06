@@ -18,11 +18,24 @@
     ],
     "juist": 2
   },
-  "toelichting": "**Device-based** negeert alle andere ID's en telt alleen per apparaat. De User-ID wordt wel verzameld, maar niet gebruikt in de rapporten. Met **Blended** of **Observed** gebruikt GA4 eerst de User-ID.\n\n- Er bestaat geen wachttijd van 90 dagen.\n- Een e-mailadres mag je nooit als User-ID gebruiken: dat is persoonsinformatie.\n- De rapportage-identiteit verandert niets aan het verzamelen of verwerken van data. Je kunt hem op elk moment wisselen, zonder blijvend effect.",
-  "kort": "Een User-ID is een vaste code waarmee je iemand herkent die inlogt, ook op een ander apparaat. GA4 staat nu op Device-based: dan telt het alleen per apparaat en laat het die code links liggen. Zet de rapportage-identiteit op Blended of Observed, dan gebruikt GA4 de User-ID wel. De verzamelde data veranderen daar niet door.",
-  "uitleg": "GA4 kan een gebruiker op drie manieren herkennen. Met de **rapportage-identiteit** (Beheer > Gegevensweergave > Rapportage-identiteit) kies je welke manieren de rapporten gebruiken:\n\n- **Blended:** eerst de User-ID, dan het device ID, en daarna vult GA4 gaten aan met modellering.\n- **Observed:** eerst de User-ID, dan het device ID, zonder modellering.\n- **Device-based:** alleen het device ID. Alle andere ID's worden genegeerd.\n\nHet **device ID** komt op een website uit de cookie van één browser. Dezelfde klant op telefoon en laptop telt dan als twee gebruikers. De **User-ID** is je eigen klant-ID na het inloggen, en maakt cross-device meten mogelijk, maar alleen als de rapportage-identiteit hem ook gebruikt.\n\nGoed om te weten:\n- De keuze verandert niets aan het verzamelen of verwerken van data. Je kunt hem dus veilig wisselen en vergelijken.\n- Ook met Blended of Observed telt een klant alleen als één gebruiker wanneer hij op elk apparaat is ingelogd. Bezoekers die nooit inloggen, blijven per apparaat geteld.\n- Verwacht na de overstap minder gebruikers. Leg dat vooraf uit aan de klant, zodat een daling in het dashboard geen paniek geeft.",
-  "kernpunt": "Een User-ID helpt alleen als de rapportage-identiteit hem gebruikt: kies Blended of Observed, niet Device-based. De keuze verandert de verzamelde data niet.",
-  "toepassing": "Kijk deze week bij een klant met een inlogfunctie welke rapportage-identiteit aanstaat, en of er in DebugView na het inloggen een user_id binnenkomt.",
+  "kern": "De User-ID komt wel binnen, maar de huidige instelling laat hem links liggen. Het is een rapportagekeuze, geen meetfout.",
+  "afleiders": [
+    "**Wachten op 90 dagen:** zo'n wachttijd bestaat niet. Met deze instelling verandert er ook over twee maanden niets.",
+    "**E-mailadres als User-ID:** dat lijkt handig om te koppelen, maar een e-mailadres is persoonsinformatie. Dat mag je nooit als User-ID gebruiken.",
+    "",
+    "**Niet terug te draaien:** wisselen naar Blended is een goed idee, maar de rapportage-identiteit verandert niets aan het verzamelen of verwerken van data. Je kunt hem op elk moment terugzetten."
+  ],
+  "kort": "Stel, een sportschool telt bezoekers aan de hand van de pasjes bij de ingang. Iemand met een pasje voor de voordeur en een voor de zijdeur telt dan als twee leden. Weet de sportschool welk lidnummer bij beide pasjes hoort, dan wordt het één lid. Maar alleen als de telling dat nummer ook gebruikt. Zo werkt het in GA4: de User-ID is dat lidnummer, en Device-based telt alleen de pasjes.",
+  "begrippen": [
+    { "term": "User-ID", "uitleg": "een vaste code uit je eigen systeem waarmee je een klant na het inloggen herkent, ook op een ander apparaat." },
+    { "term": "Device ID", "uitleg": "de ID van één browser of app; op een website komt die uit een cookie." },
+    { "term": "Blended en Observed", "uitleg": "instellingen die eerst de User-ID gebruiken en daarna het device ID. Blended vult gaten daarnaast aan met modellering." }
+  ],
+  "uitleg": "GA4 kan een gebruiker op drie manieren herkennen. Met de **rapportage-identiteit** (Beheer > Gegevensweergave > Rapportage-identiteit) kies je welke manieren de rapporten gebruiken:\n\n- **Blended:** eerst de User-ID, dan het device ID, en daarna vult GA4 gaten aan met modellering.\n- **Observed:** eerst de User-ID, dan het device ID, zonder modellering.\n- **Device-based:** alleen het device ID. Alle andere ID's worden genegeerd.\n\nHet **device ID** komt op een website uit de cookie van één browser. Dezelfde klant op telefoon en laptop telt dan als twee gebruikers. De User-ID maakt cross-device meten mogelijk.\n\nGoed om te weten:\n- Omdat de keuze de verzamelde data niet verandert, kun je veilig wisselen en vergelijken.\n- Ook met Blended of Observed telt een klant alleen als één gebruiker wanneer hij op elk apparaat is ingelogd. Bezoekers die nooit inloggen, blijven per apparaat geteld.\n- Verwacht na de overstap minder gebruikers. Leg dat vooraf uit aan de klant, zodat een daling in het dashboard geen paniek geeft.",
+  "kernpunt": "Voert een klant een User-ID in, controleer dan meteen of de rapportage-identiteit hem ook gebruikt, en waarschuw dat het aantal gebruikers kan dalen.",
+  "toepassing": "Kijk vandaag bij een klant met een inlogfunctie welke rapportage-identiteit aanstaat, en of er in DebugView na het inloggen een user_id binnenkomt.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Reporting identity - Analytics Help",
     "url": "https://support.google.com/analytics/answer/10976610"

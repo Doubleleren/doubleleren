@@ -4,10 +4,7 @@
   "niveau": "basis",
   "vakgebied": "Analytics",
   "onderwerp": "GA4: ongewenste verwijzingen (betaalprovider als bron)",
-  "matrix": [
-    "3.1.2",
-    "3.1.4"
-  ],
+  "matrix": ["3.1.2", "3.1.4"],
   "titel": "De betaalprovider is opeens je beste verkoopkanaal in GA4",
   "intro": "Een webshop is overgestapt naar een nieuwe betaalprovider. Klanten rekenen af op de betaalpagina van die provider en komen daarna terug op de bedankpagina van de shop. Sinds de overstap staat in GA4 bij de aankopen 'checkout.betaalprovider.nl / referral' bovenaan. Organic en Paid lijken samen 40% minder aankopen op te leveren.",
   "opdracht": {
@@ -21,15 +18,27 @@
     ],
     "juist": 3
   },
-  "toelichting": "Komt een klant terug van de betaalpagina, dan ziet GA4 een nieuwe verwijzing en start het een sessie met de betaalprovider als bron. De aankoop valt dan in die sessie. Met de lijst **ongewenste verwijzingen** zegt GA4 voortaan: negeer dit domein als bron.\n\n- **Filter voor intern verkeer:** dat werkt op IP-adressen van je eigen team, niet op een verwijzend domein. En je wilt deze sessies niet weggooien: er zitten aankopen in.\n- **Ander attributiemodel:** dat verdeelt het krediet anders over de contactmomenten, maar de betaalprovider blijft als contactmoment in de data staan.\n- **Filteren in rapporten:** dan verdwijnen juist de aankopen uit je rapport, want die hangen aan de sessie met de betaalprovider. Oude data verander je er ook niet mee.",
-  "kort": "Komt een klant terug van de betaalpagina, dan denkt GA4 dat hij via de betaalprovider binnenkwam en krijgt die de aankoop. Zet het domein van de betaalprovider daarom op de lijst met ongewenste verwijzingen in de instellingen van je datastream. Dan negeert GA4 dat domein als bron en gaat de aankoop naar het echte kanaal. Oude cijfers veranderen niet.",
-  "uitleg": "Een **verwijzing** (referral) is verkeer van een andere website. Meestal is dat precies wat je wilt meten. Maar soms gaat een bezoeker even naar een ander domein als onderdeel van jouw eigen proces, en komt dan terug. Voorbeelden uit de GA4-help:\n- een externe betaalprovider in de checkout;\n- een mail om je wachtwoord te herstellen.\n\nZonder instelling ziet GA4 de terugkeer als nieuwe verwijzing. De aankoop of het formulier wordt dan toegeschreven aan de betaalprovider of de mailprovider, en je echte kanalen lijken slechter te presteren.\n\n**Zo stel je het in:** Beheer → Gegevensstreams → kies de webstream → Taginstellingen configureren → Alles weergeven → Ongewenste verwijzingen weergeven (in het Engels: Configure tag settings → List unwanted referrals). Je hebt minimaal de rol Bewerker nodig en kunt tot 50 domeinen per stream toevoegen. GA4 geeft zulke events dan de parameter ignore_referrer=true mee.\n\nTwee dingen om te onthouden:\n- De instelling werkt vanaf het moment dat je hem aanzet. Oude data veranderen niet; noteer de datum voor je rapportages.\n- Controleer na elke wissel van betaalprovider of boekingssysteem of het nieuwe domein op de lijst staat.",
-  "kernpunt": "Komen klanten via een betaalprovider of ander extern domein terug op je site, zet dat domein dan op de lijst met ongewenste verwijzingen. Anders krijgt dat domein het krediet voor je aankopen.",
+  "kern": "Zeg GA4 dat de terugkeer van de betaalpagina geen nieuwe bron is. Dan blijft de aankoop bij het kanaal waar de klant echt vandaan kwam.",
+  "afleiders": [
+    "**Filter voor intern verkeer:** dat klinkt als ruis wegfilteren, maar het werkt op IP-adressen van je eigen team, niet op een verwijzend domein. En je wilt deze sessies niet kwijt: er zitten aankopen in.",
+    "**Ander attributiemodel:** dat verdeelt het krediet anders over de contactmomenten. De betaalprovider blijft dan gewoon als contactmoment in de data staan.",
+    "**Filteren in rapporten:** dan verdwijnen juist de aankopen, want die hangen aan de sessie met de betaalprovider. Oude data verander je er ook niet mee.",
+    ""
+  ],
+  "kort": "Stel, een portier telt bij de deur waar klanten vandaan komen. Een klant komt binnen via de etalage, loopt even naar de pinautomaat buiten en komt terug. Telt de portier alleen die laatste keer, dan lijkt het alsof de pinautomaat klanten aanbrengt. Zo gaat het ook in GA4. De klant komt terug van de betaalpagina, en GA4 ziet dat als een nieuw bezoek vanaf die site. De lijst met ongewenste verwijzingen zegt GA4 dat deze terugkeer niet meetelt als bron.",
+  "begrippen": [
+    { "term": "Verwijzing (referral)", "uitleg": "verkeer dat via een link op een andere website binnenkomt." },
+    { "term": "Ongewenste verwijzingen", "uitleg": "een lijst in GA4 met domeinen die GA4 niet als bron van een bezoek mag zien." },
+    { "term": "Sessie", "uitleg": "één bezoek aan je site, met alles wat iemand in die tijd doet." },
+    { "term": "Attributiemodel", "uitleg": "de regel die bepaalt welk kanaal het krediet voor een aankoop krijgt." }
+  ],
+  "uitleg": "Dit speelt overal waar een bezoeker voor jouw eigen proces even naar een ander domein gaat en daarna terugkomt. Voorbeelden uit de GA4-help:\n- een externe betaalprovider in de checkout;\n- een mail om je wachtwoord te herstellen.\n\nZonder instelling krijgt dat andere domein de aankoop of het formulier, en lijken je echte kanalen slechter te presteren.\n\n**Zo stel je het in:** Beheer → Gegevensstreams → kies de webstream → Taginstellingen configureren → Alles weergeven → Ongewenste verwijzingen weergeven (in het Engels: Configure tag settings → List unwanted referrals). Je hebt minimaal de rol Bewerker nodig en kunt tot 50 domeinen per stream toevoegen. GA4 geeft zulke events dan de parameter ignore_referrer=true mee.\n\nTwee dingen om te onthouden:\n- De instelling werkt vanaf het moment dat je hem aanzet. Oude data veranderen niet; noteer de datum voor je rapportages.\n- Controleer na elke wissel van betaalprovider of boekingssysteem of het nieuwe domein op de lijst staat.",
+  "kernpunt": "Wisselt een klant van betaalprovider of boekingssysteem, zet dan meteen het nieuwe domein op de lijst met ongewenste verwijzingen.",
   "toepassing": "Open bij één webshopklant het rapport Verkeersacquisitie met als dimensie Sessiebron/-medium en key events. Staat er een betaalprovider of iDEAL-domein tussen? Zet het dan op de lijst en noteer de datum.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Identify unwanted referrals - Analytics Help",
     "url": "https://support.google.com/analytics/answer/10327750"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

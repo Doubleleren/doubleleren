@@ -4,9 +4,7 @@
   "niveau": "basis",
   "vakgebied": "SEO",
   "onderwerp": "Statuscodes: 404, 410, soft 404 en redirects bij verdwenen pagina's",
-  "matrix": [
-    "5.1.2"
-  ],
+  "matrix": ["5.1.2"],
   "titel": "1.400 producten uit het assortiment: wat doe je met de oude URL's?",
   "intro": "Een webshop in fietsonderdelen haalt 1.400 producten definitief uit het assortiment. Voor ongeveer 300 ervan is er een directe opvolger, zoals een nieuwer model van hetzelfde onderdeel. Voor de rest is er niets vergelijkbaars. De developer vraagt wat er met de oude URL's moet gebeuren.",
   "opdracht": {
@@ -20,11 +18,24 @@
     ],
     "juist": 1
   },
-  "toelichting": "Een redirect is bedoeld voor een pagina die een duidelijke vervanger heeft. Voor de 300 producten met een opvolger is een 301 dus de juiste keuze. Voor de rest zegt Google: geef een 404 of 410, zodat duidelijk is dat de pagina niet meer bestaat.\n\n- **Alles naar de homepage:** de homepage is geen vervanger van een losse remschijf. De bezoeker vindt niet wat hij zocht, en zo'n redirect voegt voor Google niets toe.\n- **410 in plaats van 404:** Google behandelt alle 4xx-codes (behalve 429) hetzelfde. Beide halen de URL uit de index; een 410 gaat voor Google niet merkbaar sneller.\n- **Status 200 met een foutmelding:** dat is precies een *soft 404*. De server zegt 'alles goed', de pagina zegt 'bestaat niet'. Search Console meldt dat als fout, en Google neemt zulke pagina's niet op.",
-  "kort": "Heeft een product een duidelijke opvolger, stuur de oude pagina dan permanent door naar die opvolger. Voor de rest geef je een 404 of 410, de code voor 'pagina bestaat niet', met een nuttige foutpagina. Stuur niet alles naar de homepage, want daar vindt niemand de remschijf die hij zocht. En laat de server echt zeggen dat de pagina weg is.",
-  "uitleg": "Pagina's verdwijnen op elke site, en dat is geen SEO-probleem. Een 404 is een normaal onderdeel van het web: Google haalt zo'n URL na verloop van tijd uit de index en crawlt hem steeds minder vaak. 4xx-codes hebben geen invloed op hoe snel Google de rest van je site crawlt.\n\nKies per URL wat bij de situatie past:\n- **Duidelijke vervanger?** Een **301** naar die pagina. Google ziet een 301 als sterk signaal om het doel te gebruiken; een 302 of 307 is een zwak signaal.\n- **Geen vervanger?** Een **404** of **410**. Voor Google maakt het verschil niet uit.\n- **Nooit:** een foutmelding met status 200 (soft 404), of alles naar de homepage sturen.\n\nMaak de 404-pagina wel nuttig voor bezoekers. Google raadt aan om duidelijk te zeggen dat de pagina niet bestaat, dezelfde opmaak en navigatie als de rest van de site te houden, en te linken naar populaire categorieën of de homepage. Belangrijk: de server moet bij die mooie foutpagina nog steeds een echte 404 teruggeven.\n\nOf je een verdwenen pagina met links of verkeer wilt 'redden', is dus een zakelijke keuze, geen verplichting.",
-  "kernpunt": "Een 301 alleen als er een duidelijke vervanger is, anders een 404 of 410 (voor Google gelijk). Nooit een foutmelding met status 200 en nooit alles naar de homepage.",
-  "toepassing": "Kijk deze week bij één webshopklant in het rapport Pagina-indexering naar 'Soft 404'. Staan daar uitverkochte of verwijderde producten? Bespreek dan met de developer welke een opvolger hebben en welke een echte 404 moeten geven.",
+  "kern": "Stuur alleen door als er echt een vervanger is. Een product zonder opvolger mag gewoon verdwijnen, met een eerlijke foutcode en een nuttige foutpagina.",
+  "afleiders": [
+    "**Alles naar de homepage:** het lijkt linkwaarde te redden, maar de homepage is geen vervanger van een losse remschijf. De bezoeker vindt niet wat hij zocht, en voor Google voegt zo'n redirect niets toe.",
+    "",
+    "**Alles een 410:** dat klinkt definitiever, maar Google behandelt alle 4xx-codes (behalve 429) hetzelfde. Een 404 en een 410 halen de URL allebei uit de index; een 410 gaat niet merkbaar sneller.",
+    "**Status 200 met een melding:** de server zegt 'alles goed' en de pagina zegt 'bestaat niet'. Dat is een soft 404: Search Console meldt het als fout en Google neemt zulke pagina's niet op."
+  ],
+  "kort": "Denk aan een winkel die een product niet meer verkoopt. Hangt er een briefje 'het nieuwe model ligt in het rek hiernaast', dan loop je graag mee. Heeft de winkel niets vergelijkbaars, dan wil je eerlijk horen dat het op is, niet naar de ingang gestuurd worden. Een doorverwijzing helpt dus alleen als er echt een opvolger is. Voor de rest moet de server ronduit zeggen dat de pagina weg is.",
+  "begrippen": [
+    { "term": "Statuscode", "uitleg": "een getal dat de server bij elke pagina meestuurt, zoals 200 voor 'gelukt' en 404 voor 'niet gevonden'." },
+    { "term": "301", "uitleg": "een permanente doorverwijzing van een oude naar een nieuwe URL." },
+    { "term": "Soft 404", "uitleg": "een pagina die 'bestaat niet' toont, terwijl de server zegt dat alles goed is (status 200)." }
+  ],
+  "uitleg": "Pagina's verdwijnen op elke site, en dat is geen SEO-probleem. Een 404 is een normaal onderdeel van het web: Google haalt zo'n URL na verloop van tijd uit de index en crawlt hem steeds minder vaak. 4xx-codes hebben geen invloed op hoe snel Google de rest van je site crawlt.\n\n**Welke redirect?** Google ziet een 301 als sterk signaal om het doel te gebruiken; een 302 of 307 is een zwak signaal. Voor een product met een duidelijke opvolger kies je dus een 301.\n\n**Maak de 404-pagina nuttig.** Google raadt aan om:\n- duidelijk te zeggen dat de pagina niet bestaat;\n- dezelfde opmaak en navigatie te houden als de rest van de site;\n- te linken naar populaire categorieën of de homepage.\n\nBelangrijk: de server moet bij die mooie foutpagina nog steeds een echte 404 teruggeven.\n\nOf je een verdwenen pagina met links of verkeer wilt 'redden', is dus een zakelijke keuze, geen verplichting.",
+  "kernpunt": "Haal je producten weg, kijk dan per URL of de bezoeker op de nieuwe pagina vindt wat hij zocht. Zo niet, geef dan een echte 404 of 410.",
+  "toepassing": "Open vandaag bij één webshopklant het rapport Pagina-indexering en kijk naar 'Soft 404'. Staan daar uitverkochte of verwijderde producten? Noteer er drie en vraag de developer welke een opvolger hebben.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Troubleshoot Google Search crawling errors | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors"

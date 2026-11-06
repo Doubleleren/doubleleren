@@ -18,15 +18,27 @@
     ],
     "juist": 3
   },
-  "toelichting": "Een tv-campagne laat vooral **zoekopdrachten op de merknaam** stijgen. Die klikken komen door de campagne, niet door SEO. Met het **filter voor branded zoekopdrachten** in het Prestatierapport splits je klikken, vertoningen, CTR en positie in branded en non-branded. Non-branded laat zien hoe nieuwe bezoekers je vinden zonder dat ze al naar jou zochten: dat is waar SEO-werk het meest zichtbaar wordt.\n\n- **Het filter beïnvloedt rankings niet:** volgens Google is het alleen voor analyse.\n- **De gemiddelde positie beweegt juist wél mee:** merkzoekopdrachten staan meestal bovenaan. Komen er veel bij, dan verbetert het gemiddelde zonder dat er iets aan de site veranderde.\n- **Branded klikken** zeggen vooral iets over merkbekendheid, en die komt hier door tv.",
-  "kort": "Door de tv-campagne zoeken meer mensen op de merknaam, en die klikken komen niet door SEO. Splits in Search Console daarom zoekopdrachten met en zonder merknaam; daar is een speciaal filter voor. Gebruik de klikken zonder merknaam als hoofdcijfer, want die laten zien hoe nieuwe mensen je vinden. Zet de klikken op de merknaam er apart naast.",
-  "uitleg": "Sinds november 2025 heeft Search Console een **filter voor branded zoekopdrachten** in het Prestatierapport (zoekresultaten). Je kiest Branded of Non-branded, en alle cijfers gelden dan alleen voor die groep. In het Insights-rapport staat ook een kaart met de verdeling van klikken.\n\nWat telt als branded:\n- je merknaam, ook in andere talen en met typfouten\n- producten of diensten die bij je merk horen, ook zonder de merknaam (Google noemt Gmail bij google.com)\n\nGoed om te weten:\n- De indeling komt uit een **AI-ondersteund systeem van Google**, niet uit een reguliere expressie. Een enkele zoekopdracht kan verkeerd zijn ingedeeld.\n- Het filter is er alleen voor properties op het **hoogste niveau** (niet voor een pad of subdomein) met **genoeg zoekopdrachten en vertoningen**.\n- Het heeft geen invloed op rankings.\n\nWaarom dit voor rapportage zo belangrijk is: branded zoekopdrachten scoren bijna altijd hoge posities en een hoge CTR. Stijgt het merkverkeer door een campagne, PR of seizoen, dan kleuren totale klikken, CTR en gemiddelde positie mee. Zet dus non-branded als hoofdcijfer voor SEO-groei, en toon branded ernaast als context. Heeft een property het filter niet, dan kun je met een eigen reguliere expressie in 'Zoekopdracht filteren' een benadering maken.",
-  "kernpunt": "Rapporteer het effect van SEO op non-branded zoekverkeer, met branded apart ernaast. Merkzoekopdrachten door campagnes of PR kleuren anders je totale klikken, CTR en gemiddelde positie.",
-  "toepassing": "Open deze week voor een klant het Prestatierapport, kies Non-branded en vergelijk de groei met die van het totaal. Zet beide cijfers in het volgende rapport, met een zin uitleg.",
+  "kern": "De tv-campagne laat vooral zoekopdrachten op de merknaam stijgen. Wat SEO doet, zie je bij mensen die nog niet naar jou zochten.",
+  "afleiders": [
+    "**Totaal aan klikken:** de reden klopt niet. Het filter is volgens Google alleen voor analyse en raakt je rankings niet. En het totaal bevat juist het extra merkverkeer door tv.",
+    "**Gemiddelde positie:** die lijkt los te staan van het aantal zoekers. Maar merkzoekopdrachten staan meestal bovenaan. Komen er veel bij, dan verbetert het gemiddelde zonder dat er iets aan de site veranderde.",
+    "**Branded klikken:** een sterker merk in Google klinkt als SEO-succes. Maar branded klikken zeggen vooral iets over merkbekendheid, en die komt hier door de tv-campagne.",
+    ""
+  ],
+  "kort": "Stel dat een bakker op tv komt en daarna een drukke week heeft. Dan weet hij nog niet of zijn nieuwe etalage werkt, want de extra klanten kwamen voor zijn naam. Pas als hij telt hoeveel voorbijgangers zomaar binnenlopen, ziet hij wat de etalage doet. Zo werkt het ook met zoekverkeer. Wie op de merknaam zoekt, kende je al, en wie zonder merknaam zoekt en jou vindt, laat het effect van SEO zien.",
+  "begrippen": [
+    { "term": "Branded", "uitleg": "zoekopdrachten met je merknaam erin, of met producten die duidelijk bij je merk horen." },
+    { "term": "Non-branded", "uitleg": "zoekopdrachten zonder merknaam, van mensen die nog niet specifiek naar jou zochten." },
+    { "term": "Gemiddelde positie", "uitleg": "de gemiddelde plek van je pagina's in de zoekresultaten, over alle zoekopdrachten heen." },
+    { "term": "Domeinproperty", "uitleg": "een Search Console-property voor je hele domein, met alle subdomeinen en zowel http als https." }
+  ],
+  "uitleg": "Sinds november 2025 heeft Search Console een **filter voor branded zoekopdrachten** in het Prestatierapport (zoekresultaten). Je kiest Branded of Non-branded, en alle cijfers gelden dan alleen voor die groep: klikken, vertoningen, CTR en positie. In het Insights-rapport staat ook een kaart met de verdeling van klikken.\n\nWat telt als branded:\n- je merknaam, ook in andere talen en met typfouten\n- producten of diensten die bij je merk horen, ook zonder de merknaam (Google noemt Gmail bij google.com)\n\nGoed om te weten:\n- De indeling komt uit een **AI-ondersteund systeem van Google**, niet uit een reguliere expressie. Een enkele zoekopdracht kan verkeerd zijn ingedeeld.\n- Het filter is er alleen voor properties op het **hoogste niveau** (niet voor een pad of subdomein) met **genoeg zoekopdrachten en vertoningen**.\n\nBranded zoekopdrachten scoren bijna altijd hoge posities en een hoge CTR. Stijgt het merkverkeer door een campagne, PR of seizoen, dan kleuren totale klikken, CTR en gemiddelde positie mee. Heeft een property het filter niet, dan kun je met een eigen reguliere expressie in 'Zoekopdracht filteren' een benadering maken.",
+  "kernpunt": "Loopt er een campagne, PR-actie of seizoenspiek, rapporteer SEO-groei dan op non-branded en zet branded ernaast als context.",
+  "toepassing": "Open vandaag voor een klant het Prestatierapport, kies Non-branded en vergelijk de groei met die van het totaal.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Introducing the branded queries filter in Search Console | Google Search Central Blog",
     "url": "https://developers.google.com/search/blog/2025/11/search-console-branded-filter"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

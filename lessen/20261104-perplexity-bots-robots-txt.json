@@ -4,7 +4,10 @@
   "niveau": "gevorderd",
   "vakgebied": "SEO / AI-search",
   "onderwerp": "Perplexity-crawlers: PerplexityBot en Perplexity-User",
-  "matrix": ["12.1.3", "12.1.6"],
+  "matrix": [
+    "12.1.3",
+    "12.1.6"
+  ],
   "titel": "PerplexityBot geblokkeerd, toch Perplexity in de logs",
   "intro": "Een klant wil als bron in Perplexity verschijnen, maar wil niet dat Perplexity 'zomaar alles leest'. De developer heeft daarom in robots.txt gezet: User-agent: PerplexityBot met Disallow: /. Een week later zie je in de serverlogs nog steeds verzoeken van Perplexity-User. De klant vraagt of Perplexity zich niet aan de regels houdt.",
   "opdracht": {
@@ -18,11 +21,24 @@
     ],
     "juist": 2
   },
-  "toelichting": "Perplexity heeft twee soorten bezoekers:\n- **PerplexityBot** zoekt en linkt websites in de zoekresultaten van Perplexity. Perplexity raadt aan hem toe te laten.\n- **Perplexity-User** haalt een pagina op als een gebruiker een vraag stelt. Omdat een gebruiker erom vroeg, **negeert hij robots.txt meestal**.\n\nDoor PerplexityBot te blokkeren maakt de klant het Perplexity juist moeilijker om de site als bron te vinden. Dat is het tegendeel van wat hij wil.\n\n- **Training:** volgens Perplexity worden geen van beide gebruikt om AI-modellen te trainen.\n- **Nepbot:** dat kan, maar controleer het eerst met de IP-lijsten die Perplexity publiceert.\n- **Dertig dagen:** er is geen wachttijd die de blokkade ongedaan maakt.",
-  "kort": "Perplexity heeft twee bezoekers. De ene doorzoekt het web om sites in de resultaten te tonen, de andere haalt een pagina op als iemand er een vraag over stelt. Die tweede volgt robots.txt meestal niet, want een mens vroeg erom. Door de eerste te blokkeren wordt de klant juist minder snel als bron gevonden.",
-  "uitleg": "AI-zoekmachines gebruiken vaak meerdere bots met elk een eigen taak. Bij Perplexity:\n- **PerplexityBot:** om websites te tonen en te linken in de zoekresultaten. Volgens Perplexity niet voor het trainen van AI-modellen.\n- **Perplexity-User:** voor acties van gebruikers. Hij bezoekt een pagina om een vraag te beantwoorden en kan ernaar linken. Ook niet voor training.\n\nWat betekent dat voor je advies?\n- Wil een klant **als bron verschijnen**, laat PerplexityBot dan toe.\n- Wil een klant inhoud **echt afschermen**, dan helpt robots.txt niet tegen Perplexity-User. Dan heb je een login of een firewallregel nodig. Maar dan verdwijn je ook als bron.\n- Twijfel je of een bezoek echt van Perplexity komt, vergelijk dan het IP-adres met de lijsten die Perplexity publiceert. Kijk naar user-agent én IP.\n\nControleer bij elke AI-zoekmachine in de documentatie welke bot wat doet.",
-  "kernpunt": "PerplexityBot zorgt dat je in Perplexity gevonden wordt; Perplexity-User haalt pagina's op voor vragen van gebruikers en negeert robots.txt meestal. Wie PerplexityBot blokkeert, wordt minder vaak als bron gevonden.",
-  "toepassing": "Kijk deze week in de robots.txt van een klant welke AI-bots geblokkeerd zijn, en check per bot in de documentatie of dat de klant zichtbaarheid in AI-zoekmachines kost.",
+  "kern": "Perplexity-User komt langs omdat een mens iets vroeg. De geblokkeerde PerplexityBot was juist de bot die de klant als bron laat vinden.",
+  "afleiders": [
+    "**Trainingscrawler:** het lijkt logisch dat er een aparte bot voor training is. Maar volgens Perplexity wordt geen van beide gebruikt om AI-modellen te trainen.",
+    "**Nepbot:** dat kan, en alert zijn is goed. Maar controleer het eerst met de IP-lijsten die Perplexity publiceert. En de blokkade van PerplexityBot kost hoe dan ook zichtbaarheid.",
+    "",
+    "**Dertig dagen wachten:** het klinkt alsof robots.txt tijd nodig heeft. Maar er is geen wachttijd die de blokkade ongedaan maakt, en Perplexity-User volgt robots.txt meestal niet."
+  ],
+  "kort": "Denk aan een reisgids en een koerier. De schrijver van de gids bezoekt je zaak om je erin op te nemen. De koerier komt iets ophalen omdat een klant erom vroeg. Weiger je de gidsschrijver, dan sta je niet in de gids, terwijl de koerier gewoon blijft komen. Zo werken de twee bots van Perplexity ook, en daarom kost deze blokkade de klant juist zichtbaarheid.",
+  "begrippen": [
+    { "term": "robots.txt", "uitleg": "een tekstbestand op je site waarin je bots vertelt welke delen ze niet mogen bezoeken." },
+    { "term": "User-agent", "uitleg": "de naam waarmee een bot zich bij je server meldt, zoals PerplexityBot." },
+    { "term": "Serverlogs", "uitleg": "de lijst waarin je server elk bezoek bijhoudt, ook dat van bots." }
+  ],
+  "uitleg": "AI-zoekmachines gebruiken vaak meerdere bots met elk een eigen taak. Bij Perplexity:\n- **PerplexityBot:** om websites te tonen en te linken in de zoekresultaten. Perplexity raadt aan hem toe te laten.\n- **Perplexity-User:** voor acties van gebruikers. Hij bezoekt een pagina om een vraag te beantwoorden en kan ernaar linken. Omdat een gebruiker erom vroeg, negeert hij robots.txt meestal.\n\nWat betekent dat voor je advies?\n- Wil een klant **als bron verschijnen**, laat PerplexityBot dan toe.\n- Wil een klant inhoud **echt afschermen**, dan helpt robots.txt niet tegen Perplexity-User. Dan heb je een login of een firewallregel nodig. Maar dan verdwijn je ook als bron.\n- Twijfel je of een bezoek echt van Perplexity komt, vergelijk dan het IP-adres met de lijsten die Perplexity publiceert. Kijk naar user-agent én IP.\n\nControleer bij elke AI-zoekmachine in de documentatie welke bot wat doet.",
+  "kernpunt": "Wil een klant als bron in een AI-zoekmachine verschijnen, blokkeer dan nooit de bot die de zoekresultaten vult.",
+  "toepassing": "Kijk vandaag in de robots.txt van één klant welke AI-bots geblokkeerd zijn. Check per bot in de documentatie of dat de klant zichtbaarheid kost.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Perplexity Crawlers - Perplexity Docs",
     "url": "https://docs.perplexity.ai/guides/bots"

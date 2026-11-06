@@ -21,15 +21,27 @@
     ],
     "juist": 2
   },
-  "toelichting": "Producten zitten zo diep omdat de enige weg erheen een lange rij 'Volgende'-links is. Een plattere structuur met subcategorieën en een paginering die meerdere pagina's tegelijk aanbiedt, haalt ze dichter naar de homepage. Link daarnaast belangrijke categorieën vanuit het menu en de homepage. Google leidt het relatieve belang van een pagina mede af uit hoeveel links het moet volgen om er te komen.\n\nWaarom de andere opties niet kloppen:\n- **Sitemap:** helpt Google URL's te vinden, maar verandert niets aan de interne links. Pagina's die diep en zwak gelinkt zijn, blijven in Googles ogen weinig belangrijk.\n- **Canonical naar pagina 1:** Google raadt dit af. Pagina 2 en verder tonen andere producten en horen een eigen canonical te hebben. Met een canonical naar pagina 1 raken de producten op die pagina's juist hun route kwijt.\n- **robots.txt:** dan kan Googlebot de producten op die pagina's helemaal niet meer via de categorie bereiken. Het probleem wordt erger.",
-  "kort": "De producten zitten zo diep omdat je er alleen komt via een lange rij 'Volgende'-knoppen. Google vindt ze daardoor lastig en ziet ze ook als minder belangrijk. Voeg subcategorieën toe en laat de paginanummers naar meerdere pagina's tegelijk linken. Dan zitten de producten veel minder klikken van de homepage af.",
-  "uitleg": "**Klikdiepte** zegt hoeveel klikken een pagina van de homepage af zit. Het is geen directe rankingfactor, maar wel een goede graadmeter voor twee dingen die er wel toe doen: hoe makkelijk Googlebot een pagina vindt, en hoe belangrijk de site die pagina zelf lijkt te vinden.\n\nGoogle schrijft in zijn uitleg over de structuur van webshops dat het de relaties tussen pagina's afleidt uit de links, niet uit de URL-structuur. Het aantal links dat Google moet volgen om een pagina te bereiken, helpt om het relatieve belang in te schatten. Een bestseller kun je dus extra gewicht geven door hem vanaf de homepage te linken.\n\nZo meet je het:\n- **Screaming Frog** toont per URL de 'Crawl Depth'. Kijk welke paginatypes structureel diep zitten.\n- Vergelijk dat met het rapport **Pagina-indexering**: diepe pagina's vallen vaak onder 'Gevonden' of 'Gecrawld, momenteel niet geïndexeerd'.\n\nZo los je het op:\n- Subcategorieën en filters met zoekvraag als eigen landingspagina's\n- Paginering met links naar meerdere pagina's, met elke pagina een eigen URL en canonical\n- Menu en homepage voor wat commercieel belangrijk is\n- Gerelateerde producten en interne links vanuit content\n\nEr is geen magisch maximum, maar alles wat belangrijk is, wil je binnen een paar klikken bereikbaar hebben.",
-  "kernpunt": "Klikdiepte laat zien hoe makkelijk Google een pagina vindt en hoe belangrijk de site hem lijkt te vinden. Je verkleint hem met een plattere structuur en betere interne links, niet met een sitemap, canonical of robots.txt.",
-  "toepassing": "Crawl deze week een klantsite met Screaming Frog, sorteer op Crawl Depth en kijk welk paginatype het diepst zit. Zoek uit via welke links die pagina's nu bereikbaar zijn.",
+  "kern": "De producten zitten te ver weg in de site. Kortere routes via links halen ze dichterbij, en laten Google ook zien dat ze belangrijk zijn.",
+  "afleiders": [
+    "**XML-sitemap:** een sitemap helpt Google URL's te vinden, dus het lijkt de oplossing. Maar de interne links blijven gelijk, en diep weggestopte pagina's blijven voor Google weinig belangrijk.",
+    "**Canonical naar pagina 1:** focus op één pagina klinkt slim. Maar pagina 2 en verder tonen andere producten. Google raadt dit af, en de producten op die pagina's raken zo juist hun route kwijt.",
+    "",
+    "**Blokkeren in robots.txt:** dat lijkt crawltijd te sparen. Maar dan kan Googlebot de producten op die pagina's niet meer via de categorie bereiken. Het probleem wordt erger."
+  ],
+  "kort": "Stel je een warenhuis voor waar je alleen bij een product komt door gang na gang af te lopen, telkens met één deur naar de volgende. Wat achteraan ligt, vind je bijna niet. Je denkt ook al snel dat het niet zo belangrijk is. Google kijkt net zo naar een site: hoe meer links het moet volgen, hoe minder belangrijk een pagina lijkt. Subcategorieën en paginanummers zijn extra deuren, zodat elk product maar een paar stappen van de ingang ligt.",
+  "begrippen": [
+    { "term": "Paginering", "uitleg": "een lange productlijst verdeeld over meerdere pagina's, met knoppen als 'Volgende' of paginanummers." },
+    { "term": "XML-sitemap", "uitleg": "een bestand met een lijst van de URL's die je door Google wilt laten vinden." },
+    { "term": "Canonical", "uitleg": "een tag die Google vertelt welke URL de hoofdversie van een pagina is." },
+    { "term": "robots.txt", "uitleg": "een bestand dat zoekmachines vertelt welke delen van de site ze niet mogen crawlen." }
+  ],
+  "uitleg": "**Klikdiepte** is geen directe rankingfactor. Het is wel een goede graadmeter voor twee dingen die er wel toe doen: hoe makkelijk Googlebot een pagina vindt, en hoe belangrijk de site die pagina zelf lijkt te vinden.\n\nGoogle schrijft in zijn uitleg over de structuur van webshops dat het de relaties tussen pagina's afleidt uit de links, niet uit de URL-structuur. Een bestseller kun je dus extra gewicht geven door hem vanaf de homepage te linken.\n\nZo meet je het:\n- **Screaming Frog** toont per URL de 'Crawl Depth'. Kijk welke paginatypes structureel diep zitten.\n- Vergelijk dat met het rapport **Pagina-indexering**: diepe pagina's vallen vaak onder 'Gevonden' of 'Gecrawld, momenteel niet geïndexeerd'.\n\nZo los je het op:\n- Subcategorieën en filters met zoekvraag als eigen landingspagina's\n- Paginering met links naar meerdere pagina's, met elke pagina een eigen URL en canonical\n- Menu en homepage voor wat commercieel belangrijk is\n- Gerelateerde producten en interne links vanuit content\n\nEr is geen magisch maximum, maar alles wat belangrijk is, wil je binnen een paar klikken bereikbaar hebben.",
+  "kernpunt": "Staan veel pagina's op 'Gevonden, momenteel niet geïndexeerd', kijk dan eerst hoeveel klikken ze van de homepage af zitten.",
+  "toepassing": "Open vandaag de laatste Screaming Frog-crawl van een klant, sorteer op Crawl Depth en noteer welk paginatype het diepst zit.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Ecommerce Website Navigation Structure | Google Search Central",
     "url": "https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
-  },
-  "herzien": "2026-10-30",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

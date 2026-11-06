@@ -21,15 +21,35 @@
     ],
     "juist": 2
   },
-  "toelichting": "Shopify laat je robots.txt aanpassen via de template **robots.txt.liquid** (Online Store → Themes → Edit code → Add a new template → robots). Shopify raadt aan om met **Liquid regels toe te voegen of weg te halen** bovenop de standaardregels, en eerdere workarounds zoals via Cloudflare eerst te verwijderen.\n\n- **De Cloudflare-route** is een oude workaround uit de tijd dat aanpassen niet kon. Twee plekken die robots.txt bepalen, is vragen om fouten.\n- **De inhoud vervangen door vaste tekst** raadt Shopify sterk af: de standaardregels worden dan niet meer bijgewerkt en kunnen verouderen.\n- **De standaardregels** blokkeren onder meer admin, winkelwagen, checkout, account en gefilterde of gesorteerde collectiepagina's, maar niet /pages/.",
-  "kort": "Shopify laat je robots.txt (het bestand dat zoekmachines zegt wat ze mogen bezoeken) gewoon aanpassen in het thema. Maak daarvoor de template robots.txt.liquid aan en voeg een regel toe voor de oude actiepagina's. De standaardregels van Shopify blijven dan meelopen. Een eigen bestand via Cloudflare is een oude omweg, en twee plekken voor dezelfde regels geeft fouten.",
-  "uitleg": "Lange tijd kon je de robots.txt van een Shopify-winkel niet aanpassen. Daardoor zie je bij oudere winkels nog workarounds, zoals een eigen bestand via Cloudflare. Tegenwoordig kan het in het thema zelf.\n\nWat de standaard-robots.txt van Shopify al blokkeert:\n- /admin, /cart en de checkout\n- account- en bestelpagina's\n- gefilterde collectiepagina's en gesorteerde collecties (sort_by)\n\nWil je meer of minder blokkeren, dan maak je de template **robots.txt.liquid** aan en pas je de regels aan met Liquid. Zo blijven de standaardregels van Shopify meelopen als die veranderen, en voeg jij alleen je eigen regel toe, bijvoorbeeld Disallow: /pages/actie-.\n\nLet op:\n- Shopify Support helpt niet bij aanpassingen in dit bestand. Een fout kan volgens Shopify al het verkeer kosten.\n- Wijzigingen gelden direct, maar crawlers reageren niet meteen.\n- robots.txt stuurt het crawlen, niet het indexeren. Wil je pagina's uit Google halen, dan werkt een noindex of een 404/410 beter. Een geblokkeerde pagina kan Google niet meer opnieuw bekijken.\n\nVoor verlopen actiepagina's is opruimen vaak de beste oplossing: verwijderen of doorsturen, en interne links weghalen.",
-  "kernpunt": "Op Shopify pas je robots.txt aan via de template robots.txt.liquid, met Liquid bovenop de standaardregels. Geen vaste tekst en geen Cloudflare-workaround.",
-  "toepassing": "Open deze week bij een Shopify-klant /robots.txt en kijk of er iets afwijkt van de standaard. Vraag na waar dat vandaan komt: uit robots.txt.liquid of uit een oude workaround?",
+  "kern": "Je kunt robots.txt gewoon in het Shopify-thema aanpassen, op een manier die de eigen regels van Shopify intact en actueel houdt.",
+  "afleiders": [
+    "**Via Cloudflare:** dat was een workaround uit de tijd dat aanpassen niet kon. Nu kan het in het thema, en twee plekken die robots.txt bepalen, is vragen om fouten.",
+    "**Vaste regels in de template:** dan weet je precies wat erin staat. Maar Shopify raadt dit sterk af: de standaardregels worden dan niet meer bijgewerkt en kunnen verouderen.",
+    "",
+    "**Niets doen:** Shopify blokkeert al veel, dus dat lijkt logisch. Maar de standaardregels blokkeren onder meer admin, winkelwagen en checkout, niet /pages/."
+  ],
+  "kort": "Denk aan een huurhuis met een huisreglement van de verhuurder. Jij mag er je eigen regels aan toevoegen, en de verhuurder werkt zijn deel bij als dat nodig is. Plak je er een eigen versie overheen, of hang je een tweede reglement bij de voordeur, dan weet niemand meer wat geldt. Zo werkt robots.txt.liquid: je zet je eigen regel bovenop die van Shopify, en Shopify houdt zijn deel actueel.",
+  "begrippen": [
+    {
+      "term": "robots.txt",
+      "uitleg": "een bestand dat zoekmachines vertelt welke adressen ze niet mogen ophalen."
+    },
+    {
+      "term": "Liquid",
+      "uitleg": "de templatetaal van Shopify-thema's, waarmee je vaste tekst en code combineert."
+    },
+    {
+      "term": "Workaround",
+      "uitleg": "een omweg om iets voor elkaar te krijgen wat het systeem zelf (nog) niet toeliet."
+    }
+  ],
+  "uitleg": "Lange tijd kon je de robots.txt van een Shopify-winkel niet aanpassen. Daardoor zie je bij oudere winkels nog workarounds, zoals een eigen bestand via Cloudflare. Shopify raadt aan die eerst te verwijderen.\n\nDe template maak je aan via Online Store → Themes → Edit code → Add a new template → robots. Daarin voeg je met Liquid regels toe of haal je ze weg, bijvoorbeeld Disallow: /pages/actie-.\n\nWat de standaard-robots.txt van Shopify al blokkeert:\n- /admin, /cart en de checkout\n- account- en bestelpagina's\n- gefilterde collectiepagina's en gesorteerde collecties (sort_by)\n\nLet op:\n- Shopify Support helpt niet bij aanpassingen in dit bestand. Een fout kan volgens Shopify al het verkeer kosten.\n- Wijzigingen gelden direct, maar crawlers reageren niet meteen.\n- robots.txt stuurt het crawlen, niet het indexeren. Wil je pagina's uit Google halen, dan werkt een noindex of een 404/410 beter. Een geblokkeerde pagina kan Google niet meer opnieuw bekijken.\n\nVoor verlopen actiepagina's is opruimen vaak de beste oplossing: verwijderen of doorsturen, en interne links weghalen.",
+  "kernpunt": "Zie je op Shopify een robots.txt-workaround buiten het thema, verplaats die regels dan eerst naar robots.txt.liquid.",
+  "toepassing": "Open vandaag bij een Shopify-klant /robots.txt en kijk of er iets afwijkt van de standaard. Vraag na waar dat vandaan komt: uit robots.txt.liquid of uit een oude workaround?",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Editing robots.txt.liquid | Shopify Help Center",
     "url": "https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

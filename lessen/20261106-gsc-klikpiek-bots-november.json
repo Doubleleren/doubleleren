@@ -18,11 +18,25 @@
     ],
     "juist": 1
   },
-  "toelichting": "Een klik kan alleen na een vertoning. Stijgen de klikken zes keer terwijl de vertoningen gelijk blijven, dan klikt opeens bijna iedereen die je resultaat ziet. Dat is te mooi om waar te zijn, zeker op positie 15 tot 40 (pagina 2 tot 4 van Google).\n\nTussen 31 oktober en 2 november 2026 zagen meer SEO's zo'n piek, volgens Search Engine Journal. Google heeft nog geen verklaring gegeven. De meest genoemde oorzaak is klikken door bots.\n\n- **Melden als succes** is riskant. Ook Search Console-data kunnen nepklikken bevatten, en de klant gaat dan van verkeerde cijfers uit.\n- **Disavow** is voor links naar je site, niet voor bezoekers of klikken.\n- **noindex** haalt juist echte pagina's uit Google. Je hoeft niets aan de site te veranderen.",
-  "kort": "Meer klikken zonder meer vertoningen is te mooi om waar te zijn. Begin november 2026 zagen veel sites zo'n piek, waarschijnlijk door bots die op zoekresultaten klikken. Meld het dus niet als succes van je werk. Haal de piek uit je cijfers en schrijf in het rapport wat er aan de hand is.",
-  "uitleg": "**Zo herken je de piek:**\n\n- de klikken springen omhoog, de vertoningen bijna niet;\n- de stijging zit vooral op desktop, mobiel blijft normaal;\n- de klikken komen vaak uit één land;\n- pagina's op positie 11 tot 55 krijgen opeens een CTR (klikratio) van 45 tot 100%;\n- veel bijna gelijke zoekopdrachten met 1 klik bij 1 vertoning.\n\n**Zo filter je hem in het Prestatierapport:**\n\n- Zet gemiddelde CTR en positie aan, open het tabblad Pagina's, filter op positie groter dan 10 en sorteer op klikken. Dan zie je welke pagina's het betreft.\n- Sluit die pagina's of dat ene land uit met een filter.\n- Kijk ter controle alleen naar mobiel. Gebruik dat niet als vaste weergave, want dan mis je ook het echte desktopverkeer.\n\nVergelijk de periode in je rapport niet met een maand waarin de piek zit, of benoem hem duidelijk.",
-  "kernpunt": "Stijgen klikken sterk terwijl de vertoningen gelijk blijven, dan is het vrijwel zeker geen echt verkeer. Begin november 2026 had een deel van de sites zo'n piek: filter hem uit je rapport en verander niets aan de site.",
-  "toepassing": "Open deze week bij je klanten het Prestatierapport voor 31 oktober tot en met 5 november. Zie je een piek in klikken zonder piek in vertoningen, zet er dan een opmerking bij in het maandrapport.",
+  "kern": "Een klik kan alleen na een vertoning. Zes keer meer klikken bij gelijke vertoningen is dus geen echt verkeer en hoort niet als resultaat in je rapport.",
+  "afleiders": [
+    "**Melden als succes:** de cijfers komen van Google zelf, dus ze lijken betrouwbaar. Maar ook Search Console-data kunnen nepklikken bevatten, en de klant gaat dan van verkeerde cijfers uit.",
+    "",
+    "**Disavow:** het voelt als een manier om Google te vertellen dat iets niet bij je hoort. Maar disavow is voor links naar je site, niet voor bezoekers of klikken.",
+    "**noindex:** de site willen beschermen is begrijpelijk. Maar noindex haalt echte pagina's uit Google, terwijl je niets aan de site hoeft te veranderen."
+  ],
+  "kort": "Stel dat een winkel opeens zes keer zoveel verkopen telt, terwijl er niet meer mensen binnenlopen. Dan kijk je eerst of de kassa niet dubbel telt, voordat je de nieuwe etalage de eer geeft. Hier is het net zo: geen extra vertoningen, wel veel extra klikken, en dat op pagina's ver weg in Google. Echte zoekers klikken zelden zo. De meest genoemde verklaring is dat bots op de resultaten klikken.",
+  "begrippen": [
+    { "term": "Vertoning", "uitleg": "één keer dat je pagina in de zoekresultaten van iemand verschijnt." },
+    { "term": "CTR", "uitleg": "klikratio: het deel van de vertoningen dat een klik oplevert." },
+    { "term": "Bot", "uitleg": "een programma dat automatisch websites bezoekt of op links klikt." },
+    { "term": "Disavow", "uitleg": "een bestand waarmee je Google vraagt bepaalde links naar je site niet mee te tellen." }
+  ],
+  "uitleg": "Tussen 31 oktober en 2 november 2026 zagen meer SEO's zo'n piek, volgens Search Engine Journal. Google heeft nog geen verklaring gegeven. De meest genoemde oorzaak is klikken door bots.\n\n**Zo herken je de piek:**\n\n- de klikken springen omhoog, de vertoningen bijna niet;\n- de stijging zit vooral op desktop, mobiel blijft normaal;\n- de klikken komen vaak uit één land;\n- pagina's op positie 11 tot 55 krijgen opeens een CTR van 45 tot 100%;\n- veel bijna gelijke zoekopdrachten met 1 klik bij 1 vertoning.\n\n**Zo filter je hem in het Prestatierapport:**\n\n- Zet gemiddelde CTR en positie aan, open het tabblad Pagina's, filter op positie groter dan 10 en sorteer op klikken.\n- Sluit die pagina's of dat ene land uit met een filter.\n- Kijk ter controle alleen naar mobiel. Gebruik dat niet als vaste weergave, want dan mis je ook het echte desktopverkeer.\n\nVergelijk de periode in je rapport niet met een maand waarin de piek zit, of benoem hem duidelijk.",
+  "kernpunt": "Stijgen klikken zonder dat vertoningen meestijgen, kijk dan eerst naar apparaat, land en positie voordat je het succes aan je werk toeschrijft.",
+  "toepassing": "Open vandaag bij een klant het Prestatierapport voor 31 oktober tot en met 5 november. Zie je een piek in klikken zonder piek in vertoningen, zet er dan een opmerking bij in het maandrapport.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Search Engine Journal: November Click Spikes In Google Search Console Are Bot Traffic – How To Filter Your Reports",
     "url": "https://www.searchenginejournal.com/november-click-spikes-in-google-search-console-are-bot-traffic-how-to-filter-your-reports/595834/"

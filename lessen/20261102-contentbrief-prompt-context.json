@@ -18,11 +18,23 @@
     ],
     "juist": 0
   },
-  "toelichting": "Claude kan alleen werken met wat in de prompt staat. Weet het niet voor wie de brief is en wie hem leest, dan maakt het een gemiddelde brief.\n\n- Een **rol** kan helpen, maar 'de beste ter wereld' geeft geen informatie over dit bedrijf of deze lezer.\n- Dezelfde vage prompt herhalen is gokken: elke versie mist dezelfde context.\n- Hoofdletters en 'BELANGRIJK' maken een opdracht niet duidelijker. Uitleggen **waarom** iets belangrijk is, werkt beter.",
-  "kort": "Claude weet alleen wat jij in je vraag zet. Vraag je kaal om een brief, dan krijg je een gemiddelde brief die bij elk bedrijf past. Vertel daarom voor welk bedrijf het is, wie de lezer is, waar de blog voor dient en in welke vorm je de brief terug wilt. Brief Claude zoals je een slimme nieuwe collega zou briefen.",
-  "uitleg": "In de prompting-richtlijnen van Anthropic staat een handige toets: laat je prompt lezen door een collega die niets van de opdracht weet. Snapt die niet wat je wilt, dan snapt Claude het ook niet. Behandel Claude als een slimme nieuwe collega die je klanten en werkwijze nog niet kent.\n\nVoor een contentbrief betekent dat:\n- **Wie is de klant?** Bedrijf, regio, diensten, wat hen onderscheidt.\n- **Wie is de lezer?** Hier: huiseigenaren met een warmtepomp die twijfelen over onderhoud, niet doe-het-zelvers.\n- **Waarvoor is het?** Een blog die moet leiden tot aanvragen voor een onderhoudscontract.\n- **Wat is goed?** Zoekwoorden, vragen die beantwoord moeten worden, lengte, toon.\n- **Welk format?** Plak je vaste sjabloon of een voorbeeld van een goede brief erbij.\n\nGeef bij een instructie ook de reden. 'Geen prijzen noemen, want die verschillen per installatie' werkt beter dan alleen 'geen prijzen'. Claude kan dan zelf afleiden wat in de geest van je vraag ligt.\n\nWerkt de prompt goed? Bewaar hem dan als sjabloon of maak er een skill van, zodat je hem voor elke klant opnieuw kunt gebruiken.",
-  "kernpunt": "Een vage prompt geeft een gemiddeld antwoord. Geef Claude context zoals je een nieuwe collega zou briefen: klant, lezer, doel, criteria en het format dat je terug wilt.",
-  "toepassing": "Pak de laatste prompt die je deze week voor een klant gebruikte en doe de collega-toets: wat zou een nieuwe collega nog moeten vragen? Voeg die antwoorden toe en vergelijk het resultaat.",
+  "kern": "Claude kent je klant en je lezer niet. Wat je niet in de prompt zet, vult het in met iets gemiddelds.",
+  "afleiders": [
+    "",
+    "**'De beste SEO-expert ter wereld':** een rol kan helpen, maar deze zegt niets over dit bedrijf of deze lezer. Claude weet daarna nog steeds niet voor wie het schrijft.",
+    "**Vaker vragen en kiezen:** dat voelt als meer keus, maar het is gokken. Elke versie mist dezelfde context, dus je kiest tussen even algemene brieven.",
+    "**Hoofdletters en 'BELANGRIJK':** nadruk maakt een opdracht niet duidelijker. Uitleggen waarom iets belangrijk is, werkt beter."
+  ],
+  "kort": "Stel, je vraagt een uitzendkracht op zijn eerste dag: 'Schrijf even een brief.' Hij doet zijn best, maar weet niet voor welke klant, voor wie of waarvoor. Dus schrijft hij iets wat overal op past. Claude werkt net zo: het weet alleen wat in je vraag staat, en vult de rest in met het gemiddelde.",
+  "begrippen": [
+    { "term": "Contentbrief", "uitleg": "een korte opdracht voor een schrijver: onderwerp, lezer, doel, zoekwoorden en opbouw van een tekst." },
+    { "term": "Prompt", "uitleg": "de vraag of opdracht die je aan Claude geeft." }
+  ],
+  "uitleg": "In de prompting-richtlijnen van Anthropic staat een handige toets: laat je prompt lezen door een collega die niets van de opdracht weet. Snapt die niet wat je wilt, dan snapt Claude het ook niet. Behandel Claude als een slimme nieuwe collega die je klanten en werkwijze nog niet kent.\n\nVoor een contentbrief betekent dat:\n- **Wie is de klant?** Bedrijf, regio, diensten, wat hen onderscheidt.\n- **Wie is de lezer?** Hier: huiseigenaren met een warmtepomp die twijfelen over onderhoud, niet doe-het-zelvers.\n- **Waarvoor is het?** Een blog die moet leiden tot aanvragen voor een onderhoudscontract.\n- **Wat is goed?** Zoekwoorden, vragen die beantwoord moeten worden, lengte, toon.\n- **Welk format?** Plak je vaste sjabloon of een voorbeeld van een goede brief erbij.\n\nGeef bij een instructie ook de reden. 'Geen prijzen noemen, want die verschillen per installatie' werkt beter dan alleen 'geen prijzen'. Claude kan dan zelf afleiden wat in de geest van je vraag ligt.\n\nWerkt de prompt goed? Bewaar hem dan als sjabloon of maak er een skill van.",
+  "kernpunt": "Schrijf je een prompt voor klantwerk, vraag je dan eerst af wat een nieuwe collega nog zou moeten vragen, en zet dat erbij.",
+  "toepassing": "Pak vandaag de laatste prompt die je voor een klant gebruikte en doe de collega-toets: wat zou een nieuwe collega nog moeten vragen? Voeg die antwoorden toe en vergelijk het resultaat.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Prompting best practices | Claude Docs",
     "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"

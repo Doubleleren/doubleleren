@@ -18,15 +18,26 @@
     ],
     "juist": 3
   },
-  "toelichting": "Baymard Institute ziet in zijn onderzoek dat de meeste webshops met **8 velden** in de hele checkout toe kunnen, terwijl het gemiddelde rond de 11 ligt.\n\n- Meer stappen maakt het formulier niet korter: de bezoeker vult nog steeds alles in.\n- Optionele velden **schrappen** kan te ver gaan (sommige klanten hebben een bedrijfsnaam nodig), en een extra verplicht veld werkt juist tegen.\n- Een opvallend kortingscodeveld zet bezoekers juist aan het zoeken naar een code. Achter een link blijft het bruikbaar zonder af te leiden.",
-  "kort": "De meeste webshops kunnen in de checkout toe met zo'n acht velden. Je hoeft niet minder te vragen, alleen minder velden te laten zien. Maak één veld voor de hele naam en laat het factuuradres standaard gelijk zijn aan het bezorgadres. Zet optionele velden en de kortingscode achter een link, zodat niemand gaat zoeken naar een code.",
-  "uitleg": "Elk veld in de checkout kost moeite. Volgens Baymard Institute had de gemiddelde checkout in 2024 **11,3 formuliervelden**, terwijl de meeste sites met **8** toe kunnen. Het gaat er niet om dat je minder gegevens vraagt, maar dat je minder velden láát zien.\n\nVijf manieren uit het onderzoek van Baymard:\n- **Eén veld voor de volledige naam** in plaats van losse velden voor voor- en achternaam.\n- **Adresregel 2 achter een link**, zoals 'Toevoeging of extra adresregel toevoegen'.\n- **Andere optionele velden ook achter een link**, zoals bedrijfsnaam en een tweede telefoonnummer.\n- **Kortingscode achter een link**, zodat bezoekers niet gaan zoeken naar een code die ze niet hebben.\n- **Factuuradres standaard gelijk aan het bezorgadres**, met een vinkje om het te wijzigen.\n\nDaarnaast raadt Baymard aan om een account pas aan te bieden ná de bestelling.\n\nTest het effect: meet in GA4 hoeveel bezoekers de stap met het formulier afronden, vóór en na de aanpassing. En kijk in sessie-opnames of bezoekers velden overslaan of terugspringen.",
-  "kernpunt": "De meeste checkouts kunnen met zo'n 8 velden toe. Voeg velden samen, zet het factuuradres standaard gelijk aan het bezorgadres en zet optionele velden en de kortingscode achter een link.",
+  "kern": "Je hoeft niet minder gegevens te vragen. Je laat alleen minder velden tegelijk zien en voegt samen wat samen kan.",
+  "afleiders": [
+    "**Over vier stappen verdelen:** elke stap oogt korter, maar de bezoeker vult nog steeds alle 16 velden in. Het formulier zelf wordt er niet korter van.",
+    "**Optionele velden schrappen:** dat gaat te ver, want sommige klanten hebben wel een bedrijfsnaam nodig. En een extra verplicht telefoonnummer werkt juist tegen.",
+    "**Kortingscode bovenaan:** het lijkt bezoekers vast te houden, maar een opvallend veld zet ze juist aan het zoeken naar een code. Achter een link blijft het bruikbaar zonder af te leiden.",
+    ""
+  ],
+  "kort": "Denk aan een inschrijfformulier bij de huisarts. Staat er voor elk detail een apart vakje, dan voelt het als veel werk, ook als je de helft leeg laat. Krijg je één regel voor je naam en een vinkje 'zelfde adres', dan ben je zo klaar. Zo werkt het ook in de checkout: elk zichtbaar veld voelt als moeite, ook als het optioneel is. Minder velden in beeld maakt afrekenen dus lichter, zonder dat je minder weet.",
+  "begrippen": [
+    { "term": "Checkout", "uitleg": "de stappen van winkelwagen tot betalen." },
+    { "term": "Optioneel veld", "uitleg": "een veld dat de klant mag overslaan." },
+    { "term": "Sprint", "uitleg": "een vaste, korte werkperiode van een developmentteam." }
+  ],
+  "uitleg": "Elk veld in de checkout kost moeite. Volgens Baymard Institute had de gemiddelde checkout in 2024 **11,3 formuliervelden**, terwijl de meeste sites met **8** toe kunnen.\n\nVijf manieren uit het onderzoek van Baymard:\n- **Eén veld voor de volledige naam** in plaats van losse velden voor voor- en achternaam.\n- **Adresregel 2 achter een link**, zoals 'Toevoeging of extra adresregel toevoegen'.\n- **Andere optionele velden ook achter een link**, zoals bedrijfsnaam en een tweede telefoonnummer.\n- **Kortingscode achter een link.**\n- **Factuuradres standaard gelijk aan het bezorgadres**, met een vinkje om het te wijzigen.\n\nDaarnaast raadt Baymard aan om een account pas aan te bieden ná de bestelling.\n\nTest het effect: meet in GA4 hoeveel bezoekers de stap met het formulier afronden, vóór en na de aanpassing. En kijk in sessie-opnames of bezoekers velden overslaan of terugspringen.",
+  "kernpunt": "Telt een checkout meer dan 8 zichtbare velden, kijk dan eerst wat je kunt samenvoegen of achter een link kunt zetten.",
   "toepassing": "Tel bij een webshopklant de zichtbare velden in de checkout, van winkelwagen tot betalen. Zijn het er meer dan 8, noteer dan welke je kunt samenvoegen of achter een link kunt zetten.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Baymard Institute: Checkout Optimization: 5 Ways to Minimize Form Fields in Checkout",
     "url": "https://baymard.com/blog/checkout-flow-average-form-fields"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

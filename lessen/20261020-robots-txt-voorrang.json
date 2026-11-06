@@ -8,7 +8,6 @@
     "1.1.8"
   ],
   "titel": "Allow of Disallow: welke robots.txt-regel wint?",
-  "volgorde": "opdracht-eerst",
   "intro": "Een webshop wil het accountgedeelte en sorteer-URL's uit de crawl houden, maar de inlogpagina moet bereikbaar blijven. De developer zet deze regels in robots.txt:\n\n- User-agent: *\n- Disallow: /account/\n- Disallow: /*?sort=\n- Allow: /account/inloggen",
   "opdracht": {
     "soort": "meerkeuze",
@@ -21,11 +20,24 @@
     ],
     "juist": 2
   },
-  "toelichting": "/account/inloggen valt onder zowel 'Disallow: /account/' als 'Allow: /account/inloggen'. Google kiest de **meest specifieke** regel, dus de regel met het langste pad: de Allow-regel wint. De volgorde van de regels in het bestand maakt niet uit. /account/bestellingen valt alleen onder de Disallow, en beide sorteer-URL's matchen /*?sort=.",
-  "kort": "Robots.txt is het bestand dat zoekmachines vertelt waar ze niet mogen kijken. Passen twee regels op hetzelfde adres, dan wint de regel die het meest precies is, dus met het langste pad. De volgorde in het bestand maakt niet uit. Daarom mag Google de inlogpagina wel bekijken, ook al is de rest van het accountgedeelte afgesloten.",
-  "uitleg": "Bij het toevoegen of verwijderen van robots.txt-instructies moet je weten hoe Google regels leest:\n\n- **Langste match wint.** Matchen een Allow- en een Disallow-regel dezelfde URL, dan geldt de regel met het langste pad. Zijn ze even specifiek, dan kiest Google de **minst beperkende** regel (Allow).\n- **Wildcards:** * staat voor nul of meer tekens, $ voor het einde van de URL. Disallow: /*.pdf$ blokkeert dus alleen URL's die op .pdf eindigen.\n- **Hoofdlettergevoelig:** /account/ matcht niet /Account/.\n- **Eén groep per crawler:** Googlebot volgt alleen de meest specifieke User-agent-groep. Staat er een aparte groep voor Googlebot, dan negeert hij de regels onder User-agent: *.\n\nLet op valkuilen in de praktijk. Disallow: /*?sort= blokkeert /tassen?kleur=rood&sort=prijs níet, want daar staat &sort= en geen ?sort=. En robots.txt regelt crawlen, niet indexeren: een geblokkeerde URL kan zonder snippet in Google verschijnen als er links naar wijzen. Wil je een pagina uit de index, gebruik dan noindex en blokkeer hem juist níet, anders ziet Google die noindex nooit.\n\nGoogle cachet robots.txt meestal tot 24 uur, dus een wijziging werkt niet direct. Content na 500 KiB wordt genegeerd.",
-  "kernpunt": "In robots.txt wint de meest specifieke (langste) regel, ongeacht de volgorde; bij gelijke lengte wint Allow. robots.txt stuurt het crawlen, niet het indexeren.",
+  "kern": "Op de inlogpagina passen twee regels, en dan wint de regel met het langste pad: hier de Allow.",
+  "afleiders": [
+    "**/account/bestellingen:** dit adres lijkt op de inlogpagina. Maar alleen de Disallow-regel past erop, dus Google mag hier niet kijken.",
+    "**/schoenen?sort=prijs-laag:** er staat geen account in het adres, dus het lijkt vrij. Maar het past op /*?sort=, want * staat voor elk pad ervoor.",
+    "",
+    "**/tassen?sort=nieuw:** hetzelfde als bij de schoenen. Het past op /*?sort= en is dus geblokkeerd."
+  ],
+  "kort": "Denk aan een gebouw met een bord 'Kantoorvleugel: geen toegang', en op de deur van de receptie in die vleugel een bord 'Hier welkom'. Het preciezere bord gaat voor, waar het ook hangt. Robots.txt werkt net zo: passen twee regels op hetzelfde adres, dan wint de regel die het preciest is. De volgorde in het bestand maakt daarbij niet uit.",
+  "begrippen": [
+    { "term": "robots.txt", "uitleg": "een bestand op een site dat zoekmachines vertelt welke delen ze niet mogen crawlen." },
+    { "term": "Crawlen", "uitleg": "het bezoeken en lezen van pagina's door een zoekmachine zoals Googlebot." },
+    { "term": "Wildcard (*)", "uitleg": "een teken dat in een regel staat voor nul of meer willekeurige tekens." }
+  ],
+  "uitleg": "Zo leest Google robots.txt-regels:\n- **Langste match wint.** Zijn een Allow- en een Disallow-regel even specifiek, dan kiest Google de **minst beperkende** regel (Allow).\n- **Wildcards:** * staat voor nul of meer tekens, $ voor het einde van de URL. Disallow: /*.pdf$ blokkeert dus alleen URL's die op .pdf eindigen.\n- **Hoofdlettergevoelig:** /account/ matcht niet /Account/.\n- **Eén groep per crawler:** Googlebot volgt alleen de meest specifieke User-agent-groep. Staat er een aparte groep voor Googlebot, dan negeert hij de regels onder User-agent: *.\n\nValkuilen in de praktijk: Disallow: /*?sort= blokkeert /tassen?kleur=rood&sort=prijs níet, want daar staat &sort= en geen ?sort=. En robots.txt regelt crawlen, niet indexeren: een geblokkeerde URL kan zonder snippet in Google verschijnen als er links naar wijzen. Wil je een pagina uit de index, gebruik dan noindex en blokkeer hem juist níet, anders ziet Google die noindex nooit.\n\nGoogle cachet robots.txt meestal tot 24 uur, dus een wijziging werkt niet direct. Content na 500 KiB wordt genegeerd.",
+  "kernpunt": "Wil je één pagina openzetten in een geblokkeerde map, schrijf dan een Allow met het langere pad; de volgorde doet er niet toe.",
   "toepassing": "Open de robots.txt van een klant met filters of zoekpagina's en controleer of parameterregels ook de variant met & afvangen. Test twijfelgevallen met de URL-inspectietool in Search Console.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "How Google interprets the robots.txt specification",
     "url": "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"

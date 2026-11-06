@@ -18,11 +18,25 @@
     ],
     "juist": 0
   },
-  "toelichting": "Het Core Web Vitals-rapport in Search Console gebruikt **velddata uit CrUX**: echte bezoeken van Chrome-gebruikers over de **laatste 28 dagen**. Twee dagen na een fix bestaat die periode nog grotendeels uit oude, trage bezoeken.\n\n- Het is geen labdata, en opnieuw laten indexeren verandert niets aan CrUX.\n- Lab en veld meten iets anders, dus ook na 48 uur hoeven ze niet gelijk te zijn.\n- Het rapport kijkt naar wat **75%** van de bezoeken haalt, niet naar de mediaan.",
-  "kort": "Search Console kijkt naar echte bezoekers van de afgelopen 28 dagen, niet naar één meting van vandaag. Twee dagen na de fix zijn de meeste bezoeken in dat rapport nog de oude, trage. Het rood verdwijnt dus pas geleidelijk. Start de controle in Search Console en kijk na vier weken opnieuw.",
-  "uitleg": "**Waar komt de data vandaan?** Het Core Web Vitals-rapport gebruikt het Chrome User Experience Report (CrUX): metingen bij echte bezoekers, over een voortschrijdende periode van 28 dagen. PageSpeed Insights laat daarnaast een labtest zien: één gesimuleerde meting op één moment.\n\n**Hoe komt een status tot stand?**\n- Search Console groepeert vergelijkbare pagina's.\n- Per groep kijkt het naar de waarde die 75% van de bezoeken haalt.\n- De groep krijgt de status van zijn slechtste metric op dat apparaattype.\n- Heeft een groep te weinig data, dan valt Search Console terug op een bredere groep.\n\n**Na een fix:** klik bij het probleem op de knop om bij te houden (Start tracking). Dat start een monitorperiode van 28 dagen. Komt het probleem in die periode niet meer voor, dan geldt het als opgelost. De knop vraagt geen nieuwe indexering aan; hij zet alleen de klok op nul.\n\nVerwacht dus dat de grafiek over een paar weken langzaam verschuift, niet in één dag. Wil je eerder bewijs, kijk dan naar eigen metingen bij echte bezoekers (RUM) per dag, en vergelijk de dagen na de fix met de week ervoor. Ook de velddata bovenaan PageSpeed Insights beslaan 28 dagen.",
-  "kernpunt": "Het Core Web Vitals-rapport gebruikt velddata over 28 dagen, dus een fix wordt pas na weken zichtbaar. Start de validatie en beoordeel na vier weken, niet na twee dagen.",
-  "toepassing": "Zet bij de eerstvolgende Core Web Vitals-fix bij een klant direct de validatie aan in Search Console, en spreek met de klant af dat jullie het resultaat na vier weken samen bekijken.",
+  "kern": "Search Console kijkt terug over 28 dagen echte bezoeken. Een fix van twee dagen geleden is daarin nog nauwelijks te zien.",
+  "afleiders": [
+    "",
+    "**Labdata en opnieuw indexeren:** PageSpeed Insights toont ook labdata, dus de verwarring is logisch. Maar het rapport gebruikt velddata, en opnieuw laten indexeren verandert daar niets aan.",
+    "**De fix werkt niet:** lab en veld meten iets anders. Ook na 48 uur hoeven ze niet gelijk te zijn, dus een rood rapport bewijst nog niets.",
+    "**De mediaan:** het rapport kijkt niet naar de middelste waarde, maar naar wat 75% van de bezoeken haalt."
+  ],
+  "kort": "Vergelijk het met je gemiddelde cijfer over een heel schooljaar. Haal je vandaag een tien, dan staat je gemiddelde morgen nog ongeveer waar het stond. Zo werkt het rapport in Search Console ook: het kijkt naar alle bezoeken van de afgelopen 28 dagen samen. Twee dagen snelle bezoeken wegen nog weinig op tegen weken van trage. Pas als de oude bezoeken uit die periode vallen, kan het rapport groen worden.",
+  "begrippen": [
+    { "term": "LCP", "uitleg": "Largest Contentful Paint: hoe lang het duurt tot het grootste stuk inhoud van de pagina in beeld is." },
+    { "term": "Velddata", "uitleg": "metingen bij echte Chrome-bezoekers (CrUX)." },
+    { "term": "Labdata", "uitleg": "een gesimuleerde test op één moment, zoals de labtest in PageSpeed Insights." },
+    { "term": "Mediaan", "uitleg": "de middelste waarde als je alle metingen op volgorde zet." }
+  ],
+  "uitleg": "**Waar komt de data vandaan?** Het Core Web Vitals-rapport gebruikt het Chrome User Experience Report (CrUX), over een voortschrijdende periode van 28 dagen. PageSpeed Insights laat daarnaast een labtest zien: één gesimuleerde meting op één moment.\n\n**Hoe komt een status tot stand?**\n- Search Console groepeert vergelijkbare pagina's.\n- Per groep kijkt het naar de waarde die 75% van de bezoeken haalt.\n- De groep krijgt de status van zijn slechtste metric op dat apparaattype.\n- Heeft een groep te weinig data, dan valt Search Console terug op een bredere groep.\n\n**Na een fix:** klik bij het probleem op de knop om bij te houden (Start tracking). Dat start een monitorperiode van 28 dagen. Komt het probleem in die periode niet meer voor, dan geldt het als opgelost. De knop vraagt geen nieuwe indexering aan; hij zet alleen de klok op nul.\n\nWil je eerder bewijs, kijk dan naar eigen metingen bij echte bezoekers (RUM) per dag, en vergelijk de dagen na de fix met de week ervoor. Ook de velddata bovenaan PageSpeed Insights beslaan 28 dagen.",
+  "kernpunt": "Gaat er een snelheidsfix live, start dan meteen de validatie in Search Console en beoordeel het rapport pas na vier weken.",
+  "toepassing": "Open vandaag bij een klant het Core Web Vitals-rapport en kijk of er een probleem openstaat dat al is opgelost. Klik dan op Start tracking en zet over vier weken een herinnering.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Core Web Vitals report - Search Console Help",
     "url": "https://support.google.com/webmasters/answer/9205520"

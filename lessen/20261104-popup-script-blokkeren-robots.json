@@ -4,7 +4,10 @@
   "niveau": "gevorderd",
   "vakgebied": "SEO",
   "onderwerp": "Eén JavaScript-bestand blokkeren in robots.txt: wanneer mag dat?",
-  "matrix": ["1.1.8", "5.3.3"],
+  "matrix": [
+    "1.1.8",
+    "5.3.3"
+  ],
   "titel": "De screenshot van Google toont alleen de leeftijdscheck",
   "intro": "Een wijnwebshop toont elke nieuwe bezoeker een leeftijdscheck. Die pop-up wordt geladen door één eigen bestand: /js/leeftijdscheck.js. De rest van de site draait op /js/main.js. In de URL-inspectietool toont de screenshot van Google alleen de pop-up. De developer wil leeftijdscheck.js blokkeren in robots.txt. Een collega zegt: 'Nooit JavaScript blokkeren, dan kan Google je pagina niet renderen.'",
   "opdracht": {
@@ -18,11 +21,24 @@
     ],
     "juist": 1
   },
-  "toelichting": "Google zegt zelf dat je met robots.txt **resourcebestanden** zoals scripts mag blokkeren, als de pagina zonder die bestanden niet wezenlijk slechter wordt. Is een bestand nodig om de pagina te begrijpen, blokkeer het dan niet. Een script dat alleen een pop-up laadt, mag dus weg voor Googlebot. main.js, dat de hele site laat werken, niet.\n\n- **Nooit JavaScript blokkeren** is een goede vuistregel, maar geen wet.\n- **De hele map /js/** blokkeert ook main.js. Dan gaat het renderen juist mis.\n- **robots.txt** werkt prima voor losse bestanden. Een noindex gaat over indexeren, niet over ophalen.",
-  "kort": "Je mag een los script voor Google blokkeren als de pagina zonder dat script gewoon werkt. Hier laadt het script alleen de pop-up, dus Google ziet daarna de echte pagina. Het hoofdscript van de site blokkeer je nooit, want dan kan Google de pagina niet goed opbouwen.",
-  "uitleg": "Googlebot **rendert** pagina's: hij voert JavaScript uit om te zien wat een bezoeker ziet. Daarom is de vuistregel om scripts en stylesheets niet te blokkeren. Maar volgens Google mag het wel als de pagina zonder dat bestand niet wezenlijk slechter wordt.\n\nJohn Mueller van Google besprak eind 2026 op Reddit zo'n geval: een pop-up voor leeftijdscontrole. Zijn opties:\n- Staat de pop-up op een **ander domein**, dan kan dat domein zichzelf blokkeren in zijn eigen robots.txt. Zo werken veel advertentiediensten.\n- Wordt de pop-up geladen door een **eigen los bestand**, blokkeer dan dat bestand.\n- Doet één bestand veel meer, blokkeer het dan niet.\n\nControleer het daarna altijd: draai de live test in de URL-inspectietool. Toont de screenshot de inhoud zonder pop-up, en staat de tekst in de gerenderde HTML? Dan werkt het.",
-  "kernpunt": "Een los script blokkeren in robots.txt mag als de pagina zonder dat script goed werkt, zoals een script dat alleen een pop-up laadt. Scripts die de pagina opbouwen, blokkeer je nooit.",
-  "toepassing": "Bekijk deze week bij een klant met een cookie- of leeftijdsmelding de screenshot in de live test van de URL-inspectietool. Bedekt de melding de inhoud, zoek dan uit welk script hem laadt.",
+  "kern": "Het script laadt alleen de pop-up, dus zonder dat bestand ziet Google gewoon de echte pagina.",
+  "afleiders": [
+    "**Nooit JavaScript blokkeren:** dat is een goede vuistregel, want Google moet de pagina kunnen opbouwen. Maar het is geen wet: een bestand dat de pagina niet nodig heeft, mag weg.",
+    "",
+    "**De hele map /js/:** dat lijkt eenvoudiger. Maar dan blokkeer je ook main.js, en dan gaat het renderen juist mis. En robots.txt werkt prima voor losse bestanden.",
+    "**noindex op het script:** dat klinkt als de nette manier. Maar robots.txt werkt prima voor losse bestanden, en een noindex gaat over indexeren, niet over ophalen."
+  ],
+  "kort": "Denk aan een fotograaf die een etalage komt fotograferen, maar steeds een bord 'Bent u 18+?' voor zijn lens krijgt. Haal je dat ene bord weg, dan ziet hij de etalage. Haal je de hele etalage weg, dan is er niets meer te fotograferen. Zo werkt het hier ook: zonder het pop-upscript ziet Google de echte pagina, maar zonder het hoofdscript kan Google de pagina niet opbouwen.",
+  "begrippen": [
+    { "term": "Renderen", "uitleg": "een pagina opbouwen zoals een browser dat doet, inclusief het uitvoeren van JavaScript." },
+    { "term": "robots.txt", "uitleg": "een tekstbestand op je site dat zoekmachines vertelt welke pagina's en bestanden ze niet mogen ophalen." },
+    { "term": "URL-inspectietool", "uitleg": "de tool in Search Console die laat zien hoe Google één pagina ophaalt en ziet, met een screenshot." }
+  ],
+  "uitleg": "Googlebot **rendert** pagina's: hij voert JavaScript uit om te zien wat een bezoeker ziet. Daarom is de vuistregel om scripts en stylesheets niet te blokkeren. Volgens Google mag je **resourcebestanden** zoals scripts wel blokkeren als de pagina zonder die bestanden niet wezenlijk slechter wordt. Is een bestand nodig om de pagina te begrijpen, blokkeer het dan niet.\n\nJohn Mueller van Google besprak eind 2026 op Reddit zo'n geval: een pop-up voor leeftijdscontrole. Zijn opties:\n- Staat de pop-up op een **ander domein**, dan kan dat domein zichzelf blokkeren in zijn eigen robots.txt. Zo werken veel advertentiediensten.\n- Wordt de pop-up geladen door een **eigen los bestand**, blokkeer dan dat bestand.\n- Doet één bestand veel meer, blokkeer het dan niet.\n\nControleer het daarna altijd: draai de live test in de URL-inspectietool. Toont de screenshot de inhoud zonder pop-up, en staat de tekst in de gerenderde HTML? Dan werkt het.",
+  "kernpunt": "Blokkeer je een script voor Google, draai dan meteen de live test en kijk of de screenshot de echte inhoud toont.",
+  "toepassing": "Bekijk vandaag bij een klant met een cookie- of leeftijdsmelding de screenshot in de live test van de URL-inspectietool. Bedekt de melding de inhoud, zoek dan uit welk script hem laadt.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Robots.txt Introduction and Guide | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/robots/intro"

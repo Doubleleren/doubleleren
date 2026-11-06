@@ -20,15 +20,39 @@
     ],
     "juist": 1
   },
-  "toelichting": "Google Search ondersteunt afbeeldingen in de **img src** in deze formaten: **BMP, GIF, JPEG, PNG, WebP, SVG en AVIF**. JPEG XL staat er niet bij, en John Mueller bevestigde op 15 oktober 2026 dat JPEG XL nu niet werkt voor Google Images en voor previews in Discover.\n\nMet een **picture-element** krijgen browsers die JPEG XL kennen het kleine bestand, terwijl de img src een formaat bevat dat elke zoekmachine leest. Volgens Mueller werkt dat voor elke zoekmachine.\n\n- **Rendering is niet hetzelfde als indexeren:** dat Chrome een formaat toont, betekent niet dat Google Images het opneemt.\n- **Een image sitemap** helpt Google afbeeldingen te vinden, maar maakt een niet-ondersteund formaat niet indexeerbaar.\n- **Kleinere bestanden** helpen wel: ze versnellen vaak de LCP en de laadtijd op mobiel.",
-  "kort": "Chrome kan JPEG XL tonen, maar Google Afbeeldingen en Discover kunnen er nog niets mee. Bied het kleine bestand daarom alleen aan via een picture-element (code waarmee de browser zelf een formaat kiest). Gebruik verder overal een formaat dat Google wel leest, zoals JPEG, WebP of AVIF. Dat geldt voor de gewone afbeeldingslink, de deelafbeelding en de productgegevens.",
-  "uitleg": "**JPEG XL** is een beeldformaat dat bij dezelfde kwaliteit vaak kleiner is dan JPEG. Safari ondersteunt het sinds versie 17 (2023). Chrome 155 rolde het vanaf 6 oktober 2026 breed uit, Firefox 158 volgde op 13 oktober. Veel developers willen het nu inzetten.\n\nVoor Google Search verandert er nog niets. In de documentatie over afbeeldingen staat JPEG XL niet in de lijst met ondersteunde formaten, en Mueller zei op Bluesky dat het formaat niet wordt ondersteund voor Google Images en Discover-previews.\n\nWat doe je in de praktijk?\n- **Progressive enhancement:** zet JPEG XL (en eventueel AVIF of WebP) als source in een picture-element, met een ondersteund formaat in de img src. Google raadt altijd een fallback in de src aan, omdat niet elke crawler picture of srcset begrijpt.\n- **Previewafbeeldingen:** gebruik voor og:image en voor image in structured data een ondersteund formaat. Discover en sociale netwerken halen hun preview daar vaak vandaan.\n- **Bestandsextensie:** laat de extensie overeenkomen met het echte bestandstype.\n\nZo krijgt de bezoeker het snelste bestand, en verlies je geen zichtbaarheid in Google Images of Discover.",
-  "kernpunt": "Google Images en Discover ondersteunen JPEG XL (nog) niet. Serveer het alleen via een picture-element, met JPEG, WebP of AVIF in de img src, og:image en structured data.",
-  "toepassing": "Vraag deze week bij een klant met een nieuw thema of een beeld-CDN na in welk formaat de img src, og:image en de Product-markup staan. Staat daar ergens .jxl, zorg dan voor een fallback.",
+  "kern": "Google Images en Discover lezen JPEG XL nog niet, dus geef het kleine bestand alleen aan browsers die het kennen, met een vertrouwd formaat als vangnet.",
+  "afleiders": [
+    "**Googlebot rendert als Chrome:** dat klinkt logisch. Maar tonen is niet hetzelfde als indexeren: Google Images neemt JPEG XL nu niet op.",
+    "",
+    "**Image sitemap:** die helpt Google afbeeldingen te vinden. Maar een formaat dat Google niet ondersteunt, wordt daar niet indexeerbaar van.",
+    "**Niet aan beginnen:** voorzichtig lijkt veilig. Maar kleinere bestanden helpen wel: ze versnellen vaak de LCP en de laadtijd op mobiel."
+  ],
+  "kort": "Denk aan een menukaart in twee talen. Gasten die de nieuwe taal lezen, krijgen de korte versie. Wie die taal niet kent, krijgt de gewone kaart en mist niets. Een picture-element werkt zo: browsers die JPEG XL kennen nemen het kleine bestand, de rest pakt het vertrouwde formaat. Google Images leest die nieuwe taal nog niet, dus waar Google zijn plaatje vandaan haalt, hoort het vertrouwde formaat.",
+  "begrippen": [
+    {
+      "term": "JPEG XL",
+      "uitleg": "een nieuw beeldformaat (.jxl) dat bij dezelfde kwaliteit vaak kleiner is dan JPEG."
+    },
+    {
+      "term": "Picture-element",
+      "uitleg": "HTML-code met meerdere versies van een afbeelding, waaruit de browser zelf een formaat kiest."
+    },
+    {
+      "term": "img src",
+      "uitleg": "het gewone adres van een afbeelding in de HTML."
+    },
+    {
+      "term": "og:image",
+      "uitleg": "de afbeelding die sociale netwerken en apps tonen als iemand een link deelt."
+    }
+  ],
+  "uitleg": "Safari ondersteunt JPEG XL sinds versie 17 (2023). Chrome 155 rolde het vanaf 6 oktober 2026 breed uit, Firefox 158 volgde op 13 oktober.\n\nVoor Google Search verandert er nog niets. Google Search ondersteunt in de img src **BMP, GIF, JPEG, PNG, WebP, SVG en AVIF**. JPEG XL staat er niet bij. John Mueller bevestigde op 15 oktober 2026 op Bluesky dat JPEG XL nu niet werkt voor Google Images en voor previews in Discover.\n\nWat doe je in de praktijk?\n- **Progressive enhancement:** zet JPEG XL (en eventueel AVIF of WebP) als source in een picture-element, met een ondersteund formaat in de img src. Volgens Mueller werkt dat voor elke zoekmachine. Google raadt altijd een fallback in de src aan, omdat niet elke crawler picture of srcset begrijpt.\n- **Previewafbeeldingen:** gebruik voor og:image en voor image in structured data een ondersteund formaat. Discover en sociale netwerken halen hun preview daar vaak vandaan.\n- **Bestandsextensie:** laat de extensie overeenkomen met het echte bestandstype.",
+  "kernpunt": "Komt er een nieuw beeldformaat, kijk dan eerst of het in Googles lijst met ondersteunde formaten staat, voordat je het in de img src zet.",
+  "toepassing": "Open vandaag bij een klant de broncode van een productpagina. Kijk in welk formaat de img src, og:image en de Product-markup staan, en zorg voor een fallback als daar ergens .jxl staat.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Search Engine Journal: Google Images & Discover Previews Don't Support JPEG XL",
     "url": "https://www.searchenginejournal.com/google-images-discover-previews-dont-support-jpeg-xl/593816/"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

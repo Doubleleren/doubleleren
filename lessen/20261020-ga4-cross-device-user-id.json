@@ -9,8 +9,6 @@
   ],
   "titel": "Eén klant, drie apparaten: zo telt GA4 hem als één gebruiker",
   "intro": "Een webshop met klantaccounts ziet in GA4 veel meer gebruikers dan er klanten zijn. De marketeer vermoedt dat klanten die op hun telefoon oriënteren en op de laptop bestellen dubbel geteld worden.",
-  "kort": "GA4 herkent een bezoeker standaard aan zijn browser, dus telefoon en laptop tellen als twee mensen. Stuur daarom na het inloggen een eigen klantnummer mee als user_id, nooit een e-mailadres. Zet die waarde bij uitloggen op null, wat leeg betekent. Kies in de instellingen voor rapportage Blended of Observed, want Device-based negeert het klantnummer.",
-  "uitleg": "GA4 herkent gebruikers via **identity spaces**. Standaard is dat het **device ID**: op een website komt die uit de *client ID* in de cookie van die ene browser. Dezelfde persoon op telefoon, laptop en tablet zijn dus drie apparaten, en zonder extra informatie ook drie gebruikers.\n\nWil je een gebruiker over apparaten heen volgen, dan stuur je een **User-ID** mee: een eigen, unieke en blijvende ID voor ingelogde gebruikers, bijvoorbeeld het klantnummer uit je eigen database.\n\nDe basis van de inrichting:\n\n- **Na het inloggen** zet je de user_id, bijvoorbeeld met gtag('set', {'user_id': '...'}) of via het Google-tag in Tag Manager.\n- **Bij uitloggen** zet je user_id op **null**, niet op een lege string of een andere waarde.\n- **Geen persoonsgegevens**: de ID mag niets bevatten waarmee een derde de gebruiker kan identificeren, dus geen e-mailadres of naam.\n- **Rapportage-identiteit**: zet die in de property op **Blended** of **Observed**. Die gebruiken eerst de User-ID en daarna het device ID (Blended vult daarna aan met modellering). **Device-based** negeert de User-ID juist.\n\nLet op: data van vóór de implementatie wordt niet alsnog aan een User-ID gekoppeld. Je cross-device beeld begint dus pas vanaf het moment dat het live staat.",
   "opdracht": {
     "soort": "meerkeuze",
     "vraag": "Welke aanpak zorgt ervoor dat deze webshop ingelogde klanten over apparaten heen als één gebruiker ziet?",
@@ -22,13 +20,27 @@
     ],
     "juist": 0
   },
-  "toelichting": "Een e-mailadres is persoonsinformatie en mag niet als User-ID. Device-based gebruikt alleen het device ID en negeert de User-ID, dus dan zie je juist géén cross-device beeld. Bij uitloggen hoort null, geen lege string, en een klantnummer als gewone event-parameter koppelt geen apparaten aan elkaar.",
-  "kernpunt": "Cross-device meten in GA4 doe je met een User-ID: een eigen niet-herleidbare klant-ID na inloggen, null bij uitloggen, en de rapportage-identiteit op Blended of Observed.",
+  "kern": "Geef ingelogde klanten een eigen nummer mee, dan kan GA4 hun apparaten aan elkaar koppelen, mits de rapportage dat nummer ook gebruikt.",
+  "afleiders": [
+    "",
+    "**E-mailadres:** het is op elk apparaat hetzelfde, dus het lijkt ideaal. Maar het is persoonsinformatie en mag daarom niet als User-ID.",
+    "**Device-based:** de naam klinkt alsof GA4 apparaten koppelt. Het doet juist het omgekeerde: deze instelling gebruikt alleen het apparaat en negeert de User-ID.",
+    "**Lege string en event-parameter:** bij uitloggen hoort null, geen lege tekst. En een klantnummer als gewone parameter bij een aankoop koppelt geen apparaten aan elkaar."
+  ],
+  "kort": "Een sportschool die je alleen aan je pasje herkent, ziet je als twee leden als je twee pasjes hebt. Pas als je aan de balie je lidnummer noemt, weten ze dat het om één persoon gaat. GA4 herkent een bezoeker standaard aan zijn browser, dus telefoon en laptop zijn twee pasjes. Een eigen klantnummer na het inloggen is het lidnummer: daarmee voegt GA4 de bezoeken samen.",
+  "begrippen": [
+    { "term": "User-ID", "uitleg": "een eigen, vaste ID voor een ingelogde gebruiker, zoals het klantnummer. Daarmee herkent GA4 iemand op elk apparaat." },
+    { "term": "Device ID", "uitleg": "de standaardherkenning van GA4: een ID in de cookie van één browser op één apparaat." },
+    { "term": "Rapportage-identiteit", "uitleg": "de instelling die bepaalt welke ID's GA4 gebruikt om gebruikers in rapporten te tellen." },
+    { "term": "null", "uitleg": "een waarde die 'niets' betekent. Dat is iets anders dan een lege tekst." }
+  ],
+  "uitleg": "GA4 herkent gebruikers via **identity spaces**. Standaard is dat het **device ID**: op een website komt die uit de *client ID* in de cookie van die ene browser. Zonder extra informatie zijn telefoon, laptop en tablet van één persoon dus drie gebruikers.\n\nDe **User-ID** is een eigen, unieke en blijvende ID voor ingelogde gebruikers, bijvoorbeeld het klantnummer uit je eigen database. Zo richt je het in:\n- **Na het inloggen** zet je de user_id, bijvoorbeeld met gtag('set', {'user_id': '...'}) of via de Google-tag in Tag Manager.\n- **Bij uitloggen** zet je user_id op **null**.\n- **Geen persoonsgegevens:** de ID mag niets bevatten waarmee een derde de gebruiker kan identificeren, dus geen e-mailadres of naam.\n- **Rapportage-identiteit:** **Blended** en **Observed** gebruiken eerst de User-ID en daarna het device ID. Blended vult daarna aan met modellering.\n\nLet op: data van vóór de implementatie wordt niet alsnog aan een User-ID gekoppeld. Je cross-device beeld begint pas vanaf het moment dat het live staat.",
+  "kernpunt": "Heeft een klant inlogaccounts, check dan of er een user_id binnenkomt en of de rapportage-identiteit niet op Device-based staat.",
   "toepassing": "Open bij een klant met inlogfunctie in GA4 Admin > Data display > Reporting identity (in de Nederlandse interface: Beheer > Gegevensweergave > Rapportage-identiteit) en kijk welke optie aanstaat. Check daarna in DebugView of er na inloggen een user_id binnenkomt, en dat het geen e-mailadres is.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Send user IDs | Google Analytics",
     "url": "https://developers.google.com/analytics/devguides/collection/ga4/user-id"
-  },
-  "herzien": "2026-11-02",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

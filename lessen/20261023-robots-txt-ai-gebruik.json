@@ -21,15 +21,39 @@
     ],
     "juist": 2
   },
-  "toelichting": "Google ondersteunt in robots.txt alleen **User-agent, Allow, Disallow en Sitemap**. Een zelfbedachte regel als No-AI-Training wordt genegeerd.\n\nVoor Gemini heeft Google het token **Google-Extended**. Daarmee bepaal je of gecrawlde content gebruikt mag worden om toekomstige Gemini-modellen te trainen en voor grounding in Gemini Apps en Vertex AI. Volgens Google heeft het geen invloed op opname in Search en is het geen rankingsignaal.\n\n- **Googlebot blokkeren** haalt je uit het crawlen voor Search; een sitemap verandert daar niets aan.\n- **noindex** haalt de artikelen juist uit Search, en dat wil de klant niet.",
-  "kort": "Robots.txt (een bestand dat crawlers vertelt wat ze mogen ophalen) kent maar een paar vaste regels. Een zelfbedachte regel als No-AI-Training negeert Google gewoon. Wil je niet dat je teksten Gemini trainen, voeg dan een blok toe voor Google-Extended met Disallow: /. Die naam regelt alleen het gebruik voor Gemini, dus je artikelen blijven gewoon in Google Search.",
-  "uitleg": "In een Search Central-video, die Search Engine Journal op 22 oktober 2026 besprak, legde Gary Illyes van Google uit wat robots.txt wel en niet kan. Volgens RFC 9309 is robots.txt een protocol voor **toegang**: het zegt welke crawler wat mag ophalen. Wat een systeem daarna met de data doet, regelt robots.txt niet.\n\nWat betekent dat in de praktijk?\n- **Regels die een crawler niet kent, doen niets.** Google negeert alles behalve User-agent, Allow, Disallow en Sitemap.\n- **Wil je een AI-crawler weren, noem dan zijn eigen user-agent-token.** Elke partij heeft een eigen token, en niet elke crawler kent Google-Extended.\n- **Google-Extended is geen aparte crawler.** Google crawlt met de bestaande user agents; het token werkt alleen als instelling in robots.txt.\n- **AI Overviews en AI Mode horen bij Search.** Daarvoor gelden de gewone Search-instellingen, zoals nosnippet, max-snippet en noindex, niet Google-Extended.\n\nEr ligt een IETF-voorstel (mede geschreven door Illyes) voor een aparte regel over contentgebruik in robots.txt, maar dat is nog een concept. Een standaard voor alleen 'niet trainen' bestaat dus nog niet.",
-  "kernpunt": "robots.txt regelt wie mag crawlen, niet wat er met de content gebeurt. Voor Gemini-training en grounding gebruik je het token Google-Extended; dat raakt Google Search niet.",
-  "toepassing": "Open deze week de robots.txt van een klant die vragen heeft over AI. Kijk of er niet-bestaande regels in staan, en spreek per AI-partij af welke user-agent-tokens je wel of niet toelaat.",
+  "kern": "Google leest maar een paar vaste regels in robots.txt, en voor Gemini is er een eigen naam waarmee je training uitzet zonder Search te raken.",
+  "afleiders": [
+    "**Het is goed zo:** het lijkt alsof Google elke regel in robots.txt volgt. Maar Google ondersteunt alleen User-agent, Allow, Disallow en Sitemap, en negeert een zelfbedachte regel.",
+    "**Googlebot blokkeren:** dat stopt de training wel, maar ook het crawlen voor Search. Een sitemap verandert daar niets aan.",
+    "",
+    "**noindex op alle artikelen:** het klinkt als een nette uitzondering. Maar noindex haalt de artikelen juist uit Search, en dat wil de klant niet."
+  ],
+  "kort": "Robots.txt werkt als het bordje bij de ingang van een gebouw: het zegt wie naar binnen mag. Wat bezoekers daarna met jouw folders doen, staat er niet op. Een regel in een taal die de portier niet kent, wordt gewoon genegeerd. Voor Gemini heeft Google een eigen naam op dat bordje, Google-Extended. Zet je die op 'geen toegang', dan blijft de gewone zoekmachine gewoon komen.",
+  "begrippen": [
+    {
+      "term": "robots.txt",
+      "uitleg": "een bestand op de site dat crawlers vertelt wat ze mogen ophalen."
+    },
+    {
+      "term": "User-agent",
+      "uitleg": "de naam van een crawler. In robots.txt zet je per naam wat die mag."
+    },
+    {
+      "term": "Google-Extended",
+      "uitleg": "een naam (token) in robots.txt waarmee je regelt of Google je content voor Gemini mag gebruiken."
+    },
+    {
+      "term": "Grounding",
+      "uitleg": "een AI-antwoord onderbouwen met informatie van websites."
+    }
+  ],
+  "uitleg": "In een Search Central-video, die Search Engine Journal op 22 oktober 2026 besprak, legde Gary Illyes van Google uit wat robots.txt wel en niet kan. Volgens RFC 9309 is robots.txt een protocol voor **toegang**: het zegt welke crawler wat mag ophalen. Wat een systeem daarna met de data doet, regelt robots.txt niet.\n\nGoogle-Extended regelt of gecrawlde content gebruikt mag worden om toekomstige Gemini-modellen te trainen, en voor grounding in Gemini Apps en Vertex AI. Volgens Google heeft het geen invloed op opname in Search en is het geen rankingsignaal.\n\nVerder goed om te weten:\n- **Google-Extended is geen aparte crawler.** Google crawlt met de bestaande user agents; het token werkt alleen als instelling in robots.txt.\n- **Elke AI-partij heeft een eigen token.** Niet elke crawler kent Google-Extended.\n- **AI Overviews en AI Mode horen bij Search.** Daarvoor gelden de gewone Search-instellingen, zoals nosnippet, max-snippet en noindex, niet Google-Extended.\n\nEr ligt een IETF-voorstel (mede geschreven door Illyes) voor een aparte regel over contentgebruik in robots.txt, maar dat is nog een concept.",
+  "kernpunt": "Wil een klant AI-gebruik beperken, noem dan per AI-partij het eigen user-agent-token, en reken nooit op zelfbedachte regels.",
+  "toepassing": "Open vandaag de robots.txt van een klant die vragen heeft over AI. Kijk of er niet-bestaande regels in staan, en welke AI-tokens er nu wel of niet worden toegelaten.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Search Engine Journal: Google Explains The Limit Of Robots.txt For AI Content Use",
     "url": "https://www.searchenginejournal.com/google-illyes-robots-txt-crawling-ai-training/593957/"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

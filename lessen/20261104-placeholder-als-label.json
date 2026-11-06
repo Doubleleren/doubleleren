@@ -4,7 +4,9 @@
   "niveau": "basis",
   "vakgebied": "CRO",
   "onderwerp": "Formulieren: placeholdertekst als label",
-  "matrix": ["7.1.1"],
+  "matrix": [
+    "7.1.1"
+  ],
   "titel": "Bezoekers klikken terug in ingevulde velden en wissen alles",
   "intro": "Een installateur heeft een offerteformulier met zeven velden. Om het 'strak' te houden staat de naam van elk veld alleen als lichtgrijze tekst ín het veld, zoals 'Postcode' en 'Gewenste datum'. Die tekst verdwijnt zodra je begint te typen. In de opnames van Microsoft Clarity zie je veel bezoekers terugklikken naar velden die al zijn ingevuld, de inhoud wissen en opnieuw beginnen.",
   "opdracht": {
@@ -18,11 +20,25 @@
     ],
     "juist": 0
   },
-  "toelichting": "Grijze tekst in een veld (een **placeholder**) verdwijnt zodra je typt. Wil een bezoeker controleren of hij het goede veld heeft ingevuld, dan moet hij de inhoud wissen om de vraag weer te zien. Dat is precies wat de opnames laten zien. Nielsen Norman Group noemt dit schadelijk en adviseert **duidelijke, zichtbare labels buiten het veld**.\n\n- **Minder velden** kan helpen, maar verklaart het wissen en opnieuw beginnen niet.\n- **Donkerder grijs** maakt het lezen vóór het typen makkelijker, maar de tekst verdwijnt nog steeds.\n- **Inline validatie** is nuttig, maar helpt niet als de bezoeker niet meer weet wat het veld vroeg.",
-  "kort": "De naam van elk veld staat alleen als grijze tekst in het veld, en verdwijnt zodra je typt. Daarna weet een bezoeker niet meer wat er gevraagd werd. Om dat te zien moet hij alles wissen, en dat zie je in de opnames gebeuren. Zet de veldnamen daarom vast boven elk veld.",
-  "uitleg": "Een placeholder als vervanging voor een label lijkt netjes, maar kost bezoekers moeite. Nielsen Norman Group noemt onder meer:\n- **Geheugen:** je moet onthouden wat het veld vroeg, want de tekst is weg.\n- **Nakijken:** vóór het versturen kun je niet controleren of alles in het goede veld staat. Ook fouten van automatisch invullen zie je niet.\n- **Fouten herstellen:** bij een foutmelding weet je niet meer welk veld wat was.\n- **Lijkt al ingevuld:** grijze tekst wordt soms aangezien voor een ingevulde waarde, waardoor bezoekers een veld overslaan.\n- **Toegankelijkheid:** lichtgrijze tekst heeft weinig contrast, en niet elke schermlezer leest placeholders voor.\n\nDe oplossing: een **vast label boven het veld**. Een placeholder mag dan nog een voorbeeld geven, zoals '1234 AB'. Een 'zwevend label' dat naar boven schuift is beter dan alleen een placeholder, maar een vast label blijft de veiligste keuze.",
-  "kernpunt": "Gebruik placeholdertekst nooit als enige label: hij verdwijnt bij het typen, waardoor bezoekers hun invoer niet meer kunnen nakijken. Zet vaste labels boven de velden.",
-  "toepassing": "Loop deze week het contact- of offerteformulier van een klant na. Staan de veldnamen alleen in het veld, adviseer dan vaste labels erboven, en bekijk in Clarity of Hotjar hoe vaak bezoekers terugklikken.",
+  "kern": "Bezoekers wissen hun invoer omdat dat de enige manier is om de verdwenen veldnaam terug te zien.",
+  "afleiders": [
+    "",
+    "**Minder velden:** korter is vaak beter, dus het lijkt een logische stap. Maar minder velden verklaart het wissen en opnieuw beginnen niet.",
+    "**Donkerder grijs:** dat maakt het lezen vóór het typen makkelijker. Maar de tekst verdwijnt nog steeds zodra je typt.",
+    "**Inline validatie:** nuttig om fouten te zien. Maar het helpt niet als de bezoeker niet meer weet wat het veld vroeg."
+  ],
+  "kort": "Stel je een vragenlijst voor waarbij elke vraag verdwijnt zodra je begint te antwoorden. Wil je later nakijken of je bij 'postcode' echt je postcode schreef, dan moet je je antwoord uitgummen om de vraag terug te zien. Zo werkt grijze tekst in een formulierveld: hij verdwijnt bij de eerste letter. Een vast label boven het veld blijft wel staan, dus kun je alles rustig nakijken.",
+  "begrippen": [
+    { "term": "Placeholder", "uitleg": "lichtgrijze tekst in een leeg veld die verdwijnt zodra je begint te typen." },
+    { "term": "Label", "uitleg": "de vaste naam van een formulierveld, meestal erboven." },
+    { "term": "Inline validatie", "uitleg": "een melding direct bij het veld als je iets fout invult, nog voordat je het formulier verstuurt." },
+    { "term": "Microsoft Clarity", "uitleg": "een tool die opnames maakt van hoe bezoekers klikken, typen en scrollen op een site." }
+  ],
+  "uitleg": "Nielsen Norman Group noemt een placeholder als vervanging voor een label schadelijk. Het lijkt netjes, maar kost bezoekers moeite:\n- **Geheugen:** je moet onthouden wat het veld vroeg, want de tekst is weg.\n- **Nakijken:** vóór het versturen kun je niet controleren of alles in het goede veld staat. Ook fouten van automatisch invullen zie je niet.\n- **Fouten herstellen:** bij een foutmelding weet je niet meer welk veld wat was.\n- **Lijkt al ingevuld:** grijze tekst wordt soms aangezien voor een ingevulde waarde, waardoor bezoekers een veld overslaan.\n- **Toegankelijkheid:** lichtgrijze tekst heeft weinig contrast, en niet elke schermlezer leest placeholders voor.\n\nNN/g adviseert **duidelijke, zichtbare labels buiten het veld**. Een placeholder mag dan nog een voorbeeld geven, zoals '1234 AB'. Een 'zwevend label' dat naar boven schuift is beter dan alleen een placeholder, maar een vast label blijft de veiligste keuze.",
+  "kernpunt": "Gebruik grijze tekst in een veld alleen als voorbeeld, nooit als enige naam van het veld.",
+  "toepassing": "Loop vandaag het contact- of offerteformulier van één klant na. Staan de veldnamen alleen in het veld, noteer dan het advies voor vaste labels erboven, en bekijk in Clarity of Hotjar een paar opnames van dat formulier.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Placeholders in Form Fields Are Harmful - Nielsen Norman Group",
     "url": "https://www.nngroup.com/articles/form-design-placeholders/"
