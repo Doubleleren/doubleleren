@@ -20,11 +20,25 @@
     ],
     "juist": 2
   },
-  "toelichting": "Afbeeldingen, JavaScript en CSS worden pas opgehaald *nadat* de eerste byte van de HTML binnen is. Ze beïnvloeden LCP en INP, maar niet de TTFB. Caching (op de server en via een CDN) zorgt dat de HTML sneller wordt uitgeleverd, en dat is precies wat TTFB meet.",
-  "kort": "TTFB meet hoe snel de server het eerste stukje van de pagina terugstuurt. Afbeeldingen en andere bestanden worden pas daarna opgehaald, dus kleinere plaatjes helpen hier niet. Zorg dat de server een kant-en-klare versie van de pagina bewaart en snel uitlevert, ook via servers dichter bij de bezoeker. Dat heet caching.",
-  "uitleg": "**TTFB** meet de tijd tussen het starten van de navigatie en het moment dat de eerste byte van het antwoord binnenkomt. Daarin zitten: redirects, het opstarten van een service worker (als die er is), DNS-lookup, het opzetten van de verbinding en TLS, en de request tot de eerste byte.\n\nDrempels volgens web.dev:\n- Goed: 0,8 seconde of minder\n- Verbetering nodig: 0,8 tot 1,8 seconde\n- Slecht: meer dan 1,8 seconde\n\nTTFB is **geen Core Web Vital**, maar wel een voorwaarde: alles wat erna komt (FCP, LCP) begint later als de server traag is.\n\nDe belangrijkste knoppen om aan te draaien:\n- **Hosting:** genoeg geheugen, een actuele backend-stack en capaciteit voor je verkeer\n- **CDN:** servers dichter bij de bezoeker\n- **Caching:** goede Cache-Control-headers en caching aan de rand van het CDN\n- **Redirects vermijden:** geen onnodige redirects op hetzelfde domein, en HSTS om de http-naar-https-redirect over te slaan\n- **Markup streamen**, zodat de browser al kan beginnen voordat de hele pagina klaar is\n- **103 Early Hints** om kritieke bestanden al aan te kondigen terwijl de server nog rekent\n\nLet op: de Lighthouse-audit 'server response time' telt DNS en redirects niet mee, dus die geeft maar een deel van de TTFB.",
-  "kernpunt": "TTFB (goed is ≤ 0,8 s) gaat over hoe snel de server de eerste byte HTML levert. Je verbetert hem met hosting, CDN, caching en minder redirects, niet met beeld- of CSS-optimalisatie.",
+  "kern": "TTFB gaat over hoe snel de server de HTML aflevert, en met caching stuurt hij een kant-en-klare pagina in plaats van die elke keer opnieuw te bouwen.",
+  "afleiders": [
+    "**Afbeeldingen comprimeren:** goed voor de laadtijd, dus het lijkt logisch. Maar afbeeldingen worden pas opgehaald nadat de eerste byte van de HTML binnen is.",
+    "**JavaScript met defer:** helpt bij het opbouwen van de pagina. Maar scripts komen pas na de HTML, dus ze veranderen niets aan de TTFB.",
+    "",
+    "**CSS opschonen:** helpt de browser eerder te tekenen. Maar ook CSS wordt pas na de eerste byte opgehaald, dus de TTFB blijft gelijk."
+  ],
+  "kort": "Een bakker die elk brood pas bakt als je binnenkomt, laat je lang wachten bij de toonbank. Een bakker met brood klaar in de schappen helpt je meteen. TTFB is die wachttijd voordat je ook maar iets krijgt. Kleinere afbeeldingen maken je tas lichter, maar verkorten die eerste wachttijd niet. Caching is het brood dat al klaarligt.",
+  "begrippen": [
+    { "term": "TTFB", "uitleg": "Time to First Byte: de tijd tot het eerste stukje van de pagina binnenkomt." },
+    { "term": "Caching", "uitleg": "een kant-en-klare versie bewaren, zodat die niet bij elk bezoek opnieuw gemaakt hoeft te worden." },
+    { "term": "CDN", "uitleg": "een netwerk van servers op verschillende plekken, zodat de site dichter bij de bezoeker staat." },
+    { "term": "Lazy-loading", "uitleg": "afbeeldingen pas laden als de bezoeker in de buurt scrolt." }
+  ],
+  "uitleg": "**TTFB** meet de tijd tussen het starten van de navigatie en het moment dat de eerste byte van het antwoord binnenkomt. Daarin zitten: redirects, het opstarten van een service worker (als die er is), DNS-lookup, het opzetten van de verbinding en TLS, en de request tot de eerste byte.\n\nDrempels volgens web.dev: goed is **0,8 seconde of minder**, verbetering nodig is 0,8 tot 1,8 seconde, slecht is **meer dan 1,8 seconde**. TTFB is geen Core Web Vital, maar alles wat erna komt (FCP, LCP) begint later als de server traag is. Beeld, scripts en CSS raken LCP en INP, niet de TTFB.\n\nDe belangrijkste knoppen:\n- **Hosting:** genoeg geheugen, een actuele backend-stack en capaciteit voor je verkeer\n- **CDN en caching:** goede Cache-Control-headers en caching aan de rand van het CDN\n- **Minder redirects:** schrap onnodige redirects op hetzelfde domein en gebruik HSTS om de http-naar-https-redirect over te slaan\n- **Markup streamen** en **103 Early Hints**, zodat de browser al kan beginnen terwijl de server nog rekent\n\nLet op: de Lighthouse-audit 'server response time' telt DNS en redirects niet mee.",
+  "kernpunt": "Is de TTFB hoog, vraag dan eerst of de HTML uit een cache komt, voordat je naar de bestanden op de pagina kijkt.",
   "toepassing": "Check in PageSpeed Insights de TTFB van de drie belangrijkste templates van een klant. Zit één boven 0,8 seconde? Vraag de developer of die pagina's uit een cache of CDN komen en of er redirects vóór zitten.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Optimize Time to First Byte",
     "url": "https://web.dev/articles/optimize-ttfb"
@@ -33,7 +47,5 @@
     "titel": "The ultimate guide to web performance",
     "kanaal": "Beyond Fireship",
     "url": "https://www.youtube.com/watch?v=0fONene3OIA"
-  },
-  "herzien": "2026-10-29",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

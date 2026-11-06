@@ -18,11 +18,25 @@
     ],
     "juist": 3
   },
-  "toelichting": "Twee pagina's die **dezelfde vraag** beantwoorden, zitten elkaar in de weg. Dat heet keyword-kannibalisatie. Hier zie je het aan de pagina's die elkaar afwisselen, allebei net buiten de eerste pagina van Google. Voeg de beste stukken van beide samen in één gids en stuur de oude URL door met een 301 (permanente doorverwijzing). Dan komen de backlinks en de inhoud samen op één pagina.\n\n- **noindex** haalt de oude blog uit Google, maar bundelt niets. Zijn inhoud en links helpen de nieuwe blog dan niet.\n- **Een canonical** is bedoeld voor (bijna) dubbele pagina's. Bij twee verschillende teksten kan Google hem negeren.\n- **Het zoekwoord weghalen** raakt ook de andere zoektermen waarop die blog gevonden wordt.",
-  "kort": "Twee blogs die dezelfde vraag beantwoorden, concurreren met elkaar, en geen van beide komt hoog. Maak er één goede blog van en stuur de oude link door naar de nieuwe. Dan telt alles wat beide blogs hadden opgebouwd voor één pagina.",
+  "kern": "De twee blogs zitten elkaar in de weg. Pas als er één pagina overblijft die alles erft, telt hun opgebouwde waarde samen.",
+  "afleiders": [
+    "**noindex:** dan blijft er inderdaad één pagina over. Maar noindex bundelt niets: de inhoud en links van de oude blog helpen de nieuwe dan niet.",
+    "**Canonical:** het klinkt als een zachte manier om signalen door te geven. Maar een canonical is voor (bijna) dubbele pagina's, en bij twee verschillende teksten kan Google hem negeren.",
+    "**Zoekwoord weghalen:** dan lijkt Google vanzelf de nieuwe te kiezen. Maar je raakt ook de andere zoektermen waarop die blog gevonden wordt.",
+    ""
+  ],
+  "kort": "Twee kraampjes op dezelfde markt die precies hetzelfde verkopen, trekken elk maar een deel van de klanten. Zet ze samen in één grote kraam en hang op de oude plek een bordje 'we staan nu daar'. Dan komt iedereen naar één plek. Zo werkt het ook met twee blogs over dezelfde vraag. Google weet niet goed welke het moet kiezen, en geen van beide komt bovenaan.",
+  "begrippen": [
+    { "term": "Keyword-kannibalisatie", "uitleg": "twee of meer pagina's van dezelfde site die met elkaar concurreren op dezelfde zoekvraag." },
+    { "term": "301", "uitleg": "een permanente doorverwijzing van een oude URL naar een nieuwe." },
+    { "term": "Canonical", "uitleg": "een verwijzing die Google vertelt welke van een paar (bijna) gelijke pagina's de hoofdversie is." },
+    { "term": "noindex", "uitleg": "een instructie aan Google om een pagina niet in de zoekresultaten op te nemen." }
+  ],
   "uitleg": "**Is het wel kannibalisatie?** Twee pagina's op hetzelfde zoekwoord zijn niet altijd een probleem. Het is pas kannibalisatie als ze dezelfde zoekintentie (wat de zoeker wil weten of doen) bedienen en geen van beide goed scoort. Een blog 'Wat kost een zonnescherm?' en een productpagina 'Zonnescherm kopen' dienen een ander doel. Die mogen naast elkaar bestaan.\n\n**Samenvoegen in vier stappen:**\n\n- Kies welke URL blijft. Meestal die met de meeste links of het meeste verkeer.\n- Neem de beste delen van de andere tekst over.\n- Stuur de andere URL door met een 301.\n- Pas interne links aan, zodat ze direct naar de overgebleven URL wijzen.\n\nWeghalen zonder doorverwijzing doe je alleen bij een pagina die echt niets meer toevoegt.",
-  "kernpunt": "Beantwoorden twee pagina's dezelfde vraag en scoren ze allebei matig, voeg ze dan samen en stuur de oude URL door met een 301. noindex, een canonical of het zoekwoord weghalen lossen het niet goed op.",
-  "toepassing": "Zoek deze week in Search Console bij een klant een zoekwoord waarop twee of meer URL's vertoningen krijgen. Bekijk of ze dezelfde vraag beantwoorden of een ander doel hebben.",
+  "kernpunt": "Wisselen twee URL's elkaar af op hetzelfde zoekwoord, check dan eerst of ze dezelfde zoekintentie hebben voordat je iets samenvoegt.",
+  "toepassing": "Zoek vandaag in Search Console bij een klant een zoekwoord waarop twee of meer URL's vertoningen krijgen. Bekijk of ze dezelfde vraag beantwoorden of een ander doel hebben.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Keyword Cannibalization: What It (Really) Is & How to Fix It | Ahrefs",
     "url": "https://ahrefs.com/blog/keyword-cannibalization/"

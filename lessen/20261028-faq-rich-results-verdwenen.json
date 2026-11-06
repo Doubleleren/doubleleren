@@ -20,15 +20,35 @@
     ],
     "juist": 0
   },
-  "toelichting": "Google heeft de FAQ-rich result in mei 2026 uitgefaseerd: vanaf 7 mei 2026 verschijnt hij niet meer in Google Search, voor geen enkele site. In juni 2026 is ook de documentatie verwijderd. Het uitklapblok dat het bureau belooft, bestaat dus niet meer.\n\nWaarom de andere opties niet kloppen:\n- **Alleen overheid en zorg:** dat gold van 2023 tot mei 2026. Het is achterhaald: nu krijgt niemand het nog.\n- **Minimaal drie vragen:** zo'n regel bestaat niet, en de rich result zelf is weg.\n- **QAPage:** die markup is voor pagina's waar gebruikers meerdere antwoorden op één vraag geven, zoals een forum. Een eigen FAQ-blok hoort daar niet onder, en het lost niets op.",
-  "kort": "Niet doen. Sinds 7 mei 2026 laat Google bij geen enkele site meer uitklapbare vragen in de zoekresultaten zien. De code die het bureau voor 4.000 euro wil plaatsen, levert in Google dus niets zichtbaars meer op. Een blok met vragen op de pagina zelf kan wel nuttig blijven, als het bezoekers echt helpt.",
-  "uitleg": "FAQ-rich results waren jarenlang een populaire manier om meer ruimte in de zoekresultaten te pakken. Daarom heeft Google ze stap voor stap teruggeschroefd:\n- **Augustus/september 2023:** alleen nog voor bekende, gezaghebbende overheids- en zorgwebsites.\n- **Mei 2026:** Google kondigt in de changelog aan dat de feature vanaf **7 mei 2026** niet meer in Google Search verschijnt.\n- **Juni 2026:** de documentatie over FAQ-rich results is verwijderd.\n\nWat betekent dat in de praktijk?\n- **Geen budget meer voor FAQ-markup om de zoekresultaten.** Wie dat nog verkoopt, werkt met verouderde informatie.\n- **De markup hoeft er niet per se af.** Er is geen aanwijzing dat bestaande FAQPage-markup schaadt; hij levert in Google alleen niets zichtbaars meer op. Haal hem weg als hij onderhoud kost of niet meer klopt met de pagina.\n- **De vragen zelf kunnen wél waardevol zijn.** Een goed FAQ-blok beantwoordt twijfels van bezoekers en levert duidelijke, losse passages op. Dat helpt bezoekers en kan ook helpen om in AI-antwoorden te worden geciteerd.\n\nLet op: oudere bronnen (en sommige checklists) noemen nog de regel 'alleen overheid en zorg'. Kijk bij structured data altijd in de changelog van Google Search Central wat er nu geldt.",
-  "kernpunt": "Google toont sinds 7 mei 2026 voor geen enkele site nog FAQ-rich results. Investeer niet in FAQ-markup om de zoekresultaten; houd een FAQ-blok alleen als het bezoekers echt helpt.",
-  "toepassing": "Check deze week of er bij een klant nog een offerte, roadmap of rapportage loopt waarin FAQ-rich results als doel of KPI staan, en haal die eruit.",
+  "kern": "Het uitklapblok dat het bureau belooft, toont Google sinds 7 mei 2026 bij niemand meer, dus de markup levert in de zoekresultaten niets zichtbaars op.",
+  "afleiders": [
+    "",
+    "**Alleen overheid en zorg:** dat klopte van 2023 tot mei 2026. Nu is het achterhaald: niemand krijgt de FAQ-rich result nog.",
+    "**Minstens drie vragen:** zo'n regel bestaat niet. En de rich result zelf is weg, dus het aantal vragen maakt niets uit.",
+    "**QAPage in plaats van FAQPage:** die markup is voor pagina's waar gebruikers meerdere antwoorden op één vraag geven, zoals een forum. Een eigen FAQ-blok hoort daar niet onder, en het lost niets op."
+  ],
+  "kort": "Stel: iemand verkoopt je een reclamebord langs een weg die al is afgesloten. Het bord zelf is prima, maar niemand rijdt er nog langs. Zo gaat het met FAQ-markup: de code doet het nog, maar Google toont de uitklapbare vragen nergens meer. Je betaalt dus voor zichtbaarheid die niet bestaat. De vragen op de pagina zelf kunnen bezoekers wel blijven helpen.",
+  "begrippen": [
+    {
+      "term": "Rich result",
+      "uitleg": "een zoekresultaat met extra's, zoals sterren of uitklapbare vragen."
+    },
+    {
+      "term": "FAQPage-markup",
+      "uitleg": "code (structured data) die Google vertelt dat een pagina veelgestelde vragen bevat."
+    },
+    {
+      "term": "QAPage",
+      "uitleg": "markup voor pagina's met één vraag en antwoorden van gebruikers, zoals een forum."
+    }
+  ],
+  "uitleg": "FAQ-rich results waren jarenlang een populaire manier om meer ruimte in de zoekresultaten te pakken. Daarom heeft Google ze stap voor stap teruggeschroefd:\n- **Augustus/september 2023:** alleen nog voor bekende, gezaghebbende overheids- en zorgwebsites.\n- **Mei 2026:** Google kondigt in de changelog aan dat de feature vanaf **7 mei 2026** niet meer in Google Search verschijnt.\n- **Juni 2026:** de documentatie over FAQ-rich results is verwijderd.\n\nWat betekent dat in de praktijk?\n- **De markup hoeft er niet per se af.** Er is geen aanwijzing dat bestaande FAQPage-markup schaadt. Haal hem weg als hij onderhoud kost of niet meer klopt met de pagina.\n- **De vragen zelf kunnen wél waardevol zijn.** Een goed FAQ-blok beantwoordt twijfels van bezoekers en levert duidelijke, losse passages op. Dat kan ook helpen om in AI-antwoorden te worden geciteerd.\n\nLet op: oudere bronnen (en sommige checklists) noemen nog de regel 'alleen overheid en zorg'. Kijk bij structured data altijd in de changelog van Google Search Central wat er nu geldt.",
+  "kernpunt": "Belooft iemand een speciaal zoekresultaat door markup, kijk dan eerst in de changelog van Google Search Central of dat resultaat nog bestaat.",
+  "toepassing": "Zoek vandaag in de lopende offertes, roadmaps of rapportages van één klant naar FAQ-rich results als doel of KPI, en haal die eruit.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Latest Google Search Documentation Updates | Google Search Central",
     "url": "https://developers.google.com/search/updates"
-  },
-  "herzien": "2026-11-02",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

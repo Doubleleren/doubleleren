@@ -18,11 +18,24 @@
     ],
     "juist": 2
   },
-  "toelichting": "Google vraagt makers om drie vragen over hun content: **wie** maakte het, **hoe** is het gemaakt, en **waarom**. Bij 'wie' raadt Google een kloppende auteursnaam aan, met een link naar meer over die persoon. Bij 'hoe' hoort ook AI: maak duidelijk dat en hoe AI is gebruikt, vooral waar lezers zich dat kunnen afvragen.\n\n- **Verzwijgen** is niet nodig. Google kijkt naar de kwaliteit en het doel van content, niet naar of er AI bij kwam kijken. Wel tegen de regels: AI vooral gebruiken om rankings te manipuleren.\n- **noindex** is te ver doorgeschoten. YMYL (onderwerpen die je geld, gezondheid of veiligheid raken) betekent: extra streng op betrouwbaarheid, niet: verboden.\n- **Een expert die niet meeschreef** als auteur noemen is misleidend. Google noemt verzonnen of onjuiste makers juist onbetrouwbaar.",
-  "kort": "Google wil dat lezers kunnen zien wie een tekst schreef en hoe die tot stand kwam. Noem dus de echte adviseur als auteur en vertel eerlijk dat AI een eerste versie maakte. Met AI werken mag; het gaat erom dat de tekst goed is en mensen helpt. Een auteur noemen die niet meeschreef, maakt de site juist minder betrouwbaar.",
-  "uitleg": "E-E-A-T staat voor ervaring, expertise, autoriteit en betrouwbaarheid. Google noemt **betrouwbaarheid** (trust) het belangrijkste. Bij YMYL-onderwerpen zoals belastingen weegt het extra zwaar.\n\nZo vertaal je 'wie en hoe' naar de praktijk:\n- **Byline:** de naam van de adviseur die de inhoud controleert, met een link naar een auteurspagina. Zet daar zijn rol, ervaring en specialisme.\n- **Korte uitleg over werkwijze:** bijvoorbeeld 'Eerste versie met AI, inhoud gecontroleerd en aangevuld door [naam], belastingadviseur'. Dat mag onder het artikel of op een pagina over de redactie.\n- **Datum van controle:** belastingregels veranderen elk jaar. Laat zien wanneer de tekst voor het laatst is nagekeken.\n- **Bronnen:** verwijs naar de Belastingdienst of de wettekst.\n\nE-E-A-T is geen score die je met één byline omhoog krikt. Het is wat Google probeert te herkennen. Echte expertise en eerlijkheid zijn het fundament.",
-  "kernpunt": "Wees open over wie een tekst maakte en hoe, ook als AI meeschreef. Een echte, controlerende expert als auteur plus een korte uitleg van de werkwijze past bij wat Google aanraadt; een auteur noemen die niet meeschreef is misleidend.",
-  "toepassing": "Kijk deze week bij een klant met YMYL-content (geld, gezondheid, recht) wat er onder de artikelen staat. Staat er alleen 'Redactie', stel dan een byline met auteurspagina en een korte werkwijze voor.",
+  "kern": "Google wil kunnen zien wie een tekst maakte en hoe. Met AI werken mag, zolang een echte expert de inhoud controleert en daarvoor instaat.",
+  "afleiders": [
+    "**Verzwijgen:** de angst is begrijpelijk, maar Google beoordeelt kwaliteit en doel, niet of er AI aan te pas kwam. Alleen AI inzetten om rankings te manipuleren is tegen de regels.",
+    "**Noindex:** YMYL klinkt als een verbod, maar betekent alleen dat Google extra streng let op betrouwbaarheid. Met noindex haal je goede artikelen zelf uit Google.",
+    "",
+    "**Externe expert:** een bekend gezicht lijkt vertrouwen te geven. Maar een auteur noemen die niet meeschreef, is misleidend, en Google noemt onjuiste makers juist onbetrouwbaar."
+  ],
+  "kort": "Denk aan een bakker die zijn deeg door een machine laat kneden. Klanten vinden dat prima, zolang de bakker zelf proeft en zijn naam aan het brood verbindt. Zet hij de naam van een beroemde bakker op het etiket, dan voelt dat als bedrog zodra het uitkomt. Zo werkt het ook met teksten. Het hulpmiddel maakt weinig uit, eerlijk zijn over wie ervoor instaat wel.",
+  "begrippen": [
+    { "term": "E-E-A-T", "uitleg": "ervaring, expertise, autoriteit en betrouwbaarheid: wat Google probeert te herkennen om te zien of je een bron kunt vertrouwen." },
+    { "term": "YMYL", "uitleg": "Your Money or Your Life: onderwerpen die je geld, gezondheid of veiligheid raken, zoals belastingen." },
+    { "term": "Byline", "uitleg": "de regel met de naam van de auteur, meestal boven of onder een artikel." }
+  ],
+  "uitleg": "Google vraagt makers om drie vragen over hun content: **wie** maakte het, **hoe** is het gemaakt en **waarom**. Bij 'hoe' hoort ook AI: maak duidelijk dat en hoe AI is gebruikt, vooral waar lezers zich dat kunnen afvragen. Van E-E-A-T noemt Google **betrouwbaarheid** (trust) het belangrijkste. Bij YMYL-onderwerpen zoals belastingen weegt het extra zwaar.\n\nZo vertaal je 'wie en hoe' naar de praktijk:\n- **Byline:** de naam van de adviseur die de inhoud controleert, met een link naar een auteurspagina. Zet daar zijn rol, ervaring en specialisme.\n- **Korte uitleg over werkwijze:** bijvoorbeeld 'Eerste versie met AI, inhoud gecontroleerd en aangevuld door [naam], belastingadviseur'. Dat mag onder het artikel of op een pagina over de redactie.\n- **Datum van controle:** belastingregels veranderen elk jaar. Laat zien wanneer de tekst voor het laatst is nagekeken.\n- **Bronnen:** verwijs naar de Belastingdienst of de wettekst.\n\nE-E-A-T is geen score die je met één byline omhoog krikt. Het is wat Google probeert te herkennen. Echte expertise en eerlijkheid zijn het fundament.",
+  "kernpunt": "Staat er onder YMYL-content alleen 'Redactie', regel dan eerst een echte auteur met auteurspagina en één zin over de werkwijze.",
+  "toepassing": "Open vandaag bij een klant met YMYL-content (geld, gezondheid, recht) drie artikelen en kijk wat eronder staat. Staat er alleen 'Redactie', noteer dan een voorstel voor een byline met auteurspagina en een zin over de werkwijze.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Creating helpful, reliable, people-first content | Google Search Central",
     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"

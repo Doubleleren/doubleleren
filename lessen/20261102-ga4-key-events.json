@@ -18,11 +18,25 @@
     ],
     "juist": 3
   },
-  "toelichting": "In GA4 is alles een event. Welke events belangrijk zijn voor het bedrijf, bepaal je zelf door ze te **markeren als key event**. Pas dan telt GA4 ze als doelactie, bijvoorbeeld in de kolom met key events in de acquisitierapporten.\n\n- **Doelen met categorie, actie en label** bestaan niet meer: dat was het model van Universal Analytics.\n- **Eerst in Google Ads importeren** is de omgekeerde volgorde. De route is event → key event → conversie in Google Ads, en dat laatste alleen als je het voor campagnes nodig hebt.\n- **Wachten** helpt niet: het event staat al in het rapport Gebeurtenissen, dus de data zijn verwerkt. Het ontbreekt alleen nog aan de markering.",
-  "kort": "In GA4 (Google Analytics) is elke actie op je site een event, ook een verzonden formulier. GA4 weet zelf niet welke acties belangrijk zijn voor je bedrijf. Daarom moet je generate_lead nog markeren als belangrijke gebeurtenis (key event). Pas dan telt GA4 het als lead in de rapporten.",
-  "uitleg": "GA4 werkt met een **event-based datamodel**: een paginaweergave, een klik en een verzonden formulier zijn allemaal events, met parameters voor de details. Er zijn geen aparte doelen meer zoals in Universal Analytics.\n\nDe acties die echt tellen voor het bedrijf, zoals een aankoop, een offerteaanvraag of een aanmelding, markeer je als **key event** (in de Nederlandse interface: belangrijke gebeurtenis). Vroeger heetten die in GA4 'conversies'. Die term gebruikt Google nu voor Google Ads.\n\nDe volgorde volgens Google:\n- **Event:** meet de actie, bijvoorbeeld generate_lead.\n- **Key event:** markeer het event als belangrijk, zodat GA4 het als doelactie rapporteert.\n- **Conversie:** maak er in Google Ads een conversie van als je er campagnes op wilt sturen.\n\nIn de praktijk ga je bij een nieuwe meting altijd na:\n- komt het event binnen (DebugView, rapport Gebeurtenissen)?\n- is het gemarkeerd als key event?\n- gaat het niet dubbel, bijvoorbeeld omdat het formulier ook een bedankpagina met een eigen event heeft?\n\nZo voorkom je dat een klant wel data heeft, maar geen antwoord krijgt op de vraag die ertoe doet.",
-  "kernpunt": "In GA4 wordt een event pas een doelactie als je het markeert als key event (belangrijke gebeurtenis). De route is event → key event → eventueel conversie in Google Ads.",
+  "kern": "GA4 meet alles wat je instelt, maar telt een event pas als doelactie als jij aangeeft dat het belangrijk is.",
+  "afleiders": [
+    "**Doel met categorie, actie en label:** dat was het model van Universal Analytics. In GA4 bestaan zulke doelen niet meer.",
+    "**Eerst importeren in Google Ads:** dat is de omgekeerde volgorde. De route is event, dan key event, en pas daarna eventueel een conversie in Google Ads als je die voor campagnes nodig hebt.",
+    "**Wachten:** het event staat al in het rapport Gebeurtenissen, dus de data zijn verwerkt. Er ontbreekt alleen nog de markering.",
+    ""
+  ],
+  "kort": "Denk aan een kassa die elke handeling vastlegt: elke scan, elke keer dat de lade opengaat, elke bon. Wil de winkelier weten hoeveel verkopen er waren, dan moet hij zeggen welke handeling een verkoop is. Anders staat het wel in het logboek, maar niet in het overzicht. Zo werkt GA4 ook. Elk verzonden formulier wordt vastgelegd, maar GA4 weet niet vanzelf dat het voor jou een lead is.",
+  "begrippen": [
+    { "term": "Event", "uitleg": "elke actie die GA4 meet, zoals een paginaweergave, een klik of een verzonden formulier." },
+    { "term": "Key event", "uitleg": "een event dat je markeert als belangrijk voor het bedrijf, zodat GA4 het als doelactie telt. In het Nederlands: belangrijke gebeurtenis." },
+    { "term": "Universal Analytics", "uitleg": "de vorige versie van Google Analytics, vóór GA4." },
+    { "term": "DebugView", "uitleg": "een scherm in GA4 waarin je events live ziet binnenkomen tijdens het testen." }
+  ],
+  "uitleg": "GA4 werkt met een **event-based datamodel**: een paginaweergave, een klik en een verzonden formulier zijn allemaal events, met parameters voor de details. Er zijn geen aparte doelen meer zoals in Universal Analytics.\n\nKey events heetten in GA4 vroeger 'conversies'. Die term gebruikt Google nu voor Google Ads.\n\nDe volgorde volgens Google:\n- **Event:** meet de actie, bijvoorbeeld generate_lead.\n- **Key event:** markeer het event als belangrijk, zodat GA4 het als doelactie rapporteert, bijvoorbeeld in de kolom met key events in de acquisitierapporten.\n- **Conversie:** maak er in Google Ads een conversie van als je er campagnes op wilt sturen.\n\nIn de praktijk ga je bij een nieuwe meting altijd na:\n- komt het event binnen (DebugView, rapport Gebeurtenissen)?\n- is het gemarkeerd als key event?\n- gaat het niet dubbel, bijvoorbeeld omdat het formulier ook een bedankpagina met een eigen event heeft?\n\nZo voorkom je dat een klant wel data heeft, maar geen antwoord krijgt op de vraag die ertoe doet.",
+  "kernpunt": "Zet je een nieuwe meting op, controleer dan drie dingen: komt het event binnen, is het een key event, en telt het niet dubbel?",
   "toepassing": "Open bij een klant in GA4 de lijst met key events en controleer of de belangrijkste actie op de site (aankoop, lead of aanmelding) erbij staat, en niet dubbel.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "About key events - Analytics Help",
     "url": "https://support.google.com/analytics/answer/13965727"

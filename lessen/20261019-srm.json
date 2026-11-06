@@ -1,6 +1,7 @@
 {
   "id": "20261019-srm",
   "type": "basis",
+  "niveau": "basis",
   "vakgebied": "CRO",
   "onderwerp": "A/B-testen: Sample Ratio Mismatch",
   "matrix": [
@@ -20,16 +21,26 @@
     ],
     "juist": 1
   },
-  "toelichting": "Bij een 50/50-test verwacht je 49.250 bezoekers per variant. Een chi-kwadraattoets op 50.000 tegen 48.500 geeft χ² ≈ 22,8 met p ≈ 0,000002. Zo'n verschil ontstaat bij toeval vrijwel nooit: dit is een **Sample Ratio Mismatch (SRM)**. 3% klinkt klein, maar bij deze aantallen is het enorm. Uitrollen kan niet, want je vergelijkt geen gelijke groepen meer. Langer doorlopen lost het ook niet op: de oorzaak blijft bestaan.",
-  "kort": "Rol nog niet uit, want bij een 50/50-test horen beide varianten ongeveer evenveel bezoekers te krijgen. Het verschil tussen 50.000 en 48.500 is te groot om toeval te zijn. Dan gaat er iets mis in de test zelf, bijvoorbeeld in de meting of de verdeling. Zoek eerst die oorzaak, want anders vergelijk je geen gelijke groepen.",
-  "uitleg": "Bij een A/B-test met een 50/50-verdeling verwacht je ongeveer evenveel bezoekers per variant. Kleine verschillen zijn toeval. Een **Sample Ratio Mismatch (SRM)** betekent dat de verdeling méér afwijkt dan toeval kan verklaren.\n\nDat is een alarmsignaal: er gaat iets mis in de test zelf. Veelvoorkomende oorzaken:\n- Een redirect-test waarbij een deel van variant B afhaakt of niet getrackt wordt\n- Variant B laadt trager, waardoor de tracking later of niet vuurt\n- Bots of interne bezoekers die maar in één variant terechtkomen\n- Een bug in de toewijzing of in cookies/consent\n\nJe toetst SRM met een **chi-kwadraattoets** op de aantallen bezoekers. Vuistregel uit de praktijk: is p < 0,01, vertrouw de resultaten dan niet. Zoek eerst de oorzaak. Hoe significant de conversie-uitkomst ook is, met een SRM vergelijk je geen gelijke groepen meer.",
-  "kernpunt": "Controleer bij elke A/B-test eerst of de bezoekersverdeling klopt (SRM-check). Pas daarna kijk je naar de conversie.",
-  "toepassing": "Zoek 'SRM calculator' (bijv. die van Lukas Vermeer) en vul de bezoekersaantallen van je laatst afgeronde test in.",
+  "kern": "Bij een 50/50-verdeling is 50.000 tegen 48.500 te scheef om toeval te zijn, dus eerst moet je weten wat er in de test misgaat.",
+  "afleiders": [
+    "**Uitrollen op 97%:** de significantie voelt als het eindoordeel. Maar die zegt niets als de groepen zelf niet eerlijk verdeeld zijn.",
+    "",
+    "**3% is te klein:** het klinkt als een klein verschil. Maar bij deze aantallen is het enorm: zo'n afwijking ontstaat bij toeval vrijwel nooit.",
+    "**Laten doorlopen:** gelijke aantallen lijken het op te lossen. Maar de oorzaak van de scheve verdeling blijft bestaan, dus je vergelijkt nog steeds geen gelijke groepen."
+  ],
+  "kort": "Stel, je verdeelt duizenden knikkers over twee bakken door steeds een munt op te gooien. Komen er dan duidelijk meer in de linkerbak, dan is de munt waarschijnlijk niet eerlijk. Een A/B-test werkt net zo: de bezoekers horen ongeveer gelijk over A en B verdeeld te worden. Is dat niet zo, dan zit er een fout in de verdeling of de meting, en zegt ook de winnaar niets.",
+  "begrippen": [
+    { "term": "Sample Ratio Mismatch (SRM)", "uitleg": "de verdeling van bezoekers over de varianten wijkt meer af dan toeval kan verklaren." },
+    { "term": "Significant", "uitleg": "de uitkomst is waarschijnlijk geen toeval. Dat zegt alleen iets als de test zelf goed loopt." },
+    { "term": "Chi-kwadraattoets", "uitleg": "een rekensom die toetst of aantallen te ver afwijken van wat je zou verwachten." }
+  ],
+  "uitleg": "Bij een 50/50-test verwacht je hier 49.250 bezoekers per variant. Een **chi-kwadraattoets** op 50.000 tegen 48.500 geeft χ² ≈ 22,8 met p ≈ 0,000002. Dat is een duidelijke **Sample Ratio Mismatch (SRM)**.\n\nEen SRM is een alarmsignaal: er gaat iets mis in de test zelf. Veelvoorkomende oorzaken:\n- Een redirect-test waarbij een deel van variant B afhaakt of niet getrackt wordt\n- Variant B laadt trager, waardoor de tracking later of niet vuurt\n- Bots of interne bezoekers die maar in één variant terechtkomen\n- Een bug in de toewijzing of in cookies/consent\n\nVuistregel uit de praktijk: is p < 0,01, vertrouw de resultaten dan niet en zoek eerst de oorzaak. Hoe significant de conversie-uitkomst ook is, met een SRM vergelijk je geen gelijke groepen meer.",
+  "kernpunt": "Is een test klaar, check dan eerst de verdeling van de bezoekers en kijk pas daarna wie er wint.",
+  "toepassing": "Vul vandaag de bezoekersaantallen van de laatst afgeronde test van een klant in de SRM Checker van Lukas Vermeer in.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Lukas Vermeer: SRM Checker",
     "url": "https://www.lukasvermeer.nl/srm/"
-  },
-  "niveau": "basis",
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

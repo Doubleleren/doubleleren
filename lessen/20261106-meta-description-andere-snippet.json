@@ -18,11 +18,24 @@
     ],
     "juist": 1
   },
-  "toelichting": "Volgens Google komt een snippet (de korte tekst onder de titel in de zoekresultaten) **vooral uit de inhoud van de pagina**. De meta description gebruikt Google alleen als die de pagina volgens Google beter beschrijft. Een zin uit de tekst zien is dus normaal, geen fout.\n\n- **Een harde grens van 155 tekens** bestaat niet. Google kort een lange tekst af waar nodig, meestal op de breedte van het scherm.\n- **Google is niet verplicht** de meta description te tonen, ook niet als hij technisch klopt.\n- **Een vast wekelijks wisselschema** bestaat niet. Google kiest zelf welke tekst de pagina het best beschrijft.",
-  "kort": "Google kiest zelf welke tekst het onder je zoekresultaat zet. Meestal pakt het een stuk tekst van de pagina. Je eigen meta description gebruikt Google alleen als die de pagina beter beschrijft. Er is dus niets kapot.",
-  "uitleg": "Een meta description blijft nuttig, ook als Google hem niet altijd toont. Zo vergroot je de kans dat hij gebruikt wordt:\n\n- **Uniek per pagina.** Dezelfde tekst op veel pagina's helpt niet.\n- **Specifiek.** Noem wat op de pagina staat: bij een product bijvoorbeeld prijs of merk, bij een artikel de auteur en de datum.\n- **Waar.** Beloof niets wat de pagina niet waarmaakt.\n- **Eerst de belangrijkste pagina's.** Weinig tijd? Begin bij de homepage en de populairste pagina's.\n\nWil je de lengte van een snippet zelf beperken, dan kan dat met de meta robots-regel max-snippet. Met data-nosnippet houd je een stuk tekst uit de snippet.\n\nEen andere snippet dan je description is geen straf: Google vond op je pagina een tekst die het geschikter vond.",
-  "kernpunt": "Google maakt snippets vooral uit de pagina zelf en gebruikt de meta description alleen als die beter beschrijft. Schrijf hem uniek en specifiek, maar zie een andere snippet niet als fout.",
-  "toepassing": "Zoek deze week bij een klant een belangrijke pagina op in Google en vergelijk de snippet met de meta description. Wijkt hij af, kijk dan of de description wel echt over deze pagina gaat.",
+  "kern": "Google kiest zelf wat het onder een resultaat zet en pakt meestal tekst van de pagina. Een andere snippet is dus normaal gedrag.",
+  "afleiders": [
+    "**Boven 155 tekens:** die grens hoor je vaak, maar een harde limiet bestaat niet. Google kort een lange tekst af waar nodig, meestal op de breedte van het scherm.",
+    "",
+    "**Fout in de code:** het lijkt logisch dat Google toont wat in de head staat. Maar Google is niet verplicht de meta description te tonen, ook niet als hij technisch klopt.",
+    "**Wekelijks testen:** het lijkt alsof Google afwisselt om te testen. Maar een vast wisselschema bestaat niet: Google kiest zelf welke tekst de pagina het best beschrijft."
+  ],
+  "kort": "Stel: je schrijft een flaptekst voor je boek. Een boekhandelaar die het boek aanprijst, leest soms liever een sprekende zin uit het boek zelf voor. Je flaptekst is niet fout, hij vindt die zin alleen treffender. Zo werkt Google ook: meestal haalt het de tekst uit de pagina, en je eigen description gebruikt het als die beter past.",
+  "begrippen": [
+    { "term": "Meta description", "uitleg": "een korte omschrijving van een pagina in de code, bedoeld voor zoekmachines." },
+    { "term": "Snippet", "uitleg": "de korte tekst onder de titel in de zoekresultaten." },
+    { "term": "Head", "uitleg": "het onzichtbare bovenste deel van de HTML, met informatie over de pagina." }
+  ],
+  "uitleg": "Een meta description blijft nuttig, ook als Google hem niet altijd toont. Zo vergroot je de kans dat hij gebruikt wordt:\n\n- **Uniek per pagina.** Dezelfde tekst op veel pagina's helpt niet.\n- **Specifiek.** Noem wat op de pagina staat: bij een product bijvoorbeeld prijs of merk, bij een artikel de auteur en de datum.\n- **Waar.** Beloof niets wat de pagina niet waarmaakt.\n- **Eerst de belangrijkste pagina's.** Weinig tijd? Begin bij de homepage en de populairste pagina's.\n\nWil je de lengte van een snippet zelf beperken, dan kan dat met de meta robots-regel max-snippet. Met data-nosnippet houd je een stuk tekst uit de snippet.",
+  "kernpunt": "Slaat Google een description over, verbeter dan de tekst en niet de code: maak hem unieker en specifieker voor die ene pagina.",
+  "toepassing": "Zoek vandaag een belangrijke pagina van een klant op in Google en vergelijk de snippet met de meta description. Wijkt hij af, kijk dan of de description wel echt over deze pagina gaat.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Control your snippets in search results | Google Search Central",
     "url": "https://developers.google.com/search/docs/appearance/snippet"

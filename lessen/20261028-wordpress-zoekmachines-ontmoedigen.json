@@ -21,15 +21,27 @@
     ],
     "juist": 1
   },
-  "toelichting": "Search Console zegt letterlijk dat het een **noindex-tag** heeft gevonden. In WordPress zit een instelling bij **Instellingen → Lezen** ('Discourage search engines from indexing this site') die vaak aanstaat op een testomgeving en bij de livegang wordt vergeten. Sinds WordPress 5.3 zet die instelling een robots-metatag met noindex en nofollow in elke pagina, en niet meer een Disallow in robots.txt. Daarom ziet de developer niets vreemds in robots.txt.\n\nWaarom de andere opties niet kloppen:\n- **robots.txt:** een blokkade in robots.txt heeft in Search Console een eigen status ('Geblokkeerd door robots.txt'). Bovendien kan Google een noindex alleen zien als het de pagina mag crawlen.\n- **Nieuwe sites wachten:** indexeren kost soms tijd, maar dan staat er 'Gevonden' of 'Gecrawld', niet 'noindex'.\n- **Canonicals:** WordPress zet zelf al canonicals op berichten en pagina's, en een ontbrekende canonical geeft nooit de status noindex.",
-  "kort": "In WordPress zit bij Instellingen en dan Lezen een vinkje om zoekmachines buiten te houden. Dat staat waarschijnlijk nog aan vanuit de testomgeving. Sinds versie 5.3 zet dat vinkje op elke pagina een noindex, een opdracht aan Google om de pagina niet te tonen. Daarom ziet de developer niets vreemds in robots.txt, het aparte bestand met regels voor zoekmachines.",
-  "uitleg": "WordPress heeft standaard een instelling om zoekmachines buiten te houden, bedoeld voor sites die nog niet af zijn. Je vindt hem bij **Instellingen → Lezen**: 'Discourage search engines from indexing this site'.\n\nWat die instelling doet, is in de loop van de tijd veranderd:\n- **Tot WordPress 5.3** zette hij een **Disallow: /** in de virtuele robots.txt. Dat bleek niet waterdicht: een geblokkeerde URL kan toch in Google komen als er andere sites naar linken.\n- **Sinds WordPress 5.3 (2019)** zet hij in elke pagina een robots-metatag met **noindex, nofollow**. Dat houdt pagina's echt uit de index.\n\nDaarom zie je in robots.txt niets bijzonders, terwijl de hele site uit Google blijft.\n\nZo controleer je het snel:\n- Bekijk de broncode of gebruik de URL-inspectietool en zoek naar een robots-metatag met noindex.\n- Check de instelling bij Instellingen → Lezen.\n\nNa het uitzetten haalt Google de pagina's niet meteen terug. Dien de sitemap opnieuw in en vraag voor de belangrijkste pagina's indexering aan met de URL-inspectietool. Zet bij elke livegang 'zoekmachinezichtbaarheid' op je checklist.",
-  "kernpunt": "De WordPress-instelling om zoekmachines te ontmoedigen zet sinds versie 5.3 een noindex-metatag op elke pagina, niet meer een Disallow in robots.txt. Check hem bij elke livegang.",
-  "toepassing": "Zet deze week 'Instellingen → Lezen: zoekmachines niet ontmoedigd' op de livegang-checklist van je team, en controleer het meteen bij de WordPress-klant die het laatst live is gegaan.",
+  "kern": "Een vinkje uit de testfase staat nog aan. Dat zet zelf een noindex in elke pagina, buiten robots.txt om.",
+  "afleiders": [
+    "**robots.txt:** de developer keek alleen daar, dus het lijkt de plek. Maar een blokkade in robots.txt heeft in Search Console een eigen status: 'Geblokkeerd door robots.txt'. En een noindex ziet Google alleen als het de pagina mag crawlen.",
+    "",
+    "**Gewoon wachten:** indexeren kost soms tijd, dus geduld klinkt redelijk. Maar dan staat er 'Gevonden' of 'Gecrawld', niet 'noindex'.",
+    "**Geen SEO-plugin:** het lijkt alsof WordPress zonder plugin niets regelt. Maar WordPress zet zelf al canonicals, en een ontbrekende canonical geeft nooit de status noindex."
+  ],
+  "kort": "Denk aan een winkel die na de verbouwing open is, maar waar nog een bordje 'Gesloten' op de deur hangt. Het hek staat open, maar wie het bordje leest, loopt door. Zo werkt het vinkje 'Zoekmachines ontmoedigen' in WordPress. Het hek is open, want robots.txt laat Google gewoon binnen. Maar elke pagina draagt een bordje dat Google hem niet mag tonen.",
+  "begrippen": [
+    { "term": "noindex", "uitleg": "een instructie in de pagina die Google vraagt de pagina niet in de zoekresultaten te tonen." },
+    { "term": "robots.txt", "uitleg": "een bestand met regels die zeggen welke delen van een site zoekmachines niet mogen crawlen." },
+    { "term": "Crawlen", "uitleg": "het bezoeken en lezen van pagina's door de robot van een zoekmachine." },
+    { "term": "Canonical", "uitleg": "een tag die aangeeft welke URL de hoofdversie van een pagina is." }
+  ],
+  "uitleg": "De instelling zit bij **Instellingen → Lezen**: 'Discourage search engines from indexing this site'. Hij is bedoeld voor sites die nog niet af zijn. Daarom staat hij vaak aan op een testomgeving en wordt hij bij de livegang vergeten.\n\nWat de instelling doet, is in de loop van de tijd veranderd:\n- **Tot WordPress 5.3** zette hij een **Disallow: /** in de virtuele robots.txt. Dat bleek niet waterdicht: een geblokkeerde URL kan toch in Google komen als er andere sites naar linken.\n- **Sinds WordPress 5.3 (2019)** zet hij in elke pagina een robots-metatag met **noindex, nofollow**. Dat houdt pagina's echt uit de index.\n\nZo controleer je het snel:\n- Bekijk de broncode of gebruik de URL-inspectietool en zoek naar een robots-metatag met noindex.\n- Check de instelling bij Instellingen → Lezen.\n\nNa het uitzetten haalt Google de pagina's niet meteen terug. Dien de sitemap opnieuw in en vraag voor de belangrijkste pagina's indexering aan met de URL-inspectietool. Zet bij elke livegang 'zoekmachinezichtbaarheid' op je checklist.",
+  "kernpunt": "Gaat een WordPress-site live vanaf een testomgeving, controleer dan eerst Instellingen → Lezen.",
+  "toepassing": "Open vandaag de broncode van de WordPress-klant die het laatst live ging en zoek op 'noindex'.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Changes to prevent search engines indexing sites | Make WordPress Core",
     "url": "https://make.wordpress.org/core/2019/09/02/changes-to-prevent-search-engines-indexing-sites/"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

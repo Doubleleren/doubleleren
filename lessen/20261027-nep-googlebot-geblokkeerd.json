@@ -20,15 +20,39 @@
     ],
     "juist": 1
   },
-  "toelichting": "Een user-agent is gewoon een tekstje dat iedereen kan invullen. Daarom verifiëren CDN's en firewalls Googlebot op **IP-adres** (reverse DNS of de IP-lijsten die Google publiceert). Jouw crawler draait niet vanaf een Google-IP en wordt dus terecht als nep-Googlebot geweerd. Stabiele cijfers in Search Console passen daarbij.\n\nWaarom de andere opties niet kloppen:\n- **Botbescherming uitzetten** is voorbarig en opent de deur voor scrapers die zich als Googlebot voordoen. Eerst controleren wat de echte Googlebot krijgt.\n- **robots.txt** geeft geen 403. Een Disallow betekent dat een nette crawler de URL niet opvraagt; de server antwoordt dan niets.\n- **JavaScript-rendering** verandert niets aan de statuscode van de eerste HTTP-respons.",
-  "kort": "Iedereen kan zijn programma Googlebot noemen, dus de beveiliging van de site kijkt naar waar het verkeer echt vandaan komt. Jouw crawler komt niet van een computer van Google en wordt daarom als nep tegengehouden. Reden voor paniek is er dus niet. Wil je weten wat de echte Google krijgt, gebruik dan de live test in de URL-inspectietool van Search Console.",
-  "uitleg": "\"Crawlen als Googlebot\" kan op twee manieren, en ze laten iets anders zien.\n\n**Een crawler met de user-agent van Googlebot** (Screaming Frog, Sitebulb) laat zien wat een server teruggeeft op basis van die user-agent. Handig om te zien of een site andere content, redirects of robots-regels voor Googlebot heeft. Maar wat op IP-adres gebeurt, zie je zo niet. Veel CDN's laten alleen geverifieerde Googlebots door en blokkeren nepversies.\n\n**De URL-inspectietool in Search Console** laat de echte Google ophalen. De live test toont de HTTP-respons, de opgehaalde HTML, de geladen resources, JavaScript-meldingen en bij een geslaagde test een screenshot. Dat is het betrouwbaarste antwoord op 'wat krijgt Google?', per URL.\n\n**Serverlogs** laten zien wat Googlebot op grote schaal krijgt. Verifieer daar wel of het echt Googlebot is: doe een reverse DNS-lookup (googlebot.com, google.com of googleusercontent.com) en daarna een forward lookup die weer op hetzelfde IP uitkomt, of vergelijk met Googles IP-lijsten.\n\nVuistregel: gebruik de gespoofte crawl om patronen te vinden, en de URL-inspectietool en logs om ze te bevestigen.",
-  "kernpunt": "Een crawler met de Googlebot-user-agent is niet Google: wat op IP-adres gebeurt, zie je er niet mee. Bevestig met de live test in de URL-inspectietool en met geverifieerde Googlebot-regels in de logs.",
-  "toepassing": "Haal deze week bij een klant achter een CDN drie belangrijke URL's door de live test van de URL-inspectietool en vergelijk statuscode en HTML met je eigen crawl als Googlebot.",
+  "kern": "Iedere crawler kan zich Googlebot noemen, dus de beveiliging kijkt waar het verkeer vandaan komt, en alleen Google zelf laat zien wat het echt krijgt.",
+  "afleiders": [
+    "**De echte Googlebot is geblokkeerd:** al die 403's zien er eng uit. Maar stabiele cijfers in Search Console passen daar niet bij. En botbescherming uitzetten opent de deur voor scrapers die zich als Googlebot voordoen.",
+    "",
+    "**robots.txt:** een blokkade lijkt een logische verklaring. Maar een Disallow geeft geen 403: een nette crawler vraagt de URL dan gewoon niet op.",
+    "**JavaScript-rendering:** rendering verandert wat je op de pagina ziet. Maar het verandert niets aan de statuscode van de eerste HTTP-respons."
+  ],
+  "kort": "Iedereen kan bij de slagboom van een bedrijf zeggen dat hij de postbode is. Een goede portier kijkt daarom niet naar wat je zegt, maar naar je pasje. Jouw crawler noemt zich Googlebot, maar heeft het pasje van Google niet en wordt dus tegengehouden. De echte postbode komt gewoon binnen. Wil je zien wat die krijgt, laat Google dan zelf de pagina ophalen met de live test in Search Console.",
+  "begrippen": [
+    {
+      "term": "User-agent",
+      "uitleg": "de naam waarmee een programma zich bij een website voorstelt. Die kan iedereen zelf invullen."
+    },
+    {
+      "term": "403",
+      "uitleg": "een statuscode van de server die betekent: toegang geweigerd."
+    },
+    {
+      "term": "CDN",
+      "uitleg": "een netwerk van servers tussen bezoeker en website dat de site sneller maakt en vaak ook beveiligt."
+    },
+    {
+      "term": "URL-inspectietool",
+      "uitleg": "een tool in Search Console die laat zien hoe Google zelf een URL ophaalt."
+    }
+  ],
+  "uitleg": "Er zijn drie manieren om te zien wat Googlebot krijgt, en elke manier laat iets anders zien.\n\n**Een crawler met de user-agent van Googlebot** (Screaming Frog, Sitebulb) laat zien wat een server teruggeeft op basis van die user-agent. Handig om te zien of een site andere content, redirects of robots-regels voor Googlebot heeft. Wat op IP-adres gebeurt, zie je zo niet. Veel CDN's laten alleen geverifieerde Googlebots door.\n\n**De URL-inspectietool in Search Console** laat de echte Google ophalen. De live test toont de HTTP-respons, de opgehaalde HTML, de geladen resources, JavaScript-meldingen en bij een geslaagde test een screenshot. Per URL is dat het betrouwbaarste antwoord op 'wat krijgt Google?'.\n\n**Serverlogs** laten zien wat Googlebot op grote schaal krijgt. Verifieer daar wel of het echt Googlebot is: doe een reverse DNS-lookup (googlebot.com, google.com of googleusercontent.com) en daarna een forward lookup die weer op hetzelfde IP uitkomt. Of vergelijk met de IP-lijsten die Google publiceert.\n\nGebruik de gespoofte crawl dus om patronen te vinden, en de URL-inspectietool en logs om ze te bevestigen.",
+  "kernpunt": "Geeft je crawl als Googlebot rare statuscodes, controleer dan eerst met de live test wat de echte Google krijgt, voordat je iets aan de beveiliging verandert.",
+  "toepassing": "Haal vandaag bij een klant achter een CDN drie belangrijke URL's door de live test van de URL-inspectietool. Vergelijk statuscode en HTML met je eigen crawl als Googlebot.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Verify requests from Google crawlers and fetchers | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot"
-  },
-  "herzien": "2026-11-02",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

@@ -18,11 +18,25 @@
     ],
     "juist": 2
   },
-  "toelichting": "Een taalmodel kan een overtuigend cijfer geven dat nergens op gebaseerd is. Anthropic raadt aan om antwoorden **controleerbaar** te maken: laat Claude bij elke bewering een letterlijk citaat geven, en laat het een bewering terugtrekken als er geen citaat voor is. Tellen doe je daarna zelf, bijvoorbeeld in een spreadsheet.\n\n- Twee keer hetzelfde antwoord bewijst niets: twee keer dezelfde fout kan ook.\n- 'Orde van grootte klopt vast' is precies de aanname die je klant op het verkeerde spoor zet.\n- 'Wees nauwkeurig' helpt weinig zonder een manier om het te controleren.",
-  "kort": "Een AI zoals Claude kan een overtuigend cijfer noemen dat nergens op gebaseerd is. Laat hem daarom bij elke bevinding letterlijke zinnen uit de reviews geven, met het nummer van die review. Kan hij geen citaat geven, schrap de bewering dan. Hoeveel mensen iets zeggen, tel je daarna zelf, bijvoorbeeld in een spreadsheet.",
-  "uitleg": "Reviews, surveys en chatlogs zijn goud voor CRO: ze vertellen **waarom** bezoekers twijfelen. Claude kan duizenden antwoorden snel ordenen in thema's. Maar bij lange stukken tekst kan het ook dingen samenvatten die er niet (zo vaak) staan.\n\nTechnieken uit de documentatie van Anthropic om dat te voorkomen:\n- **Eerst citaten, dan analyse.** Laat Claude bij lange documenten eerst letterlijke citaten verzamelen en de analyse daarop baseren.\n- **Citaten bij elke bewering.** Vind Claude geen citaat, dan schrapt het de bewering.\n- **Ruimte voor 'weet ik niet'.** Geef expliciet toestemming om te zeggen dat de data iets niet laten zien.\n- **Alleen de aangeleverde bronnen.** Vraag Claude om geen algemene kennis toe te voegen.\n\nVoor een CRO-analyse werkt deze volgorde goed:\n1. Laat Claude thema's voorstellen, met per thema 3 tot 5 letterlijke citaten en de ID's.\n2. Tel de aantallen zelf, bijvoorbeeld door Claude per review één thema te laten toekennen in een tabel die je kunt filteren.\n3. Maak pas dan hypotheses: 'Als we X veranderen, verwachten we Y, omdat klanten zeggen Z.'\n\nZo kun je in de presentatie elke bevinding met een echte klantzin onderbouwen.",
-  "kernpunt": "Laat Claude elke bevinding uit klantfeedback onderbouwen met letterlijke citaten, schrap wat geen citaat heeft, en tel aantallen zelf na voordat je ze presenteert.",
+  "kern": "Claude kan een overtuigend cijfer noemen dat nergens op gebaseerd is. Alleen wat je kunt terugvinden in de brondata, hoort in de presentatie.",
+  "afleiders": [
+    "**Twee keer vragen:** een gelijk antwoord voelt als bevestiging, maar twee keer dezelfde fout kan ook. Het zegt niets over de brondata.",
+    "**Presenteren als schatting:** 'de orde van grootte klopt vast' is precies de aanname die je klant op het verkeerde spoor zet. Je kwam het onderwerp zelf maar een handvol keer tegen.",
+    "",
+    "**'Wees heel nauwkeurig':** dat klinkt als een oplossing, maar het helpt weinig zonder een manier om het te controleren."
+  ],
+  "kort": "Een collega zegt na een lange klantdag: 'Bijna iedereen klaagde over de levertijd.' Dat klinkt overtuigend, dus je vraagt: wie zei dat dan precies? Kan hij geen namen noemen, dan was het vooral een indruk. Claude kan bij veel tekst net zo een indruk als feit brengen. Vraag dus om de letterlijke zinnen, dan zie je meteen of het klopt.",
+  "begrippen": [
+    { "term": "Exitsurvey", "uitleg": "een korte vragenlijst voor bezoekers die de site verlaten." },
+    { "term": "A/B-test", "uitleg": "een test waarin je twee versies van een pagina vergelijkt bij echte bezoekers." },
+    { "term": "Hypothese", "uitleg": "een onderbouwde verwachting die je met een test controleert." },
+    { "term": "Review-ID", "uitleg": "het unieke nummer van een review, zodat je hem kunt terugvinden." }
+  ],
+  "uitleg": "Reviews, surveys en chatlogs zijn goud voor CRO: ze vertellen **waarom** bezoekers twijfelen. Claude kan duizenden antwoorden snel ordenen in thema's. Maar bij lange stukken tekst kan het ook dingen samenvatten die er niet (zo vaak) staan.\n\nTechnieken uit de documentatie van Anthropic:\n- **Eerst citaten, dan analyse.** Laat Claude bij lange documenten eerst letterlijke citaten verzamelen en de analyse daarop baseren.\n- **Citaten bij elke bewering.** Vindt Claude geen citaat, dan trekt het de bewering terug.\n- **Ruimte voor 'weet ik niet'.** Geef expliciet toestemming om te zeggen dat de data iets niet laten zien.\n- **Alleen de aangeleverde bronnen.** Vraag Claude om geen algemene kennis toe te voegen.\n\nVoor een CRO-analyse werkt deze volgorde goed:\n- **Thema's met bewijs:** laat Claude thema's voorstellen, met per thema 3 tot 5 letterlijke citaten en de ID's.\n- **Zelf tellen:** laat Claude per review één thema toekennen in een filterbare tabel.\n- **Pas dan hypotheses:** 'Als we X veranderen, verwachten we Y, omdat klanten zeggen Z.'\n\nZo kun je in de presentatie elke bevinding met een echte klantzin onderbouwen.",
+  "kernpunt": "Presenteer nooit een aantal uit een AI-analyse dat je niet zelf hebt nageteld.",
   "toepassing": "Neem een analyse van klantfeedback die je recent met AI hebt gemaakt. Kies het cijfer waar je het meest op bouwt en zoek drie letterlijke voorbeelden in de brondata. Vind je ze niet, pas de analyse dan aan.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Reduce hallucinations | Claude Docs",
     "url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"

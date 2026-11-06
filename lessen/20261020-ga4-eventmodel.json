@@ -8,7 +8,6 @@
     "3.1.6"
   ],
   "titel": "Waar is mijn Event Category gebleven in GA4?",
-  "volgorde": "opdracht-eerst",
   "intro": "Een klant mailt: \"In het oude Analytics hadden we een event met Category 'Formulier' en Action 'Verzenden'. Waar vind ik die category nu terug in GA4?\" Om dat goed te beantwoorden moet je snappen hoe GA4 data opslaat.",
   "opdracht": {
     "soort": "meerkeuze",
@@ -21,11 +20,25 @@
     ],
     "juist": 2
   },
-  "toelichting": "In GA4 is álles een event: een paginaweergave (page_view), een scroll, een aankoop en ook de start van een sessie (session_start). Category, Action en Label bestaan niet meer; context geef je mee via parameters. Paginaweergaven en scrolls komen standaard binnen via enhanced measurement.",
-  "kort": "In GA4 bestaan Category, Action en Label niet meer. Alles wat een bezoeker doet is een event: een gebeurtenis met een naam en extra details, zelfs het begin van een bezoek. Het oude formulier-event wordt dus een naam zoals generate_lead, met details zoals de naam van het formulier. Wil je zo'n detail in rapporten zien, meld het dan eerst apart aan.",
-  "uitleg": "Universal Analytics (UA) was gebouwd rond **sessies en hit types**: een pageview-hit, een event-hit, een ecommerce-hit. Een event had altijd *Category, Action en Label*.\n\nGA4 draait dat om: **elke interactie is een event**, met een naam en parameters voor de context. Google onderscheidt vier soorten:\n- **Automatisch verzamelde events**, zoals session_start en first_visit\n- **Enhanced measurement**: page_view, scroll (bij 90% scrolldiepte), outbound click, file_download, form_start/form_submit en video-events, aan te zetten per datastream\n- **Aanbevolen events**: vaste namen met voorgeschreven parameters, zoals generate_lead, sign_up en purchase\n- **Custom events**: zelf bedacht, alleen als er geen andere optie past\n\nSessies bestaan nog wel, maar ze worden **afgeleid uit events**. Bij de start van een sessie verstuurt GA4 een session_start-event en krijgt de sessie een ga_session_id. Een sessie eindigt standaard na 30 minuten inactiviteit. Anders dan in UA begint er in GA4 geen nieuwe sessie als de campagnebron halverwege verandert. Sessieaantallen van UA en GA4 zijn daarom niet één-op-één te vergelijken.\n\nHet antwoord aan de klant: de oude Category wordt in GA4 een **eventnaam** (bijvoorbeeld generate_lead) plus **parameters** (bijvoorbeeld form_name). Wil je zo'n parameter in rapporten zien, registreer hem dan als custom dimension.",
-  "kernpunt": "GA4 kent geen hit types en geen Category/Action/Label meer: alles is een event met parameters, en sessies worden afgeleid uit events (session_start).",
+  "kern": "In GA4 is elke handeling een event met een naam en details, en zelfs het begin van een sessie is zo'n event.",
+  "afleiders": [
+    "**Hit types zoals in UA:** zo werkte het oude Analytics. GA4 kent geen aparte soorten hits meer: een paginaweergave is gewoon het event page_view.",
+    "**Sessie als basis:** sessies bestaan nog, dus het klinkt logisch. Maar ze worden afgeleid uit events, en Category, Action en Label bestaan niet meer.",
+    "",
+    "**Alleen eigen events:** wie uit UA komt, denkt dat alles handwerk is. Maar paginaweergaven en scrolls komen standaard binnen via enhanced measurement."
+  ],
+  "kort": "Het oude Analytics werkte met een vast formulier met drie hokjes: Category, Action en Label. GA4 werkt meer als een logboek: elke gebeurtenis krijgt een naam, en daaronder noteer je de details die erbij horen. Het oude formulier-event wordt dus een gebeurtenis met een eigen naam, met de naam van het formulier als detail. Omdat alles een gebeurtenis is, is zelfs het begin van een bezoek er een.",
+  "begrippen": [
+    { "term": "Event", "uitleg": "een gebeurtenis die GA4 meet, zoals een paginaweergave, een scroll of een aankoop." },
+    { "term": "Parameter", "uitleg": "een extra detail bij een event, zoals de naam van het formulier." },
+    { "term": "Enhanced measurement", "uitleg": "een instelling in GA4 die standaardevents zoals paginaweergaven en scrolls automatisch meet." },
+    { "term": "Universal Analytics (UA)", "uitleg": "de vorige versie van Google Analytics, met hit types en Category, Action en Label." }
+  ],
+  "uitleg": "Google onderscheidt vier soorten events:\n- **Automatisch verzamelde events**, zoals session_start en first_visit\n- **Enhanced measurement**: page_view, scroll (bij 90% scrolldiepte), outbound click, file_download, form_start/form_submit en video-events, aan te zetten per datastream\n- **Aanbevolen events**: vaste namen met voorgeschreven parameters, zoals generate_lead, sign_up en purchase\n- **Custom events**: zelf bedacht, alleen als er geen andere optie past\n\nBij de start van een sessie verstuurt GA4 een session_start-event en krijgt de sessie een ga_session_id. Een sessie eindigt standaard na 30 minuten inactiviteit. Anders dan in UA begint er in GA4 geen nieuwe sessie als de campagnebron halverwege verandert. Sessieaantallen van UA en GA4 zijn daarom niet één-op-één te vergelijken.\n\nHet antwoord aan de klant: de oude Category wordt in GA4 een **eventnaam** (bijvoorbeeld generate_lead) plus **parameters** (bijvoorbeeld form_name). Wil je zo'n parameter in rapporten zien, registreer hem dan als custom dimension.",
+  "kernpunt": "Zet je een oud UA-event over, kies dan eerst een aanbevolen eventnaam en zet de details in parameters.",
   "toepassing": "Open bij een klant in GA4 Reports > Engagement > Events. Kijk welke events er binnenkomen en markeer welke automatisch of via enhanced measurement komen, welke aanbevolen events zijn en welke custom. Staan er custom events tussen die een aanbevolen naam hadden kunnen krijgen?",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "About events - Analytics Help",
     "url": "https://support.google.com/analytics/answer/9322688"

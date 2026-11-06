@@ -18,11 +18,24 @@
     ],
     "juist": 2
   },
-  "toelichting": "De balk komt binnen nadat de pagina al getekend is. Er is geen plek voor gereserveerd, dus alles eronder schuift op. Geef de plek van de balk vooraf een vaste hoogte (min-height in de CSS). Dan verschijnt de tekst in ruimte die er al was.\n\n- **Later laden** maakt het niet beter. De balk duwt de inhoud dan nog steeds weg, alleen op een later moment.\n- **Afmetingen bij afbeeldingen** zijn verstandig, maar hier is de balk de oorzaak, niet de foto's.\n- **Lighthouse** meet alleen het laden in een testomgeving. Search Console gebruikt velddata: metingen bij echte bezoekers, over hun hele bezoek. Die tellen.",
-  "kort": "De balk verschijnt pas als de pagina er al staat, en duwt dan alles naar beneden. Houd daarom vooraf een vaste ruimte vrij waar de balk in komt. Dan verspringt er niets meer. Een goede score in Lighthouse zegt hier weinig, want echte bezoekers zien het verspringen wel.",
+  "kern": "Het verspringen komt doordat de balk geen eigen plek heeft. Krijgt hij die vooraf, dan verschijnt de tekst in ruimte die er al was.",
+  "afleiders": [
+    "**Later laden:** dan staat de foto inderdaad eerder in beeld. Maar de balk duwt de inhoud nog steeds weg, alleen op een later moment.",
+    "**Afmetingen bij afbeeldingen:** dat is de bekendste oorzaak van CLS en dus verstandig. Maar hier is de balk de oorzaak, niet de foto's.",
+    "",
+    "**Lighthouse volgen:** een testscore van 0,02 klinkt geruststellend. Maar Lighthouse meet alleen het laden in een testomgeving, en Search Console meet echte bezoekers over hun hele bezoek."
+  ],
+  "kort": "Stel dat je in de bioscoop zit en er komt nog iemand bij terwijl de film al loopt. Er is geen stoel vrij, dus de hele rij schuift een plek op. Had je vooraf een stoel vrijgehouden, dan was hij er zonder gedoe bij gaan zitten. Zo werkt het met een balk die later binnenkomt: zonder vrije ruimte schuift alles eronder op. Echte bezoekers merken dat, ook als een test het niet ziet.",
+  "begrippen": [
+    { "term": "Velddata", "uitleg": "metingen bij echte bezoekers, zoals Search Console die toont." },
+    { "term": "Lighthouse", "uitleg": "een test die je zelf draait en die alleen het laden van de pagina meet, in een testomgeving." },
+    { "term": "min-height", "uitleg": "een CSS-regel die een blok een vaste minimale hoogte geeft, ook als de inhoud er nog niet is." }
+  ],
   "uitleg": "CLS is goed bij **0,1 of lager**, gemeten bij 75% van de bezoeken. De bekendste oorzaken en oplossingen volgens web.dev:\n\n- **Afbeeldingen en video's zonder afmetingen:** zet width en height, of aspect-ratio in de CSS.\n- **Advertenties, embeds en balken die later laden:** reserveer ruimte met min-height. Laat die ruimte niet inklappen als er niets komt.\n- **Inhoud boven bestaande inhoud invoegen:** hoe hoger op het scherm, hoe erger. Kan het niet anders, zet het dan lager of als overlay over de pagina heen.\n- **Webfonts:** een vervangend lettertype met andere maten laat tekst verspringen. Kies een lettertype dat erop lijkt en laad belangrijke fonts vooraf.\n- **Animaties:** gebruik transform in plaats van top of left.\n\nVerschuivingen binnen 0,5 seconde na een klik of tik tellen niet mee. Een menu dat openklapt na een klik is dus geen probleem.",
-  "kernpunt": "Iets wat later op de pagina verschijnt, krijgt vooraf een vaste plek (bijv. min-height). Beoordeel CLS op velddata uit Search Console of CrUX, niet alleen op Lighthouse.",
-  "toepassing": "Open deze week een productpagina van een klant op je telefoon en kijk of er na het laden nog een balk, banner of melding bovenaan verschijnt. Zo ja, vraag de developer om daar vooraf ruimte voor te reserveren.",
+  "kernpunt": "Is CLS in het veld slecht maar in Lighthouse goed, zoek dan eerst naar iets wat pas na het laden verschijnt.",
+  "toepassing": "Open vandaag een productpagina van een klant op je telefoon en kijk of er na het laden nog een balk, banner of melding bovenaan verschijnt. Zo ja, vraag de developer om daar vooraf ruimte voor te reserveren.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Optimize Cumulative Layout Shift | web.dev",
     "url": "https://web.dev/articles/optimize-cls"

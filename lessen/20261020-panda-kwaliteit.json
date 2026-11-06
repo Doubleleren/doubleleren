@@ -9,8 +9,6 @@
   ],
   "titel": "Van Panda naar kernalgoritme: zo beoordeelt Google contentkwaliteit nu",
   "intro": "Een klant met een affiliatesite verloor na een core update veel organisch verkeer. In een oud blogartikel leest hij dat hij \"een Panda-straf\" heeft.",
-  "kort": "Panda was een los filter van Google tegen slechte content, maar zit sinds 2015 gewoon in het vaste systeem. Er komt dus geen aparte update om op te wachten. Een verzoek indienen of oude pagina's massaal weggooien helpt ook niet. Kijk eerlijk of je pagina's echt beter en origineler zijn dan die van concurrenten, en verbeter ze.",
-  "uitleg": "**Panda** werd in 2011 aangekondigd. Het systeem moest ervoor zorgen dat kwalitatief goede en originele content beter zichtbaar werd, en dunne, gekopieerde of massaal geproduceerde content minder. In het begin kwam Panda in losse updates.\n\nVolgens Google zelf is Panda in **2015** opgegaan in de **kernsystemen** (core ranking systems). Hetzelfde gebeurde later met het **helpful content system** (aangekondigd in 2022): dat werd in **maart 2024** onderdeel van de kernsystemen. Google noemt beide inmiddels *retired systems*.\n\nWat betekent dat voor jou?\n\n- Er bestaat geen losse \"Panda-update\" of \"Panda-straf\" meer. Kwaliteit wordt beoordeeld door de kernsystemen, en grote verschuivingen zie je vooral rond **core updates**.\n- Een algoritmische daling is **geen handmatige actie**: er is geen melding in Search Console en geen heroverwegingsverzoek mogelijk.\n- Herstel vraagt om echte verbetering. Google geeft daarvoor zelfbeoordelingsvragen, zoals: biedt de content originele informatie of analyse? Voegt hij wezenlijk iets toe ten opzichte van andere pagina's in de zoekresultaten? Is hij massaal geproduceerd zonder aandacht per pagina?\n\nDe gedachte achter Panda leeft dus nog steeds, alleen niet meer als apart filter.",
   "opdracht": {
     "soort": "meerkeuze",
     "vraag": "Wat is het beste advies aan deze klant?",
@@ -22,9 +20,25 @@
     ],
     "juist": 1
   },
-  "toelichting": "Panda-refreshes bestaan niet meer: Panda zit sinds 2015 in de kernsystemen. Een heroverwegingsverzoek kan alleen bij een handmatige actie, en een algoritmische daling is dat niet. Massaal oude content verwijderen om 'vers' te lijken helpt volgens Google niet. Wat wel werkt: de getroffen pagina's eerlijk beoordelen en echt beter maken.",
-  "kernpunt": "Panda is sinds 2015 onderdeel van Googles kernsystemen, het helpful content system sinds maart 2024. Een kwaliteitsdaling los je niet op met wachten of een verzoek, maar met betere content.",
-  "toepassing": "Neem bij een klant met een daling na een core update de vijf pagina's die het meest verloren. Leg ze naast de top 3 in de zoekresultaten en noteer per pagina wat de concurrent beter of origineler doet.",
+  "kern": "Panda zit al jaren in Googles vaste systemen, dus herstel komt alleen van pagina's die echt beter en origineler worden.",
+  "afleiders": [
+    "**Heroverwegingsverzoek:** dat lijkt de officiële weg terug. Maar een verzoek kan alleen bij een handmatige actie, en een algoritmische daling is dat niet.",
+    "",
+    "**Wachten op een Panda-refresh:** zo ging het vroeger, met losse updates. Maar Panda zit sinds 2015 in de kernsystemen, dus zo'n refresh komt er niet meer.",
+    "**Helft verwijderen:** opruimen voelt als een frisse start. Maar massaal oude content verwijderen om 'vers' te lijken helpt volgens Google niet."
+  ],
+  "kort": "Vroeger kwam er af en toe een aparte inspecteur langs om de kwaliteit van een restaurant te keuren. Nu zit die keuring in het gewone werk van elke dag. Er is dus geen herkeuring om op te wachten of om aan te vragen. Je klimt alleen weer op door je gerechten echt beter te maken dan die van de buren.",
+  "begrippen": [
+    { "term": "Kernsystemen", "uitleg": "de vaste systemen waarmee Google pagina's beoordeelt en rangschikt." },
+    { "term": "Core update", "uitleg": "een brede aanpassing van de kernsystemen van Google, waardoor rankings flink kunnen verschuiven." },
+    { "term": "Handmatige actie", "uitleg": "een straf die een medewerker van Google oplegt. Die zie je als melding in Search Console." },
+    { "term": "Heroverwegingsverzoek", "uitleg": "een verzoek in Search Console om een handmatige actie op te heffen." }
+  ],
+  "uitleg": "**Panda** werd in 2011 aangekondigd. Het systeem moest ervoor zorgen dat kwalitatief goede en originele content beter zichtbaar werd, en dunne, gekopieerde of massaal geproduceerde content minder. In het begin kwam Panda in losse updates.\n\nVolgens Google zelf is Panda in **2015** opgegaan in de **kernsystemen** (core ranking systems). Hetzelfde gebeurde later met het **helpful content system** (aangekondigd in 2022): dat werd in **maart 2024** onderdeel van de kernsystemen. Google noemt beide inmiddels *retired systems*.\n\nWat betekent dat voor jou?\n- Kwaliteit wordt beoordeeld door de kernsystemen, en grote verschuivingen zie je vooral rond **core updates**.\n- Een algoritmische daling geeft geen melding in Search Console.\n- Voor herstel geeft Google zelfbeoordelingsvragen, zoals: biedt de content originele informatie of analyse? Voegt hij wezenlijk iets toe ten opzichte van andere pagina's in de zoekresultaten? Is hij massaal geproduceerd zonder aandacht per pagina?\n\nDe gedachte achter Panda leeft dus nog steeds, alleen niet meer als apart filter.",
+  "kernpunt": "Noemt een klant een 'Panda-straf', leg dan zijn zwakste pagina's naast de zelfbeoordelingsvragen van Google.",
+  "toepassing": "Neem bij een klant met een daling na een core update de pagina die het meest verloor. Leg hem naast de top 3 in de zoekresultaten en noteer wat de concurrent beter of origineler doet.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "A guide to Google Search ranking systems",
     "url": "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
@@ -33,7 +47,5 @@
     "titel": "How To Recover From Google's Helpful Content Update",
     "kanaal": "Rank Math SEO",
     "url": "https://www.youtube.com/watch?v=wYAa4BHXUPA"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

@@ -18,11 +18,25 @@
     ],
     "juist": 2
   },
-  "toelichting": "Google rendert JavaScript wel, maar **klikt niet op knoppen** en voert meestal geen functies uit die een gebruikersactie nodig hebben. Alles wat pas na een klik op 'Meer laden' verschijnt, ziet Google dus niet, en de links naar die producten ook niet.\n\n- Server-side rendering helpt niet zolang de producten pas na een klik worden opgehaald.\n- Een sitemap helpt Google URL's te vinden, maar vervangt geen interne links: die geven context en laten zien wat belangrijk is.\n- Een canonical naar pagina 1 raadt Google juist af: elke pagina in de reeks hoort een eigen canonical te hebben.",
-  "kort": "Google klikt niet op knoppen zoals Meer laden. Producten die pas na zo'n klik verschijnen, ziet Google dus niet. Geef elke set producten daarom een eigen webadres, bijvoorbeeld met ?page=2. Link daar met een gewone link naartoe (een <a href>), zodat Google hem kan volgen.",
-  "uitleg": "Een knop 'Meer laden' of infinite scroll is prettig voor bezoekers, maar wordt vrijwel altijd met JavaScript gebouwd. Google klikt niet en scrolt niet zoals een bezoeker. Zonder extra werk ziet Google alleen de eerste set producten.\n\nWat Google aanraadt bij paginering en bijladen:\n- **Eigen URL per pagina**, bijvoorbeeld met ?page=2. Geen #-fragmenten: Google negeert alles na het hekje en slaat zo'n link mogelijk over.\n- **Gewone links** met <a href> van elke pagina naar de volgende, en eventueel terug naar pagina 1.\n- **Eigen canonical per pagina**, niet allemaal naar pagina 1.\n\nJe kunt beide combineren: de knop blijft voor bezoekers, en daarnaast staan er echte links naar ?page=2 enzovoort. Laat de knop bij het bijladen de URL bijwerken, zodat een gedeelde link ook naar de juiste plek gaat.\n\nControleer het met de URL-inspectietool: staan de links naar volgende pagina's in de gerenderde HTML? En crawl de categorie met Screaming Frog met JavaScript-rendering aan. Vindt de crawler de diepere producten niet, dan vindt Google ze waarschijnlijk ook niet.",
-  "kernpunt": "Google klikt niet op 'Meer laden'. Geef elke set producten een eigen URL en link ernaar met een gewone <a href>, met een eigen canonical per pagina.",
+  "kern": "Google bekijkt de pagina zoals hij laadt en drukt nergens op. Wat pas na een klik verschijnt, en de links daarin, bestaat voor Google niet.",
+  "afleiders": [
+    "**Server-side rendering:** Google rendert JavaScript wel. Het probleem is de klik: zolang de producten pas na de knop worden opgehaald, helpt ook server-side rendering niet.",
+    "**Producten in de sitemap:** dat helpt Google de URL's te vinden, maar vervangt geen interne links. Die geven context en laten zien wat belangrijk is.",
+    "",
+    "**Canonical naar pagina 1:** het lijkt dubbele content op te lossen, maar Google raadt dat juist af. Elke pagina in de reeks hoort een eigen canonical te hebben."
+  ],
+  "kort": "Stel je een boek voor waarin je pas verder kunt lezen als je op een belletje drukt. Een lezer drukt erop, maar iemand die alleen bladzijden omslaat, komt nooit voorbij de eerste. Google is die bladeraar: het volgt gewone links, maar drukt niet op knoppen. Producten achter de knop 'Meer laden' vindt Google daarom niet. Behalve als er ook een gewone link naar een volgende pagina staat.",
+  "begrippen": [
+    { "term": "JavaScript", "uitleg": "programmeercode die in de browser draait en een pagina na het laden kan aanpassen." },
+    { "term": "<a href>", "uitleg": "de gewone HTML-code voor een link, die Google kan volgen." },
+    { "term": "Server-side rendering", "uitleg": "de server bouwt de pagina al helemaal op voordat hij naar de browser gaat." },
+    { "term": "Canonical", "uitleg": "een tag die aangeeft welke versie van een pagina de hoofdversie is." }
+  ],
+  "uitleg": "Een knop 'Meer laden' of infinite scroll is prettig voor bezoekers, maar wordt vrijwel altijd met JavaScript gebouwd. Google rendert JavaScript wel, maar voert meestal geen functies uit die een gebruikersactie nodig hebben, en scrolt niet zoals een bezoeker. Zonder extra werk ziet Google alleen de eerste set producten.\n\nWat Google aanraadt bij paginering en bijladen:\n- **Eigen URL per pagina**, bijvoorbeeld met ?page=2. Geen #-fragmenten: Google negeert alles na het hekje en slaat zo'n link mogelijk over.\n- **Gewone links** met <a href> van elke pagina naar de volgende, en eventueel terug naar pagina 1.\n- **Eigen canonical per pagina**, niet allemaal naar pagina 1.\n\nJe kunt beide combineren: de knop blijft voor bezoekers, en daarnaast staan er echte links naar ?page=2 enzovoort. Laat de knop bij het bijladen de URL bijwerken, zodat een gedeelde link ook naar de juiste plek gaat.\n\nControleer het met de URL-inspectietool: staan de links naar volgende pagina's in de gerenderde HTML? En crawl de categorie met Screaming Frog met JavaScript-rendering aan.",
+  "kernpunt": "Bouwt een developer bijladen met een knop of scroll, vraag dan altijd ook om echte links naar genummerde pagina's.",
   "toepassing": "Open bij een webshopklant een grote categorie en kijk of er onder de producten echte links naar volgende pagina's staan. Is er alleen een knop, controleer dan met URL-inspectie of de diepere producten in de gerenderde HTML voorkomen.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Pagination, incremental page loading, and their impact on Google Search | Google Search Central",
     "url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"

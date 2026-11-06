@@ -21,11 +21,25 @@
     ],
     "juist": 0
   },
-  "toelichting": "Een pdf heeft geen HTML-head, dus een meta robots-tag kun je er niet in zetten. Daarvoor is de **X-Robots-Tag**: dezelfde regels, maar als HTTP-header bij het bestand.\n\n- Een noindex op de linkende pagina geldt alleen voor die pagina zelf. De pdf's erven niets.\n- Met een Disallow kan Google de pdf's niet meer ophalen en ziet het dus ook geen noindex. Al geïndexeerde URL's kunnen dan juist blijven staan.\n- nofollow op een link is geen indexregel. Google kan de pdf ook via andere links of een sitemap vinden.",
-  "kort": "In een pdf kun je geen tag in de pagina zetten. Daarom geef je de server een extra regel mee bij elk pdf-bestand: X-Robots-Tag: noindex, wat betekent 'niet opnemen in Google'. Blokkeer de pdf's niet in robots.txt (het bestand dat zegt waar Google niet mag kijken). Anders haalt Google ze niet meer op en ziet het die regel nooit.",
-  "uitleg": "Met de **robots meta-tag** geef je per HTML-pagina regels mee, zoals noindex. Voor bestanden zonder HTML, zoals pdf's en afbeeldingen, gebruik je de **X-Robots-Tag** in de HTTP-header. Google ondersteunt daarin dezelfde regels.\n\nZo stel je het in voor alle pdf's, volgens Google Search Central:\n- **Apache** (in .htaccess of de serverconfiguratie): een Files-blok voor .pdf met Header set X-Robots-Tag \"noindex, nofollow\".\n- **NGINX**: een location-blok voor .pdf met add_header X-Robots-Tag \"noindex, nofollow\".\n\nBelangrijk: Google vindt de header alleen als het de pdf mag **crawlen**. Staat de URL geblokkeerd in robots.txt, dan worden de indexregels genegeerd. Zet dus nooit een Disallow op bestanden die je met noindex uit de index wilt halen.\n\nHoud er rekening mee dat het even duurt: een pdf valt pas uit de index als Google hem opnieuw heeft opgehaald. Voor snel resultaat kun je de URL's daarnaast tijdelijk verbergen met de tool Verwijderingen.\n\nEn bij echt vertrouwelijke informatie is noindex niet genoeg. Iedereen met de link kan de pdf nog openen. Dan is een inlog de enige echte oplossing.",
-  "kernpunt": "Bestanden zonder HTML, zoals pdf's, houd je uit de index met de HTTP-header X-Robots-Tag: noindex. Laat ze wel crawlbaar, anders ziet Google die header nooit.",
-  "toepassing": "Zoek deze week met site:domein.nl filetype:pdf welke pdf's van een klant in Google staan, en bespreek welke daar niet horen.",
+  "kern": "Een pdf heeft geen plek voor een meta-tag. Daarom geef je de noindex mee in de header die de server bij het bestand stuurt.",
+  "afleiders": [
+    "",
+    "**Noindex op de linkende pagina:** het lijkt alsof de pdf's de regel overnemen. Maar een noindex geldt alleen voor die pagina zelf, en die moest juist vindbaar blijven.",
+    "**Disallow in robots.txt:** blokkeren voelt als de snelste weg. Maar dan kan Google de pdf's niet meer ophalen en ziet het geen noindex. Al geïndexeerde URL's kunnen dan juist blijven staan.",
+    "**nofollow op de links:** dat klinkt als 'Google, kom hier niet'. Maar nofollow is geen indexregel, en Google kan de pdf ook via andere links of een sitemap vinden."
+  ],
+  "kort": "In een dichtgeplakte doos kun je geen briefje meer stoppen, maar je kunt wel een label op de buitenkant plakken. Een pdf is zo'n dichte doos: er is geen plek voor een tag in de pagina. Daarom plakt de server het label erbuiten, in de informatie die hij bij het bestand meestuurt. Google moet de doos dan wel kunnen ophalen, anders ziet het dat label nooit.",
+  "begrippen": [
+    { "term": "Noindex", "uitleg": "de opdracht aan Google om een pagina of bestand niet in de zoekresultaten op te nemen." },
+    { "term": "HTTP-header", "uitleg": "extra informatie die de server meestuurt bij elk bestand, onzichtbaar voor de bezoeker." },
+    { "term": "X-Robots-Tag", "uitleg": "een HTTP-header met dezelfde regels als de meta robots-tag, zoals noindex, maar dan voor elk soort bestand." },
+    { "term": "robots.txt", "uitleg": "een tekstbestand op je site dat zoekmachines vertelt waar ze niet mogen kijken." }
+  ],
+  "uitleg": "Met de **robots meta-tag** geef je per HTML-pagina regels mee, zoals noindex. Voor bestanden zonder HTML, zoals pdf's en afbeeldingen, gebruik je de **X-Robots-Tag** in de HTTP-header. Google ondersteunt daarin dezelfde regels.\n\nZo stel je het in voor alle pdf's, volgens Google Search Central:\n- **Apache** (in .htaccess of de serverconfiguratie): een Files-blok voor .pdf met Header set X-Robots-Tag \"noindex, nofollow\".\n- **NGINX**: een location-blok voor .pdf met add_header X-Robots-Tag \"noindex, nofollow\".\n\nStaat de URL geblokkeerd in robots.txt, dan worden de indexregels genegeerd. Zet dus nooit een Disallow op bestanden die je met noindex uit de index wilt halen.\n\nHoud er rekening mee dat het even duurt: een pdf valt pas uit de index als Google hem opnieuw heeft opgehaald. Voor snel resultaat kun je de URL's daarnaast tijdelijk verbergen met de tool Verwijderingen.\n\nEn bij echt vertrouwelijke informatie is noindex niet genoeg. Iedereen met de link kan de pdf nog openen. Dan is een inlog de enige echte oplossing.",
+  "kernpunt": "Wil je iets uit de index halen, blokkeer het dan nooit tegelijk in robots.txt: Google moet de noindex kunnen zien.",
+  "toepassing": "Zoek vandaag met site:domein.nl filetype:pdf welke pdf's van een klant in Google staan. Noteer welke daar niet horen.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Robots meta tag, data-nosnippet, and X-Robots-Tag specifications | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"

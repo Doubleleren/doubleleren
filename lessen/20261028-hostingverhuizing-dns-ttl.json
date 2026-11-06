@@ -20,15 +20,27 @@
     ],
     "juist": 3
   },
-  "toelichting": "Bij een DNS-wijziging krijgt niet iedereen meteen het nieuwe IP-adres. Resolvers onthouden het oude adres zo lang als de **TTL** aangeeft. Google adviseert daarom de TTL minstens een week vooraf te verlagen (bijvoorbeeld naar een paar uur), en de oude hosting pas uit te zetten als het verkeer daar naar nul is gezakt en je zeker weet dat iedereen, ook Googlebot, de nieuwe server bereikt.\n\nWaarom de andere opties niet kloppen:\n- **301 op de oude server:** domein en URL's blijven gelijk. Een redirect naar 'dezelfde' URL zou naar zichzelf wijzen. Een redirect hoort bij een URL-wijziging, niet bij een hostingwissel.\n- **Adreswijziging in Search Console:** die tool is voor een verhuizing naar een ander domein.\n- **robots.txt-blokkade:** daarmee sluit je Googlebot buiten op het moment dat hij de nieuwe server juist moet leren kennen.",
-  "kort": "Als je verhuist, krijgt niet iedereen meteen het nieuwe adres van je server. Computers onthouden het oude adres een tijdje, zo lang als de TTL (een soort houdbaarheidstermijn) aangeeft. Zet die TTL daarom minstens een week vooraf laag. Laat de oude server draaien tot daar geen verkeer meer binnenkomt, anders krijgen sommige bezoekers en ook Google een foutmelding.",
-  "uitleg": "Om dit te snappen, moet je weten wat er gebeurt als iemand een URL opvraagt. De browser (of Googlebot) vraagt eerst via **DNS** welk IP-adres bij het domein hoort, en maakt dan verbinding met de server op dat adres. Dat antwoord wordt onderweg bewaard (gecachet), zo lang als de **TTL** (time to live) van het DNS-record aangeeft.\n\nStaat de TTL op een dag en zet je de DNS om, dan komt een deel van de bezoekers en crawlers tot een dag later nog bij de oude server uit. Zeg je die dezelfde middag op, dan krijgen zij foutmeldingen.\n\nGoogles stappenplan voor een hostingwissel zonder URL-wijziging:\n- Zet de nieuwe omgeving klaar en test hem, bijvoorbeeld met een tijdelijke hostname.\n- Verlaag de **TTL** minstens een week vooraf naar een lage waarde, zoals een paar uur.\n- Zet de DNS om naar de nieuwe server.\n- Kijk in de logs van de oude server of daar nog verkeer binnenkomt. Pas als dat naar nul is gezakt, zeg je de oude hosting op.\n- Houd de **crawlstatistieken** in Search Console in de gaten. Een tijdelijke daling van de crawlfrequentie direct na de overstap is normaal; daarna loopt hij in een paar dagen weer op, soms tot boven het oude niveau.\n\nDe zoekmachine merkt van zo'n verhuizing weinig, zolang de site bereikbaar blijft en snel antwoordt.",
-  "kernpunt": "Bij een hostingwissel zonder URL-wijziging verlaag je de TTL minstens een week vooraf, laat je de oude server draaien tot er geen verkeer meer komt, en zie je een korte crawldip als normaal.",
-  "toepassing": "Vraag bij de eerstvolgende geplande hostingwissel van een klant na welke TTL de DNS-records nu hebben, en zet het verlagen ervan een week vooraf in de planning.",
+  "kern": "Het nieuwe adres is niet meteen overal bekend. Geef het tijd en houd de oude server aan tot niemand hem nog bezoekt.",
+  "afleiders": [
+    "**301 op de oude server:** een redirect klinkt logisch bij een verhuizing. Maar domein en URL's blijven gelijk, dus de redirect zou naar zichzelf wijzen. Een 301 hoort bij een URL-wijziging.",
+    "**Adreswijziging in Search Console:** de naam doet aan elke verhuizing denken. Maar die tool is alleen bedoeld voor een verhuizing naar een ander domein.",
+    "**Blokkeren in robots.txt:** voorzichtig zijn lijkt veilig. Maar zo sluit je Googlebot buiten op het moment dat hij de nieuwe server juist moet leren kennen.",
+    ""
+  ],
+  "kort": "Stel je voor dat je verhuist en je vrienden nog een tijdje je oude adres onthouden. Wie het nieuwe adres nog niet kent, belt aan bij het oude huis. Zo gaat het ook met een website: computers onthouden het oude serveradres zo lang als de TTL aangeeft. Daarom maak je die termijn vooraf kort. En je houdt het oude huis open tot er niemand meer aanbelt, ook Google niet.",
+  "begrippen": [
+    { "term": "DNS", "uitleg": "het adresboek van internet: het zoekt bij een domeinnaam het IP-adres van de server op." },
+    { "term": "IP-adres", "uitleg": "het nummer waarmee een server op internet bereikbaar is." },
+    { "term": "TTL", "uitleg": "time to live: hoe lang een DNS-antwoord onderweg bewaard wordt voordat het opnieuw wordt opgevraagd." },
+    { "term": "301-redirect", "uitleg": "een permanente doorverwijzing van een oude URL naar een nieuwe." }
+  ],
+  "uitleg": "Staat de TTL op een dag en zet je de DNS om, dan komt een deel van de bezoekers en crawlers tot een dag later nog bij de oude server uit. Zeg je die dezelfde middag op, dan krijgen zij foutmeldingen.\n\nGoogles stappenplan voor een hostingwissel zonder URL-wijziging:\n- Zet de nieuwe omgeving klaar en test hem, bijvoorbeeld met een tijdelijke hostname.\n- Verlaag de **TTL** minstens een week vooraf naar een lage waarde, zoals een paar uur.\n- Zet de DNS om naar de nieuwe server.\n- Kijk in de logs van de oude server of daar nog verkeer binnenkomt. Pas als dat naar nul is gezakt en je zeker weet dat ook Googlebot de nieuwe server bereikt, zeg je de oude hosting op.\n- Houd de **crawlstatistieken** in Search Console in de gaten. Een tijdelijke daling van de crawlfrequentie direct na de overstap is normaal. Daarna loopt hij in een paar dagen weer op, soms tot boven het oude niveau.\n\nDe zoekmachine merkt van zo'n verhuizing weinig, zolang de site bereikbaar blijft en snel antwoordt.",
+  "kernpunt": "Wisselt een klant van hosting, vraag dan eerst naar de huidige TTL en de opzegdatum van de oude server.",
+  "toepassing": "Zoek vandaag met een DNS-checker op welke TTL de DNS-records van een klant nu hebben, en noteer of dat uren of dagen is.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Changing Your Web Hosting and SEO | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

@@ -18,11 +18,25 @@
     ],
     "juist": 2
   },
-  "toelichting": "Google noemt voor elke video in een videositemap deze tags verplicht:\n\n- video:thumbnail_loc (de URL van de thumbnail)\n- video:title\n- video:description\n- video:content_loc (het videobestand) **of** video:player_loc (de speler). Eén van de twee is genoeg.\n\nDe duur (video:duration) en de publicatiedatum zijn optioneel. Die heeft de developer wel, maar de thumbnail en de link naar video of speler ontbreken.\n\n- **Alleen een thumbnail** is niet genoeg: de link naar het bestand of de speler blijft verplicht.\n- **Niets meer** klopt niet: een sitemap zonder verplichte tags voldoet niet aan de eisen.\n- **Beide links** mag, maar het hoeft niet.",
-  "kort": "Een videositemap is een lijst waarmee je Google je video's laat vinden. Per video moet er een titel, een beschrijving en een plaatje (thumbnail) in staan. Daarnaast een link naar het videobestand óf naar de videospeler. De duur en de datum zijn handig, maar niet verplicht.",
-  "uitleg": "Een videositemap helpt vooral als Google je video's moeilijk zelf vindt. Bijvoorbeeld omdat ze in een eigen speler zitten of pas laden met JavaScript.\n\nEen paar dingen om op te letten:\n- **Thumbnail:** Google moet het plaatje kunnen ophalen. Blokkeer de map met thumbnails dus niet in robots.txt.\n- **content_loc of player_loc:** content_loc wijst naar het videobestand zelf, bijvoorbeeld een .mp4. player_loc wijst naar de speler, zoals een embed-URL. Zet hier niet de URL van de pagina zelf neer.\n- **Optioneel maar nuttig:** duur, publicatiedatum en een verloopdatum voor video's die offline gaan.\n- **Combineren mag:** de video-tags mogen in je gewone sitemap staan, of in een aparte videositemap.\n\nVideo-markup (VideoObject) op de pagina zelf is een aanvulling. Daarmee geef je Google dezelfde informatie, en meer, zoals hoofdstukken in een video.",
-  "kernpunt": "Verplicht in een videositemap: thumbnail, titel, beschrijving en een link naar het videobestand óf de speler. Duur en publicatiedatum zijn optioneel.",
-  "toepassing": "Heeft een klant eigen video's die slecht in Google Video's verschijnen? Controleer deze week of er een videositemap is, en of elke video daarin een thumbnail en een content_loc of player_loc heeft.",
+  "kern": "Google eist per video een titel, beschrijving, thumbnail en een link naar bestand of speler. De developer leverde vooral velden die optioneel zijn.",
+  "afleiders": [
+    "**Alleen een thumbnail:** de thumbnail ontbreekt inderdaad. Maar ook de link naar het videobestand of de speler is verplicht, en duur of datum vervangen die niet.",
+    "**Niets meer:** dat de informatie al op de pagina staat, klinkt logisch. Maar een sitemap zonder de verplichte tags voldoet niet aan de eisen.",
+    "",
+    "**Beide links:** dat mag, maar het hoeft niet. Eén van de twee is genoeg."
+  ],
+  "kort": "Een videositemap is een soort tv-gids voor Google. Per programma moet erin staan hoe het heet, waar het over gaat, een plaatje en op welke zender je het kunt zien. Zonder zender weet niemand waar hij moet kijken, hoe mooi de beschrijving ook is. De duur en de datum zijn extra: handig, maar de gids werkt ook zonder.",
+  "begrippen": [
+    { "term": "Videositemap", "uitleg": "een lijst waarmee je Google per video vertelt waar hij staat en waar hij over gaat." },
+    { "term": "Thumbnail", "uitleg": "het kleine voorbeeldplaatje van een video." },
+    { "term": "content_loc", "uitleg": "de tag met de link naar het videobestand zelf, bijvoorbeeld een .mp4." },
+    { "term": "player_loc", "uitleg": "de tag met de link naar de videospeler, zoals een embed-URL." }
+  ],
+  "uitleg": "De verplichte tags per video zijn video:thumbnail_loc, video:title, video:description en video:content_loc **of** video:player_loc. De duur (video:duration) en de publicatiedatum zijn optioneel.\n\nEen videositemap helpt vooral als Google je video's moeilijk zelf vindt. Bijvoorbeeld omdat ze in een eigen speler zitten of pas laden met JavaScript.\n\nEen paar dingen om op te letten:\n- **Thumbnail:** Google moet het plaatje kunnen ophalen. Blokkeer de map met thumbnails dus niet in robots.txt.\n- **Geen pagina-URL:** zet bij content_loc of player_loc niet de URL van de pagina zelf neer.\n- **Optioneel maar nuttig:** duur, publicatiedatum en een verloopdatum voor video's die offline gaan.\n- **Combineren mag:** de video-tags mogen in je gewone sitemap staan, of in een aparte videositemap.\n\nVideo-markup (VideoObject) op de pagina zelf is een aanvulling. Daarmee geef je Google dezelfde informatie, en meer, zoals hoofdstukken in een video.",
+  "kernpunt": "Zitten video's in een eigen speler, controleer dan eerst of elke video in de sitemap een thumbnail en een link naar bestand of speler heeft.",
+  "toepassing": "Heeft een klant eigen video's? Open vandaag zijn videositemap en controleer bij drie video's of er een thumbnail_loc en een content_loc of player_loc in staat.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Video sitemaps | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps"

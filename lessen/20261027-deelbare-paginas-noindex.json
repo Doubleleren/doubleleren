@@ -21,15 +21,39 @@
     ],
     "juist": 2
   },
-  "toelichting": "Google vraagt platforms waar gebruikers pagina's kunnen delen of laten genereren om zich af te vragen of die content bedoeld is om via zoekmachines gevonden te worden. Is hij bedoeld voor delen, samenwerken of gebruik, dan hoort er standaard een **noindex** op.\n\nWaarom de andere opties niet kloppen:\n- **Meteen Disallow** voorkomt dat Google de pagina's nog crawlt. Dan ziet Google ook geen noindex, en URL's die al bekend zijn kunnen in de index blijven staan, alleen zonder beschrijving. Een robots.txt-blokkade is een prima standaard voor nieuwe pagina's, maar niet om al geïndexeerde URL's op te ruimen.\n- **Een canonical naar de homepage** is een misleidend signaal: de pagina's zijn geen duplicaat van de homepage. Google negeert zo'n canonical waarschijnlijk, en de spam blijft vindbaar.\n- **Verwijderingen** verbergt URL's maar tijdelijk (ongeveer zes maanden) en lost niets op bij de bron.",
-  "kort": "Offertes die gebruikers met elkaar delen, zijn niet bedoeld om via Google gevonden te worden. Zet er daarom standaard een noindex op: een regel in de code die zegt 'niet in Google opnemen'. Google moet de pagina's wel kunnen blijven bezoeken, anders ziet het die regel niet. Houd daarnaast in de gaten of er ineens veel nieuwe pagina's bijkomen, want dat wijst op spam.",
-  "uitleg": "Op 26 oktober 2026 vulde Google zijn gids over het voorkomen van misbruik aan met een nieuw onderdeel: **indexeer alleen content die voor Search bedoeld is**. Het gaat om tools waarmee gebruikers gedeelde pagina's, gegenereerde content of web-apps publiceren, zoals offertes, wensenlijstjes, ontwerpen of AI-uitvoer.\n\nHet advies:\n- Bepaal per type pagina of hij gevonden moet worden via zoekmachines, of alleen bedoeld is voor wie de link heeft.\n- Zo niet: zet standaard een **noindex** (meta robots of X-Robots-Tag), of blokkeer het crawlen standaard in robots.txt.\n\nDie twee sluiten elkaar uit op dezelfde URL: een noindex werkt alleen als Google de pagina mag crawlen. Staan er al pagina's in de index, laat ze dan eerst crawlbaar met noindex tot ze verdwenen zijn.\n\nGoogle noemt ook hoe je misbruik vroeg ziet:\n- Search Console geverifieerd houden voor meldingen over handmatige acties en beveiliging\n- het rapport Pagina-indexering en het prestatierapport controleren op onverwachte pieken\n- op het platform zelf het aantal nieuwe openbare pagina's bijhouden, met een alarm bij plotselinge sprongen of als een paar gebruikers de meeste indexeerbare URL's maken",
-  "kernpunt": "Pagina's die gebruikers maken om te delen, horen standaard niet in Google: geef ze een noindex. Wat al geïndexeerd is, laat je crawlbaar tot het eruit is, en je bewaakt pieken in nieuwe pagina's.",
-  "toepassing": "Check deze week bij een klant met accounts, wensenlijstjes of een deelfunctie of die pagina's openbaar zijn. Zoek met site: en in Pagina-indexering of ze in Google staan.",
+  "kern": "Gedeelde offertes zijn voor wie de link krijgt, niet voor Google: houd ze standaard buiten de index, en zorg dat Google dat kan zien.",
+  "afleiders": [
+    "**Direct Disallow:** dan ziet Google de pagina's niet meer, dus dat lijkt snel. Maar dan leest Google ook de noindex niet, en bekende URL's kunnen zonder beschrijving in de index blijven.",
+    "**Canonical naar de homepage:** zo lijkt de waarde naar een goede pagina te gaan. Maar de offertes zijn geen kopie van de homepage. Google negeert zo'n canonical waarschijnlijk, en de spam blijft vindbaar.",
+    "",
+    "**Verwijderingen:** dat werkt snel, maar verbergt de URL's maar ongeveer zes maanden. Het lost niets op bij de bron."
+  ],
+  "kort": "Vergelijk het met een brief die je doorstuurt aan een collega. Die brief is voor hem bedoeld, niet om op het prikbord in de hal te hangen. Een gedeelde offerte is net zo: hij is voor wie de link krijgt. Daarom zet je er standaard 'niet ophangen' op, een noindex. Google moet de pagina wel mogen openen, anders leest het dat briefje nooit.",
+  "begrippen": [
+    {
+      "term": "noindex",
+      "uitleg": "een instructie in de code: neem deze pagina niet op in de zoekresultaten."
+    },
+    {
+      "term": "X-Robots-Tag",
+      "uitleg": "de noindex-instructie, meegestuurd in de HTTP-header van de server in plaats van in de HTML."
+    },
+    {
+      "term": "Disallow",
+      "uitleg": "de regel in robots.txt die Google verbiedt een adres op te halen."
+    },
+    {
+      "term": "Canonical",
+      "uitleg": "een tag die zegt welke pagina de hoofdversie is."
+    }
+  ],
+  "uitleg": "Op 26 oktober 2026 vulde Google zijn gids over het voorkomen van misbruik aan met een nieuw onderdeel: **indexeer alleen content die voor Search bedoeld is**. Het gaat om tools waarmee gebruikers gedeelde pagina's, gegenereerde content of web-apps publiceren, zoals offertes, wensenlijstjes, ontwerpen of AI-uitvoer.\n\nHet advies:\n- Bepaal per type pagina of hij gevonden moet worden via zoekmachines, of alleen bedoeld is voor wie de link heeft.\n- Zo niet: zet standaard een **noindex**, of blokkeer het crawlen standaard in robots.txt.\n\nDie twee sluiten elkaar uit op dezelfde URL. Een robots.txt-blokkade is een prima standaard voor nieuwe pagina's, maar niet om al geïndexeerde URL's op te ruimen.\n\nGoogle noemt ook hoe je misbruik vroeg ziet:\n- Search Console geverifieerd houden voor meldingen over handmatige acties en beveiliging\n- het rapport Pagina-indexering en het prestatierapport controleren op onverwachte pieken\n- op het platform zelf het aantal nieuwe openbare pagina's bijhouden, met een alarm bij plotselinge sprongen of als een paar gebruikers de meeste indexeerbare URL's maken",
+  "kernpunt": "Bouwt een klant een functie waarmee gebruikers pagina's publiceren, spreek dan vóór de lancering af of die pagina's in Google horen.",
+  "toepassing": "Kijk vandaag of een klant met accounts, wensenlijstjes of een deelfunctie die pagina's openbaar heeft. Zoek met site: en in Pagina-indexering of ze in Google staan.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Prevent user-generated spam on your site and platform | Google Search Central",
     "url": "https://developers.google.com/search/docs/monitor-debug/prevent-abuse"
-  },
-  "herzien": "2026-11-04",
-  "wijziging": "In gewone taal toegevoegd."
+  }
 }

@@ -18,11 +18,25 @@
     ],
     "juist": 1
   },
-  "toelichting": "De belknop is in de HTML een gewone link (een <a>-element) met een adres dat begint met tel:. De kliktrigger **Just Links** luistert precies naar klikken op zulke links. Met de voorwaarde **Click URL begint met tel:** gaat de tag alleen af bij belknoppen, en niet bij elke andere link.\n\n- **Paginaweergave** meet hoe vaak een pagina geladen wordt, ook als er een tel:-link op staat. Of iemand op de knop klikt, zie je daar niet in.\n- **All Elements zonder voorwaarde** gaat af bij élke klik op de pagina, ook op tekst en plaatjes. Je telt dan veel te veel.\n- **Formulierverzending** reageert op het versturen van een formulier. Een klik op een link is dat niet.",
-  "kort": "De belknop is gewoon een link die met tel: begint. In Tag Manager kies je daarom een trigger die alleen op klikken op links let, met de regel: het adres begint met tel:. Zo telt GA4 alleen de klikken op de belknop, en niet elke andere klik of elke pagina die geladen wordt.",
+  "kern": "De belknop is een gewone link met een adres dat met tel: begint. Je laat de tag dus alleen afgaan bij klikken op precies zulke links.",
+  "afleiders": [
+    "**Paginaweergave:** de knop staat op die pagina's, dus het lijkt te tellen wat je wilt. Maar je meet dan hoe vaak een pagina laadt, niet of iemand op de knop klikt.",
+    "",
+    "**All Elements zonder voorwaarde:** zo mis je zeker niets, lijkt het. Maar de tag gaat dan af bij élke klik, ook op tekst en plaatjes, en je telt veel te veel.",
+    "**Formulierverzending:** bellen voelt als contact opnemen, net als een formulier. Maar die trigger reageert alleen op het versturen van een formulier, en een klik op een link is dat niet."
+  ],
+  "kort": "Denk aan een portier die alleen mensen met een rode pas moet tellen. Hij telt niet iedereen die langs de deur loopt, en ook niet iedereen die binnenkomt. De belknop is zo'n link met een herkenbaar kenmerk: het adres begint met tel:. Laat Tag Manager dus alleen op klikken op links letten, en dan alleen op die met dat kenmerk. Zo tel je echte belpogingen en geen ruis.",
+  "begrippen": [
+    { "term": "Tag", "uitleg": "in Google Tag Manager: een stukje code dat iets doet, hier een event naar GA4 sturen." },
+    { "term": "Trigger", "uitleg": "de regel die bepaalt wanneer een tag afgaat." },
+    { "term": "Just Links", "uitleg": "een kliktrigger in GTM die alleen reageert op klikken op links (<a>-elementen)." },
+    { "term": "Click URL", "uitleg": "een variabele in GTM met het adres van de link waarop iemand klikte." }
+  ],
   "uitleg": "Een event meten in GTM bestaat altijd uit drie delen:\n\n- **Tag:** wat er gebeurt. Hier: stuur het event klik_telefoon naar GA4.\n- **Trigger:** wanneer. Hier: een klik op een link waarvan de URL met tel: begint.\n- **Variabelen:** welke informatie je gebruikt. Hier Click URL. Zie je die niet bij de keuzes, zet hem dan aan onder Variabelen → Configureren.\n\nTips voor deze klus:\n- Zet **Click URL** gerust als parameter in de tag. Dan zie je in GA4 welk nummer gebeld werd, handig bij meerdere vestigingen.\n- Test in de **Preview**-modus van GTM. Klik op de knop en kijk of de tag afgaat. Controleer daarna in GA4 bij DebugView of het event binnenkomt.\n- Wil de klant dit als conversie zien? Markeer klik_telefoon in GA4 als key event.\n\nLet op: een klik is nog geen gesprek. Wil je echte gesprekken meten, dan heb je een belmeettool nodig.",
   "kernpunt": "Klikken op een tel:-link meet je in GTM met een Just Links-kliktrigger met de voorwaarde Click URL begint met tel:. Test altijd eerst in Preview en DebugView.",
-  "toepassing": "Kies deze week een klant met belknoppen op de site. Check in GA4 of klikken daarop al gemeten worden. Zo niet, zet de tag en trigger op en test ze in Preview.",
+  "toepassing": "Kies vandaag een klant met belknoppen op de site en kijk in GA4 of klikken daarop al gemeten worden. Zo niet, noteer het als eerste taak voor de GTM-instelling.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Click trigger - Tag Manager Help",
     "url": "https://support.google.com/tagmanager/answer/7679320"

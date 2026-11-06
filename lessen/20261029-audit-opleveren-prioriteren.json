@@ -20,15 +20,24 @@
     ],
     "juist": 1
   },
-  "toelichting": "Een audit is pas af als de klant weet wat hij moet doen. Met twee developerdagen per maand is de vraag niet 'wat is er mis?', maar 'wat eerst?'. Daarom zet je bovenaan een korte lijst met de acties die het meeste opleveren voor de minste moeite, en lever je de rest mee als naslag.\n\n- **De volledige spreadsheet** schuift het belangrijkste werk, prioriteren, door naar de developer, die de SEO-impact niet kan inschatten.\n- **Uitstel vragen** voor iets wat de klant toch niet in één keer kan uitvoeren, kost vertrouwen en levert niets op.\n- **Alleen 'kritiek' uit de tool** is een gok: de ernst die een tool geeft, zegt niets over hoeveel omzet of verkeer erachter zit.",
-  "kort": "Een klant met één developer voor twee dagen per maand kan geen 140 punten tegelijk oppakken. Hij moet vooral weten wat eerst moet. Zet daarom bovenaan de vijf tot tien acties die het meeste opleveren voor het minste werk, en stuur de volledige lijst als bijlage mee. Kijk daarbij naar verkeer en omzet, niet naar hoe ernstig je tool een fout noemt.",
-  "uitleg": "Werk duidelijk en op tijd opleveren betekent: de klant krijgt op het afgesproken moment iets waarmee hij verder kan. Bij een audit is dat een **prioriteitenlijst**, geen opsomming van alles wat een tool vond.\n\nEen handig hulpmiddel is een **prioriteringsmatrix**. Nielsen Norman Group beschrijft hem als een grafiek met twee criteria, bijvoorbeeld de waarde van een actie tegenover de moeite die het kost. Wat steeds in het hoekje 'veel waarde, weinig moeite' valt, pak je eerst. Het resultaat moet volgens NN/g een duidelijk actieplan met een planning zijn.\n\nVoor SEO kun je zo scoren:\n- **Impact:** hoeveel belangrijke pagina's, verkeer of omzet raakt het?\n- **Moeite:** hoeveel developeruren, en zijn er afhankelijkheden?\n- **Risico:** wat gebeurt er als je het laat liggen?\n\nVorm van de oplevering:\n- één pagina bovenaan: de top 5 à 10, met per actie wat, waarom en een schatting van de tijd\n- een voorstel voor de volgorde over de komende maanden\n- de volledige lijst als bijlage\n\nLukt iets niet voor de deadline? Lever op tijd wat af is, en zeg erbij wat nog volgt en wanneer.",
-  "kernpunt": "Lever een audit op als prioriteitenlijst: bovenaan de acties met de meeste impact voor de minste moeite, de rest als bijlage. De ernst die een tool geeft, is geen prioriteit.",
-  "toepassing": "Pak deze week je laatste audit of actielijst erbij en scoor de tien grootste punten op impact en moeite. Staat de top 3 ook bovenaan in wat de klant van je kreeg?",
+  "kern": "Met twee developerdagen per maand is de vraag niet wat er mis is, maar wat eerst moet. Die keuze maak jij, niet de developer.",
+  "afleiders": [
+    "**Volledige spreadsheet:** alles delen voelt transparant. Maar zo schuif je het belangrijkste werk, prioriteren, door naar de developer. En die kan de SEO-impact niet inschatten.",
+    "",
+    "**Uitstel vragen:** een compleet rapport lijkt professioneler. Maar de klant kan 140 punten toch niet in één keer uitvoeren. Uitstel kost dan vertrouwen en levert niets op.",
+    "**Alleen 'kritiek' uit de tool:** dat lijkt een objectieve selectie. Maar de ernst die een tool geeft, zegt niets over hoeveel omzet of verkeer erachter zit."
+  ],
+  "kort": "Een monteur die je auto keurt, geeft je geen lijst van 140 krasjes en piepjes. Hij zegt: deze twee dingen eerst, de rest kan wachten. Dan weet jij waar je je beperkte budget aan uitgeeft. Een klant met één developer voor twee dagen per maand zit in dezelfde positie. Hij heeft meer aan een korte volgorde dan aan een complete lijst.",
+  "begrippen": [
+    { "term": "Crawltool", "uitleg": "een programma dat een website doorloopt zoals een zoekmachine dat doet, en daarbij fouten opspoort." }
+  ],
+  "uitleg": "Een handig hulpmiddel bij het kiezen is een **prioriteringsmatrix**. Nielsen Norman Group beschrijft hem als een grafiek met twee criteria, bijvoorbeeld de waarde van een actie tegenover de moeite die het kost. Wat steeds in het hoekje 'veel waarde, weinig moeite' valt, pak je eerst. Het resultaat moet volgens NN/g een duidelijk actieplan met een planning zijn.\n\nVoor SEO kun je zo scoren:\n- **Impact:** hoeveel belangrijke pagina's, verkeer of omzet raakt het?\n- **Moeite:** hoeveel developeruren, en zijn er afhankelijkheden?\n- **Risico:** wat gebeurt er als je het laat liggen?\n\nVorm van de oplevering:\n- één pagina bovenaan: de top 5 à 10, met per actie wat, waarom en een schatting van de tijd\n- een voorstel voor de volgorde over de komende maanden\n- de volledige lijst als bijlage\n\nLukt iets niet voor de deadline? Lever op tijd wat af is, en zeg erbij wat nog volgt en wanneer.",
+  "kernpunt": "Lever je een audit op, begin dan met één pagina: wat eerst moet, waarom, en hoeveel tijd het kost.",
+  "toepassing": "Pak vandaag je laatste audit of actielijst erbij en scoor de tien grootste punten op impact en moeite. Staat de top 3 ook bovenaan in wat de klant van je kreeg?",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Using Prioritization Matrices to Inform UX Decisions | Nielsen Norman Group",
     "url": "https://www.nngroup.com/articles/prioritization-matrices/"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }

@@ -18,11 +18,19 @@
     ],
     "juist": 0
   },
-  "toelichting": "Wie niets vindt, probeert nog één keer iets anders of vertrekt, vaak naar een externe zoekmachine. Baymard zag in onderzoek dat ongeveer de helft van de webshops zo'n doodlopende pagina heeft. Geef de bezoeker daarom meteen een nieuwe route: passende categorieën en andere zoektermen.\n\n- **Zoektips** werken slecht. Bezoekers lezen ze zelden, en volgens Baymard geven ze juist een reden om weg te gaan.\n- **Doorsturen naar de homepage** is verwarrend. De bezoeker ziet niet waarom hij daar is en moet helemaal opnieuw beginnen.\n- **Een kortingspop-up** lost het echte probleem niet op: de bezoeker weet nog steeds niet waar het product staat.",
-  "kort": "Een bezoeker die niets vindt, staat voor een dichte deur. Zoektips helpen nauwelijks, want bijna niemand leest ze. Laat daarom meteen categorieën en andere zoektermen zien die passen bij wat hij zocht. Dan kan hij gewoon verder zoeken op je site.",
-  "uitleg": "Baymard noemt vijf manieren om een pagina 'Geen resultaten' beter te maken:\n\n- **Passende categorieën** tonen, bijvoorbeeld 'Tentaccessoires' bij 'tentharingen zand'.\n- **Andere zoektermen** voorstellen. Is er maar één goed alternatief, voer dat dan meteen uit en meld waarom.\n- **Persoonlijke suggesties**, zoals onlangs bekeken producten.\n- **Hulp** aanbieden: telefoonnummer, chat of een link naar de klantenservice. Wie hier belandt, staat op het punt af te haken.\n- **Populaire producten en categorieën** laten zien.\n\nKijk daarnaast naar de oorzaak. Bekijk regelmatig de zoekopdrachten zonder resultaat. Vaak gaat het om synoniemen, typfouten of producten die je wel hebt maar anders noemt. Die los je op in de zoekmachine van de site zelf. Zoekt men vaak naar iets wat je niet verkoopt, dan is dat nuttige informatie voor het assortiment.",
-  "kernpunt": "Een pagina 'Geen resultaten' mag nooit doodlopen. Toon passende categorieën, andere zoektermen en hulp, en los veelvoorkomende zoekopdrachten zonder resultaat op in de zoekfunctie zelf.",
-  "toepassing": "Zoek deze week op de site van een klant naar een product dat niet bestaat en bekijk de pagina die je krijgt. Geeft die alleen zoektips, stel dan voor om er categorieën en populaire producten aan toe te voegen.",
+  "kern": "Wie niets vindt, probeert nog één keer iets anders of vertrekt. Geef hem op die pagina meteen een nieuwe route die past bij wat hij zocht.",
+  "afleiders": [
+    "",
+    "**Meer zoektips:** uitleggen hoe zoeken werkt, lijkt behulpzaam. Maar bezoekers lezen ze zelden, en volgens Baymard geven ze juist een reden om weg te gaan.",
+    "**Naar de homepage:** daar staat veel, dus het lijkt een goede uitwijk. Maar de bezoeker ziet niet waarom hij daar is en moet helemaal opnieuw beginnen.",
+    "**Kortingspop-up:** een korting lijkt een vertrekkende bezoeker vast te houden. Maar het echte probleem blijft: hij weet nog steeds niet waar het product staat."
+  ],
+  "kort": "Je vraagt in een bouwmarkt naar tentharingen voor zand, en de medewerker zegt alleen: 'Probeer het anders te vragen.' Grote kans dat je de winkel uitloopt. Een goede medewerker zegt: 'Die precies niet, maar kijk eens in gang 4 bij de tentaccessoires.' Zo hoort een pagina zonder resultaten ook te werken: hij wijst de weg in plaats van de deur te sluiten.",
+  "uitleg": "Baymard zag in onderzoek dat ongeveer de helft van de webshops zo'n doodlopende pagina heeft. Wie niets vindt, vertrekt vaak naar een externe zoekmachine. Baymard noemt vijf manieren om de pagina beter te maken:\n\n- **Passende categorieën** tonen, bijvoorbeeld 'Tentaccessoires' bij 'tentharingen zand'.\n- **Andere zoektermen** voorstellen. Is er maar één goed alternatief, voer dat dan meteen uit en meld waarom.\n- **Persoonlijke suggesties**, zoals onlangs bekeken producten.\n- **Hulp** aanbieden: telefoonnummer, chat of een link naar de klantenservice. Wie hier belandt, staat op het punt af te haken.\n- **Populaire producten en categorieën** laten zien.\n\nKijk daarnaast naar de oorzaak. Bekijk regelmatig de zoekopdrachten zonder resultaat. Vaak gaat het om synoniemen, typfouten of producten die je wel hebt maar anders noemt. Die los je op in de zoekmachine van de site zelf. Zoekt men vaak naar iets wat je niet verkoopt, dan is dat nuttige informatie voor het assortiment.",
+  "kernpunt": "Leveren veel zoekopdrachten niets op, los dan eerst de meest voorkomende op in de zoekfunctie zelf, met synoniemen en typfouten.",
+  "toepassing": "Zoek vandaag op de site van een klant naar een product dat niet bestaat en bekijk de pagina die je krijgt. Geeft die alleen zoektips, noteer dan een voorstel om er categorieën en populaire producten aan toe te voegen.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Baymard Institute: Search UX: 5 Proven Strategies for Improving 'No Results' Pages",
     "url": "https://baymard.com/research-articles/no-results-page"

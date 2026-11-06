@@ -21,11 +21,25 @@
     ],
     "juist": 0
   },
-  "toelichting": "Elk segment dat je achteraf bekijkt, is in feite een extra test. Is er geen echt verschil, dan heeft elk segment 5% kans op een vals positief resultaat. Bij 20 segmenten verwacht je er dus gemiddeld één, puur door toeval. Behandel de iPad-uitkomst als hypothese en test hem opnieuw.\n\n- p = 0,04 in één van 20 segmenten bewijst niets: dit is precies wat toeval oplevert.\n- Eén segment zegt niets over de andere. Het totaal liet juist geen verschil zien.\n- Verlengen tot het wél significant is, is peeking. Dat vergroot de kans op een vals positief resultaat.",
-  "kort": "Kijk je achteraf naar 20 groepen, zoals iPad-gebruikers, dan vind je er vaak één die lijkt te winnen, puur door toeval. Bij elke groep is er namelijk 5% kans op een valse winnaar. De iPad-uitkomst is dus geen bewijs, alleen een idee. Rol niets uit, maar test de iPad opnieuw in een aparte test.",
-  "uitleg": "Adobe legt het uit in de documentatie van Adobe Target: is er geen echt verschil, dan is de kans op een vals positief resultaat per segment gelijk aan het significantieniveau. Bij 5% loop je dus gemiddeld **één vals positief resultaat op per 20 segmenten** die je bekijkt. De kans dat er minstens één tussen zit, is bij 20 onafhankelijke segmenten zelfs ongeveer 64%.\n\nDaar komt bij dat een segment veel kleiner is dan de hele test. De steekproef was berekend op het totaal, niet op Safari op iPad.\n\nWat je wel doet:\n- **Leg vooraf vast** welke segmenten je wilt bekijken, en waarom.\n- **Corrigeer** als je meerdere vergelijkingen maakt. Met de eenvoudige Bonferroni-correctie deel je het significantieniveau door het aantal vergelijkingen: 5% / 20 = 0,25%.\n- **Noteer** een opvallend segment als hypothese in je testlog, niet als resultaat.\n- **Test opnieuw**: een nieuwe test, alleen op dat segment, met een eigen steekproefberekening.\n\nZo blijft een segmentanalyse wat hij moet zijn: een bron van nieuwe ideeën.",
-  "kernpunt": "Segmenten achteraf zijn extra tests: bij 20 segmenten vind je met 5% significantie gemiddeld één 'winnaar' door toeval. Zie zo'n uitkomst als hypothese en test hem opnieuw.",
-  "toepassing": "Kijk deze week in het testlog van een klant of er beslissingen zijn genomen op basis van één segment. Zet bij zo'n test een notitie dat het om een hypothese gaat die nog getest moet worden.",
+  "kern": "Twintig segmenten achteraf zijn twintig kansen op toeval. Eén 'winnaar' daartussen is een idee om opnieuw te testen, geen bewijs.",
+  "afleiders": [
+    "",
+    "**Uitrollen voor iPad:** p = 0,04 lijkt overtuigend, want het ligt onder 0,05. Maar bij 20 segmenten is één zo'n uitkomst precies wat toeval oplevert.",
+    "**Uitrollen voor iedereen:** het klinkt logisch dat een winnaar elders ook werkt. Maar één segment zegt niets over de andere, en het totaal liet juist geen verschil zien.",
+    "**Test verlengen:** doorgaan tot het wel significant is, voelt als extra zekerheid. Maar dat is peeking, en dat vergroot juist de kans op een vals positief resultaat."
+  ],
+  "kort": "Gooi twintig keer met een dobbelsteen, dan zit er bijna zeker een zes tussen. Niemand denkt dan dat die ene worp bijzonder was. Segmenten achteraf werken net zo. Elk segment is een extra worp, met 5% kans op een winnaar die er niet is. Hoe meer groepen je bekijkt, hoe groter de kans dat er toevallig een 'winnaar' tussen zit.",
+  "begrippen": [
+    { "term": "Segment", "uitleg": "een deel van de bezoekers, bijvoorbeeld alleen Safari op iPad of alleen nieuwe bezoekers." },
+    { "term": "p-waarde", "uitleg": "hoe waarschijnlijk zo'n verschil is als er in werkelijkheid geen verschil is. Onder 0,05 heet een uitkomst meestal significant." },
+    { "term": "Vals positief", "uitleg": "een 'winnaar' die er in werkelijkheid niet is: het verschil komt door toeval." },
+    { "term": "Peeking", "uitleg": "tussendoor naar de resultaten kijken en de test stoppen of verlengen zodra het je uitkomt." }
+  ],
+  "uitleg": "Adobe legt het uit in de documentatie van Adobe Target: is er geen echt verschil, dan is de kans op een vals positief resultaat per segment gelijk aan het significantieniveau. Bij 5% verwacht je dus **gemiddeld één vals positief resultaat per 20 segmenten**. De kans dat er minstens één tussen zit, is bij 20 onafhankelijke segmenten ongeveer 64%.\n\nBovendien is een segment veel kleiner dan de hele test. De steekproef was berekend op het totaal, niet op Safari op iPad.\n\nWat je wel doet:\n- **Leg vooraf vast** welke segmenten je wilt bekijken, en waarom.\n- **Corrigeer** als je meerdere vergelijkingen maakt. Met de eenvoudige Bonferroni-correctie deel je het significantieniveau door het aantal vergelijkingen: 5% / 20 = 0,25%.\n- **Noteer** een opvallend segment als hypothese in je testlog, niet als resultaat.\n- **Test opnieuw**: een nieuwe test, alleen op dat segment, met een eigen steekproefberekening.\n\nZo blijft een segmentanalyse wat hij moet zijn: een bron van nieuwe ideeën.",
+  "kernpunt": "Wil je segmenten bekijken, leg dan vóór de test vast welke. Zie alles wat je daarna pas ontdekt als hypothese.",
+  "toepassing": "Open vandaag het testlog van één klant en zoek een beslissing die op één segment rust. Zet erbij dat het een hypothese is die nog een eigen test nodig heeft.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "How Do I Avoid Common A/B Testing Mistakes? | Adobe Target (Experience League)",
     "url": "https://experienceleague.adobe.com/en/docs/target/using/activities/abtest/common-ab-testing-pitfalls"

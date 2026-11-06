@@ -20,15 +20,39 @@
     ],
     "juist": 2
   },
-  "toelichting": "In de head horen alleen **title, meta, link, script, style, base, noscript en template**. Komt Google een ander element tegen, zoals een img of iframe, dan neemt het aan dat de head daar eindigt en leest het de elementen daarna niet meer als head-elementen. De noindex en de canonical na de pixel worden dus genegeerd. De URL-inspectietool die geen noindex ziet, bevestigt dat.\n\nWaarom de andere opties niet kloppen:\n- **Alleen de eerste drie elementen** is verzonnen. De volgorde telt alleen omdat er een ongeldig element tussen staat.\n- **Meta robots wordt genegeerd** klopt niet: de meta-tag en de X-Robots-Tag werken allebei.\n- **Canonical wint altijd** klopt niet. Het combineren van noindex en een canonical is wel een tegenstrijdig signaal, maar het verklaart niet dat de URL-inspectietool geen noindex ziet.",
-  "kort": "Bovenin de code van een pagina, de head, mogen maar een paar soorten regels staan. Een trackingpixel als afbeelding hoort daar niet bij. Daar denkt Google dat de head ophoudt, dus de regels erna leest het niet meer, zoals de noindex (de opdracht om de pagina uit Google te houden). Zet de pixel onder de belangrijke regels of haal hem weg.",
-  "uitleg": "Browsers zijn vergevingsgezind: een pixel of iframe in de head werkt gewoon. Maar de HTML-parser sluit de head automatisch af zodra er een element verschijnt dat er niet hoort, en alles daarna komt in de body terecht. Google doet hetzelfde. Volgens Google worden alle elementen na een ongeldig element genegeerd.\n\nGeldig in de head zijn:\n- **title**\n- **meta**\n- **link**\n- **script**\n- **style**\n- **base**\n- **noscript**\n- **template**\n\nVeelvoorkomende boosdoeners zijn trackingpixels (img), iframes van chatwidgets of tagmanagers, en losse tekst of een div die een plugin in de head zet.\n\nZo controleer je het:\n- Kijk in de **gerenderde HTML** (URL-inspectietool, of Elementen in Chrome DevTools) in plaats van de broncode. Staan je meta-tags daar opeens in de body, dan is de head te vroeg afgesloten.\n- Kan het element niet weg, zet het dan **onder** alle belangrijke meta-tags.\n\nVoor GTM is dit een bekende valkuil: het noscript-iframe hoort direct na de openingstag van de body, niet in de head.",
-  "kernpunt": "Een img, iframe of ander ongeldig element in de head sluit hem voor Google af: alles daarna, zoals noindex, canonical of hreflang, wordt genegeerd. Controleer de gerenderde HTML, niet alleen de broncode.",
-  "toepassing": "Open deze week bij een klant de gerenderde HTML van de homepage in de URL-inspectietool en controleer of title, meta robots, canonical en hreflang nog in de head staan.",
+  "kern": "Google stopt met het lezen van de head bij het eerste element dat daar niet thuishoort, en de noindex staat daarachter.",
+  "afleiders": [
+    "**Alleen de eerste drie elementen:** zo'n regel bestaat niet. De volgorde telt hier alleen omdat er een ongeldig element tussen staat.",
+    "**Alleen de X-Robots-Tag telt:** de header lijkt de 'echte' instructie. Maar de meta-tag en de X-Robots-Tag werken allebei.",
+    "",
+    "**Canonical wint altijd:** noindex met een canonical is wel een tegenstrijdig signaal. Maar het verklaart niet dat de URL-inspectietool helemaal geen noindex ziet."
+  ],
+  "kort": "Stel: je leest een recept, en midden in de lijst met ingrediënten staat ineens 'Bereiding'. Dan denk je dat de lijst klaar is, en de ingrediënten daarna mis je. Zo leest Google de head. Daar horen maar een paar soorten regels in. Komt Google een afbeelding tegen, dan denkt het dat de head voorbij is en leest het de regels daarna niet meer als instructie.",
+  "begrippen": [
+    {
+      "term": "Head",
+      "uitleg": "het bovenste, onzichtbare deel van de HTML met instellingen voor browsers en zoekmachines."
+    },
+    {
+      "term": "Trackingpixel",
+      "uitleg": "een onzichtbaar plaatje dat meet wie een pagina bekijkt."
+    },
+    {
+      "term": "noindex",
+      "uitleg": "een instructie om de pagina niet in de zoekresultaten op te nemen."
+    },
+    {
+      "term": "Canonical",
+      "uitleg": "een tag die zegt welke versie van een pagina de hoofdversie is."
+    }
+  ],
+  "uitleg": "In de head horen alleen **title, meta, link, script, style, base, noscript en template**.\n\nBrowsers zijn vergevingsgezind: een pixel of iframe in de head werkt gewoon. Maar de HTML-parser sluit de head automatisch af zodra er een element verschijnt dat er niet hoort, en alles daarna komt in de body terecht. Google doet hetzelfde. Volgens Google worden alle elementen na een ongeldig element genegeerd, dus ook een canonical of hreflang.\n\nVeelvoorkomende boosdoeners:\n- trackingpixels (img)\n- iframes van chatwidgets of tagmanagers\n- losse tekst of een div die een plugin in de head zet\n\nZo controleer je het:\n- Kijk in de **gerenderde HTML** (URL-inspectietool, of Elementen in Chrome DevTools) in plaats van de broncode. Staan je meta-tags daar opeens in de body, dan is de head te vroeg afgesloten.\n- Kan het element niet weg, zet het dan **onder** alle belangrijke meta-tags.\n\nVoor GTM is dit een bekende valkuil: het noscript-iframe hoort direct na de openingstag van de body, niet in de head.",
+  "kernpunt": "Ziet Google een tag niet die wel in je broncode staat, kijk dan eerst in de gerenderde HTML of hij nog in de head staat.",
+  "toepassing": "Open vandaag bij een klant de gerenderde HTML van de homepage in de URL-inspectietool. Controleer of title, meta robots, canonical en hreflang nog in de head staan.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Use valid HTML to specify page metadata | Google Search Central",
     "url": "https://developers.google.com/search/docs/crawling-indexing/valid-page-metadata"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties even lang gemaakt."
+  }
 }

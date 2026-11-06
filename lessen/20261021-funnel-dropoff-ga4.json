@@ -9,7 +9,6 @@
     "3.1.3"
   ],
   "titel": "Conversie 0,9%: in welke stap haken bezoekers af?",
-  "volgorde": "opdracht-eerst",
   "intro": "Een webshop heeft een conversieratio van 0,9%. De klant wil 'een nieuwe homepage'. Jij bouwt eerst in GA4 een funnelverkenning met de stappen view_item, add_to_cart, begin_checkout en purchase, uitgesplitst naar apparaat.",
   "opdracht": {
     "soort": "meerkeuze",
@@ -22,11 +21,25 @@
     ],
     "juist": 1
   },
-  "toelichting": "Het grote verschil zit in één stap op één apparaattype. Daar ligt de kans. Een open funnel verandert alleen hoe gebruikers instromen, niet het probleem. Meer verkeer naar een lekkende checkout vergroot vooral het lek.",
-  "kort": "Het probleem zit in één stap: op mobiel haken veel meer mensen af bij het afrekenen dan op desktop. Daar ligt dus je kans, niet bij een nieuwe homepage. Bekijk opnames van mobiele bezoekers en test het afrekenen op mobiel. Meer bezoekers naar een kapotte kassa sturen maakt het lek alleen groter.",
-  "uitleg": "Een lage conversieratio zegt weinig zolang je niet weet **waar** bezoekers afhaken. Met de **funnelverkenning** in GA4 (Verkennen > Funnelverkenning) zie je per stap hoeveel gebruikers doorgaan en hoeveel afhaken.\n\nHandige instellingen:\n- **Gesloten funnel:** gebruikers moeten in stap 1 instromen. **Open funnel:** ze mogen in elke stap instromen. Voor een checkout gebruik je meestal een gesloten funnel.\n- **Uitsplitsing:** zet bijvoorbeeld apparaatcategorie of kanaal ernaast. Een gebruiker telt mee bij de eerste waarde die op hem van toepassing is.\n- **Verstreken tijd:** de gemiddelde tijd tussen stappen. Lang twijfelen voor de betaling zegt ook iets.\n- **Volgende actie:** wat doen mensen direct na een stap? Zo zie je bijvoorbeeld dat ze na begin_checkout naar de verzendkostenpagina gaan.\n\nDe werkwijze: vind de stap met de **grootste afwijking** (tussen apparaten, kanalen of ten opzichte van een benchmark), onderzoek daar met kwalitatieve data (recordings, heatmaps, surveys) **waarom** mensen afhaken, en formuleer pas dan een hypothese. Begin dus niet bij wat de klant het mooiste vindt om te veranderen.",
-  "kernpunt": "Zoek eerst wáár bezoekers afhaken (funnelverkenning, uitgesplitst naar apparaat of kanaal), daarna waarom (kwalitatieve data), en pas dan wat je verandert.",
+  "kern": "Het grote verschil zit in één stap op één apparaat, dus daar ligt de kans, niet op de homepage.",
+  "afleiders": [
+    "**Homepage vernieuwen:** daar beginnen veel bezoekers, en de klant wil het graag. Maar de funnel laat zien dat de andere stappen op mobiel en desktop vergelijkbaar zijn.",
+    "",
+    "**Meer mobiel verkeer:** meer bezoekers lijkt meer verkopen. Maar meer verkeer naar een lekkende checkout vergroot vooral het lek.",
+    "**Open funnel:** dat verandert alleen hoe gebruikers de funnel instromen. Het probleem in de mobiele checkout blijft gewoon bestaan."
+  ],
+  "kort": "Stel, in je winkel lopen op zaterdag veel meer mensen weg bij de kassa dan op dinsdag. Dan ga je niet de etalage verbouwen, maar kijk je wat er op zaterdag bij de kassa misgaat. Hier is mobiel de zaterdag: daar haken veel meer mensen af bij het afrekenen. Zoek dus eerst uit waarom het daar misgaat, bijvoorbeeld met opnames van bezoeken.",
+  "begrippen": [
+    { "term": "Conversieratio", "uitleg": "het percentage bezoekers dat koopt of een ander doel bereikt." },
+    { "term": "Funnelverkenning", "uitleg": "een rapport in GA4 dat per stap laat zien hoeveel bezoekers doorgaan en hoeveel afhaken." },
+    { "term": "Checkout", "uitleg": "het afrekenproces van een webshop, van winkelwagen tot betaling." },
+    { "term": "Open funnel", "uitleg": "een funnel waarin bezoekers in elke stap mogen instromen, niet alleen in de eerste." }
+  ],
+  "uitleg": "Met de **funnelverkenning** in GA4 (Verkennen > Funnelverkenning) zie je per stap hoeveel gebruikers doorgaan en hoeveel afhaken.\n\nHandige instellingen:\n- **Gesloten funnel:** gebruikers moeten in stap 1 instromen. Bij een **open funnel** mag dat in elke stap. Voor een checkout gebruik je meestal een gesloten funnel.\n- **Uitsplitsing:** zet bijvoorbeeld apparaatcategorie of kanaal ernaast. Een gebruiker telt mee bij de eerste waarde die op hem van toepassing is.\n- **Verstreken tijd:** de gemiddelde tijd tussen stappen. Lang twijfelen voor de betaling zegt ook iets.\n- **Volgende actie:** wat doen mensen direct na een stap? Zo zie je bijvoorbeeld dat ze na begin_checkout naar de verzendkostenpagina gaan.\n\nDe werkwijze: vind de stap met de **grootste afwijking** (tussen apparaten, kanalen of ten opzichte van een benchmark). Onderzoek daar met kwalitatieve data (recordings, heatmaps, surveys) **waarom** mensen afhaken, en formuleer pas dan een hypothese. Begin dus niet bij wat de klant het mooiste vindt om te veranderen.",
+  "kernpunt": "Wil een klant een redesign, laat dan eerst met een funnel zien waar bezoekers afhaken, en kies pas daarna wat je verandert.",
   "toepassing": "Bouw voor een webshopklant een gesloten funnelverkenning van view_item tot purchase, uitgesplitst naar apparaatcategorie, en noteer de stap met het grootste verschil tussen mobiel en desktop.",
+  "herzien": "2026-11-06",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "[GA4] Funnel exploration - Analytics Help",
     "url": "https://support.google.com/analytics/answer/9327974"
@@ -35,7 +48,5 @@
     "titel": "The BEST Conversion Rate Optimization Tutorial for Ecommerce in 2025",
     "kanaal": "ThrillX",
     "url": "https://www.youtube.com/watch?v=eWWOJL1y8Qw"
-  },
-  "herzien": "2026-11-03",
-  "wijziging": "Opties dezelfde vorm gegeven."
+  }
 }
