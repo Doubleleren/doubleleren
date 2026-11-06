@@ -215,10 +215,13 @@ New-DlFeedback $dO $ids.Foxtrot $cg.prive @{ beheer = $V } 'goed' 'Vals namens F
 $fbUit3 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
 Controleer ($fbUit3 -match '1 overgeslagen' -and -not ($fbUit3 -match 'Vals namens')) 'Feedback met een valse handtekening wordt overgeslagen en gemeld'
 
-# Halfjaarlijkse check: na de deadline toont de pop-up geen les maar de weg naar de skilllijst, en telt niets mee
-& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde" -Opslaan -Datum '2027-02-03' -Thuis "$T\Echo"
+# Halfjaarlijkse check: na de deadline toont de pop-up geen les maar de weg naar de skilllijst, en telt niets mee.
+# Twee jaar vooruit: dan is de skilllijst van vandaag altijd ouder dan de vrijstelling voor nieuwe deelnemers
+# (wie in de twee maanden vóór een ronde begon, hoeft die ronde niet mee te doen), ongeacht in welke maand de test draait.
+$rondeJaar = (Get-Date).Year + 2
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde" -Opslaan -Datum "$rondeJaar-02-03" -Thuis "$T\Echo"
 Controleer ((Test-Path "$Werk\snap-ronde\0-skilllijst.png") -and -not (Test-Path "$Werk\snap-ronde\2-opdracht.png") -and -not (Test-Path "$D\data\$($ids.Echo)\log-$maand.enc")) 'Na 31 januari zonder bijgewerkte skilllijst: geen les, niets opgeslagen'
-& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde2" -Datum '2027-01-15' -Thuis "$T\Echo"
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde2" -Datum "$rondeJaar-01-15" -Thuis "$T\Echo"
 Controleer ((Test-Path "$Werk\snap-ronde2\2-opdracht.png") -and -not (Test-Path "$Werk\snap-ronde2\0-skilllijst.png")) 'Vóór de deadline: gewoon de les (de website toont een melding)'
 $rD = Get-DlRonde ([pscustomobject]@{ scores = [pscustomobject]@{ '1.1.1' = [pscustomobject]@{ '2027-01' = 3 } } }) '2026-10-19' ([datetime]'2027-02-03')
 $rN = Get-DlRonde $null '2026-12-01' ([datetime]'2027-02-03')
@@ -299,6 +302,14 @@ Controleer ($ctx.lesstatistiek.'20261019-srm'.n -ge 1 -and $ctx.lesstatistiek.'2
 Controleer (@($fbC | Where-Object tekst -eq 'Na de omzetting').Count -eq 1 -and -not ($fbC | Where-Object { $_.PSObject.Properties.Name -contains 'door' }) -and -not ((ConvertTo-Json $fbC -Depth 4) -match 'lid-[0-9a-f]{6}')) 'Context: feedback zonder afzender en zonder pseudoniemen'
 Controleer (-not ($fbC | Where-Object tekst -eq 'Vals namens Foxtrot') -and -not ($fbC | Where-Object tekst -match 'Afronden reageert')) 'Context: vervalste feedback en feedback zonder generatorkopie overgeslagen'
 Remove-Item "$T\beheer\generator\context.json"
+# Vaste beginstand voor de checks hieronder: les 20261019-srm zoals hij oorspronkelijk was (nooit herzien, het juiste
+# antwoord ruim het langst). Zo hangt de test niet af van wat de generator later aan de echte les verandert.
+$srm = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+foreach ($v in 'herzien', 'wijziging', 'actief') { $srm.PSObject.Properties.Remove($v) }
+$jSrm = [int]$srm.opdracht.juist
+$maxSrm = (@(0..3 | Where-Object { $_ -ne $jSrm } | ForEach-Object { "$($srm.opdracht.opties[$_])".Length }) | Measure-Object -Maximum).Maximum
+while ("$($srm.opdracht.opties[$jSrm])".Length -le 1.1 * $maxSrm) { $srm.opdracht.opties[$jSrm] += ', ook als het verschil klein lijkt' }
+[IO.File]::WriteAllText("$A\lessen\20261019-srm.json", ($srm | ConvertTo-Json -Depth 6), (New-Object Text.UTF8Encoding($false)))
 # Controle van herzien-velden
 $basis = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
 $l1 = $basis.PSObject.Copy(); $l1 | Add-Member actief $false -Force
