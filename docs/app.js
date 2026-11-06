@@ -88,6 +88,15 @@ function metKopie(ruw) {
     bewaarVoortaan() { aan = true; bewaarBoom(); },
     // Offline begonnen: opnieuw proberen (gooit als GitHub nog weg is)
     async online() { if (offline) await herstel(); },
+    // Alleen de paden waarvoor wel(p) geldt opnieuw uit de boom (bijv. het scorebord vernieuwen); de rest blijft zoals geladen
+    async vernieuw(wel) {
+      if (offline) return herstel();
+      const boom = await ruw.boom(); if (!boom.paden) return;
+      paden = [...(paden || []).filter((p) => !wel(p)), ...boom.paden.filter(wel)];
+      for (const p of [...shas.keys()]) if (wel(p) && !boom.shas.has(p)) { shas.delete(p); vergeet(p); }
+      boom.shas.forEach((v, p) => { if (wel(p)) shas.set(p, v); });
+      bewaarBoom();
+    },
     async bytes(p) {
       const k = kopie.get(p), sha = shas.get(p);
       if (k && sha && k.sha === sha) return k.b.slice();
@@ -146,7 +155,7 @@ function apiBron(eigenaar, repo, token) {
   };
   return metKopie({
     async boom() {
-      const r = await haal(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+      const r = await haal(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1&t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (r.status === 401 || r.status === 403 || r.status === 404) throw new Error('UITNODIGING');
       if (!r.ok) throw new Error(`GitHub gaf een onverwachte fout (${r.status}). Neem contact op met de beheerder.`);
@@ -907,6 +916,13 @@ async function toonScorebord() {
   }).join('')}</tbody>` : '<tbody><tr><td class="leeg">Nog niemand op het scorebord in deze periode.</td></tr></tbody>';
   $('sb-sub').textContent = soort === 'j' ? `Jaarstand ${w}: punten en goed opgeteld over de maanden, langste reeks = de beste maand.` : huidig ? 'Deze maand loopt nog. Je stand wordt bijgewerkt zodra je een les afrondt.' : '';
 }
+// Knop Vernieuwen: alleen de scorebordbestanden opnieuw ophalen (nieuwe boom, cache leeg) en het bord opnieuw tekenen
+async function vernieuwScorebord() {
+  const k = $('sb-vernieuw'); k.disabled = true; k.textContent = 'Vernieuwen…'; $('sb-fout').textContent = '';
+  try { await S.data.vernieuw((p) => SB_PAD.test(p)); SB.cache.clear(); await toonScorebord(); }
+  catch (e) { $('sb-fout').textContent = `Vernieuwen lukt nu niet: ${e.message}`; }
+  finally { k.disabled = false; k.textContent = 'Vernieuwen'; }
+}
 // De keuze staat in je eigen profiel (versleuteld en door jou ondertekend), niet in de openbare scorebordbestanden
 async function zetZichtbaar(aan) {
   $('sb-zichtbaar').disabled = true; $('sb-zichtbaar-status').textContent = 'Opslaan…';
@@ -1466,6 +1482,7 @@ $('mx-opslaan').addEventListener('click', async () => {
   try { await slaSkilllijstOp(); } catch (e) { $('mx-fout').textContent = e.message; } finally { k.disabled = false; k.textContent = 'Opslaan'; }
 });
 $('sb-keuze').addEventListener('change', () => toonScorebord().catch(() => {}));
+$('sb-vernieuw').addEventListener('click', vernieuwScorebord);
 $('sb-zichtbaar').addEventListener('change', (e) => zetZichtbaar(e.target.checked));
 $('feedback-knop').addEventListener('click', () => openFeedback(NAV.huidig === 'lesdetail' ? NAV.les : undefined));
 $('fb-form').addEventListener('submit', (e) => e.preventDefault());

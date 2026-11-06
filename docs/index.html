@@ -133,6 +133,7 @@ details.spoiler > summary { cursor: pointer; color: var(--smart-ink); font-weigh
 tr.ik td { background: var(--fun-50); }
 .sb-kies { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .sb-kies .veld { width: auto; padding: 8px 14px; font-size: 15px; }
+.sb-kies .knop { background: var(--cool-50); }
 
 .les { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-top: 1px solid var(--cool); }
 .les:first-child { border-top: 0; padding-top: 0; }
@@ -407,9 +408,10 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   <div id="scorebord" hidden>
     <section class="paneel" style="margin-top:0">
       <div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Elke maand een nieuwe ronde. Punten = aantal goed + je langste reeks van die maand (weekenden onderbreken een reeks niet).</p></div>
-        <div class="sb-kies"><label for="sb-keuze" class="sub" style="margin:0">Periode</label><select id="sb-keuze" class="veld"></select></div></div>
+        <div class="sb-kies"><label for="sb-keuze" class="sub" style="margin:0">Periode</label><select id="sb-keuze" class="veld"></select><button type="button" class="knop" id="sb-vernieuw">Vernieuwen</button></div></div>
       <div class="tabel"><table id="sb-tabel"></table></div>
       <p class="sub" id="sb-sub"></p>
+      <p class="fout" id="sb-fout" role="alert"></p>
     </section>
   </div>
 
