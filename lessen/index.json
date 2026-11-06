@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-05T08:19:27",
+    "bijgewerkt":  "2026-11-06T05:27:22",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -3749,6 +3749,162 @@
                        "bron":  {
                                     "titel":  "Video sitemaps | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-cls-promobalk-ruimte-reserveren",
+                       "titel":  "De promobalk duwt de koopknop weg: hoe los je dat op?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: CLS verbeteren bij een balk die later verschijnt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.7",
+                                      "5.2.6"
+                                  ],
+                       "kernpunt":  "Iets wat later op de pagina verschijnt, krijgt vooraf een vaste plek (bijv. min-height). Beoordeel CLS op velddata uit Search Console of CrUX, niet alleen op Lighthouse.",
+                       "bron":  {
+                                    "titel":  "Optimize Cumulative Layout Shift | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-cls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-gsc-klikpiek-bots-november",
+                       "titel":  "Zes keer zoveel klikken in Search Console, en niemand weet waarom",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Search Console: een klikpiek begin november 2026 die niet echt is",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.2",
+                                      "4.1.1"
+                                  ],
+                       "kernpunt":  "Stijgen klikken sterk terwijl de vertoningen gelijk blijven, dan is het vrijwel zeker geen echt verkeer. Begin november 2026 had een deel van de sites zo\u0027n piek: filter hem uit je rapport en verander niets aan de site.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: November Click Spikes In Google Search Console Are Bot Traffic – How To Filter Your Reports",
+                                    "url":  "https://www.searchenginejournal.com/november-click-spikes-in-google-search-console-are-bot-traffic-how-to-filter-your-reports/595834/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-inp-filterklik-werk-uitstellen",
+                       "titel":  "Een filterklik van 480 ms: wat moet de developer als eerste doen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: INP verbeteren door werk na een klik uit te stellen",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.5",
+                                      "5.2.4"
+                                  ],
+                       "kernpunt":  "Laat een klik eerst alleen het zichtbare antwoord tekenen en schuif de rest van het werk naar een latere taak. INP meet tot het eerstvolgende beeld, dus daar win je de meeste tijd.",
+                       "bron":  {
+                                    "titel":  "Optimize Interaction to Next Paint | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-inp"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-kannibalisatie-twee-blogs-samenvoegen",
+                       "titel":  "Twee blogs over zonneschermen kiezen, allebei op positie 14",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Keyword-kannibalisatie: twee blogs over dezelfde vraag",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.3"
+                                  ],
+                       "kernpunt":  "Beantwoorden twee pagina\u0027s dezelfde vraag en scoren ze allebei matig, voeg ze dan samen en stuur de oude URL door met een 301. noindex, een canonical of het zoekwoord weghalen lossen het niet goed op.",
+                       "bron":  {
+                                    "titel":  "Keyword Cannibalization: What It (Really) Is \u0026 How to Fix It | Ahrefs",
+                                    "url":  "https://ahrefs.com/blog/keyword-cannibalization/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-meta-description-andere-snippet",
+                       "titel":  "Google toont niet de meta description die we schreven. Kapot?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Meta description: waarom Google soms andere tekst toont",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.9"
+                                  ],
+                       "kernpunt":  "Google maakt snippets vooral uit de pagina zelf en gebruikt de meta description alleen als die beter beschrijft. Schrijf hem uniek en specifiek, maar zie een andere snippet niet als fout.",
+                       "bron":  {
+                                    "titel":  "Control your snippets in search results | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/snippet"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-orphan-pages-alleen-in-sitemap",
+                       "titel":  "120 cursussen in de sitemap, 85 in de crawl: waar zijn de rest?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Orphan pages: pagina\u0027s die wel in de sitemap staan, maar niet in de crawl",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.1",
+                                      "1.2.6"
+                                  ],
+                       "kernpunt":  "Een pagina die in de sitemap staat maar niet in een crawl, heeft meestal geen enkele interne link. Vergelijk de crawl met sitemap, GA en Search Console om ze te vinden, en link waardevolle pagina\u0027s weer aan.",
+                       "bron":  {
+                                    "titel":  "How To Find Orphan Pages | Screaming Frog",
+                                    "url":  "https://www.screamingfrog.co.uk/seo-spider/tutorials/find-orphan-pages/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-title-overal-dezelfde-makelaar",
+                       "titel":  "300 woningpagina\u0027s met precies dezelfde title",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Meta title: unieke, beschrijvende titles in plaats van één sjabloon",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.8"
+                                  ],
+                       "kernpunt":  "Geef elke pagina een eigen title die zegt wat erop staat, bij veel pagina\u0027s via een sjabloon uit de data. Een vaste tekenlimiet bestaat niet; Google kort zelf af.",
+                       "bron":  {
+                                    "titel":  "Influencing your title links in search results | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/title-link"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261106-zoeken-geen-resultaten-pagina",
+                       "titel":  "\u0027Geen resultaten gevonden\u0027: het eindstation van je webshop?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Zoekfunctie op de site: de pagina \u0027Geen resultaten\u0027",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Een pagina \u0027Geen resultaten\u0027 mag nooit doodlopen. Toon passende categorieën, andere zoektermen en hulp, en los veelvoorkomende zoekopdrachten zonder resultaat op in de zoekfunctie zelf.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: Search UX: 5 Proven Strategies for Improving \u0027No Results\u0027 Pages",
+                                    "url":  "https://baymard.com/research-articles/no-results-page"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

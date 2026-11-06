@@ -1,0 +1,30 @@
+{
+  "id": "20261106-kannibalisatie-twee-blogs-samenvoegen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Keyword-kannibalisatie: twee blogs over dezelfde vraag",
+  "matrix": ["1.2.3"],
+  "titel": "Twee blogs over zonneschermen kiezen, allebei op positie 14",
+  "intro": "Een zonweringbedrijf heeft twee blogs: 'Zonnescherm kiezen: waar let je op?' uit 2022 en 'Het juiste zonnescherm kiezen' uit 2025. Ze beantwoorden dezelfde vraag, met grotendeels dezelfde tips. In Search Console wisselen ze elkaar af op 'zonnescherm kiezen', allebei rond positie 14. Beide blogs hebben een paar backlinks van andere sites.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je?",
+    "opties": [
+      "De oudste blog op noindex zetten, want dan blijft er voor Google nog maar één pagina over voor deze zoekterm.",
+      "Op de oudste blog een canonical naar de nieuwe zetten, want zo geeft die zijn signalen door zonder iets te verwijderen.",
+      "Het zoekwoord uit de titel en koppen van de oudste blog halen, want dan kiest Google vanzelf de nieuwe blog.",
+      "De blogs samenvoegen tot één sterke gids en de oude URL met een 301 doorsturen, want zo bundel je links en inhoud."
+    ],
+    "juist": 3
+  },
+  "toelichting": "Twee pagina's die **dezelfde vraag** beantwoorden, zitten elkaar in de weg. Dat heet keyword-kannibalisatie. Hier zie je het aan de pagina's die elkaar afwisselen, allebei net buiten de eerste pagina van Google. Voeg de beste stukken van beide samen in één gids en stuur de oude URL door met een 301 (permanente doorverwijzing). Dan komen de backlinks en de inhoud samen op één pagina.\n\n- **noindex** haalt de oude blog uit Google, maar bundelt niets. Zijn inhoud en links helpen de nieuwe blog dan niet.\n- **Een canonical** is bedoeld voor (bijna) dubbele pagina's. Bij twee verschillende teksten kan Google hem negeren.\n- **Het zoekwoord weghalen** raakt ook de andere zoektermen waarop die blog gevonden wordt.",
+  "kort": "Twee blogs die dezelfde vraag beantwoorden, concurreren met elkaar, en geen van beide komt hoog. Maak er één goede blog van en stuur de oude link door naar de nieuwe. Dan telt alles wat beide blogs hadden opgebouwd voor één pagina.",
+  "uitleg": "**Is het wel kannibalisatie?** Twee pagina's op hetzelfde zoekwoord zijn niet altijd een probleem. Het is pas kannibalisatie als ze dezelfde zoekintentie (wat de zoeker wil weten of doen) bedienen en geen van beide goed scoort. Een blog 'Wat kost een zonnescherm?' en een productpagina 'Zonnescherm kopen' dienen een ander doel. Die mogen naast elkaar bestaan.\n\n**Samenvoegen in vier stappen:**\n\n- Kies welke URL blijft. Meestal die met de meeste links of het meeste verkeer.\n- Neem de beste delen van de andere tekst over.\n- Stuur de andere URL door met een 301.\n- Pas interne links aan, zodat ze direct naar de overgebleven URL wijzen.\n\nWeghalen zonder doorverwijzing doe je alleen bij een pagina die echt niets meer toevoegt.",
+  "kernpunt": "Beantwoorden twee pagina's dezelfde vraag en scoren ze allebei matig, voeg ze dan samen en stuur de oude URL door met een 301. noindex, een canonical of het zoekwoord weghalen lossen het niet goed op.",
+  "toepassing": "Zoek deze week in Search Console bij een klant een zoekwoord waarop twee of meer URL's vertoningen krijgen. Bekijk of ze dezelfde vraag beantwoorden of een ander doel hebben.",
+  "bron": {
+    "titel": "Keyword Cannibalization: What It (Really) Is & How to Fix It | Ahrefs",
+    "url": "https://ahrefs.com/blog/keyword-cannibalization/"
+  }
+}

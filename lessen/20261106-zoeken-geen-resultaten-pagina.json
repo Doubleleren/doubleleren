@@ -1,0 +1,30 @@
+{
+  "id": "20261106-zoeken-geen-resultaten-pagina",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Zoekfunctie op de site: de pagina 'Geen resultaten'",
+  "matrix": ["7.1.1"],
+  "titel": "'Geen resultaten gevonden': het eindstation van je webshop?",
+  "intro": "Een webshop in campingartikelen ziet in de zoekdata van de site dat 9% van de zoekopdrachten niets oplevert. Bezoekers zoeken bijvoorbeeld op 'tentharingen zand' of 'koelbox 12v'. De pagina 'Geen resultaten' toont nu alleen: 'Probeer een ander zoekwoord of controleer de spelling.' Bijna niemand die op die pagina belandt, koopt nog iets.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing van de pagina 'Geen resultaten' werkt volgens onderzoek het best?",
+    "opties": [
+      "Passende categorieën en andere zoektermen tonen, want dan heeft de bezoeker meteen een volgende stap op de site.",
+      "Meer zoektips geven over spelling en synoniemen, want dan leert de bezoeker hoe de zoekfunctie van de site werkt.",
+      "De bezoeker direct doorsturen naar de homepage, want daar staan de meeste producten en aanbiedingen bij elkaar.",
+      "Een pop-up met een kortingscode tonen, want een korting houdt een bezoeker vast die op het punt staat weg te gaan."
+    ],
+    "juist": 0
+  },
+  "toelichting": "Wie niets vindt, probeert nog één keer iets anders of vertrekt, vaak naar een externe zoekmachine. Baymard zag in onderzoek dat ongeveer de helft van de webshops zo'n doodlopende pagina heeft. Geef de bezoeker daarom meteen een nieuwe route: passende categorieën en andere zoektermen.\n\n- **Zoektips** werken slecht. Bezoekers lezen ze zelden, en volgens Baymard geven ze juist een reden om weg te gaan.\n- **Doorsturen naar de homepage** is verwarrend. De bezoeker ziet niet waarom hij daar is en moet helemaal opnieuw beginnen.\n- **Een kortingspop-up** lost het echte probleem niet op: de bezoeker weet nog steeds niet waar het product staat.",
+  "kort": "Een bezoeker die niets vindt, staat voor een dichte deur. Zoektips helpen nauwelijks, want bijna niemand leest ze. Laat daarom meteen categorieën en andere zoektermen zien die passen bij wat hij zocht. Dan kan hij gewoon verder zoeken op je site.",
+  "uitleg": "Baymard noemt vijf manieren om een pagina 'Geen resultaten' beter te maken:\n\n- **Passende categorieën** tonen, bijvoorbeeld 'Tentaccessoires' bij 'tentharingen zand'.\n- **Andere zoektermen** voorstellen. Is er maar één goed alternatief, voer dat dan meteen uit en meld waarom.\n- **Persoonlijke suggesties**, zoals onlangs bekeken producten.\n- **Hulp** aanbieden: telefoonnummer, chat of een link naar de klantenservice. Wie hier belandt, staat op het punt af te haken.\n- **Populaire producten en categorieën** laten zien.\n\nKijk daarnaast naar de oorzaak. Bekijk regelmatig de zoekopdrachten zonder resultaat. Vaak gaat het om synoniemen, typfouten of producten die je wel hebt maar anders noemt. Die los je op in de zoekmachine van de site zelf. Zoekt men vaak naar iets wat je niet verkoopt, dan is dat nuttige informatie voor het assortiment.",
+  "kernpunt": "Een pagina 'Geen resultaten' mag nooit doodlopen. Toon passende categorieën, andere zoektermen en hulp, en los veelvoorkomende zoekopdrachten zonder resultaat op in de zoekfunctie zelf.",
+  "toepassing": "Zoek deze week op de site van een klant naar een product dat niet bestaat en bekijk de pagina die je krijgt. Geeft die alleen zoektips, stel dan voor om er categorieën en populaire producten aan toe te voegen.",
+  "bron": {
+    "titel": "Baymard Institute: Search UX: 5 Proven Strategies for Improving 'No Results' Pages",
+    "url": "https://baymard.com/research-articles/no-results-page"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "20261106-meta-description-andere-snippet",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Meta description: waarom Google soms andere tekst toont",
+  "matrix": ["2.1.9"],
+  "titel": "Google toont niet de meta description die we schreven. Kapot?",
+  "intro": "Een tandartspraktijk heeft voor elke pagina zelf een meta description geschreven. Bij de pagina over een wortelkanaalbehandeling toont Google toch een zin uit de tekst: 'Een wortelkanaalbehandeling duurt meestal twee afspraken van een uur.' De meta description staat gewoon in de head van de pagina. De praktijkhouder vraagt of er iets stuk is.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste uitleg voor de praktijkhouder?",
+    "opties": [
+      "Er is iets mis met de description, want boven de 155 tekens slaat Google hem altijd over en kiest het een zin.",
+      "Er is niets kapot, want Google maakt snippets vooral uit de pagina en kiest de description alleen als die beter past.",
+      "Er is iets mis met de code, want Google moet de meta description tonen als die in de head van de pagina staat.",
+      "Er is niets kapot, want Google wisselt de meta description elke week af met tekst van de pagina om te testen."
+    ],
+    "juist": 1
+  },
+  "toelichting": "Volgens Google komt een snippet (de korte tekst onder de titel in de zoekresultaten) **vooral uit de inhoud van de pagina**. De meta description gebruikt Google alleen als die de pagina volgens Google beter beschrijft. Een zin uit de tekst zien is dus normaal, geen fout.\n\n- **Een harde grens van 155 tekens** bestaat niet. Google kort een lange tekst af waar nodig, meestal op de breedte van het scherm.\n- **Google is niet verplicht** de meta description te tonen, ook niet als hij technisch klopt.\n- **Een vast wekelijks wisselschema** bestaat niet. Google kiest zelf welke tekst de pagina het best beschrijft.",
+  "kort": "Google kiest zelf welke tekst het onder je zoekresultaat zet. Meestal pakt het een stuk tekst van de pagina. Je eigen meta description gebruikt Google alleen als die de pagina beter beschrijft. Er is dus niets kapot.",
+  "uitleg": "Een meta description blijft nuttig, ook als Google hem niet altijd toont. Zo vergroot je de kans dat hij gebruikt wordt:\n\n- **Uniek per pagina.** Dezelfde tekst op veel pagina's helpt niet.\n- **Specifiek.** Noem wat op de pagina staat: bij een product bijvoorbeeld prijs of merk, bij een artikel de auteur en de datum.\n- **Waar.** Beloof niets wat de pagina niet waarmaakt.\n- **Eerst de belangrijkste pagina's.** Weinig tijd? Begin bij de homepage en de populairste pagina's.\n\nWil je de lengte van een snippet zelf beperken, dan kan dat met de meta robots-regel max-snippet. Met data-nosnippet houd je een stuk tekst uit de snippet.\n\nEen andere snippet dan je description is geen straf: Google vond op je pagina een tekst die het geschikter vond.",
+  "kernpunt": "Google maakt snippets vooral uit de pagina zelf en gebruikt de meta description alleen als die beter beschrijft. Schrijf hem uniek en specifiek, maar zie een andere snippet niet als fout.",
+  "toepassing": "Zoek deze week bij een klant een belangrijke pagina op in Google en vergelijk de snippet met de meta description. Wijkt hij af, kijk dan of de description wel echt over deze pagina gaat.",
+  "bron": {
+    "titel": "Control your snippets in search results | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/snippet"
+  }
+}
