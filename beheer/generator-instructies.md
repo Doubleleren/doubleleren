@@ -45,7 +45,7 @@ Per soort feedback:
 - **`fout`** (iets klopt niet of is onvolledig): open de les en zoek het uit bij een gezaghebbende bron (fetch hem).
   - Klopt de melding: verbeter de les in hetzelfde bestand. Pas het antwoord, de opties, de uitleg of de bron aan, en zet `"herzien": "JJJJ-MM-DD"` (vandaag) en `"wijziging": "korte reden, max 300 tekens, zonder namen"`, bijv. "Optie C was ook juist; vraag verduidelijkt."
   - Is de les niet goed te repareren (verouderd, misleidend of de vraag deugt niet): zet `"actief": false` plus `herzien` en `wijziging`. Hij komt dan nooit meer in een wachtrij, maar wie hem deed kan hem nog nalezen. Haal hem ook uit alle wachtrijen. Schrijf zo nodig een nieuwe, betere les over hetzelfde onderwerp (een nieuwe situatie, een nieuw id).
-  - Klopt de les wel: laat hem staan. Wordt hij duidelijk verkeerd begrepen, maak dan de vraag of de `toelichting` duidelijker (met `herzien` en `wijziging`).
+  - Klopt de les wel: laat hem staan. Wordt hij duidelijk verkeerd begrepen, maak dan de vraag of de blokken na het antwoord duidelijker (zie 'Na het antwoord' in stap 3) (met `herzien` en `wijziging`).
   - Gaat het om een teamles: niets aanpassen, alleen tellen voor je eindregel.
 - **`toevoeging`** (een onderwerp of vraag die iemand mist): geef dat onderwerp voorrang bij de voorraadlessen in stap 3, als het binnen het vak past. Een wens die al met een les is ingevuld na de datum van de feedback, telt niet meer.
 - **`goed`** (dit gaat goed): gebruik vaker het format, het soort opdracht of het onderwerp dat genoemd wordt.
@@ -57,7 +57,7 @@ Per soort feedback:
 
 **Modelantwoord in bestaande lessen.** Plan je een eigen open, zoek-op- of maak-met-claude-les opnieuw in en begint het `modelantwoord` nog niet met `**De kern:**`? Herschrijf het dan eerst volgens de regel in stap 3, met `herzien` en `wijziging: "Modelantwoord eenvoudiger gemaakt."`.
 
-**"In gewone taal" bij bestaande lessen** (feedback november 2026: "de uitleg is nog erg lastig, graag een Jip-en-Janneke-alinea"). Een eigen les zonder `kort` vul je aan wanneer je hem opnieuw inplant: schrijf `kort` volgens 'Begrijpelijk schrijven', en begint de `uitleg` met een alinea `**Kort gezegd:** ...`, haal die dan uit de uitleg en zet hem (zo nodig eenvoudiger) in `kort`. Zet `herzien` (vandaag) en `wijziging: "In gewone taal toegevoegd."`. Vul daarnaast elke run tot 10 andere eigen lessen zonder `kort` aan, te beginnen met lessen waarover feedback kwam dat de uitleg lastig is, daarna lessen die het vaakst in wachtrijen staan. Lessen van het team pas je niet aan.
+**Vaste opbouw van de uitleg bij bestaande lessen** (feedback november 2026 van de head of SEO: "vier keer hetzelfde punt, jargon zonder uitleg, geen beeld, foute antwoorden als losse bullets onderaan"). Een eigen meerkeuzeles zonder `afleiders` (`"oudeUitleg": true` in `lessen\index.json`) breng je naar de opbouw in stap 3 ('Na het antwoord') wanneer je hem opnieuw inplant: schrijf `kern`, zet de redenen per foute optie uit de `toelichting` in `afleiders`, herschrijf `kort` met een vergelijking uit het dagelijks leven, voeg `begrippen` toe, en verwijder de `toelichting` (wat daar verder in stond, gaat naar `uitleg` als het iets toevoegt). Maak `kernpunt` en `toepassing` korter waar ze een eerder blok herhalen. Een open, zoek-op- of maak-met-claudeles krijgt alleen het nieuwe `kort`, `begrippen` en de nieuwe regels voor `kernpunt` en `toepassing`. Zet `herzien` (vandaag) en `wijziging: "Uitleg in de vaste opbouw gezet."`. Doe daarnaast elke run tot 10 andere eigen lessen die nog niet in die opbouw staan, te beginnen met lessen waarover feedback kwam dat de uitleg lastig is, daarna lessen die het vaakst in wachtrijen staan. Lessen van het team pas je niet aan.
 
 **Video bij bestaande lessen.** Plan je een eigen les zonder `video` opnieuw in, kijk dan of er in `sjablonen\seo\videos.json` inmiddels een video staat die volgens de regel in stap 3 past. Zo ja, voeg hem toe, met `herzien` (vandaag) en `wijziging: "Kennisvideo toegevoegd."`. Een les met een video laat je zoals hij is.
 
@@ -135,30 +135,47 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
   "titel": "pakkende titel, max ~70 tekens",
   "intro": "optioneel: alleen de situatie, max ~60 woorden, zonder het antwoord (zie 'Opbouw: eerst zelf nadenken')",
   "opdracht": { "soort": "meerkeuze | open | zoek-op | maak-met-claude", "vraag": "...", "opties": ["4 bij meerkeuze"], "juist": 0, "minTekens": 100, "hint": "optioneel" },
-  "toelichting": "optioneel, vooral bij meerkeuze",
+  "kern": "bij meerkeuze: één zin met de kern van het juiste antwoord, max 200 tekens (staat achter 'Goed!')",
+  "afleiders": ["bij meerkeuze: per optie, in dezelfde volgorde, één zin waarom hij niet klopt; bij het juiste antwoord \"\""],
   "modelantwoord": "bij open/zoek-op/maak-met-claude",
-  "kort": "In gewone taal: 2–4 korte zinnen zonder vakjargon (zie 'Begrijpelijk schrijven'), staat direct na het antwoord",
-  "uitleg": "de verdieping, 100–150 woorden (hooguit 180); staat uitklapbaar onder 'kort'",
-  "kernpunt": "1–2 zinnen om te onthouden",
-  "toepassing": "1 concrete actie voor deze week bij een klant",
+  "kort": "Zo werkt het: 2–5 korte zinnen met één vergelijking uit het dagelijks leven, zonder vakjargon",
+  "begrippen": [{ "term": "TTFB", "uitleg": "max 200 tekens, gewone woorden" }],
+  "uitleg": "de verdieping, 100–150 woorden (hooguit 180); staat uitklapbaar onder 'Lees de volledige uitleg'",
+  "kernpunt": "één vuistregel om te onthouden",
+  "toepassing": "1 concrete actie die je vandaag in hooguit 10 minuten doet",
   "bron": { "titel": "...", "url": "https://..." },
   "video": { "titel": "...", "kanaal": "...", "url": "https://www.youtube.com/watch?v=..." }
 }
 ```
-Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJJ-MM-DD"`, `"wijziging": "korte reden"` en eventueel `"actief": false` bij.
+Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJJ-MM-DD"`, `"wijziging": "korte reden"` en eventueel `"actief": false` bij. Het oude veld `toelichting` schrijf je niet meer bij nieuwe lessen: wat daar stond, staat nu in `kern`, `afleiders` en `uitleg`. Een les met `afleiders` heeft geen `toelichting` (anders staat alles dubbel).
+
+**Na het antwoord: vaste opbouw** (feedback november 2026 van de head of SEO). De deelnemer ziet na zijn antwoord deze blokken, in deze volgorde:
+
+| Blok | Veld | Regel |
+|---|---|---|
+| 1. Feedback | `kern` | "Goed!" of "Niet helemaal. Juist is: …", gevolgd door één zin met de kern. Herhaal de juiste optie niet woordelijk: die staat al in beeld. Bij open opdrachten is dit het `modelantwoord` (begint met `**De kern:**`). |
+| 2. Zo werkt het | `kort` | Het mechanisme achter het antwoord, met **altijd één vergelijking uit het dagelijks leven** die blijft hangen (doorverbonden worden aan de telefoon, een winkel met de deur op slot, een routebeschrijving met omwegen). 2–5 korte zinnen, geen vakjargon, geen opsomming, geen opmaak. Leg uit **waarom** het zo werkt, niet alleen de regel. |
+| 3. Waarom de andere antwoorden niet kloppen | `afleiders` | Per foute optie één zin, die begint met een korte naam van de optie in vet: `"**Zwaardere hosting:** de server is al snel. Doorverbinden blijft doorverbinden."`. Ga in op de denkfout: waarom lijkt het logisch, en waarom klopt het niet? Koos de deelnemer deze optie, dan staat zijn reden bovenaan. |
+| 4. Begrippen | `begrippen` | Hooguit vier vaktermen die **in deze les voorkomen** en die een junior niet vanzelf kent. Per term één korte uitleg in gewone woorden. Geen termen die nergens in de les staan. Geen begrippen nodig? Laat het veld weg. |
+| 5. Lees de volledige uitleg | `uitleg` | Uitklapbaar: de diepgang voor wie meer wil (drempels, bronnen, aanpak in stappen). Hier mogen vaktermen, want seniors lezen dit. |
+| 6. Onthoud | `kernpunt` | Eén regel, geformuleerd als vuistregel ("Wijkt velddata af van labdata, kijk dan eerst wat de echte bezoeker onderweg tegenkomt."). |
+| 7. Probeer vandaag | `toepassing` | Iets wat je **vandaag** doet, in hooguit 10 minuten, bij een klant. Niet "deze week". |
+
+**Herhalingstoets** vóór het opslaan: lees de blokken 1 tot en met 7 achter elkaar. Elk blok voegt iets toe wat nog niet in een eerder blok stond. Zegt `kort`, `kernpunt` of de `uitleg` hetzelfde als `kern` in andere woorden, herschrijf dan het latere blok: `kern` zegt *wat*, `kort` zegt *waarom* (met het beeld), `kernpunt` zegt *wat je voortaan doet*.
+
+**Niet alles op kleuterniveau.** De korte blokken (1 tot en met 4) zijn voor iedereen begrijpelijk. De diepgang voor ervaren collega's zit in de uitklapbare `uitleg` en in de vraag zelf (praktijkcases, randgevallen op `gevorderd` en `expert`). Maak een expertles dus niet makkelijker, maar wel helder.
 
 **Begrijpelijk schrijven** (geldt voor elke les, ook voor gevorderd en expert: ook ervaren collega's lezen liever eenvoudig):
-- **`kort` ("In gewone taal")**: 2–4 korte zinnen die zeggen wat het antwoord is en waarom, alsof je het aan een nieuwe collega bij de koffieautomaat uitlegt. Geen vakjargon; is een woord echt nodig, leg het dan in dezelfde zin uit. Geen opsommingen, geen opmaak. Dit is wat de deelnemer als eerste leest na zijn antwoord.
-- **Elk vakbegrip leg je uit bij de eerste keer** dat het in de les voorkomt, in gewone woorden (bijv. "long-tail zoekopdrachten (lange, specifieke zoekopdrachten die weinig mensen typen)"). Begin de `toelichting` niet met een term die je pas later uitlegt.
+- **Elk vakbegrip** dat in `kern`, `kort` of `afleiders` voorkomt, staat in `begrippen` of wordt in dezelfde zin uitgelegd. Gebruik in die blokken liever geen termen als DNS, CrUX of eind-URL als het ook zonder kan.
 - **Korte zinnen**: gemiddeld hooguit 15 woorden, één gedachte per zin. Liever twee zinnen dan één met drie bijzinnen.
-- **De `uitleg` is verdieping**, 100–150 woorden (hooguit 180), met korte alinea's of een korte opsomming. Wat al in `kort` staat, hoef je niet te herhalen.
+- **De `uitleg` is verdieping**, 100–150 woorden (hooguit 180), met korte alinea's of een korte opsomming. Wat al in een eerder blok staat, herhaal je niet.
 
-**Opbouw: eerst zelf nadenken, dan de uitleg.** Een les verschijnt altijd in deze volgorde: `intro` (de situatie) → `opdracht` → bij meerkeuze goed/fout, anders het `modelantwoord` → `kort` (In gewone taal) → `toelichting` → `uitleg` (uitklapbaar), `kernpunt` en `toepassing`. De deelnemer ziet de uitleg dus pas **na** zijn antwoord. Daarom:
+**Opbouw: eerst zelf nadenken, dan de uitleg.** Een les verschijnt altijd in deze volgorde: `intro` (de situatie) → `opdracht` → de blokken uit 'Na het antwoord'. De deelnemer ziet de uitleg dus pas **na** zijn antwoord. Daarom:
 - **De intro schetst alleen de situatie** (klant, cijfers, wat er speelt), in maximaal ~60 woorden. Geen regels, geen oplossingsrichting, geen opsomming van opties en geen begrippen die het antwoord weggeven.
 - **Spoilertoets** vóór het opslaan: kan iemand die het onderwerp niet kent de vraag goed beantwoorden met alleen de intro en de vraag? Dan verraadt de les zichzelf: herschrijf hem. Hetzelfde geldt voor de `hint`: die wijst een richting aan, maar geeft geen antwoord.
 - **Toepassen, niet navertellen.** Vraag om een keuze, afweging, diagnose of prioriteit in de situatie ("welk van deze filters laat je indexeren, en waarom?"), liever dan om een opsomming die je uit de uitleg kunt overnemen ("noem vijf punten").
-- **Echte beginners** (score 1–2 op die vaardigheid, onderwerp is nieuw): kies meestal meerkeuze. Kiezen tussen plausibele opties lukt ook zonder voorkennis, en de toelichting leert het je. Is een begrip echt nodig om de vraag te snappen, geef dan **één zin definitie** in de intro (wat het is, niet wat je ermee moet doen).
-- `toelichting` (meerkeuze) en `modelantwoord` leggen uit **waarom** het juiste antwoord juist is en waarom de andere opties of veelgemaakte fouten het niet zijn. De `uitleg` daarna verdiept het onderwerp.
+- **Echte beginners** (score 1–2 op die vaardigheid, onderwerp is nieuw): kies meestal meerkeuze. Kiezen tussen plausibele opties lukt ook zonder voorkennis, en de blokken na het antwoord leren het je. Is een begrip echt nodig om de vraag te snappen, geef dan **één zin definitie** in de intro (wat het is, niet wat je ermee moet doen).
+- Het `modelantwoord` legt uit **waarom** een goed antwoord goed is en welke fouten vaak gemaakt worden. De `uitleg` daarna verdiept het onderwerp.
 - **Het modelantwoord is iets om je eigen antwoord naast te leggen, geen perfecte tekst.** De deelnemer beoordeelt zelf of hij het goed had. Dat moet makkelijk gaan, ook als hij het in andere woorden zei. Begin daarom met `**De kern:**` en 1–2 korte zinnen in gewone taal: wat een goed antwoord in elk geval bevat, zoals een collega het zou opschrijven. Gebruik geen opgepoetste formuleringen en geen stapel vaktermen. Daarna mag het uitgebreider: waarom het zo is en welke fouten vaak gemaakt worden. Voorbeeld: `"**De kern:** laat alleen het merkfilter indexeren, want daar zoeken mensen op. Kleur en prijs krijgen noindex.\n\nWaarom: …"`.
 - Het oude veld `volgorde` gebruik je niet meer; website en pop-up negeren het.
 
