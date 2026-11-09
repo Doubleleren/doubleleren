@@ -1,0 +1,41 @@
+{
+  "id": "20261109-reviews-alleen-positief-acm",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Betrouwbaarheid: reviews eerlijk tonen (regels van de ACM)",
+  "matrix": ["7.1.3"],
+  "titel": "4,9 sterren op de homepage, maar de slechte reviews zijn eruit gefilterd",
+  "intro": "Een webshop in tuinmeubelen toont op de homepage het blok 'Wat klanten zeggen', met gemiddeld 4,9 sterren. De eigenaar kiest zelf welke reviews erin komen. Reviews met 1 of 2 sterren laat hij weg. Nergens staat waar de reviews vandaan komen. Hij wil het blok nu ook op alle productpagina's zetten, om meer vertrouwen te wekken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je?",
+    "opties": [
+      "Het blok uitbreiden zoals gepland, want een hoge score wekt vertrouwen en de eigenaar mag zelf kiezen wat hij laat zien.",
+      "Alleen de slechte reviews weghalen die ouder zijn dan een jaar, want oude reviews zeggen niets meer over de winkel.",
+      "Eerst alle reviews tonen, ook de slechte, en uitleggen waar ze vandaan komen, want selectief tonen is misleidend.",
+      "Een keurmerk naast het blok zetten, want met een keurmerk erbij mag een webshop zijn reviews vrij selecteren."
+    ],
+    "juist": 2
+  },
+  "kern": "Een score overtuigt alleen als hij eerlijk tot stand komt. Alleen goede reviews laten zien is misleiding, en dat verbiedt de wet.",
+  "afleiders": [
+    "**Uitbreiden zoals gepland:** een hoge score lijkt goed voor vertrouwen. Maar wie de slechte reviews weglaat, geeft een vertekend beeld, en dat mag niet volgens de ACM.",
+    "**Oude slechte reviews weghalen:** een termijn van een jaar mag, maar dan voor alle reviews, en je zegt erbij dat je die termijn gebruikt. Alleen de slechte weghalen blijft selectief.",
+    "",
+    "**Keurmerk erbij:** een keurmerk geeft vertrouwen, maar het geeft je geen vrijbrief. Ook met een keurmerk moet je positieve en negatieve reviews laten zien."
+  ],
+  "kort": "Denk aan een restaurant dat alleen de complimenten uit het gastenboek voor het raam hangt. Voorbijgangers vinden dat mooi, tot ze ontdekken dat de klachten zijn weggelaten. Dan geloven ze ook de complimenten niet meer. Een score van 4,9 werkt net zo. Hij overtuigt alleen als mensen erop kunnen rekenen dat er niets is weggepoetst.",
+  "begrippen": [
+    { "term": "ACM", "uitleg": "Autoriteit Consument & Markt: de Nederlandse toezichthouder die onder meer controleert of bedrijven consumenten niet misleiden." },
+    { "term": "Omnibus-richtlijn", "uitleg": "Europese regels voor consumentenbescherming die sinds 28 mei 2022 in Nederland gelden, onder meer voor online reviews." },
+    { "term": "Keurmerk", "uitleg": "een logo van een onafhankelijke organisatie dat aangeeft dat een webshop aan bepaalde eisen voldoet." }
+  ],
+  "uitleg": "Sinds 28 mei 2022 gelden in Nederland strengere regels voor reviews, door de Europese Omnibus-richtlijn. Valse reviews plaatsen of reviews verkeerd weergeven is altijd misleidend.\n\nWat de ACM van een webshop vraagt:\n- **Positief én negatief:** reviews weglaten die je niet uitkomen, is misleiding.\n- **Leg uit hoe je zorgt dat reviews echt zijn**, bijvoorbeeld doordat alleen kopers een review kunnen schrijven.\n- **Laat zien waar de reviews vandaan komen** en welke je toont, bijvoorbeeld alle reviews van het afgelopen jaar.\n- **Leg uit hoe de score tot stand komt**, zoals het gemiddeld aantal sterren.\n- **Beloonde reviews** markeer je duidelijk, bijvoorbeeld met 'Deze persoon kreeg het product gratis'.\n\nVoor conversie is dit ook verstandig. Een reviewblok zonder herkomst en zonder kritiek oogt al snel te mooi om waar te zijn.\n\nPraktisch: zet onder het blok een link naar een korte pagina over je reviewbeleid. Toon de reviews via een systeem dat alle beoordelingen van echte kopers verzamelt, en reageer zichtbaar op kritiek.",
+  "kernpunt": "Toont een klant reviews, kijk dan of de slechte er ook staan en of er uitleg is over herkomst, controle en berekening van de score.",
+  "toepassing": "Open vandaag de site van een webshopklant en zoek het reviewblok. Kijk of er staat waar de reviews vandaan komen en hoe de score wordt berekend. Ontbreekt dat, zet het dan op je adviezenlijst.",
+  "bron": {
+    "titel": "ACM: Reviews en beoordelingen gebruiken",
+    "url": "https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/online-beinvloeden/reviews-en-beoordelingen-gebruiken"
+  }
+}

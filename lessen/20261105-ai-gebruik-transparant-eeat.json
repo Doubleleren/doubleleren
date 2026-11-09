@@ -34,10 +34,15 @@
   "uitleg": "Google vraagt makers om drie vragen over hun content: **wie** maakte het, **hoe** is het gemaakt en **waarom**. Bij 'hoe' hoort ook AI: maak duidelijk dat en hoe AI is gebruikt, vooral waar lezers zich dat kunnen afvragen. Van E-E-A-T noemt Google **betrouwbaarheid** (trust) het belangrijkste. Bij YMYL-onderwerpen zoals belastingen weegt het extra zwaar.\n\nZo vertaal je 'wie en hoe' naar de praktijk:\n- **Byline:** de naam van de adviseur die de inhoud controleert, met een link naar een auteurspagina. Zet daar zijn rol, ervaring en specialisme.\n- **Korte uitleg over werkwijze:** bijvoorbeeld 'Eerste versie met AI, inhoud gecontroleerd en aangevuld door [naam], belastingadviseur'. Dat mag onder het artikel of op een pagina over de redactie.\n- **Datum van controle:** belastingregels veranderen elk jaar. Laat zien wanneer de tekst voor het laatst is nagekeken.\n- **Bronnen:** verwijs naar de Belastingdienst of de wettekst.\n\nE-E-A-T is geen score die je met één byline omhoog krikt. Het is wat Google probeert te herkennen. Echte expertise en eerlijkheid zijn het fundament.",
   "kernpunt": "Staat er onder YMYL-content alleen 'Redactie', regel dan eerst een echte auteur met auteurspagina en één zin over de werkwijze.",
   "toepassing": "Open vandaag bij een klant met YMYL-content (geld, gezondheid, recht) drie artikelen en kijk wat eronder staat. Staat er alleen 'Redactie', noteer dan een voorstel voor een byline met auteurspagina en een zin over de werkwijze.",
-  "herzien": "2026-11-06",
-  "wijziging": "Uitleg in de vaste opbouw gezet.",
+  "herzien": "2026-11-09",
+  "wijziging": "Kennisvideo toegevoegd.",
   "bron": {
     "titel": "Creating helpful, reliable, people-first content | Google Search Central",
     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  },
+  "video": {
+    "titel": "Author SEO: Optimize Your Site for Google E-E-A-T",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=D9hyyjQ-t90"
   }
 }

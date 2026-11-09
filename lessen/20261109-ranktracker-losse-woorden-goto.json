@@ -1,0 +1,41 @@
+{
+  "id": "20261109-ranktracker-losse-woorden-goto",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Rank trackers: vertekende posities door resultaten over één los woord en Google-redirectlinks (najaar 2026)",
+  "matrix": ["4.1.4", "4.1.2"],
+  "titel": "Zes zoekwoorden zakken in de rank tracker, maar Search Console blijft gelijk",
+  "intro": "Je maakt het maandrapport voor een klant in zakelijke financiering. In de rank tracker zijn 6 van de 40 zoekwoorden sinds eind september gezakt van plek 6 tot 8 naar plek 12 tot 15. In Search Console blijven vertoningen en klikken voor dezelfde zoekopdrachten ongeveer gelijk. Boven de pagina van de klant staan in de tracker resultaten van Facebook en Reddit.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je voordat je dit aan de klant rapporteert?",
+    "opties": [
+      "Melden als verlies van zichtbaarheid, want een rank tracker leest de echte resultaten van Google uit, en die liegen niet.",
+      "Opnieuw meten en naast Search Console leggen, want trackers tellen nu soms resultaten over één los woord mee.",
+      "De pagina's meteen herschrijven op het zoekwoord, want Google vindt ze kennelijk minder relevant dan eerst.",
+      "Overstappen naar een andere rank tracker, want deze tool meet blijkbaar verkeerd en is dus niet meer te vertrouwen."
+    ],
+    "juist": 1
+  },
+  "kern": "Zakken posities in de tracker terwijl vertoningen en klikken in Search Console gelijk blijven, dan ligt het waarschijnlijk aan de meting en niet aan de site.",
+  "afleiders": [
+    "**Melden als verlies:** een tracker lijkt een objectieve meting. Maar sinds half september zitten er soms resultaten tussen over één los woord uit de zoekopdracht. Dan zakt je pagina in de telling zonder dat er iets veranderd is.",
+    "",
+    "**Meteen herschrijven:** bij een daling is dat een logische reflex. Maar Search Console laat geen verlies zien. Je zou dus iets repareren wat niet stuk is.",
+    "**Andere tool kiezen:** het probleem zit niet in één tool. Meerdere trackers en dataleveranciers meldden dezelfde verstoringen, omdat ze allemaal dezelfde Google-resultaten uitlezen."
+  ],
+  "kort": "Stel dat een bibliothecaris bij jouw vraag naar het boek 'De Lijn' ook drie boeken over buslijnen op de stapel legt. Jouw boek ligt dan lager op de stapel, terwijl er in de kast niets veranderd is. Zo gaat het nu bij rank trackers. Google toont soms resultaten over één woord uit de zoekopdracht, en de tracker telt die mee. Search Console telt echte vertoningen en klikken, en die laten dan geen verlies zien.",
+  "begrippen": [
+    { "term": "Rank tracker", "uitleg": "een tool die elke dag of week opzoekt op welke plek een pagina in Google staat voor vaste zoekwoorden." },
+    { "term": "Vertoning", "uitleg": "één keer dat je pagina in de zoekresultaten van iemand verschijnt." },
+    { "term": "Goto-link", "uitleg": "een link via google.com/goto die eerst langs Google gaat en dan pas doorstuurt naar de echte pagina." }
+  ],
+  "uitleg": "Twee problemen maken rankdata sinds dit najaar minder betrouwbaar.\n\n**1. Resultaten over één los woord.** SE Ranking onderzocht 10.000 Amerikaanse desktopzoekwoorden (gepubliceerd op 3 november 2026). Op 16 september had 0,09% van de zoekwoorden zulke ongerelateerde resultaten, op 17 september 57,3%. In 84% van de gevallen ging het om één woord uit de zoekopdracht, en 96,5% van die blokken begon op plek 9 of lager. Facebook, Reddit en Instagram kwamen het vaakst voor.\n\n**2. Goto-links.** Google stuurt resultaten sinds eind augustus via google.com/goto door. Sinds eind oktober beperkt Google hoe snel zulke links per resultatenpagina te volgen zijn. Trackers slaan daardoor soms niet de echte landingspagina op.\n\nZo controleer je het:\n- Zoek zoekwoorden die sinds eind september naar plek 9 of lager zakten.\n- Kijk wat er boven je pagina staat: gaat het over één los woord?\n- Vergelijk met Search Console voor dezelfde zoekopdracht, hetzelfde land en apparaat.\n\nHet onderzoek ging over de VS. Controleer dus zelf of je het ook in Nederland ziet.",
+  "kernpunt": "Zakt een zoekwoord in de tracker, kijk dan eerst of de vertoningen in Search Console ook zakken voordat je het een verlies noemt.",
+  "toepassing": "Open vandaag het rankrapport van één klant en zoek zoekwoorden die sinds eind september naar plek 9 of lager zakten. Leg ze naast de vertoningen in Search Console voor dezelfde zoekopdracht.",
+  "bron": {
+    "titel": "SE Ranking: onderzoek naar ongerelateerde resultaten in Google (november 2026)",
+    "url": "https://seranking.com/blog/unrelated-google-results-research-study/"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "20261109-canonical-naar-andere-categorie",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "rel=canonical: alleen voor (bijna) dubbele pagina's, niet om autoriteit te bundelen",
+  "matrix": ["1.3.3"],
+  "titel": "Canonical naar de hoofdcategorie, maar Google houdt de subcategorie",
+  "intro": "Een fietsenwinkel heeft de hoofdcategorie 'Bakfietsen' en de subcategorie 'Elektrische bakfietsen', met een eigen tekst en 40 eigen producten. Om 'de autoriteit te bundelen' zette een developer op de subcategorie een canonical naar de hoofdcategorie. In de URL-inspectietool staat nu bij de door de gebruiker opgegeven canonieke URL de hoofdcategorie, maar bij de door Google gekozen canonieke URL de subcategorie zelf.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Waarom kiest Google hier anders, en wat doe je?",
+    "opties": [
+      "Google heeft de canonical nog niet verwerkt; vraag via URL-inspectie opnieuw indexering aan en wacht dan af.",
+      "De pagina's verschillen te veel om dubbel te zijn; geef de subcategorie een canonical naar zichzelf.",
+      "De canonical staat in de HTML; zet hem in de HTTP-header, want daar weegt hij voor Google zwaarder.",
+      "Google twijfelt tussen de twee; zet ook een noindex op de subcategorie, zodat de canonical sterker wordt."
+    ],
+    "juist": 1
+  },
+  "kern": "Een canonical is bedoeld voor pagina's die (bijna) hetzelfde zijn. Een subcategorie met eigen producten is geen kopie, dus Google houdt hem apart.",
+  "afleiders": [
+    "**Opnieuw laten indexeren:** dat lijkt een kwestie van geduld. Maar Google heeft de canonical al gezien, dat staat in de inspectie. Het kiest bewust anders, en dat verandert niet door opnieuw aan te vragen.",
+    "",
+    "**In de HTTP-header zetten:** de header is een andere plek, geen sterkere. Google noemt beide even sterk, en het probleem is niet de plek maar dat de pagina's niet dubbel zijn.",
+    "**Er een noindex bij zetten:** het voelt als extra nadruk, maar noindex haalt de pagina helemaal uit Google. Je verliest dan een pagina waar mensen op zoeken, en Google raadt die combinatie af."
+  ],
+  "kort": "Stel dat je bij de post een verhuisbericht doet voor je buurman, terwijl hij gewoon thuis woont. De postbode ziet zijn naam op de bel en bezorgt zijn brieven gewoon daar. Zo gaat Google om met een canonical tussen twee verschillende pagina's. Een canonical zegt: 'dit is een kopie, kijk daar'. Ziet Google dat de pagina helemaal geen kopie is, dan volgt het die aanwijzing niet blind.",
+  "begrippen": [
+    { "term": "Canonical", "uitleg": "een tag die aangeeft welke versie van een pagina de hoofdversie is, als er meerdere (bijna) gelijke versies bestaan." },
+    { "term": "URL-inspectietool", "uitleg": "een tool in Search Console die laat zien hoe Google één specifieke URL ziet en welke versie Google als hoofdversie kiest." },
+    { "term": "Noindex", "uitleg": "een instructie die Google vraagt een pagina niet in de zoekresultaten op te nemen." }
+  ],
+  "uitleg": "rel=\"canonical\" is volgens Google een sterke hint, geen bevel. Hij is bedoeld om uit een groep **dubbele of bijna dubbele** pagina's de voorkeursversie aan te wijzen. Google schreef al in 2013 dat de canonieke pagina het grootste deel van de inhoud van de duplicaat moet bevatten. Een canonical van een categorie- of landingspagina naar een andere pagina noemt Google een fout. Het advies: geef zo'n pagina een canonical naar zichzelf, of geen.\n\nHet risico gaat twee kanten op. Negeert Google de canonical, zoals hier, dan gebeurt er niets. Volgt Google hem wel, dan verdwijnt de subcategorie uit de zoekresultaten, en daarmee een pagina voor een zoekterm met eigen vraag.\n\nWil je echt autoriteit bundelen?\n- **Subcategorie houden:** canonical naar zichzelf, en interne links met een duidelijke ankertekst.\n- **Subcategorie overbodig:** producten samenvoegen in de hoofdcategorie en de oude URL met een 301 doorsturen.\n\nKijk in de URL-inspectietool altijd naar beide velden: de opgegeven en de door Google gekozen canonieke URL.",
+  "kernpunt": "Gebruik een canonical alleen tussen pagina's die echt bijna hetzelfde zijn. Wil je pagina's samenvoegen, gebruik dan een 301.",
+  "toepassing": "Crawl vandaag de categoriepagina's van een webshopklant en filter op pagina's waarvan de canonical naar een andere URL wijst. Kijk bij drie van die pagina's of het echt kopieën zijn.",
+  "bron": {
+    "titel": "5 common mistakes with rel=canonical | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2013/04/5-common-mistakes-with-relcanonical"
+  }
+}

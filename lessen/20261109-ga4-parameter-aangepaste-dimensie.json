@@ -1,0 +1,47 @@
+{
+  "id": "20261109-ga4-parameter-aangepaste-dimensie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: eventparameters zichtbaar maken met een aangepaste dimensie",
+  "matrix": ["3.1.6"],
+  "titel": "De parameter staat in DebugView, maar nergens in de rapporten",
+  "intro": "Een installatiebedrijf meet offerteaanvragen met het event 'offerte_aanvraag'. Via Google Tag Manager stuurt de developer de parameter 'dienst' mee, met waarden als 'warmtepomp' en 'zonnepanelen'. In DebugView ziet de marketeer die parameter netjes binnenkomen. Maar in de rapporten en verkenningen kan ze nergens uitsplitsen op 'dienst'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is er nodig om 'dienst' in rapporten te kunnen gebruiken?",
+    "opties": [
+      "Het event als key event markeren, want alleen bij key events toont GA4 de parameters in de rapporten.",
+      "Per dienst een apart event aanmaken, want GA4 kan per event maar één vaste parameter in rapporten tonen.",
+      "'dienst' registreren als aangepaste dimensie, want eigen parameters verschijnen niet vanzelf in rapporten.",
+      "Een week wachten, want parameters verschijnen pas na zeven dagen in rapporten, ook als ze in DebugView staan."
+    ],
+    "juist": 2
+  },
+  "kern": "GA4 ontvangt de parameter wel, maar toont een eigen parameter pas in rapporten als je hem registreert als aangepaste dimensie.",
+  "afleiders": [
+    "**Key event markeren:** dat maakt het event tot een conversie. Of je op een parameter kunt uitsplitsen, verandert daar niet door.",
+    "**Apart event per dienst:** dat lijkt overzichtelijk, maar je krijgt zo tientallen events en verliest het overzicht. Eén event met een parameter is juist hoe GA4 is bedoeld.",
+    "",
+    "**Een week wachten:** zonder registratie komt de parameter nooit in de rapporten. Na het aanmaken van de dimensie duurt het 24 tot 48 uur, geen week."
+  ],
+  "kort": "Vergelijk het met een archiefkast waarin brieven binnenkomen met een notitie erop. De notitie zit er wel bij, maar je kunt er pas op zoeken als je er een eigen tabblad voor maakt. GA4 werkt zo met eigen parameters. DebugView laat alles zien wat binnenkomt. De rapporten tonen alleen wat een eigen 'tabblad' heeft: een aangepaste dimensie.",
+  "begrippen": [
+    { "term": "Event", "uitleg": "één actie die GA4 meet, zoals een paginaweergave of een verstuurd formulier." },
+    { "term": "Parameter", "uitleg": "extra informatie die met een event meekomt, zoals welke dienst iemand koos." },
+    { "term": "Aangepaste dimensie", "uitleg": "een eigen kenmerk dat je in GA4 aanmaakt, zodat je rapporten op een parameter kunt uitsplitsen." },
+    { "term": "DebugView", "uitleg": "een scherm in GA4 dat live laat zien welke events en parameters er binnenkomen tijdens het testen." }
+  ],
+  "uitleg": "In GA4 is alles een event, en elk event kan parameters meekrijgen. Een deel daarvan kent GA4 al, zoals de paginatitel. Eigen parameters, zoals 'dienst', zie je wel in DebugView, maar voor rapporten maak je eerst een **aangepaste dimensie** aan. Google zegt het zo: je maakt een aangepaste dimensie 'so you can analyze the data from the event parameter'.\n\nZo doe je dat:\n- Ga naar **Beheer > Aangepaste definities > Aangepaste dimensie maken**.\n- Kies het **bereik Event** voor een parameter die bij één event hoort.\n- Vul de **parameternaam** precies zo in als de developer hem verstuurt.\n- Na **24 tot 48 uur** kun je erop rapporteren, ook in verkenningen.\n\nTips:\n- Maak de dimensie aan **zodra een nieuw event live gaat**, niet pas als iemand om een rapport vraagt.\n- Houd een lijst bij van events en parameters, zodat developer en marketeer dezelfde namen gebruiken.\n- Een parameter die alleen iets zegt over de gebruiker, zoals klanttype, krijgt het bereik Gebruiker.",
+  "kernpunt": "Stuurt een developer een eigen parameter mee, maak dan meteen een aangepaste dimensie aan. Anders kun je er in rapporten niets mee.",
+  "toepassing": "Open vandaag in GA4 van een klant Beheer > Aangepaste definities. Vergelijk de lijst met de parameters die je in DebugView ziet binnenkomen en noteer welke nog niet geregistreerd zijn.",
+  "bron": {
+    "titel": "[GA4] About custom dimensions and metrics - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/14240153"
+  },
+  "video": {
+    "titel": "Track custom events with Google Analytics 4",
+    "kanaal": "Analytics Mania",
+    "url": "https://www.youtube.com/watch?v=HyFZhvPZUNM"
+  }
+}
