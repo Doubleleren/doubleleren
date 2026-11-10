@@ -612,7 +612,7 @@ function toonSkilllijst() {
   if (!totaal) {
     $('mx-sub').textContent = '';
     $('matrix').innerHTML = isGroep(eigenVak(S.mij)) && !Object.keys(lid.vakken || {}).length
-      ? '<p class="leeg">Je hebt nog geen vak gekozen om te leren. Kies er een bij <button type="button" class="leslink" data-naar="instellingen">Instellingen</button>; daarna vul je hier de skilllijst in.</p>'
+      ? '<p class="leeg">Je hebt nog geen vak gekozen om te leren. Kies er een bij <button type="button" class="leslink" data-sub-naar="leren">Wat ik leer</button>; daarna vul je hier de skilllijst in.</p>'
       : '<p class="leeg">Voor jouw vak is er nog geen skilllijst. Zodra die er is, vul je hem hier in.</p>';
     return;
   }
@@ -774,14 +774,26 @@ $('prio').addEventListener('click', (e) => { const b = e.target.closest('button[
 
 // ---------------------------------------------------------------- instellingen (tandwiel rechtsboven)
 // Wat je leert, je prioriteiten, het scorebord en hoe je elke dag je les krijgt. Losse tab, zodat de andere tabs rustig blijven.
-function toonInstellingen() {
+// Instellingen in onderdelen (subtabs); geeft het getoonde onderdeel terug. Een onderdeel dat voor jou niet geldt
+// (bijv. geen skilllijst of geen lessen) zie je niet; dan opent het eerste.
+const INST_SUBS = ['leren', 'skilllijst', 'werkdagen', 'dagelijks', 'scorebord'];
+let instSub = INST_SUBS[0];
+function toonInstellingen(sub) {
   const ik = S.leden[S.mij];
   $('start-paneel').hidden = !moetInrichten();
   if (!$('start-paneel').hidden) $('start-naam').textContent = ik?.naam ? ` ${ik.naam}` : '';
   toonVakken(); toonPrioriteit(); toonWerkdagen();
   $('sb-instelling').hidden = !magLessen(); $('sb-zichtbaar').checked = SB.zichtbaar;
   $('snelkoppeling').hidden = !magLessen();
+  const kan = { leren: true, skilllijst: !!ik?.sl, werkdagen: !$('werkdagen-paneel').hidden, dagelijks: magLessen(), scorebord: magLessen() };
+  instSub = kan[sub] ? sub : kan[instSub] && !sub ? instSub : INST_SUBS[0];
+  document.querySelectorAll('#inst-tabs button[data-sub]').forEach((b) => { b.hidden = !kan[b.dataset.sub]; b.setAttribute('aria-selected', String(b.dataset.sub === instSub)); });
+  document.querySelectorAll('#instellingen .inst-sub').forEach((d) => { d.hidden = d.dataset.sub !== instSub; });
+  return instSub;
 }
+$('inst-tabs').addEventListener('click', (e) => { const b = e.target.closest('button[data-sub]'); if (b) tab('instellingen', b.dataset.sub); });
+// Overal: [data-sub-naar] opent een onderdeel van Instellingen
+document.addEventListener('click', (e) => { const b = e.target.closest('[data-sub-naar]'); if (b && S.org) tab('instellingen', b.dataset.subNaar); });
 
 // Welkom: na het doorlopen van de instellingen één klik naar je eerste les (bewaard in je eigen profiel)
 $('start-klaar').addEventListener('click', async () => {
@@ -1682,7 +1694,7 @@ $('maak-knop').addEventListener('click', async () => {
 });
 
 // ---------------------------------------------------------------- navigatie en start
-const TABS = ['vandaag', 'mij', 'skilllijst', 'scorebord', 'team', 'kennisbank', 'maken', 'instellingen'];
+const TABS = ['vandaag', 'mij', 'scorebord', 'team', 'kennisbank', 'maken', 'instellingen'];
 const VIEWS = [...TABS, 'lesdetail', 'feedback'];
 function toonView(naam) {
   for (const v of VIEWS) $(v).hidden = v !== naam;
@@ -1697,10 +1709,13 @@ function magTab(t) {
 // Eerste keer (nog geen les gedaan en instellingen niet afgerond): eerst naar Instellingen
 const moetInrichten = () => { const ik = S.leden[S.mij]; return !!ik?.sl && magLessen() && !ik.logs.length && ik.profiel?.ingericht !== true; };
 const standaardTab = () => (moetInrichten() ? 'instellingen' : magLessen() && L.status?.les ? 'vandaag' : !S.leden[S.mij]?.matrix && teamLeden().length ? 'team' : 'mij');
-function tab(naam) {
+// De skilllijst is een onderdeel van Instellingen; 'skilllijst' (oude links, #skilllijst) gaat daarheen
+function tab(naam, sub) {
+  if (naam === 'skilllijst') { naam = 'instellingen'; sub = 'skilllijst'; }
   NAV.huidig = naam; NAV.geduwd = false; toonView(naam);
-  if (location.hash !== '#' + naam) history.replaceState(null, '', location.pathname + location.search + '#' + naam);
-  if (naam === 'instellingen') toonInstellingen();
+  if (naam === 'instellingen') sub = toonInstellingen(sub || INST_SUBS[0]);
+  const hash = naam === 'instellingen' && sub !== INST_SUBS[0] ? `instellingen/${sub}` : naam;
+  if (location.hash !== '#' + hash) history.replaceState(null, '', location.pathname + location.search + '#' + hash);
   if (naam === 'scorebord') toonScorebord().catch((e) => { $('sb-tabel').innerHTML = `<tbody><tr><td class="fout">Scorebord laden mislukt: ${esc(e.message)}</td></tr></tbody>`; });
 }
 // Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback of een tab
@@ -1708,6 +1723,7 @@ function route() {
   let h = ''; try { h = decodeURIComponent(location.hash.slice(1)); } catch { /* kapot adres: standaardtab */ }
   if (h.startsWith('les/') && LES_ID.test(h.slice(4))) { if (NAV.huidig !== 'lesdetail' && NAV.huidig !== 'feedback') NAV.vorige = NAV.huidig; toonLesDetail(h.slice(4)); }
   else if (h === 'feedback') openFeedback();
+  else if (h.startsWith('instellingen/')) tab('instellingen', h.slice(13));
   else tab(magTab(h) && !(moetInrichten() && ['vandaag', 'mij', ''].includes(h)) ? h : standaardTab());
 }
 async function naInloggen() {
@@ -1729,7 +1745,7 @@ async function naInloggen() {
   if (teamLeden().length) toonTeam();
   toonKennisbank();
   const lessen = magLessen();
-  for (const t of ['vandaag', 'skilllijst', 'scorebord', 'maken']) $('tab-' + t).hidden = !magTab(t);
+  for (const t of ['vandaag', 'scorebord', 'maken']) $('tab-' + t).hidden = !magTab(t);
   if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); startMiddagWekker(); }
   toonRonde();
   route();
