@@ -40,6 +40,13 @@ button, input { font: inherit; }
 .tabs { display: flex; gap: 8px; flex-wrap: wrap; }
 .tabs button { border: 0; border-radius: var(--r-pill); padding: 8px 16px; background: rgba(255,255,255,.6); cursor: pointer; font-weight: 600; }
 .tabs button[aria-selected="true"] { background: var(--ink); color: var(--white); }
+.subtabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1.6px solid var(--cool); margin: 0 0 16px; }
+.subtabs button { border: 0; background: none; padding: 10px 14px; margin-bottom: -1.6px; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 600; color: var(--muted); font-size: 15px; }
+.subtabs button:hover { color: var(--ink); }
+.subtabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.inst-sub > .paneel + .paneel { margin-top: 16px; }
+.inst-kop { font-size: 26px; margin: 4px 0 12px; }
+#start-paneel { margin-bottom: 18px; }
 
 .paneel { background: var(--white); border: 1.6px solid var(--cool); border-radius: var(--r-sm); padding: 22px 24px; min-width: 0; }
 .paneel h2 { font-size: 22px; font-weight: 700; line-height: 1.2; }
@@ -258,7 +265,6 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
     <div class="tabs" id="tabs" role="tablist" hidden>
       <button type="button" role="tab" data-tab="vandaag" aria-selected="false" id="tab-vandaag" hidden>Les van vandaag</button>
       <button type="button" role="tab" data-tab="mij" aria-selected="true">Mijn voortgang</button>
-      <button type="button" role="tab" data-tab="skilllijst" aria-selected="false" id="tab-skilllijst" hidden>Skilllijst</button>
       <button type="button" role="tab" data-tab="scorebord" aria-selected="false" id="tab-scorebord" hidden>Scorebord</button>
       <button type="button" role="tab" data-tab="team" aria-selected="false" id="tab-team" hidden>Mijn team</button>
       <button type="button" role="tab" data-tab="kennisbank" aria-selected="false">Kennisbank</button>
@@ -358,7 +364,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <div id="les-inhoud" class="les-tekst"></div>
       <div id="les-knoppen" class="les-knoppen"></div>
       <p class="fout" id="les-fout" role="alert"></p>
-      <p class="sub" id="snel-hint" hidden>Elke dag vanzelf je les? Zet de pop-up of een snelkoppeling aan bij <button type="button" class="leslink" data-naar="instellingen">Instellingen</button>.</p>
+      <p class="sub" id="snel-hint" hidden>Elke dag vanzelf je les? Zet de pop-up of een snelkoppeling aan bij <button type="button" class="leslink" data-sub-naar="dagelijks">Instellingen</button>.</p>
     </section>
   </div>
 
@@ -377,18 +383,27 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
   </div>
 
   <div id="instellingen" hidden>
+    <h2 class="inst-kop">Instellingen</h2>
     <section class="paneel start" id="start-paneel" hidden>
       <h2>Welkom<span id="start-naam"></span>!</h2>
-      <p>Zet eerst even alles goed, dan passen je lessen meteen bij jou. Loop deze pagina van boven naar beneden door:</p>
+      <p>Zet eerst even alles goed, dan passen je lessen meteen bij jou. Loop de onderdelen hieronder langs:</p>
       <ol class="stappen-lijst">
-        <li><b>Wat wil je leren?</b> Je eigen vak staat al aan; zet er gerust een ander vak bij.</li>
-        <li><b>Werkdagen:</b> werk je parttime, zet dan je vrije dagen uit.</li>
-        <li><b>Elke dag vanzelf je les:</b> installeer de pop-up (Windows) of maak een snelkoppeling.</li>
-        <li><b>Scorebord:</b> kies of je erop wilt staan.</li>
+        <li><button type="button" class="leslink" data-sub-naar="leren">Wat ik leer</button>: je eigen vak staat al aan; zet er gerust een ander vak bij.</li>
+        <li><button type="button" class="leslink" data-sub-naar="werkdagen">Werkdagen</button>: werk je parttime, zet dan je vrije dagen uit.</li>
+        <li><button type="button" class="leslink" data-sub-naar="dagelijks">Dagelijkse les</button>: installeer de pop-up (Windows) of maak een snelkoppeling.</li>
+        <li><button type="button" class="leslink" data-sub-naar="scorebord">Scorebord</button>: kies of je erop wilt staan.</li>
       </ol>
       <div class="les-knoppen" style="justify-content:flex-start"><button type="button" class="knop zwart" id="start-klaar">Klaar, naar mijn eerste les →</button></div>
       <p class="sub" id="start-status" role="status"></p>
     </section>
+    <div class="subtabs" id="inst-tabs" role="tablist" aria-label="Instellingen">
+      <button type="button" role="tab" data-sub="leren" aria-selected="true">Wat ik leer</button>
+      <button type="button" role="tab" data-sub="skilllijst" aria-selected="false">Skilllijst</button>
+      <button type="button" role="tab" data-sub="werkdagen" aria-selected="false">Werkdagen</button>
+      <button type="button" role="tab" data-sub="dagelijks" aria-selected="false">Dagelijkse les</button>
+      <button type="button" role="tab" data-sub="scorebord" aria-selected="false">Scorebord</button>
+    </div>
+    <div class="inst-sub" data-sub="leren">
     <section class="paneel" id="vakken-paneel" style="margin-top:0" hidden>
       <div class="paneel-kop"><div><h2>Wat wil je leren?</h2><p class="sub">Je eigen vak staat standaard aan. <b>Meeleren</b>: af en toe een les over dat vak. <b>Focus</b>: daar gaan de meeste lessen over. Voor een extra vak hoef je geen skilllijst in te vullen.</p></div></div>
       <div id="vakken"></div>
@@ -399,15 +414,21 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <div id="prio"></div>
       <p class="sub" id="prio-status" role="status"></p>
     </section>
+    </div>
+    <div class="inst-sub" data-sub="werkdagen" hidden>
     <section class="paneel" id="werkdagen-paneel" hidden>
       <div class="paneel-kop"><div><h2>Werkdagen</h2><p class="sub">Werk je parttime of ben je een week vrij? Zet je vrije dagen uit. Op een vrije dag breekt je reeks niet; een les doen mag wel en telt mee. Een week pas je aan tot en met vrijdag de week ervoor; daarna ligt hij vast. In het weekend zijn er nooit lessen.</p></div></div>
       <div id="werkdagen"></div>
       <p class="sub" id="werkdagen-status" role="status"></p>
     </section>
+    </div>
+    <div class="inst-sub" data-sub="scorebord" hidden>
     <section class="paneel" id="sb-instelling" hidden><div class="paneel-kop"><div><h2>Scorebord</h2><p class="sub">Op het scorebord ziet het team alleen je naam, je aantal goed en je reeks. Nooit je skilllijst, vragen of antwoorden.</p></div></div>
       <label class="schakel"><input type="checkbox" id="sb-zichtbaar" checked> Toon mij op het scorebord</label>
       <p class="sub" id="sb-zichtbaar-status" role="status"></p>
     </section>
+    </div>
+    <div class="inst-sub" data-sub="dagelijks" hidden>
     <section class="paneel" id="snelkoppeling">
       <div class="paneel-kop"><div><h2>Elke dag vanzelf je les</h2><p class="sub">Kies een van de twee opties. Eenmalig instellen, ongeveer een minuut.</p></div></div>
       <h3 style="font-size:15px;margin-bottom:8px">Optie 1: de pop-up <span class="pill" style="margin-left:6px">Aanrader</span> <span class="sub">(Windows)</span></h3>
@@ -441,14 +462,13 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
         </div>
       </details>
     </section>
-  </div>
-
-  <div id="skilllijst" hidden>
+    </div>
+    <div class="inst-sub" data-sub="skilllijst" hidden>
     <section class="paneel" style="margin-top:0">
       <div class="paneel-kop"><div><h2>Skilllijst</h2><p class="sub" id="mx-sub"></p></div><button class="knop zwart" type="button" id="mx-bijwerken">Skilllijst bijwerken</button></div>
       <p class="sub" id="mx-ronde" style="margin:0 0 12px"></p>
       <p class="sub" id="mx-klaar" role="status"></p>
-      <p class="sub" style="margin:0 0 12px">Welke vakken je leert en waar je je op richt, stel je in bij <button type="button" class="leslink" data-naar="instellingen">Instellingen</button>.</p>
+      <p class="sub" style="margin:0 0 12px">Welke vakken je leert en waar je je op richt, stel je in bij <button type="button" class="leslink" data-sub-naar="leren">Wat ik leer</button>.</p>
       <div id="matrix"></div>
       <div class="legenda"><span><i class="sw"></i>Laatste score (gemiddeld, 1–5)</span><span><i class="sw tick"></i>Eerste meting</span></div>
     </section>
@@ -465,7 +485,9 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
         <p class="fout" id="mx-fout" role="alert"></p>
       </form>
     </section>
+    </div>
   </div>
+
 
   <div id="scorebord" hidden>
     <section class="paneel" style="margin-top:0">
