@@ -1,0 +1,42 @@
+{
+  "id": "20261110-lege-filtercombinatie-404",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Faceted navigation: lege filtercombinaties en de juiste statuscode",
+  "matrix": ["1.2.4", "1.1.1"],
+  "titel": "9.000 filterpagina's met 'Geen producten gevonden'",
+  "intro": "Een webshop in badkamermeubels laat filters op merk en kleur indexeren, omdat daar zoekvraag naar is. In de crawlstatistieken zie je dat Googlebot veel tijd kwijt is aan combinaties als /wastafels?merk=x&kleur=oranje. Die pagina's tonen 'Geen producten gevonden' en geven statuscode 200. Het gaat om ruim 9.000 adressen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je voor die lege filterpagina's?",
+    "opties": [
+      "Een noindex op pagina's zonder producten, want dan verdwijnen ze uit de index en stopt Google met het opvragen ervan.",
+      "Een redirect naar de ongefilterde categorie, want dan komt de bezoeker toch bij producten uit en blijft de linkwaarde behouden.",
+      "Een canonical naar de ongefilterde categorie, want daarmee bundel je de signalen en daalt het crawlen meteen naar bijna nul.",
+      "Een 404 op het adres zelf zodra de combinatie geen producten oplevert, want dan weet Googlebot dat hier niets te halen valt."
+    ],
+    "juist": 3
+  },
+  "kern": "Een filtercombinatie zonder resultaten hoort een 404 te geven op haar eigen adres. Dan leert Googlebot dat die adressen niets opleveren.",
+  "afleiders": [
+    "**noindex:** dat haalt de pagina's wel uit de index. Maar Google moet ze blijven opvragen om de noindex te zien, dus crawltijd bespaar je er niet mee.",
+    "**Redirect naar de categorie:** voor de bezoeker voelt dat vriendelijk. Maar Google vraagt juist om de 404 op het adres zelf te geven, niet om door te sturen naar een algemene pagina.",
+    "**Canonical:** dat kan het crawlen op den duur wat verminderen. Maar het werkt traag, en Google noemt het op de lange termijn minder effectief.",
+    ""
+  ],
+  "kort": "Denk aan een postbode die elke dag langs 9.000 huizen moet waar een briefje op de deur hangt: 'hier woont niemand'. De deur staat open, dus de postbode blijft aanbellen. Een 404 is een bordje 'dit adres bestaat niet'. Dan hoeft de postbode er niet meer langs. Die tijd gaat naar de straten waar wel iemand woont.",
+  "begrippen": [
+    { "term": "Statuscode 200", "uitleg": "het antwoord van de server dat alles in orde is en de pagina bestaat." },
+    { "term": "404", "uitleg": "het antwoord van de server dat een pagina niet bestaat." },
+    { "term": "Crawlstatistieken", "uitleg": "een rapport in Search Console dat laat zien hoeveel en welke pagina's Googlebot opvraagt." },
+    { "term": "Faceted navigation", "uitleg": "filters op een categoriepagina, zoals merk, kleur of prijs, die elk een eigen adres kunnen maken." }
+  ],
+  "uitleg": "Google geeft voor filter-URL's die je **wel** wilt laten indexeren een paar regels:\n\n- Gebruik **&** als scheidingsteken tussen parameters. Komma's, puntkomma's en haakjes worden vaak niet als scheiding herkend.\n- Houd een **vaste volgorde** van filters aan en voorkom dubbele filters in één URL.\n- Geef een **404** als een combinatie geen resultaten heeft. Dat geldt ook voor dubbele of onzinnige combinaties en voor paginanummers die niet bestaan.\n- Geef die 404 **op het adres zelf**. Stuur niet door naar een algemene foutpagina.\n\nFilters zonder zoekvraag, zoals prijs of sortering, houd je liever helemaal uit de crawl: met robots.txt of met filters die via een #-fragment werken. Een canonical of nofollow helpt minder goed.\n\nControleer na de aanpassing in de crawlstatistieken of het aandeel 404's eerst stijgt en het aantal opgevraagde filter-URL's daarna daalt.",
+  "kernpunt": "Levert een filtercombinatie niets op, geef dan een 404 op dat adres, niet een lege pagina met status 200.",
+  "toepassing": "Kies vandaag bij een webshopklant een filtercombinatie die niets kan opleveren, zoals een merk met een kleur die het niet voert. Controleer met een headercheck of de URL-inspectie welke statuscode die pagina geeft.",
+  "bron": {
+    "titel": "Managing crawling of faceted navigation URLs | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+  }
+}

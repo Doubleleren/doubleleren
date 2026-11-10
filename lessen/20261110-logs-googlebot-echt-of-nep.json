@@ -1,0 +1,46 @@
+{
+  "id": "20261110-logs-googlebot-echt-of-nep",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Logfile-analyse: eerst controleren of Googlebot echt Googlebot is",
+  "matrix": ["1.1.3", "1.1.6"],
+  "titel": "1,2 miljoen Googlebot-verzoeken in de logs, vier keer meer dan in Search Console",
+  "intro": "Je krijgt de serverlogs van een webshop over de afgelopen maand. Je filtert op de user-agent 'Googlebot' en telt 1,2 miljoen verzoeken. In de crawlstatistieken van Search Console staat over dezelfde maand ongeveer een kwart daarvan. De klant wil weten of Google zijn crawlbudget verspilt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je als eerste, voordat je iets zegt over het crawlbudget?",
+    "opties": [
+      "De IP-adressen controleren met een reverse DNS-check of Googles IP-lijsten, want iedereen kan zich als Googlebot voordoen.",
+      "Googlebot via robots.txt tijdelijk beperken, want vier keer zoveel verzoeken betekent dat Google de server te zwaar belast.",
+      "De gecrawlde URL's naast de sitemap leggen, want dan zie je meteen welke opgevraagde adressen er niet in thuishoren.",
+      "Uitgaan van de logs, want Search Console toont in de crawlstatistieken alleen een steekproef van alle verzoeken van Google."
+    ],
+    "juist": 0
+  },
+  "kern": "De user-agent is gewoon tekst die iedereen kan invullen. Pas na een controle van het IP-adres weet je welke verzoeken echt van Google komen.",
+  "afleiders": [
+    "",
+    "**Googlebot beperken:** bij een zware belasting lijkt dat verstandig. Maar dan blokkeer je ook de echte Googlebot, terwijl het extra verkeer misschien niet eens van Google komt.",
+    "**Vergelijken met de sitemap:** dat is een goede volgende stap. Maar zolang nepbots in je data zitten, analyseer je ook adressen die Google nooit heeft opgevraagd.",
+    "**Search Console als steekproef:** de voorbeeld-URL's in dat rapport zijn inderdaad een selectie. De totalen niet, dus het verschil is een signaal, geen meetfout."
+  ],
+  "kort": "Het is alsof er iemand aanbelt in een jas met 'Politie' erop. Zo'n jas kan iedereen kopen, het pasje laat zien of het klopt. In een logbestand is de user-agent die jas. Het IP-adres is het pasje, en dat kun je bij Google navragen. Pas als het pasje klopt, weet je wie er echt langs is geweest.",
+  "begrippen": [
+    { "term": "Serverlog", "uitleg": "een bestand waarin de server elk verzoek bijhoudt: welk adres, wanneer, van welk IP-adres en met welke user-agent." },
+    { "term": "User-agent", "uitleg": "de naam die een bezoeker of bot zelf meestuurt, zoals 'Googlebot'. Die kan iedereen invullen." },
+    { "term": "Reverse DNS-check", "uitleg": "opzoeken bij welke domeinnaam een IP-adres hoort. Bij echte Googlebots is dat googlebot.com, google.com of googleusercontent.com." }
+  ],
+  "uitleg": "Google noemt twee manieren om te controleren of een verzoek echt van Google komt:\n\n- **Handmatig:** doe een reverse DNS-lookup op het IP-adres, bijvoorbeeld met het commando host. De naam moet eindigen op googlebot.com, google.com of googleusercontent.com. Zoek die naam daarna weer op (forward DNS) en controleer of je hetzelfde IP-adres terugkrijgt.\n- **Automatisch:** vergelijk het IP-adres met de lijsten die Google publiceert, zoals common-crawlers.json voor Googlebot en special-crawlers.json voor bijvoorbeeld AdsBot.\n\nVeel log-analysetools kunnen bots op deze manier voor je verifiëren. Nepbots zijn vaak scrapers of SEO-tools die zich als Googlebot voordoen om niet geblokkeerd te worden.\n\nPas na deze filterstap heeft het zin om te kijken waar Googlebot zijn tijd aan besteedt: parameters, redirects, 404's of pagina's die er niet toe doen.",
+  "kernpunt": "Analyseer je logs, filter dan eerst op geverifieerde Google-IP's. Anders tel je scrapers mee die zich als Googlebot voordoen.",
+  "toepassing": "Neem vandaag uit de logs van een klant drie IP-adressen met user-agent Googlebot. Zoek ze op met een reverse DNS-check en kijk of de naam eindigt op googlebot.com of google.com.",
+  "bron": {
+    "titel": "Verify requests from Google crawlers and fetchers | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot"
+  },
+  "video": {
+    "titel": "Screaming Frog Log File Analyser - 6.0",
+    "kanaal": "Screaming Frog",
+    "url": "https://www.youtube.com/watch?v=-Qgly4DRWeE"
+  }
+}

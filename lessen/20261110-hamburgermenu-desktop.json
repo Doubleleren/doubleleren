@@ -1,0 +1,41 @@
+{
+  "id": "20261110-hamburgermenu-desktop",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Navigatie: een verborgen menu (hamburger) op desktop",
+  "matrix": ["7.1.2", "1.2.5"],
+  "titel": "Het hoofdmenu verdwijnt achter drie streepjes, ook op desktop",
+  "intro": "Een fietsenwinkel krijgt een nieuw design. Om de homepage rustiger te maken, zit het hoofdmenu nu ook op desktop achter een icoon met drie streepjes. Er zijn zes categorieën, van stadsfietsen tot onderdelen. Na de livegang daalt het aantal bezoeken aan categoriepagina's, terwijl het verkeer naar de homepage gelijk blijft.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het beste advies?",
+    "opties": [
+      "Het menu verborgen houden, maar het icoon een opvallende kleur geven, want dan zoeken bezoekers vanzelf naar de knop.",
+      "De zes categorieën weer zichtbaar bovenaan zetten, want op desktop gebruiken bezoekers een verborgen menu veel minder.",
+      "Het menu pas na het scrollen tonen als vaste balk, want bovenaan leidt een menu af van de grote openingsfoto.",
+      "Een maand wachten met ingrijpen, want bezoekers moeten wennen aan een nieuw menu en daarna herstelt het gebruik vanzelf."
+    ],
+    "juist": 1
+  },
+  "kern": "Op desktop is ruimte genoeg om de categorieën te tonen. Een verborgen menu wordt veel minder gebruikt, en dan worden ook de categorieën minder bezocht.",
+  "afleiders": [
+    "**Opvallend icoon:** dat helpt een beetje bij het vinden. Maar bezoekers moeten nog steeds raden wat erachter zit, en op desktop klikken ze er zelden op.",
+    "",
+    "**Pas na scrollen tonen:** dan is het menu er wel, alleen te laat. Juist bovenaan kijken bezoekers waar ze heen kunnen, en dat moment mist dit menu.",
+    "**Laten wennen:** na een redesign klinkt dat logisch. Maar het probleem is niet dat het menu nieuw is. Het is onzichtbaar, en dat blijft het."
+  ],
+  "kort": "Stel je een supermarkt voor waar de bordjes boven de gangpaden zijn weggehaald, voor een rustiger beeld. Wie ze wil zien, moet eerst een kastje openen. De meeste klanten doen dat niet en lopen alleen langs wat ze toevallig tegenkomen. Een verborgen menu werkt net zo: wat je niet ziet, gebruik je niet. Op een groot scherm is genoeg plek voor de bordjes.",
+  "begrippen": [
+    { "term": "Hamburgermenu", "uitleg": "een icoon met drie streepjes waarachter het menu verborgen zit. Je ziet het menu pas na een klik." },
+    { "term": "Hoofdnavigatie", "uitleg": "de vaste lijst met belangrijkste onderdelen van een site, meestal bovenaan of links." },
+    { "term": "Combinatienavigatie", "uitleg": "een menu waarvan de belangrijkste onderdelen zichtbaar zijn en de rest achter een knop zit." }
+  ],
+  "uitleg": "Nielsen Norman Group testte verborgen, zichtbare en gecombineerde navigatie op desktop en mobiel (2016).\n\nOp desktop:\n- Een **verborgen menu** werd in **27%** van de gevallen gebruikt, tegen **48%** bij een zichtbaar menu en **50%** bij combinatienavigatie.\n- Met een verborgen menu waren mensen minstens **39% trager**.\n- Taken voelden met een verborgen menu ook moeilijker.\n\nHet advies: gebruik op desktop geen verborgen navigatie. Zet de hoofdonderdelen zichtbaar bovenaan of links op de pagina.\n\nOp mobiel is ruimte schaarser. Ook daar werd een menu met een paar zichtbare onderdelen vaker gebruikt dan een volledig verborgen menu.\n\nVoor Google maakt een verborgen menu meestal weinig uit, zolang de links in de HTML staan. Het verlies zit bij de bezoekers: wie de categorieën niet vindt, bestelt minder.",
+  "kernpunt": "Heb je op desktop ruimte, toon dan de hoofdcategorieën. Verberg alleen wat echt bijzaak is.",
+  "toepassing": "Open vandaag de site van een klant op een laptop. Kijk of je de belangrijkste categorieën ziet zonder op een menu-icoon te klikken.",
+  "bron": {
+    "titel": "Hamburger Menus and Hidden Navigation Hurt UX Metrics | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/hamburger-menus/"
+  }
+}

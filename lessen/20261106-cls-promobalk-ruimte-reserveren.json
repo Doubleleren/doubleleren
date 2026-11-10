@@ -34,10 +34,15 @@
   "uitleg": "CLS is goed bij **0,1 of lager**, gemeten bij 75% van de bezoeken. De bekendste oorzaken en oplossingen volgens web.dev:\n\n- **Afbeeldingen en video's zonder afmetingen:** zet width en height, of aspect-ratio in de CSS.\n- **Advertenties, embeds en balken die later laden:** reserveer ruimte met min-height. Laat die ruimte niet inklappen als er niets komt.\n- **Inhoud boven bestaande inhoud invoegen:** hoe hoger op het scherm, hoe erger. Kan het niet anders, zet het dan lager of als overlay over de pagina heen.\n- **Webfonts:** een vervangend lettertype met andere maten laat tekst verspringen. Kies een lettertype dat erop lijkt en laad belangrijke fonts vooraf.\n- **Animaties:** gebruik transform in plaats van top of left.\n\nVerschuivingen binnen 0,5 seconde na een klik of tik tellen niet mee. Een menu dat openklapt na een klik is dus geen probleem.",
   "kernpunt": "Is CLS in het veld slecht maar in Lighthouse goed, zoek dan eerst naar iets wat pas na het laden verschijnt.",
   "toepassing": "Open vandaag een productpagina van een klant op je telefoon en kijk of er na het laden nog een balk, banner of melding bovenaan verschijnt. Zo ja, vraag de developer om daar vooraf ruimte voor te reserveren.",
-  "herzien": "2026-11-06",
-  "wijziging": "Uitleg in de vaste opbouw gezet.",
+  "herzien": "2026-11-10",
+  "wijziging": "Kennisvideo toegevoegd.",
   "bron": {
     "titel": "Optimize Cumulative Layout Shift | web.dev",
     "url": "https://web.dev/articles/optimize-cls"
+  },
+  "video": {
+    "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+    "kanaal": "Matt Diggity",
+    "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
   }
 }

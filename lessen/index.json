@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-09T05:33:33",
+    "bijgewerkt":  "2026-11-10T05:29:25",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -261,14 +261,15 @@
                        "matrix":  [
                                       "1.2.4"
                                   ],
-                       "kernpunt":  "Bepaal per filter of er zoekvraag is. Filters zonder zoekvraag houd je uit de crawl (robots.txt of #-fragmenten), filters met zoekvraag maak je tot schone, consistente landingspagina\u0027s. Lege combinaties geven een 404.",
+                       "kernpunt":  "Bepaal per filter of er zoekvraag is. Zo niet, houd het filter dan uit de crawl in plaats van het alleen uit de index te halen.",
                        "bron":  {
                                     "titel":  "Managing crawling of faceted navigation URLs",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-10"
                    },
                    {
                        "id":  "20261020-ga4-cross-device-user-id",
@@ -3822,10 +3823,14 @@
                                     "titel":  "Optimize Cumulative Layout Shift | web.dev",
                                     "url":  "https://web.dev/articles/optimize-cls"
                                 },
-                       "video":  null,
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "herzien":  "2026-11-06"
+                       "herzien":  "2026-11-10"
                    },
                    {
                        "id":  "20261106-gsc-klikpiek-bots-november",
@@ -4149,6 +4154,109 @@
                        "bron":  {
                                     "titel":  "ACM: Reviews en beoordelingen gebruiken",
                                     "url":  "https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/online-beinvloeden/reviews-en-beoordelingen-gebruiken"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261110-ga4-user-id-voor-inloggen",
+                       "titel":  "User-ID staat live: zie je nu ook hoe klanten in september wisselden?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4 User-ID: wat er gebeurt met events vóór het inloggen en met oude data",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.1.5"
+                                  ],
+                       "kernpunt":  "Gaat User-ID live, noteer dan de datum: cross-device-cijfers zijn pas vanaf die dag te vergelijken.",
+                       "bron":  {
+                                    "titel":  "[GA4] Measure activity across platforms with User-ID - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/9213390"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261110-hamburgermenu-desktop",
+                       "titel":  "Het hoofdmenu verdwijnt achter drie streepjes, ook op desktop",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Navigatie: een verborgen menu (hamburger) op desktop",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.2",
+                                      "1.2.5"
+                                  ],
+                       "kernpunt":  "Heb je op desktop ruimte, toon dan de hoofdcategorieën. Verberg alleen wat echt bijzaak is.",
+                       "bron":  {
+                                    "titel":  "Hamburger Menus and Hidden Navigation Hurt UX Metrics | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/hamburger-menus/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261110-lege-filtercombinatie-404",
+                       "titel":  "9.000 filterpagina\u0027s met \u0027Geen producten gevonden\u0027",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Faceted navigation: lege filtercombinaties en de juiste statuscode",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.2.4",
+                                      "1.1.1"
+                                  ],
+                       "kernpunt":  "Levert een filtercombinatie niets op, geef dan een 404 op dat adres, niet een lege pagina met status 200.",
+                       "bron":  {
+                                    "titel":  "Managing crawling of faceted navigation URLs | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261110-logs-googlebot-echt-of-nep",
+                       "titel":  "1,2 miljoen Googlebot-verzoeken in de logs, vier keer meer dan in Search Console",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Logfile-analyse: eerst controleren of Googlebot echt Googlebot is",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.3",
+                                      "1.1.6"
+                                  ],
+                       "kernpunt":  "Analyseer je logs, filter dan eerst op geverifieerde Google-IP\u0027s. Anders tel je scrapers mee die zich als Googlebot voordoen.",
+                       "bron":  {
+                                    "titel":  "Verify requests from Google crawlers and fetchers | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot"
+                                },
+                       "video":  {
+                                     "titel":  "Screaming Frog Log File Analyser - 6.0",
+                                     "kanaal":  "Screaming Frog",
+                                     "url":  "https://www.youtube.com/watch?v=-Qgly4DRWeE"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261110-productmarkup-b2b-prijs-na-inloggen",
+                       "titel":  "Product-markup zonder fouten, maar de B2B-shop toont prijzen pas na inloggen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Product-markup: verplichte velden en markup die niet op de pagina staat",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.1",
+                                      "2.2.8"
+                                  ],
+                       "kernpunt":  "Controleer Product-markup altijd ook met de Rich Results Test. Die kijkt naar Googles verplichte velden, de validator niet.",
+                       "bron":  {
+                                    "titel":  "Product snippet (Product, Review, Offer) structured data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/product-snippet"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
