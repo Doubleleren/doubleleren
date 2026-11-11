@@ -1,0 +1,41 @@
+{
+  "id": "20261111-gtm-formulier-alleen-geslaagd",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GTM: een formulierverzending alleen tellen als die echt lukt",
+  "matrix": ["3.2.4", "3.1.1"],
+  "titel": "200 offerteaanvragen in GA4, maar 120 in de mailbox",
+  "intro": "Een installatiebedrijf meet offerteaanvragen met een GA4-event via Google Tag Manager (GTM). De tag gaat af op een trigger van het type Formulierverzending. In GA4 staan deze maand 200 aanvragen. In de mailbox van de klant zitten er 120. Veel bezoekers klikken op 'Verstuur' terwijl een verplicht veld nog leeg is.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat pas je in GTM aan om het verschil te verkleinen?",
+    "opties": [
+      "In de trigger 'Validatie controleren' aanzetten, zodat hij alleen afgaat als het formulier echt verzonden is.",
+      "In de trigger 'Wachten op tags' aanzetten, zodat GA4 het event pas ontvangt als het formulier klaar is.",
+      "De trigger vervangen door een klik-trigger op 'Verstuur', zodat je elke poging netjes apart kunt tellen.",
+      "Het event in GA4 als key event markeren, zodat GA4 mislukte en dubbele verzendingen zelf wegfiltert."
+    ],
+    "juist": 0
+  },
+  "kern": "Zonder die controle telt GTM elke klik op 'Verstuur', ook als het formulier een foutmelding geeft. Met de controle tel je alleen verzendingen die gelukt zijn.",
+  "afleiders": [
+    "",
+    "**Wachten op tags:** dat klinkt alsof GTM wacht tot alles klopt. Maar die optie houdt de verzending alleen even vast, zodat je tags tijd hebben om af te gaan. Mislukte pogingen tellen nog steeds mee.",
+    "**Klik-trigger op de knop:** dan tel je juist elke klik, ook de mislukte. Het verschil met de mailbox wordt daardoor eerder groter dan kleiner.",
+    "**Key event markeren:** dat maakt een event belangrijker in je rapporten. Maar GA4 weet niet of een formulier lukte, dus het filtert niets weg."
+  ],
+  "kort": "Denk aan een loket waar mensen een formulier inleveren. Telt de medewerker iedereen die iets over de balie schuift, dan tel je ook de formulieren die meteen terugkomen omdat er een handtekening mist. Je wilt alleen tellen wat wordt aangenomen. De optie in GTM doet precies dat: hij kijkt of de browser het formulier echt verstuurt.",
+  "begrippen": [
+    { "term": "GTM", "uitleg": "Google Tag Manager: een tool waarmee je meetcodes (tags) op een site zet en beheert zonder steeds de code aan te passen." },
+    { "term": "Trigger", "uitleg": "de regel in GTM die bepaalt wanneer een tag afgaat, bijvoorbeeld bij een klik of bij het verzenden van een formulier." },
+    { "term": "Key event", "uitleg": "een event dat je in GA4 als belangrijk markeert, zoals een aanvraag of aankoop. Vroeger heette dat een conversie." }
+  ],
+  "uitleg": "De trigger **Formulierverzending** (Form Submission) in GTM heeft twee opties:\n- **Wachten op tags** (Wait for Tags): houdt de verzending vast tot de tags die op deze trigger draaien zijn afgegaan, of tot een time-out verstrijkt. Handig als de pagina na verzenden meteen doorstuurt.\n- **Validatie controleren** (Check Validation): de trigger gaat alleen af als het formulier met succes wordt verzonden.\n\nNiet elk formulier werkt goed met deze trigger. Formulieren die via JavaScript verzenden of in een iframe staan, geven vaak geen standaard verzendsignaal. Meet dan liever een bedankpagina, of laat de developer pas na een geslaagde verzending een dataLayer-event sturen.\n\nTest altijd in de voorbeeldmodus van GTM: verstuur het formulier met een leeg verplicht veld en kijk of de tag dan niet afgaat.",
+  "kernpunt": "Leg de GA4-telling van een formulier geregeld naast wat er echt binnenkomt in de mailbox of het CRM.",
+  "toepassing": "Open bij één klant de formuliertrigger in GTM en kijk of 'Validatie controleren' aanstaat. Test het in de voorbeeldmodus met een leeg verplicht veld.",
+  "bron": {
+    "titel": "Form submission trigger - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/7679217"
+  }
+}

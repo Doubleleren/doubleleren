@@ -1,0 +1,47 @@
+{
+  "id": "20261111-core-update-november-2026",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "November 2026 core update: wat doe je tijdens de uitrol?",
+  "matrix": ["10.1.1", "4.1.2"],
+  "titel": "Core update net gestart: 200 blogs schrappen of afwachten?",
+  "intro": "Google is op 10 november 2026 begonnen met de November 2026 core update. De uitrol kan tot twee weken duren. Een webshop in tuinmeubelen ziet een dag later 9% minder klikken bij het zoektype Afbeeldingen. Bij het zoektype Web is het gelijk gebleven. De eigenaar wil vandaag 200 oude blogartikelen verwijderen \"om de kwaliteit op te krikken\".",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de eigenaar vandaag?",
+    "opties": [
+      "Vandaag de 200 artikelen verwijderen, omdat Google de site tijdens de uitrol opnieuw beoordeelt en dan alleen sterke pagina's ziet.",
+      "Morgen de eerste dagen van de uitrol vergelijken met dezelfde dagen vorige week, zodat je snel ziet welke pagina's geraakt zijn.",
+      "De 200 artikelen vandaag op noindex zetten in plaats van verwijderen, zodat ze buiten de beoordeling van deze update blijven.",
+      "Nu niets veranderen, omdat posities nog schuiven, en een week na de uitrol Web en Afbeeldingen apart vergelijken met vóór de start."
+    ],
+    "juist": 3
+  },
+  "kern": "Een core update kun je pas beoordelen als hij klaar is. Splits dan per zoektype, want een daling bij Afbeeldingen vraagt iets anders dan een daling bij Web.",
+  "afleiders": [
+    "**Nu verwijderen:** opruimen voelt als snel werken aan kwaliteit. Maar Google noemt verwijderen een laatste redmiddel. En je weet nog niet eens of de daling blijft.",
+    "**De eerste dagen vergelijken:** vroeg kijken voelt alert. Maar tijdens de uitrol schuiven posities nog heen en weer. Je meet dan vooral ruis.",
+    "**Noindex in plaats van verwijderen:** dat lijkt een zachtere ingreep. Maar het blijft een snelle ingreep zonder diagnose, en zulke quick fixes raadt Google juist af.",
+    ""
+  ],
+  "kort": "Na een storm bekijk je de schade pas als het stil is. Dan loop je elk deel van het huis apart langs: het dak, de schuur, de tuin. Zo werkt het ook met een core update. Tijdens de uitrol waait het nog, dus de cijfers van nu zeggen weinig. Daarna kijk je per onderdeel, want afbeeldingen en gewone resultaten kunnen elk anders geraakt zijn.",
+  "begrippen": [
+    { "term": "Core update", "uitleg": "een brede aanpassing van de manier waarop Google pagina's rangschikt. Hij richt zich niet op specifieke sites." },
+    { "term": "Uitrol", "uitleg": "de periode waarin Google een update stap voor stap invoert. Bij een core update kan dat tot twee weken duren." },
+    { "term": "Zoektype", "uitleg": "de keuze in het Prestatierapport van Search Console tussen onder meer Web, Afbeeldingen, Video en Nieuws." },
+    { "term": "Noindex", "uitleg": "een instructie aan zoekmachines om een pagina niet in de zoekresultaten op te nemen." }
+  ],
+  "uitleg": "**Wat er speelt**\n- Google startte de November 2026 core update op 10 november. Het is de derde core update van 2026, na die van maart en mei.\n- De uitrol kan tot twee weken duren.\n\n**Wat Google adviseert**\n- Wacht tot de uitrol klaar is, en daarna nog minstens een volle week.\n- Vergelijk die week in Search Console met een week vóór de start van de uitrol.\n- Analyseer zoektypes apart: Web, Afbeeldingen, Video en het tabblad Nieuws.\n- Zakt een pagina een paar posities, dan is geen drastische actie nodig. Pas content die goed presteert niet aan.\n- Vermijd quick fixes. Content verwijderen is een laatste redmiddel.\n\n**Herstel**\nSommige veranderingen zie je binnen een paar dagen. Maar het kan maanden duren voordat de systemen van Google verbeteringen oppikken.",
+  "kernpunt": "Plan grote sitewijzigingen liever niet midden in een uitrol. Anders kun je later niet zien wat door de update kwam en wat door jou.",
+  "toepassing": "Zet vandaag bij je klanten een annotatie op 10 november 2026 in het rapport of dashboard, met de notitie dat de uitrol tot twee weken kan duren.",
+  "bron": {
+    "titel": "Search Engine Journal: Google's November 2026 Core Update Starts Rolling Out",
+    "url": "https://www.searchenginejournal.com/google-november-2026-core-update/596614/"
+  },
+  "video": {
+    "titel": "Recover From ANY Google Algorithm Update",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=Qcd_2W5na60"
+  }
+}

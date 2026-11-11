@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-10T05:29:25",
+    "bijgewerkt":  "2026-11-11T05:29:21",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -914,14 +914,15 @@
                                       "1.4.4",
                                       "1.4.2"
                                   ],
-                       "kernpunt":  "Een HTML-sitemap is voor bezoekers, een XML-sitemap voor zoekmachines. Grote sites hebben een XML-sitemap nodig, opgesplitst per paginatype, zodat je in Search Console ziet welke belangrijke URL\u0027s niet geïndexeerd zijn.",
+                       "kernpunt":  "Heeft een site meer pagina\u0027s dan menu en footer kunnen tonen, zorg dan voor een XML-sitemap, gesplitst per paginatype.",
                        "bron":  {
                                     "titel":  "Build and Submit a Sitemap | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-11"
                    },
                    {
                        "id":  "20261021-lcp-deeltijden-claude",
@@ -1748,7 +1749,7 @@
                                       "11.1.1",
                                       "11.1.2"
                                   ],
-                       "kernpunt":  "E-E-A-T is geen score en geen rankingfactor op zich, maar een kader voor wat Google wil belonen. Trust is het belangrijkste onderdeel, zeker bij YMYL; je verbetert het met echte makers, bronnen en transparantie, niet met markup.",
+                       "kernpunt":  "Vraag bij E-E-A-T niet \u0027welke code voegen we toe?\u0027, maar \u0027kan een bezoeker nagaan wie dit schreef en waarom die het weet?\u0027",
                        "bron":  {
                                     "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
@@ -1759,7 +1760,8 @@
                                      "url":  "https://www.youtube.com/watch?v=4YhJH5VOF3w"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-11"
                    },
                    {
                        "id":  "20261027-hreflang-pdf-http-header",
@@ -4257,6 +4259,155 @@
                        "bron":  {
                                     "titel":  "Product snippet (Product, Review, Offer) structured data | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/product-snippet"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261111-core-update-november-2026",
+                       "titel":  "Core update net gestart: 200 blogs schrappen of afwachten?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "November 2026 core update: wat doe je tijdens de uitrol?",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Plan grote sitewijzigingen liever niet midden in een uitrol. Anders kun je later niet zien wat door de update kwam en wat door jou.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: Google\u0027s November 2026 Core Update Starts Rolling Out",
+                                    "url":  "https://www.searchenginejournal.com/google-november-2026-core-update/596614/"
+                                },
+                       "video":  {
+                                     "titel":  "Recover From ANY Google Algorithm Update",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261111-fcp-webfont-tekst-onzichtbaar",
+                       "titel":  "Een lege pagina tot het lettertype binnen is",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "FCP verbeteren: tekst zichtbaar houden terwijl een webfont laadt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.9",
+                                      "5.2.8"
+                                  ],
+                       "kernpunt":  "Blijft een pagina leeg terwijl de HTML er al is, kijk dan eerst naar fonts en CSS voordat je de server de schuld geeft.",
+                       "bron":  {
+                                    "titel":  "First Contentful Paint (FCP) | web.dev",
+                                    "url":  "https://web.dev/articles/fcp"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261111-ga4-bounce-engaged-sessie",
+                       "titel":  "Een receptensite waar bijna niemand meer \u0027bouncet\u0027",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: engaged sessies en bouncepercentage",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.6",
+                                      "4.1.3"
+                                  ],
+                       "kernpunt":  "Lees een bouncepercentage in GA4 als \u0027niet betrokken\u0027, niet als \u0027maar één pagina gezien\u0027.",
+                       "bron":  {
+                                    "titel":  "[GA4] Engagement rate and bounce rate - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/12195621"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261111-gtm-formulier-alleen-geslaagd",
+                       "titel":  "200 offerteaanvragen in GA4, maar 120 in de mailbox",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GTM: een formulierverzending alleen tellen als die echt lukt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.4",
+                                      "3.1.1"
+                                  ],
+                       "kernpunt":  "Leg de GA4-telling van een formulier geregeld naast wat er echt binnenkomt in de mailbox of het CRM.",
+                       "bron":  {
+                                    "titel":  "Form submission trigger - Tag Manager Help",
+                                    "url":  "https://support.google.com/tagmanager/answer/7679217"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261111-noindex-alleen-mobiele-versie",
+                       "titel":  "Filterpagina\u0027s alleen op mobiel uit Google houden?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Mobile-first indexing: een andere robots-metatag op mobiel",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "8.1.2",
+                                      "8.1.1",
+                                      "1.3.1"
+                                  ],
+                       "kernpunt":  "Verschilt de HTML per apparaat, leg dan de robots-tags van beide versies naast elkaar. De mobiele versie bepaalt wat er in Google staat.",
+                       "bron":  {
+                                    "titel":  "Mobile-first indexing best practices | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+                                },
+                       "video":  {
+                                     "titel":  "Mobile-First Indexing",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261111-tikdoelen-mobiel-winkelmand",
+                       "titel":  "Mobiel haakt af in de winkelmand, desktop niet",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Mobiele UX: te kleine tikdoelen in de winkelmand",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1",
+                                      "7.1.5"
+                                  ],
+                       "kernpunt":  "Haakt mobiel veel vaker af dan desktop bij dezelfde stap, meet dan eerst de knoppen, voordat je aan teksten of kleuren zit.",
+                       "bron":  {
+                                    "titel":  "Touch Targets on Touchscreens | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/touch-target-size/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261111-utm-in-interne-links",
+                       "titel":  "UTM-codes in de eigen menubanners",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "URL-parameters sturen zonder de oude parametertool: UTM-codes in interne links",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.6",
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "Gebruik utm-codes alleen voor links van buiten je site, nooit voor links tussen je eigen pagina\u0027s.",
+                       "bron":  {
+                                    "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

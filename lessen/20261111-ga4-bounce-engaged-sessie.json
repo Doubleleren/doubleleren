@@ -1,0 +1,42 @@
+{
+  "id": "20261111-ga4-bounce-engaged-sessie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: engaged sessies en bouncepercentage",
+  "matrix": ["3.1.6", "4.1.3"],
+  "titel": "Een receptensite waar bijna niemand meer 'bouncet'",
+  "intro": "Een receptensite krijgt veel bezoekers die één recept openen, er 40 seconden in lezen en de site daarna verlaten. De klant ziet in GA4 een laag bouncepercentage en vertrouwt het niet. \"In het oude Analytics was dit altijd 80%.\"",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe telt GA4 zo'n bezoek van één pagina en 40 seconden?",
+    "opties": [
+      "Als bounce, omdat de bezoeker maar één pagina bekeek en daarna zonder klik of andere actie de site verliet.",
+      "Als engaged sessie, omdat het bezoek langer dan 10 seconden duurde, ook al bleef het bij één pagina.",
+      "Als bounce, tenzij je een scroll-event als key event instelt, omdat alleen key events een sessie engaged maken.",
+      "Als engaged sessie, omdat GA4 elke sessie met een page_view-event automatisch als betrokken bezoek telt."
+    ],
+    "juist": 1
+  },
+  "kern": "GA4 kijkt niet alleen naar het aantal pagina's. Een sessie telt als betrokken bij meer dan 10 seconden, een key event of minstens twee paginaweergaven.",
+  "afleiders": [
+    "**Eén pagina is een bounce:** zo werkte het oude Universal Analytics. GA4 telt alleen een bounce als een sessie aan geen van de drie voorwaarden voldoet.",
+    "",
+    "**Alleen met een key event:** een key event is één van de drie manieren om engaged te zijn. Langer dan 10 seconden blijven is er ook één.",
+    "**Elke page_view telt:** dan zou niemand ooit bouncen. Eén paginaweergave alleen is niet genoeg; er moet nog een voorwaarde bij."
+  ],
+  "kort": "Vergelijk het met een winkel die bijhoudt wie echt binnenkomt. Vroeger telde iemand die maar één schap bekeek als 'meteen weer weg', ook als hij er tien minuten stond te lezen. Nu telt de winkel ook mee wie even blijft staan. Daarom ligt het bouncepercentage in GA4 vaak veel lager dan vroeger. Het gedrag is niet veranderd, de definitie wel.",
+  "begrippen": [
+    { "term": "Sessie", "uitleg": "één bezoek aan een site, van binnenkomst tot vertrek of tot er een tijd niets gebeurt." },
+    { "term": "Engaged sessie", "uitleg": "een bezoek dat GA4 als betrokken telt: langer dan 10 seconden, met een key event of met minstens twee paginaweergaven." },
+    { "term": "Bouncepercentage", "uitleg": "in GA4 het deel van de sessies dat niet engaged was." },
+    { "term": "Key event", "uitleg": "een event dat je in GA4 als belangrijk markeert, zoals een aankoop of aanvraag." }
+  ],
+  "uitleg": "Volgens Google is een sessie **engaged** als hij aan minstens één voorwaarde voldoet:\n- hij duurt langer dan 10 seconden;\n- er is een key event;\n- er zijn minstens 2 pagina- of schermweergaven.\n\nHet **engagementpercentage** is het aandeel engaged sessies. Het **bouncepercentage** is precies het omgekeerde: het aandeel sessies dat niet engaged was.\n\nWat betekent dat voor je rapportage?\n- Vergelijk bouncepercentages uit Universal Analytics niet met GA4. Het zijn andere definities.\n- Bij content met één pagina per bezoek, zoals recepten of blogs, is engagement een eerlijkere maat dan pagina's per sessie.\n- Een laag bouncepercentage zegt nog niet dat de pagina goed werkt. Kijk ook naar de gemiddelde betrokkenheidstijd en naar conversies.",
+  "kernpunt": "Lees een bouncepercentage in GA4 als 'niet betrokken', niet als 'maar één pagina gezien'.",
+  "toepassing": "Zet in GA4 voor één klant het engagementpercentage en de gemiddelde betrokkenheidstijd naast elkaar voor de vijf best bezochte pagina's.",
+  "bron": {
+    "titel": "[GA4] Engagement rate and bounce rate - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/12195621"
+  }
+}
