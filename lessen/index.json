@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-11T05:29:21",
+    "bijgewerkt":  "2026-11-12T05:29:51",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1563,7 +1563,7 @@
                                       "8.1.3",
                                       "8.1.1"
                                   ],
-                       "kernpunt":  "Sinds 5 juli 2024 crawlt Google alle sites voor Search met Googlebot Smartphone. Googlebot Desktop in je logs is normaal; check de mobiele versie op volledigheid.",
+                       "kernpunt":  "Zie je Googlebot Desktop in de logs, maak je dan geen zorgen over de indexering, maar vergelijk de mobiele versie met desktop.",
                        "bron":  {
                                     "titel":  "Mobile-indexing vLast final final | Google Search Central Blog",
                                     "url":  "https://developers.google.com/search/blog/2024/06/mobile-indexing-vlast-final-final.doc"
@@ -1574,7 +1574,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-12"
                    },
                    {
                        "id":  "20261026-jpeg-xl-google-images",
@@ -2657,14 +2658,15 @@
                        "matrix":  [
                                       "1.1.5"
                                   ],
-                       "kernpunt":  "URL-inspectie toont standaard de laatst geïndexeerde versie, niet de huidige pagina. Controleer een fix met \u0027URL live testen\u0027; ook een geslaagde test garandeert geen indexering.",
+                       "kernpunt":  "Controleer elke technische fix met een live test, en stuur de klant het resultaat in plaats van te wachten op het rapport.",
                        "bron":  {
                                     "titel":  "URL Inspection tool - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/9012289"
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-12"
                    },
                    {
                        "id":  "20261030-ai-assistenten-kanaalgroep-claude",
@@ -4410,6 +4412,154 @@
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
                                 },
                        "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261112-bezorgdatum-in-plaats-van-levertijd",
+                       "titel":  "\u00273-5 werkdagen\u0027 en klanten die een kalender openen",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Checkout: bezorgdatum tonen in plaats van levertijd",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Toon in de checkout per verzendoptie een bezorgdatum, geen levertijd in werkdagen.",
+                       "bron":  {
+                                    "titel":  "Use “Delivery Date” Not “Shipping Speed” (41% Don’t) | Baymard",
+                                    "url":  "https://baymard.com/research-articles/shipping-speed-vs-delivery-date"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261112-cdn-overstap-crawlpiek",
+                       "titel":  "Nieuw CDN, en de eigen server bezwijkt onder Googlebot",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Overstap naar een CDN: crawlpiek, koude cache en botbescherming",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.4",
+                                      "5.1.1",
+                                      "1.1.1"
+                                  ],
+                       "kernpunt":  "Zet je een site achter een CDN, vul dan eerst de cache en regel een uitzondering voor geverifieerde crawlers, voordat al het verkeer overgaat.",
+                       "bron":  {
+                                    "titel":  "Moving to a CDN without overwhelming your origin (or blocking Googlebot) | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2026/11/crawling-cdn"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261112-ga4-filter-intern-verkeer-testen",
+                       "titel":  "Het filter voor intern verkeer meteen op Actief zetten?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: een filter voor intern verkeer eerst testen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.2",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "Zet een gegevensfilter in GA4 nooit direct op Actief. Controleer eerst in Verkennen wat het in de stand Testen markeert.",
+                       "bron":  {
+                                    "titel":  "Filter out internal traffic - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/10104470?hl=en"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261112-json-ld-in-de-body",
+                       "titel":  "Productmarkup onderaan de pagina: telt die wel mee?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "JSON-LD: waar het blok in de HTML mag staan",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.9",
+                                      "2.2.8"
+                                  ],
+                       "kernpunt":  "Bij structured data telt of de markup geldig is en klopt met de pagina, niet waar het blok in de HTML staat.",
+                       "bron":  {
+                                    "titel":  "Intro to How Structured Data Markup Works | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+                                },
+                       "video":  {
+                                     "titel":  "What Is Schema Markup And Why You Need It For SEO",
+                                     "kanaal":  "Dominate Marketing",
+                                     "url":  "https://www.youtube.com/watch?v=vJEygBWs80A"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261112-mixed-content-script-geblokkeerd",
+                       "titel":  "Na de overstap naar https doet de reviewwidget het niet meer",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "HTTPS-migratie: mixed content",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.2",
+                                      "5.1.1"
+                                  ],
+                       "kernpunt":  "Ga je over naar https, zoek dan in de broncode naar http:// bij scripts, stylesheets en iframes. Die worden geblokkeerd, plaatjes vaak niet.",
+                       "bron":  {
+                                    "titel":  "What is mixed content? | web.dev",
+                                    "url":  "https://web.dev/articles/what-is-mixed-content"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261112-robots-txt-googlebot-groep-negeert-ster",
+                       "titel":  "Eén regel voor Googlebot erbij, en de sorteer-URL\u0027s worden weer gecrawld",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "robots.txt: welke user-agent-groep Googlebot volgt",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "1.3.6",
+                                      "1.1.8"
+                                  ],
+                       "kernpunt":  "Voeg je een groep voor één crawler toe, herhaal daarin dan elke regel uit de groep voor * die ook voor die crawler moet gelden.",
+                       "bron":  {
+                                    "titel":  "How Google interprets the robots.txt specification | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261112-url-inspectie-gecrawld-als",
+                       "titel":  "Is deze productpagina mobiel of desktop gecrawld? Waar zie je dat?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Mobile-first indexing: per pagina zien welke crawler hem ophaalde",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "8.1.3",
+                                      "8.1.1"
+                                  ],
+                       "kernpunt":  "Twijfelt een klant hoe Google een pagina bekijkt, kijk dan bij \u0027Gecrawld als\u0027 in de URL-inspectie in plaats van te gokken op basis van andere rapporten.",
+                       "bron":  {
+                                    "titel":  "URL Inspection tool - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/9012289?hl=en"
+                                },
+                       "video":  {
+                                     "titel":  "Mobile-First Indexing",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+                                 },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    }

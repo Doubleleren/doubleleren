@@ -1,0 +1,40 @@
+{
+  "id": "20261112-bezorgdatum-in-plaats-van-levertijd",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Checkout: bezorgdatum tonen in plaats van levertijd",
+  "matrix": ["7.1.1"],
+  "titel": "'3-5 werkdagen' en klanten die een kalender openen",
+  "intro": "Een webshop in tuinmeubelen biedt in de checkout drie verzendopties: 'Standaard (3-5 werkdagen)', 'Snel (1-2 werkdagen)' en 'Ophalen'. In sessie-opnames zie je dat bezoekers lang stilstaan bij die keuze. Sommigen openen een ander tabblad met een kalender. Bestellingen na 15:00 gaan pas de volgende werkdag de deur uit.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing pakt dit probleem het best aan?",
+    "opties": [
+      "De snelle optie standaard aanvinken, zodat de meeste bezoekers zonder nadenken de duurdere keuze doorlopen.",
+      "Het aantal opties terugbrengen tot één, zodat bezoekers in de checkout helemaal geen keuze meer hoeven te maken.",
+      "Een uitleg van 'werkdagen' in een infoknop zetten, zodat bezoekers zelf de levertijd beter kunnen inschatten.",
+      "Per optie een verwachte bezorgdatum tonen, zodat bezoekers niet zelf hoeven te rekenen wanneer het pakket komt."
+    ],
+    "juist": 3
+  },
+  "kern": "Bezoekers willen weten wanneer het pakket er is, niet hoe lang het onderweg is. Een datum per optie haalt het rekenwerk weg.",
+  "afleiders": [
+    "**Snelle optie vooraf aanvinken:** dat maakt de keuze wel sneller. Maar de bezoeker weet nog steeds niet wanneer het pakket komt, en een dure standaardkeuze voelt als een truc.",
+    "**Eén optie:** minder keuze klinkt rustiger. Maar wie haast heeft of wil ophalen, verliest zijn optie, en de onduidelijke levertijd blijft bestaan.",
+    "**Uitleg van werkdagen:** dat helpt een beetje. Maar de bezoeker moet nog steeds zelf rekenen, en de besteltijd van 15:00 zit er niet in.",
+    ""
+  ],
+  "kort": "Vraag je iemand de weg en krijg je 'nog drie kwartier, met wat files', dan moet je zelf uitrekenen hoe laat je er bent. Een navigatie die zegt 'aankomst 14:20' is veel prettiger. In de checkout werkt het net zo. Bij '3-5 werkdagen' moet de bezoeker rekenen met weekenden en besteltijden. Een datum geeft meteen het antwoord.",
+  "begrippen": [
+    { "term": "Checkout", "uitleg": "de stappen waarin een klant zijn bestelling afrondt: gegevens, verzending en betaling." },
+    { "term": "Sessie-opname", "uitleg": "een video-achtige weergave van wat een echte bezoeker op de site deed, zoals in Clarity of Hotjar." }
+  ],
+  "uitleg": "Baymard zag in grote checkout-tests dat deelnemers vastliepen bij een levertijd zoals '2 werkdagen'. Ze moesten zelf rekening houden met de verwerkingstijd, het uiterste besteltijdstip en wat precies een werkdag is. Dat leidde tot twijfel en soms tot afhakers. Volgens Baymards benchmark toont 41% van de webshops geen bezorgdatum bij de verzendkeuze.\n\n**Zo pak je het aan:**\n- Toon per verzendoptie een verwachte bezorgdatum, naast de prijs, in de keuze zelf.\n- Een datumbereik mag ook. Dat is makkelijker te lezen dan een bereik in dagen. Een venster van meer dan ongeveer 5 tot 7 dagen liet sommige deelnemers twijfelen.\n- Reken de datum uit met de API van de vervoerder of een eigen systeem. Houd rekening met de verwerkingstijd, en zorg voor een terugval als de API traag is.\n\n**Let op:** bezoekers lezen de datum als een belofte. Een gemiste datum kost vertrouwen. Een te ruime marge laat de levering juist trager lijken. Pas de datum aan bij drukte, nalevering en feestdagen.",
+  "kernpunt": "Toon in de checkout per verzendoptie een bezorgdatum, geen levertijd in werkdagen.",
+  "toepassing": "Loop vandaag bij één webshopklant de checkout door tot de verzendkeuze. Staat er een datum of alleen 'x werkdagen'? Zet het als snelle verbetering op de lijst voor het volgende overleg.",
+  "bron": {
+    "titel": "Use “Delivery Date” Not “Shipping Speed” (41% Don’t) | Baymard",
+    "url": "https://baymard.com/research-articles/shipping-speed-vs-delivery-date"
+  }
+}

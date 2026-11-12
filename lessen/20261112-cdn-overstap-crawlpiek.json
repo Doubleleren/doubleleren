@@ -1,0 +1,42 @@
+{
+  "id": "20261112-cdn-overstap-crawlpiek",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Overstap naar een CDN: crawlpiek, koude cache en botbescherming",
+  "matrix": ["1.5.4", "5.1.1", "1.1.1"],
+  "titel": "Nieuw CDN, en de eigen server bezwijkt onder Googlebot",
+  "intro": "Een webshop met 60.000 URL's zet maandagavond een CDN voor de site. Dinsdag ligt de eigen server twee keer kort plat. In de serverlogs zie je dat Googlebot drie keer zoveel verzoeken doet als vorige week. De hostingpartij wil Googlebot 'voorlopig maar even blokkeren'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpak past het best bij wat Google hierover adviseert?",
+    "opties": [
+      "Googlebot een week blokkeren in robots.txt, zodat de server rust krijgt tot de cache van het CDN gevuld is.",
+      "Alle bots een CAPTCHA laten oplossen via de firewall, zodat alleen echte bezoekers de server nog belasten.",
+      "De cache vooraf vullen en echte crawlers doorlaten, zodat de server ontlast wordt; desnoods een paar uur 503.",
+      "Het CDN tijdelijk uitzetten, omdat Google een site achter een nieuw CDN ziet als een nieuwe site en alles opnieuw crawlt."
+    ],
+    "juist": 2
+  },
+  "kern": "Google crawlt meer omdat de site ineens sneller antwoordt. Zolang de cache van het CDN leeg is, komt dat werk bij je eigen server terecht.",
+  "afleiders": [
+    "**Googlebot een week blokkeren:** dat geeft wel rust. Maar een week niet crawlen kost zichtbaarheid, terwijl het probleem maar kort duurt.",
+    "**CAPTCHA voor alle bots:** dat lijkt een nette firewallregel. Maar Googlebot kan geen CAPTCHA oplossen, gaat minder crawlen en pagina's kunnen uit Google vallen.",
+    "",
+    "**CDN uitzetten:** de piek komt inderdaad door het CDN. Maar Google ziet geen nieuwe site, alleen een snellere. Met een gevulde cache wordt je server juist minder belast."
+  ],
+  "kort": "Denk aan een supermarkt die een supersnelle kassa krijgt. Omdat het zo vlot gaat, komen er ineens veel meer klanten. Maar de schappen bij de kassa zijn nog leeg, dus alles moet uit het magazijn komen. Zo werkt het hier ook. Google merkt dat de site sneller is en stuurt meer verzoeken. Tot het CDN zijn eigen voorraad heeft, gaat elk verzoek door naar je eigen server.",
+  "begrippen": [
+    { "term": "CDN", "uitleg": "een netwerk van servers over de wereld dat kopieën van je pagina's bewaart en dichtbij de bezoeker uitlevert." },
+    { "term": "Origin", "uitleg": "je eigen server, waar de echte site draait. Het CDN haalt daar alles op wat het nog niet heeft." },
+    { "term": "Koude cache", "uitleg": "een cache die nog leeg is. Elke eerste vraag naar een pagina moet dan nog naar de origin." },
+    { "term": "429 en 503", "uitleg": "statuscodes voor 'te veel verzoeken' en 'tijdelijk niet beschikbaar'. Googlebot gaat dan rustiger crawlen." }
+  ],
+  "uitleg": "Google legde op 11 november 2026 in de Search Central-blog uit waarom dit gebeurt.\n\n**Waarom de piek:** Google bepaalt per site een *crawl capacity limit* (hostload). Reageert de server snel en stabiel, dan mag het crawlen omhoog, als er vraag naar is. Na de overstap naar een CDN dalen de responstijden sterk, en dat leest Google als betere infrastructuur.\n\n**Waarom de origin het zwaar heeft:** een nieuw CDN begint met een koude cache. Bezoekers komen vooral op populaire pagina's, die snel in de cache staan. Crawlers lopen juist de hele URL-voorraad af, dus veel verzoeken gaan door naar de origin.\n\n**Wat Google adviseert:**\n- Gebruik de optie voor geverifieerde bots in je CDN of WAF. Googles crawlers zijn te controleren via de gepubliceerde IP-reeksen. Blokkeer ongewenste bots gericht.\n- Vul de cache vooraf: drukbezochte pagina's, pagina's voor drukke periodes en vaak gecrawlde URL's.\n- Is het nog te zwaar, geef dan tijdelijk 429 of 503: een paar uur, niet langer dan een à twee dagen.",
+  "kernpunt": "Zet je een site achter een CDN, vul dan eerst de cache en regel een uitzondering voor geverifieerde crawlers, voordat al het verkeer overgaat.",
+  "toepassing": "Open bij een klant met een CDN of firewall het rapport Crawlstatistieken in Search Console (via Instellingen). Kijk of er pieken in verzoeken of serverfouten zijn. Vraag de developer of de firewall een uitzondering heeft voor geverifieerde bots.",
+  "bron": {
+    "titel": "Moving to a CDN without overwhelming your origin (or blocking Googlebot) | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2026/11/crawling-cdn"
+  }
+}

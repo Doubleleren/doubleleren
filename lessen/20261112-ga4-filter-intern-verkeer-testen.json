@@ -1,0 +1,41 @@
+{
+  "id": "20261112-ga4-filter-intern-verkeer-testen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: een filter voor intern verkeer eerst testen",
+  "matrix": ["3.1.2", "3.1.4"],
+  "titel": "Het filter voor intern verkeer meteen op Actief zetten?",
+  "intro": "Een collega heeft in GA4 een filter voor intern verkeer aangemaakt. Het IP-bereik van het kantoor heeft hij snel overgenomen uit een oude mail van de klant. Het filter staat nu in de stand 'Testen'. Hij wil het meteen op 'Actief' zetten, zodat de cijfers van deze maand schoon zijn.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat raad je hem aan?",
+    "opties": [
+      "Meteen activeren, want een verkeerd filter kun je later uitzetten en dan komen de weggefilterde data weer terug.",
+      "Eerst op Testen laten staan, want dan zie je in Verkennen welk verkeer het filter zou weghalen voordat het echt gebeurt.",
+      "Meteen activeren, want in de stand Testen haalt GA4 de data al weg en verandert er bij activeren dus niets meer.",
+      "Het filter op Inactief zetten en een segment gebruiken, want filters voor intern verkeer werken alleen op oude data."
+    ],
+    "juist": 1
+  },
+  "kern": "Een actief filter haalt data voorgoed weg. In de stand Testen worden de data alleen gemarkeerd, zodat je eerst kunt zien of het IP-bereik klopt.",
+  "afleiders": [
+    "**Later uitzetten:** uitzetten stopt het filter alleen voor nieuwe data. Wat het al heeft weggehaald, komt nooit meer terug.",
+    "",
+    "**Testen filtert al:** in de stand Testen haalt GA4 niets weg. Het markeert de data alleen met een speciale dimensie, zodat je kunt controleren.",
+    "**Werkt alleen op oude data:** het is andersom. Een filter werkt alleen op nieuwe data, vanaf het moment dat het actief is."
+  ],
+  "kort": "Het werkt als een papierversnipperaar met een proefstand. In de proefstand legt hij de papieren alleen apart, zodat je kunt zien of hij de goede pakt. Zet je hem echt aan, dan is wat erdoor gaat voorgoed weg. Een verkeerd IP-bereik kan zo ook bezoeken van echte klanten wissen, en die krijg je niet terug.",
+  "begrippen": [
+    { "term": "Filter voor intern verkeer", "uitleg": "een instelling in GA4 die bezoeken van je eigen team, herkend aan het IP-adres, uit de cijfers haalt." },
+    { "term": "IP-bereik", "uitleg": "een reeks internetadressen, bijvoorbeeld alle adressen van het kantoornetwerk." },
+    { "term": "Verkennen", "uitleg": "het onderdeel van GA4 waarin je zelf tabellen en analyses bouwt (Explore)." }
+  ],
+  "uitleg": "Zo werkt het filter voor intern verkeer in GA4:\n\n1. **Intern verkeer definiëren** in de instellingen van de datastream: een regel met de IP-adressen. Die bezoeken krijgen de waarde *internal* bij de parameter traffic_type.\n2. **Een gegevensfilter** in Beheer bepaalt wat er met die bezoeken gebeurt.\n\nHet gegevensfilter heeft drie standen:\n- **Testen:** GA4 markeert passende data met de dimensie *Test data filter name*. Er wordt niets weggehaald. Je controleert het in Verkennen.\n- **Actief:** GA4 past het filter toe op binnenkomende data. De wijziging is permanent. Weggefilterde data zie je nooit meer, ook niet in BigQuery.\n- **Inactief:** het filter doet niets.\n\nHet kan 24 tot 36 uur duren voordat een filter werkt. Kijk dus pas na een dag of twee in Verkennen welke bezoeken gemarkeerd zijn. Wil je data alleen tijdelijk verbergen, gebruik dan een filter in het rapport. Dat laat de data zelf intact.",
+  "kernpunt": "Zet een gegevensfilter in GA4 nooit direct op Actief. Controleer eerst in Verkennen wat het in de stand Testen markeert.",
+  "toepassing": "Open bij één klant in GA4 Beheer > Gegevensfilters. Staat er een filter op Actief, vraag dan na of het IP-bereik nog past bij het kantoor en de thuiswerkers.",
+  "bron": {
+    "titel": "Filter out internal traffic - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/10104470?hl=en"
+  }
+}

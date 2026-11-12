@@ -1,0 +1,46 @@
+{
+  "id": "20261112-url-inspectie-gecrawld-als",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Mobile-first indexing: per pagina zien welke crawler hem ophaalde",
+  "matrix": ["8.1.3", "8.1.1"],
+  "titel": "Is deze productpagina mobiel of desktop gecrawld? Waar zie je dat?",
+  "intro": "Een klant heeft een oude webshop met een aparte desktop- en mobiele weergave. Hij vraagt of zijn belangrijkste productpagina 'al mobiel bekeken wordt' door Google. Je wilt dat voor die ene pagina nakijken in Search Console.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Waar zie je met welk type crawler Google deze pagina het laatst heeft opgehaald?",
+    "opties": [
+      "In het Core Web Vitals-rapport, want dat splitst de pagina's in een mobiel en een desktopdeel per crawler.",
+      "In het robots.txt-rapport, want daar staat per crawler welke versie van het bestand Google heeft opgehaald.",
+      "In de URL-inspectie bij de geïndexeerde versie, want daar staat bij 'Gecrawld als' of dat mobiel of desktop was.",
+      "In het rapport Prestaties, want daar kun je op apparaat filteren en zie je welke crawler de klikken opleverde."
+    ],
+    "juist": 2
+  },
+  "kern": "De URL-inspectie laat per pagina zien met welk type Googlebot de geïndexeerde versie is opgehaald: mobiel of desktop.",
+  "afleiders": [
+    "**Core Web Vitals-rapport:** dat splitst wel mobiel en desktop. Maar het gaat om snelheidsmetingen bij echte Chrome-gebruikers, niet om de crawler.",
+    "**robots.txt-rapport:** daar zie je of Google je robots.txt kon ophalen. Het zegt niets over hoe een losse pagina gecrawld is.",
+    "",
+    "**Prestaties per apparaat:** dat filter gaat over de zoeker die klikte. Of iemand op mobiel zocht, zegt niets over de crawler die de pagina ophaalde."
+  ],
+  "kort": "Het werkt als de stempel in een paspoort. Een reisverslag vertelt je waar iemand is geweest, maar alleen de stempel laat zien via welke grens hij binnenkwam. De meeste rapporten in Search Console gaan over bezoekers en hun apparaat. Alleen de URL-inspectie toont de stempel van de crawler zelf, per pagina.",
+  "begrippen": [
+    { "term": "URL-inspectie", "uitleg": "de tool in Search Console die laat zien wat Google van één URL weet, zoals wanneer en hoe hij is gecrawld." },
+    { "term": "Googlebot smartphone", "uitleg": "de crawler van Google die zich voordoet als een mobiele telefoon." },
+    { "term": "Mobile-first indexing", "uitleg": "Google gebruikt de mobiele versie van een pagina om die op te nemen in de zoekresultaten en te rangschikken." }
+  ],
+  "uitleg": "Inspecteer je een URL, dan zie je eerst de **geïndexeerde versie**: hoe Google de pagina bij het laatste bezoek zag. Onder het kopje over crawlen staat **Gecrawld als** (Crawled as): het type user-agent, mobiel of desktop. Ook de datum van de laatste crawl staat erbij.\n\nMet **URL live testen** haal je de pagina nu op. Ook daar zie je met welk type crawler dat gebeurde, plus de HTML en een screenshot.\n\nWat je mag verwachten: na 5 juli 2024 crawlt en indexeert Google alle sites voor Search met Googlebot smartphone. Bij vrijwel elke pagina staat dus mobiel. De vraag van de klant is daarmee beantwoord. De echte vraag is of de mobiele weergave compleet is: dezelfde tekst, links, afbeeldingen en structured data als desktop.\n\nWil je het voor de hele site zien in plaats van per pagina, gebruik dan **Crawlstatistieken** (via Instellingen), uitgesplitst per type Googlebot.",
+  "kernpunt": "Twijfelt een klant hoe Google een pagina bekijkt, kijk dan bij 'Gecrawld als' in de URL-inspectie in plaats van te gokken op basis van andere rapporten.",
+  "toepassing": "Inspecteer vandaag bij één klant de belangrijkste productpagina in Search Console. Noteer wat er bij 'Gecrawld als' staat en open de live test om de mobiele HTML te bekijken.",
+  "bron": {
+    "titel": "URL Inspection tool - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/9012289?hl=en"
+  },
+  "video": {
+    "titel": "Mobile-First Indexing",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+  }
+}
