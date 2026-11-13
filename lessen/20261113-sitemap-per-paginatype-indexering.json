@@ -1,0 +1,42 @@
+{
+  "id": "20261113-sitemap-per-paginatype-indexering",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Sitemaps per paginatype splitsen om indexering te diagnosticeren",
+  "matrix": ["1.4.2", "1.5.1"],
+  "titel": "11.000 pagina's niet geïndexeerd, maar welk soort pagina?",
+  "intro": "Een webshop heeft één XML-sitemap met 38.000 URL's: producten, categorieën, merkpagina's en blogs door elkaar. In het rapport Pagina-indexering staan 11.000 ingediende URL's als 'Gecrawld - momenteel niet geïndexeerd'. De klant wil weten bij welk soort pagina het probleem zit. De voorbeeldlijst in het rapport is daarvoor te kort.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe krijg je het snelst per paginatype inzicht?",
+    "opties": [
+      "Alle 11.000 URL's één voor één in de URL-inspectie zetten, want alleen die tool geeft per pagina de echte reden van Google.",
+      "De sitemap splitsen in een sitemap per paginatype, want dan kun je het rapport per sitemap filteren en zie je de cijfers per type.",
+      "De sitemap verwijderen en opnieuw indienen, want dan crawlt Google alles opnieuw en verdwijnen de meeste meldingen vanzelf.",
+      "Per map een aparte property aanmaken in Search Console, want het rapport kun je niet op een losse sitemap filteren."
+    ],
+    "juist": 1
+  },
+  "kern": "Met een sitemap per paginatype kun je het rapport Pagina-indexering per sitemap filteren. Dan zie je per type hoeveel er wel en niet in Google staat.",
+  "afleiders": [
+    "**Alles in de URL-inspectie:** die tool is precies per pagina. Maar hij werkt één URL tegelijk, en 11.000 keer inspecteren kost dagen zonder overzicht per type.",
+    "",
+    "**Opnieuw indienen:** dat voelt als een reset. Maar het verandert niets aan de reden waarom Google de pagina's niet opneemt.",
+    "**Een property per map:** dat kan werken als elk type een eigen map heeft. Maar het rapport heeft wel degelijk een filter per sitemap, en dat is sneller en werkt ook zonder mappen."
+  ],
+  "kort": "Denk aan een magazijn waar alle dozen op één grote hoop liggen. Je ziet dat 11.000 dozen beschadigd zijn, maar niet of het om stoelen of lampen gaat. Zet je elke soort in een eigen stelling, dan zie je meteen welke stelling het probleem is. Een sitemap per paginatype is zo'n stelling. Search Console laat de cijfers dan per sitemap zien.",
+  "begrippen": [
+    { "term": "XML-sitemap", "uitleg": "een bestand met de adressen van je pagina's, bedoeld voor zoekmachines." },
+    { "term": "Sitemap-index", "uitleg": "een overzichtsbestand dat naar meerdere sitemaps verwijst. Je dient dan alleen de index in." },
+    { "term": "Pagina-indexering", "uitleg": "het rapport in Search Console dat laat zien welke pagina's wel en niet in Google staan, en waarom." },
+    { "term": "Gecrawld - momenteel niet geïndexeerd", "uitleg": "Google heeft de pagina bezocht, maar besloot hem (nog) niet op te nemen." }
+  ],
+  "uitleg": "Het rapport Pagina-indexering heeft bovenaan een filter met vier opties:\n- **Alle bekende pagina's** (standaard)\n- **Alle ingediende pagina's**\n- **Alleen niet-ingediende pagina's**\n- **Een specifieke sitemap** of sitemap-index\n\nDie laatste optie maakt splitsen de moeite waard. Maak bijvoorbeeld:\n- sitemap-producten.xml\n- sitemap-categorieen.xml\n- sitemap-merken.xml\n- sitemap-blog.xml\n\nZet ze in één sitemap-index en dien die in. Filter daarna per sitemap. Zitten 9.000 van de 11.000 meldingen bij producten, dan weet je waar je verder zoekt, bijvoorbeeld bij bijna gelijke varianten.\n\nEen URL telt als ingediend zodra hij in een ingediende sitemap staat, ook als Google hem daarnaast via links vond.\n\nTip van Google: wil je een fix snel laten valideren, maak dan een sitemap met alleen de belangrijkste pagina's en filter daarop voordat je de validatie start.",
+  "kernpunt": "Splits een grote sitemap per paginatype, dan wijst Search Console zelf aan waar het indexeringsprobleem zit.",
+  "toepassing": "Open vandaag bij één klant Pagina-indexering en kies in het filter bovenaan een specifieke sitemap. Vergelijk het aandeel niet-geïndexeerde URL's tussen twee sitemaps.",
+  "bron": {
+    "titel": "Page indexing report - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/7440203?hl=en"
+  }
+}

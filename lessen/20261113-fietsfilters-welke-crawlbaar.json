@@ -1,0 +1,42 @@
+{
+  "id": "20261113-fietsfilters-welke-crawlbaar",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Faceted navigation: per filter beslissen op basis van zoekvraag",
+  "matrix": ["1.2.4"],
+  "titel": "Alle filters dicht in robots.txt, ook het merk?",
+  "intro": "Een fietsenwinkel heeft op de categorie E-bikes filters voor merk, framemaat, prijs en sortering. Elke filterklik maakt een nieuwe URL. Uit zoekwoordonderzoek blijkt dat er veel gezocht wordt op 'Gazelle e-bike' en 'Batavus e-bike'. Op 'e-bike framemaat 53' of 'e-bike oplopend in prijs' zoekt bijna niemand.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "De developer stelt voor om alle filter-URL's te blokkeren in robots.txt. Wat adviseer je?",
+    "opties": [
+      "Het merkfilter een vaste, crawlbare URL geven en alleen maat, prijs en sortering blokkeren, want alleen op merk wordt gezocht.",
+      "Alle filters blokkeren zoals voorgesteld, want filterpagina's tonen dezelfde producten als de categorie en voegen dus niets toe.",
+      "Alle filters crawlbaar laten en ze een noindex geven, want dan bespaar je crawltijd en blijven ze bruikbaar voor bezoekers.",
+      "Alle filters crawlbaar laten met een canonical naar de categorie, want dan telt Google de merkpagina's mee voor de categorie."
+    ],
+    "juist": 0
+  },
+  "kern": "Kijk per filter of er zoekvraag is. Het merkfilter verdient een eigen pagina die Google kan vinden; filters zonder zoekvraag houd je uit de crawl.",
+  "afleiders": [
+    "",
+    "**Alles blokkeren:** voor de meeste filters klopt dat. Maar 'Gazelle e-bike' is een eigen zoekvraag, en een geblokkeerde merkpagina kan daar niet op gevonden worden.",
+    "**Overal noindex:** dat haalt pagina's uit de index. Maar Google moet ze blijven opvragen om de noindex te zien, dus crawltijd bespaar je er niet mee.",
+    "**Canonical naar de categorie:** daarmee vraag je Google juist om de merkpagina niet te tonen. En om de crawl te sturen werkt een canonical op lange termijn minder goed."
+  ],
+  "kort": "Denk aan een supermarkt. Die maakt niet voor elke combinatie van merk, prijs en houdbaarheid een eigen pad. Alleen voor wat klanten echt zoeken, zoals 'biologisch', hangt een bord boven het pad. Zo werkt het ook met filters. Waar mensen in Google naar zoeken, krijgt een eigen vindbare pagina. De rest houd je voor de crawler dicht, zodat die zijn tijd aan nuttige pagina's besteedt.",
+  "begrippen": [
+    { "term": "Filter-URL", "uitleg": "een webadres dat ontstaat als je op een filter klikt, bijvoorbeeld /e-bikes?merk=gazelle." },
+    { "term": "robots.txt", "uitleg": "een tekstbestand op je site met regels voor crawlers over welke adressen ze niet mogen opvragen." },
+    { "term": "noindex", "uitleg": "een instructie op een pagina dat die niet in de zoekresultaten mag. Google moet de pagina daarvoor wel eerst opvragen." },
+    { "term": "Canonical", "uitleg": "een verwijzing naar de versie van een pagina die Google moet tonen als er meerdere vergelijkbare versies zijn." }
+  ],
+  "uitleg": "Google noemt twee problemen bij filters: **overcrawling** van bijna dubbele URL's en **tragere ontdekking** van nieuwe, nuttige pagina's.\n\n**Filters zonder zoekvraag** (hier maat, prijs en sortering):\n- blokkeer ze in robots.txt op de parameter, of\n- laat ze werken via een #-fragment, dat Google bij het crawlen negeert.\n\n**Filters met zoekvraag** (hier merk):\n- gebruik & als scheidingsteken en een vaste volgorde van filters\n- geef ze een eigen title en H1, zoals 'Gazelle e-bikes'\n- link er intern naar en zet ze in de sitemap\n- geef een 404 als een combinatie geen producten oplevert\n\nLet op combinaties: merk plus framemaat heeft meestal geen zoekvraag. Blokkeer de parameter voor maat dus ook als die achter een merkfilter staat.\n\nCanonical en nofollow kunnen helpen, maar Google noemt ze op de lange termijn minder effectief dan robots.txt of #-fragmenten.",
+  "kernpunt": "Zet filters niet allemaal tegelijk dicht: geef filters met zoekvraag een eigen pagina en houd alleen de rest uit de crawl.",
+  "toepassing": "Zoek vandaag bij een webshopklant in een zoekwoordtool het volume op voor 'merk + categorie' bij twee merken. Kijk daarna of die merkfilters een eigen, crawlbare URL hebben.",
+  "bron": {
+    "titel": "Managing crawling of faceted navigation URLs | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+  }
+}

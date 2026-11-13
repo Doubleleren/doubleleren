@@ -1,0 +1,45 @@
+{
+  "id": "20261113-productreview-wie-hoe-waarom",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "E-E-A-T in productreviews: laten zien wie test en hoe",
+  "matrix": ["11.1.6", "11.1.4"],
+  "titel": "Twaalf espressomachines in huis, en de review is van 'Redactie'",
+  "intro": "Een blog over koffie publiceert 'De 10 beste espressomachines van 2026'. De teksten zijn goed geschreven, maar staan onder de naam 'Redactie'. Nergens staat of de machines echt gebruikt zijn. De eigenaar heeft wel twaalf machines in huis staan en test ze elke week.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing sluit het best aan bij wat Google over betrouwbare content zegt?",
+    "opties": [
+      "Laten zien wie test en hoe: een auteur met naam, het aantal geteste machines en eigen foto's, want dat toont ervaring.",
+      "Een E-E-A-T-score laten berekenen en op de pagina zetten, want Google leest zo'n score uit en beloont een hoge waarde.",
+      "Elke maand het jaartal en de datum verversen, want Google ziet de pagina dan als actueler en vertrouwt hem eerder.",
+      "De reviews verlengen tot ruim 3.000 woorden per machine, want Google beoordeelt lange reviews als grondiger."
+    ],
+    "juist": 0
+  },
+  "kern": "Google moedigt aan te laten zien wie iets maakte en hoe. Bij reviews helpt het te tonen hoeveel producten getest zijn, hoe, en met eigen foto's.",
+  "afleiders": [
+    "",
+    "**Een E-E-A-T-score:** het klinkt meetbaar. Maar E-E-A-T is geen score die Google van je pagina afleest. Het beschrijft waar betrouwbare content aan voldoet.",
+    "**Datum verversen:** een nieuwe datum oogt actueel. Maar Google noemt datums aanpassen zonder echte wijziging juist een teken van content die voor zoekmachines is gemaakt.",
+    "**Langer maken:** meer tekst lijkt grondiger. Maar Google zegt zelf dat het geen voorkeur heeft voor een bepaald aantal woorden."
+  ],
+  "kort": "Vergelijk het met een autotest in een tijdschrift. Je vertrouwt hem meer als je ziet wie erin reed, hoeveel kilometer en op welke wegen, met eigen foto's van onderweg. Een stuk van 'de redactie' zonder bewijs kan net zo goed uit een folder komen. Google wil hetzelfde weten: wie maakte dit, en hoe weet die persoon het?",
+  "begrippen": [
+    { "term": "E-E-A-T", "uitleg": "Experience, Expertise, Authoritativeness, Trustworthiness: hoe Google beschrijft waar betrouwbare content aan voldoet." },
+    { "term": "Byline", "uitleg": "de regel bij een artikel met de naam van de maker." }
+  ],
+  "uitleg": "Google geeft op de pagina over behulpzame content drie vragen om je content langs te leggen: **wie, hoe en waarom**.\n\n**Wie:** maak duidelijk wie de content maakte. Google raadt een byline aan waar lezers die verwachten, met een link naar meer over de auteur. Verzonnen namen of nepfoto's werken averechts.\n\n**Hoe:** bij productreviews groeit het vertrouwen als je laat zien:\n- hoeveel producten getest zijn\n- wat de resultaten waren\n- hoe er getest is, met bewijs zoals eigen foto's\n\nGebruik je AI of automatisering, leg dan uit hoe en waarom, waar lezers dat zouden willen weten.\n\n**Waarom:** de belangrijkste vraag. Is de pagina gemaakt om bezoekers te helpen, of vooral om verkeer uit Google te halen?\n\nGoogle noemt ook signalen van content die vooral voor zoekmachines is gemaakt, zoals schrijven naar een woordenaantal of datums aanpassen zonder echte wijziging.",
+  "kernpunt": "Heeft een klant echte ervaring, laat die dan zien: wie testte, hoeveel en hoe, met eigen beeld.",
+  "toepassing": "Open vandaag de best bezochte review van een klant. Noteer of er een auteur bij staat en of je ziet hoeveel producten getest zijn. Ontbreekt een van de twee, zet het dan op de actielijst.",
+  "bron": {
+    "titel": "Creating helpful, reliable, people-first content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  },
+  "video": {
+    "titel": "Author SEO: Optimize Your Site for Google E-E-A-T",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=D9hyyjQ-t90"
+  }
+}

@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-12T05:29:51",
+    "bijgewerkt":  "2026-11-13T05:33:01",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -364,14 +364,15 @@
                        "matrix":  [
                                       "3.2.1"
                                   ],
-                       "kernpunt":  "GTM scheidt tracking van de websitecode: tags, triggers en variabelen beheer je in één container, met Preview om te testen en versies om terug te rollen.",
+                       "kernpunt":  "Moet een klant regelmatig nieuwe metingen toevoegen, beheer de tracking dan in GTM in plaats van in de broncode.",
                        "bron":  {
                                     "titel":  "Introduction to Tag Manager - Tag Manager Help",
                                     "url":  "https://support.google.com/tagmanager/answer/6102821"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-13"
                    },
                    {
                        "id":  "20261020-hreflang-nl-be",
@@ -552,14 +553,15 @@
                        "matrix":  [
                                       "10.1.2"
                                   ],
-                       "kernpunt":  "Penguin is sinds 2016 een realtime onderdeel van het kernalgoritme en devalueert spamlinks in plaats van hele sites te straffen. Er komen geen Penguin-updates meer om op te wachten.",
+                       "kernpunt":  "Hoor je \u0027wachten op de volgende Penguin-update\u0027, kijk dan eerst of er een handmatige actie is. Zo niet, dan is er niets om op te wachten.",
                        "bron":  {
                                     "titel":  "Penguin is now part of our core algorithm",
                                     "url":  "https://developers.google.com/search/blog/2016/09/penguin-is-now-part-of-our-core"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-13"
                    },
                    {
                        "id":  "20261020-ppc-seo-samenwerken",
@@ -4560,6 +4562,207 @@
                                      "kanaal":  "Google Search Central",
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-ab-test-minstens-een-week",
+                       "titel":  "De steekproef is na vier dagen binnen: test klaar?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-test plannen: de duur afronden op hele weken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Rond de duur van een A/B-test af naar hele weken, en leg de einddatum vast vóór de start.",
+                       "bron":  {
+                                    "titel":  "How long to run an experiment | Optimizely",
+                                    "url":  "https://docs.optimizely.com/experimentation-strategy/docs/how-long-to-run-an-experiment"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-chatgpt-business-hub",
+                       "titel":  "Een eigen profiel in ChatGPT: koop je daarmee aanbevelingen?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Businesses in ChatGPT: wat een geclaimd profiel wel en niet oplevert",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "12.1.3"
+                                  ],
+                       "kernpunt":  "Claim een AI-profiel om te meten en je gegevens te laten kloppen, niet om een betere plek te kopen.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: How to Submit Your Website to ChatGPT Business Hub",
+                                    "url":  "https://www.searchenginejournal.com/submit-website-chatgpt/596785/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-clarity-scrollmap-per-apparaat",
+                       "titel":  "78% ziet het formulier, zegt de scrollmap. Op welk scherm?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Clarity: een scrollmap per apparaat lezen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.5"
+                                  ],
+                       "kernpunt":  "Lees een scrollmap altijd eerst op het apparaat waar de meeste bezoekers zitten.",
+                       "bron":  {
+                                    "titel":  "Scroll maps | Microsoft Learn",
+                                    "url":  "https://learn.microsoft.com/en-us/clarity/heatmaps/scroll-maps"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-fietsfilters-welke-crawlbaar",
+                       "titel":  "Alle filters dicht in robots.txt, ook het merk?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Faceted navigation: per filter beslissen op basis van zoekvraag",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.4"
+                                  ],
+                       "kernpunt":  "Zet filters niet allemaal tegelijk dicht: geef filters met zoekvraag een eigen pagina en houd alleen de rest uit de crawl.",
+                       "bron":  {
+                                    "titel":  "Managing crawling of faceted navigation URLs | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-gsc-positie-door-ai-overview",
+                       "titel":  "Positie 8 in de rank tracker, 1,4 in Search Console",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Rank tracker vs. Search Console: de positie van een AI Overview",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "4.1.4",
+                                      "4.1.2",
+                                      "12.1.1"
+                                  ],
+                       "kernpunt":  "Is de positie in Search Console veel beter dan in de rank tracker, kijk dan eerst of de site in een AI Overview wordt geciteerd.",
+                       "bron":  {
+                                    "titel":  "What are impressions, position, and clicks? - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/7042828?hl=en"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-licentie-metadata-weggecomprimeerd",
+                       "titel":  "Nieuwe compressieplug-in, en de Licensable-badge is weg",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Afbeeldingslicenties: IPTC-metadata en compressie",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.6",
+                                      "2.1.14"
+                                  ],
+                       "kernpunt":  "Zet een klant licentie-informatie in de beeldbestanden, controleer dan of compressie of een CDN die metadata laat staan.",
+                       "bron":  {
+                                    "titel":  "Image metadata in Google Images | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-mobiel-toetsenbord-checkout",
+                       "titel":  "Elke keer wisselen naar het cijferscherm in de checkout",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Mobiele formulieren: het juiste toetsenbord per veld",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Laat elk invoerveld op mobiel het passende toetsenbord openen: een cijferpad voor cijfers, maar niet voor de Nederlandse postcode.",
+                       "bron":  {
+                                    "titel":  "Baymard Institute: \u0027Touch Keyboard\u0027 Implementations Have Improved Just 9% Since 2013",
+                                    "url":  "https://baymard.com/blog/mobile-touch-keyboards"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-paid-organic-meer-organische-vertoningen",
+                       "titel":  "100% vertoningsaandeel, toch drie keer zoveel organische vertoningen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Paid \u0026 organic-rapport: waarom organisch vaker verschijnt dan je advertentie",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "9.2.2",
+                                      "9.2.3"
+                                  ],
+                       "kernpunt":  "Vergelijk je advertentie- en organische vertoningen, controleer dan eerst of ze over hetzelfde land, dezelfde uren en dezelfde apparaten gaan.",
+                       "bron":  {
+                                    "titel":  "About the paid \u0026 organic report - Google Ads Help",
+                                    "url":  "https://support.google.com/google-ads/answer/3097241?hl=en"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-productreview-wie-hoe-waarom",
+                       "titel":  "Twaalf espressomachines in huis, en de review is van \u0027Redactie\u0027",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "E-E-A-T in productreviews: laten zien wie test en hoe",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "11.1.6",
+                                      "11.1.4"
+                                  ],
+                       "kernpunt":  "Heeft een klant echte ervaring, laat die dan zien: wie testte, hoeveel en hoe, met eigen beeld.",
+                       "bron":  {
+                                    "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+                                },
+                       "video":  {
+                                     "titel":  "Author SEO: Optimize Your Site for Google E-E-A-T",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=D9hyyjQ-t90"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261113-sitemap-per-paginatype-indexering",
+                       "titel":  "11.000 pagina\u0027s niet geïndexeerd, maar welk soort pagina?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Sitemaps per paginatype splitsen om indexering te diagnosticeren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.4.2",
+                                      "1.5.1"
+                                  ],
+                       "kernpunt":  "Splits een grote sitemap per paginatype, dan wijst Search Console zelf aan waar het indexeringsprobleem zit.",
+                       "bron":  {
+                                    "titel":  "Page indexing report - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/7440203?hl=en"
+                                },
+                       "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
                    }

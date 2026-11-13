@@ -1,0 +1,42 @@
+{
+  "id": "20261113-gsc-positie-door-ai-overview",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Rank tracker vs. Search Console: de positie van een AI Overview",
+  "matrix": ["4.1.4", "4.1.2", "12.1.1"],
+  "titel": "Positie 8 in de rank tracker, 1,4 in Search Console",
+  "intro": "Voor 'isolatiesubsidie aanvragen' meet de rank tracker van een klant elke dag organische positie 8. Search Console geeft over dezelfde periode een gemiddelde positie van 1,4 voor die zoekopdracht. De CTR in Search Console is laag. Bij die zoekopdracht staat bijna altijd een AI Overview bovenaan.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke verklaring past het best bij deze cijfers?",
+    "opties": [
+      "De rank tracker meet vanaf één vaste locatie, want bij een lokale zoekopdracht staat de klant elders vrijwel altijd op plek 1.",
+      "Search Console telt alleen resultaten bovenaan de pagina mee, want lagere resultaten krijgen geen vertoning als niemand scrolt.",
+      "De site wordt geciteerd in de AI Overview, want alle links daarin krijgen de positie van dat blok, en de hoogste telt.",
+      "Search Console telt een AI Overview niet mee als resultaat, want daardoor schuiven alle organische posities één plek omhoog."
+    ],
+    "juist": 2
+  },
+  "kern": "Een AI Overview telt in Search Console als één positie, en elke link erin krijgt die positie. Wordt de klant daarin geciteerd, dan telt die hoge plek.",
+  "afleiders": [
+    "**Vaste locatie:** dat verklaart verschillen bij lokale zoekopdrachten. Maar een subsidievraag is niet lokaal, en een gat van zeven plekken past daar niet bij.",
+    "**Alleen bovenaan:** een vertoning hangt niet af van scrollen. Een gewone link telt zodra hij op de geladen resultatenpagina staat.",
+    "",
+    "**AI Overview telt niet:** het is andersom. Het blok neemt zelf een positie in, dus de organische resultaten eronder schuiven juist een plek omlaag."
+  ],
+  "kort": "Denk aan de uitslag van een estafette. Iedereen in het winnende team krijgt plek 1, ook de loper die in zijn eigen race als achtste binnenkwam. Zo werkt Search Console met een AI Overview. Het hele blok is één plek, en elke bron erin krijgt die plek. De rank tracker kijkt alleen naar de eigen race en ziet plek 8. Allebei kloppen, maar ze meten iets anders.",
+  "begrippen": [
+    { "term": "AI Overview", "uitleg": "de AI-samenvatting die Google boven de gewone zoekresultaten kan tonen, met links naar bronnen." },
+    { "term": "Gemiddelde positie", "uitleg": "in Search Console: het gemiddelde van de hoogste plek waarop je site per vertoning stond." },
+    { "term": "Rank tracker", "uitleg": "een tool die elke dag op een vaste manier controleert op welke plek je staat voor gekozen zoekwoorden." },
+    { "term": "CTR", "uitleg": "click-through rate: het percentage vertoningen dat tot een klik leidt." }
+  ],
+  "uitleg": "Zo telt Search Console, volgens de eigen help:\n- Een **AI Overview neemt één positie** in. Alle links erin krijgen die positie.\n- Per vertoning telt de **hoogste positie** van een link naar je site.\n- Een klik op een link in de AI Overview telt als klik.\n- AI Mode volgt dezelfde methode als een gewone resultatenpagina.\n\nGevolg: staat de klant organisch op 8 en wordt hij in de AI Overview bovenaan genoemd, dan telt Search Console voor die vertoning positie 1. Wordt hij niet elke keer geciteerd, dan zakt het gemiddelde iets, zoals hier naar 1,4.\n\nDe lage CTR past in dat beeld: een bron in een AI Overview krijgt meestal minder klikken dan een gewone eerste plek.\n\nVoor rapportage:\n- Een betere gemiddelde positie is geen bewijs van betere organische rankings.\n- Zie je een groot verschil met de rank tracker, kijk dan of er een AI Overview staat en of je tracker AI-citaten apart meet.",
+  "kernpunt": "Is de positie in Search Console veel beter dan in de rank tracker, kijk dan eerst of de site in een AI Overview wordt geciteerd.",
+  "toepassing": "Zoek vandaag bij een klant de zoekopdracht met het grootste verschil tussen rank tracker en Search Console. Zoek hem zelf op in Google en kijk of de klant in de AI Overview staat.",
+  "bron": {
+    "titel": "What are impressions, position, and clicks? - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/7042828?hl=en"
+  }
+}
