@@ -26,6 +26,8 @@ button, input { font: inherit; }
 .num { font-variant-numeric: tabular-nums; }
 [hidden] { display: none !important; }
 
+.testband { background: var(--fun); color: var(--ink); font-size: 14px; }
+.testband .wrap { padding-block: 10px; }
 .kop { background: var(--smart); }
 .kop .wrap { padding-block: 32px 40px; display: grid; gap: 16px; }
 .merk { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: space-between; }
@@ -256,6 +258,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
 </style>
 </head>
 <body>
+<div class="testband" id="testband" role="note" hidden><div class="wrap"><strong>Testversie (staging).</strong> Testdata en aparte testaccounts; niets hiervan komt in de live versie. De pop-up hoort bij de live versie en test hier niet mee.</div></div>
 <header class="kop">
   <div class="wrap">
     <div class="merk">
@@ -432,12 +435,15 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
     <section class="paneel" id="snelkoppeling">
       <div class="paneel-kop"><div><h2>Elke dag vanzelf je les</h2><p class="sub">Kies een van de twee opties. Eenmalig instellen, ongeveer een minuut.</p></div></div>
       <h3 style="font-size:15px;margin-bottom:8px">Optie 1: de pop-up <span class="pill" style="margin-left:6px">Aanrader</span> <span class="sub">(Windows)</span></h3>
+      <p id="popup-staging" hidden><strong>Niet in de testversie.</strong> De pop-up werkt alleen met de live versie en je live account. Installeer hem daar, niet hier.</p>
+      <div id="popup-optie">
       <p>De pop-up zet je les 's ochtends en om 12:30 over je scherm en gaat pas weg als je hem hebt gedaan (één keer per dag 2 uur uitstellen mag). Hij werkt zichzelf bij; je installeert hem één keer.</p>
       <ol class="stappen-lijst" style="margin-bottom:12px">
         <li>Open <strong>Windows PowerShell</strong> via het Startmenu.</li>
         <li><button type="button" class="knop zwart" data-actie="kopieer-popup">Kopieer de installatieregel</button>, plak hem in PowerShell en druk op Enter.</li>
         <li>Kies <em>Ik heb al een account</em> en vul je uitnodigingscode en je code van zes woorden in.</li>
       </ol>
+      </div>
       <h3 style="font-size:15px;margin:22px 0 8px;padding-top:18px;border-top:1px solid var(--cool)">Optie 2: een snelkoppeling <span class="sub">(Windows en Mac)</span></h3>
       <p>Geen pop-up, maar elke keer dat je je computer opstart gaat deze pagina vanzelf open. Vink bij het inloggen "Onthoud mij" aan, dan sta je meteen in je les. Werk je op een Mac, dan is dit je optie.</p>
       <details class="spoiler" style="margin-top:6px">

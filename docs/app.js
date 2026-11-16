@@ -198,6 +198,8 @@ async function laadOpenbaar() {
     S.app = rawBron(S.eigenaar, S.appRepo);
   }
   S.inst = await json(S.app, 'instellingen.json');
+  // Testversie (de workflow 'Staging-site bijwerken' zet omgeving op staging): band bovenaan en geen pop-up
+  if (S.inst?.omgeving === 'staging') { $('testband').hidden = false; $('popup-optie').hidden = true; $('popup-staging').hidden = false; }
   S.vertrouwd = (await json(S.app, 'vertrouwd.json'))?.beheer;
   if (!K.sleutelVorm(S.vertrouwd)) throw new Error('de beheerder heeft DoubleLeren nog niet ingericht');
   const idx = await json(S.app, 'lessen/index.json');
