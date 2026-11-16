@@ -1,0 +1,41 @@
+{
+  "id": "20261116-json-ld-gekrulde-aanhalingstekens",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "JSON-syntax: waarom Google structured data niet kan lezen",
+  "matrix": ["5.3.4", "2.2.9"],
+  "titel": "Productmarkup uit Word geplakt: Google kan er niets mee",
+  "intro": "De marketeer van een fietsenwinkel schrijft de JSON-LD voor productpagina's in Word en plakt die daarna in het CMS. Een week later staat in Search Console het rapport voor gestructureerde gegevens die niet te parsen zijn (Unparsable structured data) vol meldingen. In de broncode zie je onder meer: “name”: “Stadsfiets Nova”.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het probleem?",
+    "opties": [
+      "De gekrulde aanhalingstekens uit Word zijn in JSON geen geldige tekens, dus de hele code is voor Google onleesbaar.",
+      "JSON-LD mag alleen in de head staan, dus Google slaat de code over omdat het CMS hem in de body van de pagina zet.",
+      "De productnaam bevat een spatie, dus die moet tussen extra haakjes staan voordat JSON hem als tekst kan lezen.",
+      "Google leest gestructureerde gegevens pas na de volgende crawl, dus de meldingen verdwijnen vanzelf na een paar weken."
+    ],
+    "juist": 0
+  },
+  "kern": "JSON accepteert alleen rechte aanhalingstekens. Met gekrulde tekens kan Google de code niet lezen, en dan vervalt het hele blok.",
+  "afleiders": [
+    "",
+    "**Alleen in de head:** veel scripts staan in de head, dus dat lijkt een regel. Maar Google leest JSON-LD ook in de body van de pagina.",
+    "**Spatie in de naam:** in sommige systemen zijn spaties lastig. In JSON is een spatie binnen de aanhalingstekens gewoon tekst.",
+    "**Vanzelf weg:** wachten helpt hier niet. Google heeft de code al gelezen en vond een fout; die blijft tot iemand de code repareert."
+  ],
+  "kort": "Denk aan een parkeerautomaat die maar één soort munt aanneemt. Een munt die er bijna hetzelfde uitziet, valt er gewoon doorheen. JSON werkt zo met aanhalingstekens: alleen het rechte teken telt als begin en einde van een tekst. Word maakt daar automatisch een gekruld teken van. Voor jou is dat hetzelfde, voor Google niet. En snapt Google één teken niet, dan snapt hij de rest van het blok ook niet meer.",
+  "begrippen": [
+    { "term": "JSON-LD", "uitleg": "een manier om structured data als los blok code in een pagina te zetten. Google raadt deze vorm aan." },
+    { "term": "Parsen", "uitleg": "code lezen en in stukjes opdelen, zodat een computer begrijpt wat er staat." },
+    { "term": "Syntaxfout", "uitleg": "een fout in de schrijfregels van een codetaal, zoals een ontbrekende komma of een verkeerd teken." }
+  ],
+  "uitleg": "Het rapport voor niet-parseerbare gestructureerde gegevens in Search Console toont markup met een ernstige syntaxfout. Google kan dan niet eens bepalen welk type bedoeld was, zoals Product of Event. Voorbeelden van meldingen:\n- *Missing ',' or '}'*: er ontbreekt een komma of sluitaccolade.\n- *Bad escape sequence in string*: een backslash is verkeerd gebruikt.\n\nVeelvoorkomende oorzaken bij handwerk:\n- gekrulde aanhalingstekens (“ ”) uit Word of Google Docs;\n- een komma na het laatste item van een lijst;\n- een recht aanhalingsteken ín een tekst, zoals 28\" wiel, zonder backslash ervoor.\n\nZo voorkom je het:\n- Schrijf JSON in een code-editor, of laat het CMS de markup uit de productvelden maken.\n- Test elke template in de Rich Results Test voordat hij live gaat.\n- Controleer na de fix een paar URL's met de URL-inspectie en volg het rapport.",
+  "kernpunt": "Schrijf JSON-LD nooit in een tekstverwerker, en test elke template voordat hij live gaat.",
+  "toepassing": "Plak vandaag de JSON-LD van één productpagina van een klant in de Rich Results Test. Kijk of er syntaxfouten of gekrulde aanhalingstekens in staan.",
+  "bron": {
+    "titel": "Unparsable structured data report - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/9166415?hl=en"
+  }
+}

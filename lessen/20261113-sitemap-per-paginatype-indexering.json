@@ -35,8 +35,15 @@
   "uitleg": "Het rapport Pagina-indexering heeft bovenaan een filter met vier opties:\n- **Alle bekende pagina's** (standaard)\n- **Alle ingediende pagina's**\n- **Alleen niet-ingediende pagina's**\n- **Een specifieke sitemap** of sitemap-index\n\nDie laatste optie maakt splitsen de moeite waard. Maak bijvoorbeeld:\n- sitemap-producten.xml\n- sitemap-categorieen.xml\n- sitemap-merken.xml\n- sitemap-blog.xml\n\nZet ze in één sitemap-index en dien die in. Filter daarna per sitemap. Zitten 9.000 van de 11.000 meldingen bij producten, dan weet je waar je verder zoekt, bijvoorbeeld bij bijna gelijke varianten.\n\nEen URL telt als ingediend zodra hij in een ingediende sitemap staat, ook als Google hem daarnaast via links vond.\n\nTip van Google: wil je een fix snel laten valideren, maak dan een sitemap met alleen de belangrijkste pagina's en filter daarop voordat je de validatie start.",
   "kernpunt": "Splits een grote sitemap per paginatype, dan wijst Search Console zelf aan waar het indexeringsprobleem zit.",
   "toepassing": "Open vandaag bij één klant Pagina-indexering en kies in het filter bovenaan een specifieke sitemap. Vergelijk het aandeel niet-geïndexeerde URL's tussen twee sitemaps.",
+  "herzien": "2026-11-16",
+  "wijziging": "Kennisvideo toegevoegd.",
   "bron": {
     "titel": "Page indexing report - Search Console Help",
     "url": "https://support.google.com/webmasters/answer/7440203?hl=en"
+  },
+  "video": {
+    "titel": "Google Search Console Indexing Report - How To Understand How Google Indexes Your Website",
+    "kanaal": "Patrick Rice",
+    "url": "https://www.youtube.com/watch?v=O9xkp0X0eJY"
   }
 }

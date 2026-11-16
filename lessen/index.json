@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-13T05:33:01",
+    "bijgewerkt":  "2026-11-16T05:30:45",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -384,14 +384,15 @@
                        "matrix":  [
                                       "2.1.17"
                                   ],
-                       "kernpunt":  "hreflang werkt alleen als elke versie zichzelf en alle andere versies noemt, met een taalcode voorop (nl-BE, nooit alleen be). Ontbreekt de terugverwijzing, dan negeert Google de tags.",
+                       "kernpunt":  "Controleer bij hreflang altijd beide kanten: wijst elke versie terug, en begint elke code met een taal?",
                        "bron":  {
                                     "titel":  "Tell Google about Localized Versions of Your Page",
                                     "url":  "https://developers.google.com/search/docs/specialty/international/localized-versions"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-16"
                    },
                    {
                        "id":  "20261020-logs-crawlbudget",
@@ -2313,14 +2314,15 @@
                        "matrix":  [
                                       "2.1.16"
                                   ],
-                       "kernpunt":  "Link naar bronnen die je vertrouwt; dat helpt de lezer. Betaalde links krijgen sponsored, gebruikerslinks ugc of nofollow, en een bron die je niet vertrouwt nofollow.",
+                       "kernpunt":  "Wil een klant externe links schrappen, vraag dan per link: vertrouwen we deze bron, en is ervoor betaald?",
                        "bron":  {
                                     "titel":  "Search Engine Optimization (SEO) Starter Guide | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-16"
                    },
                    {
                        "id":  "20261029-ga4-gebruikers-vs-verkeersacquisitie",
@@ -4762,9 +4764,159 @@
                                     "titel":  "Page indexing report - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/7440203?hl=en"
                                 },
+                       "video":  {
+                                     "titel":  "Google Search Console Indexing Report - How To Understand How Google Indexes Your Website",
+                                     "kanaal":  "Patrick Rice",
+                                     "url":  "https://www.youtube.com/watch?v=O9xkp0X0eJY"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-16"
+                   },
+                   {
+                       "id":  "20261116-categorietegels-zonder-alt-tekst",
+                       "titel":  "Zes categorietegels op de homepage, maar Google leest geen linktekst",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Interne links via afbeeldingen: de alt-tekst als linktekst",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.15",
+                                      "2.1.14"
+                                  ],
+                       "kernpunt":  "Linkt een afbeelding, geef hem dan een alt-tekst die zegt waar de link naartoe gaat.",
+                       "bron":  {
+                                    "titel":  "Link best practices for Google | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+                                },
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261116-featured-snippet-niet-af-te-dwingen",
+                       "titel":  "\u0027Zet onze uitleg in dat kader bovenaan\u0027: kan dat met code?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Featured snippets: wat je wel en niet kunt sturen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.6",
+                                      "2.1.12"
+                                  ],
+                       "kernpunt":  "Wil een klant in het uitgelichte kader, verbeter dan het antwoord op de pagina. Code om dat af te dwingen bestaat niet.",
+                       "bron":  {
+                                    "titel":  "Featured snippets and your website | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/featured-snippets"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261116-geciteerd-in-ai-overview-weinig-klikken",
+                       "titel":  "Bron in de AI Overview: komt het extra verkeer nu vanzelf?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Zero-click: wat een bronvermelding in een AI Overview oplevert aan klikken",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "12.1.5",
+                                      "12.1.1"
+                                  ],
+                       "kernpunt":  "Stel bij AI-zichtbaarheid doelen op vermeldingen en conversies, niet op extra klikken.",
+                       "bron":  {
+                                    "titel":  "Google users are less likely to click on links when an AI summary appears in the results | Pew Research Center",
+                                    "url":  "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
+                                },
+                       "video":  {
+                                     "titel":  "Google AI Overviews \u0026 SEO: What\u0027s gonna change?",
+                                     "kanaal":  "GetResponse",
+                                     "url":  "https://www.youtube.com/watch?v=xUyGAbwuTas"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261116-google-verwijzer-logs-vs-search-console",
+                       "titel":  "14.000 Google-bezoeken in de logs, maar 9.000 klikken in Search Console",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Google-verkeer herkennen in analytics en serverlogs (nieuwe helppagina van Google)",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.2",
+                                      "4.1.2",
+                                      "1.1.3"
+                                  ],
+                       "kernpunt":  "Een Google-verwijzer betekent \u0027kwam van Google\u0027, niet \u0027kwam uit de zoekresultaten\u0027. Haal Discover en Afbeeldingen apart uit Search Console.",
+                       "bron":  {
+                                    "titel":  "Identify Google Search traffic in your web analytics or server logs | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/monitor-debug/identify-google-search-traffic"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261116-json-ld-gekrulde-aanhalingstekens",
+                       "titel":  "Productmarkup uit Word geplakt: Google kan er niets mee",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "JSON-syntax: waarom Google structured data niet kan lezen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.4",
+                                      "2.2.9"
+                                  ],
+                       "kernpunt":  "Schrijf JSON-LD nooit in een tekstverwerker, en test elke template voordat hij live gaat.",
+                       "bron":  {
+                                    "titel":  "Unparsable structured data report - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/9166415?hl=en"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261116-snippet-wissen-eigen-pagina",
+                       "titel":  "Privénummer van de pagina gehaald, maar het staat nog in Google",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "De tool Verwijderingen: alleen de snippet wissen bij je eigen pagina",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.5.2"
+                                  ],
+                       "kernpunt":  "Moet er iets uit een snippet, wis dan alleen de snippet en laat de pagina opnieuw indexeren. Verberg niet de hele pagina.",
+                       "bron":  {
+                                    "titel":  "Removals and SafeSearch reports Tool - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/9689846?hl=en"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261116-validator-groen-rich-results-test-leeg",
+                       "titel":  "Validator: geen fouten. Rich Results Test: geen items. Wie heeft gelijk?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Rich Results Test en Schema Markup Validator: wat elke tool controleert",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.11",
+                                      "2.2.8"
+                                  ],
+                       "kernpunt":  "Wil je een rich result, test dan met de Rich Results Test. De validator zegt alleen of je markup netjes is.",
+                       "bron":  {
+                                    "titel":  "The Structured Data Testing Tool is moving to schema.org | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2020/12/structured-data-testing-tool-update"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "vormAfwijkend":  true
                    }
                ]
 }

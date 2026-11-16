@@ -1,0 +1,42 @@
+{
+  "id": "20261116-snippet-wissen-eigen-pagina",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "De tool Verwijderingen: alleen de snippet wissen bij je eigen pagina",
+  "matrix": ["1.5.2"],
+  "titel": "Privénummer van de pagina gehaald, maar het staat nog in Google",
+  "intro": "Een installatiebedrijf had per ongeluk het mobiele nummer van een monteur op de contactpagina gezet. Het nummer is er vanochtend af gehaald. In Google staat het nog in de tekst onder het zoekresultaat van de contactpagina. De klant wil het nummer zo snel mogelijk uit Google, maar de contactpagina moet vindbaar blijven.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke actie in Search Console past het best?",
+    "opties": [
+      "Een tijdelijke verwijdering van de URL aanvragen, want dan verdwijnt de pagina zes maanden en is het oude nummer daarna vergeten.",
+      "De optie in Verwijderingen gebruiken die alleen de snippet wist, want de pagina blijft dan vindbaar tot Google hem opnieuw leest.",
+      "Een verzoek doen via Verouderde content, want met die tool laten site-eigenaren oude tekst in de zoekresultaten bijwerken.",
+      "De contactpagina in robots.txt blokkeren, want dan haalt Google de pagina niet meer op en verdwijnt de oude snippet vanzelf."
+    ],
+    "juist": 1
+  },
+  "kern": "Die optie haalt alleen de tekst onder het resultaat weg, tot Google de pagina opnieuw indexeert. De pagina zelf blijft gewoon in Google.",
+  "afleiders": [
+    "**Tijdelijk verwijderen:** het nummer is dan inderdaad meteen weg. Maar de hele contactpagina verdwijnt ook, terwijl die vindbaar moet blijven.",
+    "",
+    "**Verouderde content:** de naam klinkt precies goed. Maar dat is een openbare tool voor mensen die géén eigenaar zijn. Als eigenaar heb je betere opties.",
+    "**Blokkeren in robots.txt:** dat lijkt Google buiten de deur te houden. Maar dan kan Google de nieuwe versie zonder nummer juist niet lezen, en blijft de oude tekst hangen."
+  ],
+  "kort": "Denk aan een winkel met een verkeerd prijskaartje in de etalage. Je wilt de winkel niet sluiten, je wilt alleen dat kaartje weg. Een tijdelijke verwijdering sluit de hele winkel. De optie die alleen de snippet wist, haalt alleen het kaartje weg. Zodra Google de nieuwe pagina leest, hangt er vanzelf een goed kaartje.",
+  "begrippen": [
+    { "term": "Snippet", "uitleg": "het stukje tekst onder de titel van een zoekresultaat." },
+    { "term": "Verwijderingen", "uitleg": "een tool in Search Console waarmee je zoekresultaten van je eigen site tijdelijk verbergt of de snippet wist." },
+    { "term": "URL-inspectie", "uitleg": "een tool in Search Console die laat zien hoe Google één pagina kent. Je kunt er ook opnieuw indexering aanvragen." },
+    { "term": "robots.txt", "uitleg": "een tekstbestand met regels voor zoekmachines over welke delen van de site ze niet mogen ophalen." }
+  ],
+  "uitleg": "De tool Verwijderingen in Search Console heeft voor je eigen site twee soorten verzoeken:\n- **Tijdelijk verwijderen:** de URL verdwijnt ongeveer zes maanden uit de zoekresultaten. Google blijft de pagina wel crawlen.\n- **Snippet wissen:** de beschrijving onder het resultaat verdwijnt tot de pagina opnieuw geïndexeerd is. De pagina blijft zichtbaar.\n\nDaarnaast toont de tool twee overzichten die niet van jou komen:\n- **Verouderde content:** verzoeken van mensen die géén eigenaar zijn.\n- **SafeSearch-filtering:** meldingen dat een URL als expliciet is aangemerkt.\n\nAanpak bij gevoelige informatie:\n1. Haal de informatie van de pagina (gedaan).\n2. Wis de snippet via Verwijderingen.\n3. Vraag via de URL-inspectie opnieuw indexering aan.\n\nTot Google de pagina opnieuw heeft geïndexeerd, kan hij nog verschijnen bij zoekopdrachten met het oude nummer. Blokkeer de pagina dus niet in robots.txt.",
+  "kernpunt": "Moet er iets uit een snippet, wis dan alleen de snippet en laat de pagina opnieuw indexeren. Verberg niet de hele pagina.",
+  "toepassing": "Open vandaag bij één klant in Search Console de tool Verwijderingen. Bekijk de tabbladen en kijk of er bij Verouderde content verzoeken van anderen staan.",
+  "bron": {
+    "titel": "Removals and SafeSearch reports Tool - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/9689846?hl=en"
+  }
+}

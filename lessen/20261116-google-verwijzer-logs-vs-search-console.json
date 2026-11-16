@@ -1,0 +1,42 @@
+{
+  "id": "20261116-google-verwijzer-logs-vs-search-console",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Google-verkeer herkennen in analytics en serverlogs (nieuwe helppagina van Google)",
+  "matrix": ["3.1.2", "4.1.2", "1.1.3"],
+  "titel": "14.000 Google-bezoeken in de logs, maar 9.000 klikken in Search Console",
+  "intro": "Google publiceerde deze maand een nieuwe helppagina over hoe je Google-verkeer herkent in analytics en serverlogs. Een klant telt in zijn serverlogs over oktober alle verzoeken met google.com of google.nl als verwijzer: 14.000. Search Console geeft voor oktober, zoektype Web, 9.000 klikken. De klant vraagt welk getal klopt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat verklaart het verschil het best?",
+    "opties": [
+      "Ook het laden van afbeeldingen, CSS en scripts heeft google.com als verwijzer, dus één bezoek telt in de logs meerdere keren.",
+      "Search Console laat geanonimiseerde zoekopdrachten weg, dus klikken op zeldzame zoekopdrachten ontbreken in het totaal.",
+      "Ook Google Afbeeldingen en Discover sturen google.com als verwijzer, dus die bezoeken tellen in de logs mee als zoekverkeer.",
+      "Search Console telt een klik pas als de pagina helemaal geladen is, dus snelle afhakers ontbreken in het aantal klikken."
+    ],
+    "juist": 2
+  },
+  "kern": "Een Google-verwijzer zegt alleen dat het bezoek van een Google-domein kwam. Zoeken, Afbeeldingen en Discover sturen hetzelfde adres mee.",
+  "afleiders": [
+    "**Afbeeldingen, CSS en scripts:** die verzoeken staan inderdaad ook in de logs. Maar daarbij is de verwijzer je eigen pagina, niet google.com.",
+    "**Geanonimiseerde zoekopdrachten:** die ontbreken alleen in de lijst met zoekopdrachten. In het totaal aantal klikken tellen ze gewoon mee.",
+    "",
+    "**Pas tellen na het laden:** dat geldt juist voor analytics-tools, die op hun script wachten. Search Console telt de klik zelf, ook als de pagina nooit laadt."
+  ],
+  "kort": "Denk aan een poststempel 'Utrecht'. Je weet dan waar de brief is gepost, maar niet door wie: de gemeente, een bedrijf of je tante. De verwijzer google.com werkt net zo. Hij zegt alleen dat de bezoeker van een Google-domein kwam. Google stuurt bewust alleen het domein mee, niet de pagina of de zoekopdracht. Daarom zien zoeken, Afbeeldingen en Discover er in je logs hetzelfde uit.",
+  "begrippen": [
+    { "term": "Verwijzer (referrer)", "uitleg": "het adres waar een bezoeker vandaan kwam. De browser stuurt het mee als hij een pagina opvraagt." },
+    { "term": "Serverlogs", "uitleg": "de lijst waarin de server elk verzoek bijhoudt: welke URL, wanneer, door wie en met welke verwijzer." },
+    { "term": "Discover", "uitleg": "de stroom met artikelen in de Google-app en op de mobiele startpagina van Google, zonder dat je iets zoekt." },
+    { "term": "Zoektype", "uitleg": "de keuze in het Prestatierapport van Search Console tussen onder meer Web, Afbeeldingen, Video en Nieuws." }
+  ],
+  "uitleg": "Volgens de nieuwe helppagina stuurt Google Search deze verwijzers mee:\n- Op het web: https://www.google.com/ of een landendomein, zoals https://www.google.nl/.\n- De Google-app op Android soms: android-app://com.google.android.googlequicksearchbox/https/www.google.com.\n- Google gebruikt de referrer-policy *origin*: alleen domein, geen pad en geen zoekopdracht.\n\n**Waarom tellingen afwijken**\n- Discover en Google Afbeeldingen sturen dezelfde verwijzers. Discover scheid je af met het Discover-rapport in Search Console.\n- Browsers laten de verwijzer soms weg, bijvoorbeeld in privémodus. Zo'n bezoek lijkt dan Direct.\n- Search Console telt de klik, analytics pas als het script draait. Adblockers en cookiekeuzes drukken dus de analytics-cijfers.\n- Een client-side redirect kan de verwijzer vervangen door je eigen URL.\n\nTel in logs alleen verzoeken voor landingspagina's. Afbeeldingen en scripts hebben je eigen pagina als verwijzer.",
+  "kernpunt": "Een Google-verwijzer betekent 'kwam van Google', niet 'kwam uit de zoekresultaten'. Haal Discover en Afbeeldingen apart uit Search Console.",
+  "toepassing": "Zet vandaag bij één klant het verkeer met een Google-verwijzer uit GA4 of de logs naast Search Console, met Web, Afbeeldingen en Discover bij elkaar opgeteld. Noteer hoe groot het verschil dan nog is.",
+  "bron": {
+    "titel": "Identify Google Search traffic in your web analytics or server logs | Google Search Central",
+    "url": "https://developers.google.com/search/docs/monitor-debug/identify-google-search-traffic"
+  }
+}
