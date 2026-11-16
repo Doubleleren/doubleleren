@@ -134,6 +134,8 @@ beheer\cloud-inrichten.ps1                            # secrets voor de cloud-ge
 beheer\feedback.ps1 -Nieuw                            # nieuwe feedback (draait ook bij elke Claude-chat via een SessionStart-hook)
 beheer\feedback.ps1 -Lijst                            # alle feedback met status
 beheer\feedback.ps1 -Afhandelen <bestand>
+beheer\beheer.ps1 -Exporteer -Bestand <pad>           # noodkopie van de beheergeheimen met wachtzin; bestand en wachtzin apart in NordPass
+beheer\beheer.ps1 -Importeer -Bestand <pad>           # noodkopie terugzetten op een andere laptop (overschrijft nooit)
 ```
 
 **Tokens:** fine-grained, met *Resource owner* `doubleleren` en zonder vervaldatum. `-Uitnodigen` geeft een vooraf ingevulde link. Trek een token in bij vertrek of bij een verloren laptop.
@@ -145,6 +147,9 @@ Vraag deelnemers het Teams-bericht met hun uitnodigingscode na het aanmelden te 
 - 2FA op het GitHub-account.
 - Branch protection op `main` van de app-repo.
 - Pages nooit aanzetten op de data-repo.
+
+## Meewerken
+Regels en werkwijze staan in [CLAUDE.md](CLAUDE.md): werk op een eigen branch vanaf `staging` en open een pull request naar `staging`. Alleen de beheerder zet staging op `main` (live). Elke push naar `staging` komt op de testsite https://doubleleren.github.io/doubleleren-staging/, met testdata in `doubleleren-data-staging` en een eigen beheersleutel (`staging/vertrouwd.json`).
 
 ## Testen
 ```

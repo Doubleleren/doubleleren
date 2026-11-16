@@ -13,6 +13,8 @@
 #   beheer.ps1 -Controleer                                       overzicht: wie ziet wie
 #   beheer.ps1 -NieuweGeneratorsleutel                           aparte sleutel voor de lesgenerator (hervatbaar)
 #   beheer.ps1 -Migreer -VanMap <map>                            eenmalig: oude beheer-repo (onondertekend) overzetten
+#   beheer.ps1 -Exporteer -Bestand <pad>                         noodkopie van de beheergeheimen (voor NordPass), met wachtzin
+#   beheer.ps1 -Importeer -Bestand <pad>                         noodkopie terugzetten op een andere laptop of Windows-account
 # Rollen: lid (met -Project of -Cel), projectleider (-Project), celleider (-Cel), head (van -Vak, standaard het standaardvak).
 # Vakken staan in instellingen.json; zonder -Vak hoort een lid bij het standaardvak (vakgebied).
 param(
@@ -21,7 +23,8 @@ param(
     [string]$Naam, [ValidateSet('lid', 'projectleider', 'celleider', 'head')][string]$Rol = 'lid', [string]$Project, [string]$Cel,
     [string]$Controlewoorden, [switch]$Optioneel, [switch]$Beheerder,
     [ValidateSet('', 'verplicht', 'optioneel')][string]$Leren = '',
-    [string]$DataMap, [string]$Thuis       # tests: lokale map i.p.v. GitHub
+    [switch]$Exporteer, [switch]$Importeer, [string]$Bestand,
+    [string]$DataMap, [string]$Thuis, [string]$Wachtzin       # tests: lokale map i.p.v. GitHub, wachtzin zonder vragen
 )
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
@@ -74,6 +77,47 @@ if ($Init) {
     $v = [ordered]@{ v = 1; beheer = (Vertrouwd) }
     [IO.File]::WriteAllText($vPad, ($v | ConvertTo-Json -Depth 4), $Utf8)
     Write-Host "vertrouwd.json bijgewerkt in de app-repo: commit en push die (alleen de beheerder kan dat)."
+    return
+}
+
+# Noodkopie: alle beheergeheimen (beheer- en generatorsleutel, beheertoken, lopende sleutelwissels) versleuteld met een
+# wachtzin (PBKDF2-SHA256 + DL1), los van DPAPI. Zo kan iemand anders het beheer overnemen. Bestand en wachtzin apart bewaren.
+if ($Exporteer -or $Importeer) {
+    if (-not $Bestand) { throw 'Geef -Bestand' }
+    function Read-Wachtzin([string]$Vraag) {
+        $s = Read-Host $Vraag -AsSecureString
+        [Runtime.InteropServices.Marshal]::PtrToStringBSTR([Runtime.InteropServices.Marshal]::SecureStringToBSTR($s))
+    }
+    if ($Exporteer) {
+        if (-not $geheim) { throw "Geen beheergeheimen in $geheimPad" }
+        $w = $Wachtzin
+        if (-not $w) {
+            $w = Read-Wachtzin 'Kies een wachtzin (minstens 16 tekens, wordt niet getoond)'
+            if ($w -cne (Read-Wachtzin 'Nog een keer')) { throw 'De wachtzinnen zijn niet gelijk.' }
+        }
+        if ($w.Length -lt 16) { throw 'De wachtzin moet minstens 16 tekens hebben.' }
+        $zout = Get-DlWillekeurig 16
+        $sl = Get-DlSleutelsUitAfgeleid (Get-DlPbkdf2 $w $zout)
+        $blob = Protect-Dl $sl 'beheer|noodkopie' $Utf8.GetBytes(($geheim | ConvertTo-Json -Depth 6 -Compress))
+        $vf = (Get-DlVingerafdrukHex (Vertrouwd)).Substring(0, 16)
+        $kopie = [ordered]@{ v = 1; soort = 'doubleleren-beheer-noodkopie'; gemaakt = (Get-Date).ToString('s'); vingerafdruk = $vf
+            salt = (ConvertTo-B64u $zout); iteraties = $script:DlPbkdf2Iteraties; geheim = (ConvertTo-B64u $blob) }
+        [IO.File]::WriteAllText($Bestand, ($kopie | ConvertTo-Json), $Utf8)
+        Write-Host "Noodkopie gemaakt: $Bestand (beheersleutel $vf…)." -ForegroundColor Green
+        Write-Host 'Zet het bestand en de wachtzin als APARTE items in NordPass en wis het bestand daarna van deze laptop.'
+    } else {
+        if ($geheim) { throw "Er staan al beheergeheimen in $geheimPad. Verplaats dat bestand eerst; overschrijven gebeurt bewust niet." }
+        $kopie = Get-Content $Bestand -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($kopie.soort -ne 'doubleleren-beheer-noodkopie' -or [int]$kopie.v -ne 1) { throw 'Dit is geen noodkopie van DoubleLeren.' }
+        $it = [int]$kopie.iteraties; if ($it -lt 100000 -or $it -gt 2000000) { throw 'Ongeldig aantal iteraties' }
+        $w = $Wachtzin; if (-not $w) { $w = Read-Wachtzin 'Wachtzin van de noodkopie' }
+        $sl = Get-DlSleutelsUitAfgeleid (Get-DlPbkdf2 $w (ConvertFrom-B64u $kopie.salt) $it)
+        try { $pt = Unprotect-Dl $sl 'beheer|noodkopie' (ConvertFrom-B64u $kopie.geheim) } catch { throw 'Verkeerde wachtzin of aangepast bestand.' }
+        $script:geheim = $Utf8.GetString($pt) | ConvertFrom-Json
+        Save-Geheim
+        Write-Host "Beheergeheimen teruggezet in $geheimPad (beheersleutel $((Get-DlVingerafdrukHex (Vertrouwd)).Substring(0, 16))…)." -ForegroundColor Green
+        Write-Host 'Kloon de data-repo daarna in de map data-kloon ernaast (zie beheer\kloon.ps1).'
+    }
     return
 }
 
