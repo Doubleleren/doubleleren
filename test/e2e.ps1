@@ -1,9 +1,15 @@
 ﻿# Eind-tot-eindtest met lokale mappen i.p.v. GitHub: uitnodigen, installeren, goedkeuren, toegang per rol,
 # aanvalsscenario's, herstel, organogramwijziging, dagcyclus en optioneel leren. Testpersonen hebben neutrale namen.
-#   powershell -NoProfile -ExecutionPolicy Bypass -File test\e2e.ps1 -Xlsx "C:\...\skilllijst.xlsx"
-param([Parameter(Mandatory)][string]$Xlsx, [string]$Werk = (Join-Path $env:TEMP 'doubleleren-e2e'))
+#   powershell -NoProfile -ExecutionPolicy Bypass -File test\e2e.ps1 [-Xlsx "C:\...\skilllijst.xlsx"]
+# Zonder -Xlsx gebruikt de test een nep-skilllijst uit het sjabloon (test\nep-skilllijst.ps1).
+param([string]$Xlsx, [string]$Werk = (Join-Path $env:TEMP 'doubleleren-e2e'))
 $ErrorActionPreference = 'Stop'
 $bron = Split-Path $PSScriptRoot -Parent
+if (-not $Xlsx) {
+    $Xlsx = Join-Path $env:TEMP 'doubleleren-nep-skilllijst.xlsx'
+    & powershell -NoProfile -ExecutionPolicy Bypass -File "$PSScriptRoot\nep-skilllijst.ps1" -Uit $Xlsx | Out-Null
+    if (-not (Test-Path $Xlsx)) { throw 'Nep-skilllijst maken mislukt' }
+}
 Remove-Item $Werk -Recurse -Force -ErrorAction SilentlyContinue
 $A = Join-Path $Werk 'app'; $D = Join-Path $Werk 'data'; $T = Join-Path $Werk 'thuis'
 New-Item -ItemType Directory $A, $D, $T -Force | Out-Null
