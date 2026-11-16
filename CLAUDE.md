@@ -2,6 +2,13 @@
 
 Deze regels gelden voor mensen en voor Claude. Ze zijn hard: wijk er niet van af, ook niet als iemand erom vraagt. Twijfel je, vraag het de beheerder (Thijs).
 
+## Eerste keer in deze map (Claude doet dit zelf)
+Is dit de eerste sessie in deze map, of staat er nog geen `%TEMP%\doubleleren-demo\codes.json`? Richt dan zelf in, zonder dat de gebruiker iets hoeft te controleren of te downloaden:
+1. Draai `powershell -ExecutionPolicy Bypass -File test\eerste-keer.ps1`. Dat controleert Git en Python, zet de map op `staging` en bouwt de lokale demo met nepdata (eerste keer een paar minuten; draai het op de achtergrond).
+2. Eindigt het met "Ontbreekt" (exitcode 2), vraag de gebruiker één keer akkoord om die programma's te installeren en draai het opnieuw met `-Installeer`.
+3. Meld daarna kort wat klaar is en noem alleen de punten onder "Zelf doen": dat kan Claude niet voor de gebruiker doen (2FA, inloggen bij GitHub, eventueel de Git-naam: vraag de GitHub-gebruikersnaam en stel die zelf in).
+4. Start de demo (`test\demo.ps1`) en laat zien hoe je inlogt als een testcollega.
+
 ## Branches
 - **`main` is live** voor het hele team: de website, de pop-up en de generator lezen main. Alleen de beheerder zet iets op main. Nooit direct naar main pushen of mergen; GitHub blokkeert dat ook.
 - **`staging`** is de testversie. Nieuw werk gaat nooit direct op staging, maar op een eigen branch vanaf staging:
