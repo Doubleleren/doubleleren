@@ -154,7 +154,8 @@ Regels en werkwijze staan in [CLAUDE.md](CLAUDE.md): werk op een eigen branch va
 ## Testen
 ```
 powershell -ExecutionPolicy Bypass -File test\kruistest.ps1
-powershell -ExecutionPolicy Bypass -File test\e2e.ps1 -Xlsx <skilllijst.xlsx>
+powershell -ExecutionPolicy Bypass -File test\e2e.ps1 [-Xlsx <skilllijst.xlsx>]   # zonder -Xlsx: nep-skilllijst
+powershell -ExecutionPolicy Bypass -File test\demo.ps1                           # lokale site met nepdata; -Bijwerken na een wijziging
 powershell -ExecutionPolicy Bypass -File test\site-demo.ps1
 ```
 Start daarna `python test\lokale-server.py 8765 %TEMP%\doubleleren-e2e` en open `http://localhost:8765/app/docs/?app=/app&data=/data`. Met `#welkom` test je het aanmelden; de testserver laat de website in `data/` schrijven.

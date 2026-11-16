@@ -28,11 +28,18 @@ Deze regels gelden voor mensen en voor Claude. Ze zijn hard: wijk er niet van af
 - Test vóór je pull request:
   ```
   powershell -ExecutionPolicy Bypass -File test\kruistest.ps1
-  powershell -ExecutionPolicy Bypass -File test\e2e.ps1 -Xlsx <eigen test-skilllijst.xlsx>
+  powershell -ExecutionPolicy Bypass -File test\e2e.ps1
   ```
-  De e2e moet **0 fouten** geven. Draai nooit twee e2e's tegelijk.
+  De e2e moet **0 fouten** geven. Zonder `-Xlsx` gebruikt hij een nep-skilllijst. Draai nooit twee e2e's (of een e2e en `test\demo.ps1`) tegelijk.
 - Commit met je eigen GitHub-account en een duidelijk Nederlands commitbericht.
 - Schrijf in de stijl van de bestaande code: Nederlandse namen en commentaar, korte functies.
 
-## Testen online
-Elke push naar `staging` zet de site op https://doubleleren.github.io/doubleleren-staging/. Die gebruikt de testdata in `doubleleren-data-staging`, nooit de live data. Daar test je met een eigen testaccount. De pop-up en de generator draaien niet mee: lessen komen daar alleen uit de kennisbank.
+## Lokaal testen (bouwen en uitproberen)
+```
+powershell -ExecutionPolicy Bypass -File test\demo.ps1              # eenmalig opbouwen (paar minuten) en starten
+powershell -ExecutionPolicy Bypass -File test\demo.ps1 -Bijwerken   # na een wijziging: nieuwste code erin, testdata blijft
+```
+Dit bouwt in `%TEMP%\doubleleren-demo` een testomgeving met nepdata (9 testcollega's in alle rollen: lid, projectleider, celleider, head, met skilllijsten, activiteit, scorebord en feedback) en start de site op http://localhost:8765. Het script toont per testcollega de uitnodigingscode en code. Geen token, geen internet, geen live data. Python 3 is nodig voor de lokale server. Wil je de site zelf starten (bijvoorbeeld in een preview), gebruik dan `-GeenServer` en daarna `python test\lokale-server.py 8765 %TEMP%\doubleleren-demo`; open `http://localhost:8765/app/docs/?app=/app&data=/data`.
+
+## Testen online (voor testers)
+Elke push naar `staging` zet de site op https://doubleleren.github.io/doubleleren-staging/ (met een gele band "Testversie"). Die gebruikt de testdata in `doubleleren-data-staging`, nooit de live data. Testers krijgen daarvoor een testaccount van de beheerder; bouwers hebben dat niet nodig. De pop-up en de generator draaien niet mee: lessen komen daar alleen uit de kennisbank.
