@@ -1,0 +1,11 @@
+# Wijzigingen in deze bestanden keurt de beheerder altijd eerst goed (zie CLAUDE.md)
+/beheer/                @thijsbol2004
+/docs/krypto.js         @thijsbol2004
+/app/lib/krypto.ps1     @thijsbol2004
+/app/lib/geheim.ps1     @thijsbol2004
+/app/lib/opslag.ps1     @thijsbol2004
+/vertrouwd.json         @thijsbol2004
+/instellingen.json      @thijsbol2004
+/.github/               @thijsbol2004
+/staging/               @thijsbol2004
+/CLAUDE.md              @thijsbol2004
