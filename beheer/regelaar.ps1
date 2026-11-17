@@ -98,6 +98,7 @@ if ($Stap -eq 'plan') {
         #    collega (basis bij score 3+) of een tweede schrijfopdracht: eruit.
         $open = @()
         foreach ($w in @($c.wachtrij | Where-Object { $_ })) {
+            if ($open.Count -ge $WACHTRIJ) { break }
             $l = $lesVan[[string]$w]; if (-not $l -or $open -contains $l.id) { continue }
             $b = Bruikbaar $l $p (VakVanLes $l)
             if ($b -eq 'nee' -or -not $vakken.Contains((VakVanLes $l))) { continue }
@@ -233,9 +234,9 @@ foreach ($id in @($rp.leden.PSObject.Properties.Name)) {
         $dag = DatumVanId $_.id
         ($_.type -eq 'nieuws' -or $_.herkomst -eq 'team') -and $dag -and ($nu - $dag).Days -le 14 -and (& $mag $_) -and
         -not ($_.type -ne 'nieuws' -and $_.niveau -eq 'basis' -and [double]$r.gem -ge 3.5)
-    } | Sort-Object @{ e = { if ($_.type -eq 'nieuws') { 0 } else { 1 } } }, id | ForEach-Object { $_.id })
+    } | Sort-Object @{ e = { if ($_.type -eq 'nieuws') { 0 } else { 1 } } }, @{ e = { $_.id }; Descending = $true } | Select-Object -First 2 | ForEach-Object { $_.id })   # hooguit 2 per keer, nieuwste eerst
     # Wensen van Claude (bijv. een les die bij iemands leerdoelen past): alleen als ze volgens de regels mogen
-    $ok = @(); foreach ($x in $wens) { $l = $lesVan[[string]$x]; if ((& $mag $l) -or ($l -and $l.soort -eq 'maak-met-claude' -and (Bruikbaar $l $p (VakVanLes $l)) -eq 'ja')) { $ok += $l.id } elseif ($x) { $genegeerd++ } }
+    $ok = @(); foreach ($x in @($wens | Select-Object -First 2)) { $l = $lesVan[[string]$x]; if ((& $mag $l) -or ($l -and $l.soort -eq 'maak-met-claude' -and (Bruikbaar $l $p (VakVanLes $l)) -eq 'ja')) { $ok += $l.id } elseif ($x) { $genegeerd++ } }
     $lijst = @($vooraan + $ok + @($r.open | Where-Object { & $mag $lesVan[$_] }))
     $leegPl = @()
     foreach ($pl in @($r.plekken)) {
@@ -254,7 +255,7 @@ foreach ($id in @($rp.leden.PSObject.Properties.Name)) {
     # Nooit twee schrijfopdrachten en hooguit één per wachtrij; daarna afkappen (vooraan en wensen gaan voor)
     $def = @(); $schrijf = 0
     foreach ($x in @($lijst | Select-Object -Unique)) { $l = $lesVan[$x]; if ($l.soort -ne 'meerkeuze') { if ($schrijf) { continue }; $schrijf++ }; $def += $x }
-    $uit[$id] = @($def | Select-Object -First ([math]::Max($WACHTRIJ, @($vooraan + $ok).Count)))
+    $uit[$id] = @($def | Select-Object -First $WACHTRIJ)
 }
 Schrijf $wPad $uit
 Write-Host "Toewijzen: $($uit.Count) wachtrij(en), $gevuld plek(ken) gevuld met nieuwe of herstelde lessen, $vervangen met een andere passende les, $leeg nog leeg$(if ($genegeerd) { ", $genegeerd wens(en) genegeerd (niet volgens de regels)" })"
