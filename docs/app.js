@@ -1416,6 +1416,9 @@ function geldigeLes(l, id) {
 const MIDDAG = '12:30';
 // Vak van een les: uit de vaardigheid-id's (cro:1.2.3 = CRO); kale id's of geen = het standaardvak
 const lesVak = (l) => { const m = (Array.isArray(l?.matrix) ? l.matrix : []).map(String).find((x) => x.includes(':')); return m ? m.split(':')[0] : S.inst.vakgebied; };
+// Cel van een lid (eigen cel of de cel van zijn project); een les met de case van een andere cel krijg je niet (generator-instructies, 'Cel')
+const celVan = (id) => { const l = S.org?.leden?.[id] || {}; return l.cel || (S.org?.cellen || []).find((c) => (c.projecten || []).some((p) => p.id === l.project))?.id || ''; };
+const celPast = (les, cel) => !cel || !les?.cel || les.cel === 'alle' || les.cel === cel;
 async function kiesLes() {
   const ik = S.leden[S.mij];
   // Twee lessen per dag: één in de ochtend, de tweede vanaf 12:30 (zelfde regel als de pop-up). De reeks blijft per dag.
@@ -1428,7 +1431,8 @@ async function kiesLes() {
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
   // Je wachtrij (klaargezet door de generator) altijd; uit de gedeelde kennisbank alleen lessen van vakken die je leert
   const mijn = vakkenVan(ik);
-  const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen).filter((id) => mijn.includes(lesVak(S.lessen[id])))];
+  const mijnCel = celVan(S.mij);
+  const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen).filter((id) => mijn.includes(lesVak(S.lessen[id])) && celPast(S.lessen[id], mijnCel))];
   for (const id of kandidaten) {
     if (!id || gedaan.has(id) || !LES_ID.test(id) || S.lessen[id]?.actief === false) continue;
     const les = await haalLes(id);
@@ -1636,7 +1640,7 @@ function verzamelLes() {
   const les = {
     id: `${dagKey(nu()).replace(/-/g, '')}-${slug(v('m-titel'))}`, herkomst: 'team',
     type: v('m-type'), niveau: v('m-niveau'), vakgebied: v('m-vakgebied'), onderwerp: v('m-onderwerp'),
-    matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'),
+    matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), cel: v('m-cel') || 'alle', titel: v('m-titel'),
     opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt'), ...(v('m-kort') ? { kort: v('m-kort') } : {})
   };
   for (const [veld, id] of [['intro', 'm-intro'], ['modelantwoord', 'm-model'], ['toepassing', 'm-toepassing']]) if (v(id)) les[veld] = v(id);
@@ -1748,6 +1752,7 @@ async function naInloggen() {
   toonKennisbank();
   const lessen = magLessen();
   for (const t of ['vandaag', 'scorebord', 'maken']) $('tab-' + t).hidden = !magTab(t);
+  $('m-cel').innerHTML = '<option value="alle">Alle cellen</option>' + (S.org.cellen || []).map((c) => `<option value="${esc(c.id)}">${esc(c.naam)}</option>`).join('');
   if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); startMiddagWekker(); }
   toonRonde();
   route();

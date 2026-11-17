@@ -63,7 +63,7 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     if (-not $vakken.Count -and $vakIds -contains $eigenVak) { $vakken[$eigenVak] = 1 }   # eigen vak zonder skilllijst: (nog) geen lessen
     if ($script:lidOngeldig) { $script:lidOvergeslagen++; continue }
     $leden[$id] = [ordered]@{
-        project = $org.leden.$id.project; cel = $org.leden.$id.cel; vak = $eigenVak; vakken = $vakken
+        project = $org.leden.$id.project; cel = $(Get-DlCelVanLid $org $id).id; vak = $eigenVak; vakken = $vakken
         focus = $(if ($profiel) { $profiel.obj.focus }); leerdoelen = $(if ($profiel) { $profiel.obj.leerdoelen })
         scores = $scores; prioriteit = $prioriteit; resultaten = $resultaten; gedaan = @($gedaan | Sort-Object -Unique); wachtrij = @($(if ($wachtrij) { $wachtrij.obj.lessen }))
     }
@@ -78,5 +78,5 @@ foreach ($naam in @(Get-DlOpslagLijst $d 'feedback' | ForEach-Object { $_ -repla
         if ($f) { $feedback += [ordered]@{ id = $f.bestand; soort = $f.soort; les = $f.les; datum = $f.datum; tekst = ($f.tekst -replace '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\u200E\u200F\u202A-\u202E\u2066-\u2069]', '') } }
     } catch { $fbOverslaan++ }
 }
-[IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; vakken = @($vakIds); leden = $leden; lesstatistiek = $stat; feedback = @($feedback) } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
+[IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; vakken = @($vakIds); cellen = @($org.cellen | ForEach-Object { $_.id }); leden = $leden; lesstatistiek = $stat; feedback = @($feedback) } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
 Write-Host "Context voor $($leden.Count) deelnemer(s), $($stat.Count) les(sen) met resultaten, $($feedback.Count) feedbackbericht(en)$(if ($fbOverslaan) { " ($fbOverslaan niet leesbaar)" }): $pad$(if ($script:ongeldig) { " · $($script:ongeldig) bestand(en) niet te controleren, $($script:lidOvergeslagen) deelnemer(s) vandaag overgeslagen" })"

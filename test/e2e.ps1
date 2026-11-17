@@ -304,6 +304,7 @@ $fbC = @($ctx.feedback)
 Controleer ($ctx.lesstatistiek.'20261019-srm'.n -ge 1 -and $ctx.lesstatistiek.'20261019-srm'.fout -ge 1) 'Context: resultaten per les over het hele team'
 Controleer (@($fbC | Where-Object tekst -eq 'Na de omzetting').Count -eq 1 -and -not ($fbC | Where-Object { $_.PSObject.Properties.Name -contains 'door' }) -and -not ((ConvertTo-Json $fbC -Depth 4) -match 'lid-[0-9a-f]{6}')) 'Context: feedback zonder afzender en zonder pseudoniemen'
 Controleer (-not ($fbC | Where-Object tekst -eq 'Vals namens Foxtrot') -and -not ($fbC | Where-Object tekst -match 'Afronden reageert')) 'Context: vervalste feedback en feedback zonder generatorkopie overgeslagen'
+Controleer ($ctx.leden.($ids.Delta).cel -eq 'ecom' -and @($ctx.cellen) -contains 'leadgen') 'Context: cel per deelnemer (ook via het project) en de lijst met cellen'
 Remove-Item "$T\beheer\generator\context.json"
 # Vaste beginstand voor de checks hieronder: les 20261019-srm zoals hij oorspronkelijk was (nooit herzien, het juiste
 # antwoord ruim het langst). Zo hangt de test niet af van wat de generator later aan de echte les verandert.
@@ -351,6 +352,18 @@ ZetLes '20261019-srm' @{ actief = $false }
 $p6 = Publiceer @('20261019-query-fan-out')
 $ok6 = $p6.ok -and $p6.uit -match 'herzien-datum nodig' -and (Get-Content "$A\lessen\20261019-srm.json" -Raw | ConvertFrom-Json).actief -ne $false
 Controleer ($ok2 -and $ok3 -and $ok4 -and $ok6) 'Eigen les zonder herzien-datum, met andere herkomst, verwijderd of ongeldig: teruggedraaid, run gaat door'
+# Cel van de case: alleen 'cel' erbij is geen herziening; een ongeldige cel of cel plus een andere wijziging wel
+ZetLes '20261019-srm' @{ cel = 'Leadgen B2B' }
+$p7 = Publiceer @('20261019-query-fan-out')
+$ok7 = $p7.ok -and $p7.uit -match 'teruggedraaid: 20261019-srm.json \(cel moet' -and -not (Get-Content "$A\lessen\20261019-srm.json" -Raw | ConvertFrom-Json).cel
+ZetLes '20261019-srm' @{ cel = 'ecom'; titel = 'Stil aangepast' }
+$p9 = Publiceer @('20261019-query-fan-out')
+$ok9 = $p9.ok -and $p9.uit -match 'herzien-datum nodig' -and (Titel '20261019-srm') -eq $tSrm
+ZetLes '20261019-srm' @{ cel = 'leadgen' }
+$p8 = Publiceer @('20261019-query-fan-out')
+$lCel = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+$ok8 = $p8.ok -and $p8.uit -match 'cel bepaald: 20261019-srm.json \(leadgen\)' -and $lCel.cel -eq 'leadgen' -and -not $lCel.herzien -and ((Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen | Where-Object id -eq '20261019-srm').cel -eq 'leadgen'
+Controleer ($ok7 -and $ok8 -and $ok9) 'Cel van een les: alleen cel erbij mag zonder herzien-datum; ongeldige cel of meer veranderd: teruggedraaid'
 ZetLes '20261019-srm' @{ actief = $false; herzien = '2026-10-21'; wijziging = 'Vraag was dubbelzinnig; vervangen door een nieuwe les.' }
 $p5 = Publiceer @('20261019-srm', '20261019-query-fan-out')
 $idxA = Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json

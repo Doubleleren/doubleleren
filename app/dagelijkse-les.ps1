@@ -180,8 +180,11 @@ try {
             try { $mxV = Read-DlVersleuteld $c.data $c.id 'matrix' $s $c.publiek; if ($mxV -and $mxV.obj.vakken) { $mijn = @($mxV.obj.vakken.PSObject.Properties | Where-Object { @(1, 2, 3) -contains [int]$_.Value } | ForEach-Object { $_.Name }) } } catch {}
             if (-not $mijn.Count) { $mijn = @($(if ($org -and $org.leden.($c.id).vak) { [string]$org.leden.($c.id).vak } else { $standaard })) }
             $lesVak = { param($l) $m = @($l.matrix | Where-Object { "$_" -like '*:*' })[0]; if ($m) { "$m".Split(':')[0] } else { $standaard } }
+            # Geen les met de case van een andere cel (generator-instructies, 'Cel'): cel uit het organogram, anders die van je project
+            $mijnCel = ''
+            if ($org) { $lid = $org.leden.($c.id); $mijnCel = if ($lid.cel) { [string]$lid.cel } elseif ($lid.project) { [string](@($org.cellen | Where-Object { @($_.projecten | Where-Object { $_.id -eq $lid.project }).Count })[0].id) } else { '' } }
             $idx = Read-DlJson $c.app 'lessen/index.json'
-            $lesId = if ($idx) { @($idx.lessen | Where-Object { $gedaan -notcontains $_.id -and $_.actief -ne $false -and $mijn -contains (& $lesVak $_) }) | Select-Object -First 1 -ExpandProperty id }
+            $lesId = if ($idx) { @($idx.lessen | Where-Object { $gedaan -notcontains $_.id -and $_.actief -ne $false -and $mijn -contains (& $lesVak $_) -and (-not $mijnCel -or -not $_.cel -or $_.cel -eq 'alle' -or $_.cel -eq $mijnCel) }) | Select-Object -First 1 -ExpandProperty id }
             if ($lesId) { $les = Read-DlJson $c.app "lessen/$lesId.json" }
         }
         if (-not $les) { Log-Fout 'Geen les beschikbaar: wachtrij en lessenpool zijn op. De generator vult ze aan.'; exit }
