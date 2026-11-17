@@ -1,0 +1,41 @@
+{
+  "id": "20261117-search-analytics-api-merkfilter",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Search Console-API: nieuwe merkindeling (branded/non-branded), multimodaal en filterlijsten (november 2026)",
+  "matrix": ["4.1.2", "4.1.1"],
+  "titel": "Het nieuwe merkfilter in de Search Console-API geeft nul rijen",
+  "intro": "Google breidde op 16 november de Search Analytics API van Search Console uit. Je kunt zoekopdrachten nu ook via de API laten indelen in branded en non-branded. Een collega probeert het bij twee klanten. Bij een grote webshop komen er rijen terug. Bij een kleine klant, waarvoor het team alleen een property voor de map /blog/ heeft, komt niets terug: geen branded en geen non-branded rijen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "De collega wil in het rapport zetten: 'geen merkverkeer'. Wat is de beste verklaring voor de lege uitkomst?",
+    "opties": [
+      "De klant heeft gewoon geen merkverkeer, want zonder zoekopdrachten met de merknaam blijven beide groepen in de API leeg.",
+      "De nieuwe indeling staat alleen in de BigQuery-export, want de API geeft die gegevens pas na de maandelijkse update vrij.",
+      "Het merkfilter werkt pas met een filter op de merknaam erbij, want de API moet eerst weten welke woorden bij het merk horen.",
+      "De indeling is er alleen voor hoofdproperty's met genoeg zoekvolume, dus filter hier zelf op de merknaam in de zoekopdracht."
+    ],
+    "juist": 3
+  },
+  "kern": "Lege rijen betekenen hier 'geen indeling beschikbaar', niet 'geen merkverkeer'. Google deelt alleen hoofdproperty's met genoeg zoekvolume in.",
+  "afleiders": [
+    "**Geen merkverkeer:** dan zou de groep non-branded nog steeds gevuld zijn. Twee lege groepen wijzen op een property zonder indeling, niet op een klant zonder merk.",
+    "**Alleen in BigQuery:** de BigQuery-export krijgt wel nieuwe gegevens over zoeken met beeld. De merkindeling haal je gewoon via de API op, zonder maandelijkse vrijgave.",
+    "**Filter op merknaam erbij:** Google bepaalt zelf welke zoekopdrachten branded zijn. Een filter op de zoekopdracht mag in dezelfde aanvraag juist niet samen met de merkindeling.",
+    ""
+  ],
+  "kort": "Denk aan een sorteermachine die alleen in de grote postsorteercentra staat. Komt jouw brief via een klein postkantoor, dan wordt hij niet op die manier gesorteerd. Dat zegt niets over hoeveel post er is. Google deelt zoekopdrachten zelf in als merk of niet-merk, maar alleen bij property's voor een hele site met genoeg zoekgegevens. Bij andere property's blijft het vak gewoon leeg.",
+  "begrippen": [
+    { "term": "Search Analytics API", "uitleg": "de koppeling waarmee je de cijfers uit het Prestatierapport van Search Console automatisch ophaalt, bijvoorbeeld voor een dashboard." },
+    { "term": "Property", "uitleg": "een site of deel van een site dat je in Search Console beheert. Een hoofdproperty dekt de hele site, niet alleen één map." },
+    { "term": "Branded zoekopdracht", "uitleg": "een zoekopdracht met de merknaam erin, zoals 'tuincentrum de linde openingstijden'. Non-branded is alles zonder merknaam." }
+  ],
+  "uitleg": "Wat is er op 16 november 2026 nieuw in de Search Analytics API?\n- **brandedClassification:** groeperen of filteren op BRANDED of NON_BRANDED. Alleen de operator 'equals'. Niet te combineren met een filter op query in dezelfde aanvraag. Gegevens vanaf 21 februari 2026, en alleen voor hoofdproperty's met genoeg zoekopdrachten en vertoningen. Andere property's krijgen geen rijen.\n- **type webMultimodal:** prestaties uit Google Lens, Circle to Search en zoeken met een geüploade afbeelding. Met een actieve bulkexport staat dit ook in BigQuery.\n- **filterLists:** meerdere landen (drieletterige ISO-codes) of apparaten in één aanvraag, bijvoorbeeld alle DACH-landen samen. Je mag dezelfde dimensie niet tegelijk in filters en filterLists gebruiken.\n\nGeen indeling beschikbaar? Haal dan in een aparte aanvraag zelf de merkzoekopdrachten op met een regex op de merknaam. Zet in het rapport welke methode je gebruikte.",
+  "kernpunt": "Geeft een nieuw filter nul rijen, controleer dan eerst of de property ervoor in aanmerking komt voordat je 'nul' rapporteert.",
+  "toepassing": "Open vandaag bij één klant het Prestatierapport en kijk of het filter op merkzoekopdrachten er staat voor de property waarover je rapporteert. Zet in je klantoverzicht welke klanten een eigen merkfilter nodig hebben.",
+  "bron": {
+    "titel": "New filtering and reporting capabilities in the Search Analytics API | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2026/11/search-analytics-api-update"
+  }
+}

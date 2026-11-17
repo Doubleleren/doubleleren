@@ -1,0 +1,42 @@
+{
+  "id": "20261117-linkspam-update-geen-straf",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Link spam updates en SpamBrain: gekochte links tellen niet meer mee",
+  "matrix": ["10.1.2", "10.1.1"],
+  "titel": "'Hoe krijgen we de straf van de link spam update eraf?'",
+  "intro": "Een klant kocht jarenlang links op blognetwerken. Na een link spam update van Google daalt het organische verkeer met 30%. In Search Console staat onder Handmatige acties niets. De klant vraagt: 'Hoe krijgen we die straf zo snel mogelijk opgeheven?'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat antwoord je de klant?",
+    "opties": [
+      "Dien een verzoek tot heroverweging in, want na een spam update moet je Google eerst laten weten dat de links weg zijn.",
+      "Wacht rustig op de volgende link spam update, want dan bekijkt Google opnieuw of de straf van de site af mag.",
+      "Er is geen straf om op te heffen, want Google telt die links niet meer mee. Bouw dus nieuwe waarde op met echte links.",
+      "Dien een disavow-bestand in met alle gekochte links, want dan krijg je de verloren waarde binnen een paar weken terug."
+    ],
+    "juist": 2
+  },
+  "kern": "Google neutraliseert onnatuurlijke links: ze tellen gewoon niet meer mee. De daling is weggevallen waarde, geen straf die je kunt laten opheffen.",
+  "afleiders": [
+    "**Heroverweging:** dat verzoek bestaat alleen bij een handmatige actie. Die staat er niet, dus er is niets om te heroverwegen.",
+    "**Wachten op de volgende update:** de waarde van die links komt niet terug, ook niet bij een volgende update. Er is geen straf die afloopt.",
+    "",
+    "**Disavow:** daarmee vraag je Google links niet mee te tellen. Deze links telden al niet meer mee, dus er komt geen waarde terug."
+  ],
+  "kort": "Denk aan een proefwerk waarbij je een spiekbriefje gebruikte. De leraar ziet het en telt dat proefwerk niet mee. Je krijgt geen straf, maar je gemiddelde zakt wel. Een briefje met excuses helpt niet: alleen nieuwe, eerlijke cijfers tillen je gemiddelde weer op. Zo werkt een link spam update. Google zet gekochte links op nul, en de waarde die ze gaven, verdwijnt.",
+  "begrippen": [
+    { "term": "Link spam update", "uitleg": "een aanpassing van Google die beter herkent welke links gekocht of nep zijn, en die links laat wegvallen." },
+    { "term": "SpamBrain", "uitleg": "het AI-systeem van Google dat spam opspoort, waaronder sites die links kopen of verkopen." },
+    { "term": "Handmatige actie", "uitleg": "een maatregel die een medewerker van Google tegen een site neemt. Die zie je in Search Console en kun je laten heroverwegen." },
+    { "term": "Disavow", "uitleg": "een bestand waarmee je Google vraagt bepaalde links naar je site niet mee te tellen." }
+  ],
+  "uitleg": "In december 2022 schreef Google bij een link spam update dat SpamBrain zowel sites herkent die links kopen, als sites die bestaan om links door te geven. Google gebruikt het om 'de impact van onnatuurlijke links te neutraliseren'. Rankings kunnen veranderen omdat de waarde van die links wegvalt.\n\n**Het verschil met een handmatige actie**\n- Handmatige actie: zichtbaar in Search Console. Je ruimt op en dient een verzoek tot heroverweging in.\n- Algoritmische neutralisatie: geen melding en geen verzoek. De links tellen gewoon niet meer.\n\n**Wat nu?**\n- Stop met links kopen. Betaalde samenwerkingen krijgen voortaan rel=\"sponsored\".\n- Kijk welke pagina's het meest daalden en wat ze nog te bieden hebben.\n- Investeer in redenen om naar de site te linken: eigen onderzoek, goede content en echte vermeldingen.\n- Reken op maanden, niet weken.",
+  "kernpunt": "Daalt een site na een link spam update zonder handmatige actie, zoek dan geen manier om een straf op te heffen, maar vervang de weggevallen linkwaarde.",
+  "toepassing": "Kijk vandaag bij één klant onder Handmatige acties in Search Console of er iets staat. Vraag na welke links er de afgelopen jaren zijn ingekocht, en noteer dat in het klantdossier.",
+  "bron": {
+    "titel": "December 2022 link spam update | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2022/12/december-22-link-spam-update"
+  }
+}

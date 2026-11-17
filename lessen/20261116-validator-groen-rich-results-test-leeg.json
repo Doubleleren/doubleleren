@@ -12,7 +12,7 @@
     "vraag": "Wat is de verklaring?",
     "opties": [
       "De Rich Results Test ziet de markup nog niet, want Google moet de pagina eerst indexeren voordat de test markup kan lezen.",
-      "De validator controleert of de markup klopt met schema.org, en de Rich Results Test alleen wat Google als rich result toont.",
+      "Beide tools werken goed, want de validator toetst aan schema.org en de Rich Results Test alleen aan rich results van Google.",
       "De markup staat waarschijnlijk in JSON-LD, want de Rich Results Test leest alleen microdata die zichtbaar in de HTML staat.",
       "De validator is sinds 2021 verouderd, want Google heeft hem vervangen. Vertrouw dus alleen op de uitkomst van de Rich Results Test."
     ],
@@ -38,5 +38,7 @@
   "bron": {
     "titel": "The Structured Data Testing Tool is moving to schema.org | Google Search Central Blog",
     "url": "https://developers.google.com/search/blog/2020/12/structured-data-testing-tool-update"
-  }
+  },
+  "herzien": "2026-11-17",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

@@ -1,0 +1,41 @@
+{
+  "id": "20261117-content-in-hapjes-voor-ai",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Content ombouwen voor AI-zoekmachines: wat Google zegt over 'hapjes' voor taalmodellen",
+  "matrix": ["12.1.4", "12.1.2"],
+  "titel": "€ 18.000 om 140 artikelen in AI-hapjes te knippen: doen?",
+  "intro": "Een installatiebedrijf heeft 140 kennisartikelen. Een bureau stelt voor ze allemaal om te bouwen voor AI-zoekmachines: alinea's van hooguit twee zinnen, elke tussenkop als chatbotvraag en bovenaan een samenvatting in opsommingstekens. Kosten: € 18.000. Het bureau wijst op onderzoek waarin pagina's met korte passages vaker geciteerd worden.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de klant, met wat Google er zelf over zegt?",
+    "opties": [
+      "Doen, want AI Mode haalt losse passages uit een pagina en citeert daarom vooral alinea's die op zichzelf heel kort zijn.",
+      "Alleen doen met FAQ-markup erbij, want zonder die markup herkent Google de vraagkoppen niet als losse antwoorden.",
+      "Niet als ombouw voor AI, want Google raadt aan voor mensen te schrijven en geen hapjesversie voor taalmodellen te maken.",
+      "Doen in een aparte AI-versie op een subdomein, want dan blijft de site voor bezoekers gelijk en leest AI de korte versie."
+    ],
+    "juist": 2
+  },
+  "kern": "Google wil geen content die speciaal voor taalmodellen in hapjes is geknipt. Duidelijke koppen voor lezers zijn prima, een ombouw puur voor AI niet.",
+  "afleiders": [
+    "**AI citeert korte alinea's:** AI-systemen halen inderdaad passages uit pagina's. Maar Google zegt dat zijn systemen tekst voor mensen belonen, niet tekst die voor machines is opgeknipt.",
+    "**FAQ-markup erbij:** voor AI-functies vraagt Google geen speciale markup. FAQ-rich results toont Google bovendien bijna alleen nog bij overheids- en zorgsites.",
+    "",
+    "**Aparte AI-versie:** Google zei begin 2026 juist dat het geen aparte versie voor taalmodellen naast die voor mensen wil. Je onderhoudt dan ook twee teksten per onderwerp."
+  ],
+  "kort": "Denk aan een kok die al zijn gerechten in mini-hapjes gaat snijden, omdat één recensent dat ooit lekker vond. De volgende recensent let weer gewoon op smaak, en de gasten eten nu onhandig. Google zegt hetzelfde over tekst: schrijf voor de lezer. Zijn systemen worden steeds beter in het belonen van tekst voor mensen. Een trucje dat nu even werkt, kan bij de volgende verandering juist tegen je werken.",
+  "begrippen": [
+    { "term": "Taalmodel (LLM)", "uitleg": "het AI-systeem achter tools als ChatGPT, Gemini en AI Mode, dat tekst leest en zelf antwoorden schrijft." },
+    { "term": "AI Mode", "uitleg": "de zoekstand van Google waarin je een gesprek voert en een AI-antwoord krijgt, met links naar bronnen." },
+    { "term": "Passage", "uitleg": "een los stukje tekst uit een pagina, zoals een alinea, dat een zoekmachine of AI apart kan gebruiken." }
+  ],
+  "uitleg": "**Wat Google zegt**\n- In mei 2025 schreef Google hoe je het goed doet in AI Overviews en AI Mode: maak unieke, niet-inwisselbare content voor mensen, zorg voor een goede pagina-ervaring en technische basis, en laat structured data kloppen met wat er zichtbaar staat. Speciale eisen voor AI zijn er niet.\n- In de podcast Search Off the Record (januari 2026) raadde Danny Sullivan expliciet af om content in hapjes voor taalmodellen te knippen of een aparte versie voor AI te maken. Zulke trucs kunnen even werken, maar de systemen veranderen.\n\n**Hoe lees je het onderzoek van het bureau?**\nMeestal is het samenhang, geen oorzaak. Pagina's met korte passages kunnen ook om andere redenen vaker geciteerd worden.\n\n**Wat wél kan**\nHeldere koppen, het antwoord vroeg in een sectie, eigen cijfers en ervaring. Dat helpt lezers én AI. Toets per wijziging: zou je dit ook doen als er geen AI bestond?",
+  "kernpunt": "Vraag bij elke AI-aanpassing: zou je dit ook doen voor een lezer zonder AI? Zo niet, sla het over.",
+  "toepassing": "Lees vandaag één AI-voorstel of AI-checklist van een klant of tool na. Streep elk punt aan dat alleen voor taalmodellen bedoeld is en niet voor de lezer.",
+  "bron": {
+    "titel": "Top ways to ensure your content performs well in Google's AI experiences on Search | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search"
+  }
+}

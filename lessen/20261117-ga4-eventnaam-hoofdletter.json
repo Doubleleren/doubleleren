@@ -1,0 +1,41 @@
+{
+  "id": "20261117-ga4-eventnaam-hoofdletter",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: eventnamen zijn hoofdlettergevoelig",
+  "matrix": ["3.1.6", "3.1.2"],
+  "titel": "40% minder leads in GA4, maar het CRM telt er evenveel",
+  "intro": "Een installatiebedrijf meet offerteaanvragen in GA4 met het event generate_lead, gemarkeerd als key event. Een nieuwe developer heeft de formulieren omgebouwd. Sinds die dag telt GA4 40% minder key events. Het CRM krijgt evenveel aanvragen als altijd. In de lijst met events staat sinds die dag ook een nieuw event: Generate_Lead.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is er aan de hand, en wat doe je?",
+    "opties": [
+      "Het is één event, want GA4 negeert hoofdletters. De daling komt door bezoekers die cookies weigeren, dus check de banner.",
+      "Het zijn twee events, want GA4 let op hoofdletters. Laat de developer de oude naam generate_lead weer precies zo sturen.",
+      "Het zijn twee events, maar GA4 voegt ze na 48 uur vanzelf samen. Wacht dus af en kijk volgende week opnieuw naar de cijfers.",
+      "Het is één event, want GA4 negeert hoofdletters. De daling komt door spam via het nieuwe formulier, dus zet er een captcha op."
+    ],
+    "juist": 1
+  },
+  "kern": "Voor GA4 zijn generate_lead en Generate_Lead twee verschillende events. Alleen de oude naam is een key event, dus de nieuwe aanvragen vallen buiten je leads.",
+  "afleiders": [
+    "**Hoofdletters negeren:** GA4 doet dat juist niet. En het CRM krijgt evenveel aanvragen, dus de cookiebanner verklaart deze daling niet.",
+    "",
+    "**Vanzelf samenvoegen:** GA4 voegt events niet zelf samen. Wat onder een andere naam binnenkwam, blijft apart staan in je rapporten.",
+    "**Spam:** het CRM telt evenveel aanvragen als altijd. Er is niets mis met het formulier, alleen met de naam waaronder GA4 ze telt."
+  ],
+  "kort": "Denk aan een postsorteerder die heel letterlijk is. Op het ene vak staat 'Jansen', op het andere 'jansen'. Een brief voor 'Jansen' gaat nooit in het vak 'jansen', ook al bedoel je dezelfde persoon. GA4 sorteert events op precies de naam die binnenkomt. Eén hoofdletter anders, en het is voor GA4 een nieuw event, zonder de instellingen van het oude.",
+  "begrippen": [
+    { "term": "Event", "uitleg": "in GA4 een losse gebeurtenis die wordt geteld, zoals een paginaweergave, een klik of een verzonden formulier." },
+    { "term": "Key event", "uitleg": "een event dat je in GA4 als belangrijk markeert, zoals een lead of aankoop. Vroeger heette dat een conversie." },
+    { "term": "CRM", "uitleg": "het klantsysteem waarin aanvragen en klantgegevens binnenkomen, los van GA4." }
+  ],
+  "uitleg": "De naamregels van GA4:\n- Een eventnaam begint met een letter en bevat alleen letters, cijfers en underscores, zonder spaties.\n- Eventnamen zijn hoofdlettergevoelig: my_event en My_Event zijn verschillende events.\n- Aanbevolen events, zoals generate_lead en purchase, schrijf je precies zoals Google ze noemt: kleine letters met underscores.\n\n**Herstellen**\n- Laat de code de oude naam weer sturen. Zo blijft je reeks kloppen.\n- Moet het snel, dan kun je in GA4 bij Events een regel maken die Generate_Lead hernoemt. Die werkt alleen voor nieuwe gegevens.\n- De data van de tussenliggende dagen staat onder de verkeerde naam. Vermeld dat in het rapport.\n\n**Voorkomen**\nZet de exacte eventnamen in een meetplan, en test na elke verbouwing in DebugView of de namen kloppen.",
+  "kernpunt": "Daalt een eventaantal opeens, zoek dan eerst in de lijst met events naar dezelfde naam met andere hoofdletters.",
+  "toepassing": "Open vandaag bij één klant in GA4 de lijst met events. Zoek naar namen die bijna hetzelfde zijn, met een hoofdletter, spatie of streepje anders.",
+  "bron": {
+    "titel": "[GA4] Event naming rules - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/13316687"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "20261117-lcp-achtergrondfoto-in-css",
+  "type": "herhaling",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: LCP verbeteren als de grote foto pas laat gevonden wordt",
+  "matrix": ["5.2.3", "5.2.2"],
+  "titel": "1,9 seconde wachten voordat de grote foto zelfs maar begint te laden",
+  "intro": "Een modewebshop heeft bovenaan de homepage een grote sfeerfoto. Die staat als achtergrondafbeelding in een extern CSS-bestand. De LCP in de velddata is 3,6 seconde. PageSpeed Insights splitst dat op: eerste byte na 0,5 s, dan 1,9 s wachten voordat de foto begint te laden, 0,6 s laden en 0,6 s tot hij in beeld staat.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing levert hier de meeste winst op?",
+    "opties": [
+      "Comprimeer de foto verder naar AVIF, want een kleiner bestand is sneller binnen en verkort zo de grootste deeltijd van de LCP.",
+      "Maak de foto vindbaar in de HTML met een preload en fetchpriority=high, want nu ziet de browser hem pas na de CSS.",
+      "Laad de foto via JavaScript na de rest van de pagina, want dan houdt hij het tonen van de tekst en knoppen niet meer op.",
+      "Verhuis naar snellere hosting, want een snellere server verkort de tijd tot de eerste byte en daarmee de hele LCP."
+    ],
+    "juist": 1
+  },
+  "kern": "Een achtergrond in CSS ontdekt de browser pas als de stylesheet binnen is. Een preload in de HTML laat hem meteen beginnen.",
+  "afleiders": [
+    "**Kleiner bestand:** het laden zelf duurt maar 0,6 seconde. De grote winst zit in de 1,9 seconde wachten voordat het laden begint.",
+    "",
+    "**Via JavaScript laden:** dan vindt de browser de foto nog later, want eerst moet het script draaien. Het wachten wordt langer, niet korter.",
+    "**Snellere hosting:** de eerste byte is er al na 0,5 seconde, en dat is goed. Een snellere server haalt maar een klein stukje van de 3,6 seconde weg."
+  ],
+  "kort": "Denk aan een boodschappenlijst die in een dichte envelop onderin je tas zit. Je kunt pas melk pakken als je de envelop hebt gevonden en geopend. Zo werkt een achtergrondfoto in CSS: de browser weet pas dat hij de foto nodig heeft als hij de stylesheet heeft opgehaald en gelezen. Een preload in de HTML is het briefje bovenop je tas. De browser begint dan meteen met de foto.",
+  "begrippen": [
+    { "term": "LCP (Largest Contentful Paint)", "uitleg": "de tijd tot het grootste stuk inhoud bovenaan, vaak een foto, in beeld staat. Goed is 2,5 seconde of minder." },
+    { "term": "Achtergrondafbeelding in CSS", "uitleg": "een foto die niet als afbeelding in de HTML staat, maar via de opmaakregels (CSS) achter een blok wordt gezet." },
+    { "term": "Preload", "uitleg": "een regel bovenin de HTML die de browser vertelt: haal dit bestand nu al op, je hebt het zo nodig." },
+    { "term": "fetchpriority=high", "uitleg": "een aanwijzing aan de browser dat dit bestand voorrang moet krijgen boven andere bestanden." }
+  ],
+  "uitleg": "web.dev deelt de LCP op in vier delen: eerste byte, wachten tot het laden begint (resource load delay), laden en tonen. Het wachten hoort klein te zijn. Is het groot, dan vindt de browser de foto te laat.\n\nVeelvoorkomende oorzaken:\n- de foto staat als background-image in CSS;\n- een script voegt de foto pas later toe, bijvoorbeeld een slider;\n- de foto heeft loading=\"lazy\".\n\nAanpak:\n- Liefst: zet de foto als gewone img in de HTML, met srcset voor verschillende schermen.\n- Kan dat niet: zet in de head een link rel=\"preload\" as=\"image\" met fetchpriority=\"high\". Gebruik bij responsieve foto's imagesrcset.\n- Geef fetchpriority=\"high\" aan hooguit één of twee afbeeldingen, anders verliest het zijn werking.\n\nControleer het effect eerst in het lab. De velddata in Search Console lopen pas na enkele weken mee.",
+  "kernpunt": "Begint de LCP-foto laat met laden, zorg dan dat hij in de HTML zelf te vinden is voordat je aan compressie of hosting denkt.",
+  "toepassing": "Open vandaag de homepage van één klant in PageSpeed Insights. Kijk welk element de LCP is, en of dat een achtergrond in CSS is of door een script wordt toegevoegd.",
+  "bron": {
+    "titel": "Optimize Largest Contentful Paint | web.dev",
+    "url": "https://web.dev/articles/optimize-lcp"
+  }
+}

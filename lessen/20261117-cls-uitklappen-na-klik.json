@@ -1,0 +1,41 @@
+{
+  "id": "20261117-cls-uitklappen-na-klik",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: wanneer telt een verschuiving na een klik mee voor CLS?",
+  "matrix": ["5.2.6", "5.2.7"],
+  "titel": "De knop 'Toon specificaties' weghalen voor een betere CLS?",
+  "intro": "Op de productpagina's van een B2B-webshop staat een knop 'Toon specificaties'. Na een klik klapt een tabel open en schuift alles eronder omlaag. De CLS in de velddata is 0,22. Opnames laten zien dat de tabel na de klik pas bij de server wordt opgehaald en na ongeveer 1,5 seconde verschijnt. De developer wil de knop weghalen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de developer?",
+    "opties": [
+      "Haal de knop weg, want elke verschuiving van inhoud telt mee voor CLS, ook als de bezoeker er zelf om vroeg.",
+      "Houd de knop, maar maak direct na de klik ruimte, want een verschuiving binnen 0,5 seconde na een klik telt niet mee.",
+      "Houd de knop zoals hij is, want een verschuiving die volgt op een klik telt nooit mee, hoe laat die ook komt.",
+      "Laad de tabel pas als de bezoeker scrolt, want verschuivingen die tijdens het scrollen gebeuren tellen niet mee voor CLS."
+    ],
+    "juist": 1
+  },
+  "kern": "Een verschuiving telt niet als hij binnen 0,5 seconde na een klik komt. Deze tabel komt pas na 1,5 seconde, en dan telt hij wel.",
+  "afleiders": [
+    "**Knop weghalen:** CLS meet alleen onverwachte verschuivingen. Klapt iets direct open na een klik, dan verwacht de bezoeker dat en telt het niet.",
+    "",
+    "**Klikken tellen nooit mee:** de uitzondering geldt alleen voor de eerste 0,5 seconde na de klik. Deze tabel komt na 1,5 seconde en telt dus wel.",
+    "**Laden na scrollen:** scrollen telt niet als klik of toetsaanslag. Een verschuiving tijdens het scrollen telt dus gewoon mee."
+  ],
+  "kort": "Denk aan iemand die vraagt of je even opzij wilt gaan. Schuif je meteen op, dan is niemand verrast. Duwt iemand je anderhalve seconde later opeens opzij, dan schrik je wel. CLS werkt net zo. Een verschuiving die direct op een klik volgt, verwacht de bezoeker, en die telt niet mee. Komt de verschuiving later, omdat er eerst iets van de server moet komen, dan voelt hij als onverwacht en telt hij wel.",
+  "begrippen": [
+    { "term": "CLS (Cumulative Layout Shift)", "uitleg": "een score voor hoeveel inhoud onverwacht verspringt terwijl je de pagina bekijkt. Goed is 0,1 of minder." },
+    { "term": "Verschuiving (layout shift)", "uitleg": "het moment dat tekst, knoppen of beelden op de pagina van plek veranderen." },
+    { "term": "Placeholder", "uitleg": "een leeg vak met de juiste hoogte dat alvast ruimte inneemt, totdat de echte inhoud er is." }
+  ],
+  "uitleg": "Volgens web.dev krijgen verschuivingen binnen 500 ms na een klik, tik of toetsaanslag het kenmerk hadRecentInput. Ze tellen dan niet mee. Scrollen, slepen en inzoomen gelden niet als zo'n invoer.\n\nCLS telt verschuivingen op in vensters: een reeks verschuivingen met minder dan 1 seconde ertussen, samen hooguit 5 seconden. Het zwaarste venster is de CLS van de pagina. Goed is 0,1 of minder op het 75e percentiel, slecht is meer dan 0,25.\n\nAanpak bij uitklappen:\n- Laat direct na de klik een vak met de verwachte hoogte zien, met een laadindicator, en zet de tabel daarin zodra hij binnen is.\n- Of stuur de specificaties al mee in de HTML en toon ze alleen bij de klik. Dat is meteen ook beter voor Google, dat niet klikt.\n\nControleer het in Chrome DevTools: in het Performance-paneel zie je per verschuiving of hij na recente invoer kwam.",
+  "kernpunt": "Klapt er iets open na een klik, zorg dan dat de ruimte binnen een halve seconde verschijnt.",
+  "toepassing": "Klik vandaag op een productpagina van één klant op elke knop die iets openklapt. Let op of de ruimte meteen verschijnt of pas na een wachttijd.",
+  "bron": {
+    "titel": "Cumulative Layout Shift (CLS) | web.dev",
+    "url": "https://web.dev/articles/cls"
+  }
+}

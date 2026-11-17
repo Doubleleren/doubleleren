@@ -1,0 +1,40 @@
+{
+  "id": "20261117-bijgewerkt-datum-elke-nacht",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Article-markup: datums (dateModified) die niet kloppen met de inhoud",
+  "matrix": ["2.2.7"],
+  "titel": "Elke nacht staat er 'Bijgewerkt op: vandaag' boven 600 artikelen",
+  "intro": "Een blog over geldzaken heeft 600 artikelen. Een plugin zet elke nacht de zichtbare tekst 'Bijgewerkt op' en het veld dateModified in de Article-markup op de datum van vandaag. Inhoudelijk verandert er meestal niets. De eigenaar: 'Zo lijkt alles vers, en dat vindt Google fijn.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de eigenaar?",
+    "opties": [
+      "Laat het zo, want Google kiest het liefst pagina's met een recente datum en kijkt daarbij niet naar wat er veranderd is.",
+      "Zet de datum alleen bij echte wijzigingen, want datums aanpassen om vers te lijken noemt Google een waarschuwingsteken.",
+      "Haal dateModified weg en laat alleen datePublished staan, want Google gebruikt de wijzigingsdatum niet bij artikelen.",
+      "Laat de zichtbare datum staan en zet dateModified terug, want Google kijkt voor de datum alleen naar wat in de code staat."
+    ],
+    "juist": 1
+  },
+  "kern": "Een datum hoort te vertellen wanneer de inhoud echt veranderde. Google noemt een nieuwe datum zonder echte wijziging een teken van werken voor zoekmachines in plaats van voor mensen.",
+  "afleiders": [
+    "**Recente datum werkt altijd:** Google vraagt juist of je datums aanpast om vers te lijken terwijl er niets veranderde. Dat is een waarschuwingsteken, geen voordeel.",
+    "",
+    "**Wijzigingsdatum niet gebruikt:** Google ondersteunt zowel datePublished als dateModified. Het probleem is niet het veld, maar de onjuiste datum erin.",
+    "**Alleen de code telt:** Google wil juist dat de zichtbare datum en de datum in de markup overeenkomen. Twee verschillende datums maken het onduidelijk."
+  ],
+  "kort": "Denk aan een supermarkt die elke ochtend een nieuwe houdbaarheidsdatum op dezelfde yoghurt plakt. Even lijkt alles vers, tot een klant het doorheeft. Dan vertrouwt hij geen enkele datum in die winkel meer. Een 'Bijgewerkt op'-datum werkt net zo. Hij is alleen iets waard als hij vertelt wanneer de inhoud echt veranderde, voor lezers en voor Google.",
+  "begrippen": [
+    { "term": "Article-markup", "uitleg": "code in een artikel die zoekmachines vertelt wat de titel, de schrijver en de datums zijn." },
+    { "term": "datePublished en dateModified", "uitleg": "de velden in die markup voor de datum van publicatie en de datum van de laatste wijziging." }
+  ],
+  "uitleg": "Wat Google over datums zegt (pagina over datums in zoekresultaten):\n- Geef datePublished en/of dateModified op in de markup.\n- Zet een zichtbare datum duidelijk op de pagina, met een label als 'Gepubliceerd' of 'Bijgewerkt'.\n- De datum beschrijft de publicatie of update van de pagina zelf.\n- Houd zichtbare datum en markup gelijk, met de juiste tijdzone.\n- Beperk andere datums op de pagina, zodat Google niet de verkeerde kiest.\n\nIn de pagina over nuttige content stelt Google bovendien de vraag: 'Verander je de datum van pagina's om ze vers te laten lijken, terwijl de inhoud niet wezenlijk veranderde?' Dat staat in het rijtje kenmerken van content die vooral voor zoekmachines is gemaakt.\n\n**Aanpak**\n- Zet de automatische datum in de plugin uit.\n- Pas de datum aan bij echte updates, zoals nieuwe tarieven of regels. Een typfout herstellen is geen update.\n- Zeker bij geldzaken helpt een korte regel onder het artikel over wat er veranderde.",
+  "kernpunt": "Verandert een datum zonder dat de inhoud verandert, zet die automatische datum dan uit.",
+  "toepassing": "Open vandaag drie artikelen van een klant en vergelijk de datum 'Bijgewerkt' met wat er echt nieuw is. Klopt het niet, zoek dan de plugin of instelling die de datum zet.",
+  "bron": {
+    "titel": "Influence your byline dates in Google Search | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/publication-dates"
+  }
+}

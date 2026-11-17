@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-16T05:30:45",
+    "bijgewerkt":  "2026-11-17T05:36:28",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -62,14 +62,15 @@
                        "matrix":  [
                                       "7.1.3"
                                   ],
-                       "kernpunt":  "Urgentie en schaarste alleen inzetten als ze echt zijn. Een nep-timer is misleiding: verboden in de EU en slecht voor vertrouwen.",
+                       "kernpunt":  "Zie je een timer of voorraadmelding, controleer dan of die op een echte deadline of echte voorraad draait.",
                        "bron":  {
                                     "titel":  "ACM spreekt webshops aan die misleidende countdowntimers gebruiken",
                                     "url":  "https://www.acm.nl/nl/publicaties/acm-spreekt-webshops-aan-die-misleidende-countdowntimers-gebruiken"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-17"
                    },
                    {
                        "id":  "20261019-query-fan-out",
@@ -741,14 +742,15 @@
                        "matrix":  [
                                       "7.1.4"
                                   ],
-                       "kernpunt":  "Google gebruikt geaggregeerde interactiedata om relevantie te beoordelen, maar noemt bounce rate en GA niet als signaal. Optimaliseer voor een tevreden bezoeker, niet voor één metric.",
+                       "kernpunt":  "Hoor je \u0027de bounce rate kost ons rankings\u0027, kijk dan eerst of de pagina waarmaakt wat de title belooft.",
                        "bron":  {
                                     "titel":  "How Does Google Determine Ranking Results - Google Search",
                                     "url":  "https://www.google.com/search/howsearchworks/how-search-works/ranking-results/"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-17"
                    },
                    {
                        "id":  "20261020-video-markup-basis",
@@ -1275,14 +1277,15 @@
                        "matrix":  [
                                       "7.1.1"
                                   ],
-                       "kernpunt":  "Onverwachte extra kosten zijn de meestgenoemde reden om af te haken in de checkout. Laat bezorgkosten zien vóórdat de bezoeker gaat afrekenen, en leg uit waar ze voor zijn.",
+                       "kernpunt":  "Haken bezoekers af in één checkoutstap, kijk dan eerst wat ze daar voor het eerst te zien krijgen.",
                        "bron":  {
                                     "titel":  "Baymard Institute: Cart \u0026 Checkout Abandonment Rate Statistics",
                                     "url":  "https://baymard.com/lists/cart-abandonment-rate"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-17"
                    },
                    {
                        "id":  "20261023-css-media-renderblokkade",
@@ -4916,7 +4919,270 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "vormAfwijkend":  true
+                       "herzien":  "2026-11-17"
+                   },
+                   {
+                       "id":  "20261117-ab-test-onbeslist-is-geen-nuleffect",
+                       "titel":  "\u0027Niet significant, dus de kortere checkout maakt niets uit\u0027",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testen: een onbesliste test is geen bewijs dat er geen effect is",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "7.2.2",
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Noem een test zonder winnaar \u0027onbeslist\u0027 en zet het interval erbij, nooit \u0027geen effect\u0027.",
+                       "bron":  {
+                                    "titel":  "Confidence intervals and improvement intervals | Optimizely",
+                                    "url":  "https://docs.optimizely.com/experimentation-strategy/docs/confidence-intervals-and-improvement-intervals"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-bijgewerkt-datum-elke-nacht",
+                       "titel":  "Elke nacht staat er \u0027Bijgewerkt op: vandaag\u0027 boven 600 artikelen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Article-markup: datums (dateModified) die niet kloppen met de inhoud",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.2.7"
+                                  ],
+                       "kernpunt":  "Verandert een datum zonder dat de inhoud verandert, zet die automatische datum dan uit.",
+                       "bron":  {
+                                    "titel":  "Influence your byline dates in Google Search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/publication-dates"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-checkout-toetsenbord-toegankelijkheid",
+                       "titel":  "De bestelknop werkt niet met het toetsenbord: na de lancering fixen?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Toegankelijkheid en conversie: de Europese toegankelijkheidswet voor webshops",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1",
+                                      "7.1.3"
+                                  ],
+                       "kernpunt":  "Test elke nieuwe checkout vóór de lancering één keer helemaal met alleen het toetsenbord.",
+                       "bron":  {
+                                    "titel":  "ACM: klant met beperking kan bij merendeel grote webwinkels niet terecht",
+                                    "url":  "https://www.acm.nl/nl/publicaties/acm-klant-met-beperking-kan-bij-merendeel-grote-webwinkels-niet-terecht"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-cls-uitklappen-na-klik",
+                       "titel":  "De knop \u0027Toon specificaties\u0027 weghalen voor een betere CLS?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: wanneer telt een verschuiving na een klik mee voor CLS?",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.6",
+                                      "5.2.7"
+                                  ],
+                       "kernpunt":  "Klapt er iets open na een klik, zorg dan dat de ruimte binnen een halve seconde verschijnt.",
+                       "bron":  {
+                                    "titel":  "Cumulative Layout Shift (CLS) | web.dev",
+                                    "url":  "https://web.dev/articles/cls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-content-in-hapjes-voor-ai",
+                       "titel":  "€ 18.000 om 140 artikelen in AI-hapjes te knippen: doen?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Content ombouwen voor AI-zoekmachines: wat Google zegt over \u0027hapjes\u0027 voor taalmodellen",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "12.1.4",
+                                      "12.1.2"
+                                  ],
+                       "kernpunt":  "Vraag bij elke AI-aanpassing: zou je dit ook doen voor een lezer zonder AI? Zo niet, sla het over.",
+                       "bron":  {
+                                    "titel":  "Top ways to ensure your content performs well in Google\u0027s AI experiences on Search | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-ga4-eventnaam-hoofdletter",
+                       "titel":  "40% minder leads in GA4, maar het CRM telt er evenveel",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: eventnamen zijn hoofdlettergevoelig",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.6",
+                                      "3.1.2"
+                                  ],
+                       "kernpunt":  "Daalt een eventaantal opeens, zoek dan eerst in de lijst met events naar dezelfde naam met andere hoofdletters.",
+                       "bron":  {
+                                    "titel":  "[GA4] Event naming rules - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/13316687"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-gtm-scrolldiepte-halverwege",
+                       "titel":  "\u002731% leest de helft van het recept\u0027: klopt dat?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Event tracking in GTM: scrolldiepte meten met een eigen trigger",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.4",
+                                      "3.1.6"
+                                  ],
+                       "kernpunt":  "Rapporteer je scrollgedrag uit GA4, zet er dan bij dat het standaardevent alleen 90% telt.",
+                       "bron":  {
+                                    "titel":  "Scroll depth trigger - Tag Manager Help",
+                                    "url":  "https://support.google.com/tagmanager/answer/7679218"
+                                },
+                       "video":  {
+                                     "titel":  "Track custom events with Google Analytics 4",
+                                     "kanaal":  "Analytics Mania",
+                                     "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-lcp-achtergrondfoto-in-css",
+                       "titel":  "1,9 seconde wachten voordat de grote foto zelfs maar begint te laden",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: LCP verbeteren als de grote foto pas laat gevonden wordt",
+                       "type":  "herhaling",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.3",
+                                      "5.2.2"
+                                  ],
+                       "kernpunt":  "Begint de LCP-foto laat met laden, zorg dan dat hij in de HTML zelf te vinden is voordat je aan compressie of hosting denkt.",
+                       "bron":  {
+                                    "titel":  "Optimize Largest Contentful Paint | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-lcp"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-linkspam-update-geen-straf",
+                       "titel":  "\u0027Hoe krijgen we de straf van de link spam update eraf?\u0027",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Link spam updates en SpamBrain: gekochte links tellen niet meer mee",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.2",
+                                      "10.1.1"
+                                  ],
+                       "kernpunt":  "Daalt een site na een link spam update zonder handmatige actie, zoek dan geen manier om een straf op te heffen, maar vervang de weggevallen linkwaarde.",
+                       "bron":  {
+                                    "titel":  "December 2022 link spam update | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2022/12/december-22-link-spam-update"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-redirectketen-drie-migraties",
+                       "titel":  "Vier redirects achter elkaar: \u0027Google komt er toch wel\u0027?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Redirectketens na meerdere migraties",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.2",
+                                      "1.1.4"
+                                  ],
+                       "kernpunt":  "Ga je een site verhuizen, verwijs dan ook de redirects van eerdere verhuizingen direct naar de nieuwe eindbestemming.",
+                       "bron":  {
+                                    "titel":  "Site moves with URL changes | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-search-analytics-api-merkfilter",
+                       "titel":  "Het nieuwe merkfilter in de Search Console-API geeft nul rijen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Search Console-API: nieuwe merkindeling (branded/non-branded), multimodaal en filterlijsten (november 2026)",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "4.1.2",
+                                      "4.1.1"
+                                  ],
+                       "kernpunt":  "Geeft een nieuw filter nul rijen, controleer dan eerst of de property ervoor in aanmerking komt voordat je \u0027nul\u0027 rapporteert.",
+                       "bron":  {
+                                    "titel":  "New filtering and reporting capabilities in the Search Analytics API | Google Search Central Blog",
+                                    "url":  "https://developers.google.com/search/blog/2026/11/search-analytics-api-update"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-sitemap-te-veel-urls",
+                       "titel":  "120.000 producten in één sitemap van 38 MB, en Search Console geeft een fout",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "XML-sitemaps: de limiet per bestand en de sitemapindex",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.4.1",
+                                      "1.1.11"
+                                  ],
+                       "kernpunt":  "Groeit een sitemap richting 50.000 URL\u0027s, splits hem dan per paginatype en verwijs ernaar met één sitemapindex.",
+                       "bron":  {
+                                    "titel":  "Build and submit a sitemap | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261117-ttfb-bezoekers-ver-van-server",
+                       "titel":  "Snel in Nederland, traag in Spanje en Zweden: wat helpt?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Time to First Byte (TTFB) verbeteren voor bezoekers ver van de server",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.11",
+                                      "5.2.10"
+                                  ],
+                       "kernpunt":  "Is de TTFB alleen ver van de server slecht, kijk dan eerst naar een CDN in plaats van naar een zwaardere server.",
+                       "bron":  {
+                                    "titel":  "Optimize Time to First Byte | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-ttfb"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
                    }
                ]
 }
