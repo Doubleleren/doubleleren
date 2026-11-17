@@ -105,7 +105,7 @@ Een token-houder kan bestanden van anderen verwijderen of een oude versie terugz
 |---|---|
 | `docs/` | Website (GitHub Pages): `index.html`, `app.js` (inloggen, aanmelden, les van vandaag, dashboard), `krypto.js`, `xlsx.js`, `woorden.js` |
 | `app/` | Windows-client: `start.ps1`, `installeer.ps1`, `dagelijkse-les.ps1`, `importeer-logboek.ps1`, `lib/` |
-| `beheer/` | `beheer.ps1`, `feedback.ps1`, `generator-context.ps1`, `generator-publiceer.ps1`, `voorstellen-opnemen.ps1` (lessen van de head), `lescontrole.ps1`, `kloon.ps1` (data-repo via git), `lessen-index.ps1`, `generator-instructies.md` |
+| `beheer/` | `beheer.ps1`, `feedback.ps1`, `generator-context.ps1`, `regelaar.ps1` (vaste regels per persoon: plan, bestellingen en wachtrijen vullen), `generator-publiceer.ps1`, `voorstellen-opnemen.ps1` (lessen van de head), `lescontrole.ps1`, `kloon.ps1` (data-repo via git), `lessen-index.ps1`, `generator-instructies.md` |
 | `lessen/` | Gedeelde lessenpool en `index.json` (niet persoonlijk) |
 | `sjablonen/` | `seo/skilllijst.csv`, `seo/curriculum.md`, `organisatie-sjabloon.json` (leeg) |
 | `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1`, `lokale-server.py` |

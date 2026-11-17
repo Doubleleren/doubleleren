@@ -79,4 +79,6 @@ foreach ($naam in @(Get-DlOpslagLijst $d 'feedback' | ForEach-Object { $_ -repla
     } catch { $fbOverslaan++ }
 }
 [IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; vakken = @($vakIds); cellen = @($org.cellen | ForEach-Object { $_.id }); leden = $leden; lesstatistiek = $stat; feedback = @($feedback) } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
+# De vaste regels per persoon (plekken, loting, cel) doet de regelaar; Claude krijgt daarna alleen werk.json
+& (Join-Path $PSScriptRoot 'regelaar.ps1') -Stap plan -Map $Uit -App $App
 Write-Host "Context voor $($leden.Count) deelnemer(s), $($stat.Count) les(sen) met resultaten, $($feedback.Count) feedbackbericht(en)$(if ($fbOverslaan) { " ($fbOverslaan niet leesbaar)" }): $pad$(if ($script:ongeldig) { " · $($script:ongeldig) bestand(en) niet te controleren, $($script:lidOvergeslagen) deelnemer(s) vandaag overgeslagen" })"
