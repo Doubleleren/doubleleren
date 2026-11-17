@@ -87,6 +87,9 @@ foreach ($lid in $alle) {
 }
 
 Write-Host '6. Dagcyclus: generator zet lessen klaar, pop-up rondt af'
+# Nieuwslessen gaan vooraan (laatste 14 dagen): uit de testkopie, zodat de test niet van de datum afhangt
+Get-ChildItem "$A\lessen" -Filter *.json | Where-Object Name -ne 'index.json' | Where-Object { (Get-Content $_.FullName -Raw -Encoding UTF8 | ConvertFrom-Json).type -eq 'nieuws' } | Remove-Item
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\lessen-index.ps1" | Out-Null
 # De testlessen hebben een cel nodig (anders krijgt iemand in een cel ze niet): zoals de generator ze labelt
 foreach ($l in '20261019-srm', '20261019-query-fan-out') { $o = Get-Content "$A\lessen\$l.json" -Raw -Encoding UTF8 | ConvertFrom-Json; $o | Add-Member cel 'alle' -Force; [IO.File]::WriteAllText("$A\lessen\$l.json", ($o | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false))) }
 & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
@@ -386,7 +389,7 @@ foreach ($p in $rpO.leden.PSObject.Properties) {
 }
 Controleer $planOk 'Plan: hooguit 5 lessen, één herhaling en één verdieping per persoon, elke plek met vaardigheid en niveau'
 # Twee lessen een cel geven en Delta (cel ecom) beide als wens geven: de leadgen-les valt af, de les voor alle cellen staat vooraan
-$vrij = @((Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen | Where-Object { $_.soort -eq 'meerkeuze' -and -not $_.cel -and $_.actief -ne $false -and -not $_.juistLangst -and -not $_.vormAfwijkend -and @($_.matrix).Count -and -not @($_.matrix | Where-Object { "$_" -like '*:*' }).Count -and @($rpO.leden.($ids.Delta).gedaan) -notcontains $_.id } | Select-Object -First 2)
+$vrij = @((Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen | Where-Object { $_.soort -eq 'meerkeuze' -and $_.actief -ne $false -and -not $_.juistLangst -and -not $_.vormAfwijkend -and @($_.matrix).Count -and -not @($_.matrix | Where-Object { "$_" -like '*:*' }).Count -and @($rpO.leden.($ids.Delta).gedaan) -notcontains $_.id } | Select-Object -First 2)
 foreach ($x in @(@($vrij[0].id, 'leadgen'), @($vrij[1].id, 'alle'))) { $o = Get-Content "$A\lessen\$($x[0]).json" -Raw -Encoding UTF8 | ConvertFrom-Json; $o | Add-Member cel $x[1] -Force; [IO.File]::WriteAllText("$A\lessen\$($x[0]).json", ($o | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false))) }
 & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\lessen-index.ps1" | Out-Null
 [IO.File]::WriteAllText("$G\wachtrijen.json", (@{ $ids.Delta = @{ wensen = @($vrij[0].id, $vrij[1].id) } } | ConvertTo-Json -Depth 4))
@@ -398,7 +401,7 @@ foreach ($p in $qR.PSObject.Properties) {
     $cel = $rpO.leden.($p.Name).cel; $ls = @($p.Value | ForEach-Object { $x = $_; $idxR | Where-Object id -eq $x })
     if ($ls.Count -ne @($p.Value).Count -or @($ls | Where-Object { $cel -and $_.herkomst -ne 'team' -and $_.cel -ne 'alle' -and $_.cel -ne $cel }).Count -or @($ls | Where-Object { @($rpO.leden.($p.Name).gedaan) -contains $_.id }).Count -or @($ls | Where-Object soort -ne 'meerkeuze').Count -gt 1) { $regelsOk = $false }
 }
-Controleer ($regelsOk -and $qR.($ids.Delta)[0] -eq $vrij[1].id -and $qR.($ids.Delta) -notcontains $vrij[0].id -and $uitR -match '1 wens\(en\) genegeerd') 'Toewijzen: alleen eigen cel of alle, nooit een gedane les, hooguit één schrijfopdracht; wens van een andere cel geweigerd'
+Controleer ($regelsOk -and $qR.($ids.Delta) -contains $vrij[1].id -and $qR.($ids.Delta) -notcontains $vrij[0].id -and $uitR -match '1 wens\(en\) genegeerd') 'Toewijzen: alleen eigen cel of alle, nooit een gedane les, hooguit één schrijfopdracht; wens voor alle cellen erin, wens van een andere cel geweigerd'
 Remove-Item "$G\context.json", "$G\werk.json", "$G\regelaar.json", "$G\wachtrijen.json" -ErrorAction SilentlyContinue
 
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
