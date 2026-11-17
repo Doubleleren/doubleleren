@@ -61,6 +61,8 @@ try {
     if ($fouten.Count) { throw "Lessen afgekeurd, niets gepubliceerd:`n  $($fouten -join "`n  ")" }
 
     & (Join-Path $PSScriptRoot 'lessen-index.ps1')
+    # Met een plan van de regelaar: open plekken vullen met de lessen die Claude schreef of herstelde, wensen van Claude meenemen
+    if (Test-Path (Join-Path $Map 'regelaar.json')) { & (Join-Path $PSScriptRoot 'regelaar.ps1') -Stap toewijzen -Map $Map -App $App }
     $alleLessen = @((Get-Content (Join-Path $App 'lessen\index.json') -Raw -Encoding UTF8 | ConvertFrom-Json).lessen)
     $bekend = @($alleLessen.id)
     $inactief = @($alleLessen | Where-Object { $_.actief -eq $false } | ForEach-Object { $_.id })
@@ -96,5 +98,5 @@ try {
 }
 finally {
     # Ontsleutelde context en verwerkte wachtrijen altijd opruimen
-    Remove-Item (Join-Path $Map 'context.json'), (Join-Path $Map 'wachtrijen.json') -ErrorAction SilentlyContinue
+    Remove-Item (Join-Path $Map 'context.json'), (Join-Path $Map 'wachtrijen.json'), (Join-Path $Map 'regelaar.json'), (Join-Path $Map 'werk.json') -ErrorAction SilentlyContinue
 }
