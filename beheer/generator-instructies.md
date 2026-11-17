@@ -1,4 +1,4 @@
-# Instructies: lessen genereren voor het hele team (DoubleLeren)
+﻿# Instructies: lessen genereren voor het hele team (DoubleLeren)
 
 Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die dagelijks met Claude werken, vooral SEO-specialisten en daarnaast collega's van andere vakken (zie **Vakken** hieronder). Elke les kost 2–5 minuten. Je werkt in de app-repo (de map waarin dit bestand onder `beheer\` staat). Persoonsgegevens zijn versleuteld; jij krijgt alleen een ontsleutelde **context zonder namen en zonder antwoorden**. Spreek de lezer in de lessen aan met "je".
 
@@ -10,6 +10,7 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die
    Meldt het script bestanden met een ongeldige handtekening, noem dat aantal dan in je eindrapport (zonder pseudoniemen).
    Lessen worden bij het publiceren gecontroleerd. Een `bron.url` moet een `https://`-adres zijn, anders wordt er niets gepubliceerd.
 3. Lees `%USERPROFILE%\.doubleleren\beheer\generator\context.json`. Per deelnemer (pseudoniem `lid-xxxxxx`):
+   - `cel` en `project`: waar de deelnemer werkt (bijv. cel `ecom`, project `ecom-b2b`; cel `leadgen`, project `leadgen-b2c`). Zonder cel: geen vaste cel (bijv. een head of een collega van een groep zoals Smartstack). Bovenaan de context staan in `cellen` alle cel-id's. Zie **Cel** hieronder.
    - `vak`: het vak waar de deelnemer bij hoort, en `vakken`: de vakken die hij wil leren met zijn stand: `1` = focus, `2` = meeleren (een oude `3` telt ook als meeleren). Een vak dat niet in `vakken` staat, staat uit: daar krijgt hij geen lessen over.
    - `scores`: laatste eigen score (1–5) per vaardigheid-id uit `sjablonen\<vak>\skilllijst.csv`. Het standaardvak (`vakgebied` in de context, `seo`) heeft kale id's (`1.3.3`), andere vakken het vak ervoor (`cro:1.3.3`).
    - `resultaten`: lessen van de laatste 3 maanden met `resultaat` (goed / deels / fout), `matrix`, `niveau`
@@ -30,6 +31,29 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die
 - **Geen scores in een vak** (net aangezet; een skilllijst invullen is voor een extra vak niet nodig): behandel hem als beginner in dat vak (score 1–2), dus fundamenten op `basis`-niveau, en laat de resultaten het niveau bijsturen: na een paar keer goed op `basis` mag het naar `gevorderd`. Een hele hoofdgebied met dezelfde score is meestal een snelle inschatting per hoofdgebied: neem die als ruwe indicatie.
 - **Bronnen per vak**: elk vak heeft eigen betrouwbare bronnen. Gebruik voor een vak zonder `curriculum.md` de gangbare vakliteratuur en officiële documentatie (bijv. Google Ads-help voor SEA, Meta-hulpcentrum voor social ads, GitHub Docs voor GitHub).
 - Het SEO-curriculum (CRO als ongeveer een kwart, werken met Claude hooguit 1 op de 10 SEO-lessen) geldt alleen voor wie SEO leert.
+
+## Cel: de case past bij je werk
+Feedback november 2026: collega's van leadgen kregen vaak een vraag over een webshop. Ze willen een case die past bij hun eigen werk. Daarom heeft elke les een `cel`: de cel waarvoor de situatie geschreven is.
+
+| `cel` | Wanneer | Typische situatie |
+|---|---|---|
+| `ecom` | De case speelt bij een webshop | productpagina's, categorieën en filters, productfeeds, winkelwagen en checkout, voorraad, retouren |
+| `leadgen` | De case speelt bij een bedrijf dat aanvragen wil | dienstpagina's, offerte- en contactformulieren, afspraken, lokale vindbaarheid en vestigingen, B2B-dienstverleners, kosten per lead |
+| `alle` | De vraag heeft geen bedrijfstype nodig of past bij beide even goed | een Google-update, hoe crawlen werkt, een statuscode, een algemene Claude-vaardigheid |
+
+**Regels bij het inplannen (stap 2):**
+- Iemand in een cel krijgt alleen lessen met **zijn eigen `cel` of `alle`**. Nooit een les met de case van een andere cel, ook niet als reserve. Iemand zonder cel kan alles krijgen, maar bij voorkeur `alle`.
+- Hetzelfde punt mag voor beide cellen getoetst worden, elk met een eigen les en een eigen case. Een leadgen-collega die iets over interne links moet leren, krijgt dus een les over interne links naar dienstpagina's, niet over categoriepagina's. Dat telt als een nieuwe les met een eigen id, en ook hier geldt: een echt andere situatie en andere opties, geen herschreven kopie.
+- Liever een case uit de eigen cel dan `alle`: een herkenbare klantsituatie leert beter. Gebruik `alle` alleen als het onderwerp echt geen bedrijfstype nodig heeft.
+- Binnen een cel mag de case ook passen bij het project (b2b of b2c in de project-id). Dat is een plus, geen eis: `cel` gaat alleen over ecom of leadgen.
+- **Een vaardigheid die bij de andere cel hoort** (bijv. productfeeds voor leadgen): zoek eerst de vertaling naar de eigen cel (filters op een overzicht van diensten of vestigingen in plaats van productfilters). Bestaat die niet, plan de vaardigheid dan alleen in als hij in iemands `focus` of `leerdoelen` staat of prioriteit 1 heeft, en geef dan een les met `alle` of de case van de andere cel met een zin in de intro waarom het ook voor deze collega telt.
+
+**Regels bij het schrijven (stap 3):**
+- Elke nieuwe les krijgt `cel`. Kies de cel vóór je de situatie bedenkt, niet erna.
+- Verdeel de voorraadlessen over de cellen naar de vraag: tel per vaardigheid hoeveel deelnemers per cel hem nodig hebben (`cel` in de context). Zijn er per cel nog maar weinig niet-gedane lessen over een vaardigheid, schrijf dan eerst voor die cel. Let erop dat leadgen niet achterblijft: de oude kennisbank gaat vooral over webshops.
+- Nieuwslessen krijgen meestal `alle`.
+
+**Lessen zonder `cel`** (oudere lessen; in `lessen\index.json` ontbreekt dan `cel`): bepaal de cel van een eigen les vóór je hem inplant. Zet alleen het veld `cel` erbij en verander verder niets. Een les waaraan alleen `cel` is toegevoegd, is geen herziening: dan geen `herzien` en geen `wijziging`. Doe daarnaast elke run tot 30 andere eigen lessen zonder `cel`, tot ze allemaal een cel hebben. Een teamles zonder `cel` pas je niet aan: beoordeel zijn cel zelf aan de hand van de intro en de vraag voordat je hem inplant.
 
 ## Stap 1: Nieuws checken
 Haal de RSS-feeds op van de afgelopen ~4 dagen:
@@ -100,10 +124,10 @@ Doel: **elke deelnemer heeft 5 lessen klaar** die hij of zij nog niet deed (niet
 
 Een ervaren collega die een basisvraag krijgt over iets wat hij al jaren doet, haakt af. Een te moeilijke vraag corrigeert zichzelf via de resultaten. Ging een verdieping fout of deels, dan volgt later een `herhaling`, en de vaardigheid telt als mogelijk overschat.
 
-**Wachtrij vervangen mag.** Staan er in iemands `wachtrij` lessen die duidelijk te makkelijk zijn voor dit niveau, dan mag je ze vervangen in plaats van alleen aanvullen. Hetzelfde geldt voor schrijfopdrachten (open, zoek-op, maak-met-claude) die niet passen bij de regels voor 'Soort opdracht' in stap 3: vervang die door een meerkeuzeles over dezelfde vaardigheid. Nieuws- en teamlessen blijf je vooraan zetten.
+**Wachtrij vervangen mag.** Staan er in iemands `wachtrij` lessen die duidelijk te makkelijk zijn voor dit niveau, dan mag je ze vervangen in plaats van alleen aanvullen. Lessen met de case van een andere cel vervang je altijd. Hetzelfde geldt voor schrijfopdrachten (open, zoek-op, maak-met-claude) die niet passen bij de regels voor 'Soort opdracht' in stap 3: vervang die door een meerkeuzeles over dezelfde vaardigheid. Nieuws- en teamlessen blijf je vooraan zetten.
 
 Werk verder zo:
-1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. "Past" betekent ook: het `niveau` sluit aan bij de persoon. Een les met `"actief": false` gebruik je nooit. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
+1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. "Past" betekent ook: het `niveau` sluit aan bij de persoon en de `cel` is die van de deelnemer of `alle` (zie 'Cel'). Een les met `"actief": false` gebruik je nooit. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
 2. **Per deelnemer per dag maximaal 1 `herhaling` en 1 `verdieping`.** De rest is `basis` (en eventueel nieuws).
 3. **Welke vaardigheid en welk niveau** (bij `basis`):
    - score 1–2: de fundamenten (`niveau: "basis"`); ongeveer de helft van de basislessen
@@ -140,6 +164,7 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
   "vakgebied": "leesbare naam, bijv. SEO | CRO | SEO / AI-search | SEO × Claude | CRO × Claude | Analytics | SEA | Social ads | Content",
   "onderwerp": "korte onderwerpnaam",
   "matrix": ["vaardigheid-id's uit de skilllijst van één vak, bijv. 1.3.3 (SEO) of cro:1.3.3"],
+  "cel": "ecom | leadgen | alle (zie 'Cel'; een id uit `cellen` in de context)",
   "titel": "pakkende titel, max ~70 tekens",
   "intro": "optioneel: alleen de situatie, max ~60 woorden, zonder het antwoord (zie 'Opbouw: eerst zelf nadenken')",
   "opdracht": { "soort": "meerkeuze | open | zoek-op | maak-met-claude", "vraag": "...", "opties": ["4 bij meerkeuze"], "juist": 0, "minTekens": 100, "hint": "optioneel" },
@@ -229,4 +254,4 @@ Regels:
 - Je wijzigingen worden een voorstel (pull request) dat Thijs of Sjoerd eerst goedkeurt. Tot dan zie je morgen weer de oude versie. Herhaal een voorstel dat nog geldt dus gewoon.
 - Niets nieuws geleerd? Laat het bestand dan ongewijzigd.
 
-Rapporteer in één regel hoeveel nieuwe lessen je schreef, hoeveel je hergebruikte, voor hoeveel deelnemers, hoeveel lessen je herzag of uit de roulatie haalde, en of je het geheugen bijwerkte. Noem geen pseudoniemen.
+Rapporteer in één regel hoeveel nieuwe lessen je schreef, hoeveel je hergebruikte, voor hoeveel deelnemers, hoeveel lessen je herzag of uit de roulatie haalde, bij hoeveel lessen je de cel bepaalde, en of je het geheugen bijwerkte. Noem geen pseudoniemen.

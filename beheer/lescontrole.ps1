@@ -29,6 +29,8 @@ function Test-DlLes($l, [string]$Id, [int]$Lengte) {
         if ([string]$l.video.url -notmatch '^https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}$') { $fouten += 'video.url moet een YouTube-video zijn (https://www.youtube.com/watch?v=...)' }
         if (-not $l.video.titel -or ([string]$l.video.titel).Length -gt 200) { $fouten += 'video.titel ontbreekt of is te lang' }
     }
+    # Cel waarvoor de case geschreven is (id uit organisatie.json, bijv. ecom of leadgen) of 'alle'; zonder = nog niet bepaald
+    if ($null -ne $l.cel -and ($l.cel -isnot [string] -or $l.cel -notmatch '^[a-z][a-z0-9-]{0,30}$')) { $fouten += "cel moet een cel-id zijn (bijv. ecom of leadgen) of 'alle'" }
     # Herzien na feedback of resultaten: datum en korte reden; 'actief: false' haalt een les uit de roulatie
     if ($null -ne $l.actief -and $l.actief -isnot [bool]) { $fouten += 'actief moet true of false zijn' }
     if ($null -ne $l.herzien -and "$($l.herzien)" -notmatch '^\d{4}-\d{2}-\d{2}$') { $fouten += 'herzien moet een datum zijn (JJJJ-MM-DD)' }
