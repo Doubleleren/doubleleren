@@ -377,7 +377,7 @@ Write-Host '17. Regelaar: plan per persoon, werkbestand zonder scores, cel en re
 $G = "$T\beheer\generator"
 & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 $werkT = Get-Content "$G\werk.json" -Raw -Encoding UTF8; $werkO = $werkT | ConvertFrom-Json
-Controleer ((Test-Path "$G\regelaar.json") -and $werkT -notmatch '"(scores|resultaten|gedaan|prioriteit)"' -and $werkT -notmatch 'Alfa|Bravo|Foxtrot|antwoord' -and @($werkO.personen.PSObject.Properties).Count -ge 1) 'Werkbestand voor Claude: zonder scores, resultaten, namen of antwoorden'
+Controleer ((Test-Path "$G\regelaar.json") -and $werkT -notmatch '"(scores|resultaten|gedaan|prioriteit|antwoord|antwoorden)"\s*:' -and $werkT -notmatch 'Alfa|Bravo|Foxtrot' -and @($werkO.personen.PSObject.Properties).Count -ge 1) 'Werkbestand voor Claude: zonder scores, resultaten, namen of antwoorden'
 $rpO = Get-Content "$G\regelaar.json" -Raw -Encoding UTF8 | ConvertFrom-Json
 $planOk = $true
 foreach ($p in $rpO.leden.PSObject.Properties) {
