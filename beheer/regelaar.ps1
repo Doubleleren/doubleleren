@@ -152,7 +152,7 @@ if ($Stap -eq 'plan') {
             $r = (Kans) * $som; $vid = $gew[-1][0]
             foreach ($g in $gew) { $r -= $g[1]; if ($r -lt 0) { $vid = $g[0]; break } }
             $s = $scores[$vid]
-            $plekken += [pscustomobject]@{ vak = $vak; vaardigheid = $vid; type = $(if ($s -ge 4) { 'verdieping' } else { 'basis' }); niveau = (& $niveauVan $vid); cel = $p.cel; les = $null }
+            $plekken += [pscustomobject]@{ vak = $vak; vaardigheid = $vid; type = $(if ($s -ge 4 -and -not @($plekken | Where-Object type -eq 'verdieping').Count) { 'verdieping' } else { 'basis' }); niveau = (& $niveauVan $vid); cel = $p.cel; les = $null }
             [void]$bezet.Add($vid); $gebruiktHg[$items[$vid].hoofdgebied] = $true
         }
 
@@ -200,7 +200,7 @@ if ($Stap -eq 'plan') {
     # niet labelen (die is van een head), dus Claude beoordeelt alleen of hij past en zet hem anders bij 'nietVoor' in de wensen.
     Schrijf (Join-Path $Map 'regelaar.json') ([ordered]@{ v = 1; vandaag = $nu.ToString('yyyy-MM-dd'); leden = $plan })
     Schrijf (Join-Path $Map 'werk.json') ([ordered]@{
-        v = 1; vandaag = $nu.ToString('yyyy-MM-dd'); vakgebied = $standaard; vakken = @($perVak.Keys); cellen = $cellen
+        v = 1; vandaag = $nu.ToString('yyyy-MM-dd'); vakgebied = $standaard; vakken = @($perVak.Keys | Where-Object { $v = $_; @($plan.Values | Where-Object { $_.vakken -contains $v }).Count }); cellen = $cellen
         bestellingen = @($bestel.Values | Sort-Object { -$_.aantal })
         voorraad = $tips
         herzienEerst = @($herzien.Keys | Sort-Object | ForEach-Object { [ordered]@{ les = $_; reden = $herzien[$_] } })
@@ -217,7 +217,7 @@ if ($Stap -eq 'plan') {
 $rp = Lees (Join-Path $Map 'regelaar.json')
 $wensen = $null; $wPad = Join-Path $Map 'wachtrijen.json'
 if (Test-Path $wPad) { try { $wensen = Lees $wPad } catch { Write-Host '  wachtrijen.json van Claude is geen geldige JSON: wensen genegeerd' } }
-$teller = @{}; $uit = [ordered]@{}; $genegeerd = 0; $gevuld = 0; $leeg = 0
+$teller = @{}; $uit = [ordered]@{}; $genegeerd = 0; $gevuld = 0; $leeg = 0; $vervangen = 0
 foreach ($id in @($rp.leden.PSObject.Properties.Name)) {
     $r = $rp.leden.$id
     $p = [pscustomobject]@{ id = $id; cel = [string]$r.cel; gedaan = New-Object 'System.Collections.Generic.HashSet[string]' }
@@ -237,10 +237,19 @@ foreach ($id in @($rp.leden.PSObject.Properties.Name)) {
     # Wensen van Claude (bijv. een les die bij iemands leerdoelen past): alleen als ze volgens de regels mogen
     $ok = @(); foreach ($x in $wens) { $l = $lesVan[[string]$x]; if ((& $mag $l) -or ($l -and $l.soort -eq 'maak-met-claude' -and (Bruikbaar $l $p (VakVanLes $l)) -eq 'ja')) { $ok += $l.id } elseif ($x) { $genegeerd++ } }
     $lijst = @($vooraan + $ok + @($r.open | Where-Object { & $mag $lesVan[$_] }))
+    $leegPl = @()
     foreach ($pl in @($r.plekken)) {
         $id2 = $pl.les
         if (-not $id2 -or -not (& $mag $lesVan[$id2]) -or $lijst -contains $id2) { $l = Zoek $pl $p $lijst $teller; $id2 = if ($l) { $l.id } }
-        if ($id2) { $lijst += $id2; $teller[$id2] = [int]$teller[$id2] + 1; if (-not $pl.les) { $gevuld++ } } else { $leeg++ }
+        if ($id2) { $lijst += $id2; $teller[$id2] = [int]$teller[$id2] + 1; if (-not $pl.les) { $gevuld++ } } else { $leegPl += $pl }
+    }
+    # Nog een lege plek (bijv. de wachtende les bleek na het labelen bij een andere cel te horen, of een bestelling lukte niet):
+    # een andere passende meerkeuzeles van hetzelfde vak en niveau, zodat de wachtrij vol blijft. Morgen plant de regelaar opnieuw.
+    foreach ($pl in $leegPl) {
+        if (@($lijst | Select-Object -Unique).Count -ge $WACHTRIJ) { break }
+        $v = @($index | Where-Object { $_.soort -eq 'meerkeuze' -and $_.niveau -eq $pl.niveau -and (VakVanLes $_) -eq $pl.vak -and $lijst -notcontains $_.id -and (& $mag $_) }) |
+            Sort-Object @{ e = { if ($_.cel -eq $p.cel) { 0 } else { 1 } } }, @{ e = { [int]$teller[$_.id] } }, @{ e = { Kans } } | Select-Object -First 1
+        if ($v) { $lijst += $v.id; $teller[$v.id] = [int]$teller[$v.id] + 1; $vervangen++ } else { $leeg++ }
     }
     # Nooit twee schrijfopdrachten en hooguit één per wachtrij; daarna afkappen (vooraan en wensen gaan voor)
     $def = @(); $schrijf = 0
@@ -248,4 +257,4 @@ foreach ($id in @($rp.leden.PSObject.Properties.Name)) {
     $uit[$id] = @($def | Select-Object -First ([math]::Max($WACHTRIJ, @($vooraan + $ok).Count)))
 }
 Schrijf $wPad $uit
-Write-Host "Toewijzen: $($uit.Count) wachtrij(en), $gevuld plek(ken) gevuld met nieuwe of herstelde lessen, $leeg nog leeg$(if ($genegeerd) { ", $genegeerd wens(en) genegeerd (niet volgens de regels)" })"
+Write-Host "Toewijzen: $($uit.Count) wachtrij(en), $gevuld plek(ken) gevuld met nieuwe of herstelde lessen, $vervangen met een andere passende les, $leeg nog leeg$(if ($genegeerd) { ", $genegeerd wens(en) genegeerd (niet volgens de regels)" })"
