@@ -84,7 +84,9 @@ try {
             # Ter controle: de geplande lessen per wachtrij, met een korte hash in plaats van het pseudoniem (de beheerder koppelt die lokaal)
             $hash = (-join ((Get-DlSha256 $script:DlUtf8.GetBytes("doubleleren-proef|$id"))[0..2] | ForEach-Object { $_.ToString('x2') }))
             $idx = @((Get-Content (Join-Path $App 'lessen\index.json') -Raw -Encoding UTF8 | ConvertFrom-Json).lessen)
-            Write-Host "  PROEF-WACHTRIJ $hash`: $(($lijst | ForEach-Object { $l = $idx | Where-Object id -eq $_ | Select-Object -First 1; "[$($l.type)/$($l.niveau)] $($l.titel)" }) -join ' || ')"
+            # Met de cel van de persoon en van elke les, om na te lezen of de case past (geen naam, alleen de hash)
+            $rpPad = Join-Path $Map 'regelaar.json'; $celP = if (Test-Path $rpPad) { "$((Get-Content $rpPad -Raw -Encoding UTF8 | ConvertFrom-Json).leden.$id.cel)" }
+            Write-Host "  PROEF-WACHTRIJ $hash (cel $(if ($celP) { $celP } else { '-' }))`: $(($lijst | ForEach-Object { $l = $idx | Where-Object id -eq $_ | Select-Object -First 1; "[$($l.type)/$($l.niveau)/$(if ($l.cel) { $l.cel } else { '-' })] $($l.titel)" }) -join ' || ')"
             continue
         }
         Write-DlVersleuteld $d $id 'wachtrij' $s $nieuw $(if ($b) { $b.sha }) 'generator' $geheim.generatorPrive | Out-Null
