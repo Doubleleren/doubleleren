@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-17T05:36:28",
+    "bijgewerkt":  "2026-11-18T05:31:15",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1613,14 +1613,15 @@
                        "matrix":  [
                                       "2.2.5"
                                   ],
-                       "kernpunt":  "Organization-markup hoort op de homepage of over-ons-pagina, met de merknaam in name, een logo van minimaal 112×112 px in een ondersteund formaat, en sameAs naar de officiële profielen.",
+                       "kernpunt":  "Toont Google een verkeerd logo of naam, kijk dan eerst wat de Organization-markup op de homepage meegeeft.",
                        "bron":  {
                                     "titel":  "Organization (Organization) structured data | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/structured-data/organization"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-18"
                    },
                    {
                        "id":  "20261026-paid-organic-rapport",
@@ -1902,14 +1903,15 @@
                                       "2.1.8",
                                       "2.1.10"
                                   ],
-                       "kernpunt":  "Google herschrijft een title als die de pagina slecht beschrijft: half leeg, verouderd, onjuist, overal hetzelfde of zonder duidelijke hoofdtitel. Herstel het in het sjabloon, zodat title en zichtbare H1 consistent zijn.",
+                       "kernpunt":  "Herschrijft Google een title, zoek dan in het sjabloon naar het signaal dat niet klopt, in plaats van losse pagina\u0027s aan te passen.",
                        "bron":  {
                                     "titel":  "Influencing your title links in search results | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/appearance/title-link"
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-18"
                    },
                    {
                        "id":  "20261027-usability-test-vijf-gebruikers",
@@ -2422,14 +2424,15 @@
                                       "2.1.12",
                                       "2.1.10"
                                   ],
-                       "kernpunt":  "Voor Google Search maken de volgorde en het aantal koppen niet uit. Wel telt dat koppen de pagina in duidelijke, beschrijvende secties opdelen voor de lezer.",
+                       "kernpunt":  "Meldt een tool iets over de volgorde of het aantal koppen, kijk dan eerst of elke kop zegt wat er in dat stuk staat.",
                        "bron":  {
                                     "titel":  "SEO Starter Guide | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-18"
                    },
                    {
                        "id":  "20261029-landingspagina-tekst-zonder-verzonnen-cijfers",
@@ -5179,6 +5182,199 @@
                        "bron":  {
                                     "titel":  "Optimize Time to First Byte | web.dev",
                                     "url":  "https://web.dev/articles/optimize-ttfb"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-bronlinks-niet-allemaal-nofollow",
+                       "titel":  "Elke link naar een bron op nofollow \u0027om linkwaarde te bewaren\u0027?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Externe links: wanneer nofollow, sponsored of ugc?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "2.1.16",
+                                      "1.3.2"
+                                  ],
+                       "kernpunt":  "Link gewoon naar goede bronnen. Markeer alleen wat betaald is, wat gebruikers plaatsten of wat je niet vertrouwt.",
+                       "bron":  {
+                                    "titel":  "Link best practices for Google | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-domeinverhuizing-verwachting-directie",
+                       "titel":  "De directie wil twee weken na de verhuizing \u0027geen verlies\u0027 zien",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Verwachtingen managen bij een domeinverhuizing",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "6.3.3",
+                                      "6.2.2",
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "Beloof bij een verhuizing geen \u0027geen verlies\u0027 op korte termijn. Spreek vooraf een tussenstand en een evaluatiemoment af.",
+                       "bron":  {
+                                    "titel":  "Site moves with URL changes | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-dynamic-serving-crawlen-als-smartphone",
+                       "titel":  "De crawl is foutloos, maar mobiel missen de productteksten",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Crawlen als mobiele user-agent bij dynamic serving",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "8.2.1",
+                                      "8.1.1"
+                                  ],
+                       "kernpunt":  "Crawl een site standaard als Googlebot Smartphone, want dat is de versie die Google indexeert.",
+                       "bron":  {
+                                    "titel":  "Mobile site and mobile-first indexing best practices | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+                                },
+                       "video":  {
+                                     "titel":  "Mobile-First Indexing",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-eeat-vertrouwen-belangrijkste",
+                       "titel":  "Een gediplomeerde expert inhuren voor fietsreviews?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "E-E-A-T: wat de vier letters betekenen en welke het zwaarst weegt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "11.1.2",
+                                      "11.1.1"
+                                  ],
+                       "kernpunt":  "Wil een klant E-E-A-T verbeteren, begin dan bij vertrouwen: laat zien wie het maakte, hoe en waarom.",
+                       "bron":  {
+                                    "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+                                },
+                       "video":  {
+                                     "titel":  "EEAT Explained: What Google Actually Uses to Judge Trust \u0026 Quality",
+                                     "kanaal":  "Edward Sturm",
+                                     "url":  "https://www.youtube.com/watch?v=4YhJH5VOF3w"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-lighthouse-groen-velddata-rood",
+                       "titel":  "Lighthouse geeft 96, maar echte bezoekers wachten bijna 4 seconden",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Labdata tegenover velddata: welke telt, en waarom verschillen ze?",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.2.1",
+                                      "4.1.1"
+                                  ],
+                       "kernpunt":  "Rapporteer snelheid op de meting bij echte bezoekers, en gebruik Lighthouse alleen om de oorzaak te zoeken.",
+                       "bron":  {
+                                    "titel":  "Why lab and field data can be different (and what to do about it) | web.dev",
+                                    "url":  "https://web.dev/articles/lab-and-field-data-differences"
+                                },
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-optimizely-snippet-gehackt",
+                       "titel":  "Kwaadaardige code in het A/B-testscript: wat doe je nu?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Beveiligingsincident Optimizely Web Experimentation (november 2026)",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.3",
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Een script dat op elke pagina draait, kan alles op die pagina. Weet dus altijd wie er code in mag zetten.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: Optimizely Says Attacker Used A Signup Flaw To Inject Malware",
+                                    "url":  "https://www.searchenginejournal.com/optimizely-signup-flaw-malware/597839/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-optimizely-via-gtm-flikkering",
+                       "titel":  "Bezoekers zien eerst de oude hero, en dan pas de variant",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testtool via Google Tag Manager: flikkering en vertekende tests",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.2.3",
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Ziet een bezoeker in een A/B-test eerst het origineel, vertrouw dan de uitkomst niet. Los eerst de flikkering op.",
+                       "bron":  {
+                                    "titel":  "Use a tag manager with Optimizely snippet | Optimizely Web Experimentation docs",
+                                    "url":  "https://docs.optimizely.com/web-experimentation/docs/implement-the-snippet-with-a-tag-manager"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-productvarianten-productgroup",
+                       "titel":  "Eén jas, zes kleuren, één URL: hoe zet je de varianten in de markup?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Structured data voor productvarianten: ProductGroup en hasVariant",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "2.2.1",
+                                      "2.2.9"
+                                  ],
+                       "kernpunt":  "Heeft een product varianten, markeer ze dan als groep met per variant eigen prijs, voorraad, ID en URL, en niet als één prijsbereik.",
+                       "bron":  {
+                                    "titel":  "Product variant (ProductGroup, Product) structured data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/product-variants"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261118-ymyl-giftige-kamerplanten",
+                       "titel":  "Drie blogs van een tuincentrum: welke moet het betrouwbaarst zijn?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "YMYL: welke content vraagt extra zorg voor E-E-A-T?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "11.1.3",
+                                      "11.1.5"
+                                  ],
+                       "kernpunt":  "Kan een fout op een pagina iemand schade doen, behandel die pagina dan als YMYL, ook in een gewone webshop.",
+                       "bron":  {
+                                    "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

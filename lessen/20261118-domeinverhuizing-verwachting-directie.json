@@ -1,0 +1,41 @@
+{
+  "id": "20261118-domeinverhuizing-verwachting-directie",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Verwachtingen managen bij een domeinverhuizing",
+  "matrix": ["6.3.3", "6.2.2", "5.1.2"],
+  "titel": "De directie wil twee weken na de verhuizing 'geen verlies' zien",
+  "intro": "Een opleidingsinstituut met zo'n 3.000 pagina's verhuist volgende week naar een nieuw domein. De redirectmap is af en getest. De marketingdirecteur wil twee weken na de verhuizing in de directievergadering melden dat er geen organisch verkeer verloren is gegaan. Ze vraagt of dat haalbaar is.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke verwachting spreek je af?",
+    "opties": [
+      "Ja, dat lukt, want met goede 301-redirects gaat alle waarde meteen mee en merkt Google vrijwel geen verschil.",
+      "Nee, want na elke verhuizing ben je een half jaar een derde van het verkeer kwijt, hoe goed de redirects ook zijn.",
+      "Reken op schommelingen, want bij deze omvang heeft Google een paar weken nodig voor de meeste pagina's.",
+      "Ja, als je na de verhuizing de oude redirects na twee weken weghaalt, want dan indexeert Google het nieuwe domein sneller."
+    ],
+    "juist": 2
+  },
+  "kern": "Bij een verhuizing schommelen posities tijdelijk. Bij een middelgrote site duurt het een paar weken voordat de meeste pagina's over zijn.",
+  "afleiders": [
+    "**Direct geen verschil:** goede redirects zijn de basis, dus dit klinkt logisch. Maar Google moet elke oude URL eerst opnieuw bezoeken, en dat kost tijd.",
+    "**Een half jaar een derde kwijt:** zulke verhalen hoor je vaak na mislukte verhuizingen. Google noemt geen vast verlies, alleen tijdelijke schommelingen.",
+    "",
+    "**Redirects na twee weken weghalen:** dan raak je juist links en bezoekers kwijt. Google raadt aan redirects zo lang mogelijk te houden, meestal minstens een jaar."
+  ],
+  "kort": "Denk aan een winkel die naar een nieuwe straat verhuist. Ook met een bord op de oude deur duurt het even voordat alle vaste klanten de weg weten. De eerste weken is het rustiger of juist wisselend. Google werkt net zo: het moet elke oude pagina opnieuw bezoeken en de verwijzing volgen. Pas daarna staat alles op het nieuwe adres.",
+  "begrippen": [
+    { "term": "301-redirect", "uitleg": "een blijvende doorverwijzing van een oude URL naar een nieuwe." },
+    { "term": "Redirectmap", "uitleg": "een lijst met per oude URL de nieuwe URL waar hij naartoe moet." },
+    { "term": "Domeinverhuizing", "uitleg": "een site die van het ene domein naar een ander gaat, bijvoorbeeld van oudenaam.nl naar nieuwenaam.nl." }
+  ],
+  "uitleg": "Google schrijft in de handleiding voor een verhuizing met URL-wijzigingen:\n- Reken op tijdelijke schommelingen in posities tijdens de verhuizing. Die komen daarna tot rust.\n- Een kleine tot middelgrote site heeft een paar weken nodig voordat de meeste pagina's verhuisd zijn. Grotere sites duren langer.\n- Houd redirects zo lang mogelijk, meestal minstens een jaar.\n- Het verkeer op de oude site hoort te dalen terwijl het op de nieuwe site stijgt.\n\nWat je de directeur voorstelt:\n- Rapporteer na twee weken een tussenstand, geen eindoordeel. Vergelijk het verkeer van het oude en nieuwe domein samen met dezelfde periode ervoor.\n- Leg vooraf vast wanneer je evalueert, bijvoorbeeld na zes en twaalf weken.\n- Volg in die tijd in Search Console beide domeinen, de server-logs en de 404-fouten.\n\nZo hoort de directie geen belofte die niet te houden is.",
+  "kernpunt": "Beloof bij een verhuizing geen 'geen verlies' op korte termijn. Spreek vooraf een tussenstand en een evaluatiemoment af.",
+  "toepassing": "Kijk vandaag of er bij een klant een verhuizing of grote URL-wijziging op de planning staat. Schrijf in twee zinnen op welke verwachting je over de eerste weken afspreekt.",
+  "bron": {
+    "titel": "Site moves with URL changes | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+  }
+}

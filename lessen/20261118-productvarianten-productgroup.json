@@ -1,0 +1,42 @@
+{
+  "id": "20261118-productvarianten-productgroup",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "Structured data voor productvarianten: ProductGroup en hasVariant",
+  "matrix": ["2.2.1", "2.2.9"],
+  "titel": "Eén jas, zes kleuren, één URL: hoe zet je de varianten in de markup?",
+  "intro": "Een kledingwebshop verkoopt een regenjas in zes kleuren en vier maten. Alles staat op één pagina; een kleur kiezen verandert de URL naar ?kleur=rood, zonder dat de pagina herlaadt. De canonical wijst altijd naar de URL zonder kleur. Nu staat er één Product-blok met de prijs van de goedkoopste variant. Sommige kleuren zijn duurder en soms uitverkocht.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke opzet van de structured data past het best bij deze pagina?",
+    "opties": [
+      "Eén Product met een AggregateOffer van laagste tot hoogste prijs, want daaruit leidt Google zelf de prijs per kleur af.",
+      "Een ProductGroup met per variant een Product in hasVariant, want zo krijgt elke kleur een eigen sku, prijs, voorraad en URL.",
+      "Per variant een los Product-blok zonder ProductGroup, met elk een canonical naar zichzelf, zodat elke kleur apart indexeert.",
+      "Alleen markup voor de variant die bij het laden zichtbaar is, want Google leest per pagina toch maar één Product-blok uit."
+    ],
+    "juist": 1
+  },
+  "kern": "Varianten op één pagina horen in één ProductGroup, met per variant een eigen Product met unieke ID, eigen aanbod en een URL die de variant voorselecteert.",
+  "afleiders": [
+    "**AggregateOffer:** een prijsbereik klinkt als een nette samenvatting. Maar Google weet dan niet welke prijs en voorraad bij welke kleur hoort.",
+    "",
+    "**Losse blokken met eigen canonical:** dan heb je zes canonicals voor één pagina. Google vraagt bij varianten op één pagina juist één canonieke URL voor de hele groep.",
+    "**Alleen de zichtbare variant:** Google leest wel meerdere varianten op één pagina, mits ze in een ProductGroup staan. Alleen de eerste kleur markeren verbergt de rest."
+  ],
+  "kort": "Denk aan een schoenendoos met één etiket voor het model en binnenin een kaartje per maat. Op het etiket staat wat alle paren gemeen hebben. Op elk kaartje staat wat er per paar anders is: maat, prijs en of hij nog op voorraad is. Zo werkt ProductGroup ook. De groep beschrijft de jas, en elke variant krijgt zijn eigen kaartje.",
+  "begrippen": [
+    { "term": "ProductGroup", "uitleg": "markup voor een product dat in varianten bestaat, zoals kleuren of maten. Het is het etiket van de hele groep." },
+    { "term": "hasVariant", "uitleg": "de eigenschap waarin je elke variant als los Product binnen de groep zet." },
+    { "term": "variesBy", "uitleg": "zegt waarin de varianten verschillen, bijvoorbeeld kleur en maat." },
+    { "term": "Canonical", "uitleg": "de URL die je als hoofdversie van een pagina aanwijst." }
+  ],
+  "uitleg": "Google onderscheidt twee opzetten voor varianten:\n\n**Eén pagina met alle varianten** (zoals hier): er is één canonieke URL voor de hele ProductGroup. In de markup:\n- ProductGroup met name, productGroupID (de 'parent sku'), variesBy en url zonder variantkeuze;\n- per variant een Product in hasVariant, met een unieke sku of gtin en een eigen Offer met prijs en beschikbaarheid;\n- per variant een URL die de variant direct voorselecteert, zoals ?kleur=rood&maat=m.\n\n**Elke variant op een eigen pagina:** elke pagina krijgt volledige markup voor de varianten op die pagina, en de ProductGroup staat op elke pagina opnieuw. Er is dan geen canonieke URL voor de groep. Varianten op andere pagina's verwijs je aan met een Product met alleen url.\n\nControleer na het aanpassen met de Rich Results Test of de varianten herkend worden.",
+  "kernpunt": "Heeft een product varianten, markeer ze dan als groep met per variant eigen prijs, voorraad, ID en URL, en niet als één prijsbereik.",
+  "toepassing": "Haal vandaag één productpagina met varianten van een klant door de Rich Results Test. Kijk of er een ProductGroup met hasVariant staat, of alleen één Product.",
+  "bron": {
+    "titel": "Product variant (ProductGroup, Product) structured data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants"
+  }
+}

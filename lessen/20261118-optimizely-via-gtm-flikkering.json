@@ -1,0 +1,41 @@
+{
+  "id": "20261118-optimizely-via-gtm-flikkering",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO",
+  "onderwerp": "A/B-testtool via Google Tag Manager: flikkering en vertekende tests",
+  "matrix": ["3.2.3", "7.2.1"],
+  "titel": "Bezoekers zien eerst de oude hero, en dan pas de variant",
+  "intro": "Een installateur test met Optimizely Web Experimentation een nieuwe hero op de homepage. Een marketeer heeft het script van Optimizely via Google Tag Manager geplaatst, als tag die op alle pagina's afgaat. In sessie-opnames zie je dat bezoekers in de variant eerst even de oude hero zien, die daarna verspringt. De variant converteert slechter dan verwacht.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat pas je aan voordat je de test opnieuw start?",
+    "opties": [
+      "Niets aan de techniek, want de variant is gewoon slechter, dus stop de test en houd de oude hero op de site.",
+      "Geef de tag in Tag Manager de hoogste prioriteit, want dan laadt het script vóór de rest en is de flikkering weg.",
+      "Zet het script bovenaan in de head, buiten Tag Manager, want via Tag Manager laadt het te laat voor de test.",
+      "Laat de variant pas na drie seconden zien, want dan heeft iedereen de pagina eerst rustig in beeld gehad."
+    ],
+    "juist": 2
+  },
+  "kern": "Via Tag Manager laadt het testscript pas als de pagina al zichtbaar is. Daardoor zien bezoekers eerst het origineel, en dat vertekent de test.",
+  "afleiders": [
+    "**De variant is slechter:** de cijfers lijken dat te zeggen. Maar bezoekers zagen een verspringende pagina, dus je hebt de variant nog niet eerlijk getest.",
+    "**Hoogste prioriteit:** prioriteit bepaalt alleen de volgorde binnen Tag Manager. Tag Manager laadt zelf al na het begin van de pagina, dus het script komt nog steeds te laat.",
+    "",
+    "**Drie seconden wachten:** dan zien juist álle bezoekers eerst het origineel. Dat maakt de flikkering niet kleiner, maar groter."
+  ],
+  "kort": "Denk aan een toneelstuk waarbij het decor pas wordt omgebouwd als het doek al open is. Het publiek ziet eerst het oude decor en dan mensen die schuiven. Dat leidt af, hoe mooi het nieuwe decor ook is. Een A/B-testscript moet klaar zijn voordat het doek opengaat. Via Tag Manager komt het te laat, dus zien bezoekers het ombouwen.",
+  "begrippen": [
+    { "term": "Google Tag Manager (GTM)", "uitleg": "een tool waarmee je scripts en metingen op een site zet zonder elke keer de code aan te passen." },
+    { "term": "Flikkering (flicker)", "uitleg": "bezoekers zien heel even de originele pagina voordat de variant van de test verschijnt." },
+    { "term": "Synchroon laden", "uitleg": "de browser wacht met tonen tot het script geladen is. Asynchroon laden wacht niet." }
+  ],
+  "uitleg": "Optimizely schrijft in zijn documentatie: 'Gebruik geen tag manager om het snippet van Optimizely te laden.' Dat kan zorgen voor 'page flashing': bezoekers zien kort de originele pagina voordat het experiment verschijnt. Ook analytics-koppelingen kunnen dan niet goed werken.\n\nGoogle Tag Manager laadt asynchroon. De browser toont de pagina dus al voordat het testscript klaar is.\n\nWat Optimizely aanraadt:\n- Zet het snippet bovenaan in de head, buiten Tag Manager.\n- Zet Tag Manager daaronder, zoals je met andere analytics-tags doet.\n- Moet het toch asynchroon, verberg dan de delen van de pagina die de test verandert tot het script klaar is. Optimizely noemt dat een laatste redmiddel.\n\nVoor de test betekent het: de resultaten tot nu toe zijn niet betrouwbaar. Herstel de plaatsing, controleer in een opname dat de flikkering weg is en start de test opnieuw.",
+  "kernpunt": "Ziet een bezoeker in een A/B-test eerst het origineel, vertrouw dan de uitkomst niet. Los eerst de flikkering op.",
+  "toepassing": "Open vandaag de broncode van een klant met een A/B-testtool. Kijk of het testscript bovenaan de head staat of via Tag Manager wordt geladen.",
+  "bron": {
+    "titel": "Use a tag manager with Optimizely snippet | Optimizely Web Experimentation docs",
+    "url": "https://docs.optimizely.com/web-experimentation/docs/implement-the-snippet-with-a-tag-manager"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "20261118-eeat-vertrouwen-belangrijkste",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "E-E-A-T: wat de vier letters betekenen en welke het zwaarst weegt",
+  "matrix": ["11.1.2", "11.1.1"],
+  "titel": "Een gediplomeerde expert inhuren voor fietsreviews?",
+  "intro": "Een fietsenwinkel schrijft reviews van e-bikes. De schrijver is monteur in de winkel en rijdt elke fiets zelf een week, met eigen foto's en metingen van de accu. Hij heeft geen diploma in techniek. De marketingmanager wil een ingenieur inhuren die zijn naam onder de reviews zet, 'want Google wil expertise zien'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat vertel je de marketingmanager?",
+    "opties": [
+      "Huur de ingenieur in, want van de vier letters weegt Expertise het zwaarst, en die toon je met een diploma aan.",
+      "Huur de ingenieur in, want een review telt pas mee als hij alle vier de letters van E-E-A-T laat zien.",
+      "Niet nodig, want Google kijkt bij reviews alleen naar het aantal woorden en de sterren in de structured data.",
+      "Niet nodig, want eigen ervaring telt ook, en het draait vooral om vertrouwen: laat zien wie test en hoe."
+    ],
+    "juist": 3
+  },
+  "kern": "Vertrouwen is volgens Google de belangrijkste letter. Echte ervaring uit eigen gebruik kan net zo waardevol zijn als een diploma.",
+  "afleiders": [
+    "**Expertise weegt het zwaarst:** expertise klinkt als de kern. Maar Google noemt vertrouwen (Trust) de belangrijkste, en de andere letters dragen daaraan bij.",
+    "**Alle vier de letters:** het lijkt logisch dat je overal op moet scoren. Maar Google zegt juist dat content niet alle vier hoeft te laten zien.",
+    "**Woorden en sterren:** lengte en markup zeggen niets over of een review te vertrouwen is. Google vraagt juist wie de review schreef en hoe hij testte.",
+    ""
+  ],
+  "kort": "Denk aan een vriend die vraagt welke e-bike hij moet kopen. Je hebt meer aan iemand die er een jaar elke dag op fietst dan aan iemand die er alleen over gelezen heeft. Zo kijkt Google ook naar content. Iemand die het zelf deed, heeft ervaring. Laat die ervaring zien, met wie testte en hoe, dan weet de lezer dat hij je kan vertrouwen.",
+  "begrippen": [
+    { "term": "E-E-A-T", "uitleg": "Experience, Expertise, Authoritativeness, Trustworthiness: ervaring, deskundigheid, gezag en betrouwbaarheid." },
+    { "term": "Experience", "uitleg": "eigen ervaring met het onderwerp, zoals een product zelf gebruikt of een plek zelf bezocht hebben." },
+    { "term": "Structured data", "uitleg": "extra code die zoekmachines vertelt wat er op een pagina staat, zoals een beoordeling met sterren." }
+  ],
+  "uitleg": "Google schrijft over E-E-A-T: 'Van deze aspecten is vertrouwen het belangrijkst. De andere dragen bij aan vertrouwen, maar content hoeft ze niet allemaal te laten zien.' Google noemt ook dat content nuttig kan zijn door de ervaring die eruit blijkt.\n\nE-E-A-T is geen rankingfactor op zich. Google gebruikt een mix van signalen die samen laten zien of content betrouwbaar is. Raters van Google beoordelen E-E-A-T, maar hun oordeel stuurt de ranking niet direct.\n\nGoogle stelt drie vragen bij content:\n- **Wie** heeft het gemaakt? Staat er een naam met achtergrond bij?\n- **Hoe** is het gemaakt? Bij reviews: hoe is er getest, met welke foto's en metingen?\n- **Waarom** is het gemaakt? Om mensen te helpen, niet om zoekverkeer te trekken.\n\nVoor deze reviews betekent dat: zet de monteur met naam en ervaring bij elke review, laat de testopzet zien en gebruik eigen foto's. Een naam van een ingenieur die niet zelf testte, voegt weinig toe.",
+  "kernpunt": "Wil een klant E-E-A-T verbeteren, begin dan bij vertrouwen: laat zien wie het maakte, hoe en waarom.",
+  "toepassing": "Open vandaag één review of gids van een klant. Kijk of je kunt zien wie hem schreef, hoe die het testte en waarom hij is gemaakt.",
+  "bron": {
+    "titel": "Creating helpful, reliable, people-first content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  },
+  "video": {
+    "titel": "EEAT Explained: What Google Actually Uses to Judge Trust & Quality",
+    "kanaal": "Edward Sturm",
+    "url": "https://www.youtube.com/watch?v=4YhJH5VOF3w"
+  }
+}
