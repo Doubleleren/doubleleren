@@ -1619,15 +1619,27 @@ $('vandaag').addEventListener('click', async (e) => {
   else if (actie === 'melding-aan') { try { await Notification.requestPermission(); } catch { /* browser weigert */ } toonLesStatus(); }
   else if (actie === 'naar-skilllijst') { tab('skilllijst'); toonSkillFormulier(); }
   else if (actie === 'feedback-les') openFeedback(L.les?.id);
-  else if (actie === 'snel-win') { try { await navigator.clipboard.writeText(lesAdres()); b.textContent = 'Link gekopieerd'; } catch { b.textContent = lesAdres(); } }
-  else if (actie === 'snel-mac') downloadSnelkoppeling();
-  else if (actie === 'kopieer-popup') {
-    const regel = `Set-ExecutionPolicy -Scope Process Bypass -Force; irm https://raw.githubusercontent.com/${S.eigenaar || 'doubleleren'}/${S.appRepo || 'doubleleren'}/main/app/start.ps1 | iex`;
-    try { await navigator.clipboard.writeText(regel); b.textContent = 'Regel gekopieerd'; } catch { b.textContent = regel; }
-  }
   else if (actie === 'afronden') {
     b.disabled = true; b.textContent = 'Versleuteld opslaan…'; $('les-fout').textContent = '';
     try { await lesOpslaan(); } catch (err) { $('les-fout').textContent = 'Opslaan mislukt: ' + err.message; b.disabled = false; b.textContent = 'Opnieuw proberen'; }
+  }
+});
+// Dagelijkse les (onderdeel van Instellingen): pop-up installeren of een snelkoppeling maken
+// Mag de browser niet naar het klembord, dan staat de tekst geselecteerd in een veld eronder (Ctrl+C)
+async function kopieer(b, tekst, klaar) {
+  try { await navigator.clipboard.writeText(tekst); b.textContent = klaar; return; } catch { /* zelf kopiëren */ }
+  let v = b.parentElement.querySelector('input.kopieer-zelf');
+  if (!v) { v = document.createElement('input'); v.className = 'veld kopieer-zelf'; v.readOnly = true; v.style.marginTop = '8px'; b.after(v); }
+  v.value = tekst; v.select(); b.textContent = 'Kopieer met Ctrl+C';
+}
+$('snelkoppeling').addEventListener('click', async (e) => {
+  const b = e.target.closest('button[data-actie]'); if (!b || b.disabled) return;
+  const actie = b.dataset.actie;
+  if (actie === 'snel-win') await kopieer(b, lesAdres(), 'Link gekopieerd');
+  else if (actie === 'snel-mac') downloadSnelkoppeling();
+  else if (actie === 'kopieer-popup') {
+    const regel = `Set-ExecutionPolicy -Scope Process Bypass -Force; irm https://raw.githubusercontent.com/${S.eigenaar || 'doubleleren'}/${S.appRepo || 'doubleleren'}/main/app/start.ps1 | iex`;
+    await kopieer(b, regel, 'Regel gekopieerd');
   }
 });
 $('vandaag').addEventListener('change', (e) => {
