@@ -471,7 +471,9 @@ function toonMij() {
   const lid = S.leden[S.mij], logs = lid.logs;
   toonMaandafsluiter(lid);
   const tel = { goed: 0, deels: 0, fout: 0 }; logs.forEach((l) => { if (l.resultaat) tel[l.resultaat]++; });
-  const mijnItems = itemsVan(lid), beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = mijnItems.length;
+  // Skilllijst op niveau telt alleen je Focus-vakken (Meeleren-vakken hoef je niet in te vullen); geen Focus-vak: alles
+  const focus = focusVakken(lid), alleItems = itemsVan(lid), focusItems = alleItems.filter((it) => focus.includes(it.vak));
+  const mijnItems = focusItems.length ? focusItems : alleItems, beoordeeld = tel.goed + tel.deels + tel.fout, maanden = maandenVan(lid), totaal = mijnItems.length;
   const items = mijnItems.map((it) => lid.matrix?.get(it.id)).filter(Boolean);
   const opNiveau = items.filter((s) => (laatste(s)?.s || 0) >= 3).length, start = items.filter((s) => (eerste(s) || 0) >= 3).length;
   const delta = pct(opNiveau, totaal) - pct(start, totaal), rk = reeks(logs, lid.werkdagen);
