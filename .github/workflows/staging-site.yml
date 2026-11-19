@@ -1,0 +1,51 @@
+# Zet elke push naar staging op de testsite https://doubleleren.github.io/doubleleren-staging/
+# met de testdata in doubleleren-data-staging (eigen beheersleutel in staging/vertrouwd.json). Nooit live data.
+name: Staging-site bijwerken
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: staging-site
+  cancel-in-progress: true
+
+jobs:
+  publiceer:
+    if: github.repository == 'Doubleleren/doubleleren'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: staging
+
+      - name: Testinstellingen in plaats van live
+        run: |
+          set -euo pipefail
+          cp staging/vertrouwd.json vertrouwd.json
+          jq '.appRepo = "doubleleren-staging" | .dataRepo = "doubleleren-data-staging" | .omgeving = "staging"' instellingen.json > instellingen.tmp
+          mv instellingen.tmp instellingen.json
+          test "$(jq -r .dataRepo instellingen.json)" = doubleleren-data-staging
+
+      - name: Naar doubleleren-staging
+        env:
+          DL_DEPLOY_STAGING: ${{ secrets.DL_DEPLOY_STAGING }}
+        run: |
+          set -euo pipefail
+          sleutel="$RUNNER_TEMP/staging.key"
+          printf '%s\n' "$DL_DEPLOY_STAGING" > "$sleutel"; chmod 600 "$sleutel"
+          uit="$RUNNER_TEMP/uit"; mkdir "$uit"
+          tar --exclude=./.git --exclude=./.github -cf - . | tar -xf - -C "$uit"
+          cd "$uit"
+          git init -q -b main
+          git config user.name doubleleren; git config user.email sync@doubleleren.invalid
+          git add -A
+          git commit -qm "staging ${GITHUB_SHA::7}"
+          git remote add origin git@github.com:Doubleleren/doubleleren-staging.git
+          GIT_SSH_COMMAND="ssh -i $sleutel -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" git push -q -f origin main
+          rm -f "$sleutel"
+          echo "Testsite bijgewerkt naar staging ${GITHUB_SHA::7}" >> "$GITHUB_STEP_SUMMARY"

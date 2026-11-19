@@ -32,7 +32,7 @@ Alles gaat in de browser; je hoeft niets te installeren.
 | Deelnemer | ja | ja | alleen het scorebord: naam, aantal goed en reeks per maand (wie zich verbergt niet) |
 | Projectleider | ja | alleen eigen | scorebord + scores en resultaten van het eigen project |
 | Celleider | ja | alleen eigen | scorebord + scores en resultaten van de eigen cel |
-| Head of SEO | ja | alleen eigen | scorebord + scores en resultaten van heel SEO |
+| Head van een vak (bijv. head of SEO) | ja | alleen eigen | scorebord + scores en resultaten van iedereen in dat vak |
 | Beheerder en generator | via sleutelbeheer: scores en resultaten (de generator krijgt geen namen) | nee | de beheerder leest ook de feedback, met naam; de generator zonder naam |
 
 ## Hoe het veilig is
@@ -110,15 +110,22 @@ Een token-houder kan bestanden van anderen verwijderen of een oude versie terugz
 | `sjablonen/` | `seo/skilllijst.csv`, `seo/curriculum.md`, `organisatie-sjabloon.json` (leeg) |
 | `test/` | `kruistest.ps1` (PowerShell ↔ WebCrypto), `e2e.ps1` (rollen, aanvallen, herstel, dagcyclus), `site-demo.ps1`, `lokale-server.py` |
 
+## Vakken
+Naast SEO kunnen andere vakken meedoen (CRO, SEA, Social ads, Content, Coderen met AI en Interne zaken; lijst in `instellingen.json`). `soort` per vak: een discipline (standaard) is iemands eigen vak én iets om te leren; een `onderwerp` (Coderen met AI, Interne zaken) kun je alleen leren; een `groep` (Base, Smartstack) is alleen een eigen vak in het organogram, zonder lessen: wie daarbij hoort kiest zelf wat hij leert. Een vak doet pas mee zodra `sjablonen/<vak>/skilllijst.csv` bestaat; tot die tijd staat het op de website als "Skilllijst volgt nog". Een Excel in de opzet van de SEO-sheet zet je om met `beheer\skilllijst-omzetten.ps1 -Xlsx <bestand> -Vak <vak>` (eerst met `-Toon` om te controleren).
+- Iedereen hoort bij één vak (organogram, standaard SEO) en kiest op de website onder *Skilllijst* welke vakken hij leert, met prioriteit hoog, normaal of laag. Je eigen vak staat standaard aan.
+- Vaardigheid-id's van SEO blijven `1.1.1`; die van andere vakken krijgen het vak ervoor (`cro:1.1.1`), ook in lessen (`matrix`).
+- Elk vak heeft een eigen head, die de voortgang ziet van iedereen die bij dat vak hoort. Cel- en projectleiders zien hun mensen, ongeacht het vak.
+
 ## Beheerder: draaiboek
 De beheersleutel en je beheertoken staan met DPAPI in `%USERPROFILE%\.doubleleren\beheer\beheer.dpapi`. Wijzigingen gaan direct en ondertekend naar `doubleleren-data/beheer/`.
 
 ```
 beheer\beheer.ps1 -Init                               # eenmalig; vraagt je beheertoken verborgen; daarna vertrouwd.json committen en pushen
-beheer\beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Optioneel]
+beheer\beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Vak cro] [-Optioneel]
 beheer\beheer.ps1 -Aanvragen
 beheer\beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f"
-beheer\beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal
+beheer\beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal   # of -Cel leadgen, en/of -Vak cro
+beheer\beheer.ps1 -Head lid-xxxxxx -Vak cro              # head van een vak
 beheer\beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht
 beheer\beheer.ps1 -Controleer
 beheer\beheer.ps1 -NieuweGeneratorsleutel             # eenmalig: aparte generatorsleutel (hervatbaar; beheersleutel blijft gelijk)
@@ -127,6 +134,8 @@ beheer\cloud-inrichten.ps1                            # secrets voor de cloud-ge
 beheer\feedback.ps1 -Nieuw                            # nieuwe feedback (draait ook bij elke Claude-chat via een SessionStart-hook)
 beheer\feedback.ps1 -Lijst                            # alle feedback met status
 beheer\feedback.ps1 -Afhandelen <bestand>
+beheer\beheer.ps1 -Exporteer -Bestand <pad>           # noodkopie van de beheergeheimen met wachtzin; bestand en wachtzin apart in NordPass
+beheer\beheer.ps1 -Importeer -Bestand <pad>           # noodkopie terugzetten op een andere laptop (overschrijft nooit)
 ```
 
 **Tokens:** fine-grained, met *Resource owner* `doubleleren` en zonder vervaldatum. `-Uitnodigen` geeft een vooraf ingevulde link. Trek een token in bij vertrek of bij een verloren laptop.
@@ -139,10 +148,14 @@ Vraag deelnemers het Teams-bericht met hun uitnodigingscode na het aanmelden te 
 - Branch protection op `main` van de app-repo.
 - Pages nooit aanzetten op de data-repo.
 
+## Meewerken
+Regels en werkwijze staan in [CLAUDE.md](CLAUDE.md): werk op een eigen branch vanaf `staging` en open een pull request naar `staging`. Alleen de beheerder zet staging op `main` (live). Elke push naar `staging` komt op de testsite https://doubleleren.github.io/doubleleren-staging/, met testdata in `doubleleren-data-staging` en een eigen beheersleutel (`staging/vertrouwd.json`).
+
 ## Testen
 ```
 powershell -ExecutionPolicy Bypass -File test\kruistest.ps1
-powershell -ExecutionPolicy Bypass -File test\e2e.ps1 -Xlsx <skilllijst.xlsx>
+powershell -ExecutionPolicy Bypass -File test\e2e.ps1 [-Xlsx <skilllijst.xlsx>]   # zonder -Xlsx: nep-skilllijst
+powershell -ExecutionPolicy Bypass -File test\demo.ps1                           # lokale site met nepdata; -Bijwerken na een wijziging
 powershell -ExecutionPolicy Bypass -File test\site-demo.ps1
 ```
 Start daarna `python test\lokale-server.py 8765 %TEMP%\doubleleren-e2e` en open `http://localhost:8765/app/docs/?app=/app&data=/data`. Met `#welkom` test je het aanmelden; de testserver laat de website in `data/` schrijven.

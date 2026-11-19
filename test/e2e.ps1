@@ -1,9 +1,15 @@
 ﻿# Eind-tot-eindtest met lokale mappen i.p.v. GitHub: uitnodigen, installeren, goedkeuren, toegang per rol,
 # aanvalsscenario's, herstel, organogramwijziging, dagcyclus en optioneel leren. Testpersonen hebben neutrale namen.
-#   powershell -NoProfile -ExecutionPolicy Bypass -File test\e2e.ps1 -Xlsx "C:\...\skilllijst.xlsx"
-param([Parameter(Mandatory)][string]$Xlsx, [string]$Werk = (Join-Path $env:TEMP 'doubleleren-e2e'))
+#   powershell -NoProfile -ExecutionPolicy Bypass -File test\e2e.ps1 [-Xlsx "C:\...\skilllijst.xlsx"]
+# Zonder -Xlsx gebruikt de test een nep-skilllijst uit het sjabloon (test\nep-skilllijst.ps1).
+param([string]$Xlsx, [string]$Werk = (Join-Path $env:TEMP 'doubleleren-e2e'))
 $ErrorActionPreference = 'Stop'
 $bron = Split-Path $PSScriptRoot -Parent
+if (-not $Xlsx) {
+    $Xlsx = Join-Path $env:TEMP 'doubleleren-nep-skilllijst.xlsx'
+    & powershell -NoProfile -ExecutionPolicy Bypass -File "$PSScriptRoot\nep-skilllijst.ps1" -Uit $Xlsx | Out-Null
+    if (-not (Test-Path $Xlsx)) { throw 'Nep-skilllijst maken mislukt' }
+}
 Remove-Item $Werk -Recurse -Force -ErrorAction SilentlyContinue
 $A = Join-Path $Werk 'app'; $D = Join-Path $Werk 'data'; $T = Join-Path $Werk 'thuis'
 New-Item -ItemType Directory $A, $D, $T -Force | Out-Null
@@ -215,13 +221,10 @@ New-DlFeedback $dO $ids.Foxtrot $cg.prive @{ beheer = $V } 'goed' 'Vals namens F
 $fbUit3 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
 Controleer ($fbUit3 -match '1 overgeslagen' -and -not ($fbUit3 -match 'Vals namens')) 'Feedback met een valse handtekening wordt overgeslagen en gemeld'
 
-# Halfjaarlijkse check: na de deadline toont de pop-up geen les maar de weg naar de skilllijst, en telt niets mee.
-# Twee jaar vooruit: dan is de skilllijst van vandaag altijd ouder dan de vrijstelling voor nieuwe deelnemers
-# (wie in de twee maanden vóór een ronde begon, hoeft die ronde niet mee te doen), ongeacht in welke maand de test draait.
-$rondeJaar = (Get-Date).Year + 2
-& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde" -Opslaan -Datum "$rondeJaar-02-03" -Thuis "$T\Echo"
-Controleer ((Test-Path "$Werk\snap-ronde\0-skilllijst.png") -and -not (Test-Path "$Werk\snap-ronde\2-opdracht.png") -and -not (Test-Path "$D\data\$($ids.Echo)\log-$maand.enc")) 'Na 31 januari zonder bijgewerkte skilllijst: geen les, niets opgeslagen'
-& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde2" -Datum "$rondeJaar-01-15" -Thuis "$T\Echo"
+# Halfjaarlijkse check: blokkeert de pop-up niet meer (de website herinnert eraan); er komt gewoon een les
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde" -Thuis "$T\Echo"
+Controleer ((Test-Path "$Werk\snap-ronde\2-opdracht.png") -and -not (Test-Path "$Werk\snap-ronde\0-skilllijst.png")) 'Halfjaarlijkse check blokkeert de pop-up niet: gewoon een les'
+& powershell -NoProfile -STA -ExecutionPolicy Bypass -File "$A\app\dagelijkse-les.ps1" -Snapshot "$Werk\snap-ronde2" -Datum '2027-01-15' -Thuis "$T\Echo"
 Controleer ((Test-Path "$Werk\snap-ronde2\2-opdracht.png") -and -not (Test-Path "$Werk\snap-ronde2\0-skilllijst.png")) 'Vóór de deadline: gewoon de les (de website toont een melding)'
 $rD = Get-DlRonde ([pscustomobject]@{ scores = [pscustomobject]@{ '1.1.1' = [pscustomobject]@{ '2027-01' = 3 } } }) '2026-10-19' ([datetime]'2027-02-03')
 $rN = Get-DlRonde $null '2026-12-01' ([datetime]'2027-02-03')
