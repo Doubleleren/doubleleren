@@ -785,7 +785,12 @@ let instSub = INST_SUBS[0];
 function toonInstellingen(sub) {
   const ik = S.leden[S.mij];
   $('start-paneel').hidden = !moetInrichten();
-  if (!$('start-paneel').hidden) $('start-naam').textContent = ik?.naam ? ` ${ik.naam}` : '';
+  if (!$('start-paneel').hidden) {
+    $('start-naam').textContent = ik?.naam ? ` ${ik.naam}` : '';
+    // Een groep (bijv. Trainee) of een vak zonder skilllijst heeft geen vak dat vanzelf aanstaat: dan zelf kiezen
+    $('start-leren').textContent = vakkenVan(ik).length ? 'je eigen vak staat al aan; zet er gerust een ander vak bij.'
+      : 'kies wat je wilt leren en zet het op Focus of Meeleren. Zonder vak krijg je nog geen lessen.';
+  }
   toonVakken(); toonPrioriteit(); toonWerkdagen();
   $('sb-instelling').hidden = !magLessen(); $('sb-zichtbaar').checked = SB.zichtbaar;
   $('snelkoppeling').hidden = !magLessen();
@@ -896,6 +901,8 @@ async function zetVak(vak, w) {
       : `Opgeslagen: je krijgt geen lessen meer over ${vakNaam(vak)}.`;
   } catch (e) { $('vakken-status').textContent = 'Opslaan mislukt: ' + e.message; }
   toonInstellingen(); toonSkilllijst(); toonMij();
+  // Nog geen les begonnen (bijv. net je eerste vak gekozen): Les van vandaag opnieuw bepalen
+  if (magLessen() && !L.les) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); }
 }
 $('vakken').addEventListener('click', (e) => { const b = e.target.closest('button[data-vak]'); if (b && !b.disabled && b.getAttribute('aria-pressed') !== 'true') zetVak(b.dataset.vak, Number(b.dataset.waarde)); });
 $('mx-modus').addEventListener('click', (e) => { const b = e.target.closest('button[data-modus]'); if (b && b.getAttribute('aria-pressed') !== 'true') toonSkillFormulier(S.formVak, b.dataset.modus); });
@@ -1444,6 +1451,12 @@ function toonLesStatus() {
   const reeksTekst = `Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'} · ${ik.logs.length} ${ik.logs.length === 1 ? 'les' : 'lessen'} afgerond`;
   if (L.status?.les) return startLes(L.status.les);
   const st = L.status || {};
+  if (!st.klaar && !st.weekend && !vakkenVan(ik).length) {   // nog niets om te leren (groep zoals Trainee, of vak zonder skilllijst)
+    $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">Vandaag</span><span class="sub">${esc(reeksTekst)}</span></div><h2>Kies eerst wat je wilt leren</h2>`;
+    $('les-inhoud').innerHTML = '<p>Je hebt nog geen vak aan staan. Zet bij Wat ik leer een vak op Focus of Meeleren; vanaf de volgende ochtend staan je lessen klaar.</p>';
+    $('les-knoppen').innerHTML = '<button type="button" class="knop zwart" data-sub-naar="leren">Naar Wat ik leer</button>';
+    $('snel-hint').hidden = true; return;
+  }
   const morgenVrij = !isWerkdag(new Date(nu().getTime() + 864e5)), morgen = morgenVrij ? 'Maandag' : 'Morgen';
   const kop = st.weekend ? 'Weekend: geen les' : st.volgende ? 'Les klaar: je tweede les staat klaar' : st.later ? 'Je ochtendles is klaar' : st.klaar ? 'Je lessen van vandaag zijn klaar' : 'Er staat nu geen nieuwe les klaar';
   const tekst = st.weekend ? 'In het weekend zijn er geen lessen, en je reeks loopt gewoon door. Maandag staat je les weer klaar.'

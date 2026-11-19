@@ -358,6 +358,19 @@ $wD = Read-DlVersleuteld $cd.data $cd.id 'wachtrij' $sD $cd.publiek
 Controleer ($p5.ok -and $p5.uit -match 'uit de roulatie' -and ($idxA.lessen | Where-Object id -eq '20261019-srm').actief -eq $false -and $wD.obj.lessen -notcontains '20261019-srm' -and $wD.obj.lessen -contains '20261019-query-fan-out') 'Les uit de roulatie: in de index gemarkeerd en uit de wachtrij gehaald'
 Remove-Item "$A\.git" -Recurse -Force
 
+Write-Host '17. Groep zonder eigen lessen: een trainee in cel Ecom'
+$uitK = Beheer -Uitnodigen -Naam Kilo -Rol lid -Cel ecom -Vak trainee
+$ids.Kilo = ([regex]::Match(($uitK -join "`n"), 'lid-[0-9a-f]{6}')).Value
+$res.Kilo = Installeer $ids.Kilo 'Kilo' @()     # zonder skilllijst
+Beheer -AutoGoedkeuren | Out-Null
+$vertrouwdK = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer   # $V is eerder hergebruikt (PowerShell: $v = $V)
+$orgK = Read-DlBeheer $dO 'organisatie.json' $vertrouwdK; $kijkK = @(Get-DlKijkers $orgK $ids.Kilo)
+Controleer ($orgK.leden.($ids.Kilo).vak -eq 'trainee' -and $kijkK -contains $ids.Bravo -and $kijkK -notcontains $ids.Alfa -and (Test-Path "$D\beheer\toegang\$($ids.Kilo).json")) 'Trainee: groep als eigen vak, aangemeld zonder skilllijst; celleider ziet hem, de head van SEO niet'
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
+$ctxK = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
+Controleer ($ctxK.leden.($ids.Kilo).vak -eq 'trainee' -and -not @($ctxK.leden.($ids.Kilo).vakken.PSObject.Properties).Count) 'Context: trainee zonder gekozen vak krijgt (nog) geen lessen'
+Remove-Item "$T\beheer\generator\context.json" -ErrorAction SilentlyContinue
+
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h
 $testcodes = @{}; foreach ($k in $res.Keys) { if ($res[$k].code) { $testcodes[$k] = $res[$k].code } }
