@@ -13,6 +13,7 @@
     { "id": "coderen-met-ai", "naam": "Coderen met AI", "soort": "onderwerp" },
     { "id": "intern", "naam": "Interne zaken", "soort": "onderwerp" },
     { "id": "base", "naam": "Base", "soort": "groep" },
-    { "id": "smartstack", "naam": "Smartstack", "soort": "groep" }
+    { "id": "smartstack", "naam": "Smartstack", "soort": "groep" },
+    { "id": "trainee", "naam": "Trainee", "soort": "groep" }
   ]
 }

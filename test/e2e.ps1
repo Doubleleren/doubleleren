@@ -434,6 +434,19 @@ foreach ($zaad in 1..5) {
 Controleer $okR 'Regelaar: "meer" geeft binnen 10 dagen één verdieping (niet als er al een les over kwam); "niet relevant" en "te makkelijk" geen herhaling of verdieping'
 Remove-Item $MR -Recurse -Force -ErrorAction SilentlyContinue
 
+Write-Host '19. Groep zonder eigen lessen: een trainee in cel Ecom'
+$uitK = Beheer -Uitnodigen -Naam Kilo -Rol lid -Cel ecom -Vak trainee
+$ids.Kilo = ([regex]::Match(($uitK -join "`n"), 'lid-[0-9a-f]{6}')).Value
+$res.Kilo = Installeer $ids.Kilo 'Kilo' @()     # zonder skilllijst
+Beheer -AutoGoedkeuren | Out-Null
+$vertrouwdK = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer   # $V is eerder hergebruikt (PowerShell: $v = $V)
+$orgK = Read-DlBeheer $dO 'organisatie.json' $vertrouwdK; $kijkK = @(Get-DlKijkers $orgK $ids.Kilo)
+Controleer ($orgK.leden.($ids.Kilo).vak -eq 'trainee' -and $kijkK -contains $ids.Bravo -and $kijkK -notcontains $ids.Alfa -and (Test-Path "$D\beheer\toegang\$($ids.Kilo).json")) 'Trainee: groep als eigen vak, aangemeld zonder skilllijst; celleider ziet hem, de head van SEO niet'
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
+$ctxK = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
+Controleer ($ctxK.leden.($ids.Kilo).vak -eq 'trainee' -and -not @($ctxK.leden.($ids.Kilo).vakken.PSObject.Properties).Count) 'Context: trainee zonder gekozen vak krijgt (nog) geen lessen'
+Remove-Item "$T\beheer\generator\context.json", "$T\beheer\generator\werk.json", "$T\beheer\generator\regelaar.json" -ErrorAction SilentlyContinue
+
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h
 $testcodes = @{}; foreach ($k in $res.Keys) { if ($res[$k].code) { $testcodes[$k] = $res[$k].code } }
