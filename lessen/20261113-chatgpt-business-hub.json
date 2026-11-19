@@ -1,0 +1,41 @@
+{
+  "id": "20261113-chatgpt-business-hub",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Businesses in ChatGPT: wat een geclaimd profiel wel en niet oplevert",
+  "matrix": ["12.1.6", "12.1.3"],
+  "titel": "Een eigen profiel in ChatGPT: koop je daarmee aanbevelingen?",
+  "intro": "Sinds 10 november test OpenAI 'Businesses in ChatGPT' (bèta). Via Business Hub kan een bedrijf een profiel in ChatGPT claimen. Een klant met een webshop in tuinmeubelen vraagt of jullie dat meteen moeten regelen. De marketingmanager hoopt dat ChatGPT de shop dan vaker aanraadt bij vragen als 'welke loungeset is weerbestendig?'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat vertel je de klant over wat het claimen oplevert?",
+    "opties": [
+      "Claimen zorgt dat ChatGPT de shop voorrang geeft in aanbevelingen, want een geverifieerd profiel telt als vertrouwenssignaal.",
+      "Claimen heeft geen zin voor een webshop, want Business Hub is net als Google Bedrijfsprofiel alleen voor zaken met een adres.",
+      "Claimen garandeert geen betere plek, want ChatGPT blijft zelf kiezen, maar het geeft wel cijfers over verwijzingen naar de site.",
+      "Claimen is alleen nodig als de shop OAI-SearchBot blokkeert, want anders haalt ChatGPT de profielgegevens zelf van de site."
+    ],
+    "juist": 2
+  },
+  "kern": "Volgens OpenAI garandeert claimen geen hogere plek. Wat je wel krijgt: een geverifieerd profiel en cijfers over vermeldingen van en klikken naar je site.",
+  "afleiders": [
+    "**Voorrang door verificatie:** een blauw vinkje voelt als een keurmerk. Maar OpenAI zegt zelf dat claimen geen hogere plek garandeert.",
+    "**Alleen met adres:** dat geldt voor Google Bedrijfsprofiel. Business Hub accepteert juist ook bedrijven die alleen online verkopen.",
+    "",
+    "**Alleen bij een geblokkeerde bot:** Business Hub vervangt geen crawltoegang. Het is een profiel met bedrijfsgegevens en cijfers, los van wat de bot van je site haalt."
+  ],
+  "kort": "Vergelijk het met een winkel die zich inschrijft bij het informatiepunt van een winkelcentrum. Je gegevens kloppen dan, en je hoort hoe vaak mensen naar je doorverwezen worden. Maar de medewerker raadt nog steeds aan wat volgens hem het beste past. Een inschrijving koopt geen aanbeveling. De echte winst is het meten: je ziet voor het eerst uit ChatGPT zelf hoe vaak het naar je site verwijst.",
+  "begrippen": [
+    { "term": "Business Hub", "uitleg": "de omgeving van OpenAI waar bedrijven hun profiel in ChatGPT claimen, verifiëren en cijfers bekijken. Sinds 10 november 2026 in bèta." },
+    { "term": "Vermelding (mention)", "uitleg": "in Business Hub: een antwoord van ChatGPT dat naar de website van het bedrijf verwijst. Alleen de merknaam noemen telt niet." },
+    { "term": "TXT-record", "uitleg": "een regel tekst in de DNS-instellingen van je domein, waarmee je bewijst dat het domein van jou is." }
+  ],
+  "uitleg": "**Wat is het?** OpenAI introduceerde op 10 november 2026 *Businesses in ChatGPT* in bèta. In Business Hub claim je een bestaand profiel of maak je er een aan, met categorie en omschrijving.\n\n**Verifiëren:**\n- het domein, met een TXT-record in de DNS\n- je identiteit, met een persoonlijke controle; daarna krijgt het profiel een blauw vinkje\n\nAnders dan bij Google Bedrijfsprofiel kunnen ook bedrijven zonder fysieke vestiging meedoen.\n\n**Cijfers:** Business Hub toont *mentions* en *website clicks*. Een mention telt alleen als ChatGPT naar de website verwijst. De data zijn geaggregeerd; gesprekken van gebruikers zie je niet.\n\n**Wat het niet doet:** volgens OpenAI garandeert claimen geen hogere plek. ChatGPT maakt zelf zijn aanbevelingen en vergelijkingen.\n\n**Waarom toch interessant:** het is een van de weinige bronnen van AI-zichtbaarheid uit het platform zelf. Leg het naast je eigen meting: verwijzingen van chatgpt.com in GA4 en bezoeken van OpenAI-bots in de serverlogs.",
+  "kernpunt": "Claim een AI-profiel om te meten en je gegevens te laten kloppen, niet om een betere plek te kopen.",
+  "toepassing": "Kijk vandaag bij één klant in GA4 hoeveel sessies er de afgelopen maand van chatgpt.com kwamen. Dan heb je een nulmeting om later naast de cijfers uit Business Hub te leggen.",
+  "bron": {
+    "titel": "Search Engine Journal: How to Submit Your Website to ChatGPT Business Hub",
+    "url": "https://www.searchenginejournal.com/submit-website-chatgpt/596785/"
+  }
+}

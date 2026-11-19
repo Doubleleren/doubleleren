@@ -1,0 +1,42 @@
+{
+  "id": "20261113-ab-test-minstens-een-week",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "A/B-test plannen: de duur afronden op hele weken",
+  "matrix": ["7.2.1"],
+  "titel": "De steekproef is na vier dagen binnen: test klaar?",
+  "intro": "Een webshop in tuinartikelen wil een nieuwe productpagina testen. De steekproefcalculator zegt dat de benodigde aantallen bezoekers er in vier dagen zijn. De marketeer wil de test daarom van maandag tot en met donderdag laten lopen. Uit GA4 blijkt dat in het weekend andere mensen kopen: vaker mobiel, met een hogere orderwaarde.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe lang plan je de test?",
+    "opties": [
+      "Vier dagen, want zodra de berekende steekproef binnen is, voegen extra dagen niets meer toe aan de betrouwbaarheid.",
+      "Tot de uitkomst significant is, want dan weet je dat het verschil echt is en kun je de test direct stoppen.",
+      "Minstens dertig dagen, want testtools hebben een volle maand nodig om bezoekers goed over de varianten te verdelen.",
+      "Minstens een volle week, want dan doen alle dagen mee, ook het weekend waarin andere klanten anders kopen."
+    ],
+    "juist": 3
+  },
+  "kern": "Plan een test op minstens één volledige bedrijfscyclus, meestal een week. Dan tellen alle soorten bezoekers mee, ook die van het weekend.",
+  "afleiders": [
+    "**Vier dagen:** het aantal bezoekers klopt dan wel. Maar het zijn alleen doordeweekse bezoekers, en die kopen anders dan de mensen van het weekend.",
+    "**Tot het significant is:** dat lijkt een veilige stopregel. Maar wie stopt zodra het er goed uitziet, wint vaak op toeval. Leg de duur vooraf vast.",
+    "**Dertig dagen:** langer lijkt veiliger. Maar het verdelen van bezoekers gebeurt meteen. De duur hangt af van je steekproef en je weekritme, niet van een vaste maand.",
+    ""
+  ],
+  "kort": "Stel dat je wilt weten hoe druk een café is, en je telt alleen van maandag tot donderdag. Je mist dan het weekend, als er heel ander publiek komt. Je telling klopt, maar het beeld niet. Zo werkt het ook bij een A/B-test. Een week heeft een eigen ritme, en een test moet dat hele ritme zien.",
+  "begrippen": [
+    { "term": "A/B-test", "uitleg": "een proef waarin je bezoekers willekeurig verdeelt over twee versies van een pagina en meet welke beter werkt." },
+    { "term": "Steekproef", "uitleg": "het aantal bezoekers of conversies dat je nodig hebt om een verschil betrouwbaar te kunnen zien." },
+    { "term": "Bedrijfscyclus", "uitleg": "het vaste ritme waarin je klanten kopen en terugkomen. Bij de meeste webshops is dat een week." },
+    { "term": "Significant", "uitleg": "de uitkomst is waarschijnlijk geen toeval, volgens een drempel die je vooraf kiest." }
+  ],
+  "uitleg": "Optimizely adviseert een test minimaal één bedrijfscyclus van zeven dagen te laten lopen, zodat alle soorten gebruikersgedrag meetellen.\n\nZo plan je de duur:\n1. **Bereken de steekproef** met je huidige conversie en het kleinste verschil dat je wilt kunnen zien.\n2. **Reken uit hoeveel dagen** dat kost met je verkeer.\n3. **Rond af naar hele weken**, met minimaal één week. Vier dagen wordt dus zeven, negen dagen wordt veertien.\n4. **Leg de einddatum vooraf vast** en stop niet eerder omdat het er al goed uitziet.\n\nLet ook op:\n- feestdagen en acties, zoals Black Friday, die het gedrag tijdelijk veranderen\n- een heel lange test: bezoekers wissen cookies en kunnen dan in de andere variant terechtkomen\n\nHeeft een klant een ander ritme, zoals pieken rond salarisdag, neem dan die cyclus als basis.",
+  "kernpunt": "Rond de duur van een A/B-test af naar hele weken, en leg de einddatum vast vóór de start.",
+  "toepassing": "Bekijk vandaag in GA4 bij een klant de conversieratio per dag van de week over de laatste vier weken. Verschilt het weekend sterk, noteer dat dan bij de volgende testplanning.",
+  "bron": {
+    "titel": "How long to run an experiment | Optimizely",
+    "url": "https://docs.optimizely.com/experimentation-strategy/docs/how-long-to-run-an-experiment"
+  }
+}

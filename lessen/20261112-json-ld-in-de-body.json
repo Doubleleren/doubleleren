@@ -1,0 +1,47 @@
+{
+  "id": "20261112-json-ld-in-de-body",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "JSON-LD: waar het blok in de HTML mag staan",
+  "matrix": ["2.2.9", "2.2.8"],
+  "titel": "Productmarkup onderaan de pagina: telt die wel mee?",
+  "intro": "Een klant met een eigen CMS wil productmarkup toevoegen. De developer kan het JSON-LD-blok alleen onderaan de pagina plaatsen, vlak boven de footer in de body. Iets in de head zetten kan alleen met een dure aanpassing van het CMS. De klant vraagt of de markup op die plek 'wel meetelt'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je?",
+    "opties": [
+      "Toch in de head zetten, want Google leest JSON-LD alleen daar en slaat scripts in de body van de pagina over.",
+      "Laat het in de body staan, want Google leest een JSON-LD-blok zowel in de head als in de body van de pagina.",
+      "Overstappen op microdata, want JSON-LD in de body ziet Google als losse tekst zonder betekenis voor de pagina.",
+      "Via Tag Manager in de head laten plaatsen, want alleen zo telt de markup ook mee voor rich results in Google."
+    ],
+    "juist": 1
+  },
+  "kern": "De plek maakt niet uit: Google leest JSON-LD in de head en in de body. Het gaat erom dat de markup geldig is en klopt met wat op de pagina staat.",
+  "afleiders": [
+    "**Alleen in de head:** veel voorbeelden zetten het blok in de head, dus het lijkt een regel. Maar Google leest het script ook in de body.",
+    "",
+    "**Overstappen op microdata:** microdata werkt ook. Maar JSON-LD in de body is geen losse tekst: Google herkent het blok aan het scripttype.",
+    "**Via Tag Manager:** Google kan JSON-LD lezen dat later wordt ingeladen, maar het is geen voorwaarde. Het is vooral een extra stap die mis kan gaan."
+  ],
+  "kort": "Vergelijk JSON-LD met een etiket op een verhuisdoos. Of het etiket bovenop of aan de zijkant zit, de verhuizer leest het toch. Belangrijk is dat erop staat wat er echt in de doos zit. Google leest het blok waar het ook staat, maar controleert wel of het klopt met de pagina.",
+  "begrippen": [
+    { "term": "JSON-LD", "uitleg": "een manier om structured data als apart blok in een pagina te zetten, los van de zichtbare tekst." },
+    { "term": "Structured data", "uitleg": "extra gegevens in de code die zoekmachines vertellen wat er op een pagina staat, zoals prijs en voorraad." },
+    { "term": "Head en body", "uitleg": "de twee hoofddelen van een HTML-pagina. De head bevat informatie over de pagina, de body de inhoud." },
+    { "term": "Microdata", "uitleg": "een andere manier van structured data, waarbij je de gegevens als kenmerken in de zichtbare HTML zet." }
+  ],
+  "uitleg": "Google kent drie formaten voor structured data: **JSON-LD**, **microdata** en **RDFa**. Alle drie zijn goed voor Google, zolang de markup geldig en goed toegepast is. Waar de opzet het toelaat, raadt Google JSON-LD aan.\n\nOver de plek zegt Google:\n- JSON-LD staat in een `<script>`-tag in de `<head>` of de `<body>`.\n- Google kan JSON-LD ook lezen als het later wordt ingeladen, bijvoorbeeld via JavaScript of een widget in het CMS.\n\nWaar het wél vaak misgaat:\n- **De markup klopt niet met de pagina**, bijvoorbeeld een andere prijs of voorraad dan de bezoeker ziet. Markeer alleen wat zichtbaar is.\n- **Ongeldige syntax**, zoals een komma te veel. Eén fout kan het hele blok onbruikbaar maken.\n\nControleer na plaatsing met de Rich Results Test op de live URL, en volg daarna de rapporten over productfragmenten en verkopersvermeldingen in Search Console.",
+  "kernpunt": "Bij structured data telt of de markup geldig is en klopt met de pagina, niet waar het blok in de HTML staat.",
+  "toepassing": "Draai vandaag de Rich Results Test op één productpagina van een klant. Kijk of de markup gevonden wordt en of prijs en voorraad gelijk zijn aan wat de bezoeker ziet.",
+  "bron": {
+    "titel": "Intro to How Structured Data Markup Works | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+  },
+  "video": {
+    "titel": "What Is Schema Markup And Why You Need It For SEO",
+    "kanaal": "Dominate Marketing",
+    "url": "https://www.youtube.com/watch?v=vJEygBWs80A"
+  }
+}

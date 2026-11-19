@@ -1,0 +1,46 @@
+{
+  "id": "20261118-dynamic-serving-crawlen-als-smartphone",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawlen als mobiele user-agent bij dynamic serving",
+  "matrix": ["8.2.1", "8.1.1"],
+  "titel": "De crawl is foutloos, maar mobiel missen de productteksten",
+  "intro": "Een webshop toont op dezelfde URL een andere HTML aan telefoons dan aan computers. Een collega crawlt de site met de standaardinstelling van zijn crawler en vindt op elke productpagina een volledige tekst van 400 woorden. Toch dalen de posities. Op je eigen telefoon zie je op de productpagina's alleen foto's en een prijs.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de volgende stap?",
+    "opties": [
+      "Crawl opnieuw met de user-agent van Googlebot Smartphone, want Google indexeert de versie die telefoons krijgen.",
+      "Crawl opnieuw met de user-agent van Googlebot Desktop, want Google indexeert de versie met de meeste tekst.",
+      "Crawl opnieuw met JavaScript uitgeschakeld, want zonder scripts ziet de crawler wat telefoons te zien krijgen.",
+      "Crawl opnieuw vanaf een Nederlands IP-adres, want de crawler kreeg nu de buitenlandse versie van de pagina's."
+    ],
+    "juist": 0
+  },
+  "kern": "Google indexeert de mobiele versie, opgehaald met de smartphone-crawler. Crawl dus ook als smartphone, anders zie je niet wat Google ziet.",
+  "afleiders": [
+    "",
+    "**Googlebot Desktop:** de desktopversie heeft hier de meeste tekst, dus die lijkt het belangrijkst. Maar Google kiest niet de langste versie: het gebruikt de mobiele.",
+    "**JavaScript uit:** dat laat zien wat er zonder scripts in de HTML staat. Maar de server stuurt telefoons een andere HTML, en die krijg je alleen met een mobiele user-agent.",
+    "**Nederlands IP-adres:** locatie kan bij sommige sites uitmaken. Hier verschilt de pagina per soort toestel, niet per land."
+  ],
+  "kort": "Denk aan een restaurant met twee menukaarten: een uitgebreide binnen en een korte op het terras. Een recensent die alleen binnen eet, schrijft over gerechten die op het terras niet bestaan. Google zit op het terras: het bekijkt je site zoals een telefoon hem krijgt. Wil je weten wat Google ziet, dan moet je dus ook op het terras gaan zitten.",
+  "begrippen": [
+    { "term": "Dynamic serving", "uitleg": "de server stuurt op dezelfde URL een andere HTML naar telefoons dan naar computers." },
+    { "term": "User-agent", "uitleg": "het naamkaartje waarmee een browser of crawler zich bij de server meldt, zoals 'Googlebot Smartphone'." },
+    { "term": "Mobile-first indexing", "uitleg": "Google gebruikt de mobiele versie van een pagina om die te indexeren en te ranken." }
+  ],
+  "uitleg": "Google schrijft dat het voor indexering en ranking de mobiele versie van de content gebruikt, opgehaald met de smartphone-crawler. Dynamic serving werkt met 'user-agent sniffing' en de header Vary: User-Agent. Google raadt responsive design aan, omdat dan elk toestel dezelfde HTML krijgt.\n\nGoogle vraagt ook dat de mobiele site dezelfde content heeft als de desktopsite. Heeft de mobiele pagina minder content, dan kun je volgens Google verkeer verliezen.\n\nZo pak je het aan:\n- Zet in je crawler de user-agent op Googlebot Smartphone en crawl opnieuw.\n- Vergelijk woordenaantal, koppen, links en structured data met de desktopcrawl.\n- Controleer losse URL's met de URL-inspectie in Search Console. Die laat de gerenderde pagina zien zoals Google hem ziet.\n- Laat de developer controleren of de server Vary: User-Agent meestuurt.\n\nOok bij responsive sites is een mobiele crawl nuttig: menu's of teksten kunnen op mobiel verborgen of weggelaten zijn.",
+  "kernpunt": "Crawl een site standaard als Googlebot Smartphone, want dat is de versie die Google indexeert.",
+  "toepassing": "Kijk vandaag in je crawler welke user-agent standaard aanstaat. Crawl één klant opnieuw als Googlebot Smartphone en vergelijk tien pagina's met de vorige crawl.",
+  "bron": {
+    "titel": "Mobile site and mobile-first indexing best practices | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+  },
+  "video": {
+    "titel": "Mobile-First Indexing",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+  }
+}

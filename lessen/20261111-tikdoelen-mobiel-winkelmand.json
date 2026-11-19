@@ -1,0 +1,40 @@
+{
+  "id": "20261111-tikdoelen-mobiel-winkelmand",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Mobiele UX: te kleine tikdoelen in de winkelmand",
+  "matrix": ["7.1.1", "7.1.5"],
+  "titel": "Mobiel haakt af in de winkelmand, desktop niet",
+  "intro": "Een webshop in diervoeding ziet in GA4 dat mobiele bezoekers veel vaker afhaken in de winkelmand dan desktopbezoekers. In Clarity zie je op mobiel veel snelle, herhaalde tikken rond de aantal-knoppen. De knoppen '+' en '−' zijn 6 bij 6 millimeter en staan direct naast de knop 'Verwijderen'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing pak je als eerste op?",
+    "opties": [
+      "Een pop-up met uitleg over de aantal-knoppen tonen, zodat bezoekers weten hoe ze het aantal aanpassen.",
+      "De knoppen in het merkoranje zetten, zodat ze beter opvallen tussen de andere elementen in de winkelmand.",
+      "De knop 'Verwijderen' weghalen uit de winkelmand, zodat bezoekers niet per ongeluk een product kwijtraken.",
+      "De aantal-knoppen minstens 1 bij 1 centimeter maken met ruimte ertussen, zodat bezoekers raak tikken."
+    ],
+    "juist": 3
+  },
+  "kern": "De herhaalde tikken wijzen op missers. Te kleine knoppen die dicht op elkaar staan, kosten tijd en leiden tot vergissingen.",
+  "afleiders": [
+    "**Pop-up met uitleg:** dat helpt als mensen niet snappen wat een knop doet. Hier snappen ze het wel, maar raken ze de knop niet. En een pop-up is juist een extra hindernis.",
+    "**Een opvallende kleur:** opvallen is hier niet het probleem. Bezoekers zien de knop en tikken erop, maar missen hem.",
+    "**Verwijderknop weghalen:** dat haalt één risico weg, maar maakt de winkelmand minder bruikbaar. De oorzaak, te kleine knoppen, blijft bestaan.",
+    ""
+  ],
+  "kort": "Probeer met wanten aan een liftknop in te drukken in een paneel waar de knoppen dicht op elkaar zitten. Je mist, drukt nog eens, en soms kies je de verkeerde verdieping. Een vinger op een telefoon is ook zo'n want: veel breder dan een muispijl. Kleine knoppen naast elkaar kosten dan tijd en irritatie, en precies daar haken mensen af.",
+  "begrippen": [
+    { "term": "Tikdoel", "uitleg": "het stukje scherm waarop je moet tikken om een knop of link te gebruiken." },
+    { "term": "Clarity", "uitleg": "Microsoft Clarity: een gratis tool die opnames en heatmaps maakt van wat bezoekers op een site doen." }
+  ],
+  "uitleg": "Nielsen Norman Group adviseert voor tikdoelen op touchscreens een minimum van **1 bij 1 centimeter**. Ze noemen een fysieke maat, omdat pixels per scherm anders uitvallen.\n\nTe kleine tikdoelen geven twee problemen:\n- **Traag:** bezoekers moeten preciezer mikken en doen er langer over.\n- **Vergissingen:** staan doelen dicht op elkaar, dan tik je makkelijk de verkeerde. Naast 'Verwijderen' is dat extra pijnlijk.\n\nEerst moet een knop groot genoeg zijn, dan pas helpt ruimte ertussen. Ongeveer 2 millimeter ruimte is een veelgenoemd minimum, maar ruimte maakt een te kleine knop niet goed.\n\nZo laat je het effect zien:\n- Filter in Clarity op mobiel en op de winkelmand, en bekijk opnames met rage clicks.\n- Vergelijk in GA4 per apparaat hoeveel mensen afhaken in de winkelmand, vóór en na de aanpassing.",
+  "kernpunt": "Haakt mobiel veel vaker af dan desktop bij dezelfde stap, meet dan eerst de knoppen, voordat je aan teksten of kleuren zit.",
+  "toepassing": "Open vandaag de winkelmand of het formulier van één klant op je telefoon en meet de kleinste knop. Is die kleiner dan 1 centimeter, zet hem dan op je adviezenlijst.",
+  "bron": {
+    "titel": "Touch Targets on Touchscreens | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/touch-target-size/"
+  }
+}

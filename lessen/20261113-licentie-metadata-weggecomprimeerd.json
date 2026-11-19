@@ -1,0 +1,42 @@
+{
+  "id": "20261113-licentie-metadata-weggecomprimeerd",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Afbeeldingslicenties: IPTC-metadata en compressie",
+  "matrix": ["2.2.6", "2.1.14"],
+  "titel": "Nieuwe compressieplug-in, en de Licensable-badge is weg",
+  "intro": "Een fotograaf zet licentie-informatie alleen als IPTC-metadata in zijn foto's, via zijn fotobewerkingsprogramma. Zijn foto's kregen in Google Afbeeldingen een Licensable-badge. Sinds de site een plug-in gebruikt die alle afbeeldingen automatisch comprimeert, ontbreekt die badge bij nieuwe foto's.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak?",
+    "opties": [
+      "De plug-in haalt de metadata uit de bestanden om ze kleiner te maken, want die informatie zit in het beeldbestand zelf.",
+      "Google toont de badge alleen nog bij structured data, want IPTC-metadata wordt sinds kort niet meer gelezen.",
+      "De gecomprimeerde foto's zijn te klein voor de badge, want Google toont hem alleen boven een minimale breedte.",
+      "De plug-in geeft de foto's een nieuwe bestandsnaam, want Google koppelt de licentie aan de oude naam van het bestand."
+    ],
+    "juist": 0
+  },
+  "kern": "IPTC-metadata zit in het beeldbestand zelf. Een plug-in die metadata wegknipt om bestanden kleiner te maken, haalt dus ook de licentie-informatie weg.",
+  "afleiders": [
+    "",
+    "**Alleen structured data:** Google leest nog steeds beide vormen. Eén van de twee is genoeg om in aanmerking te komen.",
+    "**Te klein:** comprimeren maakt een bestand lichter, niet per se kleiner in pixels. En Google noemt geen minimale breedte voor deze badge.",
+    "**Nieuwe bestandsnaam:** IPTC-metadata reist mee in het bestand zelf. Een andere naam verandert daar niets aan, zolang de metadata erin blijft."
+  ],
+  "kort": "Vergelijk het met een schilderij met de naam van de maker op de achterkant van het doek. Snijdt de lijstenmaker het doek bij om het in een kleinere lijst te passen, dan is die naam weg. Zo werkt het met IPTC-metadata: die staat in het bestand zelf. Een plug-in die bestanden kleiner maakt door 'overbodige' gegevens te schrappen, kan juist die informatie weghalen.",
+  "begrippen": [
+    { "term": "IPTC-metadata", "uitleg": "informatie die in een fotobestand zelf is opgeslagen, zoals maker, copyright en licentie." },
+    { "term": "Licensable-badge", "uitleg": "een label in Google Afbeeldingen dat aangeeft dat er licentie-informatie bij een foto hoort." },
+    { "term": "Structured data", "uitleg": "extra code op een webpagina die zoekmachines vertelt wat er op de pagina staat, hier: wie de foto maakte en onder welke licentie." },
+    { "term": "Web Statement of Rights", "uitleg": "het IPTC-veld met de link naar de licentievoorwaarden. Nodig voor de badge." }
+  ],
+  "uitleg": "Google kent twee manieren om licentie-informatie mee te geven:\n\n**IPTC-fotometadata**\n- zit in het bestand zelf, dus één keer per foto\n- voor de badge is het veld *Web Statement of Rights* nodig\n\n**Structured data (ImageObject)**\n- staat op de pagina, en moet bij elk gebruik van de foto opnieuw\n- voor de badge is *license* nodig; *acquireLicensePage* wordt aanbevolen\n\nEén van de twee is genoeg. Spreken ze elkaar tegen, dan gebruikt Google de structured data.\n\nGoogle schrijft dat metadata weghalen een bestand kleiner kan maken, maar raadt aan om in elk geval de rechteninformatie te bewaren: maker, credit en copyright.\n\nOplossing hier: stel de plug-in zo in dat hij IPTC-velden laat staan. Of voeg ImageObject-markup toe, zodat de informatie niet meer van het bestand afhangt. Een garantie op de badge geeft Google nooit.",
+  "kernpunt": "Zet een klant licentie-informatie in de beeldbestanden, controleer dan of compressie of een CDN die metadata laat staan.",
+  "toepassing": "Download vandaag één afbeelding van de site van een klant en bekijk de bestandsgegevens. Staan maker en copyright er nog in, of zijn ze weggehaald?",
+  "bron": {
+    "titel": "Image metadata in Google Images | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"
+  }
+}

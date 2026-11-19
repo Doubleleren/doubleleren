@@ -1,0 +1,42 @@
+{
+  "id": "20261110-productmarkup-b2b-prijs-na-inloggen",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Product-markup: verplichte velden en markup die niet op de pagina staat",
+  "matrix": ["2.2.1", "2.2.8"],
+  "titel": "Product-markup zonder fouten, maar de B2B-shop toont prijzen pas na inloggen",
+  "intro": "Een groothandel in installatiemateriaal toont prijzen pas na het inloggen. Reviews heeft de site niet. De developer heeft op 8.000 productpagina's Product-markup gezet met naam, merk, afbeelding, beschrijving en artikelnummer. De Schema Markup Validator vindt geen fouten. Toch ziet de klant na twee maanden niets veranderen aan de zoekresultaten.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de klant?",
+    "opties": [
+      "De prijs alleen in de markup zetten, want Google leest de markup en hoeft de prijs niet op de pagina zelf te zien.",
+      "Meer eigenschappen toevoegen, zoals gtin en kleur, want hoe vollediger de markup, hoe eerder Google een rijk resultaat toont.",
+      "Uitleggen dat een zichtbare prijs of reviews nodig zijn, want zonder een van die twee komt Product-markup niet in aanmerking.",
+      "Per product Organization-markup gebruiken, want voor B2B-sites zonder prijzen toont Google dan het logo en de merknaam."
+    ],
+    "juist": 2
+  },
+  "kern": "Google toont productextra's alleen met een prijs (offers), een review of een gemiddelde score in de markup. En wat in de markup staat, moet ook op de pagina staan.",
+  "afleiders": [
+    "**Prijs alleen in de markup:** zo lijkt het probleem opgelost. Maar markup moet beschrijven wat op de pagina staat, en een verborgen prijs kan een handmatige actie opleveren.",
+    "**Meer eigenschappen:** een volledige markup is prima. Maar extra velden vervangen de verplichte niet: zonder prijs, review of score blijft het nee.",
+    "",
+    "**Organization per product:** dat klinkt als een uitweg voor B2B. Maar Organization-markup beschrijft het bedrijf, niet een product, en levert geen productresultaat op."
+  ],
+  "kort": "Vergelijk het met een aanvraag voor een parkeervergunning. Je kunt naam, adres en de kleur van je auto perfect invullen. Zonder kenteken wordt het toch niets, want dat ene veld is verplicht. Product-markup werkt net zo: Google wil minstens een prijs, een review of een gemiddelde score. En die moet ook echt op de pagina staan, anders klopt de aanvraag niet met de werkelijkheid.",
+  "begrippen": [
+    { "term": "Product-markup", "uitleg": "code in de pagina die Google vertelt dat het om een product gaat, met gegevens als naam, prijs en reviews." },
+    { "term": "Schema Markup Validator", "uitleg": "een tool van schema.org die controleert of de code klopt, maar niet of Google er iets mee toont." },
+    { "term": "offers", "uitleg": "het deel van Product-markup met de prijs en beschikbaarheid van het product." },
+    { "term": "Handmatige actie", "uitleg": "een maatregel van een medewerker van Google. Bij markup betekent dat: de pagina's komen niet meer in aanmerking voor rijke resultaten." }
+  ],
+  "uitleg": "Volgens Google heeft Product-markup naast **name** minstens één van deze drie nodig: **review**, **aggregateRating** of **offers**. Alle andere velden zijn aanbevolen, niet verplicht.\n\nDe Schema Markup Validator controleert alleen of de code klopt volgens schema.org. Of Googles verplichte velden erin staan, zie je in de **Rich Results Test**.\n\nDaarnaast geldt een algemene regel: 'Don't mark up content that is not visible to readers of the page.' Wie dat toch doet, riskeert een handmatige actie. Dan verliest de pagina het recht op rijke resultaten.\n\nWat kan deze klant doen?\n- Een openbare prijs tonen, zoals een adviesprijs, en die markeren.\n- Productreviews verzamelen en zichtbaar op de pagina zetten.\n- Of accepteren dat er geen productextra's komen. Dat is dan een zakelijke keuze, geen technische fout.\n\nGoogle garandeert overigens nooit dat een rijk resultaat verschijnt, ook niet als alles klopt.",
+  "kernpunt": "Controleer Product-markup altijd ook met de Rich Results Test. Die kijkt naar Googles verplichte velden, de validator niet.",
+  "toepassing": "Haal vandaag een productpagina van een klant door de Rich Results Test. Kijk of de test het product zonder fouten herkent en of de prijs in de markup dezelfde is als op de pagina.",
+  "bron": {
+    "titel": "Product snippet (Product, Review, Offer) structured data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/product-snippet"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "20261111-fcp-webfont-tekst-onzichtbaar",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "FCP verbeteren: tekst zichtbaar houden terwijl een webfont laadt",
+  "matrix": ["5.2.9", "5.2.8"],
+  "titel": "Een lege pagina tot het lettertype binnen is",
+  "intro": "Een advocatenkantoor heeft een nieuwe site met een eigen lettertype. Op een trage mobiele verbinding zie je eerst een paar tellen een lege pagina. Daarna verschijnt alle tekst tegelijk. De pagina heeft geen grote afbeeldingen. In de CSS staat bij het lettertype: font-display: block.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing helpt de First Contentful Paint (FCP) hier het meest?",
+    "opties": [
+      "Alle afbeeldingen lazy loaden, zodat de browser eerst de tekst kan tonen en pas daarna de beelden ophaalt.",
+      "De server sneller maken met een zwaarder hostingpakket, omdat FCP vooral afhangt van de eerste byte.",
+      "font-display: swap gebruiken, zodat de tekst meteen in een systeemletter verschijnt tot het eigen font er is.",
+      "Het lettertype onderaan de pagina laden, zodat de browser het pas na de rest van de HTML gaat ophalen."
+    ],
+    "juist": 2
+  },
+  "kern": "Met font-display: block houdt de browser tekst onzichtbaar tot het font binnen is. Met swap staat de tekst er meteen, eerst in een standaardletter.",
+  "afleiders": [
+    "**Afbeeldingen lazy loaden:** dat helpt vaak bij de laadtijd. Maar deze pagina heeft geen grote afbeeldingen, en de tekst wacht op het lettertype, niet op beelden.",
+    "**Snellere server:** een trage server vertraagt FCP inderdaad. Maar hier is de pagina er al; alleen de tekst blijft onzichtbaar tot het font binnen is.",
+    "",
+    "**Font later laden:** dan duurt het juist langer voordat het font er is. Zolang block geldt, blijft de tekst al die tijd onzichtbaar."
+  ],
+  "kort": "Stel dat een spreker pas begint als zijn eigen microfoon is aangesloten, terwijl er een reservemicrofoon klaarligt. De zaal zit dan in stilte te wachten. Slimmer is beginnen met de reserve en wisselen zodra de eigen microfoon werkt. Zo werkt swap: de bezoeker kan meteen lezen, en het mooie lettertype komt er later bij.",
+  "begrippen": [
+    { "term": "FCP", "uitleg": "First Contentful Paint: het moment waarop de eerste tekst of afbeelding op het scherm verschijnt." },
+    { "term": "Webfont", "uitleg": "een lettertype dat de browser van internet downloadt, in plaats van een letter die al op het apparaat staat." },
+    { "term": "font-display", "uitleg": "een CSS-instelling die bepaalt wat de browser met tekst doet zolang een webfont nog niet binnen is." }
+  ],
+  "uitleg": "**FCP** meet hoe lang het duurt tot er iets van de inhoud op het scherm staat: tekst, een afbeelding, een svg of een canvas. Volgens web.dev is 1,8 seconde of minder goed en is meer dan 3,0 seconde slecht, gemeten op het 75e percentiel.\n\nOnzichtbare tekst telt niet als inhoud. Daarom noemt web.dev 'zorg dat tekst zichtbaar blijft terwijl webfonts laden' als een van de manieren om FCP te verbeteren.\n\nZo pak je het aan:\n- Zet font-display: swap (of optional) in de @font-face-regel.\n- Laad het belangrijkste font eerder met preload als de browser het laat ontdekt.\n- Gebruik zo min mogelijk varianten (gewichten en stijlen).\n\nLet op: met swap kan tekst verspringen als het eigen font binnenkomt. Kies daarom een systeemletter met vergelijkbare maten, zodat de layout rustig blijft.",
+  "kernpunt": "Blijft een pagina leeg terwijl de HTML er al is, kijk dan eerst naar fonts en CSS voordat je de server de schuld geeft.",
+  "toepassing": "Zoek bij één klant in de CSS naar font-display en noteer per lettertype welke waarde er staat.",
+  "bron": {
+    "titel": "First Contentful Paint (FCP) | web.dev",
+    "url": "https://web.dev/articles/fcp"
+  }
+}

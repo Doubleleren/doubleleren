@@ -1,0 +1,41 @@
+{
+  "id": "20261112-robots-txt-googlebot-groep-negeert-ster",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "robots.txt: welke user-agent-groep Googlebot volgt",
+  "matrix": ["1.3.6", "1.1.8"],
+  "titel": "Eén regel voor Googlebot erbij, en de sorteer-URL's worden weer gecrawld",
+  "intro": "De robots.txt van een webshop heeft één groep voor `User-agent: *` met Disallow-regels voor /winkelwagen/, /account/ en `/*?sort=`. Een developer zet onderaan een nieuwe groep: `User-agent: Googlebot` met alleen `Disallow: /zoeken/`. Een week later zie je in de logs dat Googlebot volop sorteer-URL's en winkelwagenpagina's opvraagt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de oorzaak?",
+    "opties": [
+      "Googlebot volgt nu alleen zijn eigen groep, dus de regels uit de groep voor alle crawlers gelden niet meer voor Googlebot.",
+      "Google voegt beide groepen samen, maar bij een conflict wint de minst strenge regel, dus de oude Disallow-regels vervallen.",
+      "De nieuwe groep staat onderaan het bestand, dus Google leest die als laatste en overschrijft daarmee alles wat erboven staat.",
+      "Googlebot negeert Disallow-regels met parameters, dus sorteer-URL's moet je altijd met een canonical of noindex sturen."
+    ],
+    "juist": 0
+  },
+  "kern": "Een crawler kiest één groep: de meest specifieke die bij zijn naam past. Heeft Googlebot een eigen groep, dan leest hij de groep voor * niet meer.",
+  "afleiders": [
+    "",
+    "**Samenvoegen, minst streng wint:** Google voegt alleen groepen met dezelfde user-agent samen. Een groep voor Googlebot en een groep voor * blijven gescheiden.",
+    "**Onderaan wint:** de volgorde in het bestand maakt niet uit. Google kiest de groep op naam, niet op plek.",
+    "**Geen regels met parameters:** Google ondersteunt patronen als /*?sort= gewoon. Het probleem is niet de regel, maar dat Googlebot die groep niet meer leest."
+  ],
+  "kort": "Denk aan een briefje op de koelkast: 'Iedereen: niet aan de taart, niet aan de wijn'. Daaronder hangt een tweede briefje: 'Oom Kees: niet aan de kaas'. Oom Kees leest alleen zijn eigen briefje en denkt dat de rest niet voor hem geldt. Googlebot leest robots.txt precies zo. Staat er een groep met zijn naam, dan slaat hij de algemene groep over.",
+  "begrippen": [
+    { "term": "robots.txt", "uitleg": "een tekstbestand in de hoofdmap van een site met regels voor welke URL's crawlers niet mogen opvragen." },
+    { "term": "User-agent-groep", "uitleg": "een blok in robots.txt dat begint met de naam van een crawler (of * voor iedereen), met daaronder de regels." },
+    { "term": "Disallow", "uitleg": "een regel die zegt welk pad een crawler niet mag opvragen." }
+  ],
+  "uitleg": "Volgens Googles uitleg van de robots.txt-standaard werkt het zo:\n\n- **Eén groep per crawler.** Een crawler volgt de groep met de meest specifieke user-agent die bij hem past. Andere groepen worden genegeerd.\n- **De groep voor * is een vangnet.** Die geldt alleen voor crawlers zonder eigen groep.\n- **Samenvoegen gebeurt alleen bij dezelfde naam.** Staan er twee groepen voor Googlebot, dan voegt Google die samen. Een groep voor Googlebot en een groep voor * worden niet samengevoegd.\n- **Binnen een groep** wint de regel met het langste pad. Bij een gelijke stand kiest Google de minst strenge regel.\n\n**De oplossing:** zet alle regels die ook voor Googlebot moeten gelden in de Googlebot-groep, of schrap die groep als hij niet nodig is.\n\nHetzelfde risico speelt bij groepen voor andere crawlers, zoals AI-crawlers. Wie een eigen groep krijgt, valt buiten de algemene regels. Controleer een wijziging daarna in het robots.txt-rapport in Search Console en in de logs.",
+  "kernpunt": "Voeg je een groep voor één crawler toe, herhaal daarin dan elke regel uit de groep voor * die ook voor die crawler moet gelden.",
+  "toepassing": "Open de robots.txt van één klant. Staat er naast User-agent: * ook een groep voor een specifieke crawler? Check dan of de belangrijke Disallow-regels in beide groepen staan.",
+  "bron": {
+    "titel": "How Google interprets the robots.txt specification | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
+  }
+}

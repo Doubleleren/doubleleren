@@ -1,0 +1,40 @@
+{
+  "id": "20261118-ymyl-giftige-kamerplanten",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "YMYL: welke content vraagt extra zorg voor E-E-A-T?",
+  "matrix": ["11.1.3", "11.1.5"],
+  "titel": "Drie blogs van een tuincentrum: welke moet het betrouwbaarst zijn?",
+  "intro": "Een tuincentrum wil drie nieuwe blogs publiceren. De schrijver heeft tijd om er één extra te laten nakijken door een deskundige en er een bron en auteur bij te zetten. De blogs zijn:\n\n- 10 kamerplanten die mooi staan in een donkere hoek\n- Welke kamerplanten zijn giftig voor katten en jonge kinderen?\n- Zo verpot je een orchidee in vijf stappen",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Aan welke blog besteed je die extra zorg, en waarom?",
+    "opties": [
+      "De blog over donkere hoeken, want daar zoeken de meeste mensen op, dus daar levert betrouwbaarheid het meeste verkeer op.",
+      "De blog over giftige planten, want een fout advies kan daar de gezondheid van kinderen en huisdieren schaden.",
+      "De blog over verpotten, want een stappenplan moet precies kloppen, anders gaat de plant van de lezer dood.",
+      "Geen van drieën apart, want Google beoordeelt de betrouwbaarheid per website en nooit per losse pagina."
+    ],
+    "juist": 1
+  },
+  "kern": "Google weegt betrouwbaarheid zwaarder bij onderwerpen die iemands gezondheid, geld of veiligheid kunnen raken.",
+  "afleiders": [
+    "**Meeste zoekvolume:** veel verkeer is fijn, maar het maakt een onderwerp niet gevoeliger. Een fout over een plant in een donkere hoek doet niemand kwaad.",
+    "",
+    "**Verpotten:** een fout stappenplan is jammer voor de plant. Maar het raakt niet de gezondheid of veiligheid van mensen of dieren.",
+    "**Per website:** de site als geheel telt mee, maar Google kijkt ook naar het onderwerp van de pagina. Een pagina over gezondheid krijgt meer gewicht dan een over decoratie."
+  ],
+  "kort": "Denk aan een buurman die je advies geeft. Zegt hij welke kleur bloempot mooi staat, dan maakt het niet uit of hij gelijk heeft. Zegt hij dat een plant veilig is voor je peuter, dan wil je zeker weten dat het klopt. Google denkt net zo. Hoe groter de schade bij een fout, hoe meer bewijs van betrouwbaarheid Google wil zien.",
+  "begrippen": [
+    { "term": "YMYL", "uitleg": "Your Money or Your Life: onderwerpen die iemands gezondheid, geld of veiligheid flink kunnen raken." },
+    { "term": "E-E-A-T", "uitleg": "Experience, Expertise, Authoritativeness, Trustworthiness: ervaring, deskundigheid, gezag en betrouwbaarheid van content." }
+  ],
+  "uitleg": "Google schrijft in zijn pagina over nuttige content dat zijn systemen bij YMYL-onderwerpen nog meer gewicht geven aan content met een sterke E-E-A-T. YMYL zijn onderwerpen die 'de gezondheid, financiële stabiliteit of veiligheid van mensen' flink kunnen raken.\n\nDat geldt dus ook buiten de bekende sectoren als zorg en financiën. Een webshop of tuincentrum heeft ook pagina's die eronder vallen, zoals:\n- giftigheid en veiligheid van producten\n- gebruik van chemische middelen, zoals bestrijdingsmiddelen\n- elektra, gas of klussen met valgevaar\n\nWat helpt op zo'n pagina:\n- een auteur of deskundige met naam en achtergrond\n- verwijzingen naar gezaghebbende bronnen, zoals een vergiftigingeninformatiecentrum\n- een datum waarop de inhoud is gecontroleerd\n\nE-E-A-T is zelf geen rankingfactor. Google gebruikt een mix van signalen die samen laten zien of content betrouwbaar is.",
+  "kernpunt": "Kan een fout op een pagina iemand schade doen, behandel die pagina dan als YMYL, ook in een gewone webshop.",
+  "toepassing": "Zoek vandaag op de site van één klant een pagina over veiligheid, gezondheid of geld. Kijk of er een auteur, bron en controledatum op staan.",
+  "bron": {
+    "titel": "Creating helpful, reliable, people-first content | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  }
+}

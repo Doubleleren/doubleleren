@@ -1,0 +1,41 @@
+{
+  "id": "20261113-clarity-scrollmap-per-apparaat",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Clarity: een scrollmap per apparaat lezen",
+  "matrix": ["7.1.5"],
+  "titel": "78% ziet het formulier, zegt de scrollmap. Op welk scherm?",
+  "intro": "Een klant met een site voor dakkapellen bekijkt in Microsoft Clarity de scrollmap van de offertepagina. In de weergave voor pc bereikt 78% van de bezoekers het offerteformulier onderaan. Hij concludeert dat de pagina niet korter hoeft. In GA4 zie je dat 70% van de bezoekers op een smartphone zit.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je eerst?",
+    "opties": [
+      "De conclusie overnemen, want een scrollmap telt alle bezoekers samen en is dus voor elk apparaat even betrouwbaar.",
+      "De scrollmap in de weergave voor mobiel bekijken, want de pagina is daar veel langer en daar zit het meeste verkeer.",
+      "Een A/B-test starten met een kortere pagina, want een scrollmap zegt niets over gedrag en alleen een test geeft zekerheid.",
+      "De klikmap erbij pakken, want als er op het formulier geklikt wordt, hebben de bezoekers het ook allemaal gezien."
+    ],
+    "juist": 1
+  },
+  "kern": "Clarity toont een scrollmap per apparaat. De pc-weergave zegt weinig over de 70% op een smartphone, waar dezelfde pagina veel langer is.",
+  "afleiders": [
+    "**Alles samen:** het lijkt één getal voor iedereen. Maar Clarity laat je kiezen tussen pc, tablet en mobiel, en elk apparaat heeft een eigen pagina-indeling.",
+    "",
+    "**Meteen testen:** een test geeft wel zekerheid. Maar je weet nog niet eens of er op mobiel een probleem is. Kijk eerst in de data die je al hebt.",
+    "**De klikmap:** klikken laten zien dat sommigen het formulier vonden. Maar ze zeggen niet hoeveel bezoekers er nooit kwamen."
+  ],
+  "kort": "Denk aan een folder die je in twee formaten drukt: A4 en een smal boekje. Op A4 staat het bestelformulier op pagina 2, in het boekje op pagina 6. Dat lezers van de A4-versie pagina 2 halen, zegt niets over het boekje. Een smartphone is dat boekje. Dezelfde pagina wordt daar veel langer, en bij elke extra schermlengte haken lezers af.",
+  "begrippen": [
+    { "term": "Scrollmap", "uitleg": "een heatmap die laat zien welk deel van de bezoekers tot welk punt van een pagina scrolt." },
+    { "term": "Average fold", "uitleg": "in Clarity: het gemiddelde punt tot waar bezoekers de pagina zien voordat ze gaan scrollen." },
+    { "term": "Klikmap", "uitleg": "een heatmap die laat zien waar bezoekers op een pagina klikken." }
+  ],
+  "uitleg": "In Clarity kies je bovenaan een heatmap het apparaat: **pc, tablet of mobiel**. Dat is nodig omdat een responsive pagina per scherm anders is opgebouwd. Een blok dat op pc halverwege staat, kan op mobiel helemaal onderaan zitten.\n\nZo lees je een scrollmap:\n- Kies eerst het apparaat met het meeste verkeer.\n- Kijk naar de **% drop-off**: op welk punt van de pagina haken veel mensen tegelijk af?\n- Let op de **average fold**: wat zien bezoekers zonder te scrollen?\n- Filter waar nodig op een segment, zoals bezoekers uit Google.\n\nWil je pc en mobiel naast elkaar zien, gebruik dan **Compare**. Daar kies je per kant een apparaat.\n\nEen scrollmap vertelt *waar* mensen afhaken, niet *waarom*. Kijk daarvoor naar opnames of stel een korte vraag op de pagina, en test een verbetering daarna.",
+  "kernpunt": "Lees een scrollmap altijd eerst op het apparaat waar de meeste bezoekers zitten.",
+  "toepassing": "Open vandaag bij een klant in Clarity de heatmap van de belangrijkste landingspagina. Zet pc en mobiel naast elkaar met Compare en noteer hoeveel procent op elk apparaat de call-to-action bereikt.",
+  "bron": {
+    "titel": "Scroll maps | Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/clarity/heatmaps/scroll-maps"
+  }
+}

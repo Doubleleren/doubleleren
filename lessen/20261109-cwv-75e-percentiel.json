@@ -1,0 +1,41 @@
+{
+  "id": "20261109-cwv-75e-percentiel",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: wanneer is een pagina 'goed'? (het 75e percentiel)",
+  "matrix": ["5.2.1", "5.2.2"],
+  "titel": "70% van de bezoekers zit goed. Haalt de site de Core Web Vitals?",
+  "intro": "Een klant stuurt een screenshot uit zijn velddata van echte bezoekers. LCP is de tijd tot het grootste stuk inhoud in beeld staat. Bij 70% van de bezoeken op mobiel is dat binnen 2,5 seconden. Bij de rest duurt het langer, soms meer dan 5 seconden. De klant concludeert: 'De meeste bezoekers zitten goed, dus we halen de Core Web Vitals.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Klopt de conclusie van de klant?",
+    "opties": [
+      "Ja, want meer dan de helft van de bezoeken haalt de grens van 2,5 seconden, en dat is de norm voor 'goed'.",
+      "Nee, want Google kijkt naar het gemiddelde van alle bezoeken, en dat komt door de trage uitschieters boven de grens.",
+      "Ja, want voor mobiel geldt een ruimere grens van 4 seconden, dus ook de tragere bezoeken vallen nog binnen de norm.",
+      "Nee, want Google kijkt naar het 75e percentiel: pas als 75% van de bezoeken binnen 2,5 seconden laadt, is het goed."
+    ],
+    "juist": 3
+  },
+  "kern": "Google beoordeelt de Core Web Vitals op het 75e percentiel. Minstens 75% van de bezoeken moet binnen de grens blijven, niet alleen de meerderheid.",
+  "afleiders": [
+    "**Meer dan de helft is genoeg:** 'de meeste bezoekers' klinkt als een voldoende. Maar de lat ligt hoger: drie op de vier bezoeken moeten binnen de grens blijven.",
+    "**Het gemiddelde telt:** een gemiddelde lijkt eerlijk, maar Google gebruikt het juist niet. Een paar extreem trage bezoeken zouden het dan te veel bepalen.",
+    "**Ruimere grens voor mobiel:** 4 seconden is de grens tussen 'verbetering nodig' en 'slecht'. Voor 'goed' geldt op mobiel en desktop dezelfde 2,5 seconden.",
+    ""
+  ],
+  "kort": "Denk aan een bus die pas 'op tijd' heet als drie van de vier ritten op tijd aankomen. Rijdt hij zeven van de tien keer op tijd, dan haalt hij die norm niet, ook al is dat de meerderheid. Google legt de lat zo hoog zodat een site goed werkt voor bijna iedereen. Ook voor wie een oudere telefoon of een slecht netwerk heeft.",
+  "begrippen": [
+    { "term": "Core Web Vitals", "uitleg": "drie cijfers van Google voor gebruikservaring: laadsnelheid (LCP), reactiesnelheid (INP) en verspringen (CLS)." },
+    { "term": "Velddata", "uitleg": "metingen bij echte bezoekers met hun eigen apparaat en netwerk, in plaats van een test in een lab." },
+    { "term": "75e percentiel", "uitleg": "de waarde waar 75% van de metingen onder blijft. Zet je alle bezoeken op volgorde van snel naar traag, dan is het de bezoeker op driekwart." }
+  ],
+  "uitleg": "De drempels voor 'goed' volgens web.dev:\n- **LCP** (laden): 2,5 seconden of minder\n- **INP** (reageren): 200 milliseconden of minder\n- **CLS** (verspringen): 0,1 of minder\n\nGoogle meet dat op het **75e percentiel** van alle paginaweergaven, apart voor mobiel en desktop. Een pagina haalt de Core Web Vitals pas als ze voor alle drie de cijfers op het 75e percentiel onder de grens blijft.\n\nIn de praktijk:\n- **PageSpeed Insights** toont in het blok met velddata per cijfer de waarde op het 75e percentiel. Die waarde vergelijk je met de grens.\n- **Search Console** groepeert URL's in het Core Web Vitals-rapport op dezelfde manier.\n- **De Lighthouse-score** is een labtest en zegt niets over het 75e percentiel van echte bezoekers.\n\nZit je net boven de grens, kijk dan vooral naar de traagste kwart van de bezoeken. Vaak zijn dat mobiele bezoekers op een trage verbinding, of bezoekers die op een zware pagina binnenkomen.",
+  "kernpunt": "Lees bij velddata altijd de waarde op het 75e percentiel, niet het aandeel bezoekers dat goed zit en niet het gemiddelde.",
+  "toepassing": "Zoek vandaag de belangrijkste pagina van een klant op in PageSpeed Insights. Noteer voor mobiel de LCP, INP en CLS uit het blok met velddata, en zet bij elke waarde of hij onder de grens blijft.",
+  "bron": {
+    "titel": "Web Vitals | web.dev",
+    "url": "https://web.dev/articles/vitals"
+  }
+}

@@ -15,10 +15,17 @@
     "minTekens": 100
   },
   "modelantwoord": "**De kern:** laat de kaartvelden er veiliger uitzien dan de rest. Zet ze in een eigen kader met een rand of achtergrondkleur, met een slotje of keurmerk erbij. Bezoekers beoordelen veiligheid op wat ze zien, niet op HTTPS.\n\nWaarom: HTTPS versleutelt elk veld op de pagina even goed, maar dat ziet een bezoeker niet. Als de kaartvelden er hetzelfde uitzien als het veld voor je straatnaam, voelt het niet als een plek voor je creditcard. In Baymards onderzoek helpt het visueel 'omkaderen' van de kaartvelden, en zelfs een eenvoudig slotje of zelfgemaakt keurmerk bij de velden verhoogt het gevoel van veiligheid.\n\nVeelgemaakte fouten: alleen naar techniek kijken ('we hebben toch HTTPS'), of keurmerken in de footer zetten, ver weg van de plek waar de twijfel ontstaat.",
-  "kort": "Technisch is de site veilig, maar dat zien bezoekers niet. Ze letten op hoe het eruitziet. Lijkt het creditcardveld op het veld voor je straatnaam, dan voelt het niet als een veilige plek. Zet de kaartvelden daarom in een eigen kader met een rand of kleur, met een slotje of keurmerk erbij, en niet ver weg onderaan de pagina.",
+  "kort": "Denk aan een bank waar de balie voor je pinpas er precies zo uitziet als de koffiehoek. Ook als het slot op de kluis prima is, aarzel je om daar je pincode in te tikken. Mensen beoordelen veiligheid op wat ze zien. Een eigen, afgebakende plek voelt als een plek waar extra goed wordt opgelet.",
+  "begrippen": [
+    { "term": "HTTPS", "uitleg": "een versleutelde verbinding tussen browser en website, te herkennen aan het slotje in de adresbalk." },
+    { "term": "Betaalprovider", "uitleg": "een bedrijf dat de betaling voor een webshop verwerkt, zoals de kaartvelden en de koppeling met de bank." },
+    { "term": "Exit-enquête", "uitleg": "een korte vragenlijst die verschijnt als een bezoeker op het punt staat de site te verlaten." }
+  ],
   "uitleg": "Er is een verschil tussen **echte** en **ervaren** veiligheid. Technisch zijn alle velden op een HTTPS-pagina even goed versleuteld. Maar bezoekers zien de techniek niet. Ze beoordelen op gevoel: lijkt dit een veilige plek voor mijn creditcard?\n\nDat gevoel kost omzet. In Baymards checkoutonderzoek van 2025 had **19%** van de ondervraagde shoppers in de afgelopen drie maanden een bestelling afgebroken omdat ze de site hun creditcardgegevens niet toevertrouwden.\n\nWat Baymard in tests zag:\n- **Omkaderen werkt.** Kaartvelden in een eigen blok, met een rand, achtergrondkleur of schaduw, voelen steviger dan de rest van het formulier.\n- **Signalen bij de velden.** Een slotje of keurmerk in dat blok verhoogt het gevoel van veiligheid. Dat geldt zelfs voor zelfgemaakte symbolen; een bekend keurmerk is dus niet eens nodig.\n- **Plaats telt.** Zet zulke signalen waar de twijfel ontstaat: bij de kaartvelden, niet in de footer.\n\nVoor CRO is dit laaghangend fruit: een kleine aanpassing in de opmaak, zonder ingreep in de betaalkoppeling. Meet daarna het afhaakpercentage op de betaalstap, liefst met een A/B-test.",
-  "kernpunt": "Bezoekers beoordelen veiligheid op wat ze zien, niet op HTTPS. Geef de kaartvelden een eigen kader met een slotje of keurmerk, zodat ze er veiliger uitzien dan de rest van het formulier.",
-  "toepassing": "Doorloop deze week de betaalstap van een webshopklant tot aan het invullen van een kaart. Vallen de betaalvelden visueel op als veilig blok, of lijken ze op elk ander veld?",
+  "kernpunt": "Zet signalen van veiligheid op de plek waar de twijfel ontstaat: bij de kaartvelden, niet in de footer.",
+  "toepassing": "Doorloop vandaag de betaalstap van een webshopklant tot aan het invullen van een kaart. Noteer of de betaalvelden opvallen als een apart, veilig blok, of lijken op elk ander veld.",
+  "herzien": "2026-11-09",
+  "wijziging": "Uitleg in de vaste opbouw gezet.",
   "bron": {
     "titel": "Baymard Institute: How Users Perceive Security During the Checkout Flow",
     "url": "https://baymard.com/blog/perceived-security-of-payment-form"

@@ -1,0 +1,42 @@
+{
+  "id": "20261118-bronlinks-niet-allemaal-nofollow",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Externe links: wanneer nofollow, sponsored of ugc?",
+  "matrix": ["2.1.16", "1.3.2"],
+  "titel": "Elke link naar een bron op nofollow 'om linkwaarde te bewaren'?",
+  "intro": "Een energieadviseur schrijft blogs over subsidies en isolatie. In elk artikel linkt de schrijver naar de bronnen, zoals de overheid en onderzoeksinstituten. Een nieuwe redacteur zet bij al die links rel=\"nofollow\". Haar reden: 'Anders lekt onze linkwaarde weg naar andere sites.' Ook een betaalde link naar een isolatiebedrijf staat in een van de blogs.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpak klopt?",
+    "opties": [
+      "Alle externe links op nofollow, want elke link naar buiten kost je eigen pagina's linkwaarde en dus posities.",
+      "Externe links helemaal weghalen, want links naar andere sites sturen je bezoekers weg en dat ziet Google als slecht.",
+      "Bronlinks gewoon laten volgen, en alleen de betaalde link markeren met sponsored, want die is gekocht.",
+      "Alle externe links op sponsored, want Google kan niet zien welke links betaald zijn en welke niet."
+    ],
+    "juist": 2
+  },
+  "kern": "Linken naar bronnen kan juist vertrouwen opbouwen. Alleen betaalde links, links van gebruikers en links die je niet vertrouwt markeer je.",
+  "afleiders": [
+    "**Alles op nofollow:** de angst voor 'weglekkende' waarde is oud en hardnekkig. Google zegt juist dat je nofollow alleen gebruikt als je de bron niet vertrouwt.",
+    "**Links weghalen:** het lijkt slim om bezoekers vast te houden. Maar zonder bronnen is een blog over subsidies minder te controleren en dus minder betrouwbaar.",
+    "",
+    "**Alles op sponsored:** sponsored betekent 'hier is voor betaald'. Zet je dat op een link naar de overheid, dan geef je Google verkeerde informatie."
+  ],
+  "kort": "Denk aan een verslag waarin je schrijft waar je informatie vandaan komt. Dat maakt je verslag niet zwakker, maar juist geloofwaardiger. Zo werkt een link naar een goede bron ook. Alleen als iemand je betaalde om ergens naar te verwijzen, moet je dat eerlijk zeggen. Daarvoor zijn de labels sponsored en nofollow.",
+  "begrippen": [
+    { "term": "Externe link", "uitleg": "een link van jouw site naar een pagina op een andere website." },
+    { "term": "rel=\"nofollow\"", "uitleg": "een label op een link dat zegt: ik sta niet in voor deze pagina." },
+    { "term": "rel=\"sponsored\"", "uitleg": "een label op een link waarvoor betaald is, bijvoorbeeld een advertentie of samenwerking." },
+    { "term": "rel=\"ugc\"", "uitleg": "een label voor links die bezoekers zelf plaatsen, zoals in reacties of een forum." }
+  ],
+  "uitleg": "Google schrijft in zijn richtlijnen voor links: 'Linken naar andere sites is niets om bang voor te zijn.' Externe links kunnen helpen om vertrouwen op te bouwen, bijvoorbeeld door je bronnen te noemen. Geef de lezer context over wat hij kan verwachten als hij klikt.\n\nWanneer je een link markeert:\n- **sponsored** (of nofollow): voor links waarvoor je betaald bent of iets kreeg.\n- **ugc** (of nofollow): voor links die gebruikers zelf plaatsen, zoals in reacties.\n- **nofollow**: alleen als je de bron niet vertrouwt, en niet voor elke externe link op je site.\n\nEen betaalde link zonder sponsored of nofollow valt onder de spamregels van Google over linkschema's.\n\nVoor de energieadviseur betekent dat: bronlinks naar de overheid en onderzoeksinstituten gewoon laten staan, en alleen de link naar het isolatiebedrijf markeren met sponsored.",
+  "kernpunt": "Link gewoon naar goede bronnen. Markeer alleen wat betaald is, wat gebruikers plaatsten of wat je niet vertrouwt.",
+  "toepassing": "Open vandaag één blog van een klant met externe links. Controleer of betaalde links sponsored hebben en of bronlinks niet onnodig op nofollow staan.",
+  "bron": {
+    "titel": "Link best practices for Google | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+  }
+}

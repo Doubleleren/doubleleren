@@ -1,0 +1,41 @@
+{
+  "id": "20261117-ab-test-onbeslist-is-geen-nuleffect",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "CRO",
+  "onderwerp": "A/B-testen: een onbesliste test is geen bewijs dat er geen effect is",
+  "matrix": ["7.2.2", "7.2.1"],
+  "titel": "'Niet significant, dus de kortere checkout maakt niets uit'",
+  "intro": "Een webshop testte drie weken een kortere checkout. Het testtool meldt: conversie +2,1% voor de nieuwe variant, niet significant. Het interval voor het verschil loopt van −6% tot +10%. De productowner concludeert: 'De kortere checkout maakt dus niets uit, we schrappen het idee.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de juiste conclusie uit deze test?",
+    "opties": [
+      "Onbeslist, want het interval past zowel bij 6% verlies als bij 10% winst, dus een flink effect is niet uitgesloten.",
+      "Er is geen effect, want een uitkomst die niet significant is, betekent dat beide varianten even goed converteren.",
+      "De nieuwe variant is 2,1% beter, want het gemeten verschil is de beste schatting en significantie gaat alleen over toeval.",
+      "De nieuwe variant is slechter, want een test zonder winnaar na drie weken wijst meestal op een verborgen negatief effect."
+    ],
+    "juist": 0
+  },
+  "kern": "Het interval loopt van flink verlies tot flinke winst. De test sluit dus niets uit: dat is 'we weten het niet', niet 'het maakt niets uit'.",
+  "afleiders": [
+    "",
+    "**Geen effect:** 'niet significant' betekent alleen dat 0% nog in het interval past. Een winst van 10% past er net zo goed in.",
+    "**2,1% beter:** het gemeten verschil is wel de beste gok, maar het brede interval laat zien hoe onzeker die gok is. Daar bouw je geen besluit op.",
+    "**Verborgen negatief effect:** dat volgt nergens uit. Een onbesliste test zegt niets over de richting, alleen dat de meting te grof was."
+  ],
+  "kort": "Denk aan een weegschaal die alleen hele kilo's toont. Je wilt weten of je 300 gram bent afgevallen, maar de schaal zegt twee keer 80 kilo. Dat bewijst niet dat je gelijk bent gebleven: de schaal is te grof. Een A/B-test met te weinig bezoekers is zo'n grove schaal. Pas als het interval smal is en dicht rond nul ligt, mag je zeggen dat het verschil te klein is om ertoe te doen.",
+  "begrippen": [
+    { "term": "Significant", "uitleg": "het verschil is zo groot dat toeval als verklaring onwaarschijnlijk is. Niet significant betekent: toeval is nog niet uit te sluiten." },
+    { "term": "Interval (betrouwbaarheidsinterval)", "uitleg": "de bandbreedte waarbinnen het echte verschil waarschijnlijk ligt, bijvoorbeeld van −6% tot +10%." },
+    { "term": "Onderscheidend vermogen (power)", "uitleg": "de kans dat een test een echt effect van een bepaalde grootte ook vindt. Weinig bezoekers betekent weinig power." }
+  ],
+  "uitleg": "Optimizely deelt uitkomsten zo in:\n- **winnaar:** het interval ligt helemaal boven 0%;\n- **verliezer:** het interval ligt helemaal onder 0%;\n- **onbeslist:** het interval bevat 0%.\nOptimizely raadt aan intervallen te rapporteren naast de significantie. Met meer data wordt het interval vaak smaller.\n\nIn de statistiek heet de denkfout van de productowner 'afwezigheid van bewijs is geen bewijs van afwezigheid'. Wil je echt kunnen zeggen dat er geen relevant effect is, kies dan vooraf een kleine marge (bijvoorbeeld −1% tot +1%). Valt het hele interval daarbinnen, dan is het verschil te klein om ertoe te doen. Dat heet een equivalentietoets.\n\nWat doe je na een onbesliste test?\n- Check of de test vooraf genoeg power had.\n- Herhaal met meer verkeer, of test een grotere verandering.\n- Of beslis op andere gronden, zoals kosten of gebruiksgemak.\nZet hem in je testlog als 'onbeslist', met het interval erbij.",
+  "kernpunt": "Noem een test zonder winnaar 'onbeslist' en zet het interval erbij, nooit 'geen effect'.",
+  "toepassing": "Zoek vandaag in het testlog van één klant een test die als 'geen effect' is afgesloten. Zoek het interval op en kijk of het een flinke winst of een flink verlies echt uitsloot.",
+  "bron": {
+    "titel": "Confidence intervals and improvement intervals | Optimizely",
+    "url": "https://docs.optimizely.com/experimentation-strategy/docs/confidence-intervals-and-improvement-intervals"
+  }
+}

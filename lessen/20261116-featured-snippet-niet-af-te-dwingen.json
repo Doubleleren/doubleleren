@@ -1,0 +1,41 @@
+{
+  "id": "20261116-featured-snippet-niet-af-te-dwingen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Featured snippets: wat je wel en niet kunt sturen",
+  "matrix": ["2.1.6", "2.1.12"],
+  "titel": "'Zet onze uitleg in dat kader bovenaan': kan dat met code?",
+  "intro": "Een hypotheekadviseur heeft een pagina over 'wat is een overbruggingskrediet'. Bij die zoekopdracht staat een concurrent bovenaan, met een stuk uitleg in een kader boven de gewone resultaten. De klant vraagt of je met een stukje code zijn eigen uitleg in dat kader kunt krijgen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat antwoord je de klant?",
+    "opties": [
+      "Ja: met FAQ-markup rond de uitleg markeer je het antwoord, want Google zet gemarkeerde vragen bovenaan in dat kader.",
+      "Ja: met de regel max-snippet op een hoge waarde geef je toestemming, want zonder die regel slaat Google je pagina over.",
+      "Nee: dat kader is alleen voor sites met veel autoriteit, want Google kiest er alleen domeinen voor die al bovenaan staan.",
+      "Nee: Google kiest zelf welke pagina in dat kader komt, want er bestaat geen code om een pagina daarvoor aan te melden."
+    ],
+    "juist": 3
+  },
+  "kern": "Google bepaalt zelf welke pagina in het kader komt. Je kunt een pagina daar niet voor aanmelden, alleen afmelden.",
+  "afleiders": [
+    "**FAQ-markup:** het klinkt logisch om een antwoord te markeren. Maar FAQ-markup is voor een ander soort resultaat, en dat toont Google sinds 2023 alleen nog bij gezaghebbende overheids- en zorgsites.",
+    "**Hoge max-snippet:** die regel bestaat wel, maar hij beperkt alleen hoeveel tekst Google mag tonen. Zonder de regel mag Google je tekst ook gewoon gebruiken.",
+    "**Alleen voor autoriteiten:** grote sites staan er vaak in, dus dat lijkt een regel. Maar Google kiest de pagina die de vraag het best beantwoordt, niet een vaste groep domeinen.",
+    ""
+  ],
+  "kort": "Denk aan een krant die één lezersbrief in een kader zet. Je kunt je brief niet zelf in dat kader plaatsen. De redactie kiest de brief die de vraag het best beantwoordt. Zo kiest Google ook welke pagina in het kader komt. Wat jij wel kunt doen, is de duidelijkste brief schrijven.",
+  "begrippen": [
+    { "term": "Featured snippet", "uitleg": "een kader bovenaan de zoekresultaten met een stuk tekst uit één pagina, met de link eronder." },
+    { "term": "FAQ-markup", "uitleg": "code die vragen en antwoorden op een pagina markeert voor zoekmachines." },
+    { "term": "max-snippet", "uitleg": "een regel in de code waarmee je bepaalt hoeveel tekens Google maximaal uit je pagina mag tonen." }
+  ],
+  "uitleg": "Google noemt featured snippets speciale kaders waarin de volgorde van een gewoon resultaat is omgedraaid: eerst de tekst, dan de link. Op de vraag hoe je een pagina als featured snippet markeert, is het antwoord van Google kort: dat kan niet.\n\n**Wat kan wel?**\n- **Afmelden:** nosnippet blokkeert alle snippets, ook de gewone. Een lage max-snippet weert vooral featured snippets, maar zonder garantie. Met data-nosnippet sluit je losse stukken tekst uit.\n- **De kans vergroten** (in de praktijk, zonder garantie): beantwoord de vraag direct onder een duidelijke kop, in een paar zinnen. Een lijst of tabel helpt bij stappen of vergelijkingen.\n\nKijk ook naar de zoekintentie. Toont Google een definitie, schrijf dan een heldere definitie in twee of drie zinnen, en werk daarna pas de details uit.",
+  "kernpunt": "Wil een klant in het uitgelichte kader, verbeter dan het antwoord op de pagina. Code om dat af te dwingen bestaat niet.",
+  "toepassing": "Zoek vandaag één vraag-zoekwoord van een klant op waar een featured snippet staat. Vergelijk de tekst in het kader met het antwoord op de pagina van de klant.",
+  "bron": {
+    "titel": "Featured snippets and your website | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/featured-snippets"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "20261119-ga4-dubbele-aankopen-transaction-id",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4-implementatie controleren: dubbele aankopen en transaction_id",
+  "matrix": ["3.1.1", "3.1.2"],
+  "titel": "1.240 aankopen in GA4, maar 1.020 in het bestelsysteem",
+  "intro": "Een webshop in tuinmeubelen telt in oktober 1.240 aankopen in GA4. Het bestelsysteem telt er 1.020. In DebugView zie je dat het event purchase opnieuw binnenkomt als iemand de bedankpagina herlaadt, of later terugkomt via de link in de bevestigingsmail. Het event bevat het bedrag en de producten.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing laat GA4 elke bestelling één keer tellen?",
+    "opties": [
+      "De sleutelgebeurtenis purchase op 'eenmaal per sessie' zetten, want dan telt een herladen bedankpagina niet mee.",
+      "Bij elk purchase-event een vaste code zoals de winkelnaam meesturen, want dan ziet GA4 herhalingen als één aankoop.",
+      "Het purchase-event alleen laten afgaan na de betaalprovider, want dan telt een herladen of later bezoek niet meer.",
+      "Het ordernummer als transaction_id meesturen, want dan voegt GA4 events met dat nummer samen tot één aankoop."
+    ],
+    "juist": 3
+  },
+  "kern": "GA4 herkent dubbele aankopen aan het transaction_id. Met een uniek ordernummer telt een herhaald event van dezelfde bestelling niet nog eens.",
+  "afleiders": [
+    "**Eenmaal per sessie:** dubbele tellingen in dezelfde sessie verdwijnen, dus het lijkt te werken. Maar wie morgen via de mail terugkomt, start een nieuwe sessie. En twee echte bestellingen in één sessie worden er één.",
+    "**Vaste code als transaction_id:** dat voorkomt dubbel tellen, dus het lijkt slim. Maar dan voegt GA4 ook verschillende bestellingen samen. Je telt dan veel te weinig.",
+    "**Alleen na de betaalprovider:** zo filter je het herladen weg. Maar de verwijzer ontbreekt vaak of verandert, waardoor je ook echte aankopen gaat missen.",
+    ""
+  ],
+  "kort": "Denk aan een kassabon met een bonnummer. Laat een klant dezelfde bon twee keer zien, dan ziet de boekhouder aan het nummer dat het om één aankoop gaat. Zonder nummer telt hij hem twee keer. GA4 werkt net zo met het transaction_id. Geef elke bestelling haar eigen nummer, dan maakt herladen niets meer uit.",
+  "begrippen": [
+    { "term": "transaction_id", "uitleg": "een parameter bij het aankoop-event met een uniek nummer per bestelling, meestal het ordernummer." },
+    { "term": "purchase-event", "uitleg": "het event dat GA4 krijgt als een bestelling is afgerond, met bedrag en producten." },
+    { "term": "DebugView", "uitleg": "een scherm in GA4 waarin je live ziet welke events een testbezoek verstuurt." },
+    { "term": "Sleutelgebeurtenis", "uitleg": "een event dat je in GA4 als belangrijk markeert, vroeger 'conversie' genoemd." }
+  ],
+  "uitleg": "Google schrijft: 'Google Analytics deduplicates purchase events with the same transaction ID.' Elk e-commerce-event hoort daarom een transaction ID te hebben, zoals het ordernummer.\n\nDe regels:\n- **Uniek per bestelling.** Gebruik nooit hetzelfde ID voor verschillende bestellingen of klanten. Dan telt GA4 volgens Google flink te weinig.\n- **Geen lege waarde.** GA4 voegt alle aankopen met transaction_id=\"\" samen tot één.\n- **Geen persoonsgegevens** in het ID, zoals een e-mailadres.\n\nHoe je het controleert:\n- Doe een testbestelling, herlaad de bedankpagina en kijk in DebugView of beide events hetzelfde ID hebben.\n- Vergelijk GA4 met het bestelsysteem. Iets minder in GA4 is normaal, door cookieweigering en adblockers. Méér in GA4 wijst bijna altijd op dubbele events.",
+  "kernpunt": "Telt GA4 méér aankopen dan het bestelsysteem, check dan eerst of elk purchase-event een uniek ordernummer als transaction_id heeft.",
+  "toepassing": "Maak vandaag bij een webshopklant in GA4 een verkenning met de dimensie Transactie-ID. Kijk of er lege of dubbele waarden tussen staan.",
+  "bron": {
+    "titel": "[GA4] Minimize duplicate key events with transaction IDs - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/12313109"
+  }
+}

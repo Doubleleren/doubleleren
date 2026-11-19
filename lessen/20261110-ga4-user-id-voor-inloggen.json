@@ -1,0 +1,42 @@
+{
+  "id": "20261110-ga4-user-id-voor-inloggen",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4 User-ID: wat er gebeurt met events vóór het inloggen en met oude data",
+  "matrix": ["3.1.5"],
+  "titel": "User-ID staat live: zie je nu ook hoe klanten in september wisselden?",
+  "intro": "Een webshop in fietsonderdelen heeft sinds 1 november User-ID live. Na het inloggen stuurt de site het klantnummer mee als user_id, bij uitloggen null. De rapportage-identiteit staat op Blended. De marketingmanager wil nu zien hoe klanten in september en oktober wisselden tussen telefoon en laptop. En wat gebeurt er met alles wat iemand bekeek vóór het inloggen?",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat kun je de marketingmanager vertellen?",
+    "opties": [
+      "Ook september en oktober, want GA4 verwerkt oude data opnieuw zodra User-ID live staat. Events vóór het inloggen blijven wel anoniem.",
+      "Alleen vanaf 1 november, want oude data wordt niet opnieuw verwerkt. Events vóór het inloggen koppelt GA4 wel alsnog aan de User-ID.",
+      "Alleen vanaf 1 november, want oude data wordt niet opnieuw verwerkt. Events vóór het inloggen blijven anoniem, tenzij je de ID in een cookie bewaart.",
+      "Ook september en oktober, want Blended vult oude data aan met modellering. Events vóór het inloggen koppelt GA4 wel alsnog aan de User-ID."
+    ],
+    "juist": 1
+  },
+  "kern": "Zodra de User-ID binnenkomt, koppelt GA4 ook de eerdere events van die bezoeker eraan. Data van vóór de livegang verwerkt GA4 nooit opnieuw.",
+  "afleiders": [
+    "**Oude maanden alsnog gekoppeld:** het klinkt logisch dat GA4 achteraf herrekent. Maar Google zegt dat data van vóór de implementatie niet opnieuw wordt verwerkt.",
+    "",
+    "**User-ID in een cookie bewaren:** zo lijkt er niets verloren te gaan. Maar dat is niet nodig, en na het uitloggen hoort de User-ID juist leeg (null) te zijn.",
+    "**Blended vult aan:** Blended gebruikt wel geschatte data, maar die is voor bezoekers zonder cookietoestemming. Oude maanden worden er niet mee herschreven."
+  ],
+  "kort": "Vergelijk het met een klantenkaart die je aan de kassa voor het eerst laat scannen. Wat al in je mandje lag, telt nog mee voor deze aankoop. Maar je aankopen van vorig jaar komen er niet alsnog op. GA4 werkt net zo. Bij het inloggen hangt het ook wat de bezoeker net daarvoor deed aan het klantnummer. Alles van vóór de dag dat User-ID live ging, blijft zoals het was.",
+  "begrippen": [
+    { "term": "User-ID", "uitleg": "een eigen klantnummer dat je na het inloggen naar GA4 stuurt, zodat bezoeken op verschillende apparaten bij één gebruiker horen." },
+    { "term": "Rapportage-identiteit", "uitleg": "de instelling in GA4 die bepaalt hoe gebruikers worden herkend: via User-ID, apparaat-ID en eventueel geschatte data." },
+    { "term": "Blended", "uitleg": "een rapportage-identiteit die User-ID, apparaat-ID en geschatte (gemodelleerde) data combineert." },
+    { "term": "null", "uitleg": "de waarde 'leeg'. Na het uitloggen zet je user_id op null, zodat latere bezoeken niet meer aan de klant gekoppeld worden." }
+  ],
+  "uitleg": "Wat Google over User-ID zegt:\n\n- **Vóór het inloggen:** 'If a user triggers events before a User-ID is set, Analytics will associate those initial events with that User-ID.'\n- **Na het uitloggen:** zet user_id op null. Latere events koppelt GA4 dan niet meer aan die gebruiker.\n- **Oude data:** wat vóór de implementatie is verzameld, wordt niet opnieuw verwerkt.\n- **Inhoud:** hooguit 256 tekens, en niets waarmee een ander de persoon kan herkennen.\n\nGevolgen voor je advies:\n- Cross-device-analyses beginnen op de dag van livegang. Zet die datum in je rapportage, zodat niemand periodes van voor en na vergelijkt alsof ze gelijk zijn.\n- Het aantal gebruikers kan na livegang dalen, omdat apparaten van dezelfde klant dan samen tellen.\n- Staat de rapportage-identiteit op Device-based, dan gebruikt GA4 de User-ID niet in rapporten.",
+  "kernpunt": "Gaat User-ID live, noteer dan de datum: cross-device-cijfers zijn pas vanaf die dag te vergelijken.",
+  "toepassing": "Kijk vandaag bij een klant met een inlogfunctie in DebugView of user_id pas na het inloggen verschijnt en na het uitloggen weer leeg is.",
+  "bron": {
+    "titel": "[GA4] Measure activity across platforms with User-ID - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/9213390"
+  }
+}

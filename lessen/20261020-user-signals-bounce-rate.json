@@ -8,21 +8,27 @@
     "7.1.4"
   ],
   "titel": "\"Onze bounce rate is 70%, dat kost ons rankings\": klopt dat?",
-  "volgorde": "uitleg-eerst",
   "intro": "Een klant ziet in GA4 een bounce rate van 70% op een blogartikel en wil de tekst inkorten \"omdat Google dat afstraft\".",
-  "kort": "Een hoge bounce rate betekent niet vanzelf dat je lager komt in Google. Google noemt dat cijfer nergens als iets waar het op let. Het is wel een seintje om te kijken waarom bezoekers snel weggaan. Belooft de titel wat de tekst levert, staat het antwoord bovenaan en laadt de pagina snel genoeg?",
-  "uitleg": "**User signals** zijn signalen over hoe mensen met zoekresultaten en pagina's omgaan. Google schrijft zelf dat het *geaggregeerde en geanonimiseerde interactiedata* gebruikt om te beoordelen of zoekresultaten relevant zijn voor een zoekopdracht. Die data wordt omgezet in signalen voor machine-learningsystemen.\n\nWat Google daar **niet** noemt: bounce rate of Google Analytics. Een metric in jouw GA4-account is dus niet hetzelfde als een rankingsignaal.\n\nBovendien betekent bounce rate in GA4 iets specifieks: het percentage sessies dat **niet engaged** was. Een sessie is engaged als hij langer dan 10 seconden duurt, een key event heeft, of 2 of meer pagina's of schermen telt. Iemand die 3 minuten jouw artikel leest, het antwoord vindt en vertrekt, telt dus niet als bounce. Iemand die na 5 seconden terugklikt wel.\n\nDe impact van user signals werkt in twee richtingen:\n- **Positief:** een pagina die de zoekvraag snel en goed beantwoordt, levert tevreden bezoekers op. Dat sluit aan bij wat Google wil belonen.\n- **Negatief:** een pagina die niet waarmaakt wat de title belooft (clickbait, opdringerige pop-ups, traag laden) frustreert bezoekers. Dat is slecht voor conversie en past niet bij wat Google als relevant resultaat wil tonen.\n\nDe les: optimaliseer niet voor één metric, maar voor de vraag *krijgt de bezoeker wat hij zocht?*",
+  "kort": "Denk aan een thermometer in je eigen woonkamer. Die zegt iets over jouw kamer, maar het KNMI gebruikt hem niet voor de weersverwachting. De bounce rate in GA4 is zo'n eigen thermometer. Google zegt wel dat het geanonimiseerde gegevens over zoekgedrag gebruikt, maar noemt bounce rate of Analytics daarbij nergens. Een hoge bounce rate is dus een reden om te kijken, geen bewijs van een straf.",
+  "begrippen": [
+    { "term": "Bounce rate (GA4)", "uitleg": "het percentage sessies dat niet 'engaged' was. Dus niet: het percentage bezoekers dat maar één pagina zag." },
+    { "term": "Engaged sessie", "uitleg": "een bezoek dat langer dan 10 seconden duurt, een key event heeft, of minstens 2 pagina's telt." },
+    { "term": "User signals", "uitleg": "signalen over hoe mensen met zoekresultaten en pagina's omgaan, zoals waar ze op klikken." }
+  ],
+  "uitleg": "**User signals** zijn signalen over hoe mensen met zoekresultaten en pagina's omgaan. Google schrijft zelf dat het *geaggregeerde en geanonimiseerde interactiedata* gebruikt om te beoordelen of zoekresultaten relevant zijn voor een zoekopdracht. Die data wordt omgezet in signalen voor machine-learningsystemen.\n\nWat Google daar **niet** noemt: bounce rate of Google Analytics. Een metric in jouw GA4-account is dus niet hetzelfde als een rankingsignaal.\n\nBovendien betekent bounce rate in GA4 iets specifieks. Iemand die 3 minuten jouw artikel leest, het antwoord vindt en vertrekt, telt niet als bounce. Iemand die na 5 seconden terugklikt wel.\n\nDe impact van user signals werkt in twee richtingen:\n- **Positief:** een pagina die de zoekvraag snel en goed beantwoordt, levert tevreden bezoekers op.\n- **Negatief:** een pagina die niet waarmaakt wat de title belooft (clickbait, opdringerige pop-ups, traag laden) frustreert bezoekers en kost conversie.",
   "opdracht": {
     "soort": "open",
     "vraag": "Wat antwoord je de klant? Leg uit waarom de 70% bounce rate niet automatisch een rankingprobleem is, en wat je in plaats daarvan zou onderzoeken.",
     "minTekens": 120,
-    "hint": "Denk aan de GA4-definitie van bounce rate en aan wat Google zelf zegt over interactiedata."
+    "hint": "Denk aan wat bounce rate in GA4 precies meet, en aan wat Google zelf zegt over gegevens van zoekers."
   },
-  "modelantwoord": "Niet automatisch. Bounce rate in GA4 is het percentage sessies dat **niet engaged** was (korter dan 10 seconden, geen key event, maar 1 pagina). Google noemt bounce rate en Google Analytics nergens als rankingsignaal; het spreekt van geaggregeerde, geanonimiseerde interactiedata om relevantie te beoordelen.\n\nWel interessant: waarom is 70% van de sessies niet engaged? Ik zou kijken:\n- of de title en meta description beloven wat het artikel levert (zoekintentie)\n- of het antwoord bovenaan staat of pas na een lange intro\n- of pop-ups of een trage laadtijd mensen wegjagen\n- naar opnames of heatmaps om te zien waar mensen afhaken\n\nInkorten kan helpen, maar alleen als het antwoord daardoor sneller vindbaar wordt.",
-  "kernpunt": "Google gebruikt geaggregeerde interactiedata om relevantie te beoordelen, maar noemt bounce rate en GA niet als signaal. Optimaliseer voor een tevreden bezoeker, niet voor één metric.",
-  "toepassing": "Zoek bij een klant de pagina met de laagste engagement rate in GA4 en vergelijk de title in Google met de eerste alinea op de pagina. Maakt de pagina direct waar wat de title belooft?",
+  "modelantwoord": "**De kern:** nee, niet vanzelf. Google noemt bounce rate nergens als rankingsignaal. Zoek wel uit waarom zoveel bezoekers snel afhaken.\n\nWaarom: bounce rate in GA4 is het percentage sessies dat **niet engaged** was (korter dan 10 seconden, geen key event, maar 1 pagina). Google spreekt van geaggregeerde, geanonimiseerde interactiedata om relevantie te beoordelen, niet van bounce rate of Analytics.\n\nWat ik zou onderzoeken:\n- of de title en meta description beloven wat het artikel levert (zoekintentie)\n- of het antwoord bovenaan staat of pas na een lange intro\n- of pop-ups of een trage laadtijd mensen wegjagen\n- opnames of heatmaps, om te zien waar mensen afhaken\n\nVeelgemaakte fout: inkorten omdat 'Google dat wil'. Inkorten helpt alleen als het antwoord daardoor sneller te vinden is.",
+  "kernpunt": "Hoor je 'de bounce rate kost ons rankings', kijk dan eerst of de pagina waarmaakt wat de title belooft.",
+  "toepassing": "Zoek vandaag bij één klant de pagina met de laagste engagement rate in GA4. Leg de title uit Google naast de eerste alinea: maakt de pagina meteen waar wat de title belooft?",
   "bron": {
     "titel": "How Does Google Determine Ranking Results - Google Search",
     "url": "https://www.google.com/search/howsearchworks/how-search-works/ranking-results/"
-  }
+  },
+  "herzien": "2026-11-17",
+  "wijziging": "Uitleg in de vaste opbouw gezet."
 }

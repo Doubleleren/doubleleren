@@ -1,0 +1,46 @@
+{
+  "id": "20261117-gtm-scrolldiepte-halverwege",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Event tracking in GTM: scrolldiepte meten met een eigen trigger",
+  "matrix": ["3.2.4", "3.1.6"],
+  "titel": "'31% leest de helft van het recept': klopt dat?",
+  "intro": "Een receptensite wil weten hoeveel bezoekers minstens de helft van een recept lezen. In GA4 staat de verbeterde meting aan, met het standaardevent scroll. De marketeer deelt het aantal scroll-events door het aantal paginaweergaven en zet in het maandrapport: '31% leest minstens de helft'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Klopt dat getal, en hoe meet je het wél goed?",
+    "opties": [
+      "Het klopt, want het event scroll telt elke keer dat een bezoeker de helft van een pagina voorbij scrolt, ook op mobiel.",
+      "Het klopt niet, want scroll telt elke beweging. Zet in GA4 de drempel van de verbeterde meting op 50% en tel opnieuw.",
+      "Het klopt niet, want scroll telt pas bij 90%. Meet 50% met een scrolldieptetrigger in GTM en een eigen GA4-event.",
+      "Het klopt niet, want scroll telt alleen op desktop. Gebruik de tijd op de pagina, want wie lang blijft, leest verder."
+    ],
+    "juist": 2
+  },
+  "kern": "Het standaardevent scroll telt pas als 90% van de pagina in beeld is geweest. Een andere drempel meet je met de scrolldieptetrigger in GTM.",
+  "afleiders": [
+    "**Telt bij de helft:** het standaardevent kent maar één drempel: 90%. Wie bij de helft stopt, telt dus helemaal niet mee.",
+    "**Drempel instellen in GA4:** de verbeterde meting heeft voor scrollen geen instelbare drempel. Je kunt hem alleen aan- of uitzetten.",
+    "",
+    "**Tijd op de pagina:** lang blijven zegt niet hoe ver iemand scrolde. Iemand kan het recept ook open laten staan terwijl hij kookt."
+  ],
+  "kort": "Denk aan een slagboom die alleen bij de uitgang van een parkeergarage staat. Die telt wie helemaal doorrijdt, niet wie halverwege parkeert. Het event scroll van GA4 is zo'n slagboom bij 90% van de pagina. Wil je weten wie halverwege komt, dan zet je met Tag Manager zelf slagbomen neer, bijvoorbeeld bij 25, 50 en 75%.",
+  "begrippen": [
+    { "term": "Verbeterde meting", "uitleg": "een instelling in GA4 die een paar dingen automatisch meet, zoals scrollen, uitgaande klikken en downloads." },
+    { "term": "Trigger", "uitleg": "de regel in Google Tag Manager die bepaalt wanneer een tag afgaat, bijvoorbeeld bij een klik of bij scrollen." },
+    { "term": "Event", "uitleg": "in GA4 een losse gebeurtenis die wordt geteld, zoals een paginaweergave, een klik of een aankoop." }
+  ],
+  "uitleg": "Het event scroll van de verbeterde meting gaat af 'de eerste keer dat een gebruiker de onderkant van een pagina bereikt', als 90% van de hoogte zichtbaar is.\n\n**Andere drempels meten met GTM**\n- Maak een trigger van het type Scrolldiepte: verticaal, in procenten, bijvoorbeeld 25, 50, 75.\n- Zet de ingebouwde variabele Scroll Depth Threshold aan.\n- Maak een GA4-eventtag met een eigen naam, zoals recept_scroll, en geef de drempel mee als parameter.\n- Maak voor die parameter een aangepaste dimensie, anders zie je hem niet in rapporten.\n- Test in Preview en DebugView voordat je publiceert.\n\n**Let op**\n- Elke drempel gaat één keer per pagina af.\n- Is een drempel al zichtbaar bij het laden, zoals op een korte pagina, dan gaat hij meteen af.\n- Bij oneindig scrollen raadt Google een trigger op zichtbaarheid van een element aan.",
+  "kernpunt": "Rapporteer je scrollgedrag uit GA4, zet er dan bij dat het standaardevent alleen 90% telt.",
+  "toepassing": "Kijk vandaag in het rapport van één klant of het event scroll ergens wordt uitgelegd als 'de helft gelezen' of iets vergelijkbaars. Pas de uitleg zo nodig aan.",
+  "bron": {
+    "titel": "Scroll depth trigger - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/7679218"
+  },
+  "video": {
+    "titel": "Track custom events with Google Analytics 4",
+    "kanaal": "Analytics Mania",
+    "url": "https://www.youtube.com/watch?v=HyFZhvPZUNM"
+  }
+}

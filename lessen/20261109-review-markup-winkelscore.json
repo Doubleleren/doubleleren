@@ -1,0 +1,41 @@
+{
+  "id": "20261109-review-markup-winkelscore",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Ratings markup: welke reviews mag je in productmarkup zetten?",
+  "matrix": ["2.2.3", "2.2.1"],
+  "titel": "De winkelscore van 9,2 als sterren op alle 600 productpagina's?",
+  "intro": "Een webshop in koffiemachines heeft op een externe reviewsite een winkelscore van 9,2 uit 3.400 beoordelingen. Die gaan vooral over levering en service. De developer wil die score als AggregateRating in de productmarkup van alle 600 productpagina's zetten, 'zodat er overal sterren in Google komen'. Op de productpagina's zelf staan geen reviews.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je?",
+    "opties": [
+      "Niet doen, want de score gaat over de winkel, komt van een andere site en staat niet zichtbaar op die pagina's.",
+      "Doen, want de score is echt en komt van een onafhankelijke partij, dus Google mag hem overal als sterren tonen.",
+      "Doen, maar alleen op de 50 best verkochte producten, want te veel dezelfde markup ziet Google als spam.",
+      "Niet doen, want AggregateRating werkt pas vanaf 5.000 beoordelingen, en deze winkel heeft er nog maar 3.400."
+    ],
+    "juist": 0
+  },
+  "kern": "Sterren in productmarkup moeten over dat ene product gaan, van gebruikers komen en op de pagina zelf te lezen zijn. Deze winkelscore voldoet aan geen van drieën.",
+  "afleiders": [
+    "",
+    "**Echt en onafhankelijk:** dat de score klopt, lijkt genoeg. Maar Google wil geen reviews die van een andere site zijn overgenomen, en deze gaan niet over het product.",
+    "**Alleen de 50 toppers:** minder pagina's voelt voorzichtiger. Maar de regels gelden per pagina: ook op 50 pagina's gaat de score niet over dat product.",
+    "**Minimaal 5.000 beoordelingen:** zo'n ondergrens klinkt aannemelijk, maar die bestaat niet. Het probleem is niet het aantal, maar waar de reviews over gaan en waar ze staan."
+  ],
+  "kort": "Stel dat een restaurant de beoordeling van zijn bezorgdienst bij elk gerecht op de menukaart zet. 'Snel bezorgd, 9,2' zegt niets over hoe de lasagne smaakt. Gasten voelen zich dan misleid. Google redeneert hetzelfde. Sterren bij een product moeten iets over dat product zeggen, en de bezoeker moet de reviews zelf kunnen lezen.",
+  "begrippen": [
+    { "term": "AggregateRating", "uitleg": "een stukje structured data met de gemiddelde score en het aantal beoordelingen, waarmee Google sterren kan tonen." },
+    { "term": "Structured data", "uitleg": "extra code in een pagina die zoekmachines in een vast formaat vertelt waar de pagina over gaat." },
+    { "term": "Productmarkup", "uitleg": "structured data die een product beschrijft, met bijvoorbeeld prijs, voorraad en reviews." }
+  ],
+  "uitleg": "De regels van Google voor review-markup:\n- **Over één specifiek item**, niet over een categorie, een lijst of de winkel als geheel.\n- **Niet overgenomen van andere sites:** 'Don't aggregate reviews or ratings from other websites.'\n- **Zichtbaar op de pagina:** de reviews die je markeert, moet de bezoeker op die pagina kunnen lezen.\n- **Direct van gebruikers afkomstig.**\n\nVoor de winkel zelf werkt het ook niet. Beheert een bedrijf de reviews over zichzelf, dan komen pagina's met LocalBusiness- of Organization-markup niet in aanmerking voor sterren.\n\nMarkup die tegen de regels ingaat, levert in het gunstigste geval niets op. In het slechtste geval volgt een handmatige actie, en komen de getroffen pagina's niet meer in aanmerking voor rich results.\n\nWat wel werkt:\n- Verzamel **reviews per product** van kopers en toon ze op de productpagina.\n- Markeer alleen die reviews, met het echte gemiddelde en aantal.\n- Gebruik de winkelscore gewoon als vertrouwenssignaal op de pagina, zonder markup.",
+  "kernpunt": "Markeer alleen reviews die over dat product gaan en die de bezoeker op dezelfde pagina kan lezen.",
+  "toepassing": "Haal vandaag één productpagina van een klant door de Rich Results Test. Staat er een AggregateRating in, kijk dan of de reviews waar die score op rust ook echt op die pagina staan.",
+  "bron": {
+    "titel": "Review snippet (Review, AggregateRating) structured data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/review-snippet"
+  }
+}

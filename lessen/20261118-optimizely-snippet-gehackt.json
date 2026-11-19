@@ -1,0 +1,41 @@
+{
+  "id": "20261118-optimizely-snippet-gehackt",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Beveiligingsincident Optimizely Web Experimentation (november 2026)",
+  "matrix": ["3.2.3", "7.2.1"],
+  "titel": "Kwaadaardige code in het A/B-testscript: wat doe je nu?",
+  "intro": "Een webshop test al maanden met Optimizely Web Experimentation. Het script van Optimizely staat op elke pagina. Op 17 november meldt Optimizely dat een aanvaller via een lek kwaadaardige JavaScript in projecten van klanten heeft gezet. Die code is inmiddels weg. De klant mailt: 'Onze beveiligingsregels laten alleen scripts van Optimizely toe. Dan zitten wij toch goed?'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de klant?",
+    "opties": [
+      "Niets doen, want de beveiligingsregels lieten alleen code van Optimizely toe, dus vreemde code werd tegengehouden.",
+      "De testtool voorgoed weghalen, want een script van een testtool op elke pagina is altijd een te groot risico.",
+      "Zelf de projectcode en de wijzigingslog nalopen en de toegang vernieuwen, want de code kwam via Optimizely binnen.",
+      "Alleen de cache van de website legen, want de kwaadaardige code zat in oude kopieën en is daarmee verdwenen."
+    ],
+    "juist": 2
+  },
+  "kern": "De code kwam van het adres dat de site vertrouwde. Ga dus zelf na wat er in het project is veranderd en wie erbij kan.",
+  "afleiders": [
+    "**Beveiligingsregels:** die regels kijken alleen van welk adres een script komt. Dit keer kwam de foute code juist van het vertrouwde adres van Optimizely.",
+    "**Tool voorgoed weghalen:** dat voelt veilig, maar het lost niets op wat al gebeurd is. Je weet dan nog steeds niet of jouw site geraakt is.",
+    "",
+    "**Cache legen:** de code zat niet in een oude kopie, maar in het project zelf. Ook na het legen weet je niet wat er op 16 november gebeurde."
+  ],
+  "kort": "Denk aan een schoonmaakbedrijf met een sleutel van je kantoor. Je beveiliger laat alleen dat bedrijf binnen. Steelt iemand de sleutel bij het schoonmaakbedrijf, dan loopt hij gewoon langs je beveiliger. Zo ging het hier ook. De foute code kwam van Optimizely zelf, dus de site liet hem binnen. Daarom moet je zelf nagaan wat er in die tijd veranderde.",
+  "begrippen": [
+    { "term": "Snippet", "uitleg": "een stukje code van een externe tool dat je op je site zet. Het laadt de rest van de tool, bijvoorbeeld de A/B-testen." },
+    { "term": "Content Security Policy (CSP)", "uitleg": "een regel in je site die zegt van welke adressen de browser scripts mag laden." },
+    { "term": "Project JavaScript", "uitleg": "eigen code in Optimizely die op elke pagina meedraait waar het snippet staat." }
+  ],
+  "uitleg": "Op 16 november 2026 zette een aanvaller kwaadaardige code in de **Project JavaScript** van Optimizely-klanten. Die code verving cryptoadressen, probeerde kaartgegevens uit eigen formulieren te halen en laadde aanvalscode voor oudere iPhones. Optimizely zegt dat het lek in de aanmeldflow zat. Het lek is gedicht, sessies zijn beëindigd en sleutels ingetrokken.\n\nBeveiligingsonderzoeker Scott Helme vond de code bij ruim 170 organisaties. Een CSP die het domein van Optimizely toestaat, hielp niet: de code kwam van dat domein.\n\nWat je bij een klant nagaat:\n- Zoek in de Project JavaScript en in eigen code van experimenten naar code die je team niet schreef.\n- Bekijk in de History-log alle wijzigingen rond 16 november.\n- Controleer wie schrijfrechten, API-tokens en koppelingen heeft, en vernieuw ze.\n- Vraagt de site zelf kaartgegevens in een eigen formulier, overleg dan over kaarten die op 16 november zijn ingevoerd. Betaalvelden van Stripe of Adyen in een iframe waren buiten bereik.",
+  "kernpunt": "Een script dat op elke pagina draait, kan alles op die pagina. Weet dus altijd wie er code in mag zetten.",
+  "toepassing": "Kijk vandaag bij één klant met een A/B-testtool wie er schrijfrechten heeft. Haal accounts weg die niet meer nodig zijn.",
+  "bron": {
+    "titel": "Search Engine Journal: Optimizely Says Attacker Used A Signup Flaw To Inject Malware",
+    "url": "https://www.searchenginejournal.com/optimizely-signup-flaw-malware/597839/"
+  }
+}

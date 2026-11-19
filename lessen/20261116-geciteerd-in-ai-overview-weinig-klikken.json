@@ -1,0 +1,46 @@
+{
+  "id": "20261116-geciteerd-in-ai-overview-weinig-klikken",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Zero-click: wat een bronvermelding in een AI Overview oplevert aan klikken",
+  "matrix": ["12.1.5", "12.1.1"],
+  "titel": "Bron in de AI Overview: komt het extra verkeer nu vanzelf?",
+  "intro": "Een zorgverzekeraar staat sinds kort als bron in de AI Overview bij 'eigen risico uitleg'. De contentmanager wil in het kwartaalplan 30% meer verkeer naar die pagina beloven, 'want we staan nu helemaal bovenaan'. Hij vraagt jou om het doel te onderbouwen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je over het doel in het kwartaalplan?",
+    "opties": [
+      "Beloof de groei gerust, want een bron in de AI-samenvatting krijgt in onderzoek ongeveer twee keer zoveel klikken als plek 1.",
+      "Beloof de groei pas na drie maanden, want Google telt klikken uit AI-samenvattingen pas daarna mee in Search Console.",
+      "Beloof geen groei maar een daling, want in onderzoek valt het verkeer weg zodra een pagina als bron in de samenvatting staat.",
+      "Beloof geen 30% groei, want in onderzoek klikt maar zo'n 1% van de bezoeken op een link in de AI-samenvatting zelf."
+    ],
+    "juist": 3
+  },
+  "kern": "Als bron genoemd worden levert weinig klikken op. In het onderzoek van Pew Research ging het om 1% van de bezoeken.",
+  "afleiders": [
+    "**Twee keer zoveel als plek 1:** bovenaan staan voelt als winst. Maar het antwoord staat al in de samenvatting, dus de meeste mensen klikken nergens op.",
+    "**Pas na drie maanden:** zo'n wachttijd bestaat niet. Klikken uit AI Overviews tellen in Search Console gewoon mee in het zoektype Web.",
+    "**Een daling beloven:** voorzichtig zijn is goed. Maar het verkeer valt niet weg: mensen klikken nog steeds op gewone resultaten, alleen minder vaak dan zonder samenvatting.",
+    ""
+  ],
+  "kort": "Denk aan een restaurant dat in een reisgids wordt genoemd. De lezer weet daarna al wat er op de kaart staat en wat het kost. Hij hoeft niet langs om dat te zien. Een AI-samenvatting werkt net zo: het antwoord staat er al, dus de meeste mensen klikken niet door. Een vermelding is goed voor je naam, maar brengt niet vanzelf bezoekers.",
+  "begrippen": [
+    { "term": "AI Overview", "uitleg": "het samenvattende AI-antwoord dat Google boven de gewone zoekresultaten kan tonen, met links naar bronnen." },
+    { "term": "Zero-click", "uitleg": "een zoekopdracht waarbij iemand het antwoord al in Google krijgt en nergens op klikt." },
+    { "term": "Bronvermelding", "uitleg": "een link naar je pagina in een AI-antwoord, als onderbouwing van wat er staat." }
+  ],
+  "uitleg": "Pew Research Center volgde in maart 2025 het surfgedrag van 900 Amerikaanse volwassenen. Van hun 68.879 Google-zoekopdrachten kreeg ongeveer 18% een AI-samenvatting.\n- Met een AI-samenvatting klikten ze in 8% van de bezoeken op een gewoon zoekresultaat, zonder samenvatting in 15%.\n- Op een link ín de samenvatting klikten ze in 1% van de bezoeken.\n- Na een pagina met samenvatting stopten ze vaker met zoeken: 26% tegen 16%.\n\n**Beperkingen:** het gaat om de VS, één maand en alleen Google. Gebruik het als richting, niet als voorspelling voor één klant.\n\n**Welke doelen passen dan wel?**\n- Hoe vaak de klant als bron verschijnt, gemeten met een tool voor AI-zichtbaarheid.\n- Vertoningen en CTR in Search Console (AI Overviews tellen mee in Web).\n- Conversies van bezoekers die wél klikken.\n- De ontwikkeling van zoekopdrachten op de merknaam.",
+  "kernpunt": "Stel bij AI-zichtbaarheid doelen op vermeldingen en conversies, niet op extra klikken.",
+  "toepassing": "Zoek vandaag de drie belangrijkste informatieve zoekwoorden van een klant op. Noteer bij welke een AI Overview staat en of de klant daarin als bron wordt genoemd.",
+  "bron": {
+    "titel": "Google users are less likely to click on links when an AI summary appears in the results | Pew Research Center",
+    "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
+  },
+  "video": {
+    "titel": "Google AI Overviews & SEO: What's gonna change?",
+    "kanaal": "GetResponse",
+    "url": "https://www.youtube.com/watch?v=xUyGAbwuTas"
+  }
+}

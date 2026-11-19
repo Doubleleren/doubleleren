@@ -1,0 +1,41 @@
+{
+  "id": "20261116-categorietegels-zonder-alt-tekst",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Interne links via afbeeldingen: de alt-tekst als linktekst",
+  "matrix": ["2.1.15", "2.1.14"],
+  "titel": "Zes categorietegels op de homepage, maar Google leest geen linktekst",
+  "intro": "Een tuincentrum heeft op de homepage zes grote foto's als tegels. Elke foto linkt naar een categorie, zoals Kamerplanten en Tuinmeubelen. De naam van de categorie staat in de foto zelf, niet als tekst op de pagina. In de code staat alleen de afbeelding met een link eromheen. De categorieën staan niet in het hoofdmenu.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat mist Google hier het meest, en wat pas je aan?",
+    "opties": [
+      "De links zijn niet te volgen, want Google volgt alleen tekstlinks en geen afbeeldingen. Zet onder de tegels een gewone menubalk.",
+      "De foto's laden te zwaar, want Google telt een link pas mee als de afbeelding snel laadt. Comprimeer ze tot onder de 100 kB.",
+      "De links missen een linktekst, want Google gebruikt bij een afbeeldingslink de alt-tekst. Vul die met de naam van de categorie.",
+      "De categorienaam in de foto is genoeg, want Google leest tekst in afbeeldingen als linktekst. Er hoeft niets te veranderen."
+    ],
+    "juist": 2
+  },
+  "kern": "Bij een link op een afbeelding gebruikt Google de alt-tekst als linktekst. Is die leeg, dan weet Google niet waar de link over gaat.",
+  "afleiders": [
+    "**Alleen tekstlinks:** tekstlinks zijn inderdaad het duidelijkst. Maar Google volgt ook een link op een afbeelding, zolang het een gewone link met een href is.",
+    "**Te zware foto's:** snelheid is belangrijk voor bezoekers. Maar of een link meetelt, hangt niet af van hoe snel de afbeelding laadt.",
+    "",
+    "**Tekst in de foto:** een mens leest die naam meteen. Maar Google gebruikt bij een afbeeldingslink het alt-attribuut als linktekst, niet de pixels van de foto."
+  ],
+  "kort": "Denk aan een gang met deuren zonder bordjes. Je kunt overal naar binnen, maar je weet niet wat er achter elke deur zit. Een foto met een link is zo'n deur. De alt-tekst is het bordje: daaraan ziet Google waar de link naartoe gaat. Tekst die alleen in de foto staat, is voor Google geen bordje.",
+  "begrippen": [
+    { "term": "Linktekst (anchor text)", "uitleg": "de woorden waarop je klikt bij een link. Ze vertellen waar de link naartoe gaat." },
+    { "term": "Alt-tekst", "uitleg": "een korte beschrijving van een afbeelding in de code, voor zoekmachines en voor mensen die de afbeelding niet zien." },
+    { "term": "Interne link", "uitleg": "een link van de ene pagina naar een andere pagina op dezelfde website." }
+  ],
+  "uitleg": "Google schrijft in zijn richtlijnen voor links:\n- Goede linktekst is beschrijvend, redelijk kort en relevant.\n- Gebruik je een afbeelding als link, dan gebruikt Google het alt-attribuut van het img-element als linktekst.\n- Elke belangrijke pagina hoort een link te hebben vanaf minstens één andere pagina op je site.\n\nVoor de tegels betekent dat:\n- **Alt-tekst = de categorienaam**, bijvoorbeeld 'Kamerplanten'. Geen rij zoekwoorden: dat is keyword stuffing, en dat valt onder de spamregels van Google.\n- **Beter nog:** zet de categorienaam ook als echte tekst op of onder de foto. Dat helpt bezoekers met een schermlezer en bij trage verbindingen.\n- **Zet de categorieën in het hoofdmenu**, zodat ze vanaf elke pagina bereikbaar zijn.\n\nIn Screaming Frog zie je bij Inlinks per link de ankertekst en de alt-tekst. Zo vind je snel links zonder tekst.",
+  "kernpunt": "Linkt een afbeelding, geef hem dan een alt-tekst die zegt waar de link naartoe gaat.",
+  "toepassing": "Bekijk vandaag de homepage van een klant en zoek de afbeeldingen die linken. Controleer per afbeelding of de alt-tekst zegt waar de link naartoe gaat.",
+  "bron": {
+    "titel": "Link best practices for Google | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+  }
+}

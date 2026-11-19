@@ -1,0 +1,41 @@
+{
+  "id": "20261113-paid-organic-meer-organische-vertoningen",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Paid & organic-rapport: waarom organisch vaker verschijnt dan je advertentie",
+  "matrix": ["9.2.2", "9.2.3"],
+  "titel": "100% vertoningsaandeel, toch drie keer zoveel organische vertoningen",
+  "intro": "Een klant adverteert in Google Ads alleen in Nederland op 'zonwering op maat'. De campagne haalt 100% vertoningsaandeel. Toch toont het Paid & organic-rapport voor die zoekopdracht drie keer zoveel organische vertoningen als advertentievertoningen. De Ads-specialist vermoedt een fout in de koppeling met Search Console.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke verklaring?",
+    "opties": [
+      "De koppeling telt elke organische positie apart, want bij twee resultaten van de site op één pagina krijgt de klant twee vertoningen.",
+      "Het rapport telt Shopping-advertenties mee als organisch, want die komen niet uit de tekstcampagne van de klant.",
+      "Search Console rondt organische vertoningen naar boven af, want kleine aantallen worden om privacyredenen niet exact getoond.",
+      "Organische vertoningen volgen de targeting van de campagne niet, want de site verschijnt ook voor zoekers buiten Nederland."
+    ],
+    "juist": 3
+  },
+  "kern": "Organische resultaten trekken zich niets aan van de instellingen van je campagne. Ze verschijnen overal waar de site rankt, dus ook buiten het doelgebied.",
+  "afleiders": [
+    "**Elke positie apart:** bij twee resultaten op één pagina klinkt dat logisch. Maar Search Console telt voor de hele site één vertoning per resultatenpagina, ook als er twee links van de site op staan.",
+    "**Shopping als organisch:** het rapport telt alleen tekstadvertenties. Shopping-advertenties komen er helemaal niet in voor, ook niet als organisch.",
+    "**Naar boven afronden:** Search Console laat zeldzame zoekopdrachten soms weg om privacyredenen. Maar het rondt niet op, en dat zou ook nooit een factor drie verklaren.",
+    ""
+  ],
+  "kort": "Vergelijk het met een flyer en een etalage. De flyer deel je alleen uit in je eigen stad, op de uren die je kiest. De etalage ziet iedereen die langsloopt, ook toeristen en nachtbrakers. Advertenties zijn de flyer: ze volgen je instellingen. Organische resultaten zijn de etalage. Daarom kunnen ze veel vaker gezien worden, zelfs als je advertentie overal staat waar hij mag staan.",
+  "begrippen": [
+    { "term": "Vertoningsaandeel", "uitleg": "het percentage van de keren dat je advertentie verscheen, van alle keren dat hij binnen je instellingen had kunnen verschijnen." },
+    { "term": "Targeting", "uitleg": "de instellingen van een campagne die bepalen waar, wanneer en voor wie een advertentie verschijnt, zoals land en tijdstip." },
+    { "term": "Paid & organic-rapport", "uitleg": "een rapport in Google Ads dat na koppeling met Search Console per zoekopdracht advertenties en organische resultaten naast elkaar zet." }
+  ],
+  "uitleg": "Volgens de help van Google Ads worden organische resultaten in dit rapport niet beperkt door de targeting van je campagnes. Het aantal organische vertoningen kan daardoor hoger zijn dan het aantal advertentievertoningen, ook bij een vertoningsaandeel van 100%.\n\nWaar het verschil vandaan kan komen:\n- **locatie:** zoekers in België of Duitsland zien de site organisch, maar niet de advertentie\n- **advertentieplanning:** 's nachts staat de campagne uit, de organische vermelding niet\n- **taal en apparaat:** uitsluitingen in de campagne gelden niet voor organisch\n\nVerder goed om te weten:\n- alleen **tekstadvertenties** tellen mee, geen Shopping\n- organische data zijn er pas **vanaf het moment van koppelen**\n- het rapport wordt één keer per dag bijgewerkt\n\nWil je paid en organisch eerlijk vergelijken, bekijk dezelfde zoekopdracht dan ook in Search Console met een filter op het doelland.",
+  "kernpunt": "Vergelijk je advertentie- en organische vertoningen, controleer dan eerst of ze over hetzelfde land, dezelfde uren en dezelfde apparaten gaan.",
+  "toepassing": "Open vandaag bij een klant met Google Ads in Search Console één merkzoekwoord en filter op land. Kijk welk deel van de vertoningen van buiten het doelgebied van de campagne komt.",
+  "bron": {
+    "titel": "About the paid & organic report - Google Ads Help",
+    "url": "https://support.google.com/google-ads/answer/3097241?hl=en"
+  }
+}

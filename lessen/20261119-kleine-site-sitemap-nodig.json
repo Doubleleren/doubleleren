@@ -1,0 +1,41 @@
+{
+  "id": "20261119-kleine-site-sitemap-nodig",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Sitemaps: wanneer heb je er een nodig?",
+  "matrix": ["1.4.2", "1.1.11"],
+  "titel": "'Zonder sitemap kom je niet in Google', zegt het forum",
+  "intro": "Een fysiotherapiepraktijk heeft een site van 45 pagina's. Alle pagina's staan in het menu of worden gelinkt vanuit de dienstpagina's. De eigenaar las op een forum dat je 'zonder XML-sitemap niet in Google komt'. Hij wil een developer inhuren om er een te laten bouwen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de eigenaar?",
+    "opties": [
+      "Direct een developer laten bouwen, want zonder sitemap kan Google de pagina's van deze site niet ontdekken.",
+      "Een sitemap met alleen de vijf belangrijkste pagina's maken, want dan geeft Google die voorrang bij het ranken.",
+      "Elke week een sitemap opnieuw indienen in Search Console, want anders vergeet Google de pagina's weer.",
+      "Geen developer inhuren, want bij een kleine site met goede links vindt Google de pagina's meestal ook zelf."
+    ],
+    "juist": 3
+  },
+  "kern": "Bij een kleine site met goede interne links vindt Google de pagina's meestal zelf. Een sitemap kan geen kwaad, maar is hier geen prioriteit.",
+  "afleiders": [
+    "**Zonder sitemap niet in Google:** dat hoor je vaak, dus het klinkt als een regel. Maar Google vindt pagina's vooral via links. Bij 45 goed gelinkte pagina's lukt dat meestal prima.",
+    "**Alleen de top 5:** het lijkt een manier om Google te sturen. Maar een sitemap helpt alleen bij het vinden van URL's. Hij bepaalt niet welke pagina beter rankt.",
+    "**Elke week indienen:** het voelt als goed onderhoud. Maar opnieuw indienen houdt geen pagina's in Google. Wat telt, is dat de pagina's bereikbaar en nuttig zijn.",
+    ""
+  ],
+  "kort": "Denk aan een klein dorp met twintig straten en duidelijke bordjes. Een bezorger vindt elk adres zonder plattegrond. In een grote stad met nieuwe wijken helpt een kaart wél. Een sitemap is zo'n kaart voor Google. Hoe groter, nieuwer of slechter gelinkt de site, hoe meer de kaart helpt.",
+  "begrippen": [
+    { "term": "XML-sitemap", "uitleg": "een bestand met een lijst van de URL's die je door Google wilt laten vinden." },
+    { "term": "Interne links", "uitleg": "links van de ene pagina naar de andere binnen dezelfde site, zoals het menu." },
+    { "term": "Indexeren", "uitleg": "het opnemen van een pagina in de database van Google, zodat hij in de zoekresultaten kan komen." }
+  ],
+  "uitleg": "Google noemt in zijn uitleg over sitemaps wanneer je er misschien **geen** nodig hebt:\n- de site is klein: 'ongeveer 500 pagina's of minder'\n- de site is goed intern gelinkt\n- er zijn niet veel video's of afbeeldingen die in de zoekresultaten moeten komen, en de site staat niet in Google Nieuws\n\nEen sitemap helpt vooral als een site groot is, nieuw is met weinig externe links, of veel video- en beeldmateriaal heeft.\n\nGoogle schrijft ook dat een sitemap niet garandeert dat alles wordt gecrawld en geïndexeerd.\n\nWaarom toch soms handig, ook bij een kleine site? Je kunt in Search Console per sitemap zien hoeveel pagina's geïndexeerd zijn. En de meeste CMS'en, zoals WordPress, maken er zelf al een. Dan kost het niets. Een developer inhuren alleen hiervoor is zonde van het budget.",
+  "kernpunt": "Vraagt een klant om een sitemap, kijk dan eerst naar grootte en interne links. Bij een kleine, goed gelinkte site is het geen prioriteit.",
+  "toepassing": "Kijk vandaag bij een kleine klant in Search Console onder Sitemaps of er een sitemap is ingediend, en of het CMS er zelf al een maakt.",
+  "bron": {
+    "titel": "Learn about sitemaps | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview"
+  }
+}

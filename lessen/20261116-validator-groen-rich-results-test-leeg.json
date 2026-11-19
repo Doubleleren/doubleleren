@@ -1,0 +1,44 @@
+{
+  "id": "20261116-validator-groen-rich-results-test-leeg",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Rich Results Test en Schema Markup Validator: wat elke tool controleert",
+  "matrix": ["2.2.11", "2.2.8"],
+  "titel": "Validator: geen fouten. Rich Results Test: geen items. Wie heeft gelijk?",
+  "intro": "Een sportschool heeft op elke pagina met een trainingsschema schema-markup laten zetten van het type ExercisePlan. De Schema Markup Validator van schema.org toont geen enkele fout. De Rich Results Test van Google zegt bij dezelfde URL dat er geen rich results gevonden zijn. De developer denkt dat een van de twee tools kapot is.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de verklaring?",
+    "opties": [
+      "De Rich Results Test ziet de markup nog niet, want Google moet de pagina eerst indexeren voordat de test markup kan lezen.",
+      "Beide tools werken goed, want de validator toetst aan schema.org en de Rich Results Test alleen aan rich results van Google.",
+      "De markup staat waarschijnlijk in JSON-LD, want de Rich Results Test leest alleen microdata die zichtbaar in de HTML staat.",
+      "De validator is sinds 2021 verouderd, want Google heeft hem vervangen. Vertrouw dus alleen op de uitkomst van de Rich Results Test."
+    ],
+    "juist": 1
+  },
+  "kern": "Allebei hebben gelijk: de markup is geldige schema.org, maar Google gebruikt dit type niet voor een opvallend zoekresultaat.",
+  "afleiders": [
+    "**Eerst indexeren:** dat lijkt logisch, want veel in Search Console wacht op een crawl. Maar de test haalt de pagina zelf live op of leest de code die je plakt.",
+    "",
+    "**Alleen microdata:** JSON-LD staat niet zichtbaar in de pagina, dus dat lijkt een verklaring. Maar Google raadt JSON-LD juist aan, en de test leest het gewoon.",
+    "**Verouderde validator:** Google heeft de oude testtool inderdaad opgeheven. Maar de controle op schema.org leeft verder als Schema Markup Validator, nu bij schema.org zelf."
+  ],
+  "kort": "Denk aan een spellingscontrole en de redacteur van een krant. De spellingscontrole zegt dat elke zin klopt. De redacteur zegt: mooi, maar dit past in geen enkele rubriek. Allebei hebben ze gelijk. De Schema Markup Validator is de spellingscontrole. De Rich Results Test is de redacteur van Google, die alleen kijkt naar soorten markup waar Google in de zoekresultaten iets mee doet.",
+  "begrippen": [
+    { "term": "Schema-markup", "uitleg": "code in een pagina die zoekmachines vertelt wat er staat, bijvoorbeeld een product met een prijs." },
+    { "term": "Rich result", "uitleg": "een opvallender zoekresultaat met iets extra's, zoals sterren, een prijs of een afbeelding." },
+    { "term": "Schema Markup Validator", "uitleg": "de testtool van schema.org die controleert of je markup klopt met de regels van schema.org." },
+    { "term": "Rich Results Test", "uitleg": "de testtool van Google die laat zien of een pagina in aanmerking komt voor een rich result." }
+  ],
+  "uitleg": "Eind 2020 splitste Google de oude Structured Data Testing Tool op:\n- **Rich Results Test** (Google): test markup voor de rich result-types van Google Search, inclusief de verplichte eigenschappen per type.\n- **Schema Markup Validator** (schema.org, sinds 2021): controleert syntax en of de markup klopt met schema.org. Ook voor types die Google niet gebruikt. Google noemde ExercisePlan daarbij zelf als voorbeeld.\n\nWat betekent dat in de praktijk?\n- Wil een klant een rich result, kies dan een type uit de Search Gallery van Google en test met de Rich Results Test.\n- Gebruikt de klant schema.org-types zonder rich result, dan is de validator de juiste controle. Die markup is niet fout, maar levert geen opvallend zoekresultaat op.\n- Na livegang volg je de rapporten voor rich results in Search Console.",
+  "kernpunt": "Wil je een rich result, test dan met de Rich Results Test. De validator zegt alleen of je markup netjes is.",
+  "toepassing": "Zet vandaag één pagina met markup van een klant in allebei de tools. Noteer welke types de Rich Results Test herkent en welke alleen de validator ziet.",
+  "bron": {
+    "titel": "The Structured Data Testing Tool is moving to schema.org | Google Search Central Blog",
+    "url": "https://developers.google.com/search/blog/2020/12/structured-data-testing-tool-update"
+  },
+  "herzien": "2026-11-17",
+  "wijziging": "Opties dezelfde vorm gegeven."
+}

@@ -1,0 +1,40 @@
+{
+  "id": "20261119-van-voor-prijs-laagste-30-dagen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Kortingen en vertrouwen: de regel voor van-voor-prijzen",
+  "matrix": ["7.1.3"],
+  "titel": "'Van € 599 voor € 449' op Black Friday: mag dat?",
+  "intro": "Een webshop in koffiemachines wil voor Black Friday bij een espressomachine 'van € 599 voor € 449' tonen. € 599 is de adviesprijs van de fabrikant. De afgelopen maand verkocht de shop de machine eerst voor € 549, en daarna twee weken in een actie voor € 499. De marketeer wil de korting zo groot mogelijk laten lijken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke prijs mag de shop als 'van'-prijs doorstrepen?",
+    "opties": [
+      "€ 599, want dat is de adviesprijs van de fabrikant, en die mag je altijd als 'van'-prijs gebruiken.",
+      "€ 549, want dat was de gewone prijs van de shop, en een tijdelijke actieprijs telt daarbij niet mee.",
+      "Geen enkele, want tijdens Black Friday mag een webshop helemaal geen doorgestreepte prijzen tonen.",
+      "€ 499, want de korting moet uitgaan van de laagste prijs die de shop in de 30 dagen ervoor vroeg."
+    ],
+    "juist": 3
+  },
+  "kern": "Een korting moet uitgaan van de laagste prijs die de shop zelf vroeg in de 30 dagen ervoor. Hier is dat de actieprijs van € 499.",
+  "afleiders": [
+    "**De adviesprijs van € 599:** fabrikanten noemen hem, dus hij voelt officieel. Maar de regel gaat over de prijs die de shop zelf vroeg, niet over een prijs die de fabrikant noemt.",
+    "**De gewone prijs van € 549:** het voelt eerlijk om een actie niet mee te tellen. Maar de regel kijkt naar de laagste prijs in die 30 dagen, ook als dat een actieprijs was.",
+    "**Helemaal geen doorgestreepte prijs:** dat lijkt veilig. Maar kortingen zijn gewoon toegestaan, ook op Black Friday. Ze moeten alleen kloppen.",
+    ""
+  ],
+  "kort": "Stel, een marktkoopman verkocht vorige week aardbeien voor drie euro. Deze week roept hij 'van vijf voor vier!'. Wie vorige week kocht, voelt zich bedrogen. Daarom moet een korting vergeleken worden met wat je kort daarvoor echt vroeg. Een eerlijke vergelijking voorkomt boetes, en klanten die zich achteraf belazerd voelen.",
+  "begrippen": [
+    { "term": "Van-voor-prijs", "uitleg": "een korting die je toont met een oude en een nieuwe prijs, bijvoorbeeld met een doorgestreepte prijs of een percentage." },
+    { "term": "ACM", "uitleg": "de Autoriteit Consument & Markt: de Nederlandse toezichthouder die onder meer misleidende kortingen beboet." }
+  ],
+  "uitleg": "Volgens de ACM mag een korting alleen uitgaan van 'de laagste prijs waarvoor het product werd aangeboden in de 30 dagen voorafgaand aan die korting'. Of je de korting nu toont met een doorgestreepte prijs of met een percentage: de vergelijking moet kloppen.\n\nDe ACM beboette webwinkels die dat niet deden. Een voorbeeld: een product stond 'van € 699 voor € 629'. In de 30 dagen ervoor kostte het in een eerdere actie € 539. De 'korting' was dus eigenlijk een prijsverhoging.\n\nWat je de klant adviseert:\n- Laat het winkelsysteem de laagste prijs van de afgelopen 30 dagen automatisch bijhouden.\n- Plan acties niet vlak na elkaar met oplopende 'van'-prijzen.\n- Gebruik geen termen als 'adviesprijs' als vergelijking zonder duidelijk te maken wat ze betekenen.\n\nVoor conversie geldt hetzelfde: een korting die niet klopt, kost vertrouwen zodra een klant het doorheeft.",
+  "kernpunt": "Toon je een doorgestreepte prijs, check dan de laagste prijs van de 30 dagen ervoor. Is die lager dan je 'van'-prijs, dan klopt de korting niet.",
+  "toepassing": "Kies vandaag bij een webshopklant één product met een doorgestreepte prijs. Zoek uit wat de laagste prijs in de 30 dagen daarvoor was.",
+  "bron": {
+    "titel": "ACM legt boetes op aan webwinkels voor nepkortingen",
+    "url": "https://www.acm.nl/nl/publicaties/acm-legt-boetes-op-aan-webwinkels-voor-nepkortingen"
+  }
+}

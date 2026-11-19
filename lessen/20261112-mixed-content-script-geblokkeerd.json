@@ -1,0 +1,41 @@
+{
+  "id": "20261112-mixed-content-script-geblokkeerd",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "HTTPS-migratie: mixed content",
+  "matrix": ["5.1.2", "5.1.1"],
+  "titel": "Na de overstap naar https doet de reviewwidget het niet meer",
+  "intro": "Een webshop is net van http naar https gegaan. De pagina's laden, maar op productpagina's werkt de reviewwidget niet meer en de opmaak van het maatadvies is weg. In de broncode staan het script en het stylesheet van die onderdelen nog met een adres dat begint met http://. Afbeeldingen met http:// worden wel gewoon getoond.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Waarom vallen juist het script en het stylesheet weg, terwijl de afbeeldingen nog laden?",
+    "opties": [
+      "Het CDN van de reviewdienst ondersteunt geen https, dus de browser krijgt voor die twee bestanden een foutmelding terug.",
+      "Googlebot heeft de nieuwe https-versie nog niet gecrawld, dus de browser haalt nog oude bestanden uit zijn cache op.",
+      "De browser blokkeert scripts en stylesheets via http op een https-pagina, omdat die de hele pagina kunnen veranderen.",
+      "De 301-redirect van http naar https werkt alleen voor pagina's, dus losse bestanden met http geven een 404-fout."
+    ],
+    "juist": 2
+  },
+  "kern": "Een script of stylesheet via http op een https-pagina heet actieve mixed content. Browsers blokkeren dat, omdat het de hele pagina kan aanpassen.",
+  "afleiders": [
+    "**CDN zonder https:** dat komt voor, maar het verklaart niet waarom de browser het bestand niet eens opvraagt. Het onveilige adres in de broncode is hier het probleem.",
+    "**Nog niet gecrawld:** wat Googlebot doet, heeft geen invloed op wat de browser van een bezoeker laadt.",
+    "",
+    "**Redirect alleen voor pagina's:** een redirect kan ook voor bestanden werken. Maar de browser vraagt een geblokkeerd script niet eens op, dus de redirect komt niet in beeld."
+  ],
+  "kort": "Denk aan een beveiligd kantoor waar iemand spullen via de onbewaakte achterdeur aanlevert. Een ingelijste foto mag de beveiliging nog wel ophangen, die kan weinig kwaad. Maar een onbekende monteur die aan de stroom wil zitten, wordt tegengehouden. De browser doet hetzelfde. Een plaatje via http laat hij vaak door, een script of opmaakbestand via http niet.",
+  "begrippen": [
+    { "term": "HTTPS", "uitleg": "de beveiligde versie van http: het verkeer tussen browser en server is versleuteld." },
+    { "term": "Mixed content", "uitleg": "een https-pagina die toch onderdelen via onbeveiligd http laadt." },
+    { "term": "Stylesheet", "uitleg": "een CSS-bestand dat de opmaak van een pagina bepaalt." }
+  ],
+  "uitleg": "**Twee soorten mixed content** (volgens web.dev):\n- **Passief:** afbeeldingen, video en audio. Die werken niet in op de rest van de pagina. Chrome probeert ze soms automatisch via https op te halen. Bestaat er geen https-versie, dan laadt het bestand niet.\n- **Actief:** scripts, stylesheets en iframes. Die kunnen de hele pagina beïnvloeden. De meeste browsers blokkeren ze standaard.\n\nDaarom gaat het na een migratie vaak mis bij widgets, chatknoppen, lettertypen en trackingscripts die hard op http in een template of plugin staan.\n\n**Zo los je het op:**\n- Zoek in templates, de database en plugin-instellingen naar http:// en vervang dat door https://.\n- Check of de externe dienst het bestand via https aanbiedt.\n- Controleer daarna in Chrome DevTools: het tabblad Issues en de Console melden mixed content per bestand.\n\nVoor SEO telt het ook: wat niet laadt, zoals reviews of tekst uit een script, ziet de bezoeker niet en mogelijk Google ook niet.",
+  "kernpunt": "Ga je over naar https, zoek dan in de broncode naar http:// bij scripts, stylesheets en iframes. Die worden geblokkeerd, plaatjes vaak niet.",
+  "toepassing": "Open vandaag één belangrijke pagina van een klant in Chrome, druk op F12 en kijk in de Console en het tabblad Issues of er meldingen over mixed content staan.",
+  "bron": {
+    "titel": "What is mixed content? | web.dev",
+    "url": "https://web.dev/articles/what-is-mixed-content"
+  }
+}

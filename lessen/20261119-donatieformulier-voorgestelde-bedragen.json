@@ -1,0 +1,40 @@
+{
+  "id": "20261119-donatieformulier-voorgestelde-bedragen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Ankereffect: voorgestelde bedragen in een formulier",
+  "matrix": ["7.1.1"],
+  "titel": "Een leeg bedragveld, en donateurs die afhaken",
+  "intro": "Een dierenasiel heeft een donatiepagina met één leeg veld: 'Uw bedrag: € …', met daaronder de knop 'Doneer'. Veel bezoekers beginnen aan het formulier, maar haken af bij het bedrag. Het asiel wil het formulier aanpassen voor de eindejaarscampagne.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Van welke aanpassing verwacht je het meeste effect?",
+    "opties": [
+      "Het veld leeg laten met de tekst 'Elk bedrag helpt', want vrije keuze voelt prettig en zet niemand onder druk.",
+      "Drie voorgestelde bedragen tonen met 'Ander bedrag', want dat geeft houvast bij het kiezen van een bedrag.",
+      "Alleen nog een vast bedrag van € 10 aanbieden, want één keuze is het makkelijkst en kost het minste denkwerk.",
+      "Een teller tonen met het aantal donateurs van vandaag, want dat haalt de twijfel over het bedrag weg."
+    ],
+    "juist": 1
+  },
+  "kern": "Voorgestelde bedragen geven een vertrekpunt. Bezoekers hoeven dan niet zelf te bedenken wat een 'normaal' bedrag is.",
+  "afleiders": [
+    "**Leeg veld met 'Elk bedrag helpt':** vrije keuze klinkt vriendelijk. Maar juist het zelf moeten bedenken is hier het probleem. Een leeg veld geeft geen houvast.",
+    "",
+    "**Alleen € 10:** één keuze kost weinig denkwerk, dus het lijkt simpel. Maar wie meer wil geven, kan dat niet meer. En wie € 10 te veel vindt, haakt alsnog af.",
+    "**Teller met donateurs:** dat kan helpen bij de vraag óf je geeft. Maar het zegt niets over hoeveel. De twijfel bij het bedrag blijft."
+  ],
+  "kort": "Denk aan een fooi in een restaurant. Staat er niets op de rekening, dan twijfel je: is vijf euro gierig of overdreven? Staat er '10, 12 of 15 procent', dan kies je zo. Een eerste getal geeft houvast, en mensen leunen sterk op dat getal. Op een donatieformulier werkt het precies zo.",
+  "begrippen": [
+    { "term": "Ankereffect", "uitleg": "de neiging om bij een keuze sterk te leunen op het eerste getal of de eerste informatie die je ziet." },
+    { "term": "Voorgesteld bedrag", "uitleg": "een bedrag dat het formulier als keuze aanbiedt, zodat de bezoeker niet zelf hoeft te rekenen." }
+  ],
+  "uitleg": "Nielsen Norman Group beschrijft het **ankereffect** als 'de neiging om te leunen op één stukje informatie' bij het inschatten van waarde en het nemen van beslissingen. Dat gebeurt meestal automatisch.\n\nNN/g noemt een test van Oxfam. De mobiele donatiepagina met voorgestelde maandbedragen leverde 23% meer ingevulde formulieren op dan een kale knop 'Doneer nu'.\n\nZo pas je het toe:\n- Toon drie of vier **realistische** bedragen, gebaseerd op wat donateurs nu echt geven.\n- Houd altijd de optie **'Ander bedrag'**, zodat niemand vastzit.\n- Laat eventueel zien wat een bedrag doet, zoals een week voer.\n\nNN/g waarschuwt ook: een anker moet kloppen. Een onrealistisch hoog bedrag of een overdreven belofte voelt als misleiding, en kost vertrouwen. Hetzelfde principe werkt in offertecalculators en abonnementskeuzes.",
+  "kernpunt": "Moeten bezoekers zelf een getal bedenken, geef dan een paar realistische voorbeelden en laat ze vrij om iets anders te kiezen.",
+  "toepassing": "Zoek vandaag bij een klant een formulier waar bezoekers zelf een bedrag of aantal invullen. Noteer of er een voorbeeld of standaardwaarde bij staat.",
+  "bron": {
+    "titel": "The Anchoring Principle | Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/anchoring-principle/"
+  }
+}

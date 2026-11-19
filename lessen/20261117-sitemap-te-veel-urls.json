@@ -1,0 +1,40 @@
+{
+  "id": "20261117-sitemap-te-veel-urls",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "XML-sitemaps: de limiet per bestand en de sitemapindex",
+  "matrix": ["1.4.1", "1.1.11"],
+  "titel": "120.000 producten in één sitemap van 38 MB, en Search Console geeft een fout",
+  "intro": "Een webshop met 120.000 producten zet alle product-URL's in één bestand: sitemap.xml, 38 MB groot. Search Console meldt bij die sitemap een fout. De developer zegt: 'Het bestand is kleiner dan 50 MB, dus aan de omvang kan het niet liggen.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het probleem, en wat is de oplossing?",
+    "opties": [
+      "Te groot bestand: Google leest per sitemap maar 10 MB. Comprimeer hem met gzip, dan past alles weer in één bestand.",
+      "Te veel producten: Google accepteert per site maar 50.000 URL's in sitemaps. Kies dus de belangrijkste producten uit.",
+      "Te veel URL's: in één sitemap mogen er 50.000 staan. Splits hem in meerdere sitemaps en dien één sitemapindex in.",
+      "Geen probleem met de omvang: de fout komt doordat de sitemap in de hoofdmap staat. Zet hem in een submap /sitemaps/."
+    ],
+    "juist": 2
+  },
+  "kern": "Eén sitemap mag maximaal 50.000 URL's of 50 MB (uitgepakt) bevatten. Zit je daarboven, dan splits je en verwijs je met een sitemapindex.",
+  "afleiders": [
+    "**Grens van 10 MB:** de grens is 50 MB uitgepakt, en dit bestand zit daaronder. Het probleem is het aantal URL's, en dat verandert niet door te comprimeren.",
+    "**Maximum per site:** er is geen grens van 50.000 voor de hele site. Een index kan tot 50.000 sitemaps bevatten, dus ruim genoeg voor 120.000 producten.",
+    "",
+    "**Verkeerde map:** een sitemap in de hoofdmap is juist prima. Sitemaps uit een index moeten in dezelfde map als de index staan, of dieper."
+  ],
+  "kort": "Denk aan een envelop waar maximaal 50 brieven in mogen, hoe dun ze ook zijn. Heb je 120 brieven, dan pak je drie enveloppen en een begeleidend briefje met de lijst van enveloppen. Een sitemap heeft zo'n grens: 50.000 adressen of 50 MB, wat het eerst komt. Een sitemapindex is dat begeleidende briefje: één bestand dat naar alle losse sitemaps verwijst.",
+  "begrippen": [
+    { "term": "XML-sitemap", "uitleg": "een bestand met een lijst van de pagina's die je door Google gevonden wilt hebben." },
+    { "term": "Sitemapindex", "uitleg": "een bestand dat zelf geen pagina's bevat, maar een lijst van sitemaps. Je dient dan alleen dat ene bestand in." }
+  ],
+  "uitleg": "De regels van Google:\n- Eén sitemap: maximaal 50 MB (ongecomprimeerd) of 50.000 URL's. Meer? Dan moet je hem opsplitsen.\n- Een sitemapindex mag tot 50.000 sitemaps bevatten.\n- Die sitemaps staan op dezelfde site als de index, in dezelfde map of dieper.\n- Per site kun je in Search Console tot 500 sitemapindexen indienen.\n- Gebruik altijd volledige, absolute URL's.\n\n**Slim splitsen**\nSplits niet willekeurig in stukken van 50.000, maar per paginatype: producten, categorieën, blog. Dan laat het rapport Pagina-indexering per sitemap zien welk soort pagina's slecht geïndexeerd wordt.\n\nHoud elke sitemap ruim onder de grens, zodat een groeiend assortiment niet ineens een fout oplevert.",
+  "kernpunt": "Groeit een sitemap richting 50.000 URL's, splits hem dan per paginatype en verwijs ernaar met één sitemapindex.",
+  "toepassing": "Open vandaag de sitemap van één grote klant en tel hoeveel URL's er in het grootste bestand staan. Zit het boven de 40.000, plan dan een splitsing.",
+  "bron": {
+    "titel": "Build and submit a sitemap | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+  }
+}

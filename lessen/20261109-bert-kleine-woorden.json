@@ -1,0 +1,41 @@
+{
+  "id": "20261109-bert-kleine-woorden",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "BERT: waarom kleine woorden in koppen en titles ertoe doen",
+  "matrix": ["10.1.4"],
+  "titel": "'Vliegen Lissabon overstap': stopwoorden schrappen, nog steeds slim?",
+  "intro": "Een reisbureau laat koppen en titles schrijven door een copywriter die kleine woorden weglaat, zoals 'naar', 'zonder' en 'met'. Hij noemt dat 'stopwoorden' die Google 'toch negeert'. Zo wordt 'Vliegen naar Lissabon zonder overstap' de kop 'Vliegen Lissabon overstap'. De klant vraagt of dat nog steeds slim is.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat zeg je tegen de klant?",
+    "opties": [
+      "Stopwoorden weglaten blijft slim, want Google kijkt alleen naar de zoekwoorden en slaat de kleine woorden over.",
+      "Stopwoorden alleen in de title weglaten, want die heeft weinig ruimte, en in de kop laten staan voor de lezer.",
+      "De kleine woorden juist laten staan, want sinds BERT gebruikt Google ze om te snappen wat iemand bedoelt.",
+      "Beide versies op de pagina zetten, want dan past de pagina bij zoekers met én zonder de kleine woorden."
+    ],
+    "juist": 2
+  },
+  "kern": "Kleine woorden als 'naar' en 'zonder' bepalen de betekenis. Google gebruikt ze sinds BERT om de zoekvraag te begrijpen, dus schrijf gewoon natuurlijke zinnen.",
+  "afleiders": [
+    "**Weglaten blijft slim:** dat was lang een bekende SEO-gewoonte. Maar sinds BERT leest Google woorden in samenhang, en dan tellen juist de kleine woorden.",
+    "**Alleen in de title weglaten:** ruimte besparen klinkt verstandig. Maar ook in de title verandert 'zonder' de betekenis: 'Lissabon overstap' zegt bijna het omgekeerde.",
+    "",
+    "**Beide versies erop:** zo lijkt de pagina op alle zoekers te passen. Maar de lezer krijgt een rommelige tekst, en Google begrijpt de natuurlijke zin al."
+  ],
+  "kort": "Vergelijk 'koffie zonder suiker' met 'koffie suiker'. Een barista die alleen de grote woorden hoort, geeft je precies het verkeerde. Zoekmachines werkten vroeger een beetje zo. BERT leest de woorden in samenhang, zoals mensen dat doen. Daardoor tellen de kleine woorden juist mee, en een kop zonder die woorden is voor Google én voor de lezer minder duidelijk.",
+  "begrippen": [
+    { "term": "BERT", "uitleg": "een taalmodel dat Google sinds 2019 gebruikt om te begrijpen wat woorden samen betekenen in een zoekopdracht." },
+    { "term": "Stopwoord", "uitleg": "een klein, veelvoorkomend woord zoals 'de', 'naar' of 'met', dat zoekmachines vroeger vaak oversloegen." },
+    { "term": "Title", "uitleg": "de paginatitel in de code, die Google meestal als blauwe klikbare regel in de zoekresultaten toont." }
+  ],
+  "uitleg": "Google kondigde BERT aan op 25 oktober 2019. Volgens Google hielp BERT toen bij ongeveer **1 op de 10 Engelstalige zoekopdrachten** in de VS, met de belofte om het naar meer talen uit te breiden.\n\nHet bekendste voorbeeld uit de aankondiging: '2019 brazil traveler to usa need a visa'. Vroeger gaf Google resultaten over Amerikanen die naar Brazilië reizen. Met BERT begrijpt Google dat het kleine woord 'to' de richting bepaalt: het gaat om een Braziliaan die naar de VS reist.\n\nWat betekent dat voor je werk?\n- **Schrijf natuurlijke zinnen** die precies zeggen wat de pagina biedt. Er is geen apart trucje 'voor BERT'.\n- **Let op betekenisdragers** zoals 'zonder', 'voor', 'naar' en 'niet'. Die bepalen of je pagina past bij wat iemand zoekt.\n- **Kijk naar de zoekresultaten:** toont Google voor jouw zoekterm pagina's die hetzelfde bedoelen als jouw pagina?\n\nOude gewoontes zoals stopwoorden schrappen of zoekwoorden letterlijk herhalen, helpen dus niet meer, en maken teksten soms minder duidelijk.",
+  "kernpunt": "Schrijf koppen en titles als een zin die een mens zou zoeken, met de kleine woorden erin.",
+  "toepassing": "Zoek vandaag bij een klant drie titles of koppen waarin kleine woorden ontbreken, zoals 'naar', 'zonder' of 'voor'. Herschrijf ze als een natuurlijke zin en kijk of de betekenis nu klopt.",
+  "bron": {
+    "titel": "Understanding searches better than ever before | Google The Keyword",
+    "url": "https://blog.google/products/search/search-language-understanding-bert/"
+  }
+}

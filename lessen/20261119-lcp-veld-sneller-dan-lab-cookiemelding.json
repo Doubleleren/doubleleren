@@ -1,0 +1,47 @@
+{
+  "id": "20261119-lcp-veld-sneller-dan-lab-cookiemelding",
+  "type": "basis",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "LCP: waarom velddata sneller kunnen zijn dan het lab",
+  "matrix": ["5.2.2", "5.2.1"],
+  "titel": "LCP 4,2 seconde in Lighthouse, 1,9 seconde bij echte bezoekers",
+  "intro": "Op de homepage van een reisorganisatie geeft Lighthouse een LCP van 4,2 seconde. Het LCP-element is de grote foto bovenaan. De velddata geven 1,9 seconde. Een meetscript in GA4 laat zien dat bij de meeste bezoeken de tekst van de cookiemelding het LCP-element is. Bijna iedereen klikt binnen een seconde op 'Accepteren'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe verklaar je het verschil tussen lab en veld?",
+    "opties": [
+      "Na de klik op de melding meet de browser geen nieuw LCP-element, dus de trage foto valt in de velddata vaak weg.",
+      "Lighthouse rekent met een trage verbinding, dus 4,2 seconde is overdreven en 1,9 seconde is de echte waarde.",
+      "De melding is het grootste element in beeld, dus de foto telt nooit mee en hoeft voor de score niet sneller.",
+      "De velddata zijn het 75e percentiel, dus een kwart van de bezoeken telt niet mee en de LCP lijkt sneller."
+    ],
+    "juist": 0
+  },
+  "kern": "Zodra een bezoeker klikt, scrolt of typt, meldt de browser geen nieuwe LCP-kandidaten meer. Een foto die pas daarna verschijnt, telt niet mee.",
+  "afleiders": [
+    "",
+    "**Lighthouse is te streng:** Lighthouse simuleert inderdaad een trage verbinding. Maar dat verklaart niet waarom het LCP-element in het veld een ander element is. En wie niet klikt, wacht nog steeds lang op de foto.",
+    "**De melding is het grootst:** de foto is groter. De melding wint alleen omdat de foto nog niet in beeld was toen de bezoeker klikte.",
+    "**Het 75e percentiel:** dat is juist een strenge maat, want 75% van de bezoeken moet sneller zijn. Het verklaart niet waarom het LCP-element verschilt."
+  ],
+  "kort": "Denk aan een jury die de grootste foto op tafel kiest. Zodra de jury opstaat, is de wedstrijd voorbij. Komt de grote foto pas daarna binnen, dan wint een kleinere. Zo werkt LCP ook. Na de eerste klik van een bezoeker kijkt de browser niet meer. De trage foto is er nog wel, alleen het cijfer ziet hem niet.",
+  "begrippen": [
+    { "term": "LCP", "uitleg": "Largest Contentful Paint: hoe lang het duurt tot het grootste stuk inhoud in beeld zichtbaar is." },
+    { "term": "LCP-element", "uitleg": "het element dat op dat moment als grootste telt, zoals een foto of een tekstblok." },
+    { "term": "Velddata", "uitleg": "metingen bij echte bezoekers, op hun eigen apparaat en verbinding." },
+    { "term": "Lighthouse", "uitleg": "een testtool die één keer laadt in een vaste testomgeving, zonder te klikken of te scrollen." }
+  ],
+  "uitleg": "Volgens web.dev stopt de browser met het melden van nieuwe LCP-kandidaten 'zodra de gebruiker met de pagina interacteert (via een tik, scroll of toetsaanslag)'. Lighthouse klikt nooit, dus daar wacht de meting wel op de foto.\n\nMeer regels die het LCP-element bepalen:\n- Elementen met opacity 0 tellen niet mee.\n- Elementen die het hele scherm vullen, ziet Chrome als achtergrond.\n- Verdwijnt het LCP-element uit beeld, dan blijft het toch het LCP-element, tot er iets groters verschijnt.\n\nWat betekent dit voor de klant?\n- De velddata zijn niet fout, maar ze verbergen een trage foto. Wie later klikt of niet klikt, wacht nog steeds.\n- Verandert de cookiemelding, bijvoorbeeld door een nieuwe tool, dan kan de LCP ineens verslechteren.\n- Maak de foto dus toch sneller: geen lazy loading en vroeg in de HTML.\n\nGoed is 2,5 seconde of minder, gemeten op het 75e percentiel.",
+  "kernpunt": "Is de LCP in het veld veel beter dan in het lab, kijk dan eerst wélk element in het veld als LCP telt.",
+  "toepassing": "Test vandaag de homepage van een klant met een cookiemelding in PageSpeed Insights. Noteer welk element Lighthouse als LCP-element aanwijst en vergelijk de LCP met de velddata bovenaan.",
+  "bron": {
+    "titel": "Largest Contentful Paint (LCP) | web.dev",
+    "url": "https://web.dev/articles/lcp"
+  },
+  "video": {
+    "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+    "kanaal": "Matt Diggity",
+    "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
+  }
+}

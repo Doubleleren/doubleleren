@@ -1,0 +1,41 @@
+{
+  "id": "20261117-redirectketen-drie-migraties",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Redirectketens na meerdere migraties",
+  "matrix": ["5.1.2", "1.1.4"],
+  "titel": "Vier redirects achter elkaar: 'Google komt er toch wel'?",
+  "intro": "Een klant is in vijf jaar drie keer verhuisd: naar https, naar een nieuwe URL-structuur en nu naar een nieuw domein. Een oude productpagina gaat daardoor via vier redirects: http://oud.nl/a → https://oud.nl/a → https://www.oud.nl/a → https://www.oud.nl/producten/a → https://www.nieuw.nl/producten/a. Alle stappen zijn 301's. De developer zegt: 'Google volgt toch alles.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de developer?",
+    "opties": [
+      "Laat elke oude URL in één stap naar de eindbestemming wijzen, want elke extra stap kost tijd voor bezoekers en Googlebot.",
+      "Laat de keten zo, want Google volgt redirects onbeperkt en geeft bij elke stap alle waarde door, hoe lang de keten ook is.",
+      "Maak van alle stappen 302's, want tijdelijke redirects worden door Googlebot sneller gevolgd dan permanente redirects.",
+      "Verwijder de oudste redirects, want URL's van een paar jaar terug hebben inmiddels geen bezoekers en geen links meer."
+    ],
+    "juist": 0
+  },
+  "kern": "Google raadt aan om direct naar de eindbestemming te verwijzen. Elke tussenstap is een extra rondje naar de server.",
+  "afleiders": [
+    "",
+    "**Onbeperkt volgen:** Google volgt standaard tot 10 stappen en raadt ketens af. Elke stap vertraagt bovendien je bezoekers.",
+    "**302 is sneller:** een tijdelijke redirect wordt niet sneller gevolgd. Hij zegt juist dat de oude URL terugkomt, en dat is hier niet zo.",
+    "**Oude redirects weghalen:** oude URL's kunnen nog jaren links, bladwijzers en verkeer hebben. Zonder redirect eindigen die op een foutpagina."
+  ],
+  "kort": "Denk aan post die na drie verhuizingen steeds wordt doorgestuurd: van je eerste adres naar je tweede, dan naar je derde. Elke keer gaat er tijd overheen, en ergens raakt er iets kwijt. Slimmer is om bij elk oud adres meteen je nieuwste adres op te geven. Zo werkt het ook met redirects. Elke stap is een extra vraag aan de server, voor bezoekers en voor Googlebot.",
+  "begrippen": [
+    { "term": "Redirect", "uitleg": "een automatische doorverwijzing van een oude URL naar een nieuwe." },
+    { "term": "301", "uitleg": "de statuscode voor een permanente redirect: deze pagina is voorgoed verhuisd." },
+    { "term": "Redirectketen", "uitleg": "meerdere redirects achter elkaar voordat je op de echte pagina uitkomt." }
+  ],
+  "uitleg": "Google over ketens bij een verhuizing:\n- Vermijd ketens en verwijs direct naar de eindbestemming. Lukt dat niet, houd de keten dan kort: liefst niet meer dan 3 en minder dan 5 stappen.\n- De crawlers van Google volgen standaard tot 10 stappen. Mislukt een redirect, dan meldt Search Console dat.\n- Laat redirects zo lang mogelijk staan, in het algemeen minstens een jaar.\n- Pas interne links aan zodat ze meteen naar de nieuwe URL wijzen.\n\n**Aanpak**\n- Verzamel alle oude URL's: oude redirectbestanden, backlinks, Search Console en serverlogs.\n- Bepaal per oude URL de eindbestemming.\n- Herschrijf de regels zodat elke oude URL in één stap daarheen gaat, ook de varianten met http en zonder www.\n- Crawl de lijst met oude URL's en controleer of elke URL na één stap een 200 geeft.",
+  "kernpunt": "Ga je een site verhuizen, verwijs dan ook de redirects van eerdere verhuizingen direct naar de nieuwe eindbestemming.",
+  "toepassing": "Plak vandaag vijf oude URL's van een klant in een redirectchecker of crawler in lijstmodus. Tel per URL hoeveel stappen het duurt tot een 200.",
+  "bron": {
+    "titel": "Site moves with URL changes | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+  }
+}

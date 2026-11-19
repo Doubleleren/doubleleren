@@ -1,0 +1,41 @@
+{
+  "id": "20261117-ttfb-bezoekers-ver-van-server",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Time to First Byte (TTFB) verbeteren voor bezoekers ver van de server",
+  "matrix": ["5.2.11", "5.2.10"],
+  "titel": "Snel in Nederland, traag in Spanje en Zweden: wat helpt?",
+  "intro": "Een Nederlandse webshop verkoopt ook veel in Spanje en Zweden. De server staat in Amsterdam. Een meting bij echte bezoekers geeft voor TTFB: Nederland 0,4 s, Spanje 1,3 s en Zweden 1,1 s. De pagina's zijn voor iedereen hetzelfde. De developer heeft de server al zwaarder gemaakt, maar Spanje en Zweden blijven traag.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat helpt hier het meest?",
+    "opties": [
+      "Maak de afbeeldingen kleiner, want minder kilobytes per pagina zorgen dat de eerste byte in het buitenland sneller binnen is.",
+      "Maak de server nog zwaarder, want meer rekenkracht maakt elke pagina sneller, ook voor de bezoekers in het buitenland.",
+      "Verhuis de server naar Spanje, want dan staat hij ongeveer in het midden tussen de Nederlandse, Spaanse en Zweedse bezoekers.",
+      "Zet een CDN voor de site, want dan komen de pagina's uit een server dicht bij de bezoeker in plaats van uit Amsterdam."
+    ],
+    "juist": 3
+  },
+  "kern": "De afstand tot de server kost bij elke aanvraag tijd. Een CDN brengt de pagina's dichter bij de bezoeker.",
+  "afleiders": [
+    "**Kleinere afbeeldingen:** de eerste byte komt vóór de afbeeldingen. Kleinere foto's helpen later in het laden, niet bij de TTFB.",
+    "**Zwaardere server:** in Nederland is de server al snel. Het verschil zit in de afstand, en die wordt niet korter met meer rekenkracht.",
+    "**Server naar Spanje:** dan wordt Spanje sneller, maar Nederland en Zweden trager. Eén server kan niet dicht bij iedereen staan.",
+    ""
+  ],
+  "kort": "Denk aan een bakker die al zijn brood vanuit Amsterdam bezorgt. Hoe snel hij ook bakt, een klant in Madrid wacht op de rit. Een CDN zet als het ware filialen neer in andere landen, met hetzelfde brood op voorraad. Elke aanvraag van een website reist heen en terug naar de server. Hoe verder weg die staat, hoe langer het duurt voordat de eerste byte binnen is.",
+  "begrippen": [
+    { "term": "TTFB (Time to First Byte)", "uitleg": "de tijd tussen het opvragen van een pagina en het moment dat het eerste stukje antwoord van de server binnenkomt." },
+    { "term": "CDN", "uitleg": "een netwerk van servers verspreid over de wereld, die kopieën van je site bewaren en uitleveren aan bezoekers in de buurt." },
+    { "term": "Meting bij echte bezoekers (velddata)", "uitleg": "cijfers uit de browsers van echte bezoekers, in plaats van een test vanaf één computer." }
+  ],
+  "uitleg": "web.dev noemt 0,8 seconde of minder als richtlijn voor TTFB. Het is geen Core Web Vital, maar een trage eerste byte schuift alles daarna op, ook de LCP.\n\nWat web.dev over afstand zegt:\n- Bezoekers ver van de server krijgen in het veld een hogere TTFB, ook als de server zelf snel is.\n- Een CDN lost dat op met servers dicht bij de bezoeker. Die kunnen inhoud aan de rand (edge) bewaren.\n- Dat werkt voor pagina's die voor iedereen hetzelfde zijn. Voor persoonlijke pagina's, zoals winkelmandje of account, niet.\n\nLet op:\n- De server moet met Cache-Control-headers aangeven wat het CDN mag bewaren. Anders vraagt het CDN alles alsnog aan Amsterdam.\n- Caching kan een trage backend verbergen. Meet de server dus ook apart.\n- Is de TTFB overal hoog, dan zit het probleem eerder in de server of de cache, niet in de afstand.",
+  "kernpunt": "Is de TTFB alleen ver van de server slecht, kijk dan eerst naar een CDN in plaats van naar een zwaardere server.",
+  "toepassing": "Kijk vandaag in GA4 bij één klant uit welke landen meer dan 10% van de bezoekers komt. Vraag bij de hosting na of er een CDN is dat ook de pagina's zelf uitlevert.",
+  "bron": {
+    "titel": "Optimize Time to First Byte | web.dev",
+    "url": "https://web.dev/articles/optimize-ttfb"
+  }
+}

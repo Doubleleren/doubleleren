@@ -1,0 +1,42 @@
+{
+  "id": "20261109-gtm-preview-niet-gepubliceerd",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Google Tag Manager: voorbeeldmodus, versies en publiceren",
+  "matrix": ["3.2.2", "3.2.1"],
+  "titel": "De tag werkt in Preview, maar in GA4 komt niets binnen",
+  "intro": "Een collega heeft in Google Tag Manager een GA4-tag gemaakt voor het nieuwe contactformulier. In de voorbeeldmodus (Preview) ziet hij de tag netjes afgaan als hij het formulier verstuurt. Drie dagen later staan er in GA4 nog steeds geen formulierevents, behalve zijn eigen testverzendingen van die middag.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak?",
+    "opties": [
+      "GA4 heeft een week nodig om nieuwe events te verwerken, dus de formulierevents verschijnen vanzelf later.",
+      "De voorbeeldmodus zet de tag na het testen uit, dus hij moet in de werkruimte opnieuw worden aangezet.",
+      "De tag werkt alleen voor de maker, want GTM-tags zijn gekoppeld aan het account dat ze heeft gemaakt.",
+      "De container is niet gepubliceerd: Preview test alleen het concept, en bezoekers krijgen de oude versie."
+    ],
+    "juist": 3
+  },
+  "kern": "Wat je in de voorbeeldmodus test, is een concept. Pas na Publiceren draait de nieuwe tag voor alle bezoekers.",
+  "afleiders": [
+    "**Een week wachten:** GA4 is soms traag, dus wachten lijkt logisch. Maar zijn eigen tests kwamen dezelfde middag al binnen. Echte bezoekers zouden dus ook al zichtbaar moeten zijn.",
+    "**Tag is uitgezet:** de voorbeeldmodus verandert niets aan je tags. Hij laat alleen zien wat er zou gebeuren als het concept live stond.",
+    "**Alleen voor de maker:** het klopt dat alleen zijn browser de voorbeeldmodus ziet. Maar een gepubliceerde tag werkt voor iedereen, wie hem ook maakte.",
+    ""
+  ],
+  "kort": "Het lijkt op een e-mail die nog in je map Concepten staat. Jij kunt hem openen en nalezen, maar de ontvanger heeft niets gekregen. Zo werkt Tag Manager ook. In de voorbeeldmodus laadt jouw browser het concept, dus jij ziet de tag werken. Gewone bezoekers krijgen de laatst gepubliceerde versie, tot iemand op Publiceren drukt.",
+  "begrippen": [
+    { "term": "Container", "uitleg": "het pakket met alle tags, triggers en variabelen van één website in Tag Manager." },
+    { "term": "Voorbeeldmodus", "uitleg": "een testmodus (Preview) waarin jij de site bekijkt alsof het concept al live staat. Andere bezoekers merken er niets van." },
+    { "term": "Versie", "uitleg": "een momentopname van de container. Bij Publiceren wordt een versie live gezet." },
+    { "term": "Tag", "uitleg": "een stukje code dat iets doet op de site, zoals een event naar GA4 sturen." }
+  ],
+  "uitleg": "Volgens de helppagina van Tag Manager laat de voorbeeldmodus je de site bekijken 'as if the current container draft was deployed'. Het debugscherm verschijnt alleen in de browser waarin je de voorbeeldmodus aanzette, en is niet zichtbaar voor gewone bezoekers.\n\nPas bij **Publiceren** zet Tag Manager je wijzigingen live. Elke publicatie wordt een **versie**: een momentopname van de container. Onder Versies zie je wanneer welke versie live ging en wie hem publiceerde.\n\nZo voorkom je dit:\n- Test in de voorbeeldmodus, klik dan op **Verzenden**, geef de versie een duidelijke naam en klik op **Publiceren**.\n- Controleer daarna live in het GA4-rapport **Realtime**, niet alleen in je eigen voorbeeldsessie.\n- Kijk bij de start of er nog niet-gepubliceerde wijzigingen van anderen in de werkruimte staan. Die gaan anders mee live.\n\nIs de container wel gepubliceerd en komt er toch niets binnen? Kijk dan naar toestemming: een tag die op cookietoestemming wacht, gaat bij bezoekers die weigeren niet af.",
+  "kernpunt": "Werkt een tag in Preview maar niet live, kijk dan eerst onder Versies wanneer er voor het laatst is gepubliceerd.",
+  "toepassing": "Open vandaag de GTM-container van een klant en kijk in het overzicht of er niet-gepubliceerde wijzigingen in de werkruimte staan. Zo ja, vraag na van wie ze zijn en of ze live moeten.",
+  "bron": {
+    "titel": "Preview and debug containers - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/6107056"
+  }
+}

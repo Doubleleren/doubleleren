@@ -1,0 +1,41 @@
+{
+  "id": "20261113-mobiel-toetsenbord-checkout",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Mobiele formulieren: het juiste toetsenbord per veld",
+  "matrix": ["7.1.1"],
+  "titel": "Elke keer wisselen naar het cijferscherm in de checkout",
+  "intro": "In de mobiele checkout van een webshop vullen klanten hun telefoonnummer en kaartnummer in. In sessie-opnames zie je dat ze bij die velden steeds zelf moeten wisselen naar de cijfers van hun toetsenbord. Een deel tikt een letter in plaats van een cijfer en krijgt een foutmelding.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste aanpassing?",
+    "opties": [
+      "De velden samenvoegen tot één veld voor alle contactgegevens, want minder velden betekent minder fouten op mobiel.",
+      "Een korte uitleg boven elk veld zetten, want klanten weten dan vooraf welk soort tekens ze moeten invullen.",
+      "Elk veld het juiste toetsenbord laten openen, want dan krijgt de klant bij cijfervelden meteen een cijferpad.",
+      "Het telefoonnummer optioneel maken, want een veld dat niet verplicht is, levert ook geen foutmeldingen meer op."
+    ],
+    "juist": 2
+  },
+  "kern": "Laat elk veld het toetsenbord openen dat bij de inhoud past, zoals een cijferpad voor kaart- en telefoonnummer. Dat scheelt wisselen en tikfouten.",
+  "afleiders": [
+    "**Velden samenvoegen:** minder velden helpt vaak. Maar één veld voor alles is lastiger te controleren en lost het wisselen van toetsenbord niet op.",
+    "**Uitleg erboven:** dat helpt bij twijfel over het formaat. Maar de klant moet dan nog steeds zelf naar de cijfers wisselen.",
+    "",
+    "**Optioneel maken:** dat kan voor het telefoonnummer. Maar het kaartnummer blijft verplicht, en daar blijven het wisselen en de tikfouten bestaan."
+  ],
+  "kort": "Vergelijk het met een rekenmachine waarop je eerst een knop moet indrukken om bij de cijfers te komen. Dat is één handeling te veel, en wie haast heeft, drukt mis. Een telefoon kan zelf het goede toetsenbord tonen, als het veld vertelt wat erin hoort. Elke handeling die je weghaalt, is een kans minder op een fout of een afhaker.",
+  "begrippen": [
+    { "term": "Cijferpad", "uitleg": "een toetsenbord op de telefoon met alleen grote cijfertoetsen." },
+    { "term": "type en inputmode", "uitleg": "instellingen in de HTML van een invoerveld die de telefoon vertellen welk toetsenbord hij moet tonen." },
+    { "term": "Sessie-opname", "uitleg": "een video-achtige weergave van wat één bezoeker op de site deed, bijvoorbeeld in Clarity of Hotjar." }
+  ],
+  "uitleg": "Baymard noemt het juiste toetsenbord een basisregel voor mobiele formulieren. In hun onderzoek uit 2015 deed 54% van de mobiele sites het niet goed bij telefoon, postcode of kaartnummer.\n\nZo regel je het in de HTML:\n- **Telefoon:** type=\"tel\"\n- **E-mail:** type=\"email\", met @ en punt direct bereikbaar\n- **Kaartnummer:** inputmode=\"numeric\". Liever niet type=\"number\": dat kan pijltjes tonen en voorloopnullen weghalen.\n- **Postcode:** let op. Een Nederlandse postcode bevat letters, dus daar hoort geen cijferpad bij.\n\nCombineer het met **autocomplete**-attributen, zoals autocomplete=\"tel\", zodat de telefoon bekende gegevens kan invullen.\n\nControleer het altijd zelf: open de checkout op een telefoon en tik elk veld aan.",
+  "kernpunt": "Laat elk invoerveld op mobiel het passende toetsenbord openen: een cijferpad voor cijfers, maar niet voor de Nederlandse postcode.",
+  "toepassing": "Open vandaag de checkout van een klant op je telefoon. Tik elk veld aan en noteer bij welke velden je zelf naar een ander toetsenbord moet wisselen.",
+  "bron": {
+    "titel": "Baymard Institute: 'Touch Keyboard' Implementations Have Improved Just 9% Since 2013",
+    "url": "https://baymard.com/blog/mobile-touch-keyboards"
+  }
+}

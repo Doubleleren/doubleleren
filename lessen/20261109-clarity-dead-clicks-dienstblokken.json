@@ -1,0 +1,46 @@
+{
+  "id": "20261109-clarity-dead-clicks-dienstblokken",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Bewijs verzamelen met Clarity: wat dead clicks je vertellen",
+  "matrix": ["7.1.5", "7.1.1"],
+  "titel": "Iedereen klikt op de drie blokken, maar er gebeurt niets",
+  "intro": "Een installatiebedrijf heeft op de homepage drie blokken met een icoon en een titel: 'Warmtepomp', 'Zonnepanelen' en 'Thuisbatterij'. Ze zijn alleen bedoeld als uitleg en linken nergens naartoe. In Microsoft Clarity zie je op die blokken veel klikken met het label 'dead click'. Weinig bezoekers komen vanaf de homepage op de dienstpagina's.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat concludeer je, en wat doe je?",
+    "opties": [
+      "Bezoekers verwachten dat de blokken klikbaar zijn; maak ze klikbaar naar de dienstpagina's en meet het effect.",
+      "Bezoekers zijn erg betrokken bij de blokken; zet er meer van op de pagina, want daar gaat de aandacht naartoe.",
+      "Het zijn vooral bots die op de pagina klikken; filter ze uit de heatmap, want echte bezoekers klikken zo niet.",
+      "De heatmap meet fout bij iconen; kijk alleen naar de scrollmap, want die is bij afbeeldingen wel betrouwbaar."
+    ],
+    "juist": 0
+  },
+  "kern": "Een dead click is een klik waarop niets gebeurt. Veel van zulke klikken op één plek betekenen: bezoekers verwachten daar iets wat de pagina niet doet.",
+  "afleiders": [
+    "",
+    "**Veel betrokkenheid:** veel klikken lijken op interesse. Maar het zijn klikken zonder resultaat, en die wijzen op frustratie, niet op betrokkenheid.",
+    "**Bots filteren:** vreemde klikpatronen doen soms aan bots denken. Maar klikken die precies op blokken landen die op knoppen lijken, passen juist bij echte bezoekers.",
+    "**De heatmap meet fout:** dat is een makkelijke uitweg als de data verrast. Clarity meet hier gewoon klikken, en de scrollmap zegt niets over waar mensen klikken."
+  ],
+  "kort": "Denk aan een deur met een grote klink die op slot zit, zonder bordje. Iedereen probeert hem en raakt een beetje geïrriteerd. De klink belooft iets wat de deur niet waarmaakt. Blokken met een icoon en een titel werken net zo: ze zien eruit als een knop. Klikken bezoekers en gebeurt er niets, dan kost dat tijd en vertrouwen, en vinden ze de dienstpagina niet.",
+  "begrippen": [
+    { "term": "Heatmap", "uitleg": "een kaart van een pagina die met kleuren laat zien waar bezoekers het meest klikken of kijken." },
+    { "term": "Dead click", "uitleg": "een klik waarop niets zichtbaars gebeurt: geen verandering op de pagina en geen nieuwe pagina." },
+    { "term": "Sessie-opname", "uitleg": "een video-achtige weergave van hoe één bezoeker over de site beweegt, klikt en scrolt." }
+  ],
+  "uitleg": "Microsoft Clarity noemt een klik een **dead click** als de bezoeker 'clicks on an element but gets no feedback in a reasonable amount of time'. Er verandert niets in beeld en er volgt geen nieuwe pagina. Volgens Clarity kan dat wijzen op kapotte elementen, trage reacties of misleidend ontwerp.\n\nVerwant zijn **rage clicks**: meerdere klikken snel achter elkaar op dezelfde plek. Die wijzen op duidelijke frustratie.\n\nZo gebruik je dead clicks als bewijs:\n- **Filter** in Clarity op dead clicks en open de heatmap van die pagina.\n- **Bekijk 5 tot 10 sessie-opnames** met een dead click. Zie je wat mensen daarna doen? Zoeken ze in het menu, of verlaten ze de site?\n- **Kies een oplossing:** maak het element klikbaar als bezoekers daar iets verwachten, of laat het er minder klikbaar uitzien.\n- **Meet het effect:** vergelijk vóór en na het aantal dead clicks en het aantal bezoekers dat op de dienstpagina's komt. Bij genoeg verkeer kun je het A/B-testen.\n\nEen heatmap laat zien wáár iets gebeurt. Opnames en een korte enquête helpen je begrijpen waarom.",
+  "kernpunt": "Zie je veel dead clicks op één element, kijk dan eerst een paar opnames terug en geef bezoekers daar wat ze verwachten.",
+  "toepassing": "Open vandaag het Clarity-dashboard van een klant en kijk welke pagina de meeste dead clicks heeft. Bekijk drie opnames van die pagina en noteer waar mensen tevergeefs op klikken.",
+  "bron": {
+    "titel": "Semantic metrics | Microsoft Learn (Clarity)",
+    "url": "https://learn.microsoft.com/en-us/clarity/insights/semantic-metrics"
+  },
+  "video": {
+    "titel": "Navigating the Microsoft Clarity Dashboard",
+    "kanaal": "Microsoft Clarity",
+    "url": "https://www.youtube.com/watch?v=7YyFnEQjmtM"
+  }
+}

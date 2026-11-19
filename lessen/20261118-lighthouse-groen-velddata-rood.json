@@ -1,0 +1,46 @@
+{
+  "id": "20261118-lighthouse-groen-velddata-rood",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Labdata tegenover velddata: welke telt, en waarom verschillen ze?",
+  "matrix": ["5.2.1", "4.1.1"],
+  "titel": "Lighthouse geeft 96, maar echte bezoekers wachten bijna 4 seconden",
+  "intro": "Een installatiebedrijf heeft een nieuwe website. De developer draait Lighthouse op zijn laptop en krijgt een prestatiescore van 96, met een LCP van 1,2 seconde. Bovenaan PageSpeed Insights staat voor mobiel een LCP van 3,9 seconde, in het rood. De developer zegt: 'Google ziet 96, dus we zijn klaar.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat klopt er?",
+    "opties": [
+      "De developer heeft gelijk, want Search Console neemt binnen 28 dagen de score uit Lighthouse over als oordeel.",
+      "De 3,9 seconde telt, want Google beoordeelt echte bezoeken, en die gebeuren op andere toestellen en verbindingen.",
+      "De 3,9 seconde is vertekend, want daarin zitten ook bots, dus laat je eerst het botverkeer uit die meting filteren.",
+      "Draai Lighthouse tien keer en neem het gemiddelde, want dan komt de score vanzelf op dezelfde waarde als het veld."
+    ],
+    "juist": 1
+  },
+  "kern": "Google oordeelt op metingen bij echte bezoekers. De test op de laptop is één nagebootst bezoek en kan heel anders uitvallen.",
+  "afleiders": [
+    "**Search Console neemt de score over:** het Core Web Vitals-rapport gebruikt nooit Lighthouse-scores. Het werkt alleen met metingen bij echte Chrome-gebruikers.",
+    "",
+    "**Bots filteren:** de meting bij echte gebruikers komt uit Chrome van echte mensen. Bots zitten daar niet in, dus er valt niets te filteren.",
+    "**Tien keer testen:** vaker testen maakt de labscore stabieler. Maar het blijft hetzelfde nagebootste bezoek, dus het komt niet vanzelf uit op wat echte bezoekers zien."
+  ],
+  "kort": "Denk aan een proefrit op een lege snelweg op zondagochtend. De auto rijdt soepel en snel. Maar je klant rijdt elke dag in de spits, op een smalle weg met een oude auto. Lighthouse is die proefrit: één snelle laptop, één verbinding, één moment. De meting bij echte bezoekers is de spits. Google kijkt naar de spits, want dat is wat mensen echt meemaken.",
+  "begrippen": [
+    { "term": "Lighthouse", "uitleg": "het testprogramma van Google dat één bezoek nabootst en daar een score van 0 tot 100 voor geeft." },
+    { "term": "Velddata", "uitleg": "metingen bij echte Chrome-bezoekers over de afgelopen 28 dagen (CrUX)." },
+    { "term": "LCP", "uitleg": "Largest Contentful Paint: hoe lang het duurt tot het grootste stuk inhoud in beeld staat. Goed is 2,5 seconde of minder." }
+  ],
+  "uitleg": "Volgens web.dev gebruikt Google voor de Core Web Vitals **velddata**: het Chrome User Experience Report (CrUX), over 28 dagen, op het 75e percentiel. Een labtest meet één toestel, één netwerk en één plek.\n\nWaarom lab en veld uit elkaar lopen:\n- **Toestellen en netwerk:** echte bezoekers hebben vaak tragere telefoons en wisselende mobiele verbindingen.\n- **Ander LCP-element:** schermgrootte, ingelogd zijn, een cookiebanner of een A/B-test kunnen bepalen wat het grootste element is.\n- **Cache:** het lab laadt meestal met een lege cache. In het veld komen terugkerende bezoekers juist sneller binnen.\n- **Gedrag:** in het veld stopt de LCP-meting zodra iemand scrolt of klikt.\n\nIs het lab groen en het veld rood, zoek dan uit wat echte bezoekers anders meemaken. Kijk in PageSpeed Insights naar mobiel en desktop apart. Test in Chrome DevTools met een trage telefoon en een trage verbinding. Eigen metingen bij bezoekers (RUM) laten per pagina zien waar de tijd zit.",
+  "kernpunt": "Rapporteer snelheid op de meting bij echte bezoekers, en gebruik Lighthouse alleen om de oorzaak te zoeken.",
+  "toepassing": "Open vandaag PageSpeed Insights voor de homepage van een klant. Vergelijk de LCP bovenaan (echte bezoekers) met de LCP uit de labtest en noteer het verschil.",
+  "bron": {
+    "titel": "Why lab and field data can be different (and what to do about it) | web.dev",
+    "url": "https://web.dev/articles/lab-and-field-data-differences"
+  },
+  "video": {
+    "titel": "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+    "kanaal": "Matt Diggity",
+    "url": "https://www.youtube.com/watch?v=_FpAvQkjlco"
+  }
+}

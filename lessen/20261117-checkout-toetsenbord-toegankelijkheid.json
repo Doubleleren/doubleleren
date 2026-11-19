@@ -1,0 +1,41 @@
+{
+  "id": "20261117-checkout-toetsenbord-toegankelijkheid",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "Toegankelijkheid en conversie: de Europese toegankelijkheidswet voor webshops",
+  "matrix": ["7.1.1", "7.1.3"],
+  "titel": "De bestelknop werkt niet met het toetsenbord: na de lancering fixen?",
+  "intro": "Een webshop in sportartikelen, met 35 medewerkers en € 8 miljoen omzet, laat een nieuwe checkout bouwen. In de test blijkt dat je de knop 'Bestelling plaatsen' niet kunt bedienen met alleen het toetsenbord. De productowner wil het na de lancering oppakken: 'Het gaat om een paar procent van de bezoekers. Toegankelijkheid is een nice-to-have.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat zeg je tegen de productowner?",
+    "opties": [
+      "Na de lancering is prima, want de toegankelijkheidsregels gelden alleen voor websites van de overheid, niet voor webshops.",
+      "Na de lancering is prima, want toegankelijkheid gaat over schermlezers, en die gebruiken een checkout toch niet zonder hulp.",
+      "Eerst oplossen, want Google rankt een checkout die niet toegankelijk is lager, en dat kost organisch verkeer op die pagina.",
+      "Eerst oplossen, want sinds juni 2025 moeten webshops van deze omvang toegankelijk zijn, en hier kan een deel niet bestellen."
+    ],
+    "juist": 3
+  },
+  "kern": "Sinds 28 juni 2025 gelden de toegankelijkheidsregels ook voor webshops met 10 of meer medewerkers of meer dan € 2 miljoen omzet. Deze knop blokkeert bestellen.",
+  "afleiders": [
+    "**Alleen de overheid:** voor overheidssites gelden al langer regels. Sinds juni 2025 vallen ook webshops onder de Europese toegankelijkheidswet.",
+    "**Alleen schermlezers:** ook wie door een beperking geen muis kan gebruiken, werkt met het toetsenbord. Voor die bezoekers is dit een dichte deur.",
+    "**Lagere ranking:** een checkout staat meestal niet eens in Google, dus ranking speelt daar geen rol. De echte redenen om nu te fixen zijn de wet en de gemiste omzet.",
+    ""
+  ],
+  "kort": "Denk aan een winkel met een draaideur als enige ingang. De meeste klanten merken niets, maar iemand in een rolstoel komt er niet in. Die ziet de schappen door het raam, maar kan niet afrekenen. Een bestelknop die niet met het toetsenbord werkt, is zo'n draaideur. Sinds juni 2025 is zo'n deur voor de meeste webshops ook wettelijk niet meer toegestaan.",
+  "begrippen": [
+    { "term": "Europese toegankelijkheidswet (EAA)", "uitleg": "de European Accessibility Act: Europese regels die onder meer webshops verplichten bruikbaar te zijn voor mensen met een beperking." },
+    { "term": "Toetsenbordbediening", "uitleg": "een site gebruiken zonder muis, alleen met toetsen als Tab en Enter. Veel mensen met een beperking werken zo." },
+    { "term": "ACM", "uitleg": "de Autoriteit Consument & Markt, die in Nederland toezicht houdt op de toegankelijkheid van webshops." }
+  ],
+  "uitleg": "De ACM controleerde in 2026 de grootste Nederlandse webwinkels:\n- 61% was niet digitaal toegankelijk. Voorbeelden: een afrekenknop die niet met het toetsenbord werkt, en een CAPTCHA die mensen niet kunnen invullen.\n- Bij nog eens 33% kon je wel bestellen, maar met serieuze problemen.\n- De regels gelden sinds 28 juni 2025 voor bedrijven met 10 of meer medewerkers en/of meer dan € 2 miljoen jaaromzet.\n- De ACM spreekt de slechtst scorende bedrijven aan. Wie niet genoeg verbetert, riskeert handhaving.\n\n**Snelle checks in de checkout**\n- Kom je overal met Tab, en zie je waar je bent (zichtbare focus)?\n- Werken knoppen met Enter of de spatiebalk?\n- Staan foutmeldingen in tekst bij het veld, niet alleen in rood?\n- Is er een alternatief voor een CAPTCHA?\n\nVoor CRO is dit ook gewoon omzet: wie niet kan afrekenen, koopt niet.",
+  "kernpunt": "Test elke nieuwe checkout vóór de lancering één keer helemaal met alleen het toetsenbord.",
+  "toepassing": "Loop vandaag de checkout van één webshopklant door zonder muis, alleen met Tab, Shift+Tab en Enter. Noteer waar je vastloopt.",
+  "bron": {
+    "titel": "ACM: klant met beperking kan bij merendeel grote webwinkels niet terecht",
+    "url": "https://www.acm.nl/nl/publicaties/acm-klant-met-beperking-kan-bij-merendeel-grote-webwinkels-niet-terecht"
+  }
+}

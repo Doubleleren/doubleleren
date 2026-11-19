@@ -1,0 +1,46 @@
+{
+  "id": "20261111-noindex-alleen-mobiele-versie",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Mobile-first indexing: een andere robots-metatag op mobiel",
+  "matrix": ["8.1.2", "8.1.1", "1.3.1"],
+  "titel": "Filterpagina's alleen op mobiel uit Google houden?",
+  "intro": "Een webshop toont op mobiel en desktop andere HTML op dezelfde URL. Op mobiel zijn de filterpagina's kaal, met weinig producten per pagina. De developer wil die mobiele versies \"uit de zoekresultaten houden\" en zet in de mobiele HTML een meta robots noindex. De desktopversie houdt index.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat gebeurt er waarschijnlijk met deze filterpagina's in Google?",
+    "opties": [
+      "Ze verdwijnen ook voor desktopzoekers uit Google, want Google indexeert de pagina's op basis van de mobiele versie.",
+      "Ze blijven voor desktopzoekers zichtbaar, want Google houdt per apparaat een aparte index bij met eigen robots-regels.",
+      "Ze blijven overal zichtbaar, want bij twee tegenstrijdige robots-tags kiest Google altijd de minst strenge van de twee.",
+      "Alleen de mobiele resultaten verdwijnen, want Google toont op mobiel de mobiele versie en op desktop de desktopversie."
+    ],
+    "juist": 0
+  },
+  "kern": "Google kijkt bij het indexeren naar de mobiele versie. Een noindex daar geldt dus voor de hele pagina, ook voor wie op desktop zoekt.",
+  "afleiders": [
+    "",
+    "**Aparte index per apparaat:** dat lijkt logisch omdat de versies verschillen. Maar Google heeft één index en gebruikt daarvoor de mobiele versie.",
+    "**De minst strenge tag wint:** dat is net andersom. Bij tegenstrijdige robots-regels kiest Google juist de strengste. En hier ziet Google de desktop-tag niet eens.",
+    "**Alleen mobiel verdwijnt:** zo zou het werken als Google beide versies apart opnam. Maar wat uit de mobiele versie verdwijnt, verdwijnt uit de hele index."
+  ],
+  "kort": "Denk aan een bibliotheek die van elk boek alleen de pocketeditie in de catalogus zet. Staat in die pocket 'niet uitlenen', dan is het boek voor iedereen onvindbaar, ook voor wie de gebonden editie zoekt. Zo werkt Google sinds de overstap naar mobiel: de mobiele versie is de catalogus. Wat daar uit staat, staat overal uit.",
+  "begrippen": [
+    { "term": "Mobile-first indexing", "uitleg": "Google gebruikt de mobiele versie van een pagina om die op te nemen in de index en te rangschikken." },
+    { "term": "Meta robots noindex", "uitleg": "een regel in de HTML die zoekmachines vraagt een pagina niet in de zoekresultaten op te nemen." },
+    { "term": "Index", "uitleg": "de grote database van Google met alle pagina's die in de zoekresultaten kunnen verschijnen." }
+  ],
+  "uitleg": "Sinds de overstap naar **mobile-first indexing** gebruikt Google de mobiele versie van een pagina om te indexeren en te ranken. Bij een responsive site is dat dezelfde HTML. Bij **dynamic serving** (andere HTML per apparaat op dezelfde URL) of een aparte m-dot-site niet.\n\nGoogle zegt daarom in de richtlijnen voor mobile-first indexing:\n- Gebruik op mobiel en desktop dezelfde robots-metatags.\n- Zet geen noindex op de mobiele pagina.\n- Geef mobiel dezelfde content en dezelfde structured data als desktop.\n\nWil je filterpagina's echt uit de index, beslis dat dan per URL en voor beide versies tegelijk. Is de mobiele versie te kaal, maak hem dan vollediger in plaats van hem te verbergen.\n\nControle: URL-inspectie in Search Console laat zien wat Googlebot smartphone ophaalt, inclusief de robots-metatag.",
+  "kernpunt": "Verschilt de HTML per apparaat, leg dan de robots-tags van beide versies naast elkaar. De mobiele versie bepaalt wat er in Google staat.",
+  "toepassing": "Kies bij één klant met dynamic serving of een m-dot-site vijf belangrijke pagina's. Controleer met URL-inspectie of de mobiele versie dezelfde robots-tag heeft als desktop.",
+  "bron": {
+    "titel": "Mobile-first indexing best practices | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+  },
+  "video": {
+    "titel": "Mobile-First Indexing",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+  }
+}
