@@ -1,0 +1,41 @@
+{
+  "id": "20261119-ab-test-weinig-verkeer-welk-idee",
+  "type": "herhaling",
+  "niveau": "gevorderd",
+  "vakgebied": "CRO",
+  "onderwerp": "A/B-testen met weinig verkeer: minimum detectable effect",
+  "matrix": ["7.2.1"],
+  "titel": "4.000 bezoekers per maand en drie testideeën: welke eerst?",
+  "intro": "De offertepagina van een installatiebedrijf krijgt 4.000 bezoekers per maand, en 2,5% vraagt een offerte aan. Met een calculator heb je uitgerekend dat je in acht weken alleen een verschil van ongeveer 40% betrouwbaar kunt aantonen. Het team heeft drie ideeën: een andere knopkleur en -tekst, een kortere intro, en een nieuwe opzet met prijsindicatie en reviews.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je voor de eerste test?",
+    "opties": [
+      "De nieuwe opzet met prijsindicatie en reviews testen, want alleen een grote verandering kan zo'n groot verschil geven.",
+      "De kleur en tekst van de knop testen, want een kleine aanpassing is snel gebouwd, dus de test kan meteen starten.",
+      "Alle drie ideeën tegelijk testen in acht varianten, want dan weet je na acht weken meteen welke combinatie wint.",
+      "De knoptest starten en stoppen zodra de tool 95% toont, want dan hoef je niet de volle acht weken te wachten."
+    ],
+    "juist": 0
+  },
+  "kern": "Met weinig verkeer kun je alleen grote verschillen aantonen. Test dus iets wat het gedrag flink kan veranderen.",
+  "afleiders": [
+    "",
+    "**Knopkleur en -tekst:** snel gebouwd, dus het voelt efficiënt. Maar zo'n kleine wijziging levert zelden 40% meer aanvragen op. De test eindigt dan vrijwel zeker zonder uitkomst.",
+    "**Acht varianten:** het lijkt tijd te sparen. Maar het verkeer wordt over acht groepen verdeeld, dus per variant heb je nog veel minder bezoekers.",
+    "**Stoppen bij 95%:** zo ben je sneller klaar. Maar wie stopt zodra de tool een winnaar toont, houdt veel vaker een toevalstreffer over."
+  ],
+  "kort": "Denk aan een keukenweegschaal die alleen hele kilo's aangeeft. Daarmee zie je nooit of er tien gram suiker bij komt. Een A/B-test met weinig bezoekers is net zo grof. Kleine verschillen verdwijnen in het toeval. Wil je toch iets leren, leg dan iets zwaars op de weegschaal: een verandering die veel kan uitmaken.",
+  "begrippen": [
+    { "term": "Minimum detectable effect (MDE)", "uitleg": "het kleinste verschil dat een test met dit aantal bezoekers betrouwbaar kan aantonen." },
+    { "term": "Relatief verschil", "uitleg": "het verschil in procenten van de huidige conversie. Van 2,5% naar 3,5% is 40% relatief, maar 1 procentpunt absoluut." },
+    { "term": "Power", "uitleg": "de kans dat de test een echt verschil ook vindt. Meestal reken je met 80%." }
+  ],
+  "uitleg": "De calculator van Evan Miller noemt de MDE 'het kleinste effect dat in (1−β)% van de gevallen gevonden wordt'. Hier: 4.000 bezoekers per variant, 2,5% conversie, 5% significantie en 80% power. Dan is de MDE ongeveer 1 procentpunt, dus zo'n 40% relatief.\n\nWat je doet bij weinig verkeer:\n- **Test grote veranderingen**: het aanbod, de prijsinformatie of de opbouw van de pagina. Details als knopkleur zijn niet te meten.\n- **Meet een stap met meer verkeer**, zoals klikken op 'Offerte aanvragen'. Wel kijk je daarna of de echte aanvragen meegaan.\n- **Leg de looptijd vooraf vast** en stop niet zodra het dashboard een winnaar toont.\n- **Verbeter kleine dingen zonder test**, op basis van gebruikerstests of sessie-opnames.\n\nHalveer je de MDE, dan heb je ongeveer vier keer zoveel bezoekers nodig.",
+  "kernpunt": "Reken eerst uit welk verschil je kunt aantonen, en kies dan een testidee dat zo'n verschil kan opleveren.",
+  "toepassing": "Vul vandaag voor één klant het verkeer en de conversie van de belangrijkste pagina in de calculator van Evan Miller in. Noteer welk verschil je in vier weken kunt aantonen.",
+  "bron": {
+    "titel": "Evan Miller: Sample Size Calculator",
+    "url": "https://www.evanmiller.org/ab-testing/sample-size.html"
+  }
+}

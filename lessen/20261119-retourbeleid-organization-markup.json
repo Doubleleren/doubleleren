@@ -1,0 +1,41 @@
+{
+  "id": "20261119-retourbeleid-organization-markup",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Structured data: retourbeleid op organisatieniveau",
+  "matrix": ["2.2.5", "2.2.1"],
+  "titel": "Hetzelfde retourbeleid in de markup van 4.000 productpagina's?",
+  "intro": "Een webshop in kinderkleding heeft 4.000 producten. Voor bijna alles geldt 30 dagen gratis retour. Alleen rompertjes met een geborduurde naam kunnen niet retour. De developer wil het retourbeleid in de productmarkup van alle 4.000 pagina's zetten. Bij elke wijziging van het beleid moet dat dan opnieuw.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe leg je het retourbeleid in de markup het slimst vast?",
+    "opties": [
+      "In de productmarkup van alle 4.000 pagina's, want Google leest een retourbeleid alleen als het bij elk product staat.",
+      "Alleen als gewone tekst in de footer, want Google haalt het retourbeleid zelf van de site en markup voegt niets toe.",
+      "Eén keer in de Organization-markup en apart bij de rompertjes, want een productbeleid gaat voor het algemene.",
+      "Alleen bij de rompertjes met naam, want Google gaat er bij alle andere producten van uit dat retour mogelijk is."
+    ],
+    "juist": 2
+  },
+  "kern": "Een beleid voor de hele winkel zet je één keer in de Organization-markup. Bij producten met een eigen beleid overschrijf je het in de productmarkup.",
+  "afleiders": [
+    "**Bij elk product:** dat kan, dus het lijkt de veilige keuze. Maar Google ondersteunt ook een beleid op organisatieniveau. Dat scheelt 4.000 keer hetzelfde blok onderhouden.",
+    "**Alleen tekst in de footer:** het beleid staat dan wel op de site. Maar met markup geef je het Google in een vaste vorm die het niet hoeft te raden.",
+    "",
+    "**Alleen de uitzondering:** het lijkt efficiënt. Maar Google gaat niet uit van een standaard. In de markup staat dan niets over de andere producten."
+  ],
+  "kort": "Denk aan de voorwaarden van een kledingwinkel. Die hang je één keer bij de kassa, niet aan elk kledingstuk. Alleen bij een uitzondering hang je een kaartje aan het product: 'Op maat gemaakt, niet retour'. Deze markup werkt net zo. Het algemene beleid staat bij de organisatie, de uitzondering bij het product.",
+  "begrippen": [
+    { "term": "Organization-markup", "uitleg": "structured data over het bedrijf zelf, zoals naam, logo en contactgegevens. Voor een webshop het type OnlineStore." },
+    { "term": "MerchantReturnPolicy", "uitleg": "het schema.org-type waarmee je een retourbeleid beschrijft: termijn, kosten en manier van retourneren." },
+    { "term": "Overschrijven", "uitleg": "voor één product een ander beleid opgeven dan het algemene. Dat van het product gaat dan voor." }
+  ],
+  "uitleg": "Google raadt aan de Organization-markup op de homepage te zetten, of op één pagina over het bedrijf. Een webshop gebruikt het subtype **OnlineStore**.\n\nIn diezelfde markup kun je met **hasMerchantReturnPolicy** het retourbeleid opgeven. Denk aan:\n- applicableCountry: voor welk land het geldt\n- returnPolicyCategory: of en hoe lang je kunt retourneren\n- merchantReturnDays: het aantal dagen\n- returnFees en returnMethod: kosten en manier\n\nMet **hasShippingService** doe je hetzelfde voor verzending.\n\nDit zijn de standaardwaarden voor de hele winkel. Hebben sommige producten een eigen beleid, dan gebruik je dezelfde eigenschappen in de productmarkup. Volgens Google overschrijft dat het beleid van de organisatie.\n\nControleer na het plaatsen met de Rich Results Test. Zorg dat de markup klopt met het beleid dat bezoekers op de site lezen.",
+  "kernpunt": "Geldt een retourbeleid voor de hele winkel, zet het dan in de Organization-markup en leg alleen uitzonderingen per product vast.",
+  "toepassing": "Test vandaag de homepage van een webshopklant in de Rich Results Test. Kijk of er Organization-markup is en of daar een retourbeleid in staat.",
+  "bron": {
+    "titel": "Organization (Organization) structured data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/organization"
+  }
+}

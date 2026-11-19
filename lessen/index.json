@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-18T05:31:15",
+    "bijgewerkt":  "2026-11-19T07:05:41",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -3404,14 +3404,15 @@
                        "matrix":  [
                                       "5.1.2"
                                   ],
-                       "kernpunt":  "301 en 308 zijn permanent en maken de doel-URL de canonieke kandidaat. Komt een pagina terug, gebruik dan een 302 of 307, of laat hem bestaan met een melding.",
+                       "kernpunt":  "Komt een pagina terug, kies dan een tijdelijke redirect, of laat de pagina bestaan met een melding.",
                        "bron":  {
                                     "titel":  "Redirects and Google Search | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-19"
                    },
                    {
                        "id":  "20261103-x-robots-tag-pdf-prijslijst",
@@ -3465,14 +3466,15 @@
                                       "3.2.1",
                                       "3.2.2"
                                   ],
-                       "kernpunt":  "Gaat er na een GTM-publicatie iets mis, publiceer dan de vorige versie opnieuw via Versies. \u0027Instellen als nieuwste versie\u0027 maakt er alleen een concept van; live verandert dan nog niets.",
+                       "kernpunt":  "Herstel eerst, zoek daarna de oorzaak: zet bij een fout de vorige versie live en analyseer pas dan wat er misging.",
                        "bron":  {
                                     "titel":  "Publishing, versions, and approvals - Tag Manager Help",
                                     "url":  "https://support.google.com/tagmanager/answer/6107163"
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "herzien":  "2026-11-19"
                    },
                    {
                        "id":  "20261104-inner-join-verliest-paginas",
@@ -5375,6 +5377,246 @@
                        "bron":  {
                                     "titel":  "Creating helpful, reliable, people-first content | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-ab-test-weinig-verkeer-welk-idee",
+                       "titel":  "4.000 bezoekers per maand en drie testideeën: welke eerst?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testen met weinig verkeer: minimum detectable effect",
+                       "type":  "herhaling",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "7.2.1"
+                                  ],
+                       "kernpunt":  "Reken eerst uit welk verschil je kunt aantonen, en kies dan een testidee dat zo\u0027n verschil kan opleveren.",
+                       "bron":  {
+                                    "titel":  "Evan Miller: Sample Size Calculator",
+                                    "url":  "https://www.evanmiller.org/ab-testing/sample-size.html"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-blogarchief-klikdiepte",
+                       "titel":  "900 blogartikelen, en de oudste zitten 60 klikken diep",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Crawl depth: oude blogartikelen diep in het archief",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.2",
+                                      "1.1.10"
+                                  ],
+                       "kernpunt":  "Zitten oude artikelen diep, geef ze een kortere route via onderwerpen en links tussen artikelen, niet alleen via het archief.",
+                       "bron":  {
+                                    "titel":  "Pagination Best Practices for Google | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-donatieformulier-voorgestelde-bedragen",
+                       "titel":  "Een leeg bedragveld, en donateurs die afhaken",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Ankereffect: voorgestelde bedragen in een formulier",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Moeten bezoekers zelf een getal bedenken, geef dan een paar realistische voorbeelden en laat ze vrij om iets anders te kiezen.",
+                       "bron":  {
+                                    "titel":  "The Anchoring Principle | Nielsen Norman Group",
+                                    "url":  "https://www.nngroup.com/articles/anchoring-principle/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-ga4-dubbele-aankopen-transaction-id",
+                       "titel":  "1.240 aankopen in GA4, maar 1.020 in het bestelsysteem",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4-implementatie controleren: dubbele aankopen en transaction_id",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.1.1",
+                                      "3.1.2"
+                                  ],
+                       "kernpunt":  "Telt GA4 méér aankopen dan het bestelsysteem, check dan eerst of elk purchase-event een uniek ordernummer als transaction_id heeft.",
+                       "bron":  {
+                                    "titel":  "[GA4] Minimize duplicate key events with transaction IDs - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/12313109"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-ga4-other-rij-landingspaginas",
+                       "titel":  "38% van de organische sessies valt onder \u0027(other)\u0027",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4-rapportage: de rij (other) en kardinaliteit",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "4.1.3",
+                                      "3.1.4"
+                                  ],
+                       "kernpunt":  "Zie je \u0027(other)\u0027 in een GA4-rapport, vraag dan minder combinaties tegelijk op en haal detail per URL uit BigQuery.",
+                       "bron":  {
+                                    "titel":  "[GA4] About the (other) row - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/13331684"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-gtm-rechten-freelancer",
+                       "titel":  "De freelancer bouwt de tags, een collega zet ze live",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GTM-beheer: gebruikersrechten per container",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.2.1"
+                                  ],
+                       "kernpunt":  "Geef in Tag Manager iedereen de laagste rechten waarmee hij zijn werk kan doen. Publiceren alleen voor wie controleert.",
+                       "bron":  {
+                                    "titel":  "Managing users and permissions - Tag Manager Help",
+                                    "url":  "https://support.google.com/tagmanager/answer/6107011"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-hreflang-en-uk-landcode",
+                       "titel":  "nl-NL, nl-BE en en-UK: waarom ziet het VK de Nederlandse shop?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Hreflang: geldige taal- en landcodes",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.3.5",
+                                      "2.1.17"
+                                  ],
+                       "kernpunt":  "Controleer bij hreflang altijd de codes zelf: taal volgens ISO 639-1, land volgens ISO 3166-1. Het VK is GB.",
+                       "bron":  {
+                                    "titel":  "Tell Google about localized versions of your page | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/specialty/international/localized-versions"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-kleine-site-sitemap-nodig",
+                       "titel":  "\u0027Zonder sitemap kom je niet in Google\u0027, zegt het forum",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Sitemaps: wanneer heb je er een nodig?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.4.2",
+                                      "1.1.11"
+                                  ],
+                       "kernpunt":  "Vraagt een klant om een sitemap, kijk dan eerst naar grootte en interne links. Bij een kleine, goed gelinkte site is het geen prioriteit.",
+                       "bron":  {
+                                    "titel":  "Learn about sitemaps | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-lcp-veld-sneller-dan-lab-cookiemelding",
+                       "titel":  "LCP 4,2 seconde in Lighthouse, 1,9 seconde bij echte bezoekers",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "LCP: waarom velddata sneller kunnen zijn dan het lab",
+                       "type":  "basis",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "5.2.2",
+                                      "5.2.1"
+                                  ],
+                       "kernpunt":  "Is de LCP in het veld veel beter dan in het lab, kijk dan eerst wélk element in het veld als LCP telt.",
+                       "bron":  {
+                                    "titel":  "Largest Contentful Paint (LCP) | web.dev",
+                                    "url":  "https://web.dev/articles/lcp"
+                                },
+                       "video":  {
+                                     "titel":  "Core Web Vitals Explained: How To Fix Site Optimization Issues",
+                                     "kanaal":  "Matt Diggity",
+                                     "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-retourbeleid-organization-markup",
+                       "titel":  "Hetzelfde retourbeleid in de markup van 4.000 productpagina\u0027s?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Structured data: retourbeleid op organisatieniveau",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "2.2.5",
+                                      "2.2.1"
+                                  ],
+                       "kernpunt":  "Geldt een retourbeleid voor de hele winkel, zet het dan in de Organization-markup en leg alleen uitzonderingen per product vast.",
+                       "bron":  {
+                                    "titel":  "Organization (Organization) structured data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/organization"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-srm-redirecttest-aanvraagpagina",
+                       "titel":  "Variant B haalt 14% meer aanvragen, maar telt 2.400 bezoekers minder",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "A/B-testen: Sample Ratio Mismatch bij een redirecttest",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.2.1",
+                                      "7.2.2"
+                                  ],
+                       "kernpunt":  "Is het een redirecttest, kijk dan eerst of variant B onderweg bezoekers verliest, en pas daarna wie er wint.",
+                       "bron":  {
+                                    "titel":  "Diagnosing Sample Ratio Mismatch in A/B Testing - Microsoft Research",
+                                    "url":  "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261119-van-voor-prijs-laagste-30-dagen",
+                       "titel":  "\u0027Van € 599 voor € 449\u0027 op Black Friday: mag dat?",
+                       "vakgebied":  "CRO",
+                       "onderwerp":  "Kortingen en vertrouwen: de regel voor van-voor-prijzen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "7.1.3"
+                                  ],
+                       "kernpunt":  "Toon je een doorgestreepte prijs, check dan de laagste prijs van de 30 dagen ervoor. Is die lager dan je \u0027van\u0027-prijs, dan klopt de korting niet.",
+                       "bron":  {
+                                    "titel":  "ACM legt boetes op aan webwinkels voor nepkortingen",
+                                    "url":  "https://www.acm.nl/nl/publicaties/acm-legt-boetes-op-aan-webwinkels-voor-nepkortingen"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

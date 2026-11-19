@@ -1,0 +1,42 @@
+{
+  "id": "20261119-blogarchief-klikdiepte",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawl depth: oude blogartikelen diep in het archief",
+  "matrix": ["1.2.2", "1.1.10"],
+  "titel": "900 blogartikelen, en de oudste zitten 60 klikken diep",
+  "intro": "Een hypotheekadviseur heeft 900 blogartikelen. Ze staan alleen in het blogoverzicht: tien per pagina, met onderaan de knop 'Oudere berichten'. Artikelen uit 2022 zitten zo 60 klikken of meer van de homepage. Juist die oudere uitlegartikelen krijgen in Search Console steeds minder vertoningen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat maakt die oudere artikelen het best bereikbaar?",
+    "opties": [
+      "Alle artikelen in de XML-sitemap zetten en die opnieuw indienen, want zo vindt Google ze zonder door het overzicht te gaan.",
+      "Het blogoverzicht vanaf pagina 6 op noindex zetten, want dan richt Google zich op de nieuwste artikelen en eerste pagina's.",
+      "Themapagina's maken die per onderwerp naar de artikelen linken, want dan staat elk artikel een paar klikken van de homepage.",
+      "De knop vervangen door oneindig scrollen met JavaScript, want dan ziet een bezoeker alle artikelen op één lange pagina."
+    ],
+    "juist": 2
+  },
+  "kern": "De artikelen zitten te ver weg in de site. Themapagina's en links tussen artikelen geven ze een korte route vanaf de homepage.",
+  "afleiders": [
+    "**XML-sitemap:** dan kent Google de URL's, dus het lijkt genoeg. Maar de interne links blijven gelijk. Voor Google blijven de artikelen ver weg en dus weinig belangrijk.",
+    "**Noindex vanaf pagina 6:** het lijkt Google te helpen focussen. Maar er komt geen kortere route bij. De oude artikelen blijven alleen via het diepe overzicht bereikbaar.",
+    "",
+    "**Oneindig scrollen:** handig voor bezoekers, dus het lijkt een verbetering. Maar Googlebot klikt meestal niet op knoppen en scrolt niet door. Zonder gewone links ziet het de oude artikelen helemaal niet meer."
+  ],
+  "kort": "Denk aan een archiefkast waarin je alleen bij een oude map komt door alle nieuwere mappen één voor één door te bladeren. Dat doet bijna niemand. Zet je de mappen per onderwerp in een eigen la, dan pak je elke map in een paar handelingen. Google werkt net zo. Wat via een paar links te bereiken is, vindt het makkelijker en lijkt belangrijker.",
+  "begrippen": [
+    { "term": "Klikdiepte", "uitleg": "het aantal klikken dat nodig is om vanaf de homepage bij een pagina te komen." },
+    { "term": "Themapagina", "uitleg": "een pagina over één onderwerp die naar alle artikelen over dat onderwerp linkt." },
+    { "term": "noindex", "uitleg": "een instructie die zegt dat een pagina niet in de zoekresultaten mag komen." },
+    { "term": "XML-sitemap", "uitleg": "een bestand met een lijst van de URL's die je door Google wilt laten vinden." }
+  ],
+  "uitleg": "Google vindt pagina's vooral via links. In zijn uitleg over paginering schrijft Google dat het URL's crawlt uit het href-attribuut van gewone a-links. Knoppen als 'Meer laden' en oneindig scrollen werken meestal met JavaScript. Die acties voert Googlebot doorgaans niet uit.\n\nKlikdiepte is geen directe rankingfactor. Het is wel een goede graadmeter: hoe dieper een pagina, hoe lastiger te vinden en hoe minder belangrijk hij lijkt.\n\nZo haal je oude artikelen naar boven:\n- **Themapagina's** per onderwerp, gelinkt vanuit menu of homepage\n- **Links in artikelen** naar verwante oudere artikelen\n- **Paginanummers** in het overzicht, in plaats van alleen 'Oudere berichten'\n- Elke overzichtspagina een eigen URL en een eigen canonical, niet naar pagina 1\n\nMeet het effect met de kolom Crawl Depth in Screaming Frog, vóór en na de aanpassing.",
+  "kernpunt": "Zitten oude artikelen diep, geef ze een kortere route via onderwerpen en links tussen artikelen, niet alleen via het archief.",
+  "toepassing": "Open vandaag de laatste crawl van een klant met een blog. Filter op blogartikelen en kijk welk deel op klikdiepte 5 of dieper zit.",
+  "bron": {
+    "titel": "Pagination Best Practices for Google | Google Search Central",
+    "url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+  }
+}

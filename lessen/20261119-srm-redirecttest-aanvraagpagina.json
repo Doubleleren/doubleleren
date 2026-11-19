@@ -1,0 +1,40 @@
+{
+  "id": "20261119-srm-redirecttest-aanvraagpagina",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "CRO",
+  "onderwerp": "A/B-testen: Sample Ratio Mismatch bij een redirecttest",
+  "matrix": ["7.2.1", "7.2.2"],
+  "titel": "Variant B haalt 14% meer aanvragen, maar telt 2.400 bezoekers minder",
+  "intro": "Een energieleverancier test een nieuwe aanvraagpagina. Bezoekers in variant B worden met een redirect naar een nieuwe URL gestuurd. De verdeling staat op 50/50. Na twee weken telt de testtool 20.000 bezoekers in A en 17.600 in B. Variant B heeft 14% meer aanvragen per bezoeker.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je met deze uitkomst?",
+    "opties": [
+      "B uitrollen, want de tool meet aanvragen per bezoeker, dus minder bezoekers in B verandert niets aan de uitkomst.",
+      "Eerst de oorzaak zoeken, want waarschijnlijk raakt B bezoekers kwijt bij de redirect en zijn de groepen niet gelijk.",
+      "De cijfers van A terugrekenen naar 17.600 bezoekers, want dan zijn de groepen even groot en eerlijk te vergelijken.",
+      "De test een week verlengen, want met meer bezoekers trekt de verdeling vanzelf recht en wordt de uitkomst betrouwbaar."
+    ],
+    "juist": 1
+  },
+  "kern": "Bij 50/50 is 20.000 tegen 17.600 geen toeval. Waarschijnlijk haakt een deel van B af bij de redirect, dus je vergelijkt geen gelijke groepen meer.",
+  "afleiders": [
+    "**Per bezoeker gemeten:** een verhouding voelt eerlijk, ook bij ongelijke aantallen. Maar wie bij de redirect afhaakt, is vaak minder gemotiveerd. De groep die overblijft in B is dus anders dan A.",
+    "",
+    "**Terugrekenen naar 17.600:** dan zijn de aantallen gelijk, maar de groepen niet. Wie in B ontbreekt, verschilt van wie bleef. Dat los je met rekenen niet op.",
+    "**Een week verlengen:** meer data voelt veiliger. Maar de oorzaak blijft bestaan. Elke week verdwijnt weer een deel van B, dus de scheefheid blijft."
+  ],
+  "kort": "Stel, je vergelijkt twee looproutes naar een winkel. Op route B staat een omleiding, en een deel van de mensen keert onderweg om. Wie toch aankomt, wil echt iets kopen. Route B lijkt dan beter, maar alleen omdat de twijfelaars al zijn afgehaakt. Een redirect in een A/B-test kan precies zo werken.",
+  "begrippen": [
+    { "term": "Sample Ratio Mismatch (SRM)", "uitleg": "de verdeling van bezoekers over de varianten wijkt meer af dan toeval kan verklaren." },
+    { "term": "Redirecttest", "uitleg": "een A/B-test waarbij variant B op een andere URL staat en bezoekers daarheen worden doorgestuurd." }
+  ],
+  "uitleg": "Microsoft beschrijft een SRM als een significant verschil tussen de gemeten en de ingestelde verdeling van gebruikers. Het advies is helder: vertrouw de uitkomst niet voordat je de oorzaak kent.\n\nDe belangrijkste waarschuwing: de gebruikers die ontbreken zijn 'zelden zomaar wat gebruikers'. Vaak zijn het juist de mensen op wie de wijziging het meeste effect had. In een test van MSN draaide de uitkomst zelfs om nadat de oorzaak was opgelost.\n\nBekende oorzaken:\n- een **redirect** in één variant, waarbij bezoekers afhaken voor de meting\n- een variant die het **meten** zelf verandert, bijvoorbeeld door snellere of tragere laadtijd\n- **botfilters** die in één variant meer bezoekers wegfilteren\n- een fout in de **voorwaarde** wie in de test komt\n\nControleer bij een redirecttest of de meting op de nieuwe URL vroeg genoeg start. Of test zonder redirect, met de variant op dezelfde URL.",
+  "kernpunt": "Is het een redirecttest, kijk dan eerst of variant B onderweg bezoekers verliest, en pas daarna wie er wint.",
+  "toepassing": "Zoek vandaag de laatste afgeronde test van een klant op. Noteer de bezoekers per variant en check in de SRM Checker van Lukas Vermeer of de verdeling klopt.",
+  "bron": {
+    "titel": "Diagnosing Sample Ratio Mismatch in A/B Testing - Microsoft Research",
+    "url": "https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/"
+  }
+}

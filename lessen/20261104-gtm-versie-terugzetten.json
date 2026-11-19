@@ -14,12 +14,19 @@
     "hint": "Kijk in de help bij het onderdeel over publiceren en versies."
   },
   "modelantwoord": "**De kern:** ga naar Versies, kies de versie van vóór maandag en publiceer die. Dan staat de oude situatie meteen weer live. 'Instellen als nieuwste versie' zet de oude versie alleen in je werkruimte als concept. Live verandert er dan nog niets tot je publiceert.\n\nStappen:\n- Open de container en ga naar **Versies**.\n- Kijk in de publicatiegeschiedenis welke versie vóór maandag live stond.\n- Klik op die versie, kies **Actie** en dan **Publiceren**.\n- Controleer in GA4 (Realtime of DebugView) of een testaankoop nog maar één keer binnenkomt.\n\nDaarna zoek je rustig uit wat er misging. Vergelijk de twee versies, of zet de oude versie als nieuwste versie in je werkruimte en voer de goede wijzigingen van maandag opnieuw door.\n\nVeelgemaakte fout: de nieuwe tag handmatig proberen te repareren onder tijdsdruk, zonder te weten wat er nog meer is gewijzigd.",
-  "kort": "Tag Manager bewaart elke gepubliceerde versie, dus je kunt altijd terug. Publiceer de versie van vóór maandag opnieuw, dan werkt alles meteen weer zoals toen. Kies je 'instellen als nieuwste versie', dan zet je die oude versie alleen klaar om aan te werken. Op de site verandert dan nog niets.",
+  "kort": "Denk aan de knop 'Vorige versie herstellen' in een gedeeld document. Tag Manager bewaart op dezelfde manier elke gepubliceerde versie. Publiceer je een oude versie opnieuw, dan staat die meteen live, zoals vóór de fout. Zet je hem alleen klaar als concept, dan heb je wel een schone basis, maar bezoekers merken er nog niets van.",
+  "begrippen": [
+    { "term": "Container", "uitleg": "de verzameling tags, triggers en variabelen van één website in Tag Manager." },
+    { "term": "Versie", "uitleg": "een vastgelegde momentopname van de container. Die kun je publiceren of later terugzetten." },
+    { "term": "Werkruimte", "uitleg": "een kladversie van de container waarin je wijzigingen maakt zonder dat bezoekers er iets van merken." }
+  ],
   "uitleg": "Elke keer dat iemand in GTM publiceert, bewaart Tag Manager een **versie**: een momentopname van alle tags, triggers en variabelen. Daarnaast is er een **publicatiegeschiedenis** met wie wat wanneer live zette. Dat maakt fouten herstelbaar.\n\nTwee manieren om een oude versie te gebruiken:\n- **Publiceren:** de oude versie gaat direct live. Dit is de noodknop.\n- **Instellen als nieuwste versie:** de inhoud wordt je nieuwe concept in de werkruimte. Je kunt hem aanpassen en later publiceren. Goed om vanaf een schone basis verder te werken.\n\nZo voorkom je dit soort situaties:\n- Geef elke versie een duidelijke naam en beschrijving, bijvoorbeeld 'purchase-tag naar dataLayer-event omgezet'.\n- Test vóór het publiceren in de voorbeeldmodus.\n- Publiceer niet vlak voor een vakantie of weekend.",
-  "kernpunt": "Gaat er na een GTM-publicatie iets mis, publiceer dan de vorige versie opnieuw via Versies. 'Instellen als nieuwste versie' maakt er alleen een concept van; live verandert dan nog niets.",
-  "toepassing": "Open deze week bij één klant de versies in GTM. Kijk of elke versie een naam en beschrijving heeft, en spreek met je team af dat dat voortaan verplicht is.",
+  "kernpunt": "Herstel eerst, zoek daarna de oorzaak: zet bij een fout de vorige versie live en analyseer pas dan wat er misging.",
+  "toepassing": "Open vandaag bij één klant de versies in GTM. Kijk of de laatste drie versies een duidelijke naam en beschrijving hebben.",
   "bron": {
     "titel": "Publishing, versions, and approvals - Tag Manager Help",
     "url": "https://support.google.com/tagmanager/answer/6107163"
-  }
+  },
+  "herzien": "2026-11-19",
+  "wijziging": "Uitleg in de vaste opbouw gezet."
 }

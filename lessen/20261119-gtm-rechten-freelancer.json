@@ -1,0 +1,42 @@
+{
+  "id": "20261119-gtm-rechten-freelancer",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "GTM-beheer: gebruikersrechten per container",
+  "matrix": ["3.2.1"],
+  "titel": "De freelancer bouwt de tags, een collega zet ze live",
+  "intro": "Een bureau laat een freelancer nieuwe tags bouwen in Google Tag Manager voor een klant. De afspraak: de freelancer bouwt de tags, en een vaste collega controleert alles en zet het live. Jij moet de freelancer nu toegang geven tot de container van de klant.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke rechten geef je de freelancer?",
+    "opties": [
+      "Publiceren op de container, want de freelancer moet zijn tags zelf live kunnen zetten om ze te controleren.",
+      "Bewerken op de container, want dan bouwt de freelancer in een werkruimte, maar maakt hij geen versie en publiceert hij niet.",
+      "Lezen op de container, want dan bekijkt de freelancer de tags en dient hij zijn wijzigingen als voorstel in bij je collega.",
+      "Beheerder op het account, want alleen een beheerder kan in een container nieuwe tags, triggers en variabelen maken."
+    ],
+    "juist": 1
+  },
+  "kern": "Met Bewerken bouwt iemand in een werkruimte. Versies maken en live zetten blijft dan bij je collega.",
+  "afleiders": [
+    "**Publiceren:** zo ziet de freelancer zelf of alles werkt, dus het lijkt praktisch. Maar dan kan hij ook alles live zetten zonder controle. Dat wilde je juist voorkomen.",
+    "",
+    "**Lezen:** dat voelt lekker veilig. Maar met Lezen kan de freelancer alleen kijken. Hij kan niets maken of aanpassen, en een 'voorstel indienen' bestaat niet.",
+    "**Beheerder op het account:** het klinkt als de rol voor wie bouwt. Maar een beheerder kan vooral containers aanmaken en rechten van gebruikers wijzigen. Dat is veel te veel."
+  ],
+  "kort": "Denk aan een stagiair bij een drukkerij. Hij mag de drukproef opmaken, maar de chef keurt hem goed en drukt af. Zo ligt een fout niet meteen in de winkel. In Tag Manager werkt het net zo. Wie bouwt, krijgt Bewerken. Wie controleert en live zet, krijgt Publiceren.",
+  "begrippen": [
+    { "term": "Container", "uitleg": "de verzameling tags, triggers en variabelen van één website in Tag Manager." },
+    { "term": "Werkruimte", "uitleg": "een kladversie van de container waarin je wijzigingen maakt zonder dat bezoekers er iets van merken." },
+    { "term": "Versie", "uitleg": "een vastgelegde momentopname van de container. Die kun je publiceren of later terugzetten." },
+    { "term": "Publiceren", "uitleg": "een versie live zetten, zodat alle bezoekers van de site hem krijgen." }
+  ],
+  "uitleg": "Tag Manager kent per container vijf niveaus:\n- **Geen toegang:** de container is niet zichtbaar.\n- **Lezen:** tags, triggers en variabelen bekijken.\n- **Bewerken:** werkruimtes maken en wijzigingen doen, maar geen versies maken of publiceren.\n- **Goedkeuren:** ook versies maken, maar niet publiceren.\n- **Publiceren:** alle rechten, inclusief live zetten.\n\nOp accountniveau is er **Gebruiker** (basisinformatie zien) en **Beheerder** (containers aanmaken en rechten van gebruikers aanpassen).\n\nGoede afspraken:\n- Geef rechten per container, niet voor het hele account.\n- Houd het aantal mensen met Publiceren klein.\n- Laat bij elke publicatie een duidelijke versienaam en beschrijving invullen. Dan zet je bij een fout snel de vorige versie terug.\n- Trek toegang in zodra een opdracht klaar is.",
+  "kernpunt": "Geef in Tag Manager iedereen de laagste rechten waarmee hij zijn werk kan doen. Publiceren alleen voor wie controleert.",
+  "toepassing": "Open vandaag bij één klant in Tag Manager het gebruikersbeheer. Kijk wie Publiceren heeft en of iedereen daar nog toegang hoort te hebben.",
+  "bron": {
+    "titel": "Managing users and permissions - Tag Manager Help",
+    "url": "https://support.google.com/tagmanager/answer/6107011"
+  }
+}

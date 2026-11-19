@@ -1,0 +1,42 @@
+{
+  "id": "20261119-ga4-other-rij-landingspaginas",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4-rapportage: de rij (other) en kardinaliteit",
+  "matrix": ["4.1.3", "3.1.4"],
+  "titel": "38% van de organische sessies valt onder '(other)'",
+  "intro": "Een webshop met 140.000 productpagina's krijgt elke maand een rapport met de organische landingspagina's uit GA4. Het is een eigen rapport met een filter op organisch verkeer en 'Sessiebron/medium' als tweede dimensie. Sinds de shop het assortiment verdubbelde, staat bovenaan een regel '(other)' met 38% van de sessies.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je om het rapport weer bruikbaar te maken?",
+    "opties": [
+      "Google signals uitzetten, want door de drempels voor kleine aantallen belanden minder bezochte pagina's in die rij.",
+      "Een kortere periode kiezen, want bij lange periodes neemt GA4 een steekproef en zet het de rest in die rij.",
+      "Per paginatype rapporteren en details uit de BigQuery-export halen, want er zijn meer pagina's dan rijen.",
+      "Twee dagen wachten met rapporteren, want GA4 zet nieuwe data in die rij totdat de verwerking helemaal klaar is."
+    ],
+    "juist": 2
+  },
+  "kern": "Een GA4-rapport heeft een maximum aantal rijen. Bij zoveel unieke pagina's past niet alles, dus voegt GA4 de minst bezochte samen.",
+  "afleiders": [
+    "**Google signals uitzetten:** drempels verbergen soms rijen, dus het lijkt hetzelfde. Maar drempels laten rijen weg; ze voegen ze niet samen tot (other).",
+    "**Kortere periode:** een steekproef klinkt logisch bij veel data. Maar een steekproef schat de getallen. Het samenvoegen komt door het aantal unieke waarden.",
+    "",
+    "**Twee dagen wachten:** verse data verandert soms nog. Maar (other) blijft staan zolang het rapport meer unieke waarden heeft dan rijen."
+  ],
+  "kort": "Denk aan een krijtbord met de prijzen van een snackbar. Er passen maar een paar regels op. Verkoop je honderden dingen, dan schrijf je de populairste op en zet je onderaan 'overige'. GA4 doet hetzelfde met de rijen van een rapport. Vraag je minder regels tegelijk, of kijk je in het volledige kasboek, dan zie je weer alles.",
+  "begrippen": [
+    { "term": "(other)", "uitleg": "de rij waarin GA4 alle minder voorkomende waarden samenvoegt als een rapport te veel rijen nodig heeft." },
+    { "term": "Kardinaliteit", "uitleg": "het aantal verschillende waarden dat een dimensie kan hebben, zoals het aantal unieke pagina's." },
+    { "term": "BigQuery-export", "uitleg": "een koppeling die alle ruwe GA4-events naar een database van Google Cloud kopieert, zonder samenvoegen." },
+    { "term": "Tweede dimensie", "uitleg": "een extra kolom in een rapport, zoals bron/medium naast de landingspagina. Elke combinatie wordt een aparte rij." }
+  ],
+  "uitleg": "Volgens Google verschijnt **(other)** als een tabel meer rijen nodig heeft dan de limiet. GA4 toont dan de meest voorkomende waarden en voegt de rest samen.\n\nWat het erger maakt:\n- **Veel unieke waarden.** Google noemt een dimensie met meer dan 500 waarden 'hoge kardinaliteit'. Een grote webshop zit daar ver boven.\n- **Combinaties.** Een tweede dimensie, filters of vergelijkingen vermenigvuldigen het aantal rijen.\n- **Type property.** Analytics 360 heeft hogere limieten dan een standaard property.\n\nWat je doet:\n- Rapporteer op een hoger niveau, zoals per paginatype of categorie.\n- Gebruik standaardrapporten waar het kan. Die draaien op samengevatte tabellen.\n- Haal detail per URL uit de BigQuery-export.\n- Registreer geen eigen dimensies met duizenden waarden, zoals zoektermen of klantnummers.\n\nZet het aandeel (other) altijd in je rapport. 38% weglaten geeft een vertekend beeld.",
+  "kernpunt": "Zie je '(other)' in een GA4-rapport, vraag dan minder combinaties tegelijk op en haal detail per URL uit BigQuery.",
+  "toepassing": "Open vandaag het rapport met landingspagina's van je grootste klant. Kijk of er een rij '(other)' staat en hoeveel procent van de sessies erin zit.",
+  "bron": {
+    "titel": "[GA4] About the (other) row - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/13331684"
+  }
+}
