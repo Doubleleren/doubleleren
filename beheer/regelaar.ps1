@@ -89,10 +89,19 @@ if ($Stap -eq 'plan') {
         $prio = @{}; foreach ($s in @($c.prioriteit.PSObject.Properties)) { $prio[$s.Name] = [int]$s.Value }
         # Laatste resultaat per vaardigheid (voor herhaling, verdieping en "niet te snel weer hetzelfde")
         $laatste = @{}
+        # Laatste reactie per vaardigheid (meer, makkelijk, niet-relevant). "Meer" is ingelost zodra er daarna een les over kwam;
+        # de andere twee blijven gelden tot een nieuwe reactie (de context bevat alleen de laatste 3 maanden, dus ze verlopen vanzelf).
+        $reactie = @{}
         foreach ($r in @($c.resultaten | Sort-Object { "$($_.datum)" })) {
             if ("$($r.datum)" -notmatch '^\d{4}-\d{2}-\d{2}') { continue }
-            foreach ($m in @($r.matrix | Where-Object { $_ })) { $laatste[[string]$m] = [pscustomobject]@{ datum = [datetime]::ParseExact("$($r.datum)".Substring(0, 10), 'yyyy-MM-dd', $null); resultaat = $r.resultaat; niveau = $(if ($r.niveau) { $r.niveau } else { 'basis' }) } }
+            $dag = [datetime]::ParseExact("$($r.datum)".Substring(0, 10), 'yyyy-MM-dd', $null)
+            foreach ($m in @($r.matrix | Where-Object { $_ })) {
+                $laatste[[string]$m] = [pscustomobject]@{ datum = $dag; resultaat = $r.resultaat; niveau = $(if ($r.niveau) { $r.niveau } else { 'basis' }) }
+                if (@('meer', 'makkelijk', 'niet-relevant') -contains $r.reactie) { $reactie[[string]$m] = [pscustomobject]@{ reactie = $r.reactie; datum = $dag } }
+                elseif ($reactie[[string]$m].reactie -eq 'meer') { $reactie.Remove([string]$m) }
+            }
         }
+        $isReactie = { param($vid, $soort) $reactie.ContainsKey($vid) -and $reactie[$vid].reactie -eq $soort }
 
         # 1. Wat er nog klaarstaat en nog bruikbaar is (niet gedaan, actief, juiste vak en cel). Te makkelijk voor een ervaren
         #    collega (basis bij score 3+) of een tweede schrijfopdracht: eruit.
@@ -115,14 +124,29 @@ if ($Stap -eq 'plan') {
         $plekken = @(); $nodig = $WACHTRIJ - $open.Count
         $niveauVan = { param($vid) $s = $scores[$vid]; if ($s) { if ($s -le 2) { 'basis' } elseif ($s -eq 3) { 'gevorderd' } else { 'expert' } } elseif ($gem -ge 3.5) { 'gevorderd' } else { 'basis' } }
         $stapOp = { param($n) $NIVEAUS[[math]::Min(2, [array]::IndexOf($NIVEAUS, $n) + 1)] }
+        # 2a0. Gevraagd ("Hier wil ik meer over" na een les): 3 tot 10 dagen later, loting (dagen - 2) / 8. Na goed een verdieping
+        #      een niveau hoger, anders een herhaling op hetzelfde niveau (met een andere vraag). Hooguit één per run.
+        $kand = @($reactie.Keys | Where-Object {
+            (& $isReactie $_ 'meer') -and $items.ContainsKey($_) -and $vakken.Contains($items[$_].vak) -and -not $bezet.Contains($_) -and ($nu - $reactie[$_].datum).Days -ge 3
+        } | Sort-Object { $reactie[$_].datum })
+        foreach ($vid in $kand) {
+            if ($plekken.Count -ge $nodig) { break }
+            if ((Kans) -lt ((($nu - $reactie[$vid].datum).Days - 2) / 8)) {
+                $goed = $laatste[$vid].resultaat -eq 'goed'
+                $plekken += [pscustomobject]@{ vak = $items[$vid].vak; vaardigheid = $vid; type = $(if ($goed) { 'verdieping' } else { 'herhaling' }); niveau = $(if ($goed) { & $stapOp $laatste[$vid].niveau } else { $laatste[$vid].niveau }); cel = $p.cel; les = $null; gevraagd = $true }
+                [void]$bezet.Add($vid); break
+            }
+        }
         # 2a. Herhaling (na fout of deels) en verdieping (na goed): 14 tot 35 dagen later, op een onvoorspelbaar moment.
-        #     Loting: aan de beurt als het getal onder (dagen - 13) / 22 ligt, dus na 35 dagen altijd. Hooguit één van elk per run.
+        #     Loting: aan de beurt als het getal onder (dagen - 13) / 22 ligt, dus na 35 dagen altijd. Hooguit één van elk per run
+        #     (een gevraagde telt mee). Niet bij "niet relevant", en geen herhaling bij "te makkelijk".
         foreach ($soort in 'herhaling', 'verdieping') {
             if ($plekken.Count -ge $nodig) { break }
+            if (@($plekken | Where-Object type -eq $soort).Count) { continue }
             $kand = @($laatste.Keys | Where-Object {
                 $r = $laatste[$_]; $d = ($nu - $r.datum).Days
-                $items.ContainsKey($_) -and $vakken.Contains($items[$_].vak) -and -not $bezet.Contains($_) -and $d -ge 14 -and
-                $(if ($soort -eq 'herhaling') { $r.resultaat -in 'fout', 'deels' } else { $r.resultaat -eq 'goed' })
+                $items.ContainsKey($_) -and $vakken.Contains($items[$_].vak) -and -not $bezet.Contains($_) -and $d -ge 14 -and -not (& $isReactie $_ 'niet-relevant') -and
+                $(if ($soort -eq 'herhaling') { $r.resultaat -in 'fout', 'deels' -and -not (& $isReactie $_ 'makkelijk') } else { $r.resultaat -eq 'goed' })
             } | Sort-Object { $laatste[$_].datum })
             foreach ($vid in $kand) {
                 if ((Kans) -lt ((($nu - $laatste[$vid].datum).Days - 13) / 22)) {
@@ -147,13 +171,15 @@ if ($Stap -eq 'plan') {
                 $w *= @{ 1 = 2.0; 2 = 1.0; 3 = 0.34 }[$(if ($prio[$items[$vid].hoofdgebied]) { $prio[$items[$vid].hoofdgebied] } else { 2 })]
                 if ($gebruiktHg[$items[$vid].hoofdgebied]) { $w *= 0.3 }
                 if ($items[$vid].notitie) { $w *= 0.5 }
+                if (& $isReactie $vid 'niet-relevant') { $w *= 0.34 } elseif (& $isReactie $vid 'makkelijk') { $w *= 0.5 }   # minder vaak, nooit helemaal niet
                 $gew += , @($vid, $w); $som += $w
             }
             if (-not $gew.Count) { $vakken.Remove($vak); if (-not $vakken.Count) { break } else { continue } }
             $r = (Kans) * $som; $vid = $gew[-1][0]
             foreach ($g in $gew) { $r -= $g[1]; if ($r -lt 0) { $vid = $g[0]; break } }
             $s = $scores[$vid]
-            $plekken += [pscustomobject]@{ vak = $vak; vaardigheid = $vid; type = $(if ($s -ge 4 -and -not @($plekken | Where-Object type -eq 'verdieping').Count) { 'verdieping' } else { 'basis' }); niveau = (& $niveauVan $vid); cel = $p.cel; les = $null }
+            $nv = & $niveauVan $vid; if (& $isReactie $vid 'makkelijk') { $nv = & $stapOp $nv }   # te makkelijk: een niveau hoger
+            $plekken += [pscustomobject]@{ vak = $vak; vaardigheid = $vid; type = $(if ($s -ge 4 -and -not @($plekken | Where-Object type -eq 'verdieping').Count) { 'verdieping' } else { 'basis' }); niveau = $nv; cel = $p.cel; les = $null }
             [void]$bezet.Add($vid); $gebruiktHg[$items[$vid].hoofdgebied] = $true
         }
 

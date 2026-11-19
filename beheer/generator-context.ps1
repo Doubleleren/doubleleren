@@ -48,8 +48,10 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
             if ("$($g.id)" -notmatch '^[0-9a-z][0-9a-z-]{0,80}$' -or @('goed', 'deels', 'fout') -notcontains $g.resultaat) { continue }
             if (-not $stat.Contains($g.id)) { $stat[$g.id] = [ordered]@{ n = 0; goed = 0; deels = 0; fout = 0 } }
             $stat[$g.id].n++; $stat[$g.id][$g.resultaat]++
+            # Reacties na de les (optioneel, één tik): per les geteld, zonder naam
+            if (@('meer', 'makkelijk', 'niet-relevant') -contains $g.reactie) { $k = $g.reactie -replace '-r', 'R'; $stat[$g.id][$k] = [int]$stat[$g.id][$k] + 1 }
         }
-        if ($maand -ge $grens) { $resultaten += @($r.obj.regels | ForEach-Object { [ordered]@{ datum = $_.datum; les = $_.id; resultaat = $_.resultaat; matrix = $_.matrix; niveau = $_.niveau; soort = $_.soort } }) }
+        if ($maand -ge $grens) { $resultaten += @($r.obj.regels | ForEach-Object { [ordered]@{ datum = $_.datum; les = $_.id; resultaat = $_.resultaat; matrix = $_.matrix; niveau = $_.niveau; soort = $_.soort; reactie = $(if (@('meer', 'makkelijk', 'niet-relevant') -contains $_.reactie) { $_.reactie }) } }) }
     }
     $scores = [ordered]@{}
     if ($matrix) { foreach ($p in $matrix.obj.scores.PSObject.Properties) { $laatste = @($p.Value.PSObject.Properties | Sort-Object Name)[-1]; if ($laatste) { $scores[$p.Name] = [int]$laatste.Value } } }
