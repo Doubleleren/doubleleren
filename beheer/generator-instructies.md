@@ -88,6 +88,7 @@ Per soort feedback:
 
 **Resultaten per les** (`lesstatistiek`, pas vanaf `n` ≥ 4):
 - **≥ 85% goed:** de les is te makkelijk voor zijn niveau. Zet `niveau` een stap lager als dat klopt (met `herzien` en `wijziging`), en maak nieuwe lessen over die vaardigheid een niveau hoger.
+- **Reacties na de les** (`makkelijk`, `meer`, `nietRelevant` in `lesstatistiek`, alleen als iemand op die knop tikte): collega's kunnen na een les met één tik reageren. Vinden **3 of meer** collega's een les te makkelijk, behandel hem dan als ≥ 85% goed. Vinden 3 of meer hem niet relevant, kijk dan of de situatie wel past bij het werk van het team en maak nieuwe lessen over die vaardigheid praktischer. `meer` vertelt welke onderwerpen leven: geef die voorrang in je voorraadlessen. Wat een reactie per persoon betekent, regelt de regelaar (zie stap 2).
 - **≤ 25% goed:** controleer de les zoals bij `fout`-feedback. Is de vraag dubbelzinnig, is een afleider ook juist of is het antwoord onjuist, repareer hem dan. Klopt alles, dan is hij gewoon moeilijk: zet `niveau` zo nodig een stap hoger (met `herzien` en `wijziging`).
 - Zie je een patroon (een soort opdracht of een onderwerp dat structureel slecht of goed valt), neem het dan mee in je geheugen (stap 5).
 
@@ -99,9 +100,10 @@ De wachtrijen stelt de regelaar samen. Doel: **elke deelnemer heeft 5 lessen kla
 | `basis` | Een vaardigheid waarop iemand laag scoort (score 1–2: `basis`, 3: `gevorderd`, 4–5: `expert`), gewogen naar eigen prioriteit (hoog twee keer zo vaak, laag een derde), afwisselend over hoofdgebieden, nooit binnen 14 dagen na een les over dezelfde vaardigheid |
 | `verdieping` | Na een **goed** resultaat, op een willekeurig moment 14 tot 35 dagen later, een niveau hoger. Ook meteen bij een eigen score van 4 of 5 |
 | `herhaling` | Na **fout** of **deels**, op een willekeurig moment 14 tot 35 dagen later, met een andere les (een nieuwe situatie) op hetzelfde niveau |
+| gevraagd (`verdieping` of `herhaling`) | Na **Hier wil ik meer over**: 3 tot 10 dagen later. Na goed een verdieping een niveau hoger, anders een herhaling op hetzelfde niveau. De les krijgt op de site en in de pop-up het label "Je vroeg om meer hierover" |
 | `nieuws` en lessen van het team | De laatste 14 dagen, vooraan bij iedereen die het vak leert en bij wie de cel past (een teamles op `basis`-niveau niet bij ervaren collega's) |
 
-Verder: hooguit één herhaling en één verdieping per run, een les komt nooit twee keer, meerkeuze eerst en hooguit één schrijfopdracht (open, zoek-op) per wachtrij, nooit maak-met-claude, en spreiding: collega's krijgen bij dezelfde vaardigheid zo veel mogelijk verschillende lessen. Een les die te makkelijk is voor een ervaren collega of een tweede schrijfopdracht haalt de regelaar uit de wachtrij.
+Verder: hooguit één herhaling en één verdieping per run, een les komt nooit twee keer, meerkeuze eerst en hooguit één schrijfopdracht (open, zoek-op) per wachtrij, nooit maak-met-claude, en spreiding: collega's krijgen bij dezelfde vaardigheid zo veel mogelijk verschillende lessen. Een les die te makkelijk is voor een ervaren collega of een tweede schrijfopdracht haalt de regelaar uit de wachtrij. Tikte iemand **Te makkelijk**, dan krijgt die vaardigheid voor hem een niveau hoger, minder vaak en geen herhaling; bij **Niet relevant voor mij** komt hij minder vaak en zonder herhaling of verdieping (nooit helemaal niet).
 
 **Jouw deel per persoon** (alleen waar het iets toevoegt; niets doen is prima):
 - **Wensen.** Past een bestaande of nieuwe les duidelijk bij iemands `focus` of `leerdoelen` (bijv. iemand wil leren over lokale SEO voor vestigingen), zet die les dan als wens vooraan. Hooguit 2 per persoon per run. Een `maak-met-claude`-les kan alleen zo, en alleen als werken met Claude in iemands `focus` of `leerdoelen` staat, hooguit één per twee weken.

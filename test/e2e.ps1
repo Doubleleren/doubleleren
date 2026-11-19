@@ -303,8 +303,14 @@ try {
 
 Write-Host '16. Leren van feedback: context, lessen herzien en uit de roulatie, bescherming van teamlessen'
 . "$A\beheer\lescontrole.ps1"
+# Reactie na de les, zoals de site en de pop-up hem in de eigen logregel zetten: Foxtrot vond zijn eerste les te makkelijk
+$cR = Get-DlClient -Thuis "$T\Foxtrot"; $sR = Get-DlEigenSleutels $cR
+$curR = Read-DlOpslag $dO "data/$($ids.Foxtrot)/log-$maand.enc"; $regR = @((Read-DlVersleuteld $cR.data $cR.id "log-$maand" $sR $cR.publiek).obj.regels)
+$regR[0] | Add-Member reactie 'makkelijk' -Force
+Write-DlVersleuteld $dO $ids.Foxtrot "log-$maand" $sR ([ordered]@{ v = 1; regels = $regR }) $curR.sha $cR.id $cR.prive | Out-Null
 & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 $ctx = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
+Controleer ($ctx.lesstatistiek.($regR[0].id).makkelijk -ge 1 -and @($ctx.leden.($ids.Foxtrot).resultaten | Where-Object { $_.reactie -eq 'makkelijk' }).Count -eq 1) 'Context: reactie na de les per les geteld en bij de eigen resultaten'
 $fbC = @($ctx.feedback)
 Controleer ($ctx.lesstatistiek.'20261019-srm'.n -ge 1 -and $ctx.lesstatistiek.'20261019-srm'.fout -ge 1) 'Context: resultaten per les over het hele team'
 Controleer (@($fbC | Where-Object tekst -eq 'Na de omzetting').Count -eq 1 -and -not ($fbC | Where-Object { $_.PSObject.Properties.Name -contains 'door' }) -and -not ((ConvertTo-Json $fbC -Depth 4) -match 'lid-[0-9a-f]{6}')) 'Context: feedback zonder afzender en zonder pseudoniemen'
@@ -403,6 +409,30 @@ foreach ($p in $qR.PSObject.Properties) {
 }
 Controleer ($regelsOk -and $qR.($ids.Delta) -contains $vrij[1].id -and $qR.($ids.Delta) -notcontains $vrij[0].id -and $uitR -match '1 wens\(en\) genegeerd') 'Toewijzen: alleen eigen cel of alle, nooit een gedane les, hooguit één schrijfopdracht; wens voor alle cellen erin, wens van een andere cel geweigerd'
 Remove-Item "$G\context.json", "$G\werk.json", "$G\regelaar.json", "$G\wachtrijen.json" -ErrorAction SilentlyContinue
+
+Write-Host '18. Reactie na de les in de regelaar: meer, te makkelijk en niet relevant'
+$vids = @(([IO.File]::ReadAllText("$A\sjablonen\seo\skilllijst.csv", [Text.Encoding]::UTF8) | ConvertFrom-Csv -Delimiter ';') | Select-Object -First 30 | ForEach-Object { $_.id })
+$X = $vids[0]; $Y = $vids[10]; $Z = $vids[20]
+function Res($dag, $vid, $uitslag, $reactie) { $o = [ordered]@{ datum = "${dag}T09:00:00"; les = "test-$dag-$vid"; resultaat = $uitslag; matrix = @($vid); niveau = 'basis'; soort = 'meerkeuze' }; if ($reactie) { $o.reactie = $reactie }; $o }
+function LidMet($res) { [ordered]@{ cel = $null; vakken = @{ seo = 1 }; scores = @{}; prioriteit = @{}; resultaten = @($res); gedaan = @(); wachtrij = @() } }
+# Persoon 1: wil meer over X (10 dagen geleden), vindt Y niet relevant en Z te makkelijk (40 dagen geleden: anders altijd verdieping
+# of herhaling). Persoon 2: wilde meer over X, maar kreeg er daarna al een les over.
+$ctxR = [ordered]@{ v = 1; vakgebied = 'seo'; vakken = @('seo'); cellen = @(); lesstatistiek = @{}; feedback = @(); leden = [ordered]@{
+    'lid-aaaaa1' = (LidMet @((Res '2026-11-21' $X 'goed' 'meer'), (Res '2026-10-22' $Y 'goed' 'niet-relevant'), (Res '2026-10-22' $Z 'fout' 'makkelijk')))
+    'lid-aaaaa2' = (LidMet @((Res '2026-11-21' $X 'goed' 'meer'), (Res '2026-11-26' $X 'goed' $null))) } }
+$MR = "$Werk\regelaar-reactie"; New-Item -ItemType Directory $MR -Force | Out-Null
+[IO.File]::WriteAllText("$MR\context.json", ($ctxR | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
+$okR = $true
+foreach ($zaad in 1..5) {
+    & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\regelaar.ps1" -Stap plan -Map $MR -App $A -Zaad $zaad -Vandaag '2026-12-01' | Out-Null
+    $rR = Get-Content "$MR\regelaar.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+    $p1 = @($rR.leden.'lid-aaaaa1'.plekken); $p2 = @($rR.leden.'lid-aaaaa2'.plekken); $gv = @($p1 | Where-Object { $_.gevraagd })
+    if ($gv.Count -ne 1 -or $gv[0].vaardigheid -ne $X -or $gv[0].type -ne 'verdieping' -or $gv[0].niveau -ne 'gevorderd') { $okR = $false }
+    if (@($p1 | Where-Object { $_.vaardigheid -in $Y, $Z -and $_.type -in 'herhaling', 'verdieping' }).Count -or @($p1 | Where-Object type -eq 'verdieping').Count -gt 1) { $okR = $false }
+    if (@($p2 | Where-Object { $_.gevraagd }).Count) { $okR = $false }
+}
+Controleer $okR 'Regelaar: "meer" geeft binnen 10 dagen één verdieping (niet als er al een les over kwam); "niet relevant" en "te makkelijk" geen herhaling of verdieping'
+Remove-Item $MR -Recurse -Force -ErrorAction SilentlyContinue
 
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h
