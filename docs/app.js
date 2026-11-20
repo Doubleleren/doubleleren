@@ -1897,5 +1897,19 @@ $('w-opnieuw').addEventListener('click', () => welkomFormulier(false));
 $('naar-welkom').addEventListener('click', (e) => { e.preventDefault(); history.replaceState(null, '', location.pathname + location.search + '#welkom'); toonWelkom(); });
 $('w-terug').addEventListener('click', (e) => { e.preventDefault(); naarInloggen(); });
 
-laadOpenbaar().then(async () => { if (location.hash === '#welkom') toonWelkom(); else await probeerSessie(); })
+// Alleen lokaal (localhost met ?app=&data=): ?als=<testnaam> logt meteen in met de testcodes uit codes.json van de
+// testmap (test\e2e.ps1 / test\demo.ps1), zodat een preview direct ingelogd opent. Op de echte site doet dit niets.
+async function lokaalInloggenAls(naam) {
+  if (!/^[\w-]{1,30}$/.test(naam)) throw new Error('Ongeldige testnaam');
+  const r = await fetch(`/codes.json?t=${Date.now()}`, { cache: 'no-store' });
+  if (!r.ok) throw new Error('Geen codes.json in de testmap');
+  const c = await r.json(); const id = c.ids?.[naam], code = c.codes?.[naam];
+  if (!id || !code || !c.token) throw new Error(`Onbekende testcollega: ${naam}`);
+  await verbind(`${id}:${c.token}`); await inloggen(id, code); await naInloggen();
+}
+laadOpenbaar().then(async () => {
+  if (location.hash === '#welkom') toonWelkom();
+  else if (LOKAAL && params.get('als')) await lokaalInloggenAls(params.get('als'));
+  else await probeerSessie();
+})
   .catch((e) => { $('login-fout').textContent = 'DoubleLeren kon niet laden: ' + e.message; });
