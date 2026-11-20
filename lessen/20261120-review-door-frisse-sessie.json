@@ -1,0 +1,41 @@
+{
+  "id": "20261120-review-door-frisse-sessie",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Werk van de agent laten reviewen door een frisse sessie",
+  "matrix": ["coderen-met-ai:3.3.2", "coderen-met-ai:3.3.4"],
+  "titel": "Claude reviewde zijn eigen werk en vond alleen twee stijlpunten",
+  "intro": "Claude Code heeft in één lange sessie een tool gebouwd die productfeeds controleert. Aan het eind vraag je in diezelfde sessie: 'Review je werk kritisch.' Claude meldt twee kleine stijlpunten. Een dag later blijkt dat de tool producten met een leeg prijsveld gewoon overslaat.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe had je de review beter kunnen inrichten?",
+    "opties": [
+      "Claude in dezelfde sessie drie keer laten reviewen, zodat hij bij elke ronde nog iets meer zou vinden.",
+      "Een reviewer vragen om zoveel mogelijk punten te vinden, zodat er zeker niets over het hoofd wordt gezien.",
+      "Een sessie die de bouw niet zag laten toetsen aan de eisen, zodat stijlpunten de echte fouten niet verdringen.",
+      "Claude eerst uitgebreid zijn redenering laten uitleggen, zodat je die zelf stap voor stap kunt nalopen."
+    ],
+    "juist": 2
+  },
+  "kern": "Een reviewer die de bouw niet zag, gaat niet mee in de redenering erachter. Laat hem toetsen aan de eisen, niet aan smaak.",
+  "afleiders": [
+    "**Drie keer reviewen:** meer rondes voelt grondiger. Maar het blijft dezelfde blik met dezelfde aannames. Die mist dezelfde fout drie keer.",
+    "**Zoveel mogelijk punten:** dat klinkt streng. Maar een reviewer die móét vinden, vindt altijd iets, vaak stijl. Daar raakt de echte fout tussen kwijt.",
+    "",
+    "**Redenering laten uitleggen:** dat lijkt open en eerlijk. Maar dan lees jij mee met dezelfde aannames. De fout zit juist op de plek waar die redenering niet aan dacht."
+  ],
+  "kort": "Je eigen tekst nalezen is lastig: je leest wat je bedoelde, niet wat er staat. Een collega die hem voor het eerst ziet, struikelt wél over de fout. Bij Claude werkt het net zo. De sessie die de tool bouwde, kent al zijn eigen 'waarom'. Een nieuwe sessie ziet alleen wat er echt staat.",
+  "begrippen": [
+    { "term": "Review", "uitleg": "een controle van wijzigingen door iemand (of een sessie) anders dan degene die ze maakte." },
+    { "term": "Diff", "uitleg": "het overzicht van wat er in de bestanden is veranderd: welke regels erbij kwamen en welke verdwenen." },
+    { "term": "Eisen", "uitleg": "de afspraken over wat de tool moet kunnen, bijvoorbeeld 'elk product zonder prijs komt in de foutenlijst'." }
+  ],
+  "uitleg": "De documentatie van Claude Code noemt twee manieren om een onafhankelijke review te krijgen:\n- `/code-review` bekijkt de diff in een aparte subagent die je gesprek nooit zag. Die laat zich niet beïnvloeden door de redenering achter de code.\n- Een **tweede sessie** reviewt het bestand zonder het bouwen te hebben gezien. Jij brengt de bevindingen terug naar de eerste sessie.\n\n**Toets aan de eisen.** De documentatie raadt een opdracht aan als: controleer of elke eis is gebouwd en of de randgevallen tests hebben, meld alleen wat de werking raakt en sla stijl over. Laat je 'sla stijl over' weg, dan vindt de reviewer altijd iets. Wie alles oplost, krijgt onnodig ingewikkelde code.\n\n**Hoe minder je meekeek, hoe meer je controleert.** Bij een lange sessie die je niet volgde, hoort een strengere review. Een test met een leeg prijsveld had deze fout ook gevonden.",
+  "kernpunt": "Laat werk reviewen door een sessie die het niet bouwde, en geef hem de eisen mee in plaats van 'zoek fouten'.",
+  "toepassing": "Open vandaag na een klus met Claude Code een nieuwe sessie. Vraag: 'Controleer deze wijziging tegen deze eisen: …, meld alleen wat de werking raakt en sla stijl over.'",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

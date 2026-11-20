@@ -1,0 +1,41 @@
+{
+  "id": "20261120-chrome-xslt-sitemap-kale-xml",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Chrome 158 stopt met XSLT: sitemaps zien er anders uit in de browser",
+  "matrix": ["1.4.1", "1.4.4"],
+  "titel": "'Onze sitemap is kapot!' Sinds deze week alleen nog code in Chrome",
+  "intro": "Een webshop op WordPress met Yoast belt in paniek. Tot vorige week zag de sitemap er in Chrome uit als een nette tabel met URL's. Nu toont Chrome alleen nog een muur met code en een waarschuwing. Er is niets aan de site veranderd. De klant wil dat het vandaag nog wordt opgelost.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de klant?",
+    "opties": [
+      "Meteen een developer laten kijken, want Google kan een sitemap zonder opmaak niet goed uitlezen.",
+      "De sitemap opnieuw indienen in Search Console, want Google moet de nieuwe weergave eerst leren kennen.",
+      "Niets aan de sitemap veranderen, want alleen Chrome toont hem anders en Google leest gewoon de code.",
+      "Tijdelijk een HTML-sitemap indienen in Search Console, want die kan Chrome nog wel netjes tonen."
+    ],
+    "juist": 2
+  },
+  "kern": "Chrome 158 maakt van een sitemap geen nette tabel meer. De inhoud is hetzelfde gebleven, en Google las altijd al de kale code.",
+  "afleiders": [
+    "**Developer laten kijken:** de kale code ziet eruit als een storing. Maar Google heeft die opmaak nooit gebruikt. Een zoekmachine leest de XML zelf.",
+    "**Opnieuw indienen:** het voelt als een veilige reset. Maar voor Google is er niets veranderd. Er valt dus ook niets opnieuw te leren.",
+    "",
+    "**HTML-sitemap indienen:** een HTML-sitemap is een gewone pagina voor bezoekers. Als lijst voor Google blijft de XML-sitemap het juiste bestand."
+  ],
+  "kort": "Denk aan een recept dat je altijd in een mooi kookboek las. Nu krijg je hetzelfde recept op een kaal kladblaadje. De ingrediënten zijn precies dezelfde. Google kookte altijd al van het kladblaadje. Alleen de mens die meekijkt, ziet het verschil.",
+  "begrippen": [
+    { "term": "XML-sitemap", "uitleg": "een bestand met de URL's die je door Google wilt laten vinden. Het is geschreven voor machines, niet voor mensen." },
+    { "term": "XSLT", "uitleg": "een opmaakbestand dat een XML-bestand in de browser omzet in een leesbare tabel. Chrome gebruikt het sinds versie 158 niet meer." },
+    { "term": "HTML-sitemap", "uitleg": "een gewone pagina op de site met links naar de belangrijkste pagina's, bedoeld voor bezoekers." }
+  ],
+  "uitleg": "**Wat er veranderde:** Chrome 158 kwam uit op 17 november 2026 en stopt met XSLT in de browser. WordPress zelf, Yoast, Rank Math en AIOSEO gebruikten zo'n opmaakbestand om de sitemap als tabel te tonen. Firefox en Safari ondersteunen XSLT voorlopig nog wel.\n\n**Wat het niet raakt:** zoekmachines lezen de XML zelf en gebruiken geen browseropmaak. Crawlen, indexeren en rankings veranderen dus niet.\n\n**Wat er komt:** Yoast vervangt XSLT in versie 28.9 door CSS. WordPress 7.2 (gepland op 8 december) haalt de opmaak uit de standaardsitemap.\n\n**Wat je doet:**\n- Controleer in Search Console onder Sitemaps of de status nog 'Geslaagd' is.\n- Verander niets in een haast, zeker niet tijdens de core update van november.\n- Wil iemand de URL's kunnen bekijken, gebruik dan een HTML-sitemap of een andere browser.",
+  "kernpunt": "Ziet een sitemap er in de browser anders uit, kijk dan eerst in Search Console of Google hem nog leest. Pas daarna denk je aan aanpassen.",
+  "toepassing": "Open vandaag bij een WordPress-klant de sitemap in Chrome en daarna het Sitemaps-rapport in Search Console. Stuur de accountmanager twee zinnen uitleg voor als de klant belt.",
+  "bron": {
+    "titel": "Search Engine Journal: Your WordPress Sitemap Isn't Broken – Chrome 158 Has Dropped XSLT",
+    "url": "https://www.searchenginejournal.com/your-wordpress-sitemap-isnt-broken-chrome-158-has-dropped-xslt/597549/"
+  }
+}

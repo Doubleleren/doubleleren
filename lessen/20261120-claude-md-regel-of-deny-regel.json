@@ -1,0 +1,41 @@
+{
+  "id": "20261120-claude-md-regel-of-deny-regel",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Regels die nooit overgeslagen mogen worden: CLAUDE.md of permissies?",
+  "matrix": ["coderen-met-ai:6.2.3", "coderen-met-ai:4.5.2"],
+  "titel": "'Lees nooit .env' staat in CLAUDE.md, en toch gebeurde het",
+  "intro": "In de CLAUDE.md van een klantproject staat: 'Lees nooit het bestand .env, daar staan de API-sleutels in.' Meestal gaat dat goed. Maar een collega zag dat Claude het bestand toch één keer opende, op zoek naar de oorzaak van een foutmelding.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe zorg je dat dit nooit meer gebeurt?",
+    "opties": [
+      "De regel in CLAUDE.md in hoofdletters zetten met IMPORTANT ervoor, zodat Claude hem altijd ziet staan.",
+      "De regel bovenaan elke opdracht herhalen, zodat Claude hem in elke sessie opnieuw te lezen krijgt.",
+      "Een skill maken die uitlegt waarom .env geheim is, zodat Claude het belang ervan beter begrijpt.",
+      "Een deny-regel voor .env in de instellingen zetten, zodat Claude Code het lezen zelf altijd blokkeert."
+    ],
+    "juist": 3
+  },
+  "kern": "CLAUDE.md is een verzoek dat Claude bijna altijd volgt. Een deny-regel dwingt Claude Code zelf af, elke keer.",
+  "afleiders": [
+    "**IMPORTANT in hoofdletters:** meer nadruk voelt als meer zekerheid. Maar ook een nadrukkelijke regel blijft een verzoek. Claude kan nog steeds besluiten dat hij even niet geldt.",
+    "**Bovenaan elke opdracht:** dan staat het er vaker. Maar het blijft tekst die Claude leest en afweegt. En je vergeet het zelf ook weleens.",
+    "**Een skill met uitleg:** begrip helpt bij keuzes. Maar een skill is ook een instructie, geen blokkade. Voor 'nooit' heb je iets nodig dat niet van Claudes oordeel afhangt.",
+    ""
+  ],
+  "kort": "Vergelijk een bordje 'Niet betreden' met een deur op slot. De meeste mensen houden zich aan het bordje. Maar wie haast heeft, loopt er soms toch langs. Een slot laat niemand door, ook niet als hij een goede reden denkt te hebben. CLAUDE.md is het bordje, een deny-regel is het slot.",
+  "begrippen": [
+    { "term": "CLAUDE.md", "uitleg": "een tekstbestand in je project dat Claude Code aan het begin van elke sessie leest, met afspraken en tips." },
+    { "term": ".env-bestand", "uitleg": "een bestand met geheime instellingen, zoals API-sleutels, dat niet in de repository hoort." },
+    { "term": "Deny-regel", "uitleg": "een instelling die Claude Code verbiedt iets te doen, bijvoorbeeld een bestand lezen. Claude Code houdt zich daar zelf aan, wat Claude ook wil." }
+  ],
+  "uitleg": "De documentatie van Claude Code maakt onderscheid tussen twee soorten instructies:\n- **Niet afgedwongen:** je opdracht, CLAUDE.md en skills. Claude leest ze en volgt ze bijna altijd, maar beslist zelf.\n- **Afgedwongen:** hooks, deny-regels en beheerde instellingen. Claude Code voert die altijd uit.\n\nEen deny-regel staat in `.claude/settings.json`, onder permissions, bijvoorbeeld `\"deny\": [\"Read(./.env)\"]`. Die geldt in elke permissiestand, ook in de stand waarin Claude zonder vragen doorwerkt. Hij blokkeert het lezen via de leestool en ook via een commando als `cat .env`.\n\nHoud het afgedwongen deel klein. Gebruik het alleen voor regels zonder uitzonderingen. Voorkeuren, zoals een schrijfstijl, blijven in CLAUDE.md.",
+  "kernpunt": "Moet iets echt nooit gebeuren, zet het dan in een deny-regel of hook. CLAUDE.md is voor richtlijnen.",
+  "toepassing": "Kijk vandaag in een eigen project of `.claude/settings.json` een deny-regel voor .env heeft. Zo niet, laat Claude Code hem toevoegen en test hem door te vragen wat er in .env staat.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

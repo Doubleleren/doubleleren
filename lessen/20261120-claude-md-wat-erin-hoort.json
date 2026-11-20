@@ -1,0 +1,40 @@
+{
+  "id": "20261120-claude-md-wat-erin-hoort",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Wat hoort er in CLAUDE.md?",
+  "matrix": ["coderen-met-ai:4.1.2", "coderen-met-ai:4.1.1"],
+  "titel": "Vier ideeën voor de CLAUDE.md, ruimte voor één: welke kies je?",
+  "intro": "Een collega maakt een CLAUDE.md voor de rapportagetool van het team. Hij wil het bestand kort houden en heeft vier ideeën voor de eerste regel. Hij vraagt jou welke het meeste oplevert.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke regel zet je er als eerste in?",
+    "opties": [
+      "Een overzicht van alle mappen en bestanden, zodat Claude de opbouw van het project niet hoeft te zoeken.",
+      "Het commando waarmee je de tests draait, zodat Claude zelf kan controleren of zijn werk nog klopt.",
+      "Een korte uitleg van wat Python is en hoe functies werken, zodat Claude de code beter begrijpt.",
+      "De zin 'Schrijf altijd nette en foutloze code', zodat Claude bij elke taak extra zorgvuldig werkt."
+    ],
+    "juist": 1
+  },
+  "kern": "In CLAUDE.md hoort alleen wat Claude niet zelf uit de code kan halen. Het testcommando is daar het nuttigste voorbeeld van.",
+  "afleiders": [
+    "**Overzicht van mappen:** dat lijkt behulpzaam. Maar Claude leest de mappen zelf. Zo'n overzicht kost bij elke taak aandacht en raakt snel verouderd.",
+    "",
+    "**Uitleg over Python:** het voelt als goede achtergrond. Maar Claude kent Python al. Dit voegt niets toe wat hij niet weet.",
+    "**Nette en foutloze code:** een goede wens. Maar het is geen instructie die je kunt nagaan. Een testcommando geeft Claude een manier om het echt te controleren."
+  ],
+  "kort": "Zie CLAUDE.md als het briefje voor een invalkracht. Je schrijft niet op waar de koffiemachine staat, want die vindt hij zelf. Je schrijft wel op hoe hij controleert of de kassa klopt. Elke regel op het briefje kost aandacht. Dus schrijf je alleen op wat hij echt niet zelf kan ontdekken.",
+  "begrippen": [
+    { "term": "CLAUDE.md", "uitleg": "een tekstbestand in je project dat Claude Code aan het begin van elke sessie leest." },
+    { "term": "Testcommando", "uitleg": "de opdracht die automatisch controleert of de code nog doet wat hij moet doen, bijvoorbeeld 'pytest'." }
+  ],
+  "uitleg": "Claude Code laadt CLAUDE.md in **elke** sessie. Volgens de documentatie kost elke regel daarom bij elke taak een beetje van Claudes aandacht, of hij nu relevant is of niet.\n\n**Wel in CLAUDE.md:**\n- commando's die Claude nodig heeft om zijn werk te controleren, zoals tests\n- beslissingen die niet in de code staan, zoals hoe je iets live zet\n- valkuilen die je niet aan de bestanden ziet\n\n**Niet in CLAUDE.md:**\n- de opbouw van mappen en bestanden: Claude leest de repository zelf\n- algemene kennis die Claude al heeft\n- persoonlijke voorkeuren: die horen in CLAUDE.local.md, die je in .gitignore zet\n- lange stappenplannen: die passen beter in een skill\n- regels die nooit overgeslagen mogen worden: die horen in een hook of deny-regel",
+  "kernpunt": "Twijfel je over een regel in CLAUDE.md, vraag je dan af of Claude dit zelf uit de bestanden kan halen. Zo ja, laat hem weg.",
+  "toepassing": "Open vandaag een CLAUDE.md van een eigen project. Streep elke regel door die Claude ook uit de bestanden kan halen, en zet het testcommando erin als dat er nog niet staat.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

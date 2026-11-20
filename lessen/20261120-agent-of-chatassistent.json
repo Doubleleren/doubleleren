@@ -1,0 +1,41 @@
+{
+  "id": "20261120-agent-of-chatassistent",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Het verschil tussen een chatassistent en een codeeragent",
+  "matrix": ["coderen-met-ai:1.1.1", "coderen-met-ai:1.1.2"],
+  "titel": "Elke maand de export in de chat plakken: wat doet een agent anders?",
+  "intro": "Een collega plakt elke maand een Search Console-export in een chatvenster en vraagt om een samenvatting per categorie. Daarna kopieert hij het antwoord naar Excel en past hij zelf de formules aan. Dat kost hem een uur. Iemand zegt: 'Met Claude Code gaat dat anders.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het belangrijkste verschil met wat hij nu doet?",
+    "opties": [
+      "Claude Code geeft slimmere antwoorden, omdat er een groter en nieuwer model achter zit dan in de chat.",
+      "Claude Code werkt zelf in de projectmap, omdat het bestanden kan lezen, aanpassen en commando's draaien.",
+      "Claude Code is alleen voor programmeercode, omdat het voor developers is gemaakt en niet voor Excel.",
+      "Claude Code heeft geen opdracht meer nodig, omdat het zelf ziet welke export er elke maand moet komen."
+    ],
+    "juist": 1
+  },
+  "kern": "Een codeeragent doet het werk zelf in je bestanden: lezen, aanpassen, iets draaien en het resultaat controleren. In de chat doe jij het kopiëren en plakken.",
+  "afleiders": [
+    "**Slimmer model:** het lijkt logisch dat een 'pro-tool' een slimmer model heeft. Maar het verschil zit niet in het model. Het zit in wat de tool zelf mag doen in je bestanden.",
+    "",
+    "**Alleen voor code:** de naam wekt die indruk. Maar een agent kan net zo goed een export opschonen, twee bestanden combineren of een rapport maken.",
+    "**Geen opdracht nodig:** een agent werkt zelfstandiger, dus dat klinkt logisch. Maar jij geeft nog steeds de opdracht. Hij voert die alleen zelf uit."
+  ],
+  "kort": "Vergelijk een klusjesman aan de telefoon met een klusjesman in je huis. Aan de telefoon zegt hij wat je moet doen, en jij draait de schroeven. In huis pakt hij zelf het gereedschap, doet het werk en kijkt of de kraan nog lekt. Een chatassistent is de telefoon. Een codeeragent staat in je huis.",
+  "begrippen": [
+    { "term": "Codeeragent", "uitleg": "een AI-tool die zelf bestanden leest, aanpast en opdrachten uitvoert op je computer, in plaats van alleen tekst terug te geven." },
+    { "term": "Projectmap", "uitleg": "de map op je computer met de bestanden waar je aan werkt, bijvoorbeeld je exports en scripts." },
+    { "term": "Commando", "uitleg": "een opdracht die de computer uitvoert, zoals een script draaien of een bestand kopiëren." }
+  ],
+  "uitleg": "Anthropic omschrijft Claude Code als een tool die je codebase leest, bestanden aanpast, commando's draait en koppelt met je andere tools. Het werkt in de terminal, in VS Code en JetBrains, in de desktop-app en in de browser.\n\n**De agentische lus.** Een agent werkt in rondes:\n- context verzamelen: welke bestanden zijn er, wat staat erin?\n- actie ondernemen: een script schrijven of een bestand aanpassen\n- het resultaat controleren: het script draaien en kijken of de uitkomst klopt\n\nIn de chat ben jij de handen: jij kopieert, plakt en controleert. Met een agent ben jij de opdrachtgever en de controleur. Voor de export van de collega betekent dat: één keer een script laten maken dat de export per categorie samenvat, en dat elke maand opnieuw draaien.",
+  "kernpunt": "Moet je antwoorden zelf kopiëren, plakken en aanpassen, dan is het een klus voor een agent die in je bestanden werkt.",
+  "toepassing": "Kies vandaag één terugkerende klus waarbij je antwoorden uit een chat naar een bestand overzet. Schrijf in twee zinnen op wat een agent daarin zelf zou kunnen doen.",
+  "bron": {
+    "titel": "Claude Code overview | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/overview"
+  }
+}
