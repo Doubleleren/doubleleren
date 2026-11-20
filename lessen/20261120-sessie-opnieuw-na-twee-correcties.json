@@ -1,0 +1,41 @@
+{
+  "id": "20261120-sessie-opnieuw-na-twee-correcties",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een sessie bijsturen: wanneer begin je opnieuw?",
+  "matrix": ["coderen-met-ai:3.2.2", "coderen-met-ai:1.1.3"],
+  "titel": "Twee keer gecorrigeerd, en het script telt nog steeds dubbel",
+  "intro": "Je laat Claude Code een script maken dat een GA4-export per kanaal samenvat. Eerst telt het script sessies dubbel. Je corrigeert het. Daarna klopt de datumnotatie niet. Je corrigeert opnieuw, en nu telt het weer dubbel. Je zit al een uur in dezelfde sessie.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat werkt nu waarschijnlijk het best?",
+    "opties": [
+      "Een derde correctie in hoofdletters typen, zodat Claude snapt dat het dubbel tellen echt moet stoppen.",
+      "Een nieuwe sessie starten met één betere opdracht, waarin je meteen beide eisen en een controle noemt.",
+      "Dezelfde sessie laten doorwerken tot het klopt, zodat Claude alles wat al geprobeerd is kan meenemen.",
+      "Overstappen op een andere AI-agent, zodat een ander model het dubbel tellen opnieuw kan bekijken."
+    ],
+    "juist": 1
+  },
+  "kern": "Na twee mislukte correcties helpt een schone start met een betere opdracht meer dan een derde correctie.",
+  "afleiders": [
+    "**Hoofdletters:** het voelt als duidelijker zijn. Maar nadruk lost het niet op. De mislukte pogingen blijven in de sessie staan en sturen mee.",
+    "",
+    "**Laten doorwerken:** het klinkt logisch dat Claude leert van wat misging. Maar die mislukte pogingen staan ook in de weg. Claude leest ze bij elk volgend antwoord opnieuw.",
+    "**Andere agent:** een frisse blik helpt soms. Maar het probleem zit in de rommelige sessie en de onvolledige opdracht. Die neem je mee naar elke andere tool."
+  ],
+  "kort": "Denk aan een routebeschrijving waarin al twee keer 'nee, toch niet hier afslaan' is doorgekrast. Wie hem leest, raakt in de war van alle doorhalingen. Een nieuw briefje met de juiste route werkt beter. Claude leest de hele sessie steeds opnieuw, ook de mislukte pogingen. Met /clear pak je een schoon briefje.",
+  "begrippen": [
+    { "term": "Sessie", "uitleg": "één gesprek met Claude Code, met alles wat erin gezegd en gedaan is." },
+    { "term": "/clear", "uitleg": "een opdracht in Claude Code die het gesprek leegmaakt, zodat je opnieuw begint zonder de oude geschiedenis." },
+    { "term": "Context", "uitleg": "alles wat Claude op dat moment 'voor zich heeft': je opdrachten, zijn antwoorden en de bestanden die hij las." }
+  ],
+  "uitleg": "De best practices van Claude Code zijn hier duidelijk over. Heb je hetzelfde twee keer gecorrigeerd en is het nog fout, dan voegt een derde correctie vooral iets toe aan een gesprek met al twee mislukte pogingen. **/clear plus één nieuwe opdracht** met wat je nu weet, werkt bijna altijd beter.\n\n**Wat zet je in die nieuwe opdracht?**\n- het doel: sessies per kanaal, per maand\n- beide eisen: niet dubbel tellen, datum als JJJJ-MM-DD\n- een controle: het totaal moet gelijk zijn aan het GA4-rapport\n\n**Andere tips:**\n- Gebruik /clear ook tussen taken die niets met elkaar te maken hebben.\n- Druk op Esc zodra Claude de verkeerde kant op gaat.\n- Bij huidige modellen raakt het geheugen zelden vol. Het gaat om focus, niet om ruimte.",
+  "kernpunt": "Twee keer gecorrigeerd en nog mis? Begin opnieuw met één opdracht waarin staat wat je nu weet.",
+  "toepassing": "Schrijf vandaag voor een terugkerende klus een opdracht met het doel, de eisen en één controle, bijvoorbeeld een totaal dat moet kloppen. Bewaar hem voor de volgende keer.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

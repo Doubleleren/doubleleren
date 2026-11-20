@@ -9,7 +9,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
-foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'client') { . (Join-Path $PSScriptRoot "lib\$l.ps1") }
+foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'client', 'organisatie') { . (Join-Path $PSScriptRoot "lib\$l.ps1") }
 # Excel-inleesscript is optioneel: sommige webfilters blokkeren het; de skilllijst kan ook via de website
 $skilllijstScript = Join-Path $PSScriptRoot 'lib\skilllijst.ps1'
 if (Test-Path $skilllijstScript) { . $skilllijstScript }
@@ -70,6 +70,10 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
     $bestaand = Read-DlBeheer $o.data "sleutels/$($u.id).json" $o.vertrouwd
     if ($bestaand -and -not $herstel) { throw 'Je bent al aangemeld. Kies "Nieuwe laptop" (met je code) of "Code kwijt".' }
     if ($herstel -and -not $bestaand) { throw 'Er is nog niets te herstellen: kies "Ik begin voor het eerst".' }
+    # Heads, leiders en beheerders keurt de beheerder altijd met controlewoorden goed, net als herstel. Vóór het wegschrijven
+    # bepalen; lukt het lezen niet, dan de woorden toch tonen (anders ziet iemand ze nooit)
+    $metWoorden = [bool]$herstel
+    if (-not $metWoorden) { try { $metWoorden = Test-DlRolhouder (Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd) $u.id } catch { $metWoorden = $true } }
 
     $kp = New-DlSleutelpaar 3072
     if (-not (Test-DlSleutelVorm $kp.publiek)) { $kp = New-DlSleutelpaar 3072 }
@@ -93,7 +97,7 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
     $oud = Read-DlOpslag $o.data "aanvragen/$($u.id).json"
     Write-DlJson $o.data "aanvragen/$($u.id).json" $aanvraag $(if ($oud) { $oud.sha }) | Out-Null
     Save-Lokaal $u $o $kp.prive $lessen
-    [pscustomobject]@{ id = $u.id; code = $code; controlewoorden = (Get-DlControlewoorden $aanvraag); gekoppeld = $gekoppeld; lessen = $lessen }
+    [pscustomobject]@{ id = $u.id; code = $code; controlewoorden = (Get-DlControlewoorden $aanvraag); metWoorden = $metWoorden; gekoppeld = $gekoppeld; lessen = $lessen }
 }
 
 # --- Kern: al aangemeld (bijv. via de website): alleen deze laptop koppelen --------
@@ -196,7 +200,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
         </Border>
         <CheckBox x:Name="Bewaard" FontSize="14">Ik heb mijn code veilig bewaard</CheckBox>
         <StackPanel x:Name="ControleRij">
-          <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,18,0,6">Stuur deze zes controlewoorden via Teams naar je beheerder. Omdat je een nieuwe code aanvraagt, wordt zo gecontroleerd dat het echt jouw aanvraag is:</TextBlock>
+          <TextBlock TextWrapping="Wrap" FontSize="15" Margin="0,18,0,6">Stuur deze zes controlewoorden via Teams naar je beheerder. Omdat je een nieuwe code aanvraagt of een leidinggevende rol hebt, wordt zo gecontroleerd dat het echt jouw aanvraag is:</TextBlock>
           <Border Background="#E2EDF6" CornerRadius="10" Padding="16,10"><TextBlock x:Name="Controle" FontSize="18" FontWeight="SemiBold"/></Border>
         </StackPanel>
         <TextBlock x:Name="Info" TextWrapping="Wrap" FontSize="13" Foreground="#5c5c5c" Margin="0,12,0,0"/>
@@ -248,8 +252,8 @@ $e.Volgende.Add_Click({
                 $r = Install-Nieuw $script:u $e.Naam.Text.Trim() $(if ($e.Xlsx.Text -and (Test-Path $e.Xlsx.Text)) { $e.Xlsx.Text } else { '' }) -herstel:([bool]$e.KKwijt.IsChecked) -lessen:$lessenKeuze
                 Register-DlTaak; Klaar
                 $e.CodeToon.Text = $r.code; $e.Controle.Text = $r.controlewoorden
-                $e.ControleRij.Visibility = $(if ($e.KKwijt.IsChecked) { 'Visible' } else { 'Collapsed' })
-                $e.Info.Text = $(if ($r.gekoppeld) { "Skilllijst ingelezen: $($r.gekoppeld) vaardigheden. " } else { '' }) + $(if ($e.KKwijt.IsChecked) { 'Zodra je beheerder je nieuwe code heeft goedgekeurd, kun je weer inloggen.' } else { 'Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten. Daarna kun je inloggen op de website.' }) + ' Je eerste les verschijnt de volgende werkdag.'
+                $e.ControleRij.Visibility = $(if ($r.metWoorden) { 'Visible' } else { 'Collapsed' })
+                $e.Info.Text = $(if ($r.gekoppeld) { "Skilllijst ingelezen: $($r.gekoppeld) vaardigheden. " } else { '' }) + $(if ($r.metWoorden) { 'Zodra je beheerder je aanvraag heeft goedgekeurd, kun je inloggen.' } else { 'Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten. Daarna kun je inloggen op de website.' }) + ' Je eerste les verschijnt de volgende werkdag.'
                 Toon 'P3'; $e.Stap.Text = 'Stap 3 van 3'; $e.Volgende.Content = 'Afronden'; $e.Volgende.IsEnabled = $false; $script:fase = 3
             }
             21 {

@@ -64,8 +64,11 @@ Controleer (-not (Test-Path "$D\beheer\toegang\$($ids.Golf).json")) 'Verkeerde c
 Write-Host '4. Goedkeuren'
 foreach ($n in 'Foxtrot', 'Golf', 'Delta', 'Bravo') { Beheer -Goedkeuren $ids[$n] -Controlewoorden $res[$n].controlewoorden | Out-Null }
 Beheer -AutoGoedkeuren | Out-Null
-Controleer (@('Alfa', 'Echo', 'Charlie' | Where-Object { Test-Path "$D\beheer\toegang\$($ids[$_]).json" }).Count -eq 3) 'AutoGoedkeuren keurt nieuwe aanmeldingen goed zonder controlewoorden'
+Controleer (@('Alfa', 'Echo', 'Charlie' | Where-Object { Test-Path "$D\beheer\toegang\$($ids[$_]).json" }).Count -eq 0 -and @(Get-ChildItem "$D\aanvragen").Count -eq 3) 'AutoGoedkeuren laat heads en leiders liggen: die keurt de beheerder goed met controlewoorden'
+foreach ($n in 'Alfa', 'Echo', 'Charlie') { Beheer -Goedkeuren $ids[$n] -Controlewoorden $res[$n].controlewoorden | Out-Null }
 Controleer (-not (Get-ChildItem "$D\aanvragen" -ErrorAction SilentlyContinue)) 'Alle aanvragen verwerkt'
+$orgG = Read-DlBeheer $dO 'organisatie.json' $V
+Controleer (@($ids.Keys | Where-Object { $orgG.leden.($ids[$_]).goedgekeurd }).Count -eq 7 -and [int]$orgG.versie -gt 0) 'Elke goedkeuring staat ondertekend in het organogram (markering), met een versienummer'
 Beheer -Controleer
 
 Write-Host '5. Wie kan wat openen'
@@ -446,6 +449,88 @@ Controleer ($orgK.leden.($ids.Kilo).vak -eq 'trainee' -and $kijkK -contains $ids
 $ctxK = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
 Controleer ($ctxK.leden.($ids.Kilo).vak -eq 'trainee' -and -not @($ctxK.leden.($ids.Kilo).vakken.PSObject.Properties).Count) 'Context: trainee zonder gekozen vak krijgt (nog) geen lessen'
 Remove-Item "$T\beheer\generator\context.json", "$T\beheer\generator\werk.json", "$T\beheer\generator\regelaar.json" -ErrorAction SilentlyContinue
+
+Write-Host '18. Beheer in de cloud: sleutels uit de omgeving, alleen gewone leden, nooit een sleutelwissel'
+$CB = Join-Path $Werk 'cloud-beheer'; New-Item -ItemType Directory $CB -Force | Out-Null      # geen beheer.dpapi: zoals op een runner
+$gb = Read-DlGeheim "$T\beheer\beheer.dpapi"; $V = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer
+$script:cloudBeheer = $gb.beheerPrive
+function BeheerCloud {
+    $env:DL_BEHEER_SLEUTEL = ($script:cloudBeheer | ConvertTo-Json -Compress); $env:DL_GENERATOR_SLEUTEL = ($gb.generatorPrive | ConvertTo-Json -Compress)
+    try {
+        $ErrorActionPreference = 'Continue'
+        $uit = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\beheer.ps1" @args -DataMap $D -Thuis $CB 2>&1 | ForEach-Object { "$_" }
+        $script:codeCloud = $LASTEXITCODE; $uit
+    } finally { Remove-Item Env:\DL_BEHEER_SLEUTEL, Env:\DL_GENERATOR_SLEUTEL -ErrorAction SilentlyContinue }
+}
+function Nieuw([string]$naam, [string[]]$rol) {
+    $u = Beheer -Uitnodigen -Naam $naam @rol; $ids[$naam] = ([regex]::Match(($u -join "`n"), 'lid-[0-9a-f]{6}')).Value
+    $res[$naam] = Installeer $ids[$naam] $naam @()
+}
+# Gewoon lid: goedgekeurd zonder controlewoorden en zonder iets op schijf
+Nieuw 'Lima' @('-Rol', 'lid', '-Project', 'ecom-b2b')
+BeheerCloud -AutoGoedkeuren | Out-Null
+$orgC = Read-DlBeheer $dO 'organisatie.json' $V
+Controleer ($script:codeCloud -eq 0 -and (Test-Path "$D\beheer\toegang\$($ids.Lima).json") -and $orgC.leden.($ids.Lima).goedgekeurd -and -not (Get-ChildItem $CB -Recurse -Filter *.dpapi)) 'Cloud keurt een gewoon lid goed, met markering, zonder DPAPI-bestand'
+# Head: blijft liggen tot de beheerder het met controlewoorden goedkeurt
+Nieuw 'Mike' @('-Rol', 'head', '-Vak', 'cro')
+$uitM = BeheerCloud -AutoGoedkeuren
+Controleer ($script:codeCloud -eq 2 -and (Test-Path "$D\aanvragen\$($ids.Mike).json") -and -not (Test-Path "$D\beheer\toegang\$($ids.Mike).json") -and ($uitM -join ' ') -match 'controlewoorden') 'Cloud laat een head liggen (exitcode 2)'
+$uitM = BeheerCloud -Goedkeuren $ids.Mike -Controlewoorden $res.Mike.controlewoorden
+Controleer ($script:codeCloud -ne 0 -and -not (Test-Path "$D\beheer\toegang\$($ids.Mike).json")) 'Ook rechtstreeks keurt de cloud geen head goed'
+Beheer -Goedkeuren $ids.Mike -Controlewoorden $res.Mike.controlewoorden | Out-Null
+Controleer (Test-Path "$D\beheer\toegang\$($ids.Mike).json") 'De beheerder keurt de head goed op de laptop'
+# Herstel (code kwijt) blijft handwerk
+$hL = Installeer $ids.Lima 'Lima-2' @('-Herstel')
+BeheerCloud -AutoGoedkeuren | Out-Null
+Controleer ($script:codeCloud -eq 2 -and (Test-Path "$D\aanvragen\$($ids.Lima).json")) 'Herstel blijft liggen in de cloud (exitcode 2)'
+Beheer -Goedkeuren $ids.Lima -Controlewoorden $hL.controlewoorden | Out-Null
+# Overname: iemand wist sleutel en toegang van India en meldt zich opnieuw als India aan
+$sPad = "$D\beheer\sleutels\$($ids.India).json"; $tPadI = "$D\beheer\toegang\$($ids.India).json"
+$sOud = [IO.File]::ReadAllBytes($sPad); $tOud = [IO.File]::ReadAllBytes($tPadI)
+$dataI = "$D\data\$($ids.India)"; $kopieI = "$Werk\india-data"; Copy-Item $dataI $kopieI -Recurse      # de aanvaller overschrijft ook zijn profiel
+Remove-Item $sPad, $tPadI
+Installeer $ids.India 'India-aanvaller' @() | Out-Null
+$uitI = BeheerCloud -AutoGoedkeuren
+Controleer ($script:codeCloud -eq 2 -and -not (Test-Path $sPad) -and ($uitI -join ' ') -match 'overname') 'Overname geweigerd: India was al eens goedgekeurd (markering in het organogram)'
+[IO.File]::WriteAllBytes($sPad, $sOud); [IO.File]::WriteAllBytes($tPadI, $tOud); Remove-Item "$D\aanvragen\$($ids.India).json"
+Remove-Item $dataI -Recurse -Force; Copy-Item $kopieI $dataI -Recurse
+# Sleutelwissel nodig (Delta is geen projectleider meer, zonder -Bijwerken): de cloud laat die toegang ongemoeid
+Nieuw 'November' @('-Rol', 'lid', '-Project', 'ecom-b2b')
+$orgR = Read-DlBeheer $dO 'organisatie.json' $V
+$pR = @($orgR.cellen | ForEach-Object { $_.projecten } | Where-Object id -eq 'ecom-b2b')[0]; $pR.leider = $null
+$orgR | Add-Member -NotePropertyName versie -NotePropertyValue ([int]$orgR.versie + 1) -Force
+Write-DlBeheer $dO 'organisatie.json' $orgR $gb.beheerPrive
+$tFoxVoor = [IO.File]::ReadAllBytes("$D\beheer\toegang\$($ids.Foxtrot).json")
+$uitR = BeheerCloud -AutoGoedkeuren
+$tFoxNa = [IO.File]::ReadAllBytes("$D\beheer\toegang\$($ids.Foxtrot).json")
+Controleer ($script:codeCloud -eq 2 -and (Test-Path "$D\beheer\toegang\$($ids.November).json") -and [Convert]::ToBase64String($tFoxVoor) -eq [Convert]::ToBase64String($tFoxNa) -and ($uitR -join ' ') -match 'Sleutelwissel nodig') 'Cloud keurt November goed maar laat de toegang van Foxtrot byte voor byte gelijk (wissel nodig, exitcode 2)'
+Beheer -Bijwerken | Out-Null
+Controleer (-not (KanOpenen 'Delta' 'Foxtrot') -and (KanOpenen 'Foxtrot' 'Foxtrot') -and (KanOpenen 'Bravo' 'Foxtrot')) 'Daarna wisselt de laptop wél: Delta ziet Foxtrot niet meer, Foxtrot en de celleider wel'
+$orgR = Read-DlBeheer $dO 'organisatie.json' $V
+$pR = @($orgR.cellen | ForEach-Object { $_.projecten } | Where-Object id -eq 'ecom-b2b')[0]; $pR.leider = $ids.Delta
+$orgR | Add-Member -NotePropertyName versie -NotePropertyValue ([int]$orgR.versie + 1) -Force
+Write-DlBeheer $dO 'organisatie.json' $orgR $gb.beheerPrive
+Beheer -Bijwerken | Out-Null
+Controleer (KanOpenen 'Delta' 'Foxtrot') 'Delta weer projectleider: ziet Foxtrot weer'
+# Verkeerde sleutel (bijv. die van een andere omgeving): stopt vóór er iets verandert
+$orgVoor = [IO.File]::ReadAllBytes("$D\beheer\organisatie.json")
+$script:cloudBeheer = (New-DlSleutelpaar 3072).prive
+$uitW = BeheerCloud -AutoGoedkeuren
+$script:cloudBeheer = $gb.beheerPrive
+Controleer ($script:codeCloud -ne 0 -and ($uitW -join ' ') -match 'vertrouwd.json' -and [Convert]::ToBase64String($orgVoor) -eq [Convert]::ToBase64String([IO.File]::ReadAllBytes("$D\beheer\organisatie.json"))) 'Verkeerde beheersleutel: gestopt, organogram ongewijzigd'
+# Een ouder (wel ondertekend) organogram terugzetten
+$orgOud = [IO.File]::ReadAllBytes("$D\beheer\organisatie.json")
+Beheer -Wijzig $ids.Hotel -Leren optioneel | Out-Null
+$orgNieuw = [IO.File]::ReadAllBytes("$D\beheer\organisatie.json")
+[IO.File]::WriteAllBytes("$D\beheer\organisatie.json", $orgOud)
+$uitO = Beheer -Controleer
+$env:DL_ORG_VERSIE_MIN = [string]([int](Read-DlBeheer $dO 'organisatie.json' $V).versie + 1)
+try { $uitOC = BeheerCloud -AutoGoedkeuren } finally { Remove-Item Env:\DL_ORG_VERSIE_MIN }
+Controleer (($uitO -join ' ') -match 'oudere versie' -and $script:codeCloud -ne 0 -and ($uitOC -join ' ') -match 'oudere versie') 'Teruggezet ouder organogram: laptop en cloud weigeren'
+[IO.File]::WriteAllBytes("$D\beheer\organisatie.json", $orgNieuw)
+# Wat alleen op de laptop mag
+$uitL = BeheerCloud -Bijwerken
+Controleer ($script:codeCloud -ne 0 -and ($uitL -join ' ') -match 'alleen op de laptop') 'Cloud weigert acties die alleen op de laptop mogen'
 
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h

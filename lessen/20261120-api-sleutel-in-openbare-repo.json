@@ -1,0 +1,41 @@
+{
+  "id": "20261120-api-sleutel-in-openbare-repo",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een API-sleutel die per ongeluk openbaar is gezet",
+  "matrix": ["coderen-met-ai:6.2.1", "coderen-met-ai:2.3.3"],
+  "titel": "De API-sleutel staat sinds gisteren in een openbare repository",
+  "intro": "Je hebt met Claude Code een klein script gebouwd dat elke ochtend cijfers uit de Search Console-API ophaalt. Gisteren heb je het naar een openbare GitHub-repository gepusht, zodat een collega het kan gebruiken. Vanochtend zie je dat de API-sleutel gewoon in het script staat.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je als eerste?",
+    "opties": [
+      "De regel met de sleutel weghalen en opnieuw pushen, zodat de sleutel niet meer in de repository staat.",
+      "De repository op privé zetten, zodat niemand de sleutel nog kan zien en je hem gewoon kunt houden.",
+      "De sleutel intrekken en een nieuwe aanmaken, zodat de oude niets meer waard is, wie hem ook heeft.",
+      "Claude vragen of de sleutel al is misbruikt, zodat je weet of je verder nog iets hoeft te doen."
+    ],
+    "juist": 2
+  },
+  "kern": "Een sleutel die openbaar heeft gestaan, moet je als gelekt behandelen. Alleen intrekken en vervangen maakt hem onschadelijk.",
+  "afleiders": [
+    "**Weghalen en opnieuw pushen:** dat voelt als opruimen. Maar de oude versie staat nog in de geschiedenis van de repository. En iemand kan hem al gekopieerd hebben.",
+    "**Op privé zetten:** dat sluit de deur voor nieuwe kijkers. Maar wie de sleutel al zag of de repository kopieerde, heeft hem nog steeds.",
+    "",
+    "**Claude vragen of hij misbruikt is:** dat lijkt slim. Maar Claude kan dat niet weten. Ga uit van misbruik en vervang de sleutel."
+  ],
+  "kort": "Stel dat je huissleutel een dag onder de mat in een drukke straat lag. Hem weer oppakken helpt niet: iemand kan er al een kopie van hebben gemaakt. Je laat het slot vervangen. Met een API-sleutel werkt het net zo. Na het intrekken past de oude sleutel op geen enkel slot meer.",
+  "begrippen": [
+    { "term": "API-sleutel", "uitleg": "een geheime code waarmee een script toegang krijgt tot een dienst, zoals Search Console. Wie hem heeft, kan doen alsof hij jou is." },
+    { "term": "Repository", "uitleg": "een projectmap op GitHub, met alle bestanden en de volledige geschiedenis van alle wijzigingen." },
+    { "term": "Intrekken", "uitleg": "een sleutel ongeldig maken bij de dienst zelf, zodat hij nergens meer werkt." }
+  ],
+  "uitleg": "GitHub schrijft dat je bij een gelekt geheim **als eerste stap** de sleutel intrekt of vervangt. Daarna kan hij geen toegang meer geven, en dat is vaak al genoeg.\n\n**Waarom weghalen niet genoeg is:** de sleutel blijft in de geschiedenis van de repository staan. Je kunt die geschiedenis herschrijven, maar kopieën (clones) en forks van anderen houden de oude versie. Die kun je niet zelf opruimen.\n\n**Voorkomen:**\n- Zet een sleutel nooit in code, in een chat of in een repository.\n- Bewaar hem in een .env-bestand dat in .gitignore staat, of in de geheimen van GitHub Actions.\n- Vraag Claude Code om de sleutel uit een omgevingsvariabele te laten lezen.\n- Lees de wijzigingen (diff) na voordat je pusht.",
+  "kernpunt": "Heeft een sleutel ergens openbaar gestaan, trek hem dan meteen in. Opruimen alleen is niet genoeg.",
+  "toepassing": "Zoek vandaag in je eigen scripts op woorden als 'key', 'token' of 'secret'. Staat er een echte sleutel in, verplaats hem naar een .env-bestand dat niet mee gaat naar GitHub.",
+  "bron": {
+    "titel": "Removing sensitive data from a repository | GitHub Docs",
+    "url": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository"
+  }
+}

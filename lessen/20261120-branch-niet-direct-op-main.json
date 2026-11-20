@@ -1,0 +1,42 @@
+{
+  "id": "20261120-branch-niet-direct-op-main",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Werken op een branch in plaats van direct op main",
+  "matrix": ["coderen-met-ai:2.2.2", "coderen-met-ai:2.3.2"],
+  "titel": "'Zal ik het direct op main zetten?' vraagt Claude",
+  "intro": "Een collega laat Claude Code een nieuwe filterknop bouwen in de interne rapportagetool. Het hele team gebruikt die tool elke dag. De knop werkt op zijn eigen laptop. Claude vraagt: 'Zal ik de wijziging direct op main committen en pushen?'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat antwoordt je collega het beste?",
+    "opties": [
+      "Ja, direct op main, zodat de knop meteen klaarstaat en niemand nog iets hoeft samen te voegen.",
+      "Ja, op main, maar eerst een kopie van de map maken, zodat je altijd terug kunt als het misgaat.",
+      "Nee, eerst op een eigen branch en via een pull request, zodat iemand meekijkt voor het live staat.",
+      "Nee, de wijziging alleen lokaal bewaren, zodat niemand anders er last van heeft tot hij af is."
+    ],
+    "juist": 2
+  },
+  "kern": "Op een branch bouw en test je zonder main te raken. Via een pull request kijkt iemand mee voordat het in main komt.",
+  "afleiders": [
+    "**Direct op main:** dat is het snelst. Maar een fout staat dan meteen bij het hele team, en niemand heeft meegekeken.",
+    "**Eerst een kopie:** dat voelt als een vangnet. Maar Git houdt de geschiedenis al bij. Het probleem is niet het terugdraaien, maar dat het team de fout dan al heeft.",
+    "",
+    "**Alleen lokaal bewaren:** dan heeft niemand er last van. Maar dan kan ook niemand meekijken, en staat je werk alleen op je eigen laptop."
+  ],
+  "kort": "Vergelijk main met de etalage van een winkel. Je kleedt geen nieuwe paspop aan terwijl klanten kijken. Dat doe je achter in de werkplaats. Pas als hij af is en een collega heeft gekeken, zet je hem in de etalage. Een branch is die werkplaats, het pull request is de collega die even komt kijken.",
+  "begrippen": [
+    { "term": "main", "uitleg": "de hoofdversie van een project. Wat daar staat, is de versie die het team gebruikt." },
+    { "term": "Branch", "uitleg": "een aparte werkversie van het project, waarin je kunt bouwen zonder de hoofdversie te veranderen." },
+    { "term": "Pull request", "uitleg": "een voorstel om je wijzigingen in main op te nemen, zodat iemand ze eerst kan bekijken." },
+    { "term": "Mergen", "uitleg": "de wijzigingen van een branch samenvoegen met main." }
+  ],
+  "uitleg": "GitHub legt het zo uit: een repository heeft standaard één branch, **main**, en die geldt als de definitieve versie. Met een branch kun je experimenteren en wijzigen voordat het in main komt. Wat je op een branch doet, verschijnt pas in main als je het merget.\n\nEen **pull request** is een voorstel: je vraagt iemand je wijzigingen te bekijken en op te nemen.\n\n**Zo werk je met Claude Code:**\n- Vraag aan het begin: 'Maak een nieuwe branch voor deze klus.'\n- Laat Claude committen op die branch en een pull request openen.\n- Laat een collega meekijken, of eerst een review doen door een nieuwe sessie.\n\nVeel teams beschermen main, zodat er niet direct op gepusht kan worden. Dan dwingt GitHub deze werkwijze zelf af.",
+  "kernpunt": "Gebruikt het team iets, werk dan op een eigen branch en laat een pull request bekijken voordat het in main komt.",
+  "toepassing": "Vraag vandaag in een eigen project aan Claude Code: 'Op welke branch zit ik?' Zit je op main, laat hem dan eerst een nieuwe branch maken voordat je verder werkt.",
+  "bron": {
+    "titel": "Hello World | GitHub Docs",
+    "url": "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+  }
+}

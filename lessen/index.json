@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-19T07:05:41",
+    "bijgewerkt":  "2026-11-20T05:28:12",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -5621,6 +5621,167 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-agent-of-chatassistent",
+                       "titel":  "Elke maand de export in de chat plakken: wat doet een agent anders?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Het verschil tussen een chatassistent en een codeeragent",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:1.1.1",
+                                      "coderen-met-ai:1.1.2"
+                                  ],
+                       "kernpunt":  "Moet je antwoorden zelf kopiëren, plakken en aanpassen, dan is het een klus voor een agent die in je bestanden werkt.",
+                       "bron":  {
+                                    "titel":  "Claude Code overview | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/overview"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-api-sleutel-in-openbare-repo",
+                       "titel":  "De API-sleutel staat sinds gisteren in een openbare repository",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een API-sleutel die per ongeluk openbaar is gezet",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.2.1",
+                                      "coderen-met-ai:2.3.3"
+                                  ],
+                       "kernpunt":  "Heeft een sleutel ergens openbaar gestaan, trek hem dan meteen in. Opruimen alleen is niet genoeg.",
+                       "bron":  {
+                                    "titel":  "Removing sensitive data from a repository | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-branch-niet-direct-op-main",
+                       "titel":  "\u0027Zal ik het direct op main zetten?\u0027 vraagt Claude",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Werken op een branch in plaats van direct op main",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.2.2",
+                                      "coderen-met-ai:2.3.2"
+                                  ],
+                       "kernpunt":  "Gebruikt het team iets, werk dan op een eigen branch en laat een pull request bekijken voordat het in main komt.",
+                       "bron":  {
+                                    "titel":  "Hello World | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-chrome-xslt-sitemap-kale-xml",
+                       "titel":  "\u0027Onze sitemap is kapot!\u0027 Sinds deze week alleen nog code in Chrome",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Chrome 158 stopt met XSLT: sitemaps zien er anders uit in de browser",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.4.1",
+                                      "1.4.4"
+                                  ],
+                       "kernpunt":  "Ziet een sitemap er in de browser anders uit, kijk dan eerst in Search Console of Google hem nog leest. Pas daarna denk je aan aanpassen.",
+                       "bron":  {
+                                    "titel":  "Search Engine Journal: Your WordPress Sitemap Isn\u0027t Broken – Chrome 158 Has Dropped XSLT",
+                                    "url":  "https://www.searchenginejournal.com/your-wordpress-sitemap-isnt-broken-chrome-158-has-dropped-xslt/597549/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-claude-md-regel-of-deny-regel",
+                       "titel":  "\u0027Lees nooit .env\u0027 staat in CLAUDE.md, en toch gebeurde het",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Regels die nooit overgeslagen mogen worden: CLAUDE.md of permissies?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.2.3",
+                                      "coderen-met-ai:4.5.2"
+                                  ],
+                       "kernpunt":  "Moet iets echt nooit gebeuren, zet het dan in een deny-regel of hook. CLAUDE.md is voor richtlijnen.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-claude-md-wat-erin-hoort",
+                       "titel":  "Vier ideeën voor de CLAUDE.md, ruimte voor één: welke kies je?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Wat hoort er in CLAUDE.md?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:4.1.2",
+                                      "coderen-met-ai:4.1.1"
+                                  ],
+                       "kernpunt":  "Twijfel je over een regel in CLAUDE.md, vraag je dan af of Claude dit zelf uit de bestanden kan halen. Zo ja, laat hem weg.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-review-door-frisse-sessie",
+                       "titel":  "Claude reviewde zijn eigen werk en vond alleen twee stijlpunten",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Werk van de agent laten reviewen door een frisse sessie",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:3.3.2",
+                                      "coderen-met-ai:3.3.4"
+                                  ],
+                       "kernpunt":  "Laat werk reviewen door een sessie die het niet bouwde, en geef hem de eisen mee in plaats van \u0027zoek fouten\u0027.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261120-sessie-opnieuw-na-twee-correcties",
+                       "titel":  "Twee keer gecorrigeerd, en het script telt nog steeds dubbel",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een sessie bijsturen: wanneer begin je opnieuw?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.2.2",
+                                      "coderen-met-ai:1.1.3"
+                                  ],
+                       "kernpunt":  "Twee keer gecorrigeerd en nog mis? Begin opnieuw met één opdracht waarin staat wat je nu weet.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "vormAfwijkend":  true
                    }
                ]
 }
