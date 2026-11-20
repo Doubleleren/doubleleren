@@ -4,8 +4,8 @@
 #   beheer.ps1 -Init                                             eenmalig: beheersleutel; vraagt je beheertoken (niet zichtbaar)
 #   beheer.ps1 -Uitnodigen -Naam Alfa -Rol projectleider -Project ecom-b2b [-Vak cro] [-Optioneel] [-Beheerder]
 #   beheer.ps1 -Aanvragen                                        openstaande aanmeldingen
-#   beheer.ps1 -Goedkeuren lid-xxxxxx -Controlewoorden "a b c d e f"
-#   beheer.ps1 -AutoGoedkeuren                                   nieuwe aanmeldingen zonder controlewoorden (herstel niet)
+#   beheer.ps1 -Goedkeuren lid-xxxxxx [-Controlewoorden "a b c d e f"]   woorden verplicht bij herstel (code kwijt)
+#   beheer.ps1 -AutoGoedkeuren                                   nieuwe aanmeldingen van gewone leden (heads, leiders en herstel niet)
 #   beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal     (of -Cel leadgen, en/of -Vak cro) en toegang meteen bijwerken
 #   beheer.ps1 -Head lid-xxxxxx -Vak cro                         head van een vak maken (ziet de voortgang van dat vak)
 #   beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht|optioneel
@@ -433,8 +433,8 @@ elseif ($Aanvragen) {
 
 elseif ($AutoGoedkeuren) {
     # Nieuwe aanmeldingen van gewone leden zonder controlewoorden goedkeuren: het wachtwoord van zes woorden is genoeg.
-    # Handwerk met controlewoorden blijft: "code kwijt" (herstel), en heads, leiders en beheerders (die zien anderen;
-    # wie een token heeft, zou zich anders kunnen aanmelden als een leider die nog niet meedoet).
+    # Handwerk blijft: "code kwijt" (herstel, met controlewoorden), en heads, leiders en beheerders (die zien anderen;
+    # de beheerder keurt hen zelf goed, zodat niemand met een token zich als een nieuwe leider kan aanmelden).
     $lijst = @(Get-DlOpslagLijst $d 'aanvragen')
     # Eenmalig: wie al een (door de beheerder ondertekende) sleutel heeft, krijgt de markering 'goedgekeurd'.
     # Meteen versturen: de kindprocessen hieronder werken in dezelfde git-kopie.
@@ -449,7 +449,7 @@ elseif ($AutoGoedkeuren) {
         try { $a = Read-DlJson $d "aanvragen/$f" } catch { Write-Host "Overgeslagen: $f is geen geldige aanvraag"; $script:wacht++; continue }
         if (-not $a -or $f -ne "$($a.id).json" -or -not $org.leden.($a.id)) { Write-Host "Overgeslagen: $f hoort niet bij een lid uit het organogram"; $script:wacht++; continue }
         if ($a.herstel) { Write-Host "Wacht op handmatige controle (code kwijt): $(Naam $a.id)  controlewoorden: $(Get-DlControlewoorden $a)"; $script:wacht++; continue }
-        if (Test-DlRolhouder $org $a.id) { Write-Host "Wacht op goedkeuring met controlewoorden (head, leider of beheerder): $(Naam $a.id)  controlewoorden: $(Get-DlControlewoorden $a)"; $script:wacht++; continue }
+        if (Test-DlRolhouder $org $a.id) { Write-Host "Wacht op goedkeuring door de beheerder (head, leider of beheerder): $(Naam $a.id). Op de laptop: beheer.ps1 -Goedkeuren $($a.id)"; $script:wacht++; continue }
         if (Test-Goedgekeurd $a.id) { Write-Host "Geweigerd: $(Naam $a.id) is al eens goedgekeurd; een nieuwe aanmelding kan alleen als herstel met controlewoorden (mogelijk overname)"; $script:wacht++; continue }
         if (Read-DlBeheer $d "sleutels/$($a.id).json" $V) { Write-Host "Overgeslagen: $(Naam $a.id) is al goedgekeurd"; $script:wacht++; continue }
         $extra = @('-Thuis', $Thuis); if ($DataMap) { $extra += @('-DataMap', $DataMap) }
@@ -474,11 +474,15 @@ elseif ($Goedkeuren) {
     $aanvraag = $script:DlUtf8.GetString($a.bytes) | ConvertFrom-Json
     if ($aanvraag.id -ne $id) { throw 'Aanvraag hoort bij een ander id' }
     if (-not (Test-DlSleutelVorm $aanvraag.publiek)) { throw 'De sleutel in de aanvraag heeft niet de vaste vorm: niet goedkeuren.' }
+    # Controlewoorden zijn verplicht bij herstel (code kwijt). Een nieuwe aanmelding keurt de beheerder ook zonder woorden
+    # goed (bijv. een head of leider, die de cloud laat liggen); geef je ze toch mee, dan moeten ze kloppen.
     $echt = Get-DlControlewoorden $aanvraag
-    $gegeven = (($Controlewoorden.ToLower() -split '[\s,\-]+') | Where-Object { $_ }) -join ' '
-    if ($gegeven -ne $echt) { throw "Controlewoorden komen NIET overeen. Niet goedkeuren: vraag $(Naam $id) opnieuw aan te melden en de woorden opnieuw door te geven." }
+    if ($Controlewoorden -or $aanvraag.herstel) {
+        $gegeven = (($Controlewoorden.ToLower() -split '[\s,\-]+') | Where-Object { $_ }) -join ' '
+        if ($gegeven -ne $echt) { throw "Controlewoorden komen NIET overeen. Niet goedkeuren: vraag $(Naam $id) opnieuw aan te melden en de woorden opnieuw door te geven." }
+    }
     if ($Cloud -and $aanvraag.herstel) { throw 'Herstel (code kwijt) kan alleen op de laptop.' }
-    if ($Cloud -and (Test-DlRolhouder $org $id)) { throw 'Heads, leiders en beheerders keurt de beheerder goed op de laptop, met controlewoorden.' }
+    if ($Cloud -and (Test-DlRolhouder $org $id)) { throw 'Heads, leiders en beheerders keurt de beheerder zelf goed op de laptop.' }
     if (-not $aanvraag.herstel -and (Test-Goedgekeurd $id)) { throw "$(Naam $id) is al eens goedgekeurd ($($org.leden.$id.goedgekeurd)). Een nieuwe aanmelding kan alleen als herstel (code kwijt): mogelijk overname." }
     $sleutelsObj = [ordered]@{ v = 2; id = $id; publiek = $aanvraag.publiek; kluis = $aanvraag.kluis }
     $oudS = Read-DlBeheer $d "sleutels/$id.json" $V

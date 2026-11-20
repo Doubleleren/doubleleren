@@ -6,7 +6,7 @@ Elke dag een korte SEO-les, en een eigen dashboard met je voortgang. Leidinggeve
 Alles gaat in de browser; je hoeft niets te installeren.
 1. Je krijgt via Teams een link (`https://doubleleren.github.io/doubleleren/#welkom`) en een **uitnodigingscode**.
 2. Plak de uitnodigingscode, vul je naam in en kies je ingevulde **skilllijst (Excel)**. Je browser maakt je **code van zes woorden**: bewaar die in je wachtwoordkluis.
-3. Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten (`beheer.ps1 -AutoGoedkeuren`, in de cloud of op de laptop van de beheerder). Bij *Code kwijt*, en als je head, leider of beheerder bent, stuur je de **zes controlewoorden** via Teams naar de beheerder.
+3. Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten (`beheer.ps1 -AutoGoedkeuren`, in de cloud of op de laptop van de beheerder). Alleen bij *Code kwijt* stuur je de **zes controlewoorden** via Teams naar de beheerder. Heads, leiders en beheerders keurt de beheerder zelf goed.
 4. Daarna log je in met je uitnodigingscode en je code. Onder **Les van vandaag** staat elke werkdag een les van 2–5 minuten.
 5. Wil je dat DoubleLeren elke ochtend vanzelf opent? Na je les staat hoe je een opstart-snelkoppeling maakt (Windows en Mac). Vink bij het inloggen **Onthoud mij** aan, dan opent hij meteen in je les zonder code (30 dagen, tot je uitlogt).
 
@@ -67,7 +67,7 @@ Alles gaat in de browser; je hoeft niets te installeren.
 - De beheerder kent geen codes.
 
 **Goedkeuren**
-- Nieuwe aanmeldingen van **gewone leden** keurt `beheer.ps1 -AutoGoedkeuren` vanzelf goed (in de cloud via `doubleleren-beheer`, of met een taak op de laptop van de beheerder), voor leden die in het organogram staan en nog nooit zijn goedgekeurd. Heads, leiders en beheerders keurt de beheerder altijd goed met de controlewoorden: zij zien gegevens van anderen. De uitnodigingscode is persoonlijk; wie een token heeft, kan zich in theorie aanmelden voor een gewoon lid dat dat nog niet deed. Dat valt op, want die collega kan zich dan niet meer aanmelden.
+- Nieuwe aanmeldingen van **gewone leden** keurt `beheer.ps1 -AutoGoedkeuren` vanzelf goed (in de cloud via `doubleleren-beheer`, of met een taak op de laptop van de beheerder), voor leden die in het organogram staan en nog nooit zijn goedgekeurd. Heads, leiders en beheerders keurt de beheerder altijd zelf goed (`-Goedkeuren <id>`): zij zien gegevens van anderen. Keur zo iemand pas goed als je weet dat die zich net heeft aangemeld. De uitnodigingscode is persoonlijk; wie een token heeft, kan zich in theorie aanmelden voor een gewoon lid dat dat nog niet deed. Dat valt op, want die collega kan zich dan niet meer aanmelden.
 - Elke goedkeuring staat ondertekend in het organogram (`goedgekeurd`), dat een oplopende `versie` heeft. Wie sleutel en toegang van een collega wist en zich opnieuw aanmeldt, wordt geweigerd; een teruggezet ouder organogram laat elke beheeractie stoppen. De cloud doet nooit een sleutelwissel: die blijft op de laptop (`-Bijwerken`).
 - Bij herstel (*Code kwijt*) blijft het handwerk: zes controlewoorden dekken de hele aanvraag (sleutel, kluis en sleutelkopieën) en worden via Teams vergeleken. Zo kan niemand andermans account overnemen.
 - Alleen sleutels met e = 65537 en n = 3072 bit worden geaccepteerd.

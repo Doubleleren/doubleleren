@@ -135,6 +135,8 @@ $oudeC = Get-DlClient -Thuis "$T\Golf"
 $h = Installeer $ids.Golf 'Golf' @('-Herstel')
 Beheer -AutoGoedkeuren | Out-Null
 Controleer (Test-Path "$D\aanvragen\$($ids.Golf).json") 'AutoGoedkeuren laat herstel (code kwijt) liggen voor handmatige controle'
+Beheer -Goedkeuren $ids.Golf | Out-Null
+Controleer (Test-Path "$D\aanvragen\$($ids.Golf).json") 'Herstel zonder controlewoorden wordt geweigerd'
 Beheer -Goedkeuren $ids.Golf -Controlewoorden $h.controlewoorden | Out-Null
 Controleer (KanOpenen 'Golf' 'Golf') 'Golf leest de eigen scores weer'
 Controleer (KanOpenen 'Echo' 'Golf') 'Echo (projectleider) ziet Golf nog steeds'
@@ -474,11 +476,11 @@ Controleer ($script:codeCloud -eq 0 -and (Test-Path "$D\beheer\toegang\$($ids.Li
 # Head: blijft liggen tot de beheerder het met controlewoorden goedkeurt
 Nieuw 'Mike' @('-Rol', 'head', '-Vak', 'cro')
 $uitM = BeheerCloud -AutoGoedkeuren
-Controleer ($script:codeCloud -eq 2 -and (Test-Path "$D\aanvragen\$($ids.Mike).json") -and -not (Test-Path "$D\beheer\toegang\$($ids.Mike).json") -and ($uitM -join ' ') -match 'controlewoorden') 'Cloud laat een head liggen (exitcode 2)'
+Controleer ($script:codeCloud -eq 2 -and (Test-Path "$D\aanvragen\$($ids.Mike).json") -and -not (Test-Path "$D\beheer\toegang\$($ids.Mike).json") -and ($uitM -join ' ') -match 'Wacht op goedkeuring door de beheerder') 'Cloud laat een head liggen voor de beheerder (exitcode 2)'
 $uitM = BeheerCloud -Goedkeuren $ids.Mike -Controlewoorden $res.Mike.controlewoorden
 Controleer ($script:codeCloud -ne 0 -and -not (Test-Path "$D\beheer\toegang\$($ids.Mike).json")) 'Ook rechtstreeks keurt de cloud geen head goed'
-Beheer -Goedkeuren $ids.Mike -Controlewoorden $res.Mike.controlewoorden | Out-Null
-Controleer (Test-Path "$D\beheer\toegang\$($ids.Mike).json") 'De beheerder keurt de head goed op de laptop'
+Beheer -Goedkeuren $ids.Mike | Out-Null
+Controleer (Test-Path "$D\beheer\toegang\$($ids.Mike).json") 'De beheerder keurt de head zelf goed op de laptop, zonder controlewoorden'
 # Herstel (code kwijt) blijft handwerk
 $hL = Installeer $ids.Lima 'Lima-2' @('-Herstel')
 BeheerCloud -AutoGoedkeuren | Out-Null

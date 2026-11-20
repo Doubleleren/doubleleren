@@ -1277,8 +1277,12 @@ const lokaleTijd = (d = nu()) => `${dagKey(d)}T${[d.getHours(), d.getMinutes(), 
 // Alles gebeurt in deze browser: sleutelpaar, code van zes woorden, kluis, datasleutel, versleuteld profiel en
 // skilllijst. Naar de privé-repo gaan alleen versleutelde bestanden en een aanvraag; beheer.ps1 -AutoGoedkeuren keurt
 // nieuwe aanvragen vanzelf goed. Alleen bij herstel (code kwijt) worden de controlewoorden via Teams vergeleken. Spiegelbeeld van Install-Nieuw in app/installeer.ps1.
-const W = { id: null, uitnodiging: null, leren: 'verplicht', naam: '', vak: null, matrix: null, herstel: false, metWoorden: false };
-// Heads, leiders en beheerders keurt de beheerder altijd met controlewoorden goed. Zelfde regel als Test-DlRolhouder in app/lib/organisatie.ps1.
+const W = { id: null, uitnodiging: null, leren: 'verplicht', naam: '', vak: null, matrix: null, herstel: false, handmatig: false };
+// Heads, leiders en beheerders keurt de beheerder altijd zelf goed (niet automatisch). Zelfde regel als Test-DlRolhouder in app/lib/organisatie.ps1.
+const WACHT_AUTO = 'Je aanmelding staat klaar en wordt vanzelf geactiveerd, meestal binnen een paar minuten. Probeer het daarna opnieuw.';
+const WACHT_HANDMATIG = 'Je aanmelding staat klaar. De beheerder keurt je account zelf goed; probeer het daarna opnieuw.';
+const KLAAR_AUTO = 'Je account wordt vanzelf geactiveerd, meestal binnen een paar minuten. Daarna log je in met je uitnodigingscode en deze code.';
+const KLAAR_HANDMATIG = 'De beheerder keurt je account zelf goed. Daarna log je in met je uitnodigingscode en deze code.';
 const heeftRol = (org, id) => [org?.head, ...Object.values(org?.heads || {})].includes(id)
   || (org?.cellen || []).some((c) => c.leider === id || (c.projecten || []).some((p) => p.leider === id))
   || (org?.beheerders || []).includes(id);
@@ -1295,14 +1299,14 @@ async function welkomVerbind() {
   if (!lid) throw new Error('Deze uitnodiging is (nog) niet bekend. Vraag de beheerder om je toe te voegen.');
   W.leren = lid.leren === 'optioneel' ? 'optioneel' : 'verplicht'; W.naam = String(lid.naam || '');
   W.vak = typeof lid.vak === 'string' && VAK_VORM.test(lid.vak) ? lid.vak : S.inst.vakgebied;
-  W.metWoorden = heeftRol(org, W.id);
+  W.handmatig = heeftRol(org, W.id);
   if ($('w-onthoud').checked) { try { localStorage.setItem('dl-uitnodiging', uitnodiging); } catch {} }
   if (await beheerJson(`sleutels/${W.id}.json`)) { welkomStap('w-bestaand'); return; }
   const a = await json(S.data, `aanvragen/${W.id}.json`);
   if (a && a.id === W.id && a.publiek && a.kluis) {
     $('w-wacht-woorden').textContent = await K.controlewoorden(a, WOORDEN);
-    const woorden = !!a.herstel || W.metWoorden;
-    $('w-wacht-herstel').hidden = !woorden; $('w-wacht-auto').hidden = woorden;
+    $('w-wacht-herstel').hidden = !a.herstel; $('w-wacht-auto').hidden = !!a.herstel;
+    $('w-wacht-auto').textContent = W.handmatig ? WACHT_HANDMATIG : WACHT_AUTO;
     welkomStap('w-wacht'); return;
   }
   welkomFormulier(false);
@@ -1357,8 +1361,8 @@ async function welkomMaak() {
   await S.data.schrijf(`aanvragen/${W.id}.json`, K.tekst.naarBytes(JSON.stringify(aanvraag, null, 2)));
   $('w-code').textContent = code.replace(/-/g, ' ');
   $('w-controle').textContent = await K.controlewoorden(aanvraag, WOORDEN);
-  const woorden = !!aanvraag.herstel || W.metWoorden;
-  $('w-controle-stap').hidden = !woorden; $('w-auto-stap').hidden = woorden;
+  $('w-controle-stap').hidden = !aanvraag.herstel; $('w-auto-stap').hidden = !!aanvraag.herstel;
+  $('w-auto-stap').textContent = W.handmatig ? KLAAR_HANDMATIG : KLAAR_AUTO;
   $('w-bewaard').checked = false; $('w-klaar').disabled = true;
   welkomStap('w-stap3');
 }
