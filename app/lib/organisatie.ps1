@@ -24,6 +24,16 @@ function Get-DlHeadVanVak($Org, [string]$Vak) {
     $null
 }
 function Get-DlHeads($Org) { @(@($Org.head) + @($(if ($Org.heads) { $Org.heads.PSObject.Properties.Value })) | Where-Object { $_ } | Select-Object -Unique) }
+# Rolhouder: head, celleider, projectleider of beheerder. Die zien anderen of beheren, dus nooit automatisch goedkeuren.
+# Dezelfde regel staat in docs/app.js (heeftRol).
+function Test-DlRolhouder($Org, [string]$Id) {
+    if ((Get-DlHeads $Org) -contains $Id) { return $true }
+    foreach ($c in @($Org.cellen)) {
+        if ($c.leider -eq $Id) { return $true }
+        foreach ($p in @($c.projecten)) { if ($p.leider -eq $Id) { return $true } }
+    }
+    @($Org.beheerders) -contains $Id
+}
 function Get-DlKijkers($Org, [string]$Id) {
     $k = New-Object System.Collections.Generic.List[string]
     $voeg = { param($x) if ($x -and -not $k.Contains($x)) { $k.Add($x) } }

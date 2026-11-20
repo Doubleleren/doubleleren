@@ -1,0 +1,34 @@
+# DoubleLeren: start de goedkeuring in Doubleleren/doubleleren-beheer zodra er een aanvraag bijkomt of verandert in deze
+# data-repo. Hoort in doubleleren-data en doubleleren-data-staging als .github/workflows/beheer-starten.yml (bron:
+# beheer/cloud/ in de app-repo). Heeft geen sleutels en haalt niets op: alleen DL_START, een token dat niets anders kan
+# dan workflows starten in doubleleren-beheer. Repo-variabele DL_OMGEVING: 'live' of 'staging'.
+# Het weghalen van een aanvraag (na goedkeuren) start niets. Collega-tokens kunnen dit bestand niet wijzigen.
+name: Beheer starten
+
+on:
+  push:
+    branches: [main]
+    paths: ['aanvragen/**', 'uitnodigingen/**']
+
+permissions: {}
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.DL_START }}
+          OMGEVING: ${{ vars.DL_OMGEVING }}
+        run: |
+          set -euo pipefail
+          case "$OMGEVING" in live|staging) ;; *) echo "Repo-variabele DL_OMGEVING ontbreekt of klopt niet."; exit 1 ;; esac
+          # Alleen toegevoegde of gewijzigde bestanden tellen (de lijst per commit uit de push zelf)
+          n=$(jq '[.commits[]? | (.added + .modified)[] | select(test("^(aanvragen|uitnodigingen)/"))] | length' "$GITHUB_EVENT_PATH")
+          if [ "$n" -eq 0 ]; then echo "Niets nieuws (bijv. een goedgekeurde aanvraag weggehaald)." >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          if gh workflow run "goedkeuren-$OMGEVING.yml" --repo Doubleleren/doubleleren-beheer -f bron=aanvraag; then
+            echo "Goedkeuring gestart ($OMGEVING)." >> "$GITHUB_STEP_SUMMARY"
+          else
+            # Bijv. gepauzeerd omdat de beheerder op de laptop bezig is: die start de cloud daarna zelf; anders het vangnet
+            echo "Kon de goedkeuring niet starten (gepauzeerd?). De laptop of het dagelijkse vangnet pakt het op." >> "$GITHUB_STEP_SUMMARY"
+          fi

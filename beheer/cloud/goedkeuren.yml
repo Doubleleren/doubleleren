@@ -1,0 +1,135 @@
+# DoubleLeren: nieuwe aanmeldingen goedkeuren in de cloud, zodat de laptop van de beheerder uit mag.
+# Sjabloon: cloud-beheer-inrichten.ps1 vult {{OMGEVING}} in (live of staging) en zet het resultaat, gelezen van het vaste
+# commit, in de privé-repo Doubleleren/doubleleren-beheer als .github/workflows/goedkeuren-{{OMGEVING}}.yml. Zo raakt een
+# test op staging nooit de workflow van live. Alleen de beheerder heeft schrijfrecht op die repo, er staan geen deploy
+# keys op en er draait geen Claude: de beheersleutel staat alleen hier.
+# Gestart door de starter in de data-repo (bij een nieuwe aanvraag), het dagelijkse vangnet (cron-job.org), de laptop
+# na een pauze, of met de hand. beheer.ps1 keurt in de cloud alleen gewone leden goed en doet nooit een sleutelwissel.
+# Een rode run (exitcode 1 of 2) betekent: er wacht iets op de beheerder (herstel, head/leider, sleutelwissel, vreemde
+# aanvraag) of er ging iets mis. GitHub mailt dan wie de run startte.
+name: Goedkeuren ({{OMGEVING}})
+run-name: Goedkeuren ({{OMGEVING}}, ${{ inputs.bron }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      bron:
+        description: 'Wie start de run'
+        type: choice
+        options: [handmatig, aanvraag, vangnet]
+        default: handmatig
+
+permissions:
+  contents: read
+
+concurrency:
+  group: beheer-{{OMGEVING}}
+  cancel-in-progress: false
+
+jobs:
+  # Goedkoop vooraf kijken of er iets ligt, zodat het vangnet en losse starts geen Windows-minuten kosten
+  kijk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      aantal: ${{ steps.k.outputs.aantal }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2, vast (deze repo heeft de beheersleutel)
+        with:
+          repository: Doubleleren/${{ '{{OMGEVING}}' == 'live' && 'doubleleren-data' || 'doubleleren-data-staging' }}
+          ssh-key: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_DEPLOY_DATA || secrets.STAGING_DEPLOY_DATA }}
+          sparse-checkout: aanvragen
+          persist-credentials: false
+      - id: k
+        run: |
+          shopt -s nullglob
+          f=(aanvragen/*.json)
+          echo "aantal=${#f[@]}" >> "$GITHUB_OUTPUT"
+          echo "Openstaande aanvragen: ${#f[@]}" >> "$GITHUB_STEP_SUMMARY"
+
+  goedkeuren:
+    needs: kijk
+    if: needs.kijk.outputs.aantal != '0'
+    runs-on: windows-latest          # de krypto gebruikt RSACng en DPAPI (Windows), net als de generator
+    timeout-minutes: 20
+    steps:
+      - name: Versie van de code en ondergrens van het organogram
+        id: v
+        shell: powershell
+        env:
+          LIVE_COMMIT: ${{ vars.DL_APP_COMMIT }}
+          STAGING_COMMIT: ${{ vars.STAGING_APP_COMMIT }}
+          LIVE_VERSIE: ${{ vars.DL_ORG_VERSIE }}
+          STAGING_VERSIE: ${{ vars.STAGING_ORG_VERSIE }}
+        run: |
+          # Bewust in PowerShell gekozen en niet met && en || in een expressie: een lege live-variabele mag nooit op staging terugvallen
+          $live = '{{OMGEVING}}' -eq 'live'
+          $c = if ($live) { $env:LIVE_COMMIT } else { $env:STAGING_COMMIT }
+          $m = if ($live) { $env:LIVE_VERSIE } else { $env:STAGING_VERSIE }
+          if ($c -notmatch '^[0-9a-f]{40}$') { "Geen geldig vast commit voor {{OMGEVING}} (variabele DL_APP_COMMIT / STAGING_APP_COMMIT)." | Tee-Object -Append -FilePath $env:GITHUB_STEP_SUMMARY; exit 1 }
+          if ($m -and $m -notmatch '^\d+$') { "Ongeldige ondergrens voor het organogram: $m" | Tee-Object -Append -FilePath $env:GITHUB_STEP_SUMMARY; exit 1 }
+          "commit=$c" | Out-File -Append -Encoding ascii $env:GITHUB_OUTPUT
+          "versie=$m" | Out-File -Append -Encoding ascii $env:GITHUB_OUTPUT
+
+      - name: App-repo ophalen (openbaar, op het vaste commit)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2
+        with:
+          repository: Doubleleren/doubleleren
+          ref: ${{ steps.v.outputs.commit }}
+          path: app
+          persist-credentials: false
+
+      - name: Testinstellingen (alleen staging)
+        if: ${{ '{{OMGEVING}}' == 'staging' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd app
+          cp staging/vertrouwd.json vertrouwd.json
+          jq '.appRepo = "doubleleren-staging" | .dataRepo = "doubleleren-data-staging" | .omgeving = "staging"' instellingen.json > instellingen.tmp
+          mv instellingen.tmp instellingen.json
+          test "$(jq -r .dataRepo instellingen.json)" = doubleleren-data-staging
+
+      - name: Data-repo ophalen (privé, met geschiedenis voor de versiecontrole van het organogram)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2
+        with:
+          repository: Doubleleren/${{ '{{OMGEVING}}' == 'live' && 'doubleleren-data' || 'doubleleren-data-staging' }}
+          path: thuis/data-kloon
+          ssh-key: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_DEPLOY_DATA || secrets.STAGING_DEPLOY_DATA }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Goedkeuren
+        shell: powershell
+        env:
+          DL_BEHEER_SLEUTEL: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_BEHEER_SLEUTEL || secrets.STAGING_BEHEER_SLEUTEL }}
+          DL_GENERATOR_SLEUTEL: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_GENERATOR_SLEUTEL || secrets.STAGING_GENERATOR_SLEUTEL }}
+          DL_DEPLOY_DATA: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_DEPLOY_DATA || secrets.STAGING_DEPLOY_DATA }}
+          DL_ORG_VERSIE_MIN: ${{ steps.v.outputs.versie }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (-not $env:DL_BEHEER_SLEUTEL -or -not $env:DL_GENERATOR_SLEUTEL -or -not $env:DL_DEPLOY_DATA) { throw 'Sleutels voor {{OMGEVING}} ontbreken (secrets).' }
+          if (-not $env:DL_ORG_VERSIE_MIN) { Remove-Item Env:\DL_ORG_VERSIE_MIN }
+          $T = "$env:GITHUB_WORKSPACE\thuis"; $k = Join-Path $env:RUNNER_TEMP 'data.key'
+          try {
+            [IO.File]::WriteAllText($k, ($env:DL_DEPLOY_DATA -replace "`r", '').Trim() + "`n")
+            icacls $k /inheritance:r /grant:r "$($env:USERNAME):F" | Out-Null
+            git -C "$T\data-kloon" config core.sshCommand "ssh -i '$($k -replace '\\', '/')' -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+            $ErrorActionPreference = 'Continue'
+            $uit = & powershell -NoProfile -ExecutionPolicy Bypass -File app\beheer\beheer.ps1 -AutoGoedkeuren -Thuis $T 2>&1 | ForEach-Object { "$_" }
+            $code = $LASTEXITCODE
+          } finally {
+            Remove-Item $k -ErrorAction SilentlyContinue
+            git -C "$T\data-kloon" config --unset core.sshCommand
+          }
+          $uit | Write-Host
+          $kop = switch ($code) { 0 { 'Klaar: alles goedgekeurd wat kon.' } 2 { 'Er wacht iets op de beheerder (zie hieronder).' } default { "Er ging iets mis (exitcode $code)." } }
+          "### $kop`n``````n$($uit -join "`n")`n``````" | Out-File -Append -Encoding utf8 $env:GITHUB_STEP_SUMMARY
+          exit $code
+
+      - name: Opruimen (ook bij een fout)
+        if: always()
+        shell: powershell
+        run: |
+          Remove-Item "$env:RUNNER_TEMP\*.key" -Force -ErrorAction SilentlyContinue
+          Remove-Item "$env:GITHUB_WORKSPACE\thuis" -Recurse -Force -ErrorAction SilentlyContinue

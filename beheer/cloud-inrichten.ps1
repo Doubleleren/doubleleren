@@ -1,6 +1,7 @@
 ﻿# Eenmalig (en veilig opnieuw te draaien): de cloud-generator in Doubleleren/doubleleren-generator van geheimen voorzien.
 # Draai dit zelf, in een gewoon PowerShell-venster. Alles gaat rechtstreeks naar GitHub en verschijnt nergens op het scherm:
-#   DL_GENERATOR_SLEUTEL   de generatorsleutel (nooit de beheersleutel; die blijft op deze laptop)
+#   DL_GENERATOR_SLEUTEL   de generatorsleutel (nooit de beheersleutel: die hoort niet in deze repo, waar Claude draait;
+#                          goedkeuren in de cloud gebeurt apart in doubleleren-beheer, zie cloud-beheer-inrichten.ps1)
 #   DL_DEPLOY_APP          nieuwe deploy key met schrijfrecht op doubleleren (lessen)
 #   DL_DEPLOY_DATA         nieuwe deploy key met schrijfrecht op doubleleren-data (wachtrijen, scorebord)
 #   ANTHROPIC_API_KEY      je API-sleutel; gh vraagt erom (plakken, niet zichtbaar)
@@ -17,7 +18,7 @@ if (-not (Test-Path $gh)) { throw 'GitHub CLI (gh) niet gevonden.' }
 $OutputEncoding = New-Object Text.UTF8Encoding($false)
 
 $g = Read-DlGeheim (Join-Path (Get-DlThuis) 'beheer\beheer.dpapi')
-if (-not $g -or -not $g.beheerPrive -or $g.beheerPrive.n -eq $g.generatorPrive.n) { throw 'Eerst beheer.ps1 -NieuweGeneratorsleutel: de beheersleutel mag nooit naar de cloud.' }
+if (-not $g -or -not $g.beheerPrive -or $g.beheerPrive.n -eq $g.generatorPrive.n) { throw 'Eerst beheer.ps1 -NieuweGeneratorsleutel: de beheersleutel mag nooit in de generator-repo.' }
 & $gh auth status 2>$null | Out-Null
 if ($LASTEXITCODE) { throw "De GitHub CLI is in dit venster nog niet ingelogd. Draai eerst:  & '$gh' auth login --web --scopes repo,workflow  en daarna dit script opnieuw." }
 & $gh repo view $Repo --json name | Out-Null; if ($LASTEXITCODE) { throw "Repo $Repo niet gevonden of geen toegang." }
@@ -40,7 +41,11 @@ try {
         & ssh-keygen -q -t ed25519 -C $titel -N '""' -f $f | Out-Null
         if (-not (Test-Path $f)) { throw 'ssh-keygen mislukt.' }
         # Oude cloud-sleutel van een eerdere inrichting eerst weghalen
-        foreach ($oud in @(& $gh repo deploy-key list --repo $doel --json id,title | ConvertFrom-Json | Where-Object { $_.title -eq $titel })) { & $gh repo deploy-key delete $oud.id --repo $doel | Out-Null }
+        # (ConvertFrom-Json geeft een JSON-lijst als één object door: eerst uitpakken, dan filteren)
+        foreach ($oud in @((& $gh repo deploy-key list --repo $doel --json id,title | ConvertFrom-Json) | ForEach-Object { $_ } | Where-Object { $_.title -eq $titel })) {
+            & $gh repo deploy-key delete $oud.id --repo $doel | Out-Null
+            if ($LASTEXITCODE) { throw "Oude deploy key $($oud.id) op $doel verwijderen mislukt: verwijder hem zelf (Settings → Deploy keys)." }
+        }
         & $gh repo deploy-key add "$f.pub" --repo $doel --allow-write --title $titel | Out-Null
         if ($LASTEXITCODE) { throw "Deploy key voor $doel toevoegen mislukt." }
         Write-Host "  deploy key met schrijfrecht op $doel"
