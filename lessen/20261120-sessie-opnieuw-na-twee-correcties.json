@@ -12,7 +12,7 @@
     "vraag": "Wat werkt nu waarschijnlijk het best?",
     "opties": [
       "Een derde correctie in hoofdletters typen, zodat Claude snapt dat het dubbel tellen echt moet stoppen.",
-      "Een nieuwe sessie starten met één betere opdracht, waarin je meteen beide eisen en een controle noemt.",
+      "Een nieuwe sessie starten met één betere opdracht, zodat de mislukte pogingen niet meer meesturen.",
       "Dezelfde sessie laten doorwerken tot het klopt, zodat Claude alles wat al geprobeerd is kan meenemen.",
       "Overstappen op een andere AI-agent, zodat een ander model het dubbel tellen opnieuw kan bekijken."
     ],
@@ -37,5 +37,7 @@
   "bron": {
     "titel": "Best practices for Claude Code | Claude Code Docs",
     "url": "https://code.claude.com/docs/en/best-practices"
-  }
+  },
+  "herzien": "2026-11-23",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

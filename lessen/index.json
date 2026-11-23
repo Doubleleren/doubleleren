@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-20T05:28:12",
+    "bijgewerkt":  "2026-11-23T05:30:42",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -5781,7 +5781,185 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "vormAfwijkend":  true
+                       "herzien":  "2026-11-23"
+                   },
+                   {
+                       "id":  "20261123-claude-controle-die-slaagt-of-zakt",
+                       "titel":  "\u0027Klaar, het script werkt.\u0027 Maar de klikken kloppen niet",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Claude een controle geven die slaagt of zakt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.3.3",
+                                      "coderen-met-ai:3.1.3"
+                                  ],
+                       "kernpunt":  "Geef Claude bij elke klus iets wat \u0027goed\u0027 of \u0027fout\u0027 zegt, en vraag om de uitkomst in plaats van om \u0027klaar\u0027.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-magento-url-key-redirect",
+                       "titel":  "40 producten hernoemd, 40 keer een 404: wat zet je in Magento aan?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Magento: automatische redirect bij een gewijzigde URL-key",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.7"
+                                  ],
+                       "kernpunt":  "Gaan er veel URL\u0027s veranderen, regel dan eerst dat het systeem zelf doorstuurt. Met de hand achteraf repareren is foutgevoelig.",
+                       "bron":  {
+                                    "titel":  "Automatic product redirects | Adobe Commerce (Experience League)",
+                                    "url":  "https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/url-rewrites/url-redirect-product-automatic"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-mcp-servers-kosten-context",
+                       "titel":  "Acht koppelingen aan, één nodig: kan dat kwaad?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "MCP-servers: gekoppeld is niet gratis",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:4.4.1",
+                                      "coderen-met-ai:4.4.2"
+                                  ],
+                       "kernpunt":  "Koppel wat je deze week gebruikt en zet de rest uit. Elke server die aan staat, reist mee in elke sessie.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-mergeconflict-zelf-kiezen",
+                       "titel":  "GitHub meldt een conflict in je pull request. Wat nu?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een mergeconflict: wat het is en wat je doet",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.2.3",
+                                      "coderen-met-ai:2.3.2"
+                                  ],
+                       "kernpunt":  "Een conflict is een vraag, geen fout: Git vraagt jou welke versie blijft. Kies bewust, en overleg bij twijfel.",
+                       "bron":  {
+                                    "titel":  "About merge conflicts | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-plan-mode-eerst-voorstel",
+                       "titel":  "Eerst zien hoe Claude het aanpakt, zonder dat er iets verandert",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "De juiste stand kiezen: eerst een plan, nog niets wijzigen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:1.2.3",
+                                      "coderen-met-ai:3.2.1"
+                                  ],
+                       "kernpunt":  "Weet je nog niet hoe het moet, laat Claude dan eerst een plan maken. Bouwen komt pas na jouw akkoord.",
+                       "bron":  {
+                                    "titel":  "Permission modes | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/permission-modes"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-skill-met-gevolgen-zelf-starten",
+                       "titel":  "Je vroeg om een concept, de klant kreeg het rapport al",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een skill met gevolgen alleen zelf laten starten",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.2.2",
+                                      "coderen-met-ai:4.2.1"
+                                  ],
+                       "kernpunt":  "Stuurt een skill iets naar buiten, laat hem dan alleen starten als jij de opdracht typt.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-subagent-geen-slimmer-antwoord",
+                       "titel":  "\u0027Laat een subagent het overdoen, die snapt het vast beter\u0027",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Wanneer een subagent wel en niet helpt",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.3.3",
+                                      "coderen-met-ai:4.3.1"
+                                  ],
+                       "kernpunt":  "Is een antwoord fout omdat er informatie ontbreekt, geef dan die informatie. Een extra agent kent hem ook niet.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-terugspoelen-herstelt-geen-commando",
+                       "titel":  "Teruggespoeld, maar drie CSV-bestanden blijven weg",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Terugspoelen (rewind): wat komt er wel en niet terug?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:3.2.3"
+                                  ],
+                       "kernpunt":  "Terugspoelen is een vangnet voor Claudes bewerkingen, niet voor wat er in de terminal gebeurt. Commit eerst als er iets verwijderd kan worden.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261123-wordpress-7-2-random-redirect",
+                       "titel":  "WordPress 7.2 komt op 8 december: wat moet de developer vooraf weten?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "WordPress 7.2 zet /random/ standaard aan, ook voor eigen berichttypes",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.4",
+                                      "1.3.1"
+                                  ],
+                       "kernpunt":  "Komt er een nieuwe standaardfunctie in het CMS, kijk dan welke pagina\u0027s die bereikt. Wat je SEO-plugin instelt, is niet genoeg.",
+                       "bron":  {
+                                    "titel":  "Make WordPress Core: Your content is going to get more random",
+                                    "url":  "https://make.wordpress.org/core/2026/11/05/your-content-is-going-to-get-more-random/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
                    }
                ]
 }

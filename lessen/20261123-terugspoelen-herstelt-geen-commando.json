@@ -1,0 +1,41 @@
+{
+  "id": "20261123-terugspoelen-herstelt-geen-commando",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Terugspoelen (rewind): wat komt er wel en niet terug?",
+  "matrix": ["coderen-met-ai:3.2.3"],
+  "titel": "Teruggespoeld, maar drie CSV-bestanden blijven weg",
+  "intro": "Claude Code past je rapportagescript aan met zijn eigen bewerkfunctie. In dezelfde beurt draait het een commando in de terminal dat de map 'exports' opruimt en drie oude CSV-bestanden verwijdert. Het resultaat bevalt je niet. Je drukt twee keer op Esc en zet code en gesprek terug naar vóór die opdracht.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is daarna weer zoals het was?",
+    "opties": [
+      "Alleen het script, omdat terugspoelen alleen bestanden herstelt die Claude met zijn eigen bewerkfunctie wijzigde.",
+      "Het script en de CSV-bestanden, omdat terugspoelen alles herstelt wat Claude sinds die opdracht heeft gedaan.",
+      "Alleen het gesprek, omdat terugspoelen nooit bestanden aanraakt en je daarvoor altijd git nodig hebt.",
+      "Niets, omdat terugspoelen alleen werkt als je vóór die opdracht zelf al een commit in git had gemaakt."
+    ],
+    "juist": 0
+  },
+  "kern": "Terugspoelen herstelt wat Claude met zijn eigen bewerkfunctie veranderde. Wat een terminalcommando deed, zoals bestanden verwijderen, komt niet terug.",
+  "afleiders": [
+    "",
+    "**Alles terug:** het menu belooft 'terug naar eerder', dus dat lijkt logisch. Maar een terminalcommando valt buiten het geheugen van terugspoelen.",
+    "**Alleen het gesprek:** je kúnt kiezen om alleen het gesprek terug te zetten. Maar je kunt ook de code terugzetten, en dan komt het script wel terug.",
+    "**Alleen met een commit:** git is een goed extra vangnet. Maar terugspoelen werkt los van git en heeft geen commit nodig."
+  ],
+  "kort": "Vergelijk het met de knop 'ongedaan maken' in een tekstverwerker. Die zet terug wat je in het document typte. Gooide je intussen een bestand in de prullenbak, dan haalt die knop het daar niet uit. Terugspoelen in Claude Code werkt net zo: het kent alleen de bewerkingen die Claude zelf in bestanden deed.",
+  "begrippen": [
+    { "term": "Terugspoelen (rewind)", "uitleg": "een menu in Claude Code waarmee je code, gesprek of allebei terugzet naar een eerdere opdracht. Je opent het met /rewind of twee keer Esc." },
+    { "term": "Terminalcommando", "uitleg": "een opdracht die Claude in de terminal uitvoert, zoals bestanden verplaatsen of verwijderen, in plaats van met zijn bewerkfunctie." },
+    { "term": "Commit", "uitleg": "een vastgelegd moment in git waar je later altijd naar terug kunt." }
+  ],
+  "uitleg": "Claude Code bewaart bij elke opdracht een checkpoint. Via /rewind of twee keer Esc op een lege invoerregel kies je wat terug moet: de code, het gesprek of allebei. Daardoor kun je gerust eerst een gewaagde aanpak proberen.\n\n**De grens:** checkpoints gaan over bestanden die Claude met zijn eigen bewerkfuncties aanpaste, in je hoofdgesprek. Een bestand dat alleen door een terminalcommando werd geraakt, wordt niet hersteld. Denk aan verwijderen, verplaatsen of een script dat bestanden overschrijft.\n\n**Daarom samen met git:**\n- Commit vóór een grote of riskante klus, zodat je altijd een vast punt hebt.\n- Laat bestanden die je niet kwijt wilt buiten mappen die Claude mag opruimen.\n- Zie je in een plan een verwijdercommando staan, druk dan meteen op Esc.",
+  "kernpunt": "Terugspoelen is een vangnet voor Claudes bewerkingen, niet voor wat er in de terminal gebeurt. Commit eerst als er iets verwijderd kan worden.",
+  "toepassing": "Kijk vandaag in een project waar je met Claude Code werkt of je laatste commit van vóór je laatste grote klus is. Zo niet, maak er nu een.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

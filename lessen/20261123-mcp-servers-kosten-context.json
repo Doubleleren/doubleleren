@@ -1,0 +1,41 @@
+{
+  "id": "20261123-mcp-servers-kosten-context",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "MCP-servers: gekoppeld is niet gratis",
+  "matrix": ["coderen-met-ai:4.4.1", "coderen-met-ai:4.4.2"],
+  "titel": "Acht koppelingen aan, één nodig: kan dat kwaad?",
+  "intro": "Een collega heeft in Claude Code acht MCP-servers gekoppeld: Search Console, GA4, Notion, Slack, Ahrefs en nog drie die hij één keer heeft geprobeerd. Vandaag werkt hij alleen aan een script dat een GA4-export opschoont. Hij vraagt of al die koppelingen kwaad kunnen. MCP is de standaard waarmee Claude tools van buiten kan gebruiken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het eerlijke antwoord?",
+    "opties": [
+      "Ze kosten niets zolang je ze niet gebruikt, omdat Claude een server pas laadt als je hem noemt.",
+      "Ze zijn een veiligheidsrisico, omdat elke MCP-server altijd volledige toegang tot je bestanden krijgt.",
+      "Ze tellen wel mee, omdat elke gekoppelde server zijn toolnamen en instructies in de context zet.",
+      "Ze vertragen alleen het opstarten, omdat Claude bij elke start alle servers moet testen op werking."
+    ],
+    "juist": 2
+  },
+  "kern": "Een gekoppelde server zet zijn toolnamen en instructies in elke sessie in de context, ook als je hem niet gebruikt. Zet wat je niet nodig hebt uit.",
+  "afleiders": [
+    "**Pas laden bij gebruik:** zo werken skills ongeveer, dus het klinkt logisch. Maar een gekoppelde MCP-server staat altijd met zijn tools in de context.",
+    "**Volledige toegang:** een server kan alleen wat zijn eigen tools kunnen. Kies wel bewust welke je koppelt, maar 'altijd alle bestanden' klopt niet.",
+    "",
+    "**Alleen opstarten:** het gaat niet om één moment bij de start. De toolnamen en instructies rijden de hele sessie mee."
+  ],
+  "kort": "Denk aan een gereedschapskist die je elke dag meesjouwt. Elk gereedschap dat erin zit, weegt mee, ook als je vandaag alleen een schroevendraaier nodig hebt. Haal eruit wat je niet gebruikt, dan loop je lichter. Gekoppelde MCP-servers zijn dat gereedschap: ze tellen mee in elke sessie.",
+  "begrippen": [
+    { "term": "MCP", "uitleg": "Model Context Protocol: een standaard om Claude te koppelen aan tools van buiten, zoals Search Console of Notion." },
+    { "term": "MCP-server", "uitleg": "de koppeling met één tool. Hij geeft Claude een set opdrachten, bijvoorbeeld 'haal zoekprestaties op'." },
+    { "term": "Context", "uitleg": "alles wat Claude op dat moment voor zich heeft. Wat erin staat, kost aandacht en gebruik bij elke vraag." }
+  ],
+  "uitleg": "De best practices van Claude Code zeggen het letterlijk: gekoppelde servers voegen hun toolnamen en instructies toe aan de context, ook als je ze niet gebruikt. Daarom is het de moeite waard om servers die je niet nodig hebt uit te zetten.\n\n**Zo pak je het aan:**\n- Typ /mcp in een sessie. Daar zie je welke servers gekoppeld zijn, en zet je ze uit zonder ze te verwijderen.\n- Bekijk met /usage welk deel van je gebruik per MCP-server gaat (op betaalde abonnementen).\n- Heeft een tool een opdrachtregelprogramma (CLI), zoals gh voor GitHub? Dan is dat meestal de makkelijkste koppeling. MCP is vooral voor systemen zonder CLI.\n\n**Koppelen** gaat vanuit de terminal, bijvoorbeeld: claude mcp add --transport http notion https://mcp.notion.com/mcp",
+  "kernpunt": "Koppel wat je deze week gebruikt en zet de rest uit. Elke server die aan staat, reist mee in elke sessie.",
+  "toepassing": "Typ vandaag /mcp in Claude Code. Zet elke server uit die je deze week niet nodig hebt.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}
