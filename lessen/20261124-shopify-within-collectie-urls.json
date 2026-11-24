@@ -1,0 +1,42 @@
+{
+  "id": "20261124-shopify-within-collectie-urls",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "Shopify: productlinks binnen collecties en canonicals",
+  "matrix": ["5.1.6", "1.3.3"],
+  "titel": "Shopify linkt naar /collections/.../products/: hoe ruim je dit op?",
+  "intro": "Een Shopify-winkel met 6.000 producten. Op collectiepagina's linkt het thema naar adressen als /collections/sale/products/wollen-trui. De canonical op die pagina's wijst naar /products/wollen-trui. In Search Console staan duizenden URL's als 'Alternatieve pagina met correcte canonieke tag', en in de crawlstatistieken gaat een groot deel van de crawls naar die collectieadressen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpak adviseer je de developer?",
+    "opties": [
+      "Disallow /collections/*/products/ in robots.txt.liquid, zodat Googlebot die adressen overslaat en zijn crawls aan de echte productpagina's besteedt.",
+      "Zet een noindex op alle productpagina's binnen een collectie, zodat alleen /products/ in de index komt en de canonical extra steun krijgt.",
+      "Maak in Shopify voor elk collectieadres een URL-redirect naar /products/, zodat Google het signaal van een redirect krijgt in plaats van een canonical.",
+      "Haal in het thema het filter within: collection uit de productlinks, zodat de collectiepagina's direct naar /products/ linken en de signalen kloppen."
+    ],
+    "juist": 3
+  },
+  "kern": "Link intern naar de canonieke URL. Zonder het within-filter wijzen links en canonical allebei naar /products/, en ontdekt Google de dubbele adressen niet meer via je eigen site.",
+  "afleiders": [
+    "**Robots.txt:** dat bespaart crawls, dus het voelt efficiënt. Maar Google kan de canonical dan niet meer lezen. Geblokkeerde URL's kunnen zelfs zonder inhoud in de index komen.",
+    "**Noindex:** dat klinkt als een extra slot op de deur. Google raadt noindex af om binnen één site een canonical te kiezen. Je stuurt dan twee verschillende signalen.",
+    "**URL-redirect:** een redirect is wel een sterk signaal. Maar in Shopify werkt een redirect alleen vanaf een adres dat een 404 geeft. De collectieadressen laden gewoon, dus de redirect doet niets.",
+    ""
+  ],
+  "kort": "Stel, je hangt bij de ingang van een gebouw een bord 'de receptie is op de begane grond'. Maar alle pijlen in de gangen wijzen naar een tweede balie op de derde verdieping. Bezoekers komen dan toch steeds daar uit. Het bord is de canonical, de pijlen zijn je interne links. Pas als de pijlen ook naar de begane grond wijzen, kiest iedereen dezelfde weg.",
+  "begrippen": [
+    { "term": "Canonical", "uitleg": "een tag waarmee je zegt welke van meerdere gelijke pagina's de hoofdversie is die in Google moet komen." },
+    { "term": "within-filter", "uitleg": "een stukje Liquid-code in Shopify-thema's dat een productlink maakt met de collectie ervoor in het adres." },
+    { "term": "Liquid", "uitleg": "de sjabloontaal waarmee Shopify-thema's zijn gebouwd." },
+    { "term": "Crawlstatistieken", "uitleg": "een rapport in Search Console dat laat zien hoeveel en welke pagina's Googlebot opvraagt." }
+  ],
+  "uitleg": "**Waar het vandaan komt:** veel Shopify-thema's maken productlinks met *product.url | within: collection*. Dat geeft adressen als /collections/sale/products/wollen-trui. Shopify zegt zelf dat dit dezelfde inhoud op aparte URL's oplevert, en dat je de SEO-gevolgen moet afwegen.\n\n**Waarom de canonical niet genoeg is:** Google ziet de canonical als sterk signaal, maar weegt alle signalen. Interne links horen daarbij. Google adviseert binnen je site naar de canonieke URL te linken. Linkt elke collectiepagina naar de collectieversie, dan blijft Googlebot die adressen ontdekken en opvragen.\n\n**De aanpak:**\n- zoek in het thema (vaak in de snippet voor productkaarten) naar *within: collection* en haal het weg;\n- controleer na publicatie met een crawl dat collectiepagina's naar /products/ linken;\n- laat de canonical staan: die vangt oude links van buiten op.\n\n**Let op:** heeft de winkel functies die de collectie in het adres nodig hebben, zoals een breadcrumb per collectie, overleg dan eerst met de developer.",
+  "kernpunt": "Laat je interne links naar dezelfde URL wijzen als je canonical. Een canonical die tegen je eigen links in praat, is een zwak verhaal.",
+  "toepassing": "Crawl vandaag één collectiepagina van een Shopify-klant en kijk of de productlinks /collections/ in het adres hebben. Zo ja, zoek in de themacode naar 'within'.",
+  "bron": {
+    "titel": "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+  }
+}

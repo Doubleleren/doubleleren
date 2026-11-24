@@ -1,0 +1,42 @@
+{
+  "id": "20261124-hook-altijd-controlescript",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een hook voor iets wat altijd moet gebeuren",
+  "matrix": ["coderen-met-ai:4.5.1", "coderen-met-ai:4.5.2"],
+  "titel": "'Draai na elke wijziging het controlescript' wordt soms vergeten",
+  "intro": "In de repository van een rapportagetool staat een controlescript. Dat kijkt of de kolomnamen in de CSV-exports nog kloppen. In de CLAUDE.md staat: 'Draai na elke wijziging in de map exports het controlescript.' Meestal doet Claude dat. Maar twee keer deze maand ging een kapotte export toch naar de klant.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste manier om te zorgen dat het script na elke wijziging draait?",
+    "opties": [
+      "De regel in CLAUDE.md in hoofdletters zetten met 'ALTIJD' erbij, want Claude weegt zo'n duidelijke nadruk zwaarder dan een gewone zin.",
+      "Een skill 'controleren' maken met de stappen van het script, want Claude pakt die skill erbij zodra hij aan de exports werkt.",
+      "Een hook maken die na elke bewerking van een bestand het script draait, want een hook voert Claude Code zelf uit, zonder keuze van Claude.",
+      "Een subagent maken die na afloop alle exports nakijkt, want een frisse sessie ziet fouten die de hoofdsessie zelf over het hoofd ziet."
+    ],
+    "juist": 2
+  },
+  "kern": "Een hook draait elke keer op een vast moment, zoals na het bewerken van een bestand. Of een regel in CLAUDE.md wordt gevolgd, blijft Claudes eigen keuze.",
+  "afleiders": [
+    "**Hoofdletters:** nadruk voelt als een stevigere afspraak. Maar hoe sterk je het ook formuleert, Claude beslist nog steeds per beurt of hij de regel volgt. Blijf je nadruk toevoegen, dan hoort de regel in een hook.",
+    "**Skill:** een skill helpt Claude om een taak goed te doen. Maar ook hier kiest Claude zelf of en wanneer hij de skill gebruikt. Dat is precies het probleem.",
+    "",
+    "**Subagent:** een frisse blik helpt bij een review. Maar een subagent start alleen als iets hem start. Dat 'altijd' is daarmee niet geregeld."
+  ],
+  "kort": "Vergelijk het met een briefje op de koelkast: 'Deur dichtdoen!' Meestal lukt dat, maar soms vergeet iemand het. Een deur met een veer gaat altijd dicht, wie er ook door loopt. Een regel in CLAUDE.md is het briefje. Een hook is de veer: die werkt elke keer, zonder dat iemand eraan hoeft te denken.",
+  "begrippen": [
+    { "term": "Hook", "uitleg": "een commando dat Claude Code zelf uitvoert op een vast moment, bijvoorbeeld na elke bestandsbewerking." },
+    { "term": "CLAUDE.md", "uitleg": "een bestand met instructies die Claude aan het begin van elke sessie leest." },
+    { "term": "Skill", "uitleg": "een set instructies en scripts voor een taak, die Claude erbij pakt wanneer hij denkt dat het past." },
+    { "term": "Subagent", "uitleg": "een aparte Claude-sessie die een deeltaak doet en het resultaat teruggeeft." }
+  ],
+  "uitleg": "**Wat de documentatie zegt:** hooks geven je deterministische controle. Bepaalde acties gebeuren dan altijd, in plaats van dat het taalmodel kiest of het ze uitvoert. Een regel in CLAUDE.md volgt Claude bijna altijd, maar het blijft per beurt Claudes beslissing.\n\n**Welke hook past hier?**\n- **PostToolUse** draait nadat een tool is gelukt. Met de matcher Edit|Write draait hij alleen na het bewerken of schrijven van een bestand. Dat past bij 'na elke wijziging'.\n- **PreToolUse** draait vóór een tool en kan die tegenhouden. Dat gebruik je voor 'dit mag nooit', zoals een beschermd bestand.\n\n**Zo zet je het op:** de hook komt in .claude/settings.json in de repository. Dan geldt hij voor iedereen die in het project werkt.\n\n**Andersom geldt ook:** heb je hooks voor dingen die eigenlijk een voorkeur zijn, haal ze dan weg en laat Claude kiezen.",
+  "kernpunt": "Moet iets altijd gebeuren, gebruik dan een hook. Merk je dat je een regel in CLAUDE.md steeds harder formuleert, dan is dat het signaal.",
+  "toepassing": "Zoek vandaag in de CLAUDE.md van één project naar regels met 'altijd' of 'nooit'. Kies er één die al eens is overgeslagen en vraag Claude er een hook voor te maken.",
+  "bron": {
+    "titel": "Automate actions with hooks | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/hooks-guide"
+  }
+}

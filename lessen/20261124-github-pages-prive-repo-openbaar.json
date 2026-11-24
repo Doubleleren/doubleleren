@@ -1,0 +1,41 @@
+{
+  "id": "20261124-github-pages-prive-repo-openbaar",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Iets live zetten met GitHub Pages, en wanneer dat niet verstandig is",
+  "matrix": ["coderen-met-ai:7.2.3", "coderen-met-ai:2.3.3"],
+  "titel": "Het klantdashboard staat in een privérepo. Kan het op GitHub Pages?",
+  "intro": "Je hebt met Claude Code een klein dashboard gebouwd met de omzet en de zoekwoorden van een klant. De data staat in een JSON-bestand in dezelfde privérepository. Een collega wil het dashboard ook op zijn telefoon zien. Claude stelt voor: 'Zal ik GitHub Pages aanzetten? Dan krijg je een link.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je?",
+    "opties": [
+      "Ja zeggen, want de repository is privé, dus alleen mensen met toegang tot de repository kunnen de pagina openen.",
+      "Ja zeggen, want de link is lang en willekeurig, dus niemand vindt het dashboard zonder dat je hem de link stuurt.",
+      "Ja zeggen, maar het JSON-bestand eerst hernoemen, want dan staat de klantdata niet meer onder een voor de hand liggende naam.",
+      "Nee zeggen, want een GitHub Pages-site is openbaar op internet, ook als de repository privé is, dus de klantdata ook."
+    ],
+    "juist": 3
+  },
+  "kern": "Een GitHub Pages-site is voor iedereen op internet bereikbaar, ook vanuit een privérepository. Klantdata hoort daar niet.",
+  "afleiders": [
+    "**Privérepository:** het voelt logisch dat de site dan ook privé is. Maar privé geldt voor de code en de bestanden in GitHub, niet voor de website die Pages ervan maakt.",
+    "**Lange link:** een moeilijk adres voelt als een slot. Maar links worden doorgestuurd, in chats geplakt en soms gevonden. Een geheime link is geen beveiliging.",
+    "**Bestand hernoemen:** dan is de data alleen lastiger te vinden. Het dashboard laadt het bestand nog steeds, dus wie de site opent, kan het gewoon ophalen.",
+    ""
+  ],
+  "kort": "Vergelijk het met een etalage van een winkel die 's avonds dicht is. De deur zit op slot, maar wat in de etalage staat, ziet iedereen die langsloopt. De privérepository is de afgesloten winkel. GitHub Pages is de etalage. Leg daar dus niets neer wat niet voor voorbijgangers bedoeld is.",
+  "begrippen": [
+    { "term": "GitHub Pages", "uitleg": "een dienst van GitHub die bestanden uit een repository als website online zet." },
+    { "term": "Privérepository", "uitleg": "een repository die alleen mensen met toegang kunnen zien. Dat geldt voor de bestanden in GitHub." },
+    { "term": "JSON-bestand", "uitleg": "een tekstbestand met gegevens in een vaste opbouw, dat een webpagina kan inladen." }
+  ],
+  "uitleg": "**Wat GitHub zegt:** sites op GitHub Pages zijn openbaar op internet, ook als de repository van de site privé is. Staat er gevoelige data in de repository, haal die dan weg voordat je publiceert.\n\n**Wanneer is Pages wel prima?**\n- een demo met nepdata of openbare cijfers;\n- documentatie of een handleiding zonder klantinformatie;\n- een tool die alleen in de browser rekent en geen data meelevert.\n\n**Wanneer niet?**\n- klantdata, omzet, persoonsgegevens of interne cijfers;\n- iets met een API-sleutel erin: die is dan voor iedereen te lezen.\n\n**Alternatieven voor het dashboard:** lokaal openen op je eigen laptop, of een omgeving waar mensen moeten inloggen. Overleg bij twijfel met wie in je bedrijf over de tools en data gaat.\n\n**Let op met Claude:** Claude stelt iets voor wat technisch werkt. Of het mag, beslis jij.",
+  "kernpunt": "Staat er iets in de repository wat niet openbaar mag, zet dan geen GitHub Pages aan. Privé geldt voor de repo, niet voor de site.",
+  "toepassing": "Kijk vandaag in je eigen GitHub-repositories onder Settings → Pages of er ergens een site aanstaat, en controleer of daar geen klantdata in zit.",
+  "bron": {
+    "titel": "Creating a GitHub Pages site | GitHub Docs",
+    "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site"
+  }
+}

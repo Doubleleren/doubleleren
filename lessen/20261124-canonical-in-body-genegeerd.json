@@ -1,0 +1,42 @@
+{
+  "id": "20261124-canonical-in-body-genegeerd",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Wat in de body mag en wat in de head moet: JSON-LD en canonical",
+  "matrix": ["5.3.2", "1.3.3"],
+  "titel": "Alle SEO-tags in een blok onderaan de pagina: werkt dat?",
+  "intro": "Bij een klant zit de template van de head op slot. Alleen het bureau van de oorspronkelijke bouwer mag hem aanpassen. De interne developer wil daarom een 'SEO-blok' onderaan elke productpagina zetten, in de body. Daarin komen de productmarkup als JSON-LD en een link rel=canonical. Hij vraagt of dat net zo goed werkt als in de head.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat antwoord je de developer?",
+    "opties": [
+      "Alles in het blok werkt, want Google leest de volledige gerenderde HTML en kijkt dus niet waar een tag precies staat.",
+      "De JSON-LD werkt in de body, maar de canonical niet, want Google accepteert een link rel=canonical alleen in de head.",
+      "Niets in het blok werkt, want Google leest zowel JSON-LD als de canonical alleen als ze in de head van de pagina staan.",
+      "De canonical werkt in de body, maar de JSON-LD niet, want markup moet vóór de zichtbare inhoud staan om mee te tellen."
+    ],
+    "juist": 1
+  },
+  "kern": "JSON-LD mag in de body staan. Een link rel=canonical telt alleen in de head. Kan dat niet, dan is een canonical in de HTTP-header een alternatief.",
+  "afleiders": [
+    "**Alles werkt:** Google leest inderdaad de hele pagina, dus dit klinkt logisch. Maar voor de canonical maakt Google een uitzondering: buiten de head wordt hij niet geaccepteerd.",
+    "",
+    "**Niets werkt:** veel SEO-tags horen in de head, dus dit lijkt een veilige gok. Maar JSON-LD is een losse scriptblok. Google leest dat ook in de body.",
+    "**Alleen de canonical:** het is net andersom. Waar de JSON-LD in de pagina staat, maakt niet uit. De canonical is juist de tag die aan de head vastzit."
+  ],
+  "kort": "Vergelijk het met een brief. Een bijlage mag je overal in de envelop stoppen, die wordt toch gelezen. Maar het adres moet op de buitenkant, anders weet de postbode niet waar de brief heen moet. JSON-LD is de bijlage: Google vindt hem overal. De canonical is het adres: die moet op de vaste plek staan, in de head.",
+  "begrippen": [
+    { "term": "Head", "uitleg": "het onzichtbare begin van een webpagina, met informatie voor browsers en zoekmachines, zoals de title en de canonical." },
+    { "term": "Body", "uitleg": "het deel van de pagina met de inhoud die bezoekers zien." },
+    { "term": "JSON-LD", "uitleg": "een manier om structured data als los blok code in een pagina te zetten, zodat Google begrijpt wat er op de pagina staat." },
+    { "term": "Canonical", "uitleg": "een verwijzing naar de hoofdversie van een pagina, als dezelfde inhoud op meer adressen staat." }
+  ],
+  "uitleg": "**Wat Google zegt:** de link rel=canonical wordt alleen geaccepteerd als hij in de head van de HTML staat. Voor JSON-LD geldt dat niet: het blok mag in de head of in de body.\n\n**Let op bij plugins en widgets:** ook een tool die zelf een canonical in de body zet, levert dus niets op. Kijk daarom altijd in de gerenderde HTML waar de tag echt staat.\n\n**Opties als de head op slot zit:**\n- de canonical als HTTP-header meesturen (Link: <url>; rel=\"canonical\"), via de server of het CDN;\n- het bureau één keer laten inbouwen dat de canonical uit een veld in het CMS komt;\n- tot die tijd zorgen dat interne links en de sitemap naar de juiste URL wijzen. Dat zijn zwakkere signalen, maar ze helpen.\n\n**Controleer achteraf** in de URL-inspectietool welke canonical Google heeft gekozen.",
+  "kernpunt": "Zet je SEO-tags buiten de head, check dan per tag of Google hem daar leest. JSON-LD mag overal, de canonical alleen in de head.",
+  "toepassing": "Bekijk vandaag in de gerenderde HTML van één klantpagina of de canonical echt in de head staat, en niet in een blok dat een plugin of widget in de body zet.",
+  "bron": {
+    "titel": "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+  }
+}

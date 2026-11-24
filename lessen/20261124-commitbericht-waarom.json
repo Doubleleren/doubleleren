@@ -1,0 +1,41 @@
+{
+  "id": "20261124-commitbericht-waarom",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Repository, commit en een goed commitbericht",
+  "matrix": ["coderen-met-ai:2.2.1"],
+  "titel": "Drie maanden later: 'update' zegt niemand iets meer",
+  "intro": "In de repository van een rapportagetool zie je drie maanden later dat de drempel voor 'merkzoekwoord' is veranderd. Je wilt weten waarom. In de geschiedenis staat bij die wijziging alleen het commitbericht 'update'. Een commit is een opgeslagen wijziging in een repository, met een korte beschrijving erbij. Vandaag laat je Claude zelf een commit maken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welk commitbericht is het nuttigst voor wie dit later terugleest?",
+    "opties": [
+      "'merkfilter.py aangepast, regel 12 tot en met 18', want dan ziet iemand later precies welke regels er zijn veranderd.",
+      "'Update merkfilter', want een kort bericht is snel te lezen en de details staan toch al in de wijziging zelf.",
+      "'Merkfilter telt nu ook schrijfwijze met spatie mee, want klanten zoeken vaak zo', want dan staat erbij waarom.",
+      "'Wijzigingen van dinsdag 24 november', want dan kan iemand later op datum terugvinden wat er toen is gebeurd."
+    ],
+    "juist": 2
+  },
+  "kern": "Een goed commitbericht zegt wat er veranderde en waarom. Welke regels er veranderden, laat Git al zien.",
+  "afleiders": [
+    "**Bestand en regels:** dat klinkt precies. Maar Git toont zelf al welke regels er veranderden. Het bericht herhaalt dan wat je al ziet, en de reden ontbreekt.",
+    "**Kort bericht:** kort is fijn, en de wijziging zelf is inderdaad terug te zien. Maar uit de code haal je niet waarom iemand het deed. Daar ging je juist naar zoeken.",
+    "",
+    "**Datum:** die slaat Git al automatisch op bij elke commit. Het bericht vertelt dan niets nieuws over de inhoud of de reden."
+  ],
+  "kort": "Vergelijk het met een notitie bij een verbouwing: 'muur weggehaald'. Over een jaar zie je zelf ook wel dat de muur weg is. Wat je dan wilt weten, is waarom: 'muur weg voor meer licht in de keuken'. Een commit bewaart de wijziging al. Het bericht is er voor het waarom.",
+  "begrippen": [
+    { "term": "Repository", "uitleg": "een map met bij elkaar horende bestanden, waarvan Git alle versies bijhoudt." },
+    { "term": "Commit", "uitleg": "een opgeslagen wijziging in een repository, met een korte beschrijving erbij." },
+    { "term": "Commitbericht", "uitleg": "de beschrijving bij een commit. Die leest iedereen die later in de geschiedenis kijkt." }
+  ],
+  "uitleg": "**Wat GitHub zegt:** elke commit heeft een beschrijving die uitlegt waarom een wijziging is gedaan. Zo begrijpen anderen wat er gebeurde en waarom.\n\n**Een handige vorm:**\n- een korte eerste regel met wat er verandert (in de gebiedende of tegenwoordige vorm);\n- eventueel een witregel en daarna de reden of de context, zoals de vraag van de klant.\n\n**Als Claude de commit maakt:** Claude schrijft zelf een bericht op basis van de wijziging. Wat er veranderde, haalt het uit de code. De reden weet het alleen als jij die in je opdracht noemde. Lees het bericht dus na en vul het waarom aan als dat ontbreekt.\n\n**Afspraken per team:** veel teams hebben eigen regels, zoals de taal van het bericht. Die staan vaak in de README of de CLAUDE.md van de repository.",
+  "kernpunt": "Schrijf in een commitbericht waarom je iets veranderde. Wat er veranderde, laat Git zelf al zien.",
+  "toepassing": "Open vandaag de geschiedenis van een repository waar je aan werkt. Zoek één commitbericht zonder reden en bedenk hoe het met één bijzin over het waarom duidelijker was geweest.",
+  "bron": {
+    "titel": "Hello World | GitHub Docs",
+    "url": "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+  }
+}

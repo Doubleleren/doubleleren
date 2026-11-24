@@ -1,0 +1,41 @@
+{
+  "id": "20261124-specifieke-opdracht-bestand-symptoom-klaar",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een goede opdracht schrijven: bestand, symptoom en wanneer het klaar is",
+  "matrix": ["coderen-met-ai:3.1.2", "coderen-met-ai:6.1.2"],
+  "titel": "'Fix de export' leverde drie rondes correcties op. Wat had geholpen?",
+  "intro": "Het script export_ga4.py maakt elke week een overzicht per kanaal. Sinds de klant een nieuw kanaal 'AI-assistenten' heeft, valt dat verkeer onder 'Overig'. Een collega typte in Claude Code: 'Fix de export.' Na drie rondes bijsturen klopte het pas. Volgende week moet hij iets vergelijkbaars doen in een ander script.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke opdracht levert waarschijnlijk in één keer het goede resultaat op?",
+    "opties": [
+      "'Fix de export en denk stap voor stap heel grondig na', zodat Claude harder nadenkt voordat het de code aanpast.",
+      "'export_ga4.py zet AI-assistenten onder Overig; klaar is als het een eigen rij heeft', zodat Claude weet waar en wanneer.",
+      "'Je bent een ervaren Python-developer, fix de export', zodat Claude de rol van een expert aanneemt en beter werk levert.",
+      "'Fix alle problemen die je in de exportscripts vindt', zodat Claude meteen ook andere fouten meeneemt die er nog zitten."
+    ],
+    "juist": 1
+  },
+  "kern": "Noem het bestand, beschrijf wat er misgaat en zeg wanneer het klaar is. Dat is informatie die Claude niet zelf uit de code kan halen.",
+  "afleiders": [
+    "**Grondig nadenken:** zulke woorden klinken als een knop voor meer kwaliteit. Maar het zijn gewone woorden in je opdracht. Ze vertellen Claude niet welk bestand of welk kanaal het om gaat.",
+    "",
+    "**Expertrol:** een rol geven voelt als een upgrade. Maar Claude weet daarmee nog steeds niet wat er misgaat en wanneer jij tevreden bent.",
+    "**Alle problemen:** breder lijkt grondiger. Maar Claude gaat dan zelf kiezen wat een probleem is, en past mogelijk dingen aan die goed waren."
+  ],
+  "kort": "Vergelijk het met de garage bellen. 'Mijn auto doet raar' levert een lange zoektocht op. 'Bij het remmen piept linksvoor, sinds de nieuwe banden' brengt de monteur meteen naar de goede plek. En als je erbij zegt 'klaar is als het piepen weg is', weet hij ook wanneer hij moet stoppen. Een goede opdracht geeft de plek, het symptoom en het eindpunt.",
+  "begrippen": [
+    { "term": "Opdracht (prompt)", "uitleg": "wat je aan Claude typt om een taak te laten doen." },
+    { "term": "Symptoom", "uitleg": "wat je ziet dat er misgaat, zoals verkeer dat in de verkeerde groep valt." },
+    { "term": "Klaar-criterium", "uitleg": "een concrete check waarmee je en Claude allebei kunnen zien dat de taak af is." }
+  ],
+  "uitleg": "**Wat de documentatie aanraadt:** een specifieke opdracht geeft Claude informatie die het nog niet heeft. Noem het bestand, beschrijf het symptoom en zeg vooraf hoe 'opgelost' eruitziet. Dat scheelt je meestal een ronde correcties.\n\n**Nog drie dingen die helpen:**\n- heb je een voorbeeld of een foutmelding, geef die mee in plaats van hem te beschrijven (een bestand met @ en het pad, een screenshot of de uitvoer van een commando);\n- heb je een voorkeur tussen twee aanpakken, zeg die erbij;\n- wil je meer dan het minimum, zeg dat ook. Claude bouwt anders vaak het kleinste dat werkt.\n\n**Wat minder helpt:** zinnen als 'denk stap voor stap' of 'wees grondig' zijn gewone tekst, geen schakelaar. Hoe hard Claude nadenkt, stel je in met het effort-niveau.\n\n**Uitzondering:** ben je nog aan het verkennen, dan is een open vraag als 'wat zou je verbeteren in dit bestand?' prima.",
+  "kernpunt": "Schrijf in je opdracht waar het zit, wat er misgaat en waaraan je ziet dat het klaar is.",
+  "toepassing": "Pak vandaag de laatste opdracht die je aan Claude gaf en herschrijf hem met bestand, symptoom en klaar-criterium. Gebruik die versie bij je volgende vergelijkbare klus.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

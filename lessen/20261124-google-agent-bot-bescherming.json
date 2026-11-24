@@ -1,0 +1,42 @@
+{
+  "id": "20261124-google-agent-bot-bescherming",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Google-Agent doorlaten in firewall en bot-bescherming",
+  "matrix": ["12.1.6", "5.1.2"],
+  "titel": "Google-Agent krijgt een CAPTCHA in de webshop: wat adviseer je?",
+  "intro": "Een webshop gebruikt een firewall met bot-bescherming. Die blokkeert verkeer van datacenters en alles in de categorie 'AI-agents', en toont anders een CAPTCHA. In de logs ziet de developer veel geweigerde verzoeken met 'Google-Agent' in de user-agent, ook op de winkelwagen. Google-Agent is een agent van Google die op verzoek van een gebruiker websites bezoekt en daar handelingen uitvoert.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de developer, op basis van de nieuwe documentatie van Google?",
+    "opties": [
+      "Zet in robots.txt een groep voor Google-Agent met Allow: /, zodat de firewall ziet dat dit verkeer welkom is en het doorlaat.",
+      "Laat alles door met 'Google-Agent' in de user-agent, zodat echte verzoeken nooit meer een CAPTCHA krijgen, ook niet op de winkelwagen.",
+      "Maak een regel die Google-Agent eerst controleert op user-agent en IP-lijst, en die vóór de brede blokkades staat, zonder CAPTCHA.",
+      "Geef Google-Agent een strengere limiet per IP-adres, zodat één gebruiker van de agent de server niet kan overbelasten met verzoeken."
+    ],
+    "juist": 2
+  },
+  "kern": "Google adviseert geverifieerde Google-Agent-verzoeken toe te laten met een regel die vóór de brede blokkades draait, zonder CAPTCHA of JavaScript-uitdaging.",
+  "afleiders": [
+    "**Robots.txt:** het lijkt logisch, want daar regel je wie er mag crawlen. Maar een firewall leest robots.txt niet. En Google-Agent werkt op verzoek van een gebruiker: zulke fetchers negeren robots.txt meestal.",
+    "**Alleen de user-agent:** dat is snel geregeld. Maar iedereen kan 'Google-Agent' in zijn user-agent zetten. Zonder controle van het IP-adres laat je ook nepbots binnen.",
+    "",
+    "**Strengere limiet per IP:** voorzichtig klinkt veilig. Maar veel gebruikers delen dezelfde IP-adressen van Google. Google raadt juist aan die adressen uit te zonderen van limieten per IP."
+  ],
+  "kort": "Denk aan een portier bij een kantoor die iedereen met een busje van een koeriersbedrijf wegstuurt. Een echte koerier van een bekende vervoerder komt dan ook niet binnen. De oplossing is niet alle busjes binnenlaten, maar het pasje controleren. Wie een echt pasje heeft, mag door zonder extra vragen. Zo doe je het ook met Google-Agent: eerst controleren of hij echt is, dan doorlaten.",
+  "begrippen": [
+    { "term": "Firewall", "uitleg": "een beveiliging die verzoeken aan je website controleert en verdacht verkeer tegenhoudt voordat het bij de site komt." },
+    { "term": "User-agent", "uitleg": "de naam die een browser of bot meestuurt bij elk verzoek. Die naam is makkelijk na te maken." },
+    { "term": "CAPTCHA", "uitleg": "een puzzel of vinkje waarmee een site test of er een mens achter het scherm zit." },
+    { "term": "Fetcher", "uitleg": "een programma dat een pagina ophaalt omdat een gebruiker erom vraagt, niet om de site te crawlen voor een zoekmachine." }
+  ],
+  "uitleg": "**Wat Google publiceerde:** een pagina 'Allow Google-Agent traffic' in de crawldocumentatie. Google-Agent hoort bij de fetchers die een gebruiker zelf in gang zet. Over die groep zegt Google dat ze robots.txt meestal negeren, omdat een mens om het bezoek vroeg.\n\n**Zo controleer je een verzoek:**\n- de user-agent bevat 'Google-Agent';\n- het IP-adres staat in het bestand user-triggered-agents.json van Google;\n- als het verzoek een handtekening heeft (Web Bot Auth, nog een experiment), controleer je die ook.\n\n**Wat Google aanraadt:**\n- de toelaatregel moet vóór blokkades op datacenters, beheerde botregels en de categorie AI-agents draaien;\n- geen CAPTCHA of JavaScript-uitdaging voor geverifieerde verzoeken;\n- de hele route toelaten: zoeken, filteren, productpagina, winkelwagen en de API-aanroepen erachter;\n- IP-adressen van Google-Agent uitzonderen van limieten per IP;\n- de IP-lijst actueel houden.\n\n**Voor SEO:** dit gaat niet over ranking. Het gaat erom dat een gebruiker die een agent iets laat doen op de site, niet tegen een dichte deur loopt.",
+  "kernpunt": "Wil je een bot van Google doorlaten, controleer dan wie hij is via de IP-lijst. Vertrouw nooit alleen op de naam in de user-agent.",
+  "toepassing": "Vraag vandaag bij één klant met bot-bescherming (zoals Cloudflare) na of verzoeken van Google-Agent worden geweigerd of een CAPTCHA krijgen.",
+  "bron": {
+    "titel": "Allow Google-Agent traffic | Google Crawling Infrastructure",
+    "url": "https://developers.google.com/crawling/docs/crawlers-fetchers/allow-google-agent"
+  }
+}

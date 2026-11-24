@@ -1,0 +1,41 @@
+{
+  "id": "20261124-ga4-funnel-open-of-gesloten",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Analytics",
+  "onderwerp": "Funnelverkenning in GA4: open of gesloten funnel",
+  "matrix": ["3.1.7", "3.1.3"],
+  "titel": "Twee funnels, dezelfde stappen, toch meer mensen in stap 3",
+  "intro": "Een webshop stuurt een nieuwsbrief met een knop 'Direct afrekenen'. Die knop opent meteen de checkoutpagina. Je collega en jij maken in GA4 allebei een funnelverkenning met dezelfde drie stappen: productpagina bekijken, checkout starten, aankoop. In het rapport van je collega staan bij 'checkout starten' 1.400 gebruikers, in dat van jou 900.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke verklaring voor het verschil?",
+    "opties": [
+      "Je collega heeft een open funnel gemaakt, dus telt hij ook wie via de nieuwsbrief meteen bij de checkout instapt.",
+      "Je collega heeft een andere periode gekozen, dus vallen er in zijn rapport meer dagen met nieuwsbriefbezoek binnen.",
+      "Je collega heeft de verstreken tijd aangezet, dus telt GA4 bij hem ook bezoekers die later in de stap terugkomen.",
+      "Je collega heeft een gesloten funnel gemaakt, dus telt GA4 bij hem elke stap los, ongeacht wat ervoor gebeurde."
+    ],
+    "juist": 0
+  },
+  "kern": "In een open funnel mag je in elke stap instappen. Wie via de nieuwsbrief direct bij de checkout begint, telt daar dan wel mee, in een gesloten funnel niet.",
+  "afleiders": [
+    "",
+    "**Andere periode:** dat kan altijd een verschil geven, dus het is een goede eerste check. Maar de nieuwsbriefknop slaat stap 1 over, en precies dat verklaart waarom stap 2 bij de één groter is.",
+    "**Verstreken tijd:** die schakelaar klinkt alsof hij meer bezoeken meetelt. Hij toont alleen de gemiddelde tijd tussen de stappen. Het aantal gebruikers verandert er niet door.",
+    "**Gesloten funnel:** het is net andersom. In een gesloten funnel moet iedereen bij stap 1 beginnen. Wie later instapt, telt dan juist niet mee."
+  ],
+  "kort": "Vergelijk het met een pretpark met een hoofdingang en een zij-ingang bij de achtbaan. Tel je alleen wie door de hoofdingang kwam, dan mis je de mensen die via de zij-ingang meteen in de rij staan. Een gesloten funnel telt alleen de hoofdingang. Een open funnel telt iedereen die in de rij staat, waar hij ook binnenkwam. Daarom geeft dezelfde rij twee verschillende getallen.",
+  "begrippen": [
+    { "term": "Funnelverkenning", "uitleg": "een rapport in GA4 dat laat zien hoeveel gebruikers elke stap van een route halen, bijvoorbeeld van product naar aankoop." },
+    { "term": "Open funnel", "uitleg": "een funnel waarin gebruikers in elke stap mogen instappen, niet alleen in de eerste." },
+    { "term": "Gesloten funnel", "uitleg": "een funnel waarin gebruikers alleen meetellen als ze bij de eerste stap begonnen." }
+  ],
+  "uitleg": "**De instelling:** in een funnelverkenning staat de schakelaar 'Open funnel maken'. Uit betekent gesloten: gebruikers moeten de funnel in stap 1 binnenkomen. Aan betekent open: gebruikers mogen in elke stap instappen.\n\n**Wanneer kies je wat?**\n- **Gesloten** als je wilt weten hoe goed de route van begin tot eind werkt, bijvoorbeeld van productpagina tot aankoop.\n- **Open** als mensen de route vaak halverwege beginnen, zoals via een nieuwsbrief, een advertentie die direct naar de checkout gaat of een bewaard winkelmandje.\n\n**Waarom dit telt:** wie GA4 beheerst, kent niet alleen de knoppen. Je kunt ook twee rapporten verklaren die elkaar lijken tegen te spreken. Dat is precies wat een klant van je vraagt.\n\n**Tip:** zet in je rapportage altijd erbij of een funnel open of gesloten is. Anders vergelijkt de klant appels met peren.",
+  "kernpunt": "Geven twee funnels met dezelfde stappen andere getallen, kijk dan eerst of de één open en de ander gesloten is.",
+  "toepassing": "Open vandaag één funnelverkenning van een klant en zet 'Open funnel maken' aan en uit. Noteer bij welke stap het verschil het grootst is en welke ingang dat verklaart.",
+  "bron": {
+    "titel": "[GA4] Funnel exploration - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/9327974"
+  }
+}

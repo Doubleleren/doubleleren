@@ -24,5 +24,8 @@
   "bron": {
     "titel": "Enroll in Analytics Academy courses on Skillshop",
     "url": "https://support.google.com/analytics/answer/15068052"
-  }
+  },
+  "actief": false,
+  "herzien": "2026-11-24",
+  "wijziging": "Uit de roulatie: de vraag ging over het examen zelf, niet over werken met GA4. Vervangen door een les over open en gesloten funnels."
 }

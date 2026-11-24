@@ -1,0 +1,41 @@
+{
+  "id": "20261124-claude-p-script-mag-niet-schrijven",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Claude zonder venster draaien (claude -p) en toestemming vooraf geven",
+  "matrix": ["coderen-met-ai:5.1.2", "coderen-met-ai:6.2.3"],
+  "titel": "Het maandagscript draait, maar samenvatting.md komt er nooit",
+  "intro": "Een collega laat elke maandag automatisch dit commando draaien: claude -p \"Vat export.csv samen per kanaal en schrijf het resultaat naar samenvatting.md\". De vlag -p laat Claude Code zonder venster werken: er kijkt niemand mee. Het script loopt af, maar samenvatting.md is nooit aangemaakt. In de uitvoer staat dat het schrijven niet is toegestaan.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat voeg je aan het commando toe?",
+    "opties": [
+      "--permission-mode acceptEdits, zodat Claude bestanden mag schrijven zonder dat er iemand op 'ja' hoeft te klikken.",
+      "--bare, zodat Claude Code sneller start en de instellingen overslaat die het schrijven van bestanden tegenhouden.",
+      "--output-format json, zodat het resultaat als gestructureerde data terugkomt en het script het zelf kan wegschrijven.",
+      "--continue, zodat Claude verdergaat in de vorige sessie, waarin het schrijven naar die map al eens was goedgekeurd."
+    ],
+    "juist": 0
+  },
+  "kern": "Zonder venster kan niemand een toestemmingsvraag beantwoorden, dus wordt die geweigerd. Geef de toestemming daarom vooraf mee in het commando.",
+  "afleiders": [
+    "",
+    "**--bare:** dat slaat hooks, skills en CLAUDE.md over, dus het klinkt als 'minder blokkades'. Maar je toestemmingsregels blijven gelden. Schrijven mag daarna nog steeds niet.",
+    "**--output-format json:** dat verandert alleen de vorm van het antwoord. Het lost iets anders op: Claude mag het bestand nog steeds niet zelf schrijven.",
+    "**--continue:** dat pakt het vorige gesprek weer op. Maar een toestemming die je toen in een venster gaf, geldt niet als vaste regel voor een nieuwe run."
+  ],
+  "kort": "Vergelijk het met een pakketbezorger die moet aanbellen voor een handtekening. Is er niemand thuis, dan gaat het pakket terug. Een briefje 'mag bij de buren' lost dat op: dan hoeft niemand open te doen. Een run met -p is een huis zonder bewoner. Wat je wilt toestaan, moet je vooraf op het briefje zetten.",
+  "begrippen": [
+    { "term": "claude -p", "uitleg": "Claude Code laten werken zonder venster, bijvoorbeeld in een script dat vanzelf draait. Het antwoord komt als tekst terug." },
+    { "term": "acceptEdits", "uitleg": "een stand waarin Claude bestanden mag aanpassen en aanmaken zonder per keer te vragen." },
+    { "term": "Toestemmingsvraag", "uitleg": "de vraag die Claude Code stelt voordat het iets doet wat niet vooraf is toegestaan, zoals een bestand schrijven." }
+  ],
+  "uitleg": "**Wat de documentatie zegt:** in een run met -p wordt een actie die toestemming nodig heeft geweigerd, tenzij iets die toestemming geeft. Bestanden lezen in je werkmap mag zonder vragen, schrijven niet.\n\n**Twee manieren om vooraf toestemming te geven:**\n- **--allowedTools** met een lijst tools, bijvoorbeeld \"Read,Edit\". Je kunt ook smaller kiezen, zoals Bash(git diff *) voor één soort commando.\n- **--permission-mode** voor de hele run, bijvoorbeeld acceptEdits (bestanden schrijven mag) of dontAsk (alles wat zou vragen wordt geweigerd, handig om dicht te timmeren).\n\n**Geef niet meer dan nodig.** Een script dat alleen een samenvatting schrijft, heeft geen toegang tot de terminal nodig. Hoe minder je toestaat, hoe kleiner de schade als de opdracht anders uitpakt.\n\n**Tip voor scripts:** kijk niet alleen of de run klaar is. Laat het script ook controleren of het bestand er echt is en niet leeg is.",
+  "kernpunt": "Draait Claude zonder venster, bedenk dan vooraf wat het mag. Geef precies die toestemming mee, niet meer.",
+  "toepassing": "Kijk vandaag of je een script of geplande taak hebt met claude -p. Noteer welke bestanden of commando's het nodig heeft en of die toestemming in het commando staat.",
+  "bron": {
+    "titel": "Run Claude Code programmatically | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/headless"
+  }
+}
