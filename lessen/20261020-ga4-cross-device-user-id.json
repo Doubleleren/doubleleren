@@ -7,6 +7,7 @@
   "matrix": [
     "3.1.5"
   ],
+  "cel": "ecom",
   "titel": "Eén klant, drie apparaten: zo telt GA4 hem als één gebruiker",
   "intro": "Een webshop met klantaccounts ziet in GA4 veel meer gebruikers dan er klanten zijn. De marketeer vermoedt dat klanten die op hun telefoon oriënteren en op de laptop bestellen dubbel geteld worden.",
   "opdracht": {

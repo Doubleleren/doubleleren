@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Faceted navigation: per filter beslissen op basis van zoekvraag",
   "matrix": ["1.2.4"],
+  "cel": "ecom",
   "titel": "Alle filters dicht in robots.txt, ook het merk?",
   "intro": "Een fietsenwinkel heeft op de categorie E-bikes filters voor merk, framemaat, prijs en sortering. Elke filterklik maakt een nieuwe URL. Uit zoekwoordonderzoek blijkt dat er veel gezocht wordt op 'Gazelle e-bike' en 'Batavus e-bike'. Op 'e-bike framemaat 53' of 'e-bike oplopend in prijs' zoekt bijna niemand.",
   "opdracht": {

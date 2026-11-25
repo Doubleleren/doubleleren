@@ -5,6 +5,7 @@
   "vakgebied": "CRO × Claude",
   "onderwerp": "Klantreviews analyseren met Claude zonder verzonnen cijfers",
   "matrix": ["7.1.5", "7.1.1"],
+  "cel": "ecom",
   "titel": "'42% twijfelt over de proefperiode': waar haalt Claude dat vandaan?",
   "intro": "Je laat Claude 1.800 productreviews en 400 antwoorden uit een exitsurvey van een matrassenwebshop analyseren, om hypotheses voor A/B-tests te vinden. In de samenvatting staat: '42% van de klanten twijfelt over de proefperiode van 100 nachten.' Als je zelf door de bestanden bladert, kom je dat onderwerp maar een handvol keer tegen. Morgen presenteer je de bevindingen aan de klant.",
   "opdracht": {

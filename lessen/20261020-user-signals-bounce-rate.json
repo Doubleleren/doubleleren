@@ -7,6 +7,7 @@
   "matrix": [
     "7.1.4"
   ],
+  "cel": "alle",
   "titel": "\"Onze bounce rate is 70%, dat kost ons rankings\": klopt dat?",
   "intro": "Een klant ziet in GA4 een bounce rate van 70% op een blogartikel en wil de tekst inkorten \"omdat Google dat afstraft\".",
   "kort": "Denk aan een thermometer in je eigen woonkamer. Die zegt iets over jouw kamer, maar het KNMI gebruikt hem niet voor de weersverwachting. De bounce rate in GA4 is zo'n eigen thermometer. Google zegt wel dat het geanonimiseerde gegevens over zoekgedrag gebruikt, maar noemt bounce rate of Analytics daarbij nergens. Een hoge bounce rate is dus een reden om te kijken, geen bewijs van een straf.",

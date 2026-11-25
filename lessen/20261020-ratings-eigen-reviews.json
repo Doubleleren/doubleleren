@@ -7,6 +7,7 @@
   "matrix": [
     "2.2.3"
   ],
+  "cel": "leadgen",
   "titel": "Sterren in Google: wanneer kom je er wel en niet voor in aanmerking?",
   "intro": "Een tandartspraktijk wil sterren in de zoekresultaten. De webbouwer heeft een reviewwidget van een extern platform op de homepage gezet en daaromheen LocalBusiness-markup met een AggregateRating van 4,8 uit 312 reviews.",
   "opdracht": {

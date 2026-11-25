@@ -8,6 +8,7 @@
     "1.5.1",
     "1.5.3"
   ],
+  "cel": "alle",
   "titel": "2.240 URL's niet geïndexeerd: allemaal opnieuw indienen?",
   "intro": "In het rapport Pagina-indexering van een klant met een grote blog staan 340 URL's met de status 'Gecrawld - momenteel niet geïndexeerd' en 1.900 met 'Gevonden - momenteel niet geïndexeerd'. De klant wil alle 2.240 URL's één voor één opnieuw indienen via de URL-inspectie.",
   "opdracht": {

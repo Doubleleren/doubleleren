@@ -7,6 +7,7 @@
   "matrix": [
     "2.1.17"
   ],
+  "cel": "ecom",
   "titel": "Nederland en Vlaanderen: waarom Google je hreflang negeert",
   "intro": "Een webshop heeft een Nederlandse en een Belgische (Vlaamse) versie op /nl-nl/ en /nl-be/. Belgische bezoekers komen in Google steeds op de Nederlandse pagina's uit, met euro-prijzen en verzendkosten voor Nederland.",
   "kort": "Denk aan twee mensen die elkaar als contactpersoon opgeven. De bank gelooft het pas als ze allebei naar elkaar verwijzen. Noemt maar één van de twee de ander, dan telt het niet. Zo werkt hreflang ook: de koppeling geldt alleen als elke versie naar de andere terugwijst. En het adres moet kloppen: eerst de taal, dan het land. Alleen 'be' is geen België, maar de taal Wit-Russisch.",

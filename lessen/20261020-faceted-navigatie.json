@@ -7,6 +7,7 @@
   "matrix": [
     "1.2.4"
   ],
+  "cel": "ecom",
   "titel": "Filters op een webshop: welke URL's laat je crawlen?",
   "intro": "Een kledingwebshop heeft filters op kleur, maat, merk, prijs en sortering. Elke klik maakt een nieuwe URL, zoals /jassen?kleur=rood&maat=m&sort=prijs. In Search Console staan tienduizenden van die URL's als niet geïndexeerd.",
   "kort": "Denk aan een bibliotheek die van elk boek een kopie maakt voor elke combinatie van kaftkleur, lettergrootte en volgorde op de plank. De bibliothecaris loopt dan vooral langs kopieën en vindt de nieuwe boeken pas laat. Google werkt net zo met filters: elke klik maakt een nieuw adres, en bijna allemaal tonen ze hetzelfde. Daarom kies je per filter: zoeken mensen hierop, dan mag het gevonden worden. Zo niet, dan houd je het buiten de deur.",

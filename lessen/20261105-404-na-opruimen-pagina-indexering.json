@@ -8,6 +8,7 @@
     "1.5.3",
     "1.5.1"
   ],
+  "cel": "ecom",
   "titel": "600 keer 'Niet gevonden (404)' in Search Console: paniek?",
   "intro": "Een webshop heeft 600 oude actiepagina's verwijderd. Er is geen vervangende pagina voor. De links in het menu, de sitemap en de blogs zijn al weggehaald. Twee weken later staan de URL's in Search Console in het rapport Pagina-indexering, onder 'Niet gevonden (404)'. De klant mailt: \"Dat zijn 600 fouten. Dat kost ons vast posities!\"",
   "opdracht": {

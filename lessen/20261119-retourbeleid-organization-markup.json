@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Structured data: retourbeleid op organisatieniveau",
   "matrix": ["2.2.5", "2.2.1"],
+  "cel": "ecom",
   "titel": "Hetzelfde retourbeleid in de markup van 4.000 productpagina's?",
   "intro": "Een webshop in kinderkleding heeft 4.000 producten. Voor bijna alles geldt 30 dagen gratis retour. Alleen rompertjes met een geborduurde naam kunnen niet retour. De developer wil het retourbeleid in de productmarkup van alle 4.000 pagina's zetten. Bij elke wijziging van het beleid moet dat dan opnieuw.",
   "opdracht": {

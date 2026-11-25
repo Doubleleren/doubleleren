@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "A/B-testen met weinig verkeer: minimum detectable effect",
   "matrix": ["7.2.1"],
+  "cel": "leadgen",
   "titel": "4.000 bezoekers per maand en drie testideeën: welke eerst?",
   "intro": "De offertepagina van een installatiebedrijf krijgt 4.000 bezoekers per maand, en 2,5% vraagt een offerte aan. Met een calculator heb je uitgerekend dat je in acht weken alleen een verschil van ongeveer 40% betrouwbaar kunt aantonen. Het team heeft drie ideeën: een andere knopkleur en -tekst, een kortere intro, en een nieuwe opzet met prijsindicatie en reviews.",
   "opdracht": {

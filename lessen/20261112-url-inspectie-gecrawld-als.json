@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Mobile-first indexing: per pagina zien welke crawler hem ophaalde",
   "matrix": ["8.1.3", "8.1.1"],
+  "cel": "ecom",
   "titel": "Is deze productpagina mobiel of desktop gecrawld? Waar zie je dat?",
   "intro": "Een klant heeft een oude webshop met een aparte desktop- en mobiele weergave. Hij vraagt of zijn belangrijkste productpagina 'al mobiel bekeken wordt' door Google. Je wilt dat voor die ene pagina nakijken in Search Console.",
   "opdracht": {

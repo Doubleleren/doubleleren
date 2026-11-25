@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GTM: een formulierverzending alleen tellen als die echt lukt",
   "matrix": ["3.2.4", "3.1.1"],
+  "cel": "leadgen",
   "titel": "200 offerteaanvragen in GA4, maar 120 in de mailbox",
   "intro": "Een installatiebedrijf meet offerteaanvragen met een GA4-event via Google Tag Manager (GTM). De tag gaat af op een trigger van het type Formulierverzending. In GA4 staan deze maand 200 aanvragen. In de mailbox van de klant zitten er 120. Veel bezoekers klikken op 'Verstuur' terwijl een verplicht veld nog leeg is.",
   "opdracht": {

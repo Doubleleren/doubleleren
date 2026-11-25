@@ -1,0 +1,42 @@
+{
+  "id": "20261123-skill-met-gevolgen-zelf-starten",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een skill met gevolgen alleen zelf laten starten",
+  "matrix": ["coderen-met-ai:4.2.2", "coderen-met-ai:4.2.1"],
+  "cel": "alle",
+  "titel": "Je vroeg om een concept, de klant kreeg het rapport al",
+  "intro": "Je team heeft in Claude Code een skill 'maandrapport-versturen'. Die maakt het maandrapport en mailt het naar de klant. Een collega vraagt Claude: 'Maak alvast een concept van het maandrapport voor de fietsenwinkel.' Claude herkent de taak, start de skill zelf, en de klant krijgt een half rapport in de mail.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe voorkom je dit het best?",
+    "opties": [
+      "In CLAUDE.md zetten dat Claude nooit zelf rapporten mag mailen, zodat Claude eerst om toestemming vraagt.",
+      "De beschrijving van de skill leeg laten, zodat Claude niet weet waarvoor hij is en hem dus niet start.",
+      "In de skill disable-model-invocation: true zetten, zodat alleen jij hem start met /maandrapport-versturen.",
+      "De skill in een gewone map buiten .claude zetten, zodat Claude hem alleen vindt als je ernaar verwijst."
+    ],
+    "juist": 2
+  },
+  "kern": "Met disable-model-invocation: true kan Claude de skill niet meer zelf starten. Hij draait alleen als jij de opdracht typt.",
+  "afleiders": [
+    "**Regel in CLAUDE.md:** dat werkt bijna altijd. Maar of Claude een regel volgt, blijft Claudes keuze. Bij iets wat een klant meteen ziet, wil je meer zekerheid.",
+    "**Lege beschrijving:** Claude kiest een skill op basis van die beschrijving, dus dit lijkt slim. Maar zo weet ook je team niet meer wat de skill doet, en blijft hij een gok.",
+    "",
+    "**Andere map:** dan is het geen skill meer die Claude Code kent. Je verliest het gemak, en je moet steeds zelf het bestand aanwijzen."
+  ],
+  "kort": "Vergelijk het met een printer die ook kan faxen. Voor gewoon printen mag iedereen op de knop drukken. Maar de faxknop zit achter een klepje, zodat niemand per ongeluk iets naar buiten stuurt. Een skill die mailt of publiceert, zet je ook achter zo'n klepje: alleen wie de opdracht zelf typt, kan hem starten.",
+  "begrippen": [
+    { "term": "Skill", "uitleg": "een opgeslagen werkwijze voor Claude Code, in een bestand SKILL.md, die je steeds opnieuw kunt gebruiken." },
+    { "term": "disable-model-invocation", "uitleg": "een instelling bovenaan een skill. Staat die op true, dan kan Claude de skill niet zelf starten, alleen jij." },
+    { "term": "CLAUDE.md", "uitleg": "een bestand met vaste aanwijzingen dat Claude Code aan het begin van elke sessie leest." }
+  ],
+  "uitleg": "Claude ziet van elke skill in elke sessie de naam en de beschrijving. Past een taak bij die beschrijving, dan kan Claude de skill zelf starten. Voor een skill zonder gevolgen is dat handig.\n\n**Bij gevolgen buiten je computer**, zoals mailen, publiceren of een release maken, raden de best practices aan om disable-model-invocation: true toe te voegen. Dan draait de skill alleen als je zelf /naam typt.\n\n**Zo ziet het begin van zo'n skill eruit:**\n- name: maandrapport-versturen\n- description: Maakt het maandrapport en mailt het naar de klant.\n- disable-model-invocation: true\n\n**Handig om te splitsen:** maak een tweede skill voor alleen het concept. Die mag Claude wel zelf starten, want hij stuurt niets naar buiten.",
+  "kernpunt": "Stuurt een skill iets naar buiten, laat hem dan alleen starten als jij de opdracht typt.",
+  "toepassing": "Kijk vandaag welke skills je team heeft in .claude/skills. Noteer bij elke skill of hij iets naar buiten stuurt, en of disable-model-invocation daar al op true staat.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

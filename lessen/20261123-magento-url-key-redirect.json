@@ -1,0 +1,43 @@
+{
+  "id": "20261123-magento-url-key-redirect",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Magento: automatische redirect bij een gewijzigde URL-key",
+  "matrix": ["5.1.7"],
+  "cel": "ecom",
+  "titel": "40 producten hernoemd, 40 keer een 404: wat zet je in Magento aan?",
+  "intro": "Een fietsenwinkel op Magento 2 (Adobe Commerce) heeft vorige week de URL-key van 40 populaire producten aangepast. Daarna gaven alle oude adressen een 404. De developer heeft ze inmiddels met de hand doorgestuurd. Volgende maand wil de redactie nog 300 producten een nieuwe URL-key geven.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke instelling controleer je vóór die tweede ronde?",
+    "opties": [
+      "Use Categories Path for Product URLs aanzetten, zodat oude adressen via het categoriepad blijven werken.",
+      "Use Canonical Link Meta Tag For Products aanzetten, zodat Google de oude adressen aan de nieuwe koppelt.",
+      "Create Permanent Redirect for URLs if URL Key Changed aanzetten, zodat oude adressen vanzelf doorsturen.",
+      "Bij elke wijziging een URL Rewrite met type 'No' laten maken, zodat de oude adressen blijven bestaan."
+    ],
+    "juist": 2
+  },
+  "kern": "Met deze instelling maakt Magento bij een nieuwe URL-key zelf een vaste redirect van het oude adres. Dan hoeft niemand 300 redirects met de hand te maken.",
+  "afleiders": [
+    "**Categoriepad:** dat voegt alleen extra adressen toe, zoals /fietsen/product.html. Het oude adres met de vorige URL-key komt er niet mee terug.",
+    "**Canonical:** die staat op de nieuwe pagina en wijst naar zichzelf. Een oud adres dat een 404 geeft, heeft geen pagina meer om een canonical op te zetten.",
+    "",
+    "**Type 'No':** dat klinkt als een veilige herschrijving. Maar 'No' betekent geen doorverwijzing. Het oude adres toont dan dezelfde pagina als een tweede URL, en dat is dubbele inhoud in plaats van een nette verhuizing."
+  ],
+  "kort": "Vergelijk het met verhuizen. Geef je de post geen nieuw adres door, dan komen brieven terug met 'onbekend'. Een doorstuurservice regelt dat in één keer voor alle post. Deze instelling is zo'n doorstuurservice: elk oud productadres stuurt bezoekers en Google vanzelf naar het nieuwe.",
+  "begrippen": [
+    { "term": "URL-key", "uitleg": "het vaste stuk van een product-URL in Magento, zoals racefiets-x in /racefiets-x.html." },
+    { "term": "404", "uitleg": "de melding 'pagina niet gevonden'. Google haalt zo'n adres na een tijd uit de zoekresultaten." },
+    { "term": "Permanente redirect", "uitleg": "een vaste doorverwijzing van een oud naar een nieuw adres. Google neemt de waarde van het oude adres dan mee." },
+    { "term": "URL Rewrite", "uitleg": "een regel in Magento die bepaalt welk adres naar welke pagina gaat, met of zonder doorverwijzing." }
+  ],
+  "uitleg": "**Waar staat het?** Onder Stores → Settings → Configuration → Catalog → Catalog → Search Engine Optimization. Zet 'Create Permanent Redirect for URLs if URL Key Changed' op Yes en klik op Save Config.\n\n**Per product:** bij het veld URL Key staat het vinkje 'Create Permanent Redirect for old URL'. Laat de redactie controleren dat dat aan staat als ze een URL-key wijzigen.\n\n**Twee waarschuwingen van Adobe:**\n- Met automatische redirects maakt Magento bij het opslaan van een categorie meteen rewrites aan. Bij een categorie met heel veel producten kan dat de site traag maken. Plan grote wijzigingen dus buiten drukke uren.\n- Zet je de URL rewrites voor producten of categorieën helemaal uit, dan verdwijnen alle bestaande rewrites. Die krijg je niet terug.\n\n**Controle achteraf:** zet een paar oude adressen in een crawler of de URL-inspectie en kijk of ze één keer doorsturen naar de nieuwe URL.",
+  "kernpunt": "Gaan er veel URL's veranderen, regel dan eerst dat het systeem zelf doorstuurt. Met de hand achteraf repareren is foutgevoelig.",
+  "toepassing": "Kijk vandaag bij een Magento-klant onder Catalog → Search Engine Optimization of automatische redirects aan staan. Noteer het in het klantdossier.",
+  "bron": {
+    "titel": "Automatic product redirects | Adobe Commerce (Experience League)",
+    "url": "https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/url-rewrites/url-redirect-product-automatic"
+  }
+}

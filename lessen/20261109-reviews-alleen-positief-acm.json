@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Betrouwbaarheid: reviews eerlijk tonen (regels van de ACM)",
   "matrix": ["7.1.3"],
+  "cel": "ecom",
   "titel": "4,9 sterren op de homepage, maar de slechte reviews zijn eruit gefilterd",
   "intro": "Een webshop in tuinmeubelen toont op de homepage het blok 'Wat klanten zeggen', met gemiddeld 4,9 sterren. De eigenaar kiest zelf welke reviews erin komen. Reviews met 1 of 2 sterren laat hij weg. Nergens staat waar de reviews vandaan komen. Hij wil het blok nu ook op alle productpagina's zetten, om meer vertrouwen te wekken.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Search Console: een klikpiek begin november 2026 die niet echt is",
   "matrix": ["4.1.2", "4.1.1"],
+  "cel": "leadgen",
   "titel": "Zes keer zoveel klikken in Search Console, en niemand weet waarom",
   "intro": "Je maakt het maandrapport voor een installatiebedrijf. In het Prestatierapport van Search Console springen de klikken op 2 november van zo'n 50 naar ruim 300 per dag. Het aantal vertoningen blijft bijna gelijk. De extra klikken komen vooral van desktop en uit één land, en landen op pagina's die op positie 15 tot 40 staan. Vorige week zijn er nieuwe teksten live gegaan.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GA4 User-ID: wat er gebeurt met events vóór het inloggen en met oude data",
   "matrix": ["3.1.5"],
+  "cel": "ecom",
   "titel": "User-ID staat live: zie je nu ook hoe klanten in september wisselden?",
   "intro": "Een webshop in fietsonderdelen heeft sinds 1 november User-ID live. Na het inloggen stuurt de site het klantnummer mee als user_id, bij uitloggen null. De rapportage-identiteit staat op Blended. De marketingmanager wil nu zien hoe klanten in september en oktober wisselden tussen telefoon en laptop. En wat gebeurt er met alles wat iemand bekeek vóór het inloggen?",
   "opdracht": {

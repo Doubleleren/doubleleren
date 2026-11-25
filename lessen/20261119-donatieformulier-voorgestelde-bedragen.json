@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Ankereffect: voorgestelde bedragen in een formulier",
   "matrix": ["7.1.1"],
+  "cel": "leadgen",
   "titel": "Een leeg bedragveld, en donateurs die afhaken",
   "intro": "Een dierenasiel heeft een donatiepagina met één leeg veld: 'Uw bedrag: € …', met daaronder de knop 'Doneer'. Veel bezoekers beginnen aan het formulier, maar haken af bij het bedrag. Het asiel wil het formulier aanpassen voor de eindejaarscampagne.",
   "opdracht": {

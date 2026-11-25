@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Link spam updates en SpamBrain: gekochte links tellen niet meer mee",
   "matrix": ["10.1.2", "10.1.1"],
+  "cel": "alle",
   "titel": "'Hoe krijgen we de straf van de link spam update eraf?'",
   "intro": "Een klant kocht jarenlang links op blognetwerken. Na een link spam update van Google daalt het organische verkeer met 30%. In Search Console staat onder Handmatige acties niets. De klant vraagt: 'Hoe krijgen we die straf zo snel mogelijk opgeheven?'",
   "opdracht": {

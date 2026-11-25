@@ -8,6 +8,7 @@
     "4.1.5",
     "4.1.2"
   ],
+  "cel": "alle",
   "titel": "42.300 of 30.900 klikken? Twee tegels in je dashboard spreken elkaar tegen",
   "intro": "Je bouwt in Whatagraph een maanddashboard voor een klant, met Search Console als bron. Tegel 1 toont het totaal aantal klikken: 42.300. Tegel 2 is een tabel met alle 640 zoekopdrachten van die maand; opgeteld komen die op 30.900 klikken. Allebei over dezelfde periode, hetzelfde land en hetzelfde zoektype. De klant mailt: 'Welk getal klopt?'",
   "opdracht": {

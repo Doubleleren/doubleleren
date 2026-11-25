@@ -8,6 +8,7 @@
     "2.1.12",
     "2.1.10"
   ],
+  "cel": "alle",
   "titel": "'H3 vóór H2' en '14 koppen': moet de developer alles omnummeren?",
   "intro": "Een klant heeft een lange koopgids over waterontharders laten bouwen. Elke sectie heeft een eigen kop. Een SEO-tool meldt twee problemen: 'H3 komt vóór de eerste H2' en 'de pagina heeft 14 koppen'. De developer vraagt je of hij de koppen voor Google moet omnummeren, en of 14 koppen te veel is.",
   "opdracht": {

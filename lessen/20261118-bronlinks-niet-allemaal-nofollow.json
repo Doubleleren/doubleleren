@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Externe links: wanneer nofollow, sponsored of ugc?",
   "matrix": ["2.1.16", "1.3.2"],
+  "cel": "leadgen",
   "titel": "Elke link naar een bron op nofollow 'om linkwaarde te bewaren'?",
   "intro": "Een energieadviseur schrijft blogs over subsidies en isolatie. In elk artikel linkt de schrijver naar de bronnen, zoals de overheid en onderzoeksinstituten. Een nieuwe redacteur zet bij al die links rel=\"nofollow\". Haar reden: 'Anders lekt onze linkwaarde weg naar andere sites.' Ook een betaalde link naar een isolatiebedrijf staat in een van de blogs.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Hreflang: geldige taal- en landcodes",
   "matrix": ["1.3.5", "2.1.17"],
+  "cel": "ecom",
   "titel": "nl-NL, nl-BE en en-UK: waarom ziet het VK de Nederlandse shop?",
   "intro": "Een Nederlandse webwinkel in fietsonderdelen opent shops voor België en het Verenigd Koninkrijk. De developer zet op elke pagina hreflang-tags: nl-NL voor Nederland, nl-BE voor België en en-UK voor het VK. Alle versies linken netjes naar elkaar terug. Na twee maanden toont Google in het VK nog vaak de Nederlandse pagina's.",
   "opdracht": {

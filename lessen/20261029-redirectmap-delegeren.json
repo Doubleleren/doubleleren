@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Werk delegeren: een redirectmap overdragen aan een collega",
   "matrix": ["6.3.1", "6.3.2"],
+  "cel": "ecom",
   "titel": "\"Maak jij even de redirectmap?\" Zo delegeer je het goed",
   "intro": "Over vier weken verhuist een webshop met 3.000 URL's naar een nieuw domein, met een nieuwe URL-structuur. Je wilt het maken van de redirectmap overdragen aan een junior collega die dat nog nooit heeft gedaan. Je hebt tien minuten om de opdracht op te schrijven.",
   "opdracht": {

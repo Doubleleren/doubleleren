@@ -8,6 +8,7 @@
     "3.1.2",
     "3.1.4"
   ],
+  "cel": "leadgen",
   "titel": "De verkenning is leeg vóór september, het standaardrapport niet",
   "intro": "Je wilt voor een klant in GA4 een trechterverkenning maken van de leadformulieren, met oktober van dit jaar naast oktober vorig jaar. De verkenning toont alleen data van de laatste twee maanden; daarvoor is alles leeg. In het standaardrapport Verkeersacquisitie zie je oktober vorig jaar wel gewoon.",
   "opdracht": {

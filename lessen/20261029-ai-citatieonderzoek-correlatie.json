@@ -8,6 +8,7 @@
     "12.1.4",
     "12.1.3"
   ],
+  "cel": "alle",
   "titel": "Jaartal erin, auteursnaam eruit? Een AI-citatieonderzoek op waarde schatten",
   "intro": "Een klant stuurt je een artikel over een onderzoek naar bijna 200.000 antwoorden van ChatGPT, AI Mode en AI Overviews. Pagina's met een jaartal in de title hadden ruim twee keer zoveel kans om geciteerd te worden, en pagina's met een auteursnaam 28% minder. De klant wil volgende week bij alle 300 blogartikelen een jaartal in de title zetten en de auteursnamen weghalen.",
   "opdracht": {

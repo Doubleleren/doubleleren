@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Crawl depth: oude blogartikelen diep in het archief",
   "matrix": ["1.2.2", "1.1.10"],
+  "cel": "leadgen",
   "titel": "900 blogartikelen, en de oudste zitten 60 klikken diep",
   "intro": "Een hypotheekadviseur heeft 900 blogartikelen. Ze staan alleen in het blogoverzicht: tien per pagina, met onderaan de knop 'Oudere berichten'. Artikelen uit 2022 zitten zo 60 klikken of meer van de homepage. Juist die oudere uitlegartikelen krijgen in Search Console steeds minder vertoningen.",
   "opdracht": {

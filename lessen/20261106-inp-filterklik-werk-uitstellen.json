@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Core Web Vitals: INP verbeteren door werk na een klik uit te stellen",
   "matrix": ["5.2.5", "5.2.4"],
+  "cel": "ecom",
   "titel": "Een filterklik van 480 ms: wat moet de developer als eerste doen?",
   "intro": "Een kledingwebshop heeft op mobiel een INP van 480 ms, vooral op categoriepagina's. INP (Interaction to Next Paint) meet hoe snel een pagina zichtbaar reageert op een klik of tik. Uit de velddata blijkt dat de klik op een filter de trage interactie is. Bij die klik draait één script dat de producten ophaalt, de lijst opnieuw opbouwt, een event naar GA4 stuurt en de URL bijwerkt.",
   "opdracht": {

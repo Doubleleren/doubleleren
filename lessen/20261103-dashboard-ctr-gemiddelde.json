@@ -8,6 +8,7 @@
     "4.1.5",
     "4.1.1"
   ],
+  "cel": "alle",
   "titel": "CTR 6,2% in het dashboard, 2,5% in Search Console: welke klopt?",
   "intro": "In het maanddashboard van een klant staat een tabel met vijf paginagroepen, elk met klikken, vertoningen en CTR. Onderaan heeft een collega een totaalregel gemaakt. Daar staat als CTR het gemiddelde van de vijf CTR's: 6,2%. Search Console geeft voor dezelfde periode en dezelfde pagina's een CTR van 2,5%.",
   "opdracht": {

@@ -8,6 +8,7 @@
     "3.1.2",
     "3.1.4"
   ],
+  "cel": "alle",
   "titel": "Bijna alle boekingen komen van je eigen site als 'referral'",
   "intro": "Een vakantiepark heeft zijn site op voorbeeldpark.nl, maar boeken gaat via boeken-voorbeeldpark.nl, een tweede domein van dezelfde klant. Beide domeinen hebben dezelfde GA4-tag. In GA4 komen bijna alle boekingen binnen met als bron 'voorbeeldpark.nl / referral', en het aantal gebruikers ligt opvallend hoog.",
   "opdracht": {

@@ -7,6 +7,7 @@
   "matrix": [
     "7.1.3"
   ],
+  "cel": "ecom",
   "titel": "De site is veilig, maar klanten durven hun creditcard niet in te vullen",
   "intro": "Een webshop in koffiemachines verkoopt ook in Duitsland en Frankrijk, waar klanten vaak met creditcard betalen. Bij de betaalstap haakt 31% af. In een exit-enquête schrijven meerdere bezoekers dat het 'niet veilig voelde'. De developer is verbaasd: de hele site draait op HTTPS en de kaartvelden komen van een gecertificeerde betaalprovider.",
   "opdracht": {

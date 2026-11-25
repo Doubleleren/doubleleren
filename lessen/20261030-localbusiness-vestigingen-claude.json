@@ -8,6 +8,7 @@
     "2.2.8",
     "2.2.9"
   ],
+  "cel": "leadgen",
   "titel": "Drie vestigingen, één generiek schemablok: laat Claude het per locatie maken",
   "intro": "Een loodgieters- en installatiebedrijf heeft vestigingen in Utrecht, Amersfoort en Zeist, elk met een eigen pagina, adres, telefoonnummer en openingstijden. De SEO-plugin zet op alle pagina's hetzelfde Organization-blok met alleen de bedrijfsnaam en het logo. De klant wil per vestiging ook de Google-reviews als sterren in de markup.",
   "opdracht": {

@@ -8,6 +8,7 @@
     "5.3.4",
     "2.2.9"
   ],
+  "cel": "alle",
   "titel": "Rich Results Test zegt 'kan niet worden geparseerd': laat Claude meekijken",
   "intro": "Een copywriter heeft in het CMS een JSON-LD-blok voor een evenementpagina geplakt, overgenomen uit een Word-document. De Rich Results Test meldt een parsefout en vindt geen enkel item. Het blok is 40 regels lang. Je wilt het niet alleen repareren, maar ook voorkomen dat het volgende week weer gebeurt.",
   "opdracht": {

@@ -7,6 +7,7 @@
   "matrix": [
     "1.2.3"
   ],
+  "cel": "ecom",
   "titel": "Drie pagina's over wandelschoenen: concurrentie of niets aan de hand?",
   "intro": "Een outdoorwinkel heeft een categoriepagina 'Wandelschoenen', een koopgids 'Wandelschoenen kiezen' en een blog 'De beste wandelschoenen van 2025'. Voor 'wandelschoenen' wisselt in Search Console de getoonde URL om de paar weken, en de positie schommelt tussen 6 en 14. De klant wil de koopgids en de blog verwijderen.",
   "opdracht": {

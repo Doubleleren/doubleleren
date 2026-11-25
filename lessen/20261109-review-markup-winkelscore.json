@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Ratings markup: welke reviews mag je in productmarkup zetten?",
   "matrix": ["2.2.3", "2.2.1"],
+  "cel": "ecom",
   "titel": "De winkelscore van 9,2 als sterren op alle 600 productpagina's?",
   "intro": "Een webshop in koffiemachines heeft op een externe reviewsite een winkelscore van 9,2 uit 3.400 beoordelingen. Die gaan vooral over levering en service. De developer wil die score als AggregateRating in de productmarkup van alle 600 productpagina's zetten, 'zodat er overal sterren in Google komen'. Op de productpagina's zelf staan geen reviews.",
   "opdracht": {

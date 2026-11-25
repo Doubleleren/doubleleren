@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Chrome 158 stopt met XSLT: sitemaps zien er anders uit in de browser",
   "matrix": ["1.4.1", "1.4.4"],
+  "cel": "ecom",
   "titel": "'Onze sitemap is kapot!' Sinds deze week alleen nog code in Chrome",
   "intro": "Een webshop op WordPress met Yoast belt in paniek. Tot vorige week zag de sitemap er in Chrome uit als een nette tabel met URL's. Nu toont Chrome alleen nog een muur met code en een waarschuwing. Er is niets aan de site veranderd. De klant wil dat het vandaag nog wordt opgelost.",
   "opdracht": {

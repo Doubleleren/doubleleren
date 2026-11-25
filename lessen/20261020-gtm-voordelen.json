@@ -7,6 +7,7 @@
   "matrix": [
     "3.2.1"
   ],
+  "cel": "alle",
   "titel": "\"Waarom GTM? Ik plak de GA-code toch gewoon in de header\"",
   "intro": "De developer van een klant vindt Google Tag Manager een overbodige extra laag. Hij zet de GA4-code liever hardcoded in de header, net als het Meta-pixel en de Google Ads-tag. De marketeer van de klant wil volgende maand drie nieuwe conversies gaan meten.",
   "opdracht": {

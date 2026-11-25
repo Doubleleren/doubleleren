@@ -7,6 +7,7 @@
   "matrix": [
     "8.2.2"
   ],
+  "cel": "alle",
   "titel": "Een klant met m.voorbeeld.nl: wat check je als eerste?",
   "volgorde": "uitleg-eerst",
   "intro": "Je opent de site van een nieuwe klant op je telefoon en belandt op m.voorbeeld.nl. Op desktop is het www.voorbeeld.nl. De klant heeft dus een **parallelle mobiele site**.",

@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "JSON-LD: waar het blok in de HTML mag staan",
   "matrix": ["2.2.9", "2.2.8"],
+  "cel": "ecom",
   "titel": "Productmarkup onderaan de pagina: telt die wel mee?",
   "intro": "Een klant met een eigen CMS wil productmarkup toevoegen. De developer kan het JSON-LD-blok alleen onderaan de pagina plaatsen, vlak boven de footer in de body. Iets in de head zetten kan alleen met een dure aanpassing van het CMS. De klant vraagt of de markup op die plek 'wel meetelt'.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een sessie bijsturen: wanneer begin je opnieuw?",
   "matrix": ["coderen-met-ai:3.2.2", "coderen-met-ai:1.1.3"],
+  "cel": "alle",
   "titel": "Twee keer gecorrigeerd, en het script telt nog steeds dubbel",
   "intro": "Je laat Claude Code een script maken dat een GA4-export per kanaal samenvat. Eerst telt het script sessies dubbel. Je corrigeert het. Daarna klopt de datumnotatie niet. Je corrigeert opnieuw, en nu telt het weer dubbel. Je zit al een uur in dezelfde sessie.",
   "opdracht": {
@@ -12,7 +13,7 @@
     "vraag": "Wat werkt nu waarschijnlijk het best?",
     "opties": [
       "Een derde correctie in hoofdletters typen, zodat Claude snapt dat het dubbel tellen echt moet stoppen.",
-      "Een nieuwe sessie starten met één betere opdracht, waarin je meteen beide eisen en een controle noemt.",
+      "Een nieuwe sessie starten met één betere opdracht, zodat de mislukte pogingen niet meer meesturen.",
       "Dezelfde sessie laten doorwerken tot het klopt, zodat Claude alles wat al geprobeerd is kan meenemen.",
       "Overstappen op een andere AI-agent, zodat een ander model het dubbel tellen opnieuw kan bekijken."
     ],
@@ -37,5 +38,7 @@
   "bron": {
     "titel": "Best practices for Claude Code | Claude Code Docs",
     "url": "https://code.claude.com/docs/en/best-practices"
-  }
+  },
+  "herzien": "2026-11-23",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

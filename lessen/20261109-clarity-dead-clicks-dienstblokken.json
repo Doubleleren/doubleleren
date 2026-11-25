@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Bewijs verzamelen met Clarity: wat dead clicks je vertellen",
   "matrix": ["7.1.5", "7.1.1"],
+  "cel": "leadgen",
   "titel": "Iedereen klikt op de drie blokken, maar er gebeurt niets",
   "intro": "Een installatiebedrijf heeft op de homepage drie blokken met een icoon en een titel: 'Warmtepomp', 'Zonnepanelen' en 'Thuisbatterij'. Ze zijn alleen bedoeld als uitleg en linken nergens naartoe. In Microsoft Clarity zie je op die blokken veel klikken met het label 'dead click'. Weinig bezoekers komen vanaf de homepage op de dienstpagina's.",
   "opdracht": {

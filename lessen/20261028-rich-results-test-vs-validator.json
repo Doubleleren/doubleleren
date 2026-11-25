@@ -8,6 +8,7 @@
     "2.2.11",
     "2.2.8"
   ],
+  "cel": "leadgen",
   "titel": "De ene tool zegt 'geen fouten', de andere 'niets gevonden'. Wie heeft gelijk?",
   "intro": "Een collega heeft Service-markup van schema.org op de dienstpagina's van een schoonmaakbedrijf gezet. In de Schema Markup Validator geeft dat nul fouten. De Rich Results Test van Google meldt voor dezelfde pagina dat er geen items zijn gevonden die in aanmerking komen. De klant vraagt of hij nu een opvallend resultaat in Google krijgt.",
   "opdracht": {

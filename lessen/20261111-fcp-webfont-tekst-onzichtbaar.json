@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "FCP verbeteren: tekst zichtbaar houden terwijl een webfont laadt",
   "matrix": ["5.2.9", "5.2.8"],
+  "cel": "leadgen",
   "titel": "Een lege pagina tot het lettertype binnen is",
   "intro": "Een advocatenkantoor heeft een nieuwe site met een eigen lettertype. Op een trage mobiele verbinding zie je eerst een paar tellen een lege pagina. Daarna verschijnt alle tekst tegelijk. De pagina heeft geen grote afbeeldingen. In de CSS staat bij het lettertype: font-display: block.",
   "opdracht": {

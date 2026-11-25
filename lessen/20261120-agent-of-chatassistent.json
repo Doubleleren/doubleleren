@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Het verschil tussen een chatassistent en een codeeragent",
   "matrix": ["coderen-met-ai:1.1.1", "coderen-met-ai:1.1.2"],
+  "cel": "alle",
   "titel": "Elke maand de export in de chat plakken: wat doet een agent anders?",
   "intro": "Een collega plakt elke maand een Search Console-export in een chatvenster en vraagt om een samenvatting per categorie. Daarna kopieert hij het antwoord naar Excel en past hij zelf de formules aan. Dat kost hem een uur. Iemand zegt: 'Met Claude Code gaat dat anders.'",
   "opdracht": {

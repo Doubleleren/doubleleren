@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "Google Tag Manager: voorbeeldmodus, versies en publiceren",
   "matrix": ["3.2.2", "3.2.1"],
+  "cel": "leadgen",
   "titel": "De tag werkt in Preview, maar in GA4 komt niets binnen",
   "intro": "Een collega heeft in Google Tag Manager een GA4-tag gemaakt voor het nieuwe contactformulier. In de voorbeeldmodus (Preview) ziet hij de tag netjes afgaan als hij het formulier verstuurt. Drie dagen later staan er in GA4 nog steeds geen formulierevents, behalve zijn eigen testverzendingen van die middag.",
   "opdracht": {

@@ -7,6 +7,7 @@
   "matrix": [
     "3.2.2"
   ],
+  "cel": "alle",
   "titel": "GA4 via GTM in vijf stappen, zonder dubbele metingen",
   "intro": "Een nieuwe klant heeft een lege GTM-container op de site staan en een verse GA4-property. Jij mag de basismeting inrichten.",
   "opdracht": {

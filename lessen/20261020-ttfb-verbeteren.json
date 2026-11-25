@@ -7,6 +7,7 @@
   "matrix": [
     "5.2.11"
   ],
+  "cel": "ecom",
   "titel": "TTFB van 2,4 seconde: waar begin je met verbeteren?",
   "intro": "PageSpeed Insights laat voor de categoriepagina's van een webshopklant een TTFB van 2,4 seconde zien bij echte gebruikers. De developer stelt voor om eerst de afbeeldingen te comprimeren.",
   "opdracht": {

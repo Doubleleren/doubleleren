@@ -7,6 +7,7 @@
   "matrix": [
     "7.1.5"
   ],
+  "cel": "ecom",
   "titel": "Van rage clicks in Clarity naar een testbare hypothese",
   "volgorde": "opdracht-eerst",
   "intro": "Een klant wil de checkout 'gewoon opnieuw laten ontwerpen'. In Microsoft Clarity zie je op de winkelwagenpagina veel **rage clicks** op de knop 'Kortingscode toepassen' en **dead clicks** op de productfoto's. Je hebt nog geen idee waarom.",

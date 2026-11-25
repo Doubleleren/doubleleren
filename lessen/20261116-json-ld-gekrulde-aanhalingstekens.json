@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "JSON-syntax: waarom Google structured data niet kan lezen",
   "matrix": ["5.3.4", "2.2.9"],
+  "cel": "ecom",
   "titel": "Productmarkup uit Word geplakt: Google kan er niets mee",
   "intro": "De marketeer van een fietsenwinkel schrijft de JSON-LD voor productpagina's in Word en plakt die daarna in het CMS. Een week later staat in Search Console het rapport voor gestructureerde gegevens die niet te parsen zijn (Unparsable structured data) vol meldingen. In de broncode zie je onder meer: “name”: “Stadsfiets Nova”.",
   "opdracht": {

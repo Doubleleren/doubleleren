@@ -7,6 +7,7 @@
   "matrix": [
     "5.2.6"
   ],
+  "cel": "alle",
   "titel": "Lighthouse zegt CLS 0,02, Search Console zegt 0,28. Wie heeft gelijk?",
   "intro": "Een klant met een nieuwsblog stuurt een screenshot van Lighthouse: CLS 0,02, groen. Toch markeert het Core Web Vitals-rapport in Search Console dezelfde artikelpagina's op mobiel als 'Slecht' met een CLS van 0,28.",
   "opdracht": {

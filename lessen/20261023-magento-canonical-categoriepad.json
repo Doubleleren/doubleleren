@@ -7,6 +7,7 @@
   "matrix": [
     "5.1.7"
   ],
+  "cel": "ecom",
   "titel": "Eén rugzak, drie URL's: welke Magento-instelling pak je eerst aan?",
   "intro": "In een Magento 2-webshop (Adobe Commerce) staat 'Use Categories Path for Product URLs' aan. Daardoor is dezelfde rugzak bereikbaar via /tassen/rugzak-x.html, /sale/rugzak-x.html en /rugzak-x.html. Search Console toont de sale-URL als de canonieke versie die Google koos. De sale stopt over twee weken, en dan verdwijnt die categorie.",
   "opdracht": {

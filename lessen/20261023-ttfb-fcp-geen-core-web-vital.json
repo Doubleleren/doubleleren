@@ -8,6 +8,7 @@
     "5.2.1",
     "5.2.10"
   ],
+  "cel": "alle",
   "titel": "TTFB en FCP staan op oranje: zakt de klant voor de Core Web Vitals?",
   "intro": "Een klant mailt bezorgd. In PageSpeed Insights staan voor de mobiele homepage op basis van velddata (de afgelopen 28 dagen) deze waarden:\n\n- TTFB 1,2 s (oranje)\n- FCP 2,4 s (oranje)\n- LCP 2,3 s\n- INP 150 ms\n- CLS 0,04\n\n'We zakken nu toch voor de Core Web Vitals?'",
   "opdracht": {

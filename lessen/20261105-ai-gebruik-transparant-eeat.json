@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "E-E-A-T: transparant zijn over wie en hoe (AI-gebruik)",
   "matrix": ["11.1.5", "11.1.4"],
+  "cel": "leadgen",
   "titel": "AI schrijft mee aan de blogs. Moet je dat laten zien?",
   "intro": "Een accountantskantoor publiceert elke week een blog over belastingregels. Een AI-tool schrijft de eerste versie. Daarna controleert een belastingadviseur van het kantoor de tekst en voegt hij eigen voorbeelden toe. Onder de artikelen staat nu alleen 'Redactie'. De marketeer wil het AI-gebruik liever niet noemen, uit angst dat Google de artikelen dan lager zet.",
   "opdracht": {

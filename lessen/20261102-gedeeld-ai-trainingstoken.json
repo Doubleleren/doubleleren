@@ -5,6 +5,7 @@
   "vakgebied": "SEO / AI-search",
   "onderwerp": "Eén robots.txt-regel tegen AI-training: het gedeelde token __usage_ai-training",
   "matrix": ["12.1.6", "1.3.6"],
+  "cel": "alle",
   "titel": "Eén robots.txt-regel tegen AI-training voor iedereen: nu al overstappen?",
   "intro": "Een regionale nieuwssite wil niet dat haar artikelen worden gebruikt om AI-modellen te trainen, maar wil wel zichtbaar blijven in Google. In robots.txt staan nu aparte regels voor GPTBot en Google-Extended. De developer las dat Google, Microsoft en OpenAI één gedeelde regel hebben omarmd, en stelt voor om alleen die nog te gebruiken:\n\nUser-agent: __usage_ai-training\nDisallow: /",
   "opdracht": {

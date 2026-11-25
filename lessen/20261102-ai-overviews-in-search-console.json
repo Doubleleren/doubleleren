@@ -5,6 +5,7 @@
   "vakgebied": "SEO / AI-search",
   "onderwerp": "AI Overviews en AI Mode in het Prestatierapport van Search Console",
   "matrix": ["12.1.6", "12.1.1"],
+  "cel": "alle",
   "titel": "Een aparte regel 'AI Overviews' in het maandrapport: waar haal je die vandaan?",
   "intro": "Een klant ziet steeds vaker AI Overviews boven zijn belangrijkste zoekwoorden. Hij wil in het maandrapport een aparte regel: klikken en vertoningen uit AI Overviews en AI Mode. Een collega gaat in het Prestatierapport van Search Console op zoek naar de juiste instelling.",
   "opdracht": {

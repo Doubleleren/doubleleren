@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "URL-inspectie: geïndexeerde versie vs. live test",
   "matrix": ["1.1.5"],
+  "cel": "ecom",
   "titel": "noindex is gisteren weggehaald, maar Search Console zegt van niet",
   "intro": "Bij een webshop stond per ongeluk een noindex op alle categoriepagina's. De developer heeft dat gisteren hersteld. De klant opent vanochtend de URL-inspectie in Search Console voor een categoriepagina en ziet nog steeds: 'Uitgesloten door noindex-tag'. Hij mailt: 'De fix werkt dus niet.'",
   "opdracht": {

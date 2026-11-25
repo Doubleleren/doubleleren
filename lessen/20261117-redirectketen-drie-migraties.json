@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Redirectketens na meerdere migraties",
   "matrix": ["5.1.2", "1.1.4"],
+  "cel": "ecom",
   "titel": "Vier redirects achter elkaar: 'Google komt er toch wel'?",
   "intro": "Een klant is in vijf jaar drie keer verhuisd: naar https, naar een nieuwe URL-structuur en nu naar een nieuw domein. Een oude productpagina gaat daardoor via vier redirects: http://oud.nl/a → https://oud.nl/a → https://www.oud.nl/a → https://www.oud.nl/producten/a → https://www.nieuw.nl/producten/a. Alle stappen zijn 301's. De developer zegt: 'Google volgt toch alles.'",
   "opdracht": {

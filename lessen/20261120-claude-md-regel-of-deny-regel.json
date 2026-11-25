@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Regels die nooit overgeslagen mogen worden: CLAUDE.md of permissies?",
   "matrix": ["coderen-met-ai:6.2.3", "coderen-met-ai:4.5.2"],
+  "cel": "alle",
   "titel": "'Lees nooit .env' staat in CLAUDE.md, en toch gebeurde het",
   "intro": "In de CLAUDE.md van een klantproject staat: 'Lees nooit het bestand .env, daar staan de API-sleutels in.' Meestal gaat dat goed. Maar een collega zag dat Claude het bestand toch één keer opende, op zoek naar de oorzaak van een foutmelding.",
   "opdracht": {

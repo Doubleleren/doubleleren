@@ -8,6 +8,7 @@
     "12.1.5",
     "12.1.1"
   ],
+  "cel": "alle",
   "titel": "Hoeveel minder wordt er geklikt als er een AI-samenvatting staat?",
   "volgorde": "opdracht-eerst",
   "intro": "Een klant ziet in Search Console dat de vertoningen van zijn informatieve blogs stijgen, maar de CTR daalt. Hij vraagt of dat door de AI-samenvattingen komt en wil een cijfer horen in plaats van een gevoel.",

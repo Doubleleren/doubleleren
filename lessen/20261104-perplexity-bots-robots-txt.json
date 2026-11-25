@@ -8,6 +8,7 @@
     "12.1.3",
     "12.1.6"
   ],
+  "cel": "alle",
   "titel": "PerplexityBot geblokkeerd, toch Perplexity in de logs",
   "intro": "Een klant wil als bron in Perplexity verschijnen, maar wil niet dat Perplexity 'zomaar alles leest'. De developer heeft daarom in robots.txt gezet: User-agent: PerplexityBot met Disallow: /. Een week later zie je in de serverlogs nog steeds verzoeken van Perplexity-User. De klant vraagt of Perplexity zich niet aan de regels houdt.",
   "opdracht": {

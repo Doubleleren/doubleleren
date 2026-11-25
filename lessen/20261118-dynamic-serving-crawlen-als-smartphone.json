@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Crawlen als mobiele user-agent bij dynamic serving",
   "matrix": ["8.2.1", "8.1.1"],
+  "cel": "ecom",
   "titel": "De crawl is foutloos, maar mobiel missen de productteksten",
   "intro": "Een webshop toont op dezelfde URL een andere HTML aan telefoons dan aan computers. Een collega crawlt de site met de standaardinstelling van zijn crawler en vindt op elke productpagina een volledige tekst van 400 woorden. Toch dalen de posities. Op je eigen telefoon zie je op de productpagina's alleen foto's en een prijs.",
   "opdracht": {

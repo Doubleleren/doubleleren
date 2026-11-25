@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Paid & organic-rapport: waarom organisch vaker verschijnt dan je advertentie",
   "matrix": ["9.2.2", "9.2.3"],
+  "cel": "alle",
   "titel": "100% vertoningsaandeel, toch drie keer zoveel organische vertoningen",
   "intro": "Een klant adverteert in Google Ads alleen in Nederland op 'zonwering op maat'. De campagne haalt 100% vertoningsaandeel. Toch toont het Paid & organic-rapport voor die zoekopdracht drie keer zoveel organische vertoningen als advertentievertoningen. De Ads-specialist vermoedt een fout in de koppeling met Search Console.",
   "opdracht": {

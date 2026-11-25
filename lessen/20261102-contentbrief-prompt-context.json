@@ -5,6 +5,7 @@
   "vakgebied": "SEO × Claude",
   "onderwerp": "Prompt-anatomie: context geven bij een contentbrief",
   "matrix": ["2.1.5"],
+  "cel": "leadgen",
   "titel": "Een contentbrief van Claude die voor elk bedrijf had kunnen zijn",
   "intro": "Je hebt voor een installatiebedrijf in Noord-Brabant een blog nodig over het onderhoud van warmtepompen. Je vraagt Claude: 'Maak een contentbrief voor warmtepomp onderhoud.' Je krijgt een nette brief terug, maar je kunt er weinig mee: hij richt zich op doe-het-zelvers en had net zo goed voor een concurrent kunnen zijn.",
   "opdracht": {

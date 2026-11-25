@@ -1,0 +1,41 @@
+{
+  "id": "20261123-claude-controle-die-slaagt-of-zakt",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Claude een controle geven die slaagt of zakt",
+  "matrix": ["coderen-met-ai:3.3.3", "coderen-met-ai:3.1.3"],
+  "cel": "alle",
+  "titel": "'Klaar, het script werkt.' Maar de klikken kloppen niet",
+  "intro": "Je laat Claude Code een script maken dat een Search Console-export per maand samenvat. Claude meldt: 'Klaar, het script werkt.' Bij het nakijken is het totaal aantal klikken 12% lager dan in Search Console. Je wilt zulke verrassingen voortaan voorkomen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat helpt daar het meest bij?",
+    "opties": [
+      "In de opdracht zetten dat Claude extra grondig moet zijn, zodat het script beter wordt nagekeken.",
+      "Elk script voortaan zelf regel voor regel doorlezen, zodat jij de fout vindt voordat Claude klaar meldt.",
+      "Een zwaarder model kiezen voor elk script met cijfers, zodat Claude minder vaak rekenfouten maakt in de som.",
+      "Een controle meegeven die slaagt of zakt, zodat Claude zelf ziet of het totaal gelijk is aan de export."
+    ],
+    "juist": 3
+  },
+  "kern": "Claude stopt als het werk af lijkt. Met een controle die slaagt of zakt, ziet Claude zelf of het echt af is en repareert het de fout.",
+  "afleiders": [
+    "**Extra grondig:** het voelt als een duidelijke instructie. Maar 'wees grondig' is gewone tekst, geen schakelaar. Claude weet daarna nog steeds niet waaraan het moet voldoen.",
+    "**Zelf doorlezen:** dan word jij de controle. Elke fout blijft liggen tot jij hem toevallig ziet, en dat kost je juist de tijd die je wilde besparen.",
+    "**Zwaarder model:** een sterker model maakt minder fouten, maar ook dat kan niet zien wat 'klopt' betekent. Zonder controle blijft 'lijkt af' het enige wat het heeft.",
+    ""
+  ],
+  "kort": "Denk aan een leerling die een rekensom maakt zonder antwoordenblad. Hij levert in zodra het er goed uitziet. Geef je hem het antwoord om mee te vergelijken, dan ziet hij zelf dat hij ernaast zit en rekent hij opnieuw. Een controle die slaagt of zakt is dat antwoordenblad voor Claude.",
+  "begrippen": [
+    { "term": "Controle", "uitleg": "iets wat Claude kan uitvoeren en dat 'goed' of 'fout' teruggeeft, zoals een test of een vergelijking met een bekend totaal." },
+    { "term": "Export", "uitleg": "een bestand met gegevens uit een tool, zoals een CSV met klikken per pagina uit Search Console." }
+  ],
+  "uitleg": "De best practices van Claude Code zeggen het zo: zonder iets om uit te voeren, heeft Claude alleen 'het lijkt klaar' om op te varen. Met een controle maakt Claude de wijziging, draait de controle, leest de uitkomst en repareert wat misging.\n\n**Wat kan een controle zijn?**\n- een testbestand of een script dat de uitkomst vergelijkt met een voorbeeld;\n- een bekend totaal, zoals het aantal klikken uit de export;\n- een screenshot naast het ontwerp.\n\n**In de opdracht:** bijvoorbeeld 'het totaal aan klikken moet gelijk zijn aan de som in export.csv. Draai die controle na elke wijziging en ga door tot hij klopt.'\n\n**Vraag om bewijs:** laat Claude het commando en de uitkomst zien. 'Alles klopt' alleen zegt weinig.",
+  "kernpunt": "Geef Claude bij elke klus iets wat 'goed' of 'fout' zegt, en vraag om de uitkomst in plaats van om 'klaar'.",
+  "toepassing": "Zoek vandaag bij één export die je vaak gebruikt een totaal dat altijd moet kloppen, zoals klikken of sessies. Schrijf het als controlezin op voor je volgende opdracht aan Claude.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

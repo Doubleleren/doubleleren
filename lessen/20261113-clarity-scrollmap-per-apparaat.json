@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Clarity: een scrollmap per apparaat lezen",
   "matrix": ["7.1.5"],
+  "cel": "leadgen",
   "titel": "78% ziet het formulier, zegt de scrollmap. Op welk scherm?",
   "intro": "Een klant met een site voor dakkapellen bekijkt in Microsoft Clarity de scrollmap van de offertepagina. In de weergave voor pc bereikt 78% van de bezoekers het offerteformulier onderaan. Hij concludeert dat de pagina niet korter hoeft. In GA4 zie je dat 70% van de bezoekers op een smartphone zit.",
   "opdracht": {

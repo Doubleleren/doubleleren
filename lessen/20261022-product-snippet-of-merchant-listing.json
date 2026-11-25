@@ -7,6 +7,7 @@
   "matrix": [
     "2.2.1"
   ],
+  "cel": "ecom",
   "titel": "Webshop én reviewblog: welke productresultaten kun je krijgen?",
   "intro": "Een klant heeft twee soorten pagina's met Product-markup: productpagina's in de eigen webshop, met prijs, voorraad en een winkelwagen, en een vergelijkingsblog met reviews van producten die alleen bij andere winkels te koop zijn. Hij wil op beide paginatypes zoveel mogelijk productinformatie in Google tonen, inclusief verzendkosten en retourbeleid.",
   "opdracht": {

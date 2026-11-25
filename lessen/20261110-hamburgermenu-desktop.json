@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Navigatie: een verborgen menu (hamburger) op desktop",
   "matrix": ["7.1.2", "1.2.5"],
+  "cel": "ecom",
   "titel": "Het hoofdmenu verdwijnt achter drie streepjes, ook op desktop",
   "intro": "Een fietsenwinkel krijgt een nieuw design. Om de homepage rustiger te maken, zit het hoofdmenu nu ook op desktop achter een icoon met drie streepjes. Er zijn zes categorieën, van stadsfietsen tot onderdelen. Na de livegang daalt het aantal bezoeken aan categoriepagina's, terwijl het verkeer naar de homepage gelijk blijft.",
   "opdracht": {

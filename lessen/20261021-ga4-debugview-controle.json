@@ -7,6 +7,7 @@
   "matrix": [
     "3.1.1"
   ],
+  "cel": "leadgen",
   "titel": "Het formulier werkt, maar GA4 ziet geen lead: hoe test je dat?",
   "intro": "Een klant heeft een nieuw contactformulier en een event generate_lead laten inbouwen. Na twee dagen staat er nog niets in de rapporten. Je wilt nu, live, controleren of het event wel binnenkomt.",
   "opdracht": {

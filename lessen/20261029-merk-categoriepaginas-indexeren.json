@@ -7,6 +7,7 @@
   "matrix": [
     "2.1.3"
   ],
+  "cel": "ecom",
   "titel": "420 merk-categoriepagina's, 55 met zoekvraag: welke mogen in Google?",
   "intro": "Een fietsenwebshop laat automatisch een pagina maken voor elke combinatie van categorie en merk, zoals /e-bikes/gazelle/ en /kinderfietsen/batavus/. Dat zijn er 420, allemaal indexeerbaar. Uit je zoekwoordonderzoek blijkt dat 55 combinaties duidelijk zoekvolume hebben. Voor de andere 365 vind je geen zoekvraag, en 90 daarvan tonen minder dan drie fietsen.",
   "opdracht": {

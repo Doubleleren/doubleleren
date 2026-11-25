@@ -7,6 +7,7 @@
   "matrix": [
     "5.1.2"
   ],
+  "cel": "alle",
   "titel": "PHP-noodpatch vanavond: wat ziet Googlebot als je site plat ligt?",
   "intro": "Op 21 oktober 2026 kwamen er noodpatches uit voor twee kritieke lekken in PHP. Een WordPress-klant laat de host vanavond patchen en de site ligt naar verwachting drie uur plat. De developer wil in die tijd op elke URL een nette pagina tonen: \"We zijn zo terug\".",
   "opdracht": {

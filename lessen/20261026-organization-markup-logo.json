@@ -7,6 +7,7 @@
   "matrix": [
     "2.2.5"
   ],
+  "cel": "alle",
   "titel": "Verkeerd logo in het knowledge panel: wat klopt er niet aan de markup?",
   "intro": "Een fietsenmerk ziet in Google het verkeerde logo in het knowledge panel. Een plugin zet Organization-markup op alle 4.000 pagina's van de site. Daarin staat:\n\n- name: de juridische naam van de holding (met B.V.), niet de merknaam\n- logo: de favicon, 48×48 pixels, als .ico-bestand\n- geen sameAs\n- url: de homepage",
   "opdracht": {

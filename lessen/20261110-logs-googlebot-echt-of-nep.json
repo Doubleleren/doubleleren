@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Logfile-analyse: eerst controleren of Googlebot echt Googlebot is",
   "matrix": ["1.1.3", "1.1.6"],
+  "cel": "ecom",
   "titel": "1,2 miljoen Googlebot-verzoeken in de logs, vier keer meer dan in Search Console",
   "intro": "Je krijgt de serverlogs van een webshop over de afgelopen maand. Je filtert op de user-agent 'Googlebot' en telt 1,2 miljoen verzoeken. In de crawlstatistieken van Search Console staat over dezelfde maand ongeveer een kwart daarvan. De klant wil weten of Google zijn crawlbudget verspilt.",
   "opdracht": {

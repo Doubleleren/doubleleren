@@ -1,0 +1,43 @@
+{
+  "id": "20261123-mergeconflict-zelf-kiezen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een mergeconflict: wat het is en wat je doet",
+  "matrix": ["coderen-met-ai:2.2.3", "coderen-met-ai:2.3.2"],
+  "cel": "alle",
+  "titel": "GitHub meldt een conflict in je pull request. Wat nu?",
+  "intro": "Jij en een collega werken in dezelfde repository aan een kleine rapportagetool, elk op een eigen branch. Jullie passen allebei dezelfde regel aan in het bestand met de kanaalnamen. Je opent een pull request naar main. GitHub meldt dat er een conflict is, en de knop om te mergen is grijs.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat betekent dit, en wat doe je?",
+    "opties": [
+      "Git kan niet kiezen welke versie van die regel blijft, dus beslis jij welke tekst er komt en zet je dat in je branch.",
+      "GitHub heeft een fout in je branch gevonden, dus maak je een nieuwe branch en zet je je wijzigingen daar opnieuw neer.",
+      "Main is tijdelijk op slot door je collega, dus wacht je tot zijn pull request klaar is en merge je daarna gewoon.",
+      "Een van jullie wijzigingen is al verloren gegaan, dus laat je Claude jouw versie met een force-push terugzetten."
+    ],
+    "juist": 0
+  },
+  "kern": "Twee branches veranderden dezelfde regel, en Git kan niet raden welke versie goed is. Jij kiest de eindtekst en zet die in je branch.",
+  "afleiders": [
+    "",
+    "**Fout in je branch:** de grijze knop voelt als een foutmelding. Maar je branch is in orde. Een nieuwe branch maken lost niets op, want dezelfde regel botst dan opnieuw.",
+    "**Main op slot:** wachten klinkt veilig. Maar het conflict verdwijnt niet als je collega eerst merget. Dan botst jouw regel nog steeds met de zijne.",
+    "**Al verloren:** er is nog niets weg. Beide versies staan klaar om uit te kiezen. Een force-push overschrijft juist werk, en dat wil je nooit op een gedeelde branch."
+  ],
+  "kort": "Stel: jij en een collega verbeteren allebei dezelfde zin in een gedeeld document. Het systeem kan niet raden welke verbetering beter is. Het zet beide versies onder elkaar en vraagt: kies er een, of maak er één zin van. Een mergeconflict werkt precies zo. Andere regels voegt Git wel zelf samen.",
+  "begrippen": [
+    { "term": "Branch", "uitleg": "een eigen werkversie van de code, zodat je wijzigt zonder de hoofdversie (main) te raken." },
+    { "term": "Pull request", "uitleg": "een verzoek om je branch samen te voegen met main, zodat anderen eerst kunnen meekijken." },
+    { "term": "Mergeconflict", "uitleg": "twee branches veranderden hetzelfde stuk tekst, en Git weet niet welke versie moet blijven." },
+    { "term": "Force-push", "uitleg": "je versie van een branch hard overschrijven op GitHub, ook als er ander werk in staat." }
+  ],
+  "uitleg": "**Wanneer ontstaat een conflict?** Volgens GitHub Docs vooral als twee mensen dezelfde regel in hetzelfde bestand anders aanpassen. Of als de een een bestand wijzigt en de ander het verwijdert. Wijzigingen op verschillende regels of in verschillende bestanden voegt Git zelf samen.\n\n**Wat doe je?**\n- Bekijk de twee versies van de regel. GitHub zet ze onder elkaar.\n- Kies de juiste tekst, of combineer ze. Overleg met je collega als je twijfelt.\n- Haal de conflictmarkeringen weg en sla het op in je branch.\n\nEen eenvoudig conflict los je op in de website van GitHub. Bij een ingewikkeld conflict doe je het lokaal en push je de oplossing naar je branch. Claude Code kan daarbij helpen, maar jij beslist welke tekst blijft.\n\nZolang er een conflict is, kun je de pull request niet mergen.",
+  "kernpunt": "Een conflict is een vraag, geen fout: Git vraagt jou welke versie blijft. Kies bewust, en overleg bij twijfel.",
+  "toepassing": "Open vandaag een repository waar je aan werkt en kijk of er open pull requests met een conflict zijn. Kijk bij één ervan welke regels botsen, zonder nog iets te mergen.",
+  "bron": {
+    "titel": "About merge conflicts | GitHub Docs",
+    "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts"
+  }
+}

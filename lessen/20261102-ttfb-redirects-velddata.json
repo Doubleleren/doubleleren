@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "TTFB: waarom velddata slechter zijn dan het lab bij redirects",
   "matrix": ["5.2.10", "5.2.11"],
+  "cel": "ecom",
   "titel": "Lighthouse zegt 'snelle server', de velddata zeggen TTFB 1,9 seconde",
   "intro": "Een webshop krijgt de helft van zijn bezoekers via advertenties en nieuwsbrieven. In PageSpeed Insights geeft Lighthouse de homepage een snelle serverrespons, maar de velddata tonen een TTFB van 1,9 seconde. De links in advertenties en nieuwsbrieven gaan eerst via een klikteller, daarna van http naar https en van het domein zonder www naar www.",
   "opdracht": {

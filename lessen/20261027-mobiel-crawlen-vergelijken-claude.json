@@ -8,6 +8,7 @@
     "8.2.1",
     "8.1.2"
   ],
+  "cel": "ecom",
   "titel": "Mobiel minder interne links dan desktop? Laat Claude twee crawls vergelijken",
   "intro": "Een webshop heeft een nieuw responsive thema. Op categoriepagina's staan op desktop een uitgebreide filterbalk, een SEO-tekst en blokken met gerelateerde categorieën. De developer zegt dat 'op mobiel alles er ook is, alleen anders ingedeeld'. Je wilt dat zwart op wit zien voor 2.400 categorie- en productpagina's.",
   "opdracht": {

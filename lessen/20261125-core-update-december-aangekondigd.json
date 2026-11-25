@@ -1,0 +1,48 @@
+{
+  "id": "20261125-core-update-december-aangekondigd",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Core updates: de novemberupdate meten terwijl de decemberupdate al is aangekondigd",
+  "matrix": ["10.1.1", "4.1.2"],
+  "cel": "alle",
+  "titel": "Novemberupdate klaar, decemberupdate op komst: wanneer meet je?",
+  "intro": "Google meldde op 24 november 2026 dat de November 2026 core update klaar is. Die begon op 10 november. Een uur later kondigde Google al een December 2026 core update aan, nog zonder startdatum. Een webshop in elektronica wil weten wat de novemberupdate met de shop deed. Black Friday valt dit jaar op 27 november.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe pak je de analyse van de novemberupdate aan?",
+    "opties": [
+      "De dagen van 10 tot en met 24 november nu al naast oktober leggen, zodat Black Friday niet in je cijfers zit.",
+      "Wachten tot ook de decemberupdate klaar is en beide dan samen meten, zodat de klant maar één analyse hoeft te lezen.",
+      "Een week na de uitrol meten tegen een week vóór 10 november, Black Friday apart, zodat seizoen en update niet mengen.",
+      "Feedback sturen via Search Console met #NovemberCoreUpdate2026, zodat Google de posities van de shop herstelt."
+    ],
+    "juist": 2
+  },
+  "kern": "Google raadt minstens een week data na de uitrol aan. In die week valt nu ook een koopjespiek, dus haal je die eruit voordat je iets concludeert.",
+  "afleiders": [
+    "**De uitrolperiode meten:** zo ontloop je Black Friday, en dat voelt slim. Maar tijdens de uitrol schuiven posities nog. Je meet dan vooral ruis, en oktober is geen gelijke periode.",
+    "**Wachten op december:** één analyse klinkt efficiënt. Maar dan lopen twee updates door elkaar, en kun je niet meer zien welke update wat deed.",
+    "",
+    "**Feedback sturen:** Google vraagt daar inderdaad om. Maar Google zegt er zelf bij dat feedback niet leidt tot handmatige aanpassingen voor losse URL's."
+  ],
+  "kort": "Vergelijk het met op de weegschaal staan na de feestdagen. Weeg je jezelf de dag na kerst, dan zie je vooral het kerstdiner en niet je nieuwe sportschema. Wil je weten wat het schema deed, dan wacht je tot alles is gezakt. En je onthoudt welke dagen een feestmaal hadden. Zo werkt het ook met een update: eerst laten bezinken, en weten welke pieken van iets anders komen.",
+  "begrippen": [
+    { "term": "Core update", "uitleg": "een brede aanpassing van de manier waarop Google pagina's rangschikt. Hij richt zich niet op specifieke sites." },
+    { "term": "Uitrol", "uitleg": "de periode waarin Google een update stap voor stap invoert. Bij een core update kan dat tot twee weken duren." },
+    { "term": "Seizoenseffect", "uitleg": "een stijging of daling die elk jaar rond dezelfde tijd terugkomt, zoals rond Black Friday of de feestdagen." },
+    { "term": "Search Status Dashboard", "uitleg": "de pagina van Google waar updates en storingen in Search worden gemeld, met een RSS-feed." }
+  ],
+  "uitleg": "**Wat er speelt**\n- De November 2026 core update liep van 10 tot 24 november.\n- Op 24 november kondigde Google de December 2026 core update vooraf aan. Die moet langere, complexere vragen beter beantwoorden en gepersonaliseerde resultaten verbeteren. Een startdatum is er nog niet.\n- Google meldt grote rankingupdates nu vooraf op het Search Status Dashboard.\n\n**Zo meet je**\n- Wacht tot de update als klaar is gemeld, plus minstens een week data.\n- Vergelijk die week met een week vóór de start van de uitrol.\n- Bekijk seizoensgebonden zoekwoorden en categorieën apart, zodat Black Friday het beeld niet kleurt.\n- Zet annotaties in Search Console op 10 en 24 november, en straks op de start van de decemberupdate.\n\n**Feedback aan Google**\nGeverifieerde eigenaren kunnen in Search Console feedback sturen met een hashtag. Google past daarop geen posities per URL aan.",
+  "kernpunt": "Meet een update pas met een volle week schone data erna, en noteer wat er in die week nog meer speelde.",
+  "toepassing": "Zet vandaag bij je belangrijkste klant een annotatie in Search Console op 24 november 2026 (einde novemberupdate) en abonneer je op de RSS-feed van het Search Status Dashboard.",
+  "bron": {
+    "titel": "Google Search Central: Stay informed about Google Search ranking updates",
+    "url": "https://developers.google.com/search/docs/ranking/stay-informed"
+  },
+  "video": {
+    "titel": "Recover From ANY Google Algorithm Update",
+    "kanaal": "Rank Math SEO",
+    "url": "https://www.youtube.com/watch?v=Qcd_2W5na60"
+  }
+}

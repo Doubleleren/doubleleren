@@ -8,6 +8,7 @@
     "8.1.3",
     "8.1.1"
   ],
+  "cel": "ecom",
   "titel": "Googlebot Desktop in de logs: is de site nog niet mobile-first?",
   "intro": "Een klant met een oudere B2B-webshop ziet in de serverlogs nog regelmatig Googlebot Desktop langskomen. Hij concludeert dat zijn site 'nog niet mobile-first wordt geïndexeerd' en wil daarom eerst de desktopversie verbeteren. De mobiele versie laat op productpagina's de specificatietabellen weg.",
   "opdracht": {

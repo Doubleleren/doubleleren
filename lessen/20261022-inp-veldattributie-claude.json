@@ -8,6 +8,7 @@
     "5.2.5",
     "5.2.4"
   ],
+  "cel": "ecom",
   "titel": "Lighthouse is groen, INP is rood: laat Claude de velddata ontleden",
   "intro": "Een webshop scoort in Lighthouse prima op Total Blocking Time, maar Search Console meldt INP 'slecht' op mobiel (75e percentiel: 560 ms) voor de productpagina's. De developer heeft de web-vitals-library met de attribution-build al draaien en levert een CSV met 2.000 INP-metingen: interactionTarget, interactionType, inputDelay, processingDuration, presentationDelay en loadState.",
   "opdracht": {
