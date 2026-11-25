@@ -221,6 +221,10 @@ try {
           <StackPanel x:Name="LinksKnoppen" Orientation="Horizontal" HorizontalAlignment="Left"/>
           <StackPanel x:Name="Knoppen" Orientation="Horizontal" HorizontalAlignment="Right"/>
         </Grid>
+        <Border x:Name="Balk" DockPanel.Dock="Bottom" Background="#EEF2FF" CornerRadius="10" Padding="18,12,18,10"
+                Margin="0,14,0,0" Visibility="Collapsed">
+          <StackPanel x:Name="BalkInhoud"/>
+        </Border>
         <ScrollViewer x:Name="Scroll" VerticalScrollBarVisibility="Auto">
           <StackPanel x:Name="Inhoud" Margin="0,0,10,0"/>
         </ScrollViewer>
@@ -235,6 +239,8 @@ try {
     $knoppen      = $win.FindName('Knoppen')
     $linksKnoppen = $win.FindName('LinksKnoppen')
     $scroll       = $win.FindName('Scroll')
+    $balk         = $win.FindName('Balk')         # vaste balk boven de knoppen (reactie, feedback, hoe ging het)
+    $balkInhoud   = $win.FindName('BalkInhoud')
     $scroll.MaxHeight = [Windows.SystemParameters]::PrimaryScreenHeight - 330
 
     $typeNaam = @{ basis = 'Basis'; verdieping = 'Verdieping'; herhaling = 'Herhaling'; nieuws = 'Nieuws' }[[string]$les.type]
@@ -303,6 +309,7 @@ try {
     }
     function Leeg {
         $inhoud.Children.Clear(); $knoppen.Children.Clear(); $linksKnoppen.Children.Clear(); $scroll.ScrollToTop()
+        $balkInhoud.Children.Clear(); $balk.Visibility = 'Collapsed'
     }
     function Voeg-UitstelKnop {
         if ($script:vrijblijvend) {
@@ -484,13 +491,19 @@ try {
         $script:afrondDashKnop = Nieuw-Knop 'Afronden en voortgang bekijken' { $script:openDashboard = $true; Sla-Op }
         $script:afrondDashKnop.Margin = Rand 0 0 0 0
         [void]$knoppen.Children.Add($script:afrondDashKnop)
+        # Alles wat je hier kunt kiezen staat in een vaste balk boven de knoppen, niet onderaan de uitleg:
+        # zo zie je zonder scrollen dat het kan (zelfde opbouw als de reactie-kaart in docs/app.js)
+        $balk.Visibility = 'Visible'
+        if (-not $Snapshot) { $scroll.MaxHeight = [Math]::Max(200, [Windows.SystemParameters]::PrimaryScreenHeight - 330 - $(if ($o.soort -ne 'meerkeuze') { 190 } else { 130 })) }
+        $hoofd = $inhoud; $inhoud = $balkInhoud
         if ($o.soort -ne 'meerkeuze') {
             # Zelfbeoordeling bepaalt of het onderwerp later terugkomt
             $script:afrondKnop.IsEnabled = $false
             $script:afrondDashKnop.IsEnabled = $false
-            Toon-Label 'Hoe ging het?'
-            $rij = New-Object Windows.Controls.StackPanel
-            $rij.Orientation = 'Horizontal'
+            $tb = Nieuw-Alinea '**Hoe ging het?** Kies er één om af te ronden.' 14 '#0F172A'; $tb.Margin = Rand 0 0 0 6
+            [void]$inhoud.Children.Add($tb)
+            $rij = New-Object Windows.Controls.WrapPanel
+            $rij.Margin = Rand 0 0 0 8
             foreach ($s in @(@('goed', 'Wist ik goed'), @('deels', 'Deels'), @('fout', 'Wist ik niet'))) {
                 $k = Nieuw-Knop $s[1] {
                     $script:resultaat = [string]$this.Tag
@@ -506,21 +519,37 @@ try {
             [void]$inhoud.Children.Add($rij)
         }
         # Reactie met één tik (optioneel); nog een keer tikken haalt hem weer weg
-        Toon-Label 'Wat vind je ervan? (optioneel)'
+        $tb = Nieuw-Alinea '**Wat vind je van deze les?** Eén tik is genoeg. Zo kiest de generator je volgende lessen beter.' 14 '#0F172A'; $tb.Margin = Rand 0 0 0 6
+        [void]$inhoud.Children.Add($tb)
         $rij = New-Object Windows.Controls.WrapPanel
         foreach ($s in @(@('meer', 'Hier wil ik meer over'), @('makkelijk', 'Te makkelijk'), @('niet-relevant', 'Niet relevant voor mij'))) {
             $k = Nieuw-Knop $s[1] {
                 $script:reactie = $(if ($script:reactie -eq [string]$this.Tag) { '' } else { [string]$this.Tag })
                 foreach ($c in $script:reactieKnoppen) {
                     $aan = $script:reactie -eq [string]$c.Tag
-                    $c.Background = Kleur $(if ($aan) { '#0F172A' } else { '#F1F5F9' }); $c.Foreground = Kleur $(if ($aan) { '#FFFFFF' } else { '#0F172A' })
+                    $c.Background = Kleur $(if ($aan) { '#0F172A' } else { '#FFFFFF' }); $c.Foreground = Kleur $(if ($aan) { '#FFFFFF' } else { '#0F172A' })
                 }
             }
-            $k.Tag = $s[0]; $k.Margin = Rand 0 0 8 8
+            $k.Tag = $s[0]; $k.Margin = Rand 0 0 8 8; $k.Background = Kleur '#FFFFFF'
             [void]$rij.Children.Add($k)
         }
         $script:reactieKnoppen = @($rij.Children)
         [void]$inhoud.Children.Add($rij)
+        # Feedback gaat via de website (versleuteld naar de beheerder); de pop-up opent die direct bij deze les
+        # (zonder installatie, zoals bij -LesBestand: het adres uit instellingen.json naast app\)
+        $cfg = if ($c -and $c.cfg) { $c.cfg } else { try { [IO.File]::ReadAllText((Join-Path (Split-Path $PSScriptRoot -Parent) 'instellingen.json'), [Text.Encoding]::UTF8) | ConvertFrom-Json } catch { $null } }
+        if ($cfg.eigenaar -and $cfg.appRepo -and [string]$les.id -match '^[a-z0-9-]{1,100}$') {
+            $tb = New-Object Windows.Controls.TextBlock
+            $tb.FontSize = 13; $tb.Margin = Rand 0 2 0 0; $tb.TextWrapping = 'Wrap'; $tb.Foreground = Kleur '#334155'
+            $tb.Inlines.Add('Klopt er iets niet, is de vraag onduidelijk of heb je een idee? ')
+            $h = New-Object Windows.Documents.Hyperlink
+            $h.Inlines.Add('Geef feedback over deze les'); $h.FontWeight = [Windows.FontWeights]::SemiBold
+            $h.NavigateUri = [uri]("https://$($cfg.eigenaar).github.io/$($cfg.appRepo)/#feedback/$($les.id)")
+            $h.Add_Click({ if (Test-WebAdres $this.NavigateUri.AbsoluteUri) { Start-Process $this.NavigateUri.AbsoluteUri; $win.WindowState = 'Minimized' } })
+            $tb.Inlines.Add($h)
+            [void]$inhoud.Children.Add($tb)
+        }
+        $inhoud = $hoofd
         [void]$knoppen.Children.Add($script:afrondKnop)
     }
 
