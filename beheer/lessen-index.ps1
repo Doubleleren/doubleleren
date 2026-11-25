@@ -9,6 +9,7 @@ $lessen = foreach ($f in Get-ChildItem (Join-Path $App 'lessen') -Filter *.json 
         kernpunt = $l.kernpunt; bron = $l.bron; video = $l.video; soort = $l.opdracht.soort
         herkomst = $(if ($l.herkomst -eq 'team') { 'team' } else { 'generator' })
     }
+    if ($l.cel) { $r.cel = "$($l.cel)" }     # cel van de case (ecom, leadgen of alle); ontbreekt = nog niet bepaald
     if ($l.herzien) { $r.herzien = "$($l.herzien)" }
     if ($l.actief -eq $false) { $r.actief = $false }     # uit de roulatie: nooit meer in een wachtrij, wel nog na te lezen
     # Meerkeuze waarbij het juiste antwoord ruim de langste optie is (meer dan 10%): te raden, de generator herziet hem

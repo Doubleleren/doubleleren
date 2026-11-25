@@ -48,8 +48,10 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
             if ("$($g.id)" -notmatch '^[0-9a-z][0-9a-z-]{0,80}$' -or @('goed', 'deels', 'fout') -notcontains $g.resultaat) { continue }
             if (-not $stat.Contains($g.id)) { $stat[$g.id] = [ordered]@{ n = 0; goed = 0; deels = 0; fout = 0 } }
             $stat[$g.id].n++; $stat[$g.id][$g.resultaat]++
+            # Reacties na de les (optioneel, één tik): per les geteld, zonder naam
+            if (@('meer', 'makkelijk', 'niet-relevant') -contains $g.reactie) { $k = $g.reactie -replace '-r', 'R'; $stat[$g.id][$k] = [int]$stat[$g.id][$k] + 1 }
         }
-        if ($maand -ge $grens) { $resultaten += @($r.obj.regels | ForEach-Object { [ordered]@{ datum = $_.datum; les = $_.id; resultaat = $_.resultaat; matrix = $_.matrix; niveau = $_.niveau; soort = $_.soort } }) }
+        if ($maand -ge $grens) { $resultaten += @($r.obj.regels | ForEach-Object { [ordered]@{ datum = $_.datum; les = $_.id; resultaat = $_.resultaat; matrix = $_.matrix; niveau = $_.niveau; soort = $_.soort; reactie = $(if (@('meer', 'makkelijk', 'niet-relevant') -contains $_.reactie) { $_.reactie }) } }) }
     }
     $scores = [ordered]@{}
     if ($matrix) { foreach ($p in $matrix.obj.scores.PSObject.Properties) { $laatste = @($p.Value.PSObject.Properties | Sort-Object Name)[-1]; if ($laatste) { $scores[$p.Name] = [int]$laatste.Value } } }
@@ -63,7 +65,7 @@ foreach ($id in @($org.leden.PSObject.Properties.Name)) {
     if (-not $vakken.Count -and $vakIds -contains $eigenVak) { $vakken[$eigenVak] = 1 }   # eigen vak zonder skilllijst: (nog) geen lessen
     if ($script:lidOngeldig) { $script:lidOvergeslagen++; continue }
     $leden[$id] = [ordered]@{
-        project = $org.leden.$id.project; cel = $org.leden.$id.cel; vak = $eigenVak; vakken = $vakken
+        project = $org.leden.$id.project; cel = $(Get-DlCelVanLid $org $id).id; vak = $eigenVak; vakken = $vakken
         focus = $(if ($profiel) { $profiel.obj.focus }); leerdoelen = $(if ($profiel) { $profiel.obj.leerdoelen })
         scores = $scores; prioriteit = $prioriteit; resultaten = $resultaten; gedaan = @($gedaan | Sort-Object -Unique); wachtrij = @($(if ($wachtrij) { $wachtrij.obj.lessen }))
     }
@@ -78,5 +80,7 @@ foreach ($naam in @(Get-DlOpslagLijst $d 'feedback' | ForEach-Object { $_ -repla
         if ($f) { $feedback += [ordered]@{ id = $f.bestand; soort = $f.soort; les = $f.les; datum = $f.datum; tekst = ($f.tekst -replace '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\u200E\u200F\u202A-\u202E\u2066-\u2069]', '') } }
     } catch { $fbOverslaan++ }
 }
-[IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; vakken = @($vakIds); leden = $leden; lesstatistiek = $stat; feedback = @($feedback) } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
+[IO.File]::WriteAllText($pad, ([ordered]@{ v = 1; gemaakt = (Get-Date).ToString('s'); vakgebied = $inst.vakgebied; vakken = @($vakIds); cellen = @($org.cellen | ForEach-Object { $_.id }); leden = $leden; lesstatistiek = $stat; feedback = @($feedback) } | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
+# De vaste regels per persoon (plekken, loting, cel) doet de regelaar; Claude krijgt daarna alleen werk.json
+& (Join-Path $PSScriptRoot 'regelaar.ps1') -Stap plan -Map $Uit -App $App
 Write-Host "Context voor $($leden.Count) deelnemer(s), $($stat.Count) les(sen) met resultaten, $($feedback.Count) feedbackbericht(en)$(if ($fbOverslaan) { " ($fbOverslaan niet leesbaar)" }): $pad$(if ($script:ongeldig) { " · $($script:ongeldig) bestand(en) niet te controleren, $($script:lidOvergeslagen) deelnemer(s) vandaag overgeslagen" })"

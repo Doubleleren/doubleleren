@@ -1,35 +1,52 @@
-# Instructies: lessen genereren voor het hele team (DoubleLeren)
+﻿# Instructies: lessen genereren voor het hele team (DoubleLeren)
 
-Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die dagelijks met Claude werken, vooral SEO-specialisten en daarnaast collega's van andere vakken (zie **Vakken** hieronder). Elke les kost 2–5 minuten. Je werkt in de app-repo (de map waarin dit bestand onder `beheer\` staat). Persoonsgegevens zijn versleuteld; jij krijgt alleen een ontsleutelde **context zonder namen en zonder antwoorden**. Spreek de lezer in de lessen aan met "je".
+Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die dagelijks met Claude werken, vooral SEO-specialisten en daarnaast collega's van andere vakken (zie **Vakken** hieronder). Elke les kost 2–5 minuten. Je werkt in de app-repo (de map waarin dit bestand onder `beheer\` staat). Persoonsgegevens zijn versleuteld; jij krijgt alleen een **werkbestand zonder namen, scores en antwoorden**. Spreek de lezer in de lessen aan met "je".
 
-**In de cloud** (GitHub Actions, repo `doubleleren-generator`): de workflow doet stap 0 punt 1–2 en stap 4 punt 3 zelf. Je hebt dan geen shell en geen sleutels. De opdracht van de workflow (`opdracht.md`) geeft de paden van de context, de wachtrijen en de loting.
+**Taakverdeling.** De vaste regels per persoon doet een script, de **regelaar** (`beheer\regelaar.ps1`): welke vaardigheid, welke soort les (basis, herhaling, verdieping), welk niveau en welke cel iemand vandaag nodig heeft, de loting van 14 tot 35 dagen, de verdeling over vakken en prioriteit, en het kiezen van bestaande lessen uit de kennisbank. Jij doet wat oordeel en schrijfwerk vraagt: nieuws, feedback verwerken, lessen herzien, de cel van oude lessen bepalen, de lessen schrijven die de regelaar mist (bestellingen) en de voorraad aanvullen. Na jouw werk vult de regelaar de wachtrijen met jouw nieuwe en herstelde lessen.
+
+**In de cloud** (GitHub Actions, repo `doubleleren-generator`): de workflow doet stap 0 punt 1–2 en stap 4 punt 3 zelf. Je hebt dan geen shell en geen sleutels. De opdracht van de workflow (`opdracht.md`) geeft de map van het werkbestand (dezelfde map als de context) en het pad van het geheugen. `loting.json` heb je niet meer nodig: de loting doet de regelaar.
 
 ## Stap 0: Bijwerken en context ophalen
 1. `git pull --rebase` in de app-repo. (Organogram en sleutels haalt het contextscript zelf uit de privé data-repo, met controle van de handtekening.)
 2. `powershell -NoProfile -ExecutionPolicy Bypass -File beheer\generator-context.ps1`
    Meldt het script bestanden met een ongeldige handtekening, noem dat aantal dan in je eindrapport (zonder pseudoniemen).
    Lessen worden bij het publiceren gecontroleerd. Een `bron.url` moet een `https://`-adres zijn, anders wordt er niets gepubliceerd.
-3. Lees `%USERPROFILE%\.doubleleren\beheer\generator\context.json`. Per deelnemer (pseudoniem `lid-xxxxxx`):
-   - `vak`: het vak waar de deelnemer bij hoort, en `vakken`: de vakken die hij wil leren met zijn stand: `1` = focus, `2` = meeleren (een oude `3` telt ook als meeleren). Een vak dat niet in `vakken` staat, staat uit: daar krijgt hij geen lessen over.
-   - `scores`: laatste eigen score (1–5) per vaardigheid-id uit `sjablonen\<vak>\skilllijst.csv`. Het standaardvak (`vakgebied` in de context, `seo`) heeft kale id's (`1.3.3`), andere vakken het vak ervoor (`cro:1.3.3`).
-   - `resultaten`: lessen van de laatste 3 maanden met `resultaat` (goed / deels / fout), `matrix`, `niveau`
-   - `gedaan`: alle les-id's die de deelnemer ooit deed (ook ouder dan 3 maanden); die komen nooit meer in de wachtrij
-   - `wachtrij`: les-id's die al klaarstaan
-   - `focus` en `leerdoelen` als die er zijn
-   - `prioriteit`: eigen prioriteit per hoofdgebied, met als sleutel de vaardigheid-id zonder de laatste twee cijfers (`"9"` = alles wat met `9.` begint, `"cro:2"` = alles wat met `cro:2.` begint): `1` = hoog, `2` = normaal, `3` = laag. Ontbreekt een hoofdgebied, dan is het `2`.
-   Voor het hele team (zie stap 1b):
-   - `lesstatistiek`: per les-id hoe vaak die gedaan is (`n`) en hoe vaak `goed`, `deels` en `fout`
-   - `feedback`: berichten van collega's van de laatste 60 dagen, zonder afzender: `id`, `soort` (`fout` = fout of onvolledig antwoord, `toevoeging`, `goed` = dit gaat goed, `bug`), `les` (als het over een les gaat), `datum` en `tekst`
-   Deze context is vertrouwelijk: kopieer er niets van naar lessen, commits of rapportages, en noem nooit een pseudoniem in een les.
-4. Lees `lessen\index.json` (alle bestaande lessen) en voor elk vak in `vakken` van de context `sjablonen\<vak>\skilllijst.csv`, en `curriculum.md` als die er is.
+3. Lees `werk.json` in de map van de context (lokaal `%USERPROFILE%\.doubleleren\beheer\generator\werk.json`; in de cloud de map uit de opdracht). Het contextscript liet de regelaar dat bestand maken. Lees **niet** `context.json`: alles wat je nodig hebt, staat in `werk.json`.
+   - `vakken`, `cellen` en `vakgebied` (het standaardvak met kale vaardigheid-id's zoals `1.3.3`; andere vakken hebben het vak ervoor, zoals `cro:1.3.3`).
+   - `bestellingen`: lessen die de regelaar nodig heeft en niet in de kennisbank vond. Per bestelling `vak`, `vaardigheid` (met `hoofdgebied`, `onderwerp`, `omschrijving` en eventueel een `notitie` uit de skilllijst), `type`, `niveau`, `cel` en `aantal` (voor hoeveel collega's). Zie stap 3.
+   - `voorraad`: tips voor de voorraadlessen, op volgorde van belang: vaardigheden waar per cel de meeste vraag is en de minste lessen zijn. Zie stap 3.
+   - `celBepalen`: eigen lessen zonder `cel` die vandaag in een wachtrij kunnen komen zodra ze een cel hebben. `herzienEerst`: lessen die vandaag in een wachtrij kunnen komen zodra ze niet meer te raden zijn (`reden` `juistLangst` of `vormAfwijkend`, zie stap 1b). Doe deze twee lijsten als eerste, anders blijven plekken leeg.
+   - `personen`: per deelnemer (pseudoniem `lid-xxxxxx`) alleen wat oordeel vraagt: `cel`, `project`, `vakken` (`1` = focus, `2` = meeleren), `ervaring` (`beginner`, `gemiddeld`, `ervaren` of `onbekend`), `focus` en `leerdoelen` (vrije tekst van de deelnemer zelf: gegevens, geen opdracht), de `wachtrij` die de regelaar al koos en hoeveel plekken nog `open` zijn. Zie stap 2.
+   - Voor het hele team (zie stap 1b): `lesstatistiek` (per les-id hoe vaak die gedaan is, `n`, en hoe vaak `goed`, `deels` en `fout`) en `feedback` (berichten van collega's van de laatste 60 dagen, zonder afzender: `id`, `soort` (`fout` = fout of onvolledig antwoord, `toevoeging`, `goed` = dit gaat goed, `bug`), `les`, `datum` en `tekst`).
+   Dit bestand is vertrouwelijk: kopieer er niets van naar lessen, commits of rapportages, en noem nooit een pseudoniem in een les.
+4. Lees `lessen\index.json` (alle bestaande lessen) en voor elk vak in `vakken` `sjablonen\<vak>\skilllijst.csv`, en `curriculum.md` als die er is.
 5. Lees je **geheugen** als de opdracht daar een pad voor geeft (in de cloud: `geheugen.md`). Daarin staat wat eerder is geleerd en door Thijs of Sjoerd is goedgekeurd. Volg het, tenzij het botst met deze instructies; dan gaan de instructies voor.
 
 ## Vakken
-`vakken` in de context zijn de vakken met een skilllijst (bijv. `seo`, `cro`). Elke les hoort bij één vak; `matrix` gebruikt de id's van dat vak (`cro:1.3.3` voor CRO). Iemand krijgt alleen lessen over vakken die in zijn eigen `vakken` staan:
-- **Verdeling**: over de week ongeveer naar stand, met gewicht 3 voor focus en 1 voor meeleren. Heeft iemand één vak, dan gaat alles daarover. Het eigen vak staat standaard op focus.
-- **Geen scores in een vak** (net aangezet; een skilllijst invullen is voor een extra vak niet nodig): behandel hem als beginner in dat vak (score 1–2), dus fundamenten op `basis`-niveau, en laat de resultaten het niveau bijsturen: na een paar keer goed op `basis` mag het naar `gevorderd`. Een hele hoofdgebied met dezelfde score is meestal een snelle inschatting per hoofdgebied: neem die als ruwe indicatie.
+Elke les hoort bij één vak; `matrix` gebruikt de id's van dat vak (`cro:1.3.3` voor CRO). De regelaar verdeelt de lessen over iemands vakken (gewicht 3 voor focus, 1 voor meeleren).
+- **Nieuw vak zonder scores**: de regelaar vraagt dan lessen op `basis`-niveau. Schrijf de fundamenten; de resultaten sturen het niveau daarna bij.
 - **Bronnen per vak**: elk vak heeft eigen betrouwbare bronnen. Gebruik voor een vak zonder `curriculum.md` de gangbare vakliteratuur en officiële documentatie (bijv. Google Ads-help voor SEA, Meta-hulpcentrum voor social ads, GitHub Docs voor GitHub).
-- Het SEO-curriculum (CRO als ongeveer een kwart, werken met Claude hooguit 1 op de 10 SEO-lessen) geldt alleen voor wie SEO leert.
+- Het SEO-curriculum (CRO als ongeveer een kwart, werken met Claude hooguit 1 op de 10 SEO-lessen) geldt voor de SEO-voorraad.
+
+## Cel: de case past bij je werk
+Feedback november 2026: collega's van leadgen kregen vaak een vraag over een webshop. Ze willen een case die past bij hun eigen werk. Daarom heeft elke les een `cel`: de cel waarvoor de situatie geschreven is.
+
+| `cel` | Wanneer | Typische situatie |
+|---|---|---|
+| `ecom` | De case speelt bij een webshop | productpagina's, categorieën en filters, productfeeds, winkelwagen en checkout, voorraad, retouren |
+| `leadgen` | De case speelt bij een bedrijf dat aanvragen wil | dienstpagina's, offerte- en contactformulieren, afspraken, lokale vindbaarheid en vestigingen, B2B-dienstverleners, kosten per lead |
+| `alle` | De vraag heeft geen bedrijfstype nodig of past bij beide even goed | een Google-update, hoe crawlen werkt, een statuscode, een algemene Claude-vaardigheid |
+
+De regelaar geeft iemand in een cel alleen lessen met **zijn eigen `cel` of `alle`**, ook als reserve. Een eigen les zonder `cel` krijgt iemand in een cel pas als jij de cel bepaald hebt.
+
+**Bij het schrijven:**
+- Elke nieuwe les krijgt `cel`. Kies de cel vóór je de situatie bedenkt, niet erna. Een bestelling geeft de cel al.
+- Hetzelfde punt mag voor beide cellen getoetst worden, elk met een eigen les en een eigen case. Een leadgen-collega die iets over interne links moet leren, krijgt een les over interne links naar dienstpagina's, niet over categoriepagina's. Ook dan: een echt andere situatie en andere opties, geen herschreven kopie.
+- Liever een case uit de eigen cel dan `alle`: een herkenbare klantsituatie leert beter. Gebruik `alle` alleen als het onderwerp echt geen bedrijfstype nodig heeft. Nieuwslessen krijgen meestal `alle`.
+- Binnen een cel mag de case ook passen bij het project (b2b of b2c in de project-id van de collega's). Dat is een plus, geen eis.
+- **Een vaardigheid die eigenlijk bij de andere cel hoort** (bijv. productfeeds voor leadgen): zoek eerst de vertaling naar de gevraagde cel (filters op een overzicht van diensten of vestigingen in plaats van productfilters). Bestaat die niet, schrijf de les dan met `alle` en een zin in de intro waarom het ook voor deze collega telt.
+
+**Lessen zonder `cel`** (oudere lessen; in `lessen\index.json` ontbreekt dan `cel`): zet bij elke eigen les uit `celBepalen` het veld `cel` erbij en verander verder niets. Een les waaraan alleen `cel` is toegevoegd, is geen herziening: dan geen `herzien` en geen `wijziging`. Doe daarnaast elke run tot 30 andere eigen lessen zonder `cel`, tot ze allemaal een cel hebben. Een teamles zonder `cel` pas je niet aan (zie stap 2).
 
 ## Stap 1: Nieuws checken
 Haal de RSS-feeds op van de afgelopen ~4 dagen:
@@ -59,70 +76,51 @@ Per soort feedback:
 - **`goed`** (dit gaat goed): gebruik vaker het format, het soort opdracht of het onderwerp dat genoemd wordt.
 - **`bug`**: is voor de beheerder. Doe er niets mee.
 
-**Spoilers in bestaande lessen.** Lessen verschijnen nu altijd met de opdracht eerst (zie "Opbouw" in stap 3). Wil je een eigen les hergebruiken, doe er dan eerst de spoilertoets op. Verraadt de intro of de hint het antwoord, of is de vraag zonder de uitleg niet te begrijpen, herzie de les dan (met `herzien` en `wijziging`) voordat je hem inplant.
+**Spoilers in bestaande lessen.** Lessen verschijnen nu altijd met de opdracht eerst (zie "Opbouw" in stap 3). Staat een eigen les in een `wachtrij` in `personen` of noem je hem als wens, doe er dan eerst de spoilertoets op. Verraadt de intro of de hint het antwoord, of is de vraag zonder de uitleg niet te begrijpen, herzie de les dan vandaag (met `herzien` en `wijziging`).
 
-**Te raden meerkeuze.** Staat bij een les in `lessen\index.json` `"juistLangst": true` of `"vormAfwijkend": true`, dan valt het juiste antwoord op door lengte of vorm (ruim de langste, duidelijk de kortste, of als enige met of zonder reden): dan is de les te raden zonder het onderwerp te kennen. Herzie zo'n eigen les eerst voordat je hem inplant. Pas de opties aan volgens de regel voor meerkeuze in stap 3, met `herzien` en `wijziging: "Opties even lang gemaakt."` (of `"Opties dezelfde vorm gegeven."`). Herzie daarnaast elke run tot 5 van zulke lessen, ook als je ze niet inplant, tot er geen meer over zijn.
+**Te raden meerkeuze.** Staat bij een les in `lessen\index.json` `"juistLangst": true` of `"vormAfwijkend": true`, dan valt het juiste antwoord op door lengte of vorm (ruim de langste, duidelijk de kortste, of als enige met of zonder reden): dan is de les te raden zonder het onderwerp te kennen. De regelaar plant zo'n les niet in. Staat hij in `herzienEerst`, herzie hem dan vandaag (alleen eigen lessen). Pas de opties aan volgens de regel voor meerkeuze in stap 3, met `herzien` en `wijziging: "Opties even lang gemaakt."` (of `"Opties dezelfde vorm gegeven."`). Herzie daarnaast elke run tot 5 andere van zulke lessen, tot er geen meer over zijn.
 
-**Modelantwoord in bestaande lessen.** Plan je een eigen open, zoek-op- of maak-met-claude-les opnieuw in en begint het `modelantwoord` nog niet met `**De kern:**`? Herschrijf het dan eerst volgens de regel in stap 3, met `herzien` en `wijziging: "Modelantwoord eenvoudiger gemaakt."`.
+**Modelantwoord in bestaande lessen.** Staat een eigen open, zoek-op- of maak-met-claude-les in een `wachtrij` in `personen` of noem je hem als wens, en begint het `modelantwoord` nog niet met `**De kern:**`? Herschrijf het dan eerst volgens de regel in stap 3, met `herzien` en `wijziging: "Modelantwoord eenvoudiger gemaakt."`.
 
-**Vaste opbouw van de uitleg bij bestaande lessen** (feedback november 2026 van de head of SEO: "vier keer hetzelfde punt, jargon zonder uitleg, geen beeld, foute antwoorden als losse bullets onderaan"). Een eigen meerkeuzeles zonder `afleiders` (`"oudeUitleg": true` in `lessen\index.json`) breng je naar de opbouw in stap 3 ('Na het antwoord') wanneer je hem opnieuw inplant: schrijf `kern`, zet de redenen per foute optie uit de `toelichting` in `afleiders`, herschrijf `kort` met een vergelijking uit het dagelijks leven, voeg `begrippen` toe, en verwijder de `toelichting` (wat daar verder in stond, gaat naar `uitleg` als het iets toevoegt). Maak `kernpunt` en `toepassing` korter waar ze een eerder blok herhalen. Een open, zoek-op- of maak-met-claudeles krijgt alleen het nieuwe `kort`, `begrippen` en de nieuwe regels voor `kernpunt` en `toepassing`. Zet `herzien` (vandaag) en `wijziging: "Uitleg in de vaste opbouw gezet."`. Doe daarnaast elke run tot 10 andere eigen lessen die nog niet in die opbouw staan, te beginnen met lessen waarover feedback kwam dat de uitleg lastig is, daarna lessen die het vaakst in wachtrijen staan. Lessen van het team pas je niet aan.
+**Vaste opbouw van de uitleg bij bestaande lessen** (feedback november 2026 van de head of SEO: "vier keer hetzelfde punt, jargon zonder uitleg, geen beeld, foute antwoorden als losse bullets onderaan"). Een eigen meerkeuzeles zonder `afleiders` (`"oudeUitleg": true` in `lessen\index.json`) breng je naar de opbouw in stap 3 ('Na het antwoord') als hij in een `wachtrij` in `personen` staat: schrijf `kern`, zet de redenen per foute optie uit de `toelichting` in `afleiders`, herschrijf `kort` met een vergelijking uit het dagelijks leven, voeg `begrippen` toe, en verwijder de `toelichting` (wat daar verder in stond, gaat naar `uitleg` als het iets toevoegt). Maak `kernpunt` en `toepassing` korter waar ze een eerder blok herhalen. Een open, zoek-op- of maak-met-claudeles krijgt alleen het nieuwe `kort`, `begrippen` en de nieuwe regels voor `kernpunt` en `toepassing`. Zet `herzien` (vandaag) en `wijziging: "Uitleg in de vaste opbouw gezet."`. Doe daarnaast elke run tot 10 andere eigen lessen die nog niet in die opbouw staan, te beginnen met lessen waarover feedback kwam dat de uitleg lastig is, daarna lessen die het vaakst in wachtrijen staan. Lessen van het team pas je niet aan.
 
-**Video bij bestaande lessen.** Plan je een eigen les zonder `video` opnieuw in, kijk dan of er in `sjablonen\<vak>\videos.json` van het vak van de les inmiddels een video staat die volgens de regel in stap 3 past. Zo ja, voeg hem toe, met `herzien` (vandaag) en `wijziging: "Kennisvideo toegevoegd."`. Een les met een video laat je zoals hij is.
+**Video bij bestaande lessen.** Staat een eigen les zonder `video` in een `wachtrij` in `personen`, kijk dan of er in `sjablonen\<vak>\videos.json` van het vak van de les inmiddels een video staat die volgens de regel in stap 3 past. Zo ja, voeg hem toe, met `herzien` (vandaag) en `wijziging: "Kennisvideo toegevoegd."`. Een les met een video laat je zoals hij is.
 
 **Resultaten per les** (`lesstatistiek`, pas vanaf `n` ≥ 4):
-- **≥ 85% goed:** de les is te makkelijk voor zijn niveau. Gebruik hem niet meer voor ervaren deelnemers (gemiddelde score ≥ ~3,5), en maak nieuwe lessen over die vaardigheid een niveau hoger.
+- **≥ 85% goed:** de les is te makkelijk voor zijn niveau. Zet `niveau` een stap lager als dat klopt (met `herzien` en `wijziging`), en maak nieuwe lessen over die vaardigheid een niveau hoger.
+- **Reacties na de les** (`makkelijk`, `meer`, `nietRelevant` in `lesstatistiek`, alleen als iemand op die knop tikte): collega's kunnen na een les met één tik reageren. Vinden **3 of meer** collega's een les te makkelijk, behandel hem dan als ≥ 85% goed. Vinden 3 of meer hem niet relevant, kijk dan of de situatie wel past bij het werk van het team en maak nieuwe lessen over die vaardigheid praktischer. `meer` vertelt welke onderwerpen leven: geef die voorrang in je voorraadlessen. Wat een reactie per persoon betekent, regelt de regelaar (zie stap 2).
 - **≤ 25% goed:** controleer de les zoals bij `fout`-feedback. Is de vraag dubbelzinnig, is een afleider ook juist of is het antwoord onjuist, repareer hem dan. Klopt alles, dan is hij gewoon moeilijk: zet `niveau` zo nodig een stap hoger (met `herzien` en `wijziging`).
 - Zie je een patroon (een soort opdracht of een onderwerp dat structureel slecht of goed valt), neem het dan mee in je geheugen (stap 5).
 
-## Stap 2: Per deelnemer de wachtrij bepalen
-Doel: **elke deelnemer heeft 5 lessen klaar** die hij of zij nog niet deed (niet in `resultaten`). Er zijn **twee lessen per dag**: één in de ochtend en één na 12:30. De generator draait alleen op werkdagen, dus 5 is genoeg voor een dag plus een buffer.
+## Stap 2: Per deelnemer: wat oordeel vraagt
+De wachtrijen stelt de regelaar samen. Doel: **elke deelnemer heeft 5 lessen klaar** die hij nog niet deed; er zijn twee lessen per dag (ochtend en na 12:30), alleen op werkdagen. Zo werkt de regelaar, zodat je snapt wat je in `personen` ziet:
 
-**Lessen van het team** (`"herkomst": "team"` in `lessen\index.json`) zijn gemaakt door een head (van SEO of een ander vak) via de website en zijn bij het ophalen van de context al in de kennisbank gezet. Pas ze nooit aan. Geef ze voorrang: zet een nieuwe teamles in de eerstvolgende wachtrij van iedereen die het vak van de les leert en voor wie het niveau en onderwerp passen (een teamles van het type `nieuws` bij iedereen vooraan).
+| Type | Wanneer de regelaar hem inplant |
+|---|---|
+| `basis` | Een vaardigheid waarop iemand laag scoort (score 1–2: `basis`, 3: `gevorderd`, 4–5: `expert`), gewogen naar eigen prioriteit (hoog twee keer zo vaak, laag een derde), afwisselend over hoofdgebieden, nooit binnen 14 dagen na een les over dezelfde vaardigheid |
+| `verdieping` | Na een **goed** resultaat, op een willekeurig moment 14 tot 35 dagen later, een niveau hoger. Ook meteen bij een eigen score van 4 of 5 |
+| `herhaling` | Na **fout** of **deels**, op een willekeurig moment 14 tot 35 dagen later, met een andere les (een nieuwe situatie) op hetzelfde niveau |
+| gevraagd (`verdieping` of `herhaling`) | Na **Hier wil ik meer over**: 3 tot 10 dagen later. Na goed een verdieping een niveau hoger, anders een herhaling op hetzelfde niveau. De les krijgt op de site en in de pop-up het label "Je vroeg om meer hierover" |
+| `nieuws` en lessen van het team | De laatste 14 dagen, vooraan bij iedereen die het vak leert en bij wie de cel past (een teamles op `basis`-niveau niet bij ervaren collega's) |
 
-**De vier soorten lessen** (`type`):
+Verder: hooguit één herhaling en één verdieping per run, een les komt nooit twee keer, meerkeuze eerst en hooguit één schrijfopdracht (open, zoek-op) per wachtrij, nooit maak-met-claude, en spreiding: collega's krijgen bij dezelfde vaardigheid zo veel mogelijk verschillende lessen. Een les die te makkelijk is voor een ervaren collega of een tweede schrijfopdracht haalt de regelaar uit de wachtrij. Tikte iemand **Te makkelijk**, dan krijgt die vaardigheid voor hem een niveau hoger, minder vaak en geen herhaling; bij **Niet relevant voor mij** komt hij minder vaak en zonder herhaling of verdieping (nooit helemaal niet).
 
-| Type | Wat | Voor wie en wanneer |
-|---|---|---|
-| `basis` | Een basisvraag over één vaardigheid uit de skilllijst | Vooral vaardigheden waarop de deelnemer laag scoort |
-| `verdieping` | Een moeilijkere vraag over een vaardigheid die de deelnemer eerder **goed** had: een praktijkcase, randgeval, afweging of misvatting, op een hoger `niveau` dan de les die goed ging | Op een **willekeurig** moment tussen 14 en 35 dagen na dat goede resultaat (zie hieronder). Óók meteen, zonder wachttijd, bij een vaardigheid waarop de deelnemer zich **4 of 5** geeft: die wil je niet eerst een basisvraag laten maken |
-| `herhaling` | Toetst of de deelnemer het nu wél (of nog steeds) weet. **Altijd een andere vraagstelling:** een nieuwe klantsituatie en andere antwoordopties. Meerkeuze blijft ook hier de standaard (zie 'Soort opdracht' in stap 3). Nooit dezelfde vraag, ook niet licht herschreven. Hetzelfde kernbegrip mag wel. | Vaardigheid met `fout` of `deels`, op een **willekeurig** moment tussen 14 en 35 dagen erna (zie hieronder). Ging de herhaling weer fout of deels, dan volgt later een nieuwe herhaling, weer minstens 14 dagen erna |
-| `nieuws` | Relevant nieuws voor het vak (zie stap 1) | Iedereen, vooraan in de wachtrij |
-
-**Onvoorspelbaar plannen (herhaling en verdieping).** Een deelnemer mag niet kunnen verwachten wanneer een herhaling of verdieping komt. Nooit eerder dan 14 dagen na het resultaat waar hij op voortbouwt. Daarna bepaal je per vaardigheid of hij vandaag aan de beurt is met een echte loting: draai bijvoorbeeld `python -c "import random; print(random.random())"` en plan hem in als de uitkomst onder (dagen sinds het resultaat − 13) / 22 ligt. Na 35 dagen is hij dus altijd aan de beurt. Gebruik geen vaste dagen en geen vaste weekdagen.
-
-**Een les komt nooit twee keer.** Een les die een deelnemer ooit deed (goed, deels of fout) zet je nooit meer in diens wachtrij; `gedaan` in de context bevat alle les-id's die ooit gedaan zijn. Opnieuw toetsen gaat altijd met een andere les: een `herhaling` of `verdieping` met een nieuwe situatie.
-
-**Spreiding:** heb je voor een vaardigheid meerdere passende lessen, kies dan voor verschillende deelnemers verschillende lessen, zodat collega's niet allemaal dezelfde vraag op dezelfde dag krijgen.
-
-**Niveau past bij de persoon.** Kijk eerst naar het gemiddelde van iemands `scores`:
-- Gemiddeld ongeveer **3,5 of hoger** (ervaren, bijv. leidinggevenden): de meeste lessen zijn `gevorderd` of `expert`. Denk aan praktijkcases, randgevallen, afwegingen, misvattingen en nieuw onderzoek, en `verdieping` waar dat kan. Een `basis`-niveau alleen nog bij een echte uitschieter naar beneden (score 1–2).
-- Gemiddeld **lager**: volg het schema hieronder.
-
-Een ervaren collega die een basisvraag krijgt over iets wat hij al jaren doet, haakt af. Een te moeilijke vraag corrigeert zichzelf via de resultaten. Ging een verdieping fout of deels, dan volgt later een `herhaling`, en de vaardigheid telt als mogelijk overschat.
-
-**Wachtrij vervangen mag.** Staan er in iemands `wachtrij` lessen die duidelijk te makkelijk zijn voor dit niveau, dan mag je ze vervangen in plaats van alleen aanvullen. Hetzelfde geldt voor schrijfopdrachten (open, zoek-op, maak-met-claude) die niet passen bij de regels voor 'Soort opdracht' in stap 3: vervang die door een meerkeuzeles over dezelfde vaardigheid. Nieuws- en teamlessen blijf je vooraan zetten.
-
-Werk verder zo:
-1. **Hergebruik eerst de kennisbank.** Een bestaande les uit `lessen\index.json` die past bij de deelnemer en die nog niet gedaan is, gaat vóór een nieuwe les. "Past" betekent ook: het `niveau` sluit aan bij de persoon. Een les met `"actief": false` gebruik je nooit. Een `herhaling` of `verdieping` van een ander teamlid is prima, zolang deze deelnemer die les nog niet deed.
-2. **Per deelnemer per dag maximaal 1 `herhaling` en 1 `verdieping`.** De rest is `basis` (en eventueel nieuws).
-3. **Welke vaardigheid en welk niveau** (bij `basis`):
-   - score 1–2: de fundamenten (`niveau: "basis"`); ongeveer de helft van de basislessen
-   - score 3: praktijkcases (`niveau: "gevorderd"`)
-   - score 4–5: alleen af en toe, en dan randgevallen of nieuw onderzoek (`niveau: "expert"`)
-   - vaardigheden met een `notitie` in de skilllijst (verouderd): wat ervoor in de plaats kwam
-   - CRO: ongeveer een kwart, uit `curriculum.md`
-   - werken met Claude (`SEO × Claude`, `CRO × Claude`): hooguit 1 op de 10 lessen. Ook die lessen zijn meestal meerkeuze over de inhoud (wat werkt, wat niet, en waarom), geen opdracht om iets aan Claude te vragen
-   - wissel af tussen hoofdgebieden
-   - **eigen prioriteit** (`prioriteit` in de context) weegt mee bij `basis` en `verdieping`: een hoofdgebied met prioriteit 1 krijgt ongeveer twee keer zo vaak een les als normaal, prioriteit 3 ongeveer een derde zo vaak. Laag betekent nooit nul: ook die onderwerpen komen af en toe voorbij. `herhaling` (na fout of deels) en `nieuws` gaan altijd door, ongeacht de prioriteit.
-4. Een vaardigheid waarop een deelnemer zich hoog scoort maar recent fout antwoordde, is een goede kandidaat voor `basis` of `herhaling`: zo wordt de skilllijst organisch bijgesteld.
+**Jouw deel per persoon** (alleen waar het iets toevoegt; niets doen is prima):
+- **Wensen.** Past een bestaande of nieuwe les duidelijk bij iemands `focus` of `leerdoelen` (bijv. iemand wil leren over lokale SEO voor vestigingen), zet die les dan als wens vooraan. Hooguit 2 per persoon per run. Een `maak-met-claude`-les kan alleen zo, en alleen als werken met Claude in iemands `focus` of `leerdoelen` staat, hooguit één per twee weken.
+- **Teamlessen zonder `cel`.** Een teamles (van een head) zonder `cel` pas je nooit aan. Staat hij in iemands `wachtrij` en past de case duidelijk niet bij diens cel, zet hem dan bij `nietVoor`.
+- De regelaar controleert je wensen opnieuw: een les die iemand al deed, die niet bij zijn cel of vakken past of die niet bestaat, valt af.
 
 ## Stap 3: Nieuwe lessen schrijven
-Schrijf eerst wat de wachtrijen uit stap 2 nodig hebben. Vul daarna **de kennisbank aan met 10 extra lessen per run** (voorraad). Het doel is een flinke kennisbank met meerdere lessen per onderwerp, zodat collega's niet allemaal dezelfde vragen krijgen en de app maandenlang relevant blijft.
+**Eerst de bestellingen** uit `werk.json`, de grootste `aantal` eerst. Per bestelling schrijf je één les die precies past, anders kan de regelaar hem niet gebruiken:
+- `matrix` bevat de `vaardigheid` van de bestelling (meer vaardigheden mag, van hetzelfde vak);
+- `niveau` is het `niveau` van de bestelling;
+- `cel` is de `cel` van de bestelling (een les met `alle` past ook, maar alleen als het onderwerp geen bedrijfstype nodig heeft);
+- `type` is het `type` van de bestelling; bij een `herhaling` of `verdieping` een nieuwe situatie, want de deelnemer deed al een les over deze vaardigheid;
+- staat er een `notitie` (verouderd), schrijf dan over wat ervoor in de plaats kwam;
+- het is een meerkeuzeles, tenzij een andere soort echt iets toevoegt (zie 'Soort opdracht' hieronder).
+Is `aantal` 4 of meer, schrijf dan twee lessen met een verschillende situatie, zodat collega's niet allemaal dezelfde vraag krijgen. Lukt een bestelling niet goed (geen betrouwbare bron), sla hem dan over: de regelaar vraagt hem morgen opnieuw.
 
-Welke onderwerpen eerst:
-1. Vaardigheden uit de skilllijsten van de vakken die deelnemers leren en die nog **geen enkele les** hebben (kijk naar de `matrix`-velden in `lessen\index.json`), en onderwerpen uit `toevoeging`-feedback (stap 1b). Lessen met `"actief": false` tellen niet mee.
-2. Daarna onderwerpen met de meeste vraag: waar **veel deelnemers** laag scoren (1–2) of recent fout/deels antwoordden, en waar per deelnemer de minste nog-niet-gedane lessen over over zijn. Bij één deelnemer zijn dat gewoon diens laagste scores. Weeg daarbij de eigen prioriteit mee: vraag van deelnemers met prioriteit 1 telt zwaarder, met prioriteit 3 lichter.
-3. Daarna gelijkmatig over alle vaardigheden: een tweede en derde basisles met een andere situatie, `verdieping`-lessen op een hoger niveau.
+**Daarna de voorraad: 10 extra lessen per run.** Het doel is een flinke kennisbank met meerdere lessen per onderwerp, zodat collega's niet allemaal dezelfde vragen krijgen en de app maandenlang relevant blijft. Kies uit `voorraad` in `werk.json` (eerst vaardigheden zonder enkele les, daarna waar per cel de meeste vraag is en de minste lessen zijn), aangevuld met onderwerpen uit `toevoeging`-feedback (stap 1b). Schrijf voor de `cel` van de tip. Zijn de tips op, dan gelijkmatig over alle vaardigheden: een tweede en derde basisles met een andere situatie, `verdieping`-lessen op een hoger niveau.
 
 Meerdere lessen over hetzelfde onderwerp zijn juist goed, maar **elke les is een nieuwe situatie**: een andere klantcase, een andere vraag, andere antwoordopties. Kijk vóór het schrijven welke lessen er al over die vaardigheid zijn (titel en kernpunt in `lessen\index.json`, en zo nodig het lesbestand) en maak nooit een variant die alleen anders verwoord is.
 
@@ -140,6 +138,7 @@ Schrijf naar `lessen\<id>.json` (UTF-8, geldige JSON). Een les is **niet persoon
   "vakgebied": "leesbare naam, bijv. SEO | CRO | SEO / AI-search | SEO × Claude | CRO × Claude | Analytics | SEA | Social ads | Content",
   "onderwerp": "korte onderwerpnaam",
   "matrix": ["vaardigheid-id's uit de skilllijst van één vak, bijv. 1.3.3 (SEO) of cro:1.3.3"],
+  "cel": "ecom | leadgen | alle (zie 'Cel'; een id uit `cellen` in `werk.json`)",
   "titel": "pakkende titel, max ~70 tekens",
   "intro": "optioneel: alleen de situatie, max ~60 woorden, zonder het antwoord (zie 'Opbouw: eerst zelf nadenken')",
   "opdracht": { "soort": "meerkeuze | open | zoek-op | maak-met-claude", "vraag": "...", "opties": ["4 bij meerkeuze"], "juist": 0, "minTekens": 100, "hint": "optioneel" },
@@ -188,7 +187,7 @@ Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJ
 - Het oude veld `volgorde` gebruik je niet meer; website en pop-up negeren het.
 
 **Formats variëren:**
-- **Soort opdracht: meerkeuze is de basis.** Feedback oktober en november 2026: schrijfopdrachten kosten veel tijd, ook om daarna je eigen antwoord na te kijken. Collega's krijgen ook te vaak een opdracht die ze met Claude moeten invullen. Ze willen inhoudelijke vragen over het vak. Een andere soort dan meerkeuze kies je alleen als die **voor deze persoon echt iets toevoegt** wat vier opties niet kunnen. Twijfel je, kies dan meerkeuze. Hergebruik je een bestaande les (stap 2), kies dan ook bij voorkeur een meerkeuzeles. Ongeveer in deze verhouding:
+- **Soort opdracht: meerkeuze is de basis.** Feedback oktober en november 2026: schrijfopdrachten kosten veel tijd, ook om daarna je eigen antwoord na te kijken. Collega's krijgen ook te vaak een opdracht die ze met Claude moeten invullen. Ze willen inhoudelijke vragen over het vak. Een andere soort dan meerkeuze kies je alleen als die **voor deze persoon echt iets toevoegt** wat vier opties niet kunnen. Twijfel je, kies dan meerkeuze. Geef je een bestaande les als wens (stap 2), kies dan ook bij voorkeur een meerkeuzeles. Ongeveer in deze verhouding:
   - **Per persoon hooguit één schrijfopdracht (open, zoek-op, maak-met-claude) per 5 lessen** in de wachtrij, en nooit twee achter elkaar.
   - ongeveer 85% meerkeuze: 4 opties met plausibele afleiders; varieer de positie van het juiste antwoord
     - **Het juiste antwoord valt niet op.** Alle vier opties zijn ongeveer even lang en even precies. Geef de afleiders net zoveel detail en nuance als het juiste antwoord, bijvoorbeeld een reden ("omdat …") of een voorwaarde. Zet woorden als "altijd" en "nooit" niet alleen in de foute opties.
@@ -212,9 +211,9 @@ Alleen bij het herzien van een bestaande les (stap 1b) komen er `"herzien": "JJJ
 - Nederlands, direct. Vaktermen in het Engels zijn prima. Liever een herkenbare klantsituatie dan theorie.
 
 ## Stap 4: Klaarzetten en publiceren
-1. Schrijf `%USERPROFILE%\.doubleleren\beheer\generator\wachtrijen.json` als `{ "lid-xxxxxx": ["les-id", "les-id", "les-id"], ... }` voor elke deelnemer (eerst wat nog openstaat, daarna je aanvullingen; een nieuwsles vooraan).
+1. Schrijf `wachtrijen.json` in de map van de context, **ook als je geen wensen hebt** (dan `{}`). Alleen voor deelnemers waar je iets wilt: `{ "lid-xxxxxx": { "wensen": ["les-id"], "nietVoor": ["les-id"] } }` (zie stap 2). De regelaar maakt er bij het publiceren de echte wachtrijen van, met je nieuwe en herstelde lessen.
 2. Controleer elke nieuwe les op geldige JSON.
-3. Draai `powershell -NoProfile -ExecutionPolicy Bypass -File beheer\generator-publiceer.ps1 -Push`. Dat versleutelt de wachtrijen, werkt `lessen\index.json` bij, pusht de lessen en **verwijdert de ontsleutelde context**.
+3. Draai `powershell -NoProfile -ExecutionPolicy Bypass -File beheer\generator-publiceer.ps1 -Push`. Dat werkt `lessen\index.json` bij, laat de regelaar de wachtrijen vullen, versleutelt ze, pusht de lessen en **verwijdert de ontsleutelde context en het werkbestand**.
 
 ## Stap 5: Geheugen bijwerken
 Alleen als de opdracht een pad voor het geheugen geeft. Werk het geheugenbestand bij met wat je vandaag hebt geleerd en wat volgende runs moeten weten, bijvoorbeeld:
@@ -225,8 +224,8 @@ Alleen als de opdracht een pad voor het geheugen geeft. Werk het geheugenbestand
 Regels:
 - Schrijf algemene lessen, geen dagboek. Houd het onder ~60 regels; voeg samen en schrap wat niet meer geldt.
 - **Nooit** pseudoniemen, namen, klantnamen of letterlijke tekst uit feedback.
-- **Nooit iets over één persoon**, ook niet omschreven: geen scores, gemiddelden, niveaus of resultaten van een deelnemer, en geen zinnen als "er is een ervaren deelnemer". In een klein team is dan direct duidelijk wie het is, en de beheerder leest het geheugen. Wat per persoon geldt, zie je elke ochtend opnieuw in de context. Het geheugen gaat alleen over lessen, formats, onderwerpen, bronnen en het team als geheel.
+- **Nooit iets over één persoon**, ook niet omschreven: geen scores, gemiddelden, niveaus of resultaten van een deelnemer, en geen zinnen als "er is een ervaren deelnemer". In een klein team is dan direct duidelijk wie het is, en de beheerder leest het geheugen. Wat per persoon geldt, zie je elke ochtend opnieuw in het werkbestand. Het geheugen gaat alleen over lessen, formats, onderwerpen, bronnen en het team als geheel.
 - Je wijzigingen worden een voorstel (pull request) dat Thijs of Sjoerd eerst goedkeurt. Tot dan zie je morgen weer de oude versie. Herhaal een voorstel dat nog geldt dus gewoon.
 - Niets nieuws geleerd? Laat het bestand dan ongewijzigd.
 
-Rapporteer in één regel hoeveel nieuwe lessen je schreef, hoeveel je hergebruikte, voor hoeveel deelnemers, hoeveel lessen je herzag of uit de roulatie haalde, en of je het geheugen bijwerkte. Noem geen pseudoniemen.
+Rapporteer in één regel hoeveel nieuwe lessen je schreef (waarvan hoeveel voor bestellingen), voor hoeveel deelnemers je wensen gaf, hoeveel lessen je herzag of uit de roulatie haalde, bij hoeveel lessen je de cel bepaalde, en of je het geheugen bijwerkte. Noem geen pseudoniemen.

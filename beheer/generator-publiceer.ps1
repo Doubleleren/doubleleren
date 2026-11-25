@@ -20,6 +20,13 @@ try {
     $d =if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $geheim.token }
     $V = (Get-Content (Join-Path $App 'vertrouwd.json') -Raw -Encoding UTF8 | ConvertFrom-Json).beheer   # beheersleutel: controleert alles onder beheer/
 
+    # Inhoud van een les als vaste tekst (sleutels gesorteerd, zonder het veld $Zonder), om twee versies te vergelijken
+    function Get-DlLesVorm($o, [string]$Zonder) {
+        if ($o -is [pscustomobject]) { '{' + ((@($o.PSObject.Properties | Where-Object Name -ne $Zonder | Sort-Object Name | ForEach-Object { "$($_.Name)=$(Get-DlLesVorm $_.Value)" })) -join ',') + '}' }
+        elseif ($o -is [array]) { '[' + ((@($o | ForEach-Object { Get-DlLesVorm $_ })) -join ',') + ']' }
+        else { ConvertTo-Json $o -Compress }
+    }
+
     # 1. Bestaande lessen (alleen als de app-map een git-kopie is): de generator mag eigen lessen herzien of uit de
     #     roulatie halen, maar nooit een teamles aanpassen, de herkomst wijzigen of een les verwijderen.
     #     Zo'n wijziging wordt teruggedraaid (de rest gaat gewoon door), zodat niemand door één fout geen les krijgt.
@@ -36,6 +43,8 @@ try {
                 elseif ((Test-DlLes $nu ([IO.Path]::GetFileNameWithoutExtension($f)) $tekst.Length).Count) { $reden = (Test-DlLes $nu ([IO.Path]::GetFileNameWithoutExtension($f)) $tekst.Length) -join '; ' }
                 elseif ($oud.herkomst -eq 'team') { $reden = 'een teamles wordt nooit door de generator aangepast' }
                 elseif ("$($nu.herkomst)" -ne "$($oud.herkomst)") { $reden = 'de herkomst van een les mag niet veranderen' }
+                # Alleen de cel van de case erbij gezet (verder niets veranderd): geen herziening, dus ook geen herzien-datum nodig
+                elseif (-not $oud.cel -and $nu.cel -and (Get-DlLesVorm $nu 'cel') -eq (Get-DlLesVorm $oud 'cel')) { Write-Host "  cel bepaald: $(Split-Path $f -Leaf) ($($nu.cel))" }
                 elseif (-not $nu.herzien) { $reden = 'een herziene les heeft een herzien-datum nodig' }
                 else { Write-Host "  herzien: $(Split-Path $f -Leaf)$(if ($nu.actief -eq $false) { ' (uit de roulatie)' })" }
             }
@@ -52,6 +61,8 @@ try {
     if ($fouten.Count) { throw "Lessen afgekeurd, niets gepubliceerd:`n  $($fouten -join "`n  ")" }
 
     & (Join-Path $PSScriptRoot 'lessen-index.ps1')
+    # Met een plan van de regelaar: open plekken vullen met de lessen die Claude schreef of herstelde, wensen van Claude meenemen
+    if (Test-Path (Join-Path $Map 'regelaar.json')) { & (Join-Path $PSScriptRoot 'regelaar.ps1') -Stap toewijzen -Map $Map -App $App }
     $alleLessen = @((Get-Content (Join-Path $App 'lessen\index.json') -Raw -Encoding UTF8 | ConvertFrom-Json).lessen)
     $bekend = @($alleLessen.id)
     $inactief = @($alleLessen | Where-Object { $_.actief -eq $false } | ForEach-Object { $_.id })
@@ -73,7 +84,9 @@ try {
             # Ter controle: de geplande lessen per wachtrij, met een korte hash in plaats van het pseudoniem (de beheerder koppelt die lokaal)
             $hash = (-join ((Get-DlSha256 $script:DlUtf8.GetBytes("doubleleren-proef|$id"))[0..2] | ForEach-Object { $_.ToString('x2') }))
             $idx = @((Get-Content (Join-Path $App 'lessen\index.json') -Raw -Encoding UTF8 | ConvertFrom-Json).lessen)
-            Write-Host "  PROEF-WACHTRIJ $hash`: $(($lijst | ForEach-Object { $l = $idx | Where-Object id -eq $_ | Select-Object -First 1; "[$($l.type)/$($l.niveau)] $($l.titel)" }) -join ' || ')"
+            # Met de cel van de persoon en van elke les, om na te lezen of de case past (geen naam, alleen de hash)
+            $rpPad = Join-Path $Map 'regelaar.json'; $celP = if (Test-Path $rpPad) { "$((Get-Content $rpPad -Raw -Encoding UTF8 | ConvertFrom-Json).leden.$id.cel)" }
+            Write-Host "  PROEF-WACHTRIJ $hash (cel $(if ($celP) { $celP } else { '-' }))`: $(($lijst | ForEach-Object { $l = $idx | Where-Object id -eq $_ | Select-Object -First 1; "[$($l.type)/$($l.niveau)/$(if ($l.cel) { $l.cel } else { '-' })] $($l.titel)" }) -join ' || ')"
             continue
         }
         Write-DlVersleuteld $d $id 'wachtrij' $s $nieuw $(if ($b) { $b.sha }) 'generator' $geheim.generatorPrive | Out-Null
@@ -87,5 +100,5 @@ try {
 }
 finally {
     # Ontsleutelde context en verwerkte wachtrijen altijd opruimen
-    Remove-Item (Join-Path $Map 'context.json'), (Join-Path $Map 'wachtrijen.json') -ErrorAction SilentlyContinue
+    Remove-Item (Join-Path $Map 'context.json'), (Join-Path $Map 'wachtrijen.json'), (Join-Path $Map 'regelaar.json'), (Join-Path $Map 'werk.json') -ErrorAction SilentlyContinue
 }

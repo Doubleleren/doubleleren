@@ -87,6 +87,11 @@ foreach ($lid in $alle) {
 }
 
 Write-Host '6. Dagcyclus: generator zet lessen klaar, pop-up rondt af'
+# Nieuwslessen gaan vooraan (laatste 14 dagen): uit de testkopie, zodat de test niet van de datum afhangt
+Get-ChildItem "$A\lessen" -Filter *.json | Where-Object Name -ne 'index.json' | Where-Object { (Get-Content $_.FullName -Raw -Encoding UTF8 | ConvertFrom-Json).type -eq 'nieuws' } | Remove-Item
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\lessen-index.ps1" | Out-Null
+# De testlessen hebben een cel nodig (anders krijgt iemand in een cel ze niet): zoals de generator ze labelt
+foreach ($l in '20261019-srm', '20261019-query-fan-out') { $o = Get-Content "$A\lessen\$l.json" -Raw -Encoding UTF8 | ConvertFrom-Json; $o | Add-Member cel 'alle' -Force; [IO.File]::WriteAllText("$A\lessen\$l.json", ($o | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false))) }
 & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 $ctx = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
 Controleer (@($ctx.leden.PSObject.Properties).Count -eq 7 -and @($ctx.leden.($ids.Foxtrot).scores.PSObject.Properties).Count -eq 144) 'Generatorcontext: 7 deelnemers met scores'
@@ -288,7 +293,7 @@ try {
     $ctxC = Get-Content "$C\generator\context.json" -Raw | ConvertFrom-Json
     [IO.File]::WriteAllText("$C\generator\wachtrijen.json", (@{ $ids.Delta = @('20261019-query-fan-out') } | ConvertTo-Json))
     $uitP = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -Thuis $C -Proef) -join ' '
-    Controleer (@($ctxC.leden.PSObject.Properties).Count -ge 8 -and $uitP -match 'PROEF: 1 wachtrij' -and (Get-DlSha1 ([IO.File]::ReadAllBytes("$D\data\$($ids.Delta)\wachtrij.enc"))) -eq $wVoor -and (Test-Path "$D\voorstellen\proef-test.json") -and -not (Test-Path "$C\generator\context.json")) 'Proefrun met de sleutel uit de omgeving: alles gecontroleerd, niets gewijzigd, context opgeruimd'
+    Controleer (@($ctxC.leden.PSObject.Properties).Count -ge 8 -and $uitP -match 'PROEF: [1-9]\d* wachtrij' -and (Get-DlSha1 ([IO.File]::ReadAllBytes("$D\data\$($ids.Delta)\wachtrij.enc"))) -eq $wVoor -and (Test-Path "$D\voorstellen\proef-test.json") -and -not (Test-Path "$C\generator\context.json")) 'Proefrun met de sleutel uit de omgeving: alles gecontroleerd, niets gewijzigd, context opgeruimd'
     & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis $C | Out-Null
     [IO.File]::WriteAllText("$C\generator\wachtrijen.json", (@{ $ids.Delta = @('20261019-query-fan-out') } | ConvertTo-Json))
     & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-publiceer.ps1" -DataMap $D -Thuis $C | Out-Null
@@ -298,17 +303,24 @@ try {
 
 Write-Host '16. Leren van feedback: context, lessen herzien en uit de roulatie, bescherming van teamlessen'
 . "$A\beheer\lescontrole.ps1"
+# Reactie na de les, zoals de site en de pop-up hem in de eigen logregel zetten: Foxtrot vond zijn eerste les te makkelijk
+$cR = Get-DlClient -Thuis "$T\Foxtrot"; $sR = Get-DlEigenSleutels $cR
+$curR = Read-DlOpslag $dO "data/$($ids.Foxtrot)/log-$maand.enc"; $regR = @((Read-DlVersleuteld $cR.data $cR.id "log-$maand" $sR $cR.publiek).obj.regels)
+$regR[0] | Add-Member reactie 'makkelijk' -Force
+Write-DlVersleuteld $dO $ids.Foxtrot "log-$maand" $sR ([ordered]@{ v = 1; regels = $regR }) $curR.sha $cR.id $cR.prive | Out-Null
 & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 $ctx = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
+Controleer ($ctx.lesstatistiek.($regR[0].id).makkelijk -ge 1 -and @($ctx.leden.($ids.Foxtrot).resultaten | Where-Object { $_.reactie -eq 'makkelijk' }).Count -eq 1) 'Context: reactie na de les per les geteld en bij de eigen resultaten'
 $fbC = @($ctx.feedback)
 Controleer ($ctx.lesstatistiek.'20261019-srm'.n -ge 1 -and $ctx.lesstatistiek.'20261019-srm'.fout -ge 1) 'Context: resultaten per les over het hele team'
 Controleer (@($fbC | Where-Object tekst -eq 'Na de omzetting').Count -eq 1 -and -not ($fbC | Where-Object { $_.PSObject.Properties.Name -contains 'door' }) -and -not ((ConvertTo-Json $fbC -Depth 4) -match 'lid-[0-9a-f]{6}')) 'Context: feedback zonder afzender en zonder pseudoniemen'
 Controleer (-not ($fbC | Where-Object tekst -eq 'Vals namens Foxtrot') -and -not ($fbC | Where-Object tekst -match 'Afronden reageert')) 'Context: vervalste feedback en feedback zonder generatorkopie overgeslagen'
+Controleer ($ctx.leden.($ids.Delta).cel -eq 'ecom' -and @($ctx.cellen) -contains 'leadgen') 'Context: cel per deelnemer (ook via het project) en de lijst met cellen'
 Remove-Item "$T\beheer\generator\context.json"
 # Vaste beginstand voor de checks hieronder: les 20261019-srm zoals hij oorspronkelijk was (nooit herzien, het juiste
 # antwoord ruim het langst). Zo hangt de test niet af van wat de generator later aan de echte les verandert.
 $srm = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-foreach ($v in 'herzien', 'wijziging', 'actief') { $srm.PSObject.Properties.Remove($v) }
+foreach ($v in 'herzien', 'wijziging', 'actief', 'cel') { $srm.PSObject.Properties.Remove($v) }
 $jSrm = [int]$srm.opdracht.juist
 $maxSrm = (@(0..3 | Where-Object { $_ -ne $jSrm } | ForEach-Object { "$($srm.opdracht.opties[$_])".Length }) | Measure-Object -Maximum).Maximum
 while ("$($srm.opdracht.opties[$jSrm])".Length -le 1.1 * $maxSrm) { $srm.opdracht.opties[$jSrm] += ', ook als het verschil klein lijkt' }
@@ -351,6 +363,18 @@ ZetLes '20261019-srm' @{ actief = $false }
 $p6 = Publiceer @('20261019-query-fan-out')
 $ok6 = $p6.ok -and $p6.uit -match 'herzien-datum nodig' -and (Get-Content "$A\lessen\20261019-srm.json" -Raw | ConvertFrom-Json).actief -ne $false
 Controleer ($ok2 -and $ok3 -and $ok4 -and $ok6) 'Eigen les zonder herzien-datum, met andere herkomst, verwijderd of ongeldig: teruggedraaid, run gaat door'
+# Cel van de case: alleen 'cel' erbij is geen herziening; een ongeldige cel of cel plus een andere wijziging wel
+ZetLes '20261019-srm' @{ cel = 'Leadgen B2B' }
+$p7 = Publiceer @('20261019-query-fan-out')
+$ok7 = $p7.ok -and $p7.uit -match 'teruggedraaid: 20261019-srm.json \(cel moet' -and -not (Get-Content "$A\lessen\20261019-srm.json" -Raw | ConvertFrom-Json).cel
+ZetLes '20261019-srm' @{ cel = 'ecom'; titel = 'Stil aangepast' }
+$p9 = Publiceer @('20261019-query-fan-out')
+$ok9 = $p9.ok -and $p9.uit -match 'herzien-datum nodig' -and (Titel '20261019-srm') -eq $tSrm
+ZetLes '20261019-srm' @{ cel = 'leadgen' }
+$p8 = Publiceer @('20261019-query-fan-out')
+$lCel = Get-Content "$A\lessen\20261019-srm.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+$ok8 = $p8.ok -and $p8.uit -match 'cel bepaald: 20261019-srm.json \(leadgen\)' -and $lCel.cel -eq 'leadgen' -and -not $lCel.herzien -and ((Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen | Where-Object id -eq '20261019-srm').cel -eq 'leadgen'
+Controleer ($ok7 -and $ok8 -and $ok9) 'Cel van een les: alleen cel erbij mag zonder herzien-datum; ongeldige cel of meer veranderd: teruggedraaid'
 ZetLes '20261019-srm' @{ actief = $false; herzien = '2026-10-21'; wijziging = 'Vraag was dubbelzinnig; vervangen door een nieuwe les.' }
 $p5 = Publiceer @('20261019-srm', '20261019-query-fan-out')
 $idxA = Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -358,7 +382,59 @@ $wD = Read-DlVersleuteld $cd.data $cd.id 'wachtrij' $sD $cd.publiek
 Controleer ($p5.ok -and $p5.uit -match 'uit de roulatie' -and ($idxA.lessen | Where-Object id -eq '20261019-srm').actief -eq $false -and $wD.obj.lessen -notcontains '20261019-srm' -and $wD.obj.lessen -contains '20261019-query-fan-out') 'Les uit de roulatie: in de index gemarkeerd en uit de wachtrij gehaald'
 Remove-Item "$A\.git" -Recurse -Force
 
-Write-Host '17. Groep zonder eigen lessen: een trainee in cel Ecom'
+Write-Host '17. Regelaar: plan per persoon, werkbestand zonder scores, cel en regels bij het toewijzen'
+$G = "$T\beheer\generator"
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
+$werkT = Get-Content "$G\werk.json" -Raw -Encoding UTF8; $werkO = $werkT | ConvertFrom-Json
+Controleer ((Test-Path "$G\regelaar.json") -and $werkT -notmatch '"(scores|resultaten|gedaan|prioriteit|antwoord|antwoorden)"\s*:' -and $werkT -notmatch 'Alfa|Bravo|Foxtrot' -and @($werkO.personen.PSObject.Properties).Count -ge 1) 'Werkbestand voor Claude: zonder scores, resultaten, namen of antwoorden'
+$rpO = Get-Content "$G\regelaar.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+$planOk = $true
+foreach ($p in $rpO.leden.PSObject.Properties) {
+    $pl = @($p.Value.plekken)
+    if (@($pl | Where-Object type -eq 'herhaling').Count -gt 1 -or @($pl | Where-Object type -eq 'verdieping').Count -gt 1 -or @($pl | Where-Object { -not $_.vaardigheid -or $_.niveau -notin 'basis', 'gevorderd', 'expert' }).Count -or (@($p.Value.open).Count + $pl.Count) -gt 5) { $planOk = $false }
+}
+Controleer $planOk 'Plan: hooguit 5 lessen, één herhaling en één verdieping per persoon, elke plek met vaardigheid en niveau'
+# Twee lessen een cel geven en Delta (cel ecom) beide als wens geven: de leadgen-les valt af, de les voor alle cellen staat vooraan
+$vrij = @((Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen | Where-Object { $_.soort -eq 'meerkeuze' -and $_.actief -ne $false -and -not $_.juistLangst -and -not $_.vormAfwijkend -and @($_.matrix).Count -and -not @($_.matrix | Where-Object { "$_" -like '*:*' }).Count -and @($rpO.leden.($ids.Delta).gedaan) -notcontains $_.id } | Select-Object -First 2)
+foreach ($x in @(@($vrij[0].id, 'leadgen'), @($vrij[1].id, 'alle'))) { $o = Get-Content "$A\lessen\$($x[0]).json" -Raw -Encoding UTF8 | ConvertFrom-Json; $o | Add-Member cel $x[1] -Force; [IO.File]::WriteAllText("$A\lessen\$($x[0]).json", ($o | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false))) }
+& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\lessen-index.ps1" | Out-Null
+[IO.File]::WriteAllText("$G\wachtrijen.json", (@{ $ids.Delta = @{ wensen = @($vrij[0].id, $vrij[1].id) } } | ConvertTo-Json -Depth 4))
+$uitR = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\regelaar.ps1" -Stap toewijzen -Map $G -App $A 2>&1 | ForEach-Object { "$_" }) -join ' '
+$qR = Get-Content "$G\wachtrijen.json" -Raw | ConvertFrom-Json
+$idxR = @((Get-Content "$A\lessen\index.json" -Raw -Encoding UTF8 | ConvertFrom-Json).lessen)
+$regelsOk = $true
+foreach ($p in $qR.PSObject.Properties) {
+    $cel = $rpO.leden.($p.Name).cel; $ls = @($p.Value | ForEach-Object { $x = $_; $idxR | Where-Object id -eq $x })
+    if ($ls.Count -ne @($p.Value).Count -or @($ls | Where-Object { $cel -and $_.herkomst -ne 'team' -and $_.cel -ne 'alle' -and $_.cel -ne $cel }).Count -or @($ls | Where-Object { @($rpO.leden.($p.Name).gedaan) -contains $_.id }).Count -or @($ls | Where-Object soort -ne 'meerkeuze').Count -gt 1) { $regelsOk = $false }
+}
+Controleer ($regelsOk -and $qR.($ids.Delta) -contains $vrij[1].id -and $qR.($ids.Delta) -notcontains $vrij[0].id -and $uitR -match '1 wens\(en\) genegeerd') 'Toewijzen: alleen eigen cel of alle, nooit een gedane les, hooguit één schrijfopdracht; wens voor alle cellen erin, wens van een andere cel geweigerd'
+Remove-Item "$G\context.json", "$G\werk.json", "$G\regelaar.json", "$G\wachtrijen.json" -ErrorAction SilentlyContinue
+
+Write-Host '18. Reactie na de les in de regelaar: meer, te makkelijk en niet relevant'
+$vids = @(([IO.File]::ReadAllText("$A\sjablonen\seo\skilllijst.csv", [Text.Encoding]::UTF8) | ConvertFrom-Csv -Delimiter ';') | Select-Object -First 30 | ForEach-Object { $_.id })
+$X = $vids[0]; $Y = $vids[10]; $Z = $vids[20]
+function Res($dag, $vid, $uitslag, $reactie) { $o = [ordered]@{ datum = "${dag}T09:00:00"; les = "test-$dag-$vid"; resultaat = $uitslag; matrix = @($vid); niveau = 'basis'; soort = 'meerkeuze' }; if ($reactie) { $o.reactie = $reactie }; $o }
+function LidMet($res) { [ordered]@{ cel = $null; vakken = @{ seo = 1 }; scores = @{}; prioriteit = @{}; resultaten = @($res); gedaan = @(); wachtrij = @() } }
+# Persoon 1: wil meer over X (10 dagen geleden), vindt Y niet relevant en Z te makkelijk (40 dagen geleden: anders altijd verdieping
+# of herhaling). Persoon 2: wilde meer over X, maar kreeg er daarna al een les over.
+$ctxR = [ordered]@{ v = 1; vakgebied = 'seo'; vakken = @('seo'); cellen = @(); lesstatistiek = @{}; feedback = @(); leden = [ordered]@{
+    'lid-aaaaa1' = (LidMet @((Res '2026-11-21' $X 'goed' 'meer'), (Res '2026-10-22' $Y 'goed' 'niet-relevant'), (Res '2026-10-22' $Z 'fout' 'makkelijk')))
+    'lid-aaaaa2' = (LidMet @((Res '2026-11-21' $X 'goed' 'meer'), (Res '2026-11-26' $X 'goed' $null))) } }
+$MR = "$Werk\regelaar-reactie"; New-Item -ItemType Directory $MR -Force | Out-Null
+[IO.File]::WriteAllText("$MR\context.json", ($ctxR | ConvertTo-Json -Depth 8), (New-Object Text.UTF8Encoding($false)))
+$okR = $true
+foreach ($zaad in 1..5) {
+    & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\regelaar.ps1" -Stap plan -Map $MR -App $A -Zaad $zaad -Vandaag '2026-12-01' | Out-Null
+    $rR = Get-Content "$MR\regelaar.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+    $p1 = @($rR.leden.'lid-aaaaa1'.plekken); $p2 = @($rR.leden.'lid-aaaaa2'.plekken); $gv = @($p1 | Where-Object { $_.gevraagd })
+    if ($gv.Count -ne 1 -or $gv[0].vaardigheid -ne $X -or $gv[0].type -ne 'verdieping' -or $gv[0].niveau -ne 'gevorderd') { $okR = $false }
+    if (@($p1 | Where-Object { $_.vaardigheid -in $Y, $Z -and $_.type -in 'herhaling', 'verdieping' }).Count -or @($p1 | Where-Object type -eq 'verdieping').Count -gt 1) { $okR = $false }
+    if (@($p2 | Where-Object { $_.gevraagd }).Count) { $okR = $false }
+}
+Controleer $okR 'Regelaar: "meer" geeft binnen 10 dagen één verdieping (niet als er al een les over kwam); "niet relevant" en "te makkelijk" geen herhaling of verdieping'
+Remove-Item $MR -Recurse -Force -ErrorAction SilentlyContinue
+
+Write-Host '19. Groep zonder eigen lessen: een trainee in cel Ecom'
 $uitK = Beheer -Uitnodigen -Naam Kilo -Rol lid -Cel ecom -Vak trainee
 $ids.Kilo = ([regex]::Match(($uitK -join "`n"), 'lid-[0-9a-f]{6}')).Value
 $res.Kilo = Installeer $ids.Kilo 'Kilo' @()     # zonder skilllijst
@@ -369,7 +445,7 @@ Controleer ($orgK.leden.($ids.Kilo).vak -eq 'trainee' -and $kijkK -contains $ids
 & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\generator-context.ps1" -DataMap $D -Thuis "$T\beheer" | Out-Null
 $ctxK = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
 Controleer ($ctxK.leden.($ids.Kilo).vak -eq 'trainee' -and -not @($ctxK.leden.($ids.Kilo).vakken.PSObject.Properties).Count) 'Context: trainee zonder gekozen vak krijgt (nog) geen lessen'
-Remove-Item "$T\beheer\generator\context.json" -ErrorAction SilentlyContinue
+Remove-Item "$T\beheer\generator\context.json", "$T\beheer\generator\werk.json", "$T\beheer\generator\regelaar.json" -ErrorAction SilentlyContinue
 
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h

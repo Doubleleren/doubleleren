@@ -180,8 +180,11 @@ try {
             try { $mxV = Read-DlVersleuteld $c.data $c.id 'matrix' $s $c.publiek; if ($mxV -and $mxV.obj.vakken) { $mijn = @($mxV.obj.vakken.PSObject.Properties | Where-Object { @(1, 2, 3) -contains [int]$_.Value } | ForEach-Object { $_.Name }) } } catch {}
             if (-not $mijn.Count) { $mijn = @($(if ($org -and $org.leden.($c.id).vak) { [string]$org.leden.($c.id).vak } else { $standaard })) }
             $lesVak = { param($l) $m = @($l.matrix | Where-Object { "$_" -like '*:*' })[0]; if ($m) { "$m".Split(':')[0] } else { $standaard } }
+            # Geen les met de case van een andere cel (generator-instructies, 'Cel'): cel uit het organogram, anders die van je project
+            $mijnCel = ''
+            if ($org) { $lid = $org.leden.($c.id); $mijnCel = if ($lid.cel) { [string]$lid.cel } elseif ($lid.project) { [string](@($org.cellen | Where-Object { @($_.projecten | Where-Object { $_.id -eq $lid.project }).Count })[0].id) } else { '' } }
             $idx = Read-DlJson $c.app 'lessen/index.json'
-            $lesId = if ($idx) { @($idx.lessen | Where-Object { $gedaan -notcontains $_.id -and $_.actief -ne $false -and $mijn -contains (& $lesVak $_) }) | Select-Object -First 1 -ExpandProperty id }
+            $lesId = if ($idx) { @($idx.lessen | Where-Object { $gedaan -notcontains $_.id -and $_.actief -ne $false -and $mijn -contains (& $lesVak $_) -and (-not $mijnCel -or -not $_.cel -or $_.cel -eq 'alle' -or $_.cel -eq $mijnCel) }) | Select-Object -First 1 -ExpandProperty id }
             if ($lesId) { $les = Read-DlJson $c.app "lessen/$lesId.json" }
         }
         if (-not $les) { Log-Fout 'Geen les beschikbaar: wachtrij en lessenpool zijn op. De generator vult ze aan.'; exit }
@@ -236,7 +239,10 @@ try {
 
     $typeNaam = @{ basis = 'Basis'; verdieping = 'Verdieping'; herhaling = 'Herhaling'; nieuws = 'Nieuws' }[[string]$les.type]
     if (-not $typeNaam) { $typeNaam = $les.type }
-    $win.FindName('Badge').Text = ('{0}  ·  {1}' -f $les.vakgebied, $typeNaam)
+    # Vroeg je de laatste 60 dagen om meer over een vaardigheid van deze les? Zelfde regel als gevraagd() in docs/app.js
+    $grens60 = (Get-Date).AddDays(-60).ToString('yyyy-MM-dd'); $lesM = @($les.matrix | ForEach-Object { "$_" })
+    $gevraagd = @($logs | Where-Object { $_.reactie -eq 'meer' -and $_.id -ne $les.id -and "$($_.datum)".Length -ge 10 -and "$($_.datum)".Substring(0, 10) -ge $grens60 -and @($_.matrix | Where-Object { $lesM -contains "$_" }).Count }).Count -gt 0
+    $win.FindName('Badge').Text = ('{0}  ·  {1}{2}' -f $les.vakgebied, $typeNaam, $(if ($gevraagd) { '  ·  Je vroeg om meer hierover' } else { '' }))
     $win.FindName('Reeks').Text = ('Les {4} van 2 vandaag  ·  reeks: {0} {1}  ·  deze maand {2} {3}' -f $reeks, $(if ($reeks -eq 1) { 'dag' } else { 'dagen' }), $dezeMaand, $(if ($dezeMaand -eq 1) { 'les' } else { 'lessen' }), [Math]::Min(2, $script:aantal + 1))
     $win.FindName('Titel').Text = $les.titel
 
@@ -339,6 +345,7 @@ try {
     $script:uitlegGetoond = $false
     $script:keuze = -1
     $script:resultaat = ''
+    $script:reactie = ''      # optioneel: meer, makkelijk of niet-relevant (zelfde als REACTIES in docs/app.js)
     $script:antwoord = ''
     $script:minTekens = if ($o.minTekens) { [int]$o.minTekens } else { 40 }
 
@@ -498,6 +505,22 @@ try {
             $script:scoreKnoppen = @($rij.Children)
             [void]$inhoud.Children.Add($rij)
         }
+        # Reactie met één tik (optioneel); nog een keer tikken haalt hem weer weg
+        Toon-Label 'Wat vind je ervan? (optioneel)'
+        $rij = New-Object Windows.Controls.WrapPanel
+        foreach ($s in @(@('meer', 'Hier wil ik meer over'), @('makkelijk', 'Te makkelijk'), @('niet-relevant', 'Niet relevant voor mij'))) {
+            $k = Nieuw-Knop $s[1] {
+                $script:reactie = $(if ($script:reactie -eq [string]$this.Tag) { '' } else { [string]$this.Tag })
+                foreach ($c in $script:reactieKnoppen) {
+                    $aan = $script:reactie -eq [string]$c.Tag
+                    $c.Background = Kleur $(if ($aan) { '#0F172A' } else { '#F1F5F9' }); $c.Foreground = Kleur $(if ($aan) { '#FFFFFF' } else { '#0F172A' })
+                }
+            }
+            $k.Tag = $s[0]; $k.Margin = Rand 0 0 8 8
+            [void]$rij.Children.Add($k)
+        }
+        $script:reactieKnoppen = @($rij.Children)
+        [void]$inhoud.Children.Add($rij)
         [void]$knoppen.Children.Add($script:afrondKnop)
     }
 
@@ -510,6 +533,7 @@ try {
                 }
                 antwoord = $(if ($o.soort -ne 'meerkeuze') { $script:antwoord } else { '' })
             }
+            if ($script:reactie) { $script:teBewaren.regel.reactie = $script:reactie }
             Schrijf-Status ($script:aantal + 1) $uitstelSlot $uitstelTot
         }
         $script:magSluiten = $true; $win.Close()

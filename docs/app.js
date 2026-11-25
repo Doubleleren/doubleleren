@@ -15,6 +15,8 @@ const dagKey = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,
 const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
 const komma = (x) => Number(x).toFixed(1).replace('.', ',');
 const RES = { goed: 'Goed', deels: 'Deels', fout: 'Fout' };
+// Reactie na een les (optioneel, één tik): de regelaar stuurt er per persoon mee bij. Staat in je eigen logregel.
+const REACTIES = { meer: 'Hier wil ik meer over', makkelijk: 'Te makkelijk', 'niet-relevant': 'Niet relevant voor mij' };
 const chip = (r) => (RES[r] ? `<span class="chip ${r}"><i></i>${RES[r]}</span>` : '');
 const SIG = { bevestigd: 'Bevestigd', overschat: 'Mogelijk overschat', onderschat: 'Mogelijk onderschat', groeit: 'Groeit' };
 const sigChip = (s) => (SIG[s] ? `<span class="chip ${s}">${SIG[s]}</span>` : '');
@@ -360,7 +362,8 @@ function hoofdgebieden(lid) { const m = new Map(); for (const it of lid ? itemsV
 function schoonLog(r) {
   if (!r || typeof r !== 'object' || !/^\d{4}-\d{2}-\d{2}T/.test(String(r.datum))) return null;
   return { datum: String(r.datum), id: String(r.id || ''), resultaat: RES[r.resultaat] ? r.resultaat : null, niveau: ['basis', 'gevorderd', 'expert'].includes(r.niveau) ? r.niveau : 'basis',
-    matrix: Array.isArray(r.matrix) ? r.matrix.map(String).filter((x) => S.sjabloon.has(x)) : [], titel: String(r.titel || ''), vakgebied: String(r.vakgebied || '') };
+    matrix: Array.isArray(r.matrix) ? r.matrix.map(String).filter((x) => S.sjabloon.has(x)) : [], titel: String(r.titel || ''), vakgebied: String(r.vakgebied || ''),
+    reactie: REACTIES[r.reactie] ? r.reactie : null };
 }
 const logMaanden = (id) => {
   const p = S.data.paden;
@@ -1367,7 +1370,7 @@ function toonWelkom() { $('login').hidden = true; $('welkom').hidden = false; we
 // Zelfde keuze en opslag als de pop-up (app/dagelijkse-les.ps1): eerst je wachtrij (klaargezet door de generator),
 // anders de gedeelde lessenpool. Het resultaat gaat zonder antwoord naar je logboek; je antwoord gaat apart naar je
 // privébestand, versleuteld met een sleutel die alleen uit jouw eigen code volgt.
-const L = { les: null, keuze: -1, antwoord: '', resultaat: '', uitlegGetoond: false, status: null };
+const L = { les: null, keuze: -1, antwoord: '', resultaat: '', reactie: '', uitlegGetoond: false, status: null };
 const SOORTEN = ['meerkeuze', 'open', 'zoek-op', 'maak-met-claude'];
 const TYPE = { basis: 'Basis', verdieping: 'Verdieping', herhaling: 'Herhaling', nieuws: 'Nieuws' };
 
@@ -1425,6 +1428,9 @@ function geldigeLes(l, id) {
 const MIDDAG = '12:30';
 // Vak van een les: uit de vaardigheid-id's (cro:1.2.3 = CRO); kale id's of geen = het standaardvak
 const lesVak = (l) => { const m = (Array.isArray(l?.matrix) ? l.matrix : []).map(String).find((x) => x.includes(':')); return m ? m.split(':')[0] : S.inst.vakgebied; };
+// Cel van een lid (eigen cel of de cel van zijn project); een les met de case van een andere cel krijg je niet (generator-instructies, 'Cel')
+const celVan = (id) => { const l = S.org?.leden?.[id] || {}; return l.cel || (S.org?.cellen || []).find((c) => (c.projecten || []).some((p) => p.id === l.project))?.id || ''; };
+const celPast = (les, cel) => !cel || !les?.cel || les.cel === 'alle' || les.cel === cel;
 async function kiesLes() {
   const ik = S.leden[S.mij];
   // Twee lessen per dag: één in de ochtend, de tweede vanaf 12:30 (zelfde regel als de pop-up). De reeks blijft per dag.
@@ -1437,7 +1443,8 @@ async function kiesLes() {
   const w = await leesEnc(S.mij, 'wachtrij', ik.sl);
   // Je wachtrij (klaargezet door de generator) altijd; uit de gedeelde kennisbank alleen lessen van vakken die je leert
   const mijn = vakkenVan(ik);
-  const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen).filter((id) => mijn.includes(lesVak(S.lessen[id])))];
+  const mijnCel = celVan(S.mij);
+  const kandidaten = [...(Array.isArray(w?.lessen) ? w.lessen.map(String) : []), ...Object.keys(S.lessen).filter((id) => mijn.includes(lesVak(S.lessen[id])) && celPast(S.lessen[id], mijnCel))];
   for (const id of kandidaten) {
     if (!id || gedaan.has(id) || !LES_ID.test(id) || S.lessen[id]?.actief === false) continue;
     const les = await haalLes(id);
@@ -1504,10 +1511,16 @@ function startMiddagWekker() {
   document.addEventListener('visibilitychange', () => { if (!document.hidden) controleerMiddag(); });
   controleerMiddag();
 }
+// Vroeg je de laatste 60 dagen om meer over een vaardigheid van deze les (en is het niet dezelfde les)? Dan staat dat erbij.
+function gevraagd(lid, les) {
+  const m = new Set((Array.isArray(les.matrix) ? les.matrix : []).map(String)), grens = dagKey(new Date(nu().getTime() - 60 * 864e5));
+  return lid.logs.some((l) => l.reactie === 'meer' && l.id !== les.id && l.datum.slice(0, 10) >= grens && l.matrix.some((x) => m.has(x)));
+}
 function startLes(les) {
-  Object.assign(L, { les, keuze: -1, antwoord: '', resultaat: '', uitlegGetoond: false });
+  Object.assign(L, { les, keuze: -1, antwoord: '', resultaat: '', reactie: '', uitlegGetoond: false });
   const ik = S.leden[S.mij], rk = reeks(ik.logs, ik.werkdagen);
   $('les-kop').innerHTML = `<div class="les-meta"><span class="pill">${esc(les.vakgebied || '')}${les.type ? ' · ' + esc(TYPE[les.type] || les.type) : ''}</span>
+    ${gevraagd(ik, les) ? '<span class="tag">Je vroeg om meer hierover</span>' : ''}
     <span class="sub">Reeks: ${rk} ${rk === 1 ? 'dag' : 'dagen'}</span></div><h2>${esc(les.titel)}</h2>`;
   $('snel-hint').hidden = true;
   // Altijd eerst zelf nadenken: situatie → opdracht → waarom goed of fout → uitleg. Het oude veld 'volgorde'
@@ -1550,6 +1563,7 @@ function lesAfronding() {
   if (o.soort !== 'meerkeuze') {
     h += lesLabel('Hoe ging het?') + `<div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
   }
+  h += lesLabel('Wat vind je ervan? (optioneel)') + `<div class="zelf" role="group" aria-label="Reactie op deze les">${Object.entries(REACTIES).map(([w, t]) => `<button type="button" class="knop" data-reactie="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
   $('les-inhoud').innerHTML = h;
   $('les-knoppen').innerHTML = knop('afronden', 'Afronden', 'zwart') + knop('feedback-les', 'Feedback over deze les');
   $('les-knoppen').querySelector('button').disabled = o.soort !== 'meerkeuze';
@@ -1569,7 +1583,8 @@ async function werkBij(id, soort, sl, wijzig) {
 async function lesOpslaan() {
   const les = L.les, o = les.opdracht, ik = S.leden[S.mij];
   const regel = { datum: lokaleTijd(), id: les.id, resultaat: L.resultaat, soort: o.soort, niveau: les.niveau ?? null,
-    matrix: (Array.isArray(les.matrix) ? les.matrix : []).filter(Boolean), vakgebied: les.vakgebied, onderwerp: les.onderwerp, titel: les.titel, type: les.type };
+    matrix: (Array.isArray(les.matrix) ? les.matrix : []).filter(Boolean), vakgebied: les.vakgebied, onderwerp: les.onderwerp, titel: les.titel, type: les.type,
+    ...(REACTIES[L.reactie] ? { reactie: L.reactie } : {}) };
   await werkBij(S.mij, `log-${regel.datum.slice(0, 7)}`, ik.sl, (h) => {
     const r = Array.isArray(h?.regels) ? h.regels : [];
     if (!r.some((x) => x.id === regel.id && x.datum === regel.datum)) r.push(regel);
@@ -1609,6 +1624,11 @@ $('vandaag').addEventListener('click', async (e) => {
     L.resultaat = zelf.dataset.zelf;
     $('les-inhoud').querySelectorAll('[data-zelf]').forEach((b) => b.setAttribute('aria-pressed', String(b === zelf)));
     $('les-knoppen').querySelector('button').disabled = false; return;
+  }
+  const re = e.target.closest('[data-reactie]');
+  if (re) {   // nog een keer tikken = weer weg
+    L.reactie = L.reactie === re.dataset.reactie ? '' : re.dataset.reactie;
+    $('les-inhoud').querySelectorAll('[data-reactie]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.reactie === L.reactie))); return;
   }
   const b = e.target.closest('button[data-actie]'); if (!b || b.disabled) return;
   const actie = b.dataset.actie;
@@ -1663,7 +1683,7 @@ function verzamelLes() {
   const les = {
     id: `${dagKey(nu()).replace(/-/g, '')}-${slug(v('m-titel'))}`, herkomst: 'team',
     type: v('m-type'), niveau: v('m-niveau'), vakgebied: v('m-vakgebied'), onderwerp: v('m-onderwerp'),
-    matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), titel: v('m-titel'),
+    matrix: v('m-matrix').split(/[\s,;]+/).filter(Boolean), cel: v('m-cel') || 'alle', titel: v('m-titel'),
     opdracht: { soort, vraag: v('m-vraag') }, uitleg: v('m-uitleg'), kernpunt: v('m-kernpunt'), ...(v('m-kort') ? { kort: v('m-kort') } : {})
   };
   for (const [veld, id] of [['intro', 'm-intro'], ['modelantwoord', 'm-model'], ['toepassing', 'm-toepassing']]) if (v(id)) les[veld] = v(id);
@@ -1775,6 +1795,7 @@ async function naInloggen() {
   toonKennisbank();
   const lessen = magLessen();
   for (const t of ['vandaag', 'scorebord', 'maken']) $('tab-' + t).hidden = !magTab(t);
+  $('m-cel').innerHTML = '<option value="alle">Alle cellen</option>' + (S.org.cellen || []).map((c) => `<option value="${esc(c.id)}">${esc(c.naam)}</option>`).join('');
   if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); startMiddagWekker(); }
   toonRonde();
   route();
