@@ -1560,12 +1560,16 @@ function lesAfronding() {
   h += gewoneTaal(les) + tekstHtml(les.toelichting) + afleidersHtml(les, L.keuze) + begrippenHtml(les);
   if (!L.uitlegGetoond) h += uitlegHtml(les);
   h += kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer vandaag') + bronHtml(les.bron) + videoHtml(les.video);
+  // Hoe ging het, reactie en feedback in een eigen kaart vlak boven Afronden, zodat je ziet dat het kan (zelfde opbouw als de pop-up)
+  h += '<div class="reactie-kaart">';
   if (o.soort !== 'meerkeuze') {
-    h += lesLabel('Hoe ging het?') + `<div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
+    h += `<b>Hoe ging het?</b><span class="sub">Kies er één om af te ronden.</span><div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
   }
-  h += lesLabel('Wat vind je ervan? (optioneel)') + `<div class="zelf" role="group" aria-label="Reactie op deze les">${Object.entries(REACTIES).map(([w, t]) => `<button type="button" class="knop" data-reactie="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
+  h += `<b>Wat vind je van deze les?</b><span class="sub">Eén tik is genoeg. Zo kiest de generator je volgende lessen beter.</span>`
+    + `<div class="zelf" role="group" aria-label="Reactie op deze les">${Object.entries(REACTIES).map(([w, t]) => `<button type="button" class="knop" data-reactie="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`
+    + `<p class="sub">Klopt er iets niet, is de vraag onduidelijk of heb je een idee? ${knop('feedback-les', 'Geef feedback over deze les')}</p></div>`;
   $('les-inhoud').innerHTML = h;
-  $('les-knoppen').innerHTML = knop('afronden', 'Afronden', 'zwart') + knop('feedback-les', 'Feedback over deze les');
+  $('les-knoppen').innerHTML = knop('afronden', 'Afronden', 'zwart');
   $('les-knoppen').querySelector('button').disabled = o.soort !== 'meerkeuze';
   $('les-inhoud').scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
@@ -1767,11 +1771,12 @@ function tab(naam, sub) {
   if (location.hash !== '#' + hash) history.replaceState(null, '', location.pathname + location.search + '#' + hash);
   if (naam === 'scorebord') toonScorebord().catch((e) => { $('sb-tabel').innerHTML = `<tbody><tr><td class="fout">Scorebord laden mislukt: ${esc(e.message)}</td></tr></tbody>`; });
 }
-// Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback of een tab
+// Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback, #feedback/<les-id> (vanuit de pop-up) of een tab
 function route() {
   let h = ''; try { h = decodeURIComponent(location.hash.slice(1)); } catch { /* kapot adres: standaardtab */ }
   if (h.startsWith('les/') && LES_ID.test(h.slice(4))) { if (NAV.huidig !== 'lesdetail' && NAV.huidig !== 'feedback') NAV.vorige = NAV.huidig; toonLesDetail(h.slice(4)); }
   else if (h === 'feedback') openFeedback();
+  else if (h.startsWith('feedback/') && LES_ID.test(h.slice(9))) openFeedback(h.slice(9));
   else if (h.startsWith('instellingen/')) tab('instellingen', h.slice(13));
   else tab(magTab(h) && !(moetInrichten() && ['vandaag', 'mij', ''].includes(h)) ? h : standaardTab());
 }

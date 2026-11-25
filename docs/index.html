@@ -240,6 +240,12 @@ kbd, code { font: 600 13px/1.4 ui-monospace, Consolas, monospace; background: va
 .zelf { display: flex; gap: 8px; flex-wrap: wrap; }
 .zelf .knop { background: var(--cool-50); }
 .zelf .knop[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.reactie-kaart { display: grid; gap: 8px; margin-top: 22px; padding: 16px 18px; border-radius: var(--r-sm); background: var(--smart-50); }
+.reactie-kaart > b { font-size: 16px; }
+.reactie-kaart > .zelf + b { margin-top: 10px; }
+.reactie-kaart .zelf .knop:not([aria-pressed="true"]) { background: var(--white); }
+.reactie-kaart p.sub { margin: 4px 0 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.reactie-kaart p.sub .knop { background: var(--white); }
 .les-knoppen { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
 .les-knoppen .knop { padding: 10px 20px; font-size: 15px; }
 .velden-rij { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
