@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een taak in vaste stappen: eerst verkennen en vastleggen, dan bouwen",
   "matrix": ["coderen-met-ai:3.1.1", "coderen-met-ai:6.1.2"],
+  "cel": "alle",
   "titel": "Je wilt een tool, maar weet nog niet precies wat erin moet",
   "intro": "Je wilt met Claude Code een kleine tool die kapotte links uit een crawl-export groepeert per paginatype. Je weet nog niet goed wat erin moet: welke statuscodes tellen, wat er met redirects gebeurt en hoe de uitkomst eruit moet zien. Je hebt een uur om er iets bruikbaars van te maken.",
   "opdracht": {

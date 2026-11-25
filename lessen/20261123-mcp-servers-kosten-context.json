@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "MCP-servers: gekoppeld is niet gratis",
   "matrix": ["coderen-met-ai:4.4.1", "coderen-met-ai:4.4.2"],
+  "cel": "alle",
   "titel": "Acht koppelingen aan, één nodig: kan dat kwaad?",
   "intro": "Een collega heeft in Claude Code acht MCP-servers gekoppeld: Search Console, GA4, Notion, Slack, Ahrefs en nog drie die hij één keer heeft geprobeerd. Vandaag werkt hij alleen aan een script dat een GA4-export opschoont. Hij vraagt of al die koppelingen kwaad kunnen. MCP is de standaard waarmee Claude tools van buiten kan gebruiken.",
   "opdracht": {

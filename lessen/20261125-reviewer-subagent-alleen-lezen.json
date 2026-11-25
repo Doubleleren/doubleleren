@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een subagent maken met beperkte tools en een duidelijk resultaat",
   "matrix": ["coderen-met-ai:4.3.2", "coderen-met-ai:3.3.2"],
+  "cel": "alle",
   "titel": "Een reviewer die alleen mag kijken, niet mag verbouwen",
   "intro": "Je bouwt met Claude Code een tool die een Search Console-export per paginatype samenvat. De eisen staan in SPEC.md. Je wilt een vaste reviewer die na elke wijziging de code naast SPEC.md legt en meldt wat ontbreekt. Vorige keer begon een review-sessie zelf code te herschrijven, en toen klopte er niets meer van je eigen wijzigingen.",
   "opdracht": {

@@ -7,6 +7,7 @@
   "matrix": [
     "5.3.5"
   ],
+  "cel": "alle",
   "titel": "2.000 redirects na een migratie: laat Claude het Python-script schrijven",
   "intro": "Na een migratie heeft een klant een CSV met 2.000 oude URL's en de nieuwe URL waar elk ervan naartoe moet. Elke oude URL hoort met één 301 op de juiste nieuwe pagina uit te komen, die een 200 geeft. De licentie van je crawler is net verlopen, en een collega stelt voor om Claude een klein Python-script te laten schrijven.",
   "opdracht": {

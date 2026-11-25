@@ -7,6 +7,7 @@
   "matrix": [
     "1.3.2"
   ],
+  "cel": "alle",
   "titel": "Betaalde links, reacties en een concurrent: welk rel-attribuut?",
   "intro": "Een receptenblog heeft drie soorten uitgaande links, allemaal zonder rel-attribuut:\n\n- (1) links naar een keukenmerk in een betaalde samenwerking\n- (2) links die lezers in de reacties onder recepten plaatsen\n- (3) een link naar een andere receptensite die in een artikel wordt genoemd, maar die de blogger niet wil aanbevelen",
   "opdracht": {

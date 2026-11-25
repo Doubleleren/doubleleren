@@ -8,6 +8,7 @@
     "8.1.2",
     "8.1.1"
   ],
+  "cel": "leadgen",
   "titel": "\"Onze klanten zitten op desktop\": telt de mobiele versie dan wel?",
   "intro": "Een dienstverlener heeft een responsive site waarop de mobiele weergave sterk is ingekort. Op mobiel zijn de klantreviews en de veelgestelde vragen weggelaten. De specificaties worden pas opgehaald na een tik op 'Meer tonen'. De structured data staat alleen in de desktopversie. De klant zegt: \"Onze bezoekers zitten vooral op desktop, dus voor Google maakt dit niet uit.\"",
   "opdracht": {

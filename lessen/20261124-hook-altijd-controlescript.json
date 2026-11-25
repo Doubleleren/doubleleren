@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een hook voor iets wat altijd moet gebeuren",
   "matrix": ["coderen-met-ai:4.5.1", "coderen-met-ai:4.5.2"],
+  "cel": "alle",
   "titel": "'Draai na elke wijziging het controlescript' wordt soms vergeten",
   "intro": "In de repository van een rapportagetool staat een controlescript. Dat kijkt of de kolomnamen in de CSV-exports nog kloppen. In de CLAUDE.md staat: 'Draai na elke wijziging in de map exports het controlescript.' Meestal doet Claude dat. Maar twee keer deze maand ging een kapotte export toch naar de klant.",
   "opdracht": {

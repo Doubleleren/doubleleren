@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Sitemaps: wanneer heb je er een nodig?",
   "matrix": ["1.4.2", "1.1.11"],
+  "cel": "leadgen",
   "titel": "'Zonder sitemap kom je niet in Google', zegt het forum",
   "intro": "Een fysiotherapiepraktijk heeft een site van 45 pagina's. Alle pagina's staan in het menu of worden gelinkt vanuit de dienstpagina's. De eigenaar las op een forum dat je 'zonder XML-sitemap niet in Google komt'. Hij wil een developer inhuren om er een te laten bouwen.",
   "opdracht": {

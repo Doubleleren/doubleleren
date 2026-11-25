@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Terugspoelen (rewind): wat komt er wel en niet terug?",
   "matrix": ["coderen-met-ai:3.2.3"],
+  "cel": "alle",
   "titel": "Teruggespoeld, maar drie CSV-bestanden blijven weg",
   "intro": "Claude Code past je rapportagescript aan met zijn eigen bewerkfunctie. In dezelfde beurt draait het een commando in de terminal dat de map 'exports' opruimt en drie oude CSV-bestanden verwijdert. Het resultaat bevalt je niet. Je drukt twee keer op Esc en zet code en gesprek terug naar vóór die opdracht.",
   "opdracht": {

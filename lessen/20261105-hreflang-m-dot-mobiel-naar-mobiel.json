@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Aparte mobiele site (m-dot) en hreflang",
   "matrix": ["8.2.2", "1.3.5"],
+  "cel": "ecom",
   "titel": "Belgische mobiele zoekers landen op de Nederlandse m-dot-site",
   "intro": "Een webshop heeft naast www.shop.nl en www.shop.be een aparte mobiele site: m.shop.nl en m.shop.be. De mobiele pagina's hebben een canonical naar hun desktopversie. De developer heeft overal hreflang toegevoegd. Op de mobiele pagina's verwijst die naar www.shop.nl en www.shop.be, 'want dat zijn de canonieke versies'. Toch krijgen Belgische mobiele zoekers vaak de Nederlandse pagina te zien.",
   "opdracht": {

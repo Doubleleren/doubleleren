@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een sessie bijsturen: wanneer begin je opnieuw?",
   "matrix": ["coderen-met-ai:3.2.2", "coderen-met-ai:1.1.3"],
+  "cel": "alle",
   "titel": "Twee keer gecorrigeerd, en het script telt nog steeds dubbel",
   "intro": "Je laat Claude Code een script maken dat een GA4-export per kanaal samenvat. Eerst telt het script sessies dubbel. Je corrigeert het. Daarna klopt de datumnotatie niet. Je corrigeert opnieuw, en nu telt het weer dubbel. Je zit al een uur in dezelfde sessie.",
   "opdracht": {

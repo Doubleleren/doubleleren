@@ -7,6 +7,7 @@
   "matrix": [
     "3.1.6"
   ],
+  "cel": "alle",
   "titel": "Waar is mijn Event Category gebleven in GA4?",
   "intro": "Een klant mailt: \"In het oude Analytics hadden we een event met Category 'Formulier' en Action 'Verzenden'. Waar vind ik die category nu terug in GA4?\" Om dat goed te beantwoorden moet je snappen hoe GA4 data opslaat.",
   "opdracht": {

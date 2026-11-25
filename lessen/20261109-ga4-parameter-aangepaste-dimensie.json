@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GA4: eventparameters zichtbaar maken met een aangepaste dimensie",
   "matrix": ["3.1.6"],
+  "cel": "leadgen",
   "titel": "De parameter staat in DebugView, maar nergens in de rapporten",
   "intro": "Een installatiebedrijf meet offerteaanvragen met het event 'offerte_aanvraag'. Via Google Tag Manager stuurt de developer de parameter 'dienst' mee, met waarden als 'warmtepomp' en 'zonnepanelen'. In DebugView ziet de marketeer die parameter netjes binnenkomen. Maar in de rapporten en verkenningen kan ze nergens uitsplitsen op 'dienst'.",
   "opdracht": {

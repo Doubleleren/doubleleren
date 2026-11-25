@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Rank trackers: vertekende posities door resultaten over één los woord en Google-redirectlinks (najaar 2026)",
   "matrix": ["4.1.4", "4.1.2"],
+  "cel": "leadgen",
   "titel": "Zes zoekwoorden zakken in de rank tracker, maar Search Console blijft gelijk",
   "intro": "Je maakt het maandrapport voor een klant in zakelijke financiering. In de rank tracker zijn 6 van de 40 zoekwoorden sinds eind september gezakt van plek 6 tot 8 naar plek 12 tot 15. In Search Console blijven vertoningen en klikken voor dezelfde zoekopdrachten ongeveer gelijk. Boven de pagina van de klant staan in de tracker resultaten van Facebook en Reddit.",
   "opdracht": {

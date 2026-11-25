@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-25T05:35:47",
+    "bijgewerkt":  "2026-11-25T14:00:09",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -25,7 +25,8 @@
                                      "url":  "https://www.youtube.com/watch?v=9TpyYFcAhmk"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261019-inp",
@@ -50,6 +51,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -70,6 +72,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -94,7 +97,8 @@
                                      "url":  "https://www.youtube.com/watch?v=rtrLA42XRog"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261019-srm",
@@ -115,6 +119,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -140,6 +145,7 @@
                                  },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -159,7 +165,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-bert-taalbegrip",
@@ -178,7 +185,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-clarity-bewijs-verzamelen",
@@ -201,7 +209,8 @@
                                      "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261020-cls-controleren",
@@ -225,6 +234,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -249,6 +259,7 @@
                                  },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-10-30",
                        "actief":  false
                    },
@@ -270,6 +281,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-10"
                    },
                    {
@@ -290,6 +302,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -314,6 +327,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -334,6 +348,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -354,6 +369,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-24",
                        "actief":  false
                    },
@@ -375,6 +391,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-13"
                    },
                    {
@@ -395,6 +412,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-16"
                    },
                    {
@@ -418,7 +436,8 @@
                                      "url":  "https://www.youtube.com/watch?v=-Qgly4DRWeE"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261020-m-dot-site",
@@ -441,7 +460,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-og-tags-deelpreview",
@@ -461,6 +481,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -482,6 +503,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -502,6 +524,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -521,7 +544,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-panda-kwaliteit",
@@ -545,6 +569,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -565,6 +590,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-13"
                    },
                    {
@@ -585,7 +611,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261020-rankbrain",
@@ -605,6 +632,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -625,6 +653,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -645,6 +674,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -664,7 +694,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-robots-txt-voorrang",
@@ -684,6 +715,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -708,6 +740,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -732,6 +765,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -752,6 +786,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -771,7 +806,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261021-clarity-via-gtm",
@@ -795,7 +831,8 @@
                                      "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261021-core-vs-spam-update",
@@ -819,6 +856,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -844,6 +882,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -864,6 +903,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -885,6 +925,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-10-30"
                    },
                    {
@@ -908,7 +949,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261021-html-vs-xml-sitemap",
@@ -929,6 +971,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-11"
                    },
                    {
@@ -953,7 +996,8 @@
                                      "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261021-links-verbergen-javascript",
@@ -977,6 +1021,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1001,7 +1046,8 @@
                                      "url":  "https://www.youtube.com/watch?v=xUyGAbwuTas"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261022-503-bij-php-onderhoud",
@@ -1021,6 +1067,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1041,7 +1088,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261022-eeat-ymyl-prioriteren",
@@ -1067,6 +1115,7 @@
                                  },
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1092,6 +1141,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1117,6 +1167,7 @@
                                  },
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1137,6 +1188,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1161,7 +1213,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261022-mobile-first-pariteit",
@@ -1185,7 +1238,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261022-noindex-geblokkeerd-door-robots",
@@ -1206,6 +1260,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1227,6 +1282,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1247,7 +1303,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261022-product-snippet-of-merchant-listing",
@@ -1267,6 +1324,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1287,6 +1345,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -1307,6 +1366,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1331,7 +1391,8 @@
                                      "url":  "https://www.youtube.com/watch?v=S5hcOZmslBw"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261023-javascript-inhoud-na-klik",
@@ -1354,7 +1415,8 @@
                                      "url":  "https://www.youtube.com/watch?v=nwGY-9lwTF4"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261023-magento-canonical-categoriepad",
@@ -1374,6 +1436,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1393,7 +1456,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261023-python-redirectcheck-claude",
@@ -1412,7 +1476,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261023-robots-txt-ai-gebruik",
@@ -1433,6 +1498,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1453,6 +1519,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1474,6 +1541,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-09"
                    },
                    {
@@ -1494,6 +1562,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1518,7 +1587,8 @@
                                      "url":  "https://www.youtube.com/watch?v=D9hyyjQ-t90"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261026-checkout-account-uitstellen",
@@ -1538,6 +1608,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1558,7 +1629,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261026-googlebot-desktop-in-logs",
@@ -1583,6 +1655,7 @@
                                  },
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-12"
                    },
                    {
@@ -1603,6 +1676,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1623,6 +1697,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-18"
                    },
                    {
@@ -1643,7 +1718,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261026-shopify-robots-txt-liquid",
@@ -1664,6 +1740,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1684,6 +1761,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1704,7 +1782,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261027-breadcrumbs-hierarchie",
@@ -1725,6 +1804,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1746,6 +1826,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1771,6 +1852,7 @@
                                  },
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-11"
                    },
                    {
@@ -1792,6 +1874,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1812,7 +1895,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261027-mobiel-crawlen-vergelijken-claude",
@@ -1832,7 +1916,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261027-nep-googlebot-geblokkeerd",
@@ -1852,6 +1937,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1872,6 +1958,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1892,7 +1979,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261027-title-link-herschreven",
@@ -1913,6 +2001,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-18"
                    },
                    {
@@ -1932,7 +2021,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261028-faq-rich-results-verdwenen",
@@ -1952,6 +2042,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1971,7 +2062,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261028-heuristische-analyse-claude",
@@ -1990,7 +2082,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261028-hostingverhuizing-dns-ttl",
@@ -2010,6 +2103,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2030,6 +2124,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -2051,6 +2146,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2071,7 +2167,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261028-meta-descriptions-40000-producten",
@@ -2090,7 +2187,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261028-rich-results-test-vs-validator",
@@ -2110,7 +2208,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261028-wordpress-zoekmachines-ontmoedigen",
@@ -2131,6 +2230,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2151,7 +2251,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261029-ankerteksten-interne-links",
@@ -2170,7 +2271,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-article-markup-auteurs-claude",
@@ -2189,7 +2291,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261029-audit-opleveren-prioriteren",
@@ -2209,6 +2312,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2228,7 +2332,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-categorietekst-keyword-stuffing",
@@ -2248,6 +2353,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2268,7 +2374,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-dashboard-geanonimiseerde-zoekopdrachten",
@@ -2289,6 +2396,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2309,7 +2417,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-externe-links-naar-bronnen",
@@ -2329,6 +2438,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-16"
                    },
                    {
@@ -2353,6 +2463,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2373,7 +2484,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-klant-belt-urls-wijzigen",
@@ -2393,7 +2505,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-klantmail-verkeersdaling-claude",
@@ -2413,7 +2526,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-kopstructuur-volgorde-aantal",
@@ -2434,6 +2548,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-18"
                    },
                    {
@@ -2453,7 +2568,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-lightspeed-kleurvarianten-canonical",
@@ -2474,6 +2590,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2493,7 +2610,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-non-branded-rapporteren",
@@ -2514,6 +2632,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2535,6 +2654,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2555,6 +2675,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2576,6 +2697,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2597,6 +2719,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2617,7 +2740,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-robots-txt-spoedfix-recrawl",
@@ -2638,6 +2762,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2658,7 +2783,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-url-inspectie-live-test",
@@ -2678,6 +2804,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-12"
                    },
                    {
@@ -2702,7 +2829,8 @@
                                      "url":  "https://www.youtube.com/watch?v=9TpyYFcAhmk"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261030-betaalvelden-voelen-onveilig",
@@ -2722,6 +2850,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-09"
                    },
                    {
@@ -2742,7 +2871,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261030-core-update-analysemoment",
@@ -2766,6 +2896,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2787,6 +2918,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2807,7 +2939,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261030-localbusiness-vestigingen-claude",
@@ -2827,7 +2960,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261030-uit-assortiment-404-410",
@@ -2847,6 +2981,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2867,7 +3002,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261102-ai-overviews-in-search-console",
@@ -2888,6 +3024,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2907,7 +3044,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261102-canonical-signalen-tegenstrijdig",
@@ -2928,6 +3066,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2948,6 +3087,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2968,6 +3108,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2989,6 +3130,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3009,6 +3151,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3034,6 +3177,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3054,6 +3198,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3075,6 +3220,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3095,6 +3241,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3116,6 +3263,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3137,6 +3285,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3158,6 +3307,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3178,6 +3328,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3199,6 +3350,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3219,7 +3371,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261102-ttfb-redirects-velddata",
@@ -3244,6 +3397,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3265,6 +3419,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3286,6 +3441,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3307,6 +3463,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3327,6 +3484,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3348,6 +3506,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3369,6 +3528,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3394,6 +3554,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3414,6 +3575,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-19"
                    },
                    {
@@ -3435,6 +3597,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3455,7 +3618,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261104-gtm-versie-terugzetten",
@@ -3476,6 +3640,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-19"
                    },
                    {
@@ -3497,6 +3662,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3518,6 +3684,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3538,7 +3705,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261104-perplexity-bots-robots-txt",
@@ -3559,6 +3727,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3579,6 +3748,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3600,6 +3770,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3622,6 +3793,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3644,6 +3816,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3669,6 +3842,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3694,6 +3868,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-09"
                    },
                    {
@@ -3715,6 +3890,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3739,6 +3915,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3760,6 +3937,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3781,6 +3959,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3802,6 +3981,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3823,6 +4003,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3848,6 +4029,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-10"
                    },
                    {
@@ -3869,6 +4051,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3890,6 +4073,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3910,6 +4094,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3930,6 +4115,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3951,6 +4137,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3971,6 +4158,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3991,6 +4179,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -4010,7 +4199,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261109-canonical-naar-andere-categorie",
@@ -4029,7 +4219,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261109-clarity-dead-clicks-dienstblokken",
@@ -4053,7 +4244,8 @@
                                      "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-cwv-75e-percentiel",
@@ -4073,7 +4265,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261109-ga4-parameter-aangepaste-dimensie",
@@ -4096,7 +4289,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-gtm-preview-niet-gepubliceerd",
@@ -4116,7 +4310,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-ranktracker-losse-woorden-goto",
@@ -4136,7 +4331,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-review-markup-winkelscore",
@@ -4156,7 +4352,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261109-reviews-alleen-positief-acm",
@@ -4175,7 +4372,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-ga4-user-id-voor-inloggen",
@@ -4194,7 +4392,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-hamburgermenu-desktop",
@@ -4214,7 +4413,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-lege-filtercombinatie-404",
@@ -4234,7 +4434,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-logs-googlebot-echt-of-nep",
@@ -4258,7 +4459,8 @@
                                      "url":  "https://www.youtube.com/watch?v=-Qgly4DRWeE"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-productmarkup-b2b-prijs-na-inloggen",
@@ -4278,7 +4480,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-core-update-november-2026",
@@ -4302,7 +4505,8 @@
                                      "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-fcp-webfont-tekst-onzichtbaar",
@@ -4322,7 +4526,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261111-ga4-bounce-engaged-sessie",
@@ -4342,7 +4547,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261111-gtm-formulier-alleen-geslaagd",
@@ -4362,7 +4568,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261111-noindex-alleen-mobiele-versie",
@@ -4387,7 +4594,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-tikdoelen-mobiel-winkelmand",
@@ -4407,7 +4615,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-utm-in-interne-links",
@@ -4427,7 +4636,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-bezorgdatum-in-plaats-van-levertijd",
@@ -4446,7 +4656,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-cdn-overstap-crawlpiek",
@@ -4467,7 +4678,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-ga4-filter-intern-verkeer-testen",
@@ -4487,7 +4699,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261112-json-ld-in-de-body",
@@ -4511,7 +4724,8 @@
                                      "url":  "https://www.youtube.com/watch?v=vJEygBWs80A"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-mixed-content-script-geblokkeerd",
@@ -4531,7 +4745,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-robots-txt-googlebot-groep-negeert-ster",
@@ -4551,7 +4766,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-url-inspectie-gecrawld-als",
@@ -4575,7 +4791,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-ab-test-minstens-een-week",
@@ -4594,7 +4811,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-chatgpt-business-hub",
@@ -4614,7 +4832,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-clarity-scrollmap-per-apparaat",
@@ -4633,7 +4852,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261113-fietsfilters-welke-crawlbaar",
@@ -4652,7 +4872,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-gsc-positie-door-ai-overview",
@@ -4673,7 +4894,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-licentie-metadata-weggecomprimeerd",
@@ -4693,7 +4915,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-mobiel-toetsenbord-checkout",
@@ -4712,7 +4935,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-paid-organic-meer-organische-vertoningen",
@@ -4732,7 +4956,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-productreview-wie-hoe-waarom",
@@ -4756,7 +4981,8 @@
                                      "url":  "https://www.youtube.com/watch?v=D9hyyjQ-t90"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-sitemap-per-paginatype-indexering",
@@ -4781,6 +5007,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-16"
                    },
                    {
@@ -4801,7 +5028,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261116-featured-snippet-niet-af-te-dwingen",
@@ -4821,7 +5049,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261116-geciteerd-in-ai-overview-weinig-klikken",
@@ -4845,7 +5074,8 @@
                                      "url":  "https://www.youtube.com/watch?v=xUyGAbwuTas"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261116-google-verwijzer-logs-vs-search-console",
@@ -4866,7 +5096,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261116-json-ld-gekrulde-aanhalingstekens",
@@ -4886,7 +5117,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261116-snippet-wissen-eigen-pagina",
@@ -4905,7 +5137,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261116-validator-groen-rich-results-test-leeg",
@@ -4926,6 +5159,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -4946,7 +5180,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-bijgewerkt-datum-elke-nacht",
@@ -4965,7 +5200,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-checkout-toetsenbord-toegankelijkheid",
@@ -4985,7 +5221,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-cls-uitklappen-na-klik",
@@ -5005,7 +5242,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-content-in-hapjes-voor-ai",
@@ -5025,7 +5263,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261117-ga4-eventnaam-hoofdletter",
@@ -5045,7 +5284,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261117-gtm-scrolldiepte-halverwege",
@@ -5069,7 +5309,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-lcp-achtergrondfoto-in-css",
@@ -5089,7 +5330,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-linkspam-update-geen-straf",
@@ -5109,7 +5351,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-redirectketen-drie-migraties",
@@ -5129,7 +5372,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-search-analytics-api-merkfilter",
@@ -5149,7 +5393,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-sitemap-te-veel-urls",
@@ -5169,7 +5414,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-ttfb-bezoekers-ver-van-server",
@@ -5189,7 +5435,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-bronlinks-niet-allemaal-nofollow",
@@ -5209,7 +5456,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-domeinverhuizing-verwachting-directie",
@@ -5230,7 +5478,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-dynamic-serving-crawlen-als-smartphone",
@@ -5254,7 +5503,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-eeat-vertrouwen-belangrijkste",
@@ -5278,7 +5528,8 @@
                                      "url":  "https://www.youtube.com/watch?v=4YhJH5VOF3w"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-lighthouse-groen-velddata-rood",
@@ -5302,7 +5553,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-optimizely-snippet-gehackt",
@@ -5322,7 +5574,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-optimizely-via-gtm-flikkering",
@@ -5342,7 +5595,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-productvarianten-productgroup",
@@ -5362,7 +5616,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-ymyl-giftige-kamerplanten",
@@ -5382,7 +5637,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-ab-test-weinig-verkeer-welk-idee",
@@ -5401,7 +5657,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-blogarchief-klikdiepte",
@@ -5421,7 +5678,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-donatieformulier-voorgestelde-bedragen",
@@ -5440,7 +5698,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-ga4-dubbele-aankopen-transaction-id",
@@ -5460,7 +5719,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-ga4-other-rij-landingspaginas",
@@ -5480,7 +5740,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-gtm-rechten-freelancer",
@@ -5499,7 +5760,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261119-hreflang-en-uk-landcode",
@@ -5519,7 +5781,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-kleine-site-sitemap-nodig",
@@ -5539,7 +5802,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-lcp-veld-sneller-dan-lab-cookiemelding",
@@ -5563,7 +5827,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261119-retourbeleid-organization-markup",
@@ -5583,7 +5848,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-srm-redirecttest-aanvraagpagina",
@@ -5603,7 +5869,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-van-voor-prijs-laagste-30-dagen",
@@ -5622,7 +5889,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261120-agent-of-chatassistent",
@@ -5642,7 +5910,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-api-sleutel-in-openbare-repo",
@@ -5662,7 +5931,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-branch-niet-direct-op-main",
@@ -5682,7 +5952,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-chrome-xslt-sitemap-kale-xml",
@@ -5702,7 +5973,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261120-claude-md-regel-of-deny-regel",
@@ -5722,7 +5994,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-claude-md-wat-erin-hoort",
@@ -5742,7 +6015,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-review-door-frisse-sessie",
@@ -5762,7 +6036,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-sessie-opnieuw-na-twee-correcties",
@@ -5783,6 +6058,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-23"
                    },
                    {
@@ -5803,7 +6079,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261123-magento-url-key-redirect",
@@ -5822,7 +6099,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261123-mcp-servers-kosten-context",
@@ -5842,7 +6120,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261123-mergeconflict-zelf-kiezen",
@@ -5862,7 +6141,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261123-plan-mode-eerst-voorstel",
@@ -5882,7 +6162,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261123-skill-met-gevolgen-zelf-starten",
@@ -5902,7 +6183,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261123-subagent-geen-slimmer-antwoord",
@@ -5922,7 +6204,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261123-terugspoelen-herstelt-geen-commando",
@@ -5941,7 +6224,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261123-wordpress-7-2-random-redirect",
@@ -5961,7 +6245,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261124-canonical-in-body-genegeerd",
@@ -5981,7 +6266,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261124-claude-p-script-mag-niet-schrijven",
@@ -6001,7 +6287,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261124-commitbericht-waarom",
@@ -6020,7 +6307,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261124-ga4-funnel-open-of-gesloten",
@@ -6040,7 +6328,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261124-github-pages-prive-repo-openbaar",
@@ -6060,7 +6349,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261124-google-agent-bot-bescherming",
@@ -6081,6 +6371,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-25"
                    },
                    {
@@ -6101,7 +6392,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261124-shopify-within-collectie-urls",
@@ -6121,7 +6413,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261124-specifieke-opdracht-bestand-symptoom-klaar",
@@ -6141,7 +6434,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-auto-mode-in-plaats-van-blind-klikken",
@@ -6161,7 +6455,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-core-update-december-aangekondigd",
@@ -6185,7 +6480,8 @@
                                      "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-eerst-interview-dan-spec",
@@ -6205,7 +6501,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-ga4-funnel-direct-of-indirect",
@@ -6225,7 +6522,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261125-gsc-export-search-type-filter",
@@ -6245,7 +6543,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-klaar-melding-bewijs-en-diff",
@@ -6265,7 +6564,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-paywall-markup-geen-cloaking",
@@ -6285,7 +6585,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-reviewer-subagent-alleen-lezen",
@@ -6305,7 +6606,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-shopify-robots-na-themawissel",
@@ -6325,7 +6627,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261125-skill-delen-via-teamrepo",
@@ -6345,7 +6648,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261125-wekelijkse-taak-laptop-dicht",
@@ -6365,7 +6669,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    }
                ]
 }

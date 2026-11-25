@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Wanneer een subagent wel en niet helpt",
   "matrix": ["coderen-met-ai:4.3.3", "coderen-met-ai:4.3.1"],
+  "cel": "alle",
   "titel": "'Laat een subagent het overdoen, die snapt het vast beter'",
   "intro": "Een collega laat Claude Code een regex schrijven die merkzoekwoorden uit een Search Console-export filtert. Het eerste antwoord mist twee schrijfwijzen van het merk: met een spatie en met een tikfout die klanten vaak maken. Hij stelt voor: 'Laat het opnieuw doen door een subagent, die geeft vast een beter antwoord.'",
   "opdracht": {

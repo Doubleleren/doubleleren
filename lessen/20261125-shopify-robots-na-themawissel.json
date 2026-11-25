@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Shopify: robots.txt.liquid na een themawissel",
   "matrix": ["5.1.6", "1.1.8"],
+  "cel": "ecom",
   "titel": "Nieuw Shopify-thema live, en je robots.txt-regel is weg",
   "intro": "Een Shopify-winkel had in robots.txt.liquid één extra regel: Disallow: /pages/actie-. Vorige week heeft een bureau een nieuw thema geplaatst. Ze downloadden het als zip en uploadden het via Online Store → Themes. Sinds dat thema live staat, ontbreekt de extra regel in /robots.txt. De standaardregels van Shopify staan er nog wel.",
   "opdracht": {

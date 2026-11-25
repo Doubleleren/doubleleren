@@ -8,6 +8,7 @@
     "7.2.2",
     "7.2.1"
   ],
+  "cel": "ecom",
   "titel": "Na 9 dagen '96% kans om te winnen': stoppen of doorgaan?",
   "intro": "Een A/B-test op de checkout zou volgens het testplan 4 weken lopen; de steekproefgrootte is vooraf berekend. De klant kijkt elke ochtend in het dashboard van de testtool. Na 9 dagen staat variant B op '96% kans om te winnen'. De klant wil de test nu stoppen en B live zetten.",
   "opdracht": {

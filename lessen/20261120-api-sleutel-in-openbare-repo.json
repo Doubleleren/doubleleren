@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een API-sleutel die per ongeluk openbaar is gezet",
   "matrix": ["coderen-met-ai:6.2.1", "coderen-met-ai:2.3.3"],
+  "cel": "alle",
   "titel": "De API-sleutel staat sinds gisteren in een openbare repository",
   "intro": "Je hebt met Claude Code een klein script gebouwd dat elke ochtend cijfers uit de Search Console-API ophaalt. Gisteren heb je het naar een openbare GitHub-repository gepusht, zodat een collega het kan gebruiken. Vanochtend zie je dat de API-sleutel gewoon in het script staat.",
   "opdracht": {

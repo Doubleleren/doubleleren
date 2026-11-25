@@ -8,6 +8,7 @@
     "1.3.4",
     "1.3.3"
   ],
+  "cel": "ecom",
   "titel": "rel=prev/next doet niets meer: zo pak je paginering nu aan",
   "intro": "Een categoriepagina van een webshop telt 12 pagina's met producten. De developer stelt voor: 'We zetten rel=prev/next op alle pagina's en laten pagina 2 tot en met 12 canonicaliseren naar pagina 1.'",
   "opdracht": {

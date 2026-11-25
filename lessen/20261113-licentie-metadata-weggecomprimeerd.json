@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Afbeeldingslicenties: IPTC-metadata en compressie",
   "matrix": ["2.2.6", "2.1.14"],
+  "cel": "alle",
   "titel": "Nieuwe compressieplug-in, en de Licensable-badge is weg",
   "intro": "Een fotograaf zet licentie-informatie alleen als IPTC-metadata in zijn foto's, via zijn fotobewerkingsprogramma. Zijn foto's kregen in Google Afbeeldingen een Licensable-badge. Sinds de site een plug-in gebruikt die alle afbeeldingen automatisch comprimeert, ontbreekt die badge bij nieuwe foto's.",
   "opdracht": {

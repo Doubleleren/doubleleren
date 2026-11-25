@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Core Web Vitals: LCP verbeteren bij een grote headerfoto",
   "matrix": ["5.2.3", "5.2.2"],
+  "cel": "ecom",
   "titel": "De grote foto bovenaan laadt als laatste. Wat pas je aan?",
   "intro": "Een fietsenwinkel heeft bovenaan elke categoriepagina een grote foto. PageSpeed Insights noemt die foto het LCP-element. LCP (Largest Contentful Paint) meet wanneer het grootste stuk inhoud in beeld staat. Op mobiel is de LCP 4,1 seconde. In de HTML staat: <img src=\"header.jpg\" loading=\"lazy\">. Een plugin heeft loading=\"lazy\" op álle afbeeldingen van de site gezet.",
   "opdracht": {

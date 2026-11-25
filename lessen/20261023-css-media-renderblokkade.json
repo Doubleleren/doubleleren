@@ -7,6 +7,7 @@
   "matrix": [
     "5.3.6"
   ],
+  "cel": "alle",
   "titel": "Drie stylesheets in de head: welke houdt de smartphone op?",
   "intro": "Een developer wil de laadtijd van een webshop verbeteren en kijkt naar de CSS. In de head staan drie stylesheets:\n\n- link rel=stylesheet href=main.css\n- link rel=stylesheet href=print.css media=print\n- link rel=stylesheet href=wide.css media=(min-width: 1200px)\n\nDe meeste bezoekers gebruiken een smartphone met een scherm van 390 pixels breed.",
   "opdracht": {

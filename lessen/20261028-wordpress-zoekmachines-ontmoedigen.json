@@ -8,6 +8,7 @@
     "5.1.4",
     "5.1.3"
   ],
+  "cel": "alle",
   "titel": "Nieuwe WordPress-site, drie weken live en bijna niets in Google",
   "intro": "Een kinderopvang heeft een nieuwe WordPress-site, drie weken geleden live gezet vanaf een testomgeving. In het rapport Pagina-indexering van Search Console staan bijna alle pagina's onder 'Uitgesloten door noindex-tag'. De developer zegt: 'robots.txt staat helemaal open, dus aan ons ligt het niet.' Er is geen SEO-plugin geïnstalleerd.",
   "opdracht": {

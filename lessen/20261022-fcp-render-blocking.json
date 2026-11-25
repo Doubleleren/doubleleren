@@ -8,6 +8,7 @@
     "5.2.9",
     "5.2.8"
   ],
+  "cel": "alle",
   "titel": "FCP van 3,4 seconde, TTFB is prima: waar zit de vertraging?",
   "intro": "Een nieuwssite heeft volgens CrUX een FCP van 3,4 s op mobiel (75e percentiel). De TTFB is 0,5 s. In de waterfall zie je in de <head> drie CSS-bestanden van samen 380 kB, een synchroon geladen script van een A/B-testtool en twee webfonts. De hero-afbeelding is 90 kB en wordt pas na de CSS opgehaald.",
   "opdracht": {

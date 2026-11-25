@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een mergeconflict: wat het is en wat je doet",
   "matrix": ["coderen-met-ai:2.2.3", "coderen-met-ai:2.3.2"],
+  "cel": "alle",
   "titel": "GitHub meldt een conflict in je pull request. Wat nu?",
   "intro": "Jij en een collega werken in dezelfde repository aan een kleine rapportagetool, elk op een eigen branch. Jullie passen allebei dezelfde regel aan in het bestand met de kanaalnamen. Je opent een pull request naar main. GitHub meldt dat er een conflict is, en de knop om te mergen is grijs.",
   "opdracht": {

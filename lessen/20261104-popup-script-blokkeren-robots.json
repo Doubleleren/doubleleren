@@ -8,6 +8,7 @@
     "1.1.8",
     "5.3.3"
   ],
+  "cel": "ecom",
   "titel": "De screenshot van Google toont alleen de leeftijdscheck",
   "intro": "Een wijnwebshop toont elke nieuwe bezoeker een leeftijdscheck. Die pop-up wordt geladen door één eigen bestand: /js/leeftijdscheck.js. De rest van de site draait op /js/main.js. In de URL-inspectietool toont de screenshot van Google alleen de pop-up. De developer wil leeftijdscheck.js blokkeren in robots.txt. Een collega zegt: 'Nooit JavaScript blokkeren, dan kan Google je pagina niet renderen.'",
   "opdracht": {

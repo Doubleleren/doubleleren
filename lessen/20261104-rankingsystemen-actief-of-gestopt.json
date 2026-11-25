@@ -9,6 +9,7 @@
     "10.1.4",
     "10.1.5"
   ],
+  "cel": "alle",
   "titel": "'Getroffen door Panda, en we optimaliseren voor BERT': klopt dat?",
   "intro": "Een prospect stuurt je een audit van een ander bureau. Daarin staat: 'Uw site is getroffen door de laatste Panda-update. Daarnaast optimaliseren wij uw teksten voor RankBrain en BERT.' Je legt dit naast Googles eigen overzicht van rankingsystemen.",
   "opdracht": {

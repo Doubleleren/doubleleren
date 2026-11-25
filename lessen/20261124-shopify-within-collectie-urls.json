@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Shopify: productlinks binnen collecties en canonicals",
   "matrix": ["5.1.6", "1.3.3"],
+  "cel": "ecom",
   "titel": "Shopify linkt naar /collections/.../products/: hoe ruim je dit op?",
   "intro": "Een Shopify-winkel met 6.000 producten. Op collectiepagina's linkt het thema naar adressen als /collections/sale/products/wollen-trui. De canonical op die pagina's wijst naar /products/wollen-trui. In Search Console staan duizenden URL's als 'Alternatieve pagina met correcte canonieke tag', en in de crawlstatistieken gaat een groot deel van de crawls naar die collectieadressen.",
   "opdracht": {

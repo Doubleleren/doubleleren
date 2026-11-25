@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "LCP: waarom velddata sneller kunnen zijn dan het lab",
   "matrix": ["5.2.2", "5.2.1"],
+  "cel": "alle",
   "titel": "LCP 4,2 seconde in Lighthouse, 1,9 seconde bij echte bezoekers",
   "intro": "Op de homepage van een reisorganisatie geeft Lighthouse een LCP van 4,2 seconde. Het LCP-element is de grote foto bovenaan. De velddata geven 1,9 seconde. Een meetscript in GA4 laat zien dat bij de meeste bezoeken de tekst van de cookiemelding het LCP-element is. Bijna iedereen klikt binnen een seconde op 'Accepteren'.",
   "opdracht": {

@@ -8,6 +8,7 @@
     "1.5.4",
     "1.1.1"
   ],
+  "cel": "ecom",
   "titel": "Nieuwe producten pas na weken in Google: wat zeggen de crawlstatistieken?",
   "intro": "Een webshop met 60.000 URL's ziet dat nieuwe producten pas na weken in Google verschijnen. In het rapport Pagina-indexering staan veel URL's als 'Ontdekt - momenteel niet geïndexeerd'. Je wilt weten hoe Googlebot de site de laatste tijd heeft gecrawld.",
   "opdracht": {

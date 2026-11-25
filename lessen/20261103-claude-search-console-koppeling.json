@@ -7,6 +7,7 @@
   "matrix": [
     "4.1.2"
   ],
+  "cel": "alle",
   "titel": "Claude noemt de pagina's met het grootste klikverlies. Waar komt dat vandaan?",
   "intro": "Een collega vraagt Claude in een nieuwe chat: 'Welke pagina's van onze klant verloren deze maand de meeste klikken in Search Console?' Claude antwoordt met een nette tabel met URL's en percentages. Er zijn in die chat geen bestanden geüpload.",
   "opdracht": {

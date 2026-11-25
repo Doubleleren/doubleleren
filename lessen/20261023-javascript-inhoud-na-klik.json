@@ -7,6 +7,7 @@
   "matrix": [
     "5.3.3"
   ],
+  "cel": "ecom",
   "titel": "Productbeschrijving achter 'Lees meer': ziet Google die tekst?",
   "intro": "Een kledingwebshop toont op productpagina's eerst twee regels tekst. De volledige beschrijving, de maattabel en de reviews worden pas met JavaScript van de server opgehaald als een bezoeker op 'Lees meer' klikt. In de HTML die bij het laden binnenkomt, staat alleen die knop.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "A/B-testen: Sample Ratio Mismatch bij een redirecttest",
   "matrix": ["7.2.1", "7.2.2"],
+  "cel": "leadgen",
   "titel": "Variant B haalt 14% meer aanvragen, maar telt 2.400 bezoekers minder",
   "intro": "Een energieleverancier test een nieuwe aanvraagpagina. Bezoekers in variant B worden met een redirect naar een nieuwe URL gestuurd. De verdeling staat op 50/50. Na twee weken telt de testtool 20.000 bezoekers in A en 17.600 in B. Variant B heeft 14% meer aanvragen per bezoeker.",
   "opdracht": {

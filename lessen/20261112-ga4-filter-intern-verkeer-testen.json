@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GA4: een filter voor intern verkeer eerst testen",
   "matrix": ["3.1.2", "3.1.4"],
+  "cel": "alle",
   "titel": "Het filter voor intern verkeer meteen op Actief zetten?",
   "intro": "Een collega heeft in GA4 een filter voor intern verkeer aangemaakt. Het IP-bereik van het kantoor heeft hij snel overgenomen uit een oude mail van de klant. Het filter staat nu in de stand 'Testen'. Hij wil het meteen op 'Actief' zetten, zodat de cijfers van deze maand schoon zijn.",
   "opdracht": {

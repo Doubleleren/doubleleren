@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Videositemap: welke tags zijn verplicht",
   "matrix": ["1.4.3", "2.2.2"],
+  "cel": "ecom",
   "titel": "De videositemap is bijna af, zegt de developer. Klopt dat?",
   "intro": "Een keukenmerk heeft 80 instructievideo's op zijn productpagina's, in een eigen videospeler. Een developer maakt een videositemap (een sitemap speciaal voor video's). Per video levert hij: de pagina-URL, een titel, een beschrijving, de duur in seconden en de publicatiedatum. Verder niets, 'want de rest staat al in de pagina'.",
   "opdracht": {

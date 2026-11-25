@@ -8,6 +8,7 @@
     "5.3.5",
     "5.3.1"
   ],
+  "cel": "alle",
   "titel": "4.200 URL's gecrawld, 2.900 over na het koppelen: waar zijn de rest?",
   "intro": "Je wilt weten welke indexeerbare pagina's geen enkele klik uit Google krijgen. Claude schrijft een Python-script dat een Screaming Frog-export (4.200 URL's) koppelt aan een Search Console-export met klikken per pagina. De kernregel is: resultaat = pd.merge(crawl, gsc, on='url'). Het resultaat telt 2.900 rijen, en geen enkele pagina heeft 0 klikken.",
   "opdracht": {

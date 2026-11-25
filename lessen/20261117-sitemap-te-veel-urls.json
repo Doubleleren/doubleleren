@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "XML-sitemaps: de limiet per bestand en de sitemapindex",
   "matrix": ["1.4.1", "1.1.11"],
+  "cel": "ecom",
   "titel": "120.000 producten in één sitemap van 38 MB, en Search Console geeft een fout",
   "intro": "Een webshop met 120.000 producten zet alle product-URL's in één bestand: sitemap.xml, 38 MB groot. Search Console meldt bij die sitemap een fout. De developer zegt: 'Het bestand is kleiner dan 50 MB, dus aan de omvang kan het niet liggen.'",
   "opdracht": {

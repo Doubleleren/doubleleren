@@ -7,6 +7,7 @@
   "matrix": [
     "6.3.4"
   ],
+  "cel": "alle",
   "titel": "140 bevindingen, één developer, deadline vrijdag: hoe lever je op?",
   "intro": "Je technische audit voor een webshop is bijna klaar: 140 bevindingen, op volgorde van de hoofdstukken uit je crawltool. De klant heeft één developer, die twee dagen per maand aan de site werkt. Je hebt beloofd vrijdag op te leveren, en het is donderdag.",
   "opdracht": {

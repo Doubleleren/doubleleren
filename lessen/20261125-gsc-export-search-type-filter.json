@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "SQL op de Search Console-export: filteren op zoektype (search_type)",
   "matrix": ["5.3.1", "4.1.2"],
+  "cel": "alle",
   "titel": "BigQuery telt 412.000 klikken, Search Console 268.000",
   "intro": "Een receptenplatform heeft de bulkexport van Search Console naar BigQuery aanstaan. Je query telt met SUM(clicks) de klikken van oktober op uit de tabel searchdata_site_impression: 412.000. Het Prestatierapport voor Zoekresultaten toont voor dezelfde datums 268.000 klikken. Je hebt al gecontroleerd dat je de site-tabel gebruikt en dat de datums kloppen.",
   "opdracht": {

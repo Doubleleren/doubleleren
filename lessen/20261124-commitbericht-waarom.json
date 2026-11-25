@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Repository, commit en een goed commitbericht",
   "matrix": ["coderen-met-ai:2.2.1"],
+  "cel": "alle",
   "titel": "Drie maanden later: 'update' zegt niemand iets meer",
   "intro": "In de repository van een rapportagetool zie je drie maanden later dat de drempel voor 'merkzoekwoord' is veranderd. Je wilt weten waarom. In de geschiedenis staat bij die wijziging alleen het commitbericht 'update'. Een commit is een opgeslagen wijziging in een repository, met een korte beschrijving erbij. Vandaag laat je Claude zelf een commit maken.",
   "opdracht": {

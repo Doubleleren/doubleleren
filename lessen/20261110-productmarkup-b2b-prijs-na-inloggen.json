@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Product-markup: verplichte velden en markup die niet op de pagina staat",
   "matrix": ["2.2.1", "2.2.8"],
+  "cel": "ecom",
   "titel": "Product-markup zonder fouten, maar de B2B-shop toont prijzen pas na inloggen",
   "intro": "Een groothandel in installatiemateriaal toont prijzen pas na het inloggen. Reviews heeft de site niet. De developer heeft op 8.000 productpagina's Product-markup gezet met naam, merk, afbeelding, beschrijving en artikelnummer. De Schema Markup Validator vindt geen fouten. Toch ziet de klant na twee maanden niets veranderen aan de zoekresultaten.",
   "opdracht": {

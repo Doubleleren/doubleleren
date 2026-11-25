@@ -8,6 +8,7 @@
     "12.1.6",
     "12.1.3"
   ],
+  "cel": "alle",
   "titel": "Niet in de training van Claude, wél te vinden in Claude: kan dat?",
   "intro": "Een uitgever van vakartikelen wil niet dat zijn teksten worden gebruikt om de AI-modellen van Anthropic te trainen. Wel wil hij dat Claude zijn artikelen kan vinden en openen als iemand er in een chat naar vraagt. De developer stelt voor om alles met 'Claude' in de user-agent te blokkeren.",
   "opdracht": {

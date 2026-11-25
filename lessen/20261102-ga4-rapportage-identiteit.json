@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GA4: de rapportage-identiteit kiezen (Blended, Observed, Device-based)",
   "matrix": ["3.1.5"],
+  "cel": "ecom",
   "titel": "User-ID staat live, maar GA4 telt nog net zoveel gebruikers",
   "intro": "Een webshop met klantaccounts stuurt sinds een maand na het inloggen een User-ID naar GA4. Toch ziet de marketeer nog net zoveel gebruikers als vóór de invoering. In de property staat de rapportage-identiteit op 'Device-based'. De rapportage-identiteit is de instelling die bepaalt met welke ID's GA4 gebruikers in de rapporten telt.",
   "opdracht": {

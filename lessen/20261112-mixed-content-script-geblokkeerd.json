@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "HTTPS-migratie: mixed content",
   "matrix": ["5.1.2", "5.1.1"],
+  "cel": "ecom",
   "titel": "Na de overstap naar https doet de reviewwidget het niet meer",
   "intro": "Een webshop is net van http naar https gegaan. De pagina's laden, maar op productpagina's werkt de reviewwidget niet meer en de opmaak van het maatadvies is weg. In de broncode staan het script en het stylesheet van die onderdelen nog met een adres dat begint met http://. Afbeeldingen met http:// worden wel gewoon getoond.",
   "opdracht": {

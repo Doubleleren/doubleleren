@@ -10,6 +10,7 @@
   "matrix": [
     "5.2.7"
   ],
+  "cel": "ecom",
   "titel": "Van rode CLS naar een fixlijst voor de developer, met Claude",
   "intro": "Een webshop heeft op mobiel een CLS van 0,31 op de categoriepagina's. De developer vraagt: \"Wat moet ik precies aanpassen?\" Jij moet het vertalen naar concrete fixes.",
   "kort": "Een pagina verspringt meestal omdat de browser niet weet hoeveel ruimte iets nodig heeft. Laat de developer daarom vooraf plek vrijhouden voor afbeeldingen, banners en advertenties. Zorg ook dat lettertypes de tekst niet laten verschuiven en dat er niets boven bestaande tekst wordt ingevoegd. Controleer daarna eerst in Lighthouse, want Search Console loopt een paar weken achter.",

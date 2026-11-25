@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Meta title: unieke, beschrijvende titles in plaats van één sjabloon",
   "matrix": ["2.1.8"],
+  "cel": "leadgen",
   "titel": "300 woningpagina's met precies dezelfde title",
   "intro": "Een makelaarskantoor heeft 300 woningpagina's. Ze hebben allemaal dezelfde title: 'Makelaar Van Dijk | Wonen in Utrecht | Huizen te koop | Hypotheekadvies | Taxatie'. Een SEO-tool meldt bij elke pagina: 'Title langer dan 60 tekens'. De klant wil de titles verbeteren, maar heeft maar een paar uur developertijd.",
   "opdracht": {

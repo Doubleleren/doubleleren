@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GA4: ongewenste verwijzingen (betaalprovider als bron)",
   "matrix": ["3.1.2", "3.1.4"],
+  "cel": "ecom",
   "titel": "De betaalprovider is opeens je beste verkoopkanaal in GA4",
   "intro": "Een webshop is overgestapt naar een nieuwe betaalprovider. Klanten rekenen af op de betaalpagina van die provider en komen daarna terug op de bedankpagina van de shop. Sinds de overstap staat in GA4 bij de aankopen 'checkout.betaalprovider.nl / referral' bovenaan. Organic en Paid lijken samen 40% minder aankopen op te leveren.",
   "opdracht": {

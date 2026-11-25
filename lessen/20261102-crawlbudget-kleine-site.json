@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Crawlbudget: wanneer is een log-analyse de moeite waard?",
   "matrix": ["1.1.3", "1.1.1"],
+  "cel": "leadgen",
   "titel": "€ 3.000 voor een crawlbudget-analyse van 1.400 pagina's: doen?",
   "intro": "Een B2B-installateur heeft een site van zo'n 1.400 pagina's, die een paar keer per maand verandert. Nieuwe pagina's staan meestal binnen een dag in Google, en het rapport Pagina-indexering laat geen opvallende problemen zien. Een freelancer biedt voor € 3.000 een server log-analyse aan 'om het crawlbudget te optimaliseren'.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Schema-plugins: één samenhangende graph in plaats van losse blokken",
   "matrix": ["2.2.10", "2.2.9"],
+  "cel": "leadgen",
   "titel": "Yoast, het thema én een offerteplugin: drie keer schema op één pagina",
   "intro": "Op de WordPress-site van een installatiebedrijf staan op elke pagina drie JSON-LD-blokken: de schema-output van Yoast SEO, een Organization-blok van het thema met de bedrijfsnaam van vóór de fusie, en een los Service-blok van een offerteplugin dat nergens naar verwijst. De developer vraagt wat hij ermee moet.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "SEO × Claude",
   "onderwerp": "Van prompt naar skill: een herbruikbaar maandrapport",
   "matrix": ["4.1.2", "4.1.1"],
+  "cel": "alle",
   "titel": "Elke maand dezelfde prompt van 400 woorden: maak er een skill van",
   "intro": "Je maakt elke maand voor zes klanten een Search Console-rapport met Claude. Elke keer plak je dezelfde prompt van 400 woorden: welke cijfers, branded apart, vergelijken met vorig jaar, drie vaste blokken. Je wilt er een skill van maken. Een skill is een map met een bestand SKILL.md: bovenaan een name en een description, daaronder de instructies.",
   "opdracht": {

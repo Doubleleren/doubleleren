@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een goede opdracht schrijven: bestand, symptoom en wanneer het klaar is",
   "matrix": ["coderen-met-ai:3.1.2", "coderen-met-ai:6.1.2"],
+  "cel": "alle",
   "titel": "'Fix de export' leverde drie rondes correcties op. Wat had geholpen?",
   "intro": "Het script export_ga4.py maakt elke week een overzicht per kanaal. Sinds de klant een nieuw kanaal 'AI-assistenten' heeft, valt dat verkeer onder 'Overig'. Een collega typte in Claude Code: 'Fix de export.' Na drie rondes bijsturen klopte het pas. Volgende week moet hij iets vergelijkbaars doen in een ander script.",
   "opdracht": {

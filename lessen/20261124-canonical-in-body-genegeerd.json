@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Wat in de body mag en wat in de head moet: JSON-LD en canonical",
   "matrix": ["5.3.2", "1.3.3"],
+  "cel": "ecom",
   "titel": "Alle SEO-tags in een blok onderaan de pagina: werkt dat?",
   "intro": "Bij een klant zit de template van de head op slot. Alleen het bureau van de oorspronkelijke bouwer mag hem aanpassen. De interne developer wil daarom een 'SEO-blok' onderaan elke productpagina zetten, in de body. Daarin komen de productmarkup als JSON-LD en een link rel=canonical. Hij vraagt of dat net zo goed werkt als in de head.",
   "opdracht": {

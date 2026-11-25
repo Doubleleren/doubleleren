@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "SQL op de Search Console-export: site-tabel of URL-tabel?",
   "matrix": ["5.3.1", "4.1.2"],
+  "cel": "ecom",
   "titel": "20% meer vertoningen in BigQuery dan in Search Console: wie telt fout?",
   "intro": "Je bouwt voor een webshop een rapport op de bulkexport van Search Console in BigQuery. Een collega telt met SUM(impressions) de vertoningen van september op uit de tabel searchdata_url_impression. Hij komt ruim 20% hoger uit dan het totaal in het Prestatierapport. Op veel zoekopdrachten staan twee URL's van de webshop tegelijk in de zoekresultaten.",
   "opdracht": {

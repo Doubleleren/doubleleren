@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "robots.txt: welke user-agent-groep Googlebot volgt",
   "matrix": ["1.3.6", "1.1.8"],
+  "cel": "ecom",
   "titel": "Eén regel voor Googlebot erbij, en de sorteer-URL's worden weer gecrawld",
   "intro": "De robots.txt van een webshop heeft één groep voor `User-agent: *` met Disallow-regels voor /winkelwagen/, /account/ en `/*?sort=`. Een developer zet onderaan een nieuwe groep: `User-agent: Googlebot` met alleen `Disallow: /zoeken/`. Een week later zie je in de logs dat Googlebot volop sorteer-URL's en winkelwagenpagina's opvraagt.",
   "opdracht": {

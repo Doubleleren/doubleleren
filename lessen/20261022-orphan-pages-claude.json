@@ -8,6 +8,7 @@
     "1.2.1",
     "1.2.6"
   ],
+  "cel": "leadgen",
   "titel": "Na de migratie: laat Claude de verweesde pagina's opsporen",
   "intro": "Na een migratie van een B2B-site zijn oude pagina's blijven staan die uit het menu zijn verdwenen. Je hebt drie exports: een Screaming Frog-crawl (Internal: HTML), de URL's uit de XML-sitemap en een Search Console-export met klikken en vertoningen per pagina over 3 maanden. Een orphan page is een pagina waar geen enkele interne link naartoe gaat.",
   "opdracht": {

@@ -7,6 +7,7 @@
   "matrix": [
     "1.1.7"
   ],
+  "cel": "alle",
   "titel": "De robots.txt-tester is weg: zo controleer je robots.txt nu in GSC",
   "volgorde": "opdracht-eerst",
   "intro": "Na een livegang van een nieuwe site daalt het aantal gecrawlde pagina's opvallend. De klant vraagt: 'Kun je even in de robots.txt-tester kijken?' Die tool bestaat niet meer.",

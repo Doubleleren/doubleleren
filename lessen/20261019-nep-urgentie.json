@@ -6,6 +6,7 @@
   "matrix": [
     "7.1.3"
   ],
+  "cel": "ecom",
   "titel": "De countdown-timer die bij elke pageload opnieuw begint",
   "opdracht": {
     "soort": "open",

@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Crawlstatistieken: hoststatus en een onbereikbare robots.txt",
   "matrix": ["1.5.4", "1.3.6"],
+  "cel": "alle",
   "titel": "Het hele weekend een 503 op robots.txt: wat deed Googlebot?",
   "intro": "Een B2B-site verhuisde vrijdagmiddag naar een nieuwe server. Door een verkeerde firewallregel gaf alleen /robots.txt het hele weekend een 503 terug (de server zegt: tijdelijk niet beschikbaar). Alle andere pagina's werkten gewoon. Maandag ziet de SEO-specialist in Search Console, onder Instellingen → Crawlstatistieken, een rode hoststatus.",
   "opdracht": {

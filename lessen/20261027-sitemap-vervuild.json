@@ -8,6 +8,7 @@
     "1.4.1",
     "1.1.11"
   ],
+  "cel": "ecom",
   "titel": "Een sitemap vol redirects, noindex en lastmod 'vandaag'",
   "intro": "Een woonwinkel heeft één sitemap.xml met 9.200 URL's. Een crawl van alleen de sitemap laat zien: 1.100 URL's geven een 301, 640 hebben een noindex, 300 geven een 404 en 2.000 zijn filter-URL's met een canonical naar de categorie. Elke URL heeft als lastmod de datum van vandaag, en alle URL's hebben priority 1.0.",
   "opdracht": {

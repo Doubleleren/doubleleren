@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Faceted navigation: lege filtercombinaties en de juiste statuscode",
   "matrix": ["1.2.4", "1.1.1"],
+  "cel": "ecom",
   "titel": "9.000 filterpagina's met 'Geen producten gevonden'",
   "intro": "Een webshop in badkamermeubels laat filters op merk en kleur indexeren, omdat daar zoekvraag naar is. In de crawlstatistieken zie je dat Googlebot veel tijd kwijt is aan combinaties als /wastafels?merk=x&kleur=oranje. Die pagina's tonen 'Geen producten gevonden' en geven statuscode 200. Het gaat om ruim 9.000 adressen.",
   "opdracht": {

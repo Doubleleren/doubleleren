@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Featured snippets: wat je wel en niet kunt sturen",
   "matrix": ["2.1.6", "2.1.12"],
+  "cel": "leadgen",
   "titel": "'Zet onze uitleg in dat kader bovenaan': kan dat met code?",
   "intro": "Een hypotheekadviseur heeft een pagina over 'wat is een overbruggingskrediet'. Bij die zoekopdracht staat een concurrent bovenaan, met een stuk uitleg in een kader boven de gewone resultaten. De klant vraagt of je met een stukje code zijn eigen uitleg in dat kader kunt krijgen.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Werk van de agent controleren: bewijs vragen en de wijzigingen (diff) lezen",
   "matrix": ["coderen-met-ai:3.3.1", "coderen-met-ai:3.3.4"],
+  "cel": "alle",
   "titel": "'Klaar, alle tests slagen.' Mag je nu committen?",
   "intro": "Je liet Claude Code twintig minuten werken aan een script dat Google Ads-kosten koppelt aan landingspagina's. Je was intussen in een overleg en keek niet mee. Als je terugkomt, staat er: 'Klaar. Het script koppelt nu alle kosten en alle tests slagen.' Je wilt de wijziging committen en naar je collega sturen.",
   "opdracht": {

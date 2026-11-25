@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Labdata tegenover velddata: welke telt, en waarom verschillen ze?",
   "matrix": ["5.2.1", "4.1.1"],
+  "cel": "leadgen",
   "titel": "Lighthouse geeft 96, maar echte bezoekers wachten bijna 4 seconden",
   "intro": "Een installatiebedrijf heeft een nieuwe website. De developer draait Lighthouse op zijn laptop en krijgt een prestatiescore van 96, met een LCP van 1,2 seconde. Bovenaan PageSpeed Insights staat voor mobiel een LCP van 3,9 seconde, in het rood. De developer zegt: 'Google ziet 96, dus we zijn klaar.'",
   "opdracht": {

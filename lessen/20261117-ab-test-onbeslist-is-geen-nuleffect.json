@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "A/B-testen: een onbesliste test is geen bewijs dat er geen effect is",
   "matrix": ["7.2.2", "7.2.1"],
+  "cel": "ecom",
   "titel": "'Niet significant, dus de kortere checkout maakt niets uit'",
   "intro": "Een webshop testte drie weken een kortere checkout. Het testtool meldt: conversie +2,1% voor de nieuwe variant, niet significant. Het interval voor het verschil loopt van −6% tot +10%. De productowner concludeert: 'De kortere checkout maakt dus niets uit, we schrappen het idee.'",
   "opdracht": {

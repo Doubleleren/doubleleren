@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Claude een controle geven die slaagt of zakt",
   "matrix": ["coderen-met-ai:3.3.3", "coderen-met-ai:3.1.3"],
+  "cel": "alle",
   "titel": "'Klaar, het script werkt.' Maar de klikken kloppen niet",
   "intro": "Je laat Claude Code een script maken dat een Search Console-export per maand samenvat. Claude meldt: 'Klaar, het script werkt.' Bij het nakijken is het totaal aantal klikken 12% lager dan in Search Console. Je wilt zulke verrassingen voortaan voorkomen.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GA4: eventnamen zijn hoofdlettergevoelig",
   "matrix": ["3.1.6", "3.1.2"],
+  "cel": "leadgen",
   "titel": "40% minder leads in GA4, maar het CRM telt er evenveel",
   "intro": "Een installatiebedrijf meet offerteaanvragen in GA4 met het event generate_lead, gemarkeerd als key event. Een nieuwe developer heeft de formulieren omgebouwd. Sinds die dag telt GA4 40% minder key events. Het CRM krijgt evenveel aanvragen als altijd. In de lijst met events staat sinds die dag ook een nieuw event: Generate_Lead.",
   "opdracht": {

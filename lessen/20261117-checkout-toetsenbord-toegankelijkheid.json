@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Toegankelijkheid en conversie: de Europese toegankelijkheidswet voor webshops",
   "matrix": ["7.1.1", "7.1.3"],
+  "cel": "ecom",
   "titel": "De bestelknop werkt niet met het toetsenbord: na de lancering fixen?",
   "intro": "Een webshop in sportartikelen, met 35 medewerkers en € 8 miljoen omzet, laat een nieuwe checkout bouwen. In de test blijkt dat je de knop 'Bestelling plaatsen' niet kunt bedienen met alleen het toetsenbord. De productowner wil het na de lancering oppakken: 'Het gaat om een paar procent van de bezoekers. Toegankelijkheid is een nice-to-have.'",
   "opdracht": {

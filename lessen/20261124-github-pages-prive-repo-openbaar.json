@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Iets live zetten met GitHub Pages, en wanneer dat niet verstandig is",
   "matrix": ["coderen-met-ai:7.2.3", "coderen-met-ai:2.3.3"],
+  "cel": "alle",
   "titel": "Het klantdashboard staat in een privérepo. Kan het op GitHub Pages?",
   "intro": "Je hebt met Claude Code een klein dashboard gebouwd met de omzet en de zoekwoorden van een klant. De data staat in een JSON-bestand in dezelfde privérepository. Een collega wil het dashboard ook op zijn telefoon zien. Claude stelt voor: 'Zal ik GitHub Pages aanzetten? Dan krijg je een link.'",
   "opdracht": {

@@ -9,6 +9,7 @@
     "2.2.1",
     "3.2.3"
   ],
+  "cel": "ecom",
   "titel": "Productmarkup via een GTM-tag op 3.000 pagina's: goed idee?",
   "intro": "Een webshop draait op een oud CMS waarin je geen code in de templates kwijt kunt. Het bureau zet daarom Product-markup met prijs en voorraad via een Custom HTML-tag in Google Tag Manager op 3.000 productpagina's. De prijzen veranderen dagelijks. De Rich Results Test met de URL toont geldige Product-markup.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Article-markup: datums (dateModified) die niet kloppen met de inhoud",
   "matrix": ["2.2.7"],
+  "cel": "alle",
   "titel": "Elke nacht staat er 'Bijgewerkt op: vandaag' boven 600 artikelen",
   "intro": "Een blog over geldzaken heeft 600 artikelen. Een plugin zet elke nacht de zichtbare tekst 'Bijgewerkt op' en het veld dateModified in de Article-markup op de datum van vandaag. Inhoudelijk verandert er meestal niets. De eigenaar: 'Zo lijkt alles vers, en dat vindt Google fijn.'",
   "opdracht": {

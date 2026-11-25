@@ -7,6 +7,7 @@
   "matrix": [
     "1.4.3"
   ],
+  "cel": "alle",
   "titel": "Een news sitemap met 14.000 artikelen: wat klopt er niet?",
   "intro": "Een regionale nieuwssite heeft een news sitemap met alle 14.000 artikelen sinds 2019. Elk artikel staat erin met news:publication_date en news:title. Elke nacht maakt het CMS er een nieuw sitemapbestand naast, met de datum in de bestandsnaam. De hoofdredacteur vraagt waarom nieuwe artikelen niet sneller in Google verschijnen.",
   "opdracht": {

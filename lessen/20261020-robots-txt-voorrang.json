@@ -7,6 +7,7 @@
   "matrix": [
     "1.1.8"
   ],
+  "cel": "ecom",
   "titel": "Allow of Disallow: welke robots.txt-regel wint?",
   "intro": "Een webshop wil het accountgedeelte en sorteer-URL's uit de crawl houden, maar de inlogpagina moet bereikbaar blijven. De developer zet deze regels in robots.txt:\n\n- User-agent: *\n- Disallow: /account/\n- Disallow: /*?sort=\n- Allow: /account/inloggen",
   "opdracht": {

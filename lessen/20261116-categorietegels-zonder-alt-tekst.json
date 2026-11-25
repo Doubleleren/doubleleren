@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Interne links via afbeeldingen: de alt-tekst als linktekst",
   "matrix": ["2.1.15", "2.1.14"],
+  "cel": "ecom",
   "titel": "Zes categorietegels op de homepage, maar Google leest geen linktekst",
   "intro": "Een tuincentrum heeft op de homepage zes grote foto's als tegels. Elke foto linkt naar een categorie, zoals Kamerplanten en Tuinmeubelen. De naam van de categorie staat in de foto zelf, niet als tekst op de pagina. In de code staat alleen de afbeelding met een link eromheen. De categorieën staan niet in het hoofdmenu.",
   "opdracht": {

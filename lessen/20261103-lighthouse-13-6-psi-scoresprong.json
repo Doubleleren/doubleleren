@@ -8,6 +8,7 @@
     "5.2.1",
     "4.1.1"
   ],
+  "cel": "alle",
   "titel": "PageSpeed-score van 58 naar 74, terwijl er niets is veranderd",
   "intro": "Een klant mailt blij: de mobiele PageSpeed Insights-score van de homepage ging deze week van 58 naar 74. Het developmentteam heeft de afgelopen maand niets aan de site gedaan. De klant wil de stijging graag in het kwartaalrapport voor de directie zetten.",
   "opdracht": {

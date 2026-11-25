@@ -8,6 +8,7 @@
     "1.3.1",
     "1.3.6"
   ],
+  "cel": "ecom",
   "titel": "noindex én Disallow, en de pagina's staan nog steeds in Google",
   "intro": "Een webshop wil de interne zoekresultaatpagina's (/zoeken?q=...) uit Google houden. De developer heeft twee dingen gedaan: een meta robots-tag met noindex op die pagina's gezet, en 'Disallow: /zoeken' in robots.txt. Drie weken later staan er nog steeds zoekpagina's in Google.",
   "opdracht": {

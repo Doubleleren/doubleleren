@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Core Web Vitals: LCP verbeteren als de grote foto pas laat gevonden wordt",
   "matrix": ["5.2.3", "5.2.2"],
+  "cel": "ecom",
   "titel": "1,9 seconde wachten voordat de grote foto zelfs maar begint te laden",
   "intro": "Een modewebshop heeft bovenaan de homepage een grote sfeerfoto. Die staat als achtergrondafbeelding in een extern CSS-bestand. De LCP in de velddata is 3,6 seconde. PageSpeed Insights splitst dat op: eerste byte na 0,5 s, dan 1,9 s wachten voordat de foto begint te laden, 0,6 s laden en 0,6 s tot hij in beeld staat.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "SEO × Claude",
   "onderwerp": "Crawlverspilling opsporen in een Screaming Frog-crawl",
   "matrix": ["1.1.2", "1.1.4"],
+  "cel": "ecom",
   "titel": "3.000 producten, 48.000 URL's in de crawl: waar komen die vandaan?",
   "intro": "Een webshop heeft 3.000 producten en 150 categorieën. Een crawl met Screaming Frog stopt pas bij 48.000 HTML-URL's. Je exporteert Internal: HTML, met per URL de statuscode, of hij indexeerbaar is, de canonical en het aantal interne links ernaartoe (inlinks).",
   "opdracht": {

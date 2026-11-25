@@ -7,6 +7,7 @@
   "matrix": [
     "2.2.2"
   ],
+  "cel": "leadgen",
   "titel": "Video-markup: drie verplichte velden en de 'key moments'",
   "volgorde": "opdracht-eerst",
   "intro": "Een klant in de installatiebranche zet uitlegvideo's ('Zo ontlucht je je radiator') op de eigen site, in een embedded player. Hij wil dat die video's beter zichtbaar worden in Google, liefst met tijdstempels naar de belangrijkste stappen.",

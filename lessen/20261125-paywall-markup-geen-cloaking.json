@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Article-markup bij betaalde artikelen: paywall-markup tegen cloaking",
   "matrix": ["2.2.7", "2.2.9"],
+  "cel": "alle",
   "titel": "Hele artikel voor Google, twee alinea's voor bezoekers: cloaking?",
   "intro": "Een regionale nieuwssite zet verdiepende artikelen achter een betaalmuur. De volledige tekst staat in de HTML, maar alles na de tweede alinea staat in een blok met de class 'premium'. Dat blok wordt verborgen voor bezoekers die niet zijn ingelogd. De pagina's hebben al Article-markup. Een collega vreest dat Google dit als cloaking ziet.",
   "opdracht": {

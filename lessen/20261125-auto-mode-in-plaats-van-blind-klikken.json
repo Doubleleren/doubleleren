@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "De juiste permissiestand per klus: Manual, auto mode of bypassPermissions",
   "matrix": ["coderen-met-ai:3.2.4", "coderen-met-ai:6.2.3"],
+  "cel": "alle",
   "titel": "Na de tiende toestemmingsvraag klik je alleen nog op 'ja'",
   "intro": "Een collega laat Claude Code een rapportscript opschonen in de repo van een klanttool. Hij heeft zijn sessie op Manual gezet. Elke bewerking en elk commando vraagt nu om toestemming. Na een kwartier klikt hij op 'ja' zonder nog te lezen wat er staat. Hij overweegt bypassPermissions aan te zetten op zijn laptop.",
   "opdracht": {

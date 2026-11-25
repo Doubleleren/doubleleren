@@ -7,6 +7,7 @@
   "matrix": [
     "2.1.11"
   ],
+  "cel": "alle",
   "titel": "Waarom toont LinkedIn het logo in plaats van je blogfoto?",
   "intro": "Een klant deelt een nieuwe blog op LinkedIn. In de preview staat het logo uit de header als afbeelding en de titel is \"Home | Bedrijfsnaam\". De blog zelf heeft een mooie headerfoto en een goede H1.",
   "opdracht": {

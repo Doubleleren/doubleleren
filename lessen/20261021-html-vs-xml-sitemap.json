@@ -8,6 +8,7 @@
     "1.4.4",
     "1.4.2"
   ],
+  "cel": "ecom",
   "titel": "\"We hebben al een sitemap in de footer\": is dat genoeg?",
   "intro": "Een klant met een webshop van 30.000 producten zegt bij de kick-off: \"Een XML-sitemap hebben we niet nodig, er staat al een sitemap-pagina in de footer met links naar alle categorieën.\"",
   "opdracht": {

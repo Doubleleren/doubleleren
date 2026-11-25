@@ -7,6 +7,7 @@
   "matrix": [
     "2.2.6"
   ],
+  "cel": "alle",
   "titel": "Laat Claude ImageObject-markup schrijven voor de Licensable-badge",
   "volgorde": "opdracht-eerst",
   "intro": "Een fotograaf verkoopt licenties op zijn natuurfoto's. Zijn foto's verschijnen wel in Google Afbeeldingen, maar zonder vermelding van de maker of hoe je een licentie koopt. Andere sites gebruiken ze daardoor zonder te betalen.",

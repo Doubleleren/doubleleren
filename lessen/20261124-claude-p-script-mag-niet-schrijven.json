@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Claude zonder venster draaien (claude -p) en toestemming vooraf geven",
   "matrix": ["coderen-met-ai:5.1.2", "coderen-met-ai:6.2.3"],
+  "cel": "alle",
   "titel": "Het maandagscript draait, maar samenvatting.md komt er nooit",
   "intro": "Een collega laat elke maandag automatisch dit commando draaien: claude -p \"Vat export.csv samen per kanaal en schrijf het resultaat naar samenvatting.md\". De vlag -p laat Claude Code zonder venster werken: er kijkt niemand mee. Het script loopt af, maar samenvatting.md is nooit aangemaakt. In de uitvoer staat dat het schrijven niet is toegestaan.",
   "opdracht": {

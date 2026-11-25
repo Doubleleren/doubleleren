@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een geplande taak maken die vanzelf draait",
   "matrix": ["coderen-met-ai:5.1.1", "coderen-met-ai:2.2.2"],
+  "cel": "alle",
   "titel": "Elke maandag om 7.00 uur een rapport, ook als je laptop dicht is",
   "intro": "Je hebt in een repo een script dat de Search Console-cijfers van een klant ophaalt en samenvat. Je wilt dat Claude dit elke maandag om 7.00 uur draait en het resultaat als pull request klaarzet. Op maandagochtend zit je meestal nog in de trein, met je laptop dicht in je tas.",
   "opdracht": {

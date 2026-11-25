@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Magento: automatische redirect bij een gewijzigde URL-key",
   "matrix": ["5.1.7"],
+  "cel": "ecom",
   "titel": "40 producten hernoemd, 40 keer een 404: wat zet je in Magento aan?",
   "intro": "Een fietsenwinkel op Magento 2 (Adobe Commerce) heeft vorige week de URL-key van 40 populaire producten aangepast. Daarna gaven alle oude adressen een 404. De developer heeft ze inmiddels met de hand doorgestuurd. Volgende maand wil de redactie nog 300 producten een nieuwe URL-key geven.",
   "opdracht": {

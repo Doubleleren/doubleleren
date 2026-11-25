@@ -8,6 +8,7 @@
     "1.5.5",
     "1.1.7"
   ],
+  "cel": "alle",
   "titel": "Het hele weekend 'Disallow: /' in robots.txt: wat doe je maandag?",
   "intro": "Bij een deploy op vrijdagmiddag is het robots.txt-bestand van de testomgeving meegegaan naar de live webshop. Daarin staat Disallow: / voor alle crawlers. Maandagochtend zie je het en zet de developer het juiste bestand terug. De klant vraagt hoe Google zo snel mogelijk de herstelde versie gebruikt.",
   "opdracht": {

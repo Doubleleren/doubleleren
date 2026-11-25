@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een skill met gevolgen alleen zelf laten starten",
   "matrix": ["coderen-met-ai:4.2.2", "coderen-met-ai:4.2.1"],
+  "cel": "alle",
   "titel": "Je vroeg om een concept, de klant kreeg het rapport al",
   "intro": "Je team heeft in Claude Code een skill 'maandrapport-versturen'. Die maakt het maandrapport en mailt het naar de klant. Een collega vraagt Claude: 'Maak alvast een concept van het maandrapport voor de fietsenwinkel.' Claude herkent de taak, start de skill zelf, en de klant krijgt een half rapport in de mail.",
   "opdracht": {

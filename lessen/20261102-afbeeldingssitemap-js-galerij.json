@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Image sitemaps: wanneer ze helpen en wat erin moet",
   "matrix": ["1.4.3", "2.1.14"],
+  "cel": "alle",
   "titel": "Een fotograaf die je niet terugvindt in Google Afbeeldingen",
   "intro": "Een trouwfotograaf toont zijn portfolio in een galerij die de foto's pas met JavaScript ophaalt. De foto's staan op een CDN met een eigen domein. In Google Afbeeldingen vind je bijna niets van zijn werk terug. Zijn webbouwer heeft gehoord van een 'image sitemap', maar weet niet of die hier zin heeft.",
   "opdracht": {

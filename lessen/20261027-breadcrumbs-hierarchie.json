@@ -8,6 +8,7 @@
     "7.1.2",
     "1.2.5"
   ],
+  "cel": "ecom",
   "titel": "Het kruimelpad toont waar de bezoeker vandaan kwam: goed idee?",
   "intro": "Een fietsenwinkel test een nieuw kruimelpad boven de productpagina's. De developer heeft het zo gebouwd dat het de laatste drie pagina's toont die de bezoeker bekeek, bijvoorbeeld 'Zoekresultaten > Sale > Gazelle Ultimate'. Op mobiel loopt het pad over drie regels. De laatste kruimel, de huidige pagina, is ook een link.",
   "opdracht": {

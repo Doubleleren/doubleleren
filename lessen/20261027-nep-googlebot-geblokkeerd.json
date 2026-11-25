@@ -7,6 +7,7 @@
   "matrix": [
     "1.1.6"
   ],
+  "cel": "alle",
   "titel": "Screaming Frog als Googlebot krijgt overal een 403: paniek?",
   "intro": "Je crawlt de site van een klant met Screaming Frog, met de user-agent op Googlebot. Bijna elke URL geeft een 403. Met de standaard user-agent van Screaming Frog laadt alles normaal. De site draait achter een CDN met botbescherming. Verkeer en vertoningen in Search Console zijn stabiel.",
   "opdracht": {

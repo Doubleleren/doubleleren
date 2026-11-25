@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Keyword-kannibalisatie: twee blogs over dezelfde vraag",
   "matrix": ["1.2.3"],
+  "cel": "leadgen",
   "titel": "Twee blogs over zonneschermen kiezen, allebei op positie 14",
   "intro": "Een zonweringbedrijf heeft twee blogs: 'Zonnescherm kiezen: waar let je op?' uit 2022 en 'Het juiste zonnescherm kiezen' uit 2025. Ze beantwoorden dezelfde vraag, met grotendeels dezelfde tips. In Search Console wisselen ze elkaar af op 'zonnescherm kiezen', allebei rond positie 14. Beide blogs hebben een paar backlinks van andere sites.",
   "opdracht": {

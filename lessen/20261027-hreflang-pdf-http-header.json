@@ -8,6 +8,7 @@
     "1.3.5",
     "2.1.17"
   ],
+  "cel": "alle",
   "titel": "Handleidingen als pdf in vier talen: waar zet je de hreflang?",
   "intro": "Een fabrikant van cv-ketels heeft per model een installatiehandleiding als pdf, in het Nederlands, Frans, Duits en Engels. Iemand uit België met een Franstalige browser krijgt in Google de Nederlandse pdf te zien. De HTML-pagina's van de site hebben al correcte hreflang-tags. *hreflang* vertelt Google welke taalversies van dezelfde inhoud er zijn.",
   "opdracht": {

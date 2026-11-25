@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Rank tracker vs. Search Console: de positie van een AI Overview",
   "matrix": ["4.1.4", "4.1.2", "12.1.1"],
+  "cel": "alle",
   "titel": "Positie 8 in de rank tracker, 1,4 in Search Console",
   "intro": "Voor 'isolatiesubsidie aanvragen' meet de rank tracker van een klant elke dag organische positie 8. Search Console geeft over dezelfde periode een gemiddelde positie van 1,4 voor die zoekopdracht. De CTR in Search Console is laag. Bij die zoekopdracht staat bijna altijd een AI Overview bovenaan.",
   "opdracht": {

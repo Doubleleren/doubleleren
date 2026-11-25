@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "A/B-test plannen: de duur afronden op hele weken",
   "matrix": ["7.2.1"],
+  "cel": "ecom",
   "titel": "De steekproef is na vier dagen binnen: test klaar?",
   "intro": "Een webshop in tuinartikelen wil een nieuwe productpagina testen. De steekproefcalculator zegt dat de benodigde aantallen bezoekers er in vier dagen zijn. De marketeer wil de test daarom van maandag tot en met donderdag laten lopen. Uit GA4 blijkt dat in het weekend andere mensen kopen: vaker mobiel, met een hogere orderwaarde.",
   "opdracht": {

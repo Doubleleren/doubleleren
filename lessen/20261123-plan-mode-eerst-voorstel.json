@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "De juiste stand kiezen: eerst een plan, nog niets wijzigen",
   "matrix": ["coderen-met-ai:1.2.3", "coderen-met-ai:3.2.1"],
+  "cel": "alle",
   "titel": "Eerst zien hoe Claude het aanpakt, zonder dat er iets verandert",
   "intro": "Je wilt het rapportagescript van een klant laten ombouwen, maar je weet nog niet precies hoe. Het script wordt elke maandag gebruikt. Claude Code staat in de terminal op auto mode. Je wilt eerst zien hoe Claude het zou aanpakken, zonder dat er al bestanden veranderen.",
   "opdracht": {

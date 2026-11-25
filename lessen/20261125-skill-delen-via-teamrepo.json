@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Een skill delen met het team via de repo",
   "matrix": ["coderen-met-ai:4.2.3", "coderen-met-ai:4.5.2"],
+  "cel": "alle",
   "titel": "Je skill werkt goed. Hoe krijgt het hele team hem?",
   "intro": "Je hebt een skill 'maandrapport' gemaakt in ~/.claude/skills/maandrapport/SKILL.md. Hij zet een Search Console-export om in een vast rapport voor de klant. Drie collega's in je klantteam willen hem ook gebruiken. Jullie werken allemaal in dezelfde repo voor deze klant, en je wilt dat verbeteringen bij iedereen terechtkomen.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Mobiele formulieren: het juiste toetsenbord per veld",
   "matrix": ["7.1.1"],
+  "cel": "ecom",
   "titel": "Elke keer wisselen naar het cijferscherm in de checkout",
   "intro": "In de mobiele checkout van een webshop vullen klanten hun telefoonnummer en kaartnummer in. In sessie-opnames zie je dat ze bij die velden steeds zelf moeten wisselen naar de cijfers van hun toetsenbord. Een deel tikt een letter in plaats van een cijfer en krijgt een foutmelding.",
   "opdracht": {

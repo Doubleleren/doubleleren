@@ -7,6 +7,7 @@
   "matrix": [
     "1.5.2"
   ],
+  "cel": "alle",
   "titel": "Staging-site uit Google gehaald met Verwijderingen: klaar?",
   "intro": "Een klant heeft per ongeluk een testomgeving van 60 pagina's openbaar gezet op staging.klant.nl, en die pagina's staan nu in Google. De klant heeft het subdomein in Search Console geverifieerd en via Verwijderingen een tijdelijk verzoek ingediend voor alle URL's met dat voorvoegsel. Een week later is niets meer te vinden. De testomgeving zelf staat nog gewoon open.",
   "opdracht": {
