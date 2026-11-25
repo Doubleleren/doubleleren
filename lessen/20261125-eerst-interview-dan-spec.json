@@ -1,0 +1,41 @@
+{
+  "id": "20261125-eerst-interview-dan-spec",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een taak in vaste stappen: eerst verkennen en vastleggen, dan bouwen",
+  "matrix": ["coderen-met-ai:3.1.1", "coderen-met-ai:6.1.2"],
+  "titel": "Je wilt een tool, maar weet nog niet precies wat erin moet",
+  "intro": "Je wilt met Claude Code een kleine tool die kapotte links uit een crawl-export groepeert per paginatype. Je weet nog niet goed wat erin moet: welke statuscodes tellen, wat er met redirects gebeurt en hoe de uitkomst eruit moet zien. Je hebt een uur om er iets bruikbaars van te maken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe pak je dit het best aan?",
+    "opties": [
+      "Een lange prompt met alle eisen die je kunt bedenken, zodat Claude in één keer alles bouwt wat je misschien wilt.",
+      "Claude laten brainstormen én bouwen in dezelfde sessie, zodat alle ideeën uit het gesprek meteen in de code komen.",
+      "Een subagent het plan laten bedenken, zodat je hoofdsessie schoon blijft en het plan beter wordt dan je eigen idee.",
+      "Claude je laten interviewen tot er een SPEC.md ligt, zodat je daarna in een nieuwe sessie vanaf een helder plan bouwt."
+    ],
+    "juist": 3
+  },
+  "kern": "Weet je nog niet precies wat je wilt, laat Claude dan vragen stellen tot de eisen op papier staan. Daarna bouw je in een frisse sessie.",
+  "afleiders": [
+    "**Een lange prompt:** dan staat alles erin, lijkt het. Maar je weet zelf nog niet wat je wilt, dus je raadt naar eisen. Claude bouwt dan ook dingen die je niet nodig hebt.",
+    "**Brainstormen en bouwen in één sessie:** dat voelt snel. Maar de sessie zit dan vol met verworpen ideeën. Een nieuwe sessie begint schoon, met alleen het plan.",
+    "**Een subagent laten plannen:** dat klinkt als slim delegeren. Maar een subagent geeft geen beter antwoord dan je hoofdsessie. En de vragen over wat jij wilt, kan alleen jij beantwoorden.",
+    ""
+  ],
+  "kort": "Vergelijk het met een verbouwing. Een goede aannemer begint niet met slopen. Hij loopt eerst met je door het huis en vraagt: wat wil je hier, wat moet blijven, wat mag het kosten? Dat schrijft hij op. Pas dan komt de bouwploeg, met die lijst in de hand. Zo werkt het ook met Claude: eerst vragen en vastleggen, dan bouwen.",
+  "begrippen": [
+    { "term": "SPEC.md", "uitleg": "een bestand waarin staat wat een tool precies moet doen. Het dient later ook als checklist voor de controle." },
+    { "term": "Sessie", "uitleg": "één gesprek met Claude Code. Alles wat erin gezegd is, leest Claude bij elke volgende stap opnieuw mee." },
+    { "term": "Crawl-export", "uitleg": "een bestand uit een crawler zoals Screaming Frog, met per URL onder meer de statuscode." }
+  ],
+  "uitleg": "**Wat de documentatie aanraadt:** weet je nog niet precies wat je wilt, dan hoef je dat niet eerst zelf uit te zoeken. Vraag Claude je te interviewen, bijvoorbeeld: 'Ik wil een tool die kapotte links per paginatype groepeert, maar heb het nog niet uitgedacht. Interview me tot je de spec kunt schrijven en zet die in SPEC.md.'\n\nClaude stelt dan meerkeuzevragen over wat nog open ligt. Bijvoorbeeld: tellen 404 en 410 allebei mee, wat doe je met redirectketens, en wat valt buiten de klus?\n\n**Daarna:** start een nieuwe sessie om te bouwen vanuit SPEC.md. Zo begint het bouwen met een schone context en een vastgelegde definitie van 'klaar'.\n\n**Bonus:** SPEC.md is meteen het document waar je een reviewer later naar laat kijken.\n\n**Weet je het al precies?** Dan kun je het interview overslaan en direct een specifieke opdracht geven.",
+  "kernpunt": "Is de klus nog vaag, laat Claude je dan eerst interviewen en bouw pas daarna, in een nieuwe sessie.",
+  "toepassing": "Kies vandaag een klein idee voor een tool en typ: 'Interview me tot je de spec kunt schrijven en zet die in SPEC.md.' Beantwoord vijf vragen en lees het resultaat.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

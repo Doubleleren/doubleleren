@@ -1,0 +1,42 @@
+{
+  "id": "20261125-auto-mode-in-plaats-van-blind-klikken",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "De juiste permissiestand per klus: Manual, auto mode of bypassPermissions",
+  "matrix": ["coderen-met-ai:3.2.4", "coderen-met-ai:6.2.3"],
+  "titel": "Na de tiende toestemmingsvraag klik je alleen nog op 'ja'",
+  "intro": "Een collega laat Claude Code een rapportscript opschonen in de repo van een klanttool. Hij heeft zijn sessie op Manual gezet. Elke bewerking en elk commando vraagt nu om toestemming. Na een kwartier klikt hij op 'ja' zonder nog te lezen wat er staat. Hij overweegt bypassPermissions aan te zetten op zijn laptop.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke stand past het best bij deze klus?",
+    "opties": [
+      "bypassPermissions aanzetten, zodat Claude doorwerkt en jij na afloop alle wijzigingen in één keer nakijkt.",
+      "Overstappen op auto mode, zodat een apart model riskante acties tegenhoudt en routinewerk zonder vragen doorgaat.",
+      "In Manual blijven en de vragen sneller afhandelen, zodat jij elke actie zelf blijft goedkeuren voordat hij gebeurt.",
+      "In CLAUDE.md zetten dat Claude alleen bij gevaarlijke acties moet vragen, zodat Claude zelf bepaalt wanneer."
+    ],
+    "juist": 1
+  },
+  "kern": "Auto mode zit tussen de twee uitersten in. Routinewerk gaat door, en een apart model let op de acties waarbij je een mens zou willen laten stoppen.",
+  "afleiders": [
+    "**bypassPermissions:** achteraf nakijken klinkt efficiënt. Maar deze stand keurt alles goed wat je deny- en ask-regels niet afvangen. Volgens de documentatie hoort hij alleen in een wegwerpomgeving, niet op je laptop.",
+    "",
+    "**In Manual blijven:** elke actie zelf goedkeuren voelt veilig. Maar na tien vragen lees je niet meer wat je goedkeurt. Dan geeft de stand alleen nog schijnveiligheid.",
+    "**Een regel in CLAUDE.md:** dat lijkt een slimme middenweg. Maar wanneer om toestemming gevraagd wordt, regelt Claude Code zelf, niet het model. Een zin in CLAUDE.md verandert de stand niet."
+  ],
+  "kort": "Vergelijk het met een stagiair die bij elke kopieeropdracht komt vragen of het mag. Na een uur zeg je overal 'ja' op, ook op dingen die je had moeten tegenhouden. Geef je hem een sleutelbos van het hele gebouw, dan kan hij overal bij. De middenweg is een teamleider die meekijkt: kopiëren mag, maar bij het archief of de kluis houdt hij hem tegen. Zo werkt auto mode.",
+  "begrippen": [
+    { "term": "Permissiestand", "uitleg": "de instelling die bepaalt welke acties Claude Code zonder jouw toestemming mag uitvoeren." },
+    { "term": "Manual", "uitleg": "de stand waarin je elke bewerking en elk commando dat niet alleen leest, zelf goedkeurt." },
+    { "term": "Auto mode", "uitleg": "de stand waarin routinewerk doorgaat en een apart model riskante acties tegenhoudt voordat ze gebeuren." },
+    { "term": "bypassPermissions", "uitleg": "de stand die alles goedkeurt wat je deny- en ask-regels niet afvangen. Alleen bedoeld voor een wegwerpomgeving." }
+  ],
+  "uitleg": "**De drie standen:**\n- **Manual:** veilig, maar na de tiende vraag keur je goed zonder te lezen, en er gebeurt niets als je weg bent.\n- **bypassPermissions:** alleen zinvol in een wegwerpcontainer.\n- **Auto mode:** de standaard in nieuwe sessies in de terminal en VS Code. Een apart model controleert acties voordat ze draaien.\n\n**Wat auto mode tegenhoudt:** onder meer curl | bash, livegangen en migraties in productie, force pushes over andermans werk en gevoelige data naar externe adressen. Na drie blokkades op rij gaat de stand terug naar vragen.\n\n**Wat écht nooit mag:** zet dat in een deny-regel. Die geldt in elke stand, ook in auto mode. Auto mode is een oordeel van een model, en een oordeel kan fout zijn.\n\n**Wisselen:** met Shift+Tab loop je in een sessie langs de standen.",
+  "kernpunt": "Merk je dat je toestemmingen goedkeurt zonder te lezen, stap dan over op auto mode en zet wat nooit mag in een deny-regel.",
+  "toepassing": "Kijk vandaag in je volgende Claude Code-sessie onderin welke stand aanstaat. Staat hij op Manual zonder goede reden, druk dan Shift+Tab tot je auto mode ziet.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

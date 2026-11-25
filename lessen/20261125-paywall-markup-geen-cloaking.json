@@ -1,0 +1,42 @@
+{
+  "id": "20261125-paywall-markup-geen-cloaking",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "Article-markup bij betaalde artikelen: paywall-markup tegen cloaking",
+  "matrix": ["2.2.7", "2.2.9"],
+  "titel": "Hele artikel voor Google, twee alinea's voor bezoekers: cloaking?",
+  "intro": "Een regionale nieuwssite zet verdiepende artikelen achter een betaalmuur. De volledige tekst staat in de HTML, maar alles na de tweede alinea staat in een blok met de class 'premium'. Dat blok wordt verborgen voor bezoekers die niet zijn ingelogd. De pagina's hebben al Article-markup. Een collega vreest dat Google dit als cloaking ziet.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je?",
+    "opties": [
+      "isAccessibleForFree op false en het blok aanwijzen met hasPart en cssSelector, zodat Google de muur herkent.",
+      "Het premium-blok alleen nog aan ingelogde bezoekers tonen, zodat Google precies dezelfde korte versie ziet.",
+      "De tekst in articleBody van de markup zetten en uit de HTML halen, zodat Google hem leest maar bezoekers niet.",
+      "Alleen geverifieerde Googlebot-IP's de hele tekst geven, zodat nepbots niets kopiëren en Google wel alles ziet."
+    ],
+    "juist": 0
+  },
+  "kern": "Met paywall-markup vertel je Google welk deel achter de betaalmuur zit. Dan mag Google de volledige tekst zien zonder dat het als cloaking geldt.",
+  "afleiders": [
+    "",
+    "**Google de korte versie geven:** dat is veilig, maar dan kan Google niet meer op de betaalde tekst ranken. Google biedt juist een manier om de volledige tekst te tonen zonder dat risico.",
+    "**Tekst alleen in de markup:** structured data moet beschrijven wat op de pagina staat. Tekst die alleen in de markup staat, is precies het verschil tussen Google en bezoeker dat je wilt vermijden.",
+    "**Alleen echte Googlebot:** een IP-controle houdt nepbots buiten, maar lost het probleem niet op. Google krijgt dan nog steeds iets anders dan de bezoeker, zonder uitleg waarom."
+  ],
+  "kort": "Denk aan een museum met een gratis hal en een betaalde zaal. Een inspecteur mag overal kijken. Hangt er bij de deur een bordje 'betaalde zaal', dan snapt hij waarom gewone bezoekers daar niet zomaar in mogen. Zonder dat bordje lijkt het alsof het museum de inspecteur een andere rondleiding geeft dan de bezoekers. Paywall-markup is dat bordje voor Google.",
+  "begrippen": [
+    { "term": "Cloaking", "uitleg": "zoekmachines andere inhoud laten zien dan bezoekers om de ranking te beïnvloeden. Dat is in strijd met de spamregels van Google." },
+    { "term": "Betaalmuur", "uitleg": "een blokkade waardoor je een deel van een artikel pas leest als je abonnee bent of inlogt." },
+    { "term": "isAccessibleForFree", "uitleg": "een eigenschap in structured data die zegt of content gratis te lezen is (true) of niet (false)." },
+    { "term": "cssSelector", "uitleg": "een verwijzing naar een stuk van de pagina via de class in de HTML, bijvoorbeeld .premium." }
+  ],
+  "uitleg": "**Wat Google vraagt:**\n- zet isAccessibleForFree op false in de markup van het artikel. Dat kan bij Article, NewsArticle en andere CreativeWork-types;\n- zet een class om elk betaald deel, bijvoorbeeld .premium;\n- verwijs daarnaar met hasPart: een WebPageElement met isAccessibleForFree false en cssSelector '.premium'.\n\n**Regels:**\n- gebruik in cssSelector alleen .class-selectors;\n- nest betaalde delen niet in elkaar;\n- isAccessibleForFree is verplicht, hasPart en cssSelector worden aanbevolen.\n\n**Waarom:** volgens Google helpt deze markup om betaalde content te onderscheiden van cloaking. Wie het spambeleid overtreedt, kan uit de zoekresultaten verdwijnen.\n\n**Tip:** gebruik precies dezelfde class in de HTML en in de markup. Anders wijst de markup naar niets.",
+  "kernpunt": "Zie je bij een betaalmuur meer tekst in de HTML dan bezoekers te zien krijgen, controleer dan of er paywall-markup op staat.",
+  "toepassing": "Open vandaag bij een klant met betaalde content één artikel. Zoek in de broncode naar isAccessibleForFree en controleer of de cssSelector overeenkomt met een class op de pagina.",
+  "bron": {
+    "titel": "Paywalled content structured data | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/paywalled-content"
+  }
+}

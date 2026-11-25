@@ -1,0 +1,42 @@
+{
+  "id": "20261125-gsc-export-search-type-filter",
+  "type": "verdieping",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "SQL op de Search Console-export: filteren op zoektype (search_type)",
+  "matrix": ["5.3.1", "4.1.2"],
+  "titel": "BigQuery telt 412.000 klikken, Search Console 268.000",
+  "intro": "Een receptenplatform heeft de bulkexport van Search Console naar BigQuery aanstaan. Je query telt met SUM(clicks) de klikken van oktober op uit de tabel searchdata_site_impression: 412.000. Het Prestatierapport voor Zoekresultaten toont voor dezelfde datums 268.000 klikken. Je hebt al gecontroleerd dat je de site-tabel gebruikt en dat de datums kloppen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak, en wat doe je?",
+    "opties": [
+      "De export telt geanonimiseerde zoekopdrachten mee en het rapport niet, dus filter je is_anonymized_query = false.",
+      "data_date staat in Pacific Time en het rapport in jouw tijdzone, dus schuift er aan beide randen een dag mee.",
+      "Er staan dubbele rijen in de export door herhaalde sleutels, dus tel je met COUNT(DISTINCT query) in plaats van SUM.",
+      "De tabel bevat ook andere zoektypes, zoals Discover en Google Nieuws, dus filter je op search_type = 'web'."
+    ],
+    "juist": 3
+  },
+  "kern": "Het Prestatierapport toont standaard alleen het zoektype Web. De export bevat elk zoektype, dus zonder filter tel je verschillende kanalen bij elkaar op.",
+  "afleiders": [
+    "**Geanonimiseerde zoekopdrachten eruit:** die zitten ook in de totalen van het rapport. In de export zijn ze alleen gemarkeerd. Filter je ze weg, dan kom je juist te laag uit.",
+    "**Tijdzone:** het klinkt als een klassieke valkuil. Maar Search Console en de export gebruiken allebei Pacific Time. En één dag verschil verklaart geen 50% meer klikken.",
+    "**Dubbele rijen:** herhaalde sleutels zijn normaal in deze export. Google zegt juist dat je metrics bijna altijd optelt. COUNT(DISTINCT query) telt zoekopdrachten, geen klikken.",
+    ""
+  ],
+  "kort": "Stel, je telt alle bezoekers van een winkelcentrum en legt dat naast het aantal bonnen van één winkel. Het eerste getal is dan veel hoger. Je telt gewoon meer ingangen mee. Zo werkt het hier ook. Het rapport kijkt standaard naar één ingang: de gewone zoekresultaten. De export bevat ook afbeeldingen, video, nieuws en Discover.",
+  "begrippen": [
+    { "term": "Bulkexport", "uitleg": "de functie van Search Console die je prestatiedata elke dag automatisch naar BigQuery kopieert." },
+    { "term": "Zoektype", "uitleg": "waar een klik vandaan komt: de gewone resultaten (Web), Afbeeldingen, Video, Nieuws, Discover of Google Nieuws." },
+    { "term": "Discover", "uitleg": "de feed met artikelen die Google op mobiel toont zonder dat iemand zoekt." },
+    { "term": "WHERE", "uitleg": "het deel van een SQL-query waarmee je alleen de rijen overhoudt die aan een voorwaarde voldoen." }
+  ],
+  "uitleg": "**Wat er in de export staat:** search_type heeft zes waarden: web, image, video, news, discover en googleNews. Het Prestatierapport Zoekresultaten staat standaard op Web. Discover en Google Nieuws hebben eigen rapporten.\n\n**Zo maak je het gelijk:**\n- filter met WHERE search_type = 'web' als je het standaardrapport wilt nabouwen;\n- groepeer op search_type als je wilt laten zien waar de klikken vandaan komen. Bij een receptensite kan Discover groot zijn;\n- tel metrics altijd op met SUM, want de export bevat herhaalde sleutels.\n\n**Positie:** sum_top_position begint bij 0. De gemiddelde positie is SUM(sum_top_position) / SUM(impressions) + 1.\n\n**Discover:** onder een drempel zijn rijen geanonimiseerd (is_anonymized_discover). Dan ontbreken velden als URL en land.",
+  "kernpunt": "Bouw je een Search Console-rapport na in BigQuery, zet dan eerst dezelfde filters als in de interface, te beginnen met het zoektype.",
+  "toepassing": "Draai vandaag in de BigQuery-export van een klant een query die de klikken van vorige maand per search_type optelt, en vergelijk het web-totaal met het Prestatierapport.",
+  "bron": {
+    "titel": "Table guidelines and reference - Search Console Help",
+    "url": "https://support.google.com/webmasters/answer/12917991"
+  }
+}

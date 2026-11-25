@@ -1,0 +1,41 @@
+{
+  "id": "20261125-wekelijkse-taak-laptop-dicht",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een geplande taak maken die vanzelf draait",
+  "matrix": ["coderen-met-ai:5.1.1", "coderen-met-ai:2.2.2"],
+  "titel": "Elke maandag om 7.00 uur een rapport, ook als je laptop dicht is",
+  "intro": "Je hebt in een repo een script dat de Search Console-cijfers van een klant ophaalt en samenvat. Je wilt dat Claude dit elke maandag om 7.00 uur draait en het resultaat als pull request klaarzet. Op maandagochtend zit je meestal nog in de trein, met je laptop dicht in je tas.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke manier van plannen past hierbij?",
+    "opties": [
+      "/loop met een interval van een week in een open sessie, zodat Claude de opdracht elke week vanzelf herhaalt.",
+      "Een geplande taak in de desktop-app, zodat de taak op je eigen computer draait met toegang tot je bestanden.",
+      "Een cloud scheduled task via /schedule, zodat de taak op servers in de cloud draait, ook met je laptop dicht.",
+      "Een regel in CLAUDE.md dat het rapport elke maandag moet draaien, zodat Claude er bij de start zelf aan denkt."
+    ],
+    "juist": 2
+  },
+  "kern": "Een cloud scheduled task draait op servers van Anthropic. Je laptop hoeft dus niet aan te staan.",
+  "afleiders": [
+    "**/loop:** die herhaalt een opdracht, dus het lijkt te passen. Maar /loop werkt binnen een open sessie op je eigen computer. Is je laptop dicht, dan draait er niets.",
+    "**Desktop-taak:** handig als je lokale bestanden nodig hebt. Maar ook die draait op je eigen computer, en die zit maandagochtend dicht in je tas.",
+    "",
+    "**Regel in CLAUDE.md:** Claude leest die pas als er een sessie start. Claude kan niet zelf besluiten om te beginnen. Iets anders moet de taak starten: jij, een timer of een gebeurtenis."
+  ],
+  "kort": "Vergelijk het met een wekker. Een wekker op je telefoon gaat niet af als de telefoon uit staat. Een wekdienst van het hotel belt wel, ook als jouw telefoon uit is, want die draait ergens anders. /loop en een desktop-taak zijn de wekker op je eigen toestel. Een cloud scheduled task is de wekdienst: hij draait op een server die altijd aanstaat.",
+  "begrippen": [
+    { "term": "Cloud scheduled task", "uitleg": "een opgeslagen opdracht voor Claude Code die op een vast tijdstip in de cloud draait. Heette eerder 'routine'." },
+    { "term": "/loop", "uitleg": "een opdracht die binnen een open sessie een prompt steeds opnieuw uitvoert, bijvoorbeeld elke 15 minuten." },
+    { "term": "Pull request", "uitleg": "een voorstel om wijzigingen van een branch in de hoofdversie op te nemen, dat iemand eerst kan bekijken." }
+  ],
+  "uitleg": "**Drie manieren om te plannen:**\n- **/loop:** binnen een open sessie op je eigen computer. Elke run is een nieuwe beurt in hetzelfde gesprek, dus laat hem niet lang lopen in een lange sessie.\n- **Desktop scheduled task:** draait op je eigen computer, met toegang tot lokale bestanden.\n- **Cloud scheduled task:** draait in de cloud. Maak hem met /schedule of op claude.ai/code/routines. Je hebt een claude.ai-abonnement nodig.\n\n**Hoe een cloud-taak werkt:** bij elke run wordt de repo opnieuw opgehaald. Claude maakt branches die beginnen met claude/. Een taak kan starten op een schema, via een API-aanroep of bij een gebeurtenis op GitHub. Vaker dan eens per uur kan niet.\n\n**Veilig instellen:** bescherm main met een regel op GitHub die de taak niet kan omzeilen. Kijk de eerste paar runs mee voordat je hem vertrouwt.",
+  "kernpunt": "Moet een taak draaien terwijl je computer uit staat, kies dan een cloud scheduled task.",
+  "toepassing": "Bedenk vandaag één wekelijkse controle die je nu met de hand doet en open claude.ai/code/routines om te zien wat je daarvoor zou moeten invullen.",
+  "bron": {
+    "titel": "Automate work with scheduled tasks | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/routines"
+  }
+}

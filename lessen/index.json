@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-24T05:30:51",
+    "bijgewerkt":  "2026-11-25T05:35:47",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -6081,7 +6081,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "vormAfwijkend":  true
+                       "herzien":  "2026-11-25"
                    },
                    {
                        "id":  "20261124-hook-altijd-controlescript",
@@ -6138,6 +6138,230 @@
                        "bron":  {
                                     "titel":  "Best practices for Claude Code | Claude Code Docs",
                                     "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-auto-mode-in-plaats-van-blind-klikken",
+                       "titel":  "Na de tiende toestemmingsvraag klik je alleen nog op \u0027ja\u0027",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "De juiste permissiestand per klus: Manual, auto mode of bypassPermissions",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.2.4",
+                                      "coderen-met-ai:6.2.3"
+                                  ],
+                       "kernpunt":  "Merk je dat je toestemmingen goedkeurt zonder te lezen, stap dan over op auto mode en zet wat nooit mag in een deny-regel.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-core-update-december-aangekondigd",
+                       "titel":  "Novemberupdate klaar, decemberupdate op komst: wanneer meet je?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core updates: de novemberupdate meten terwijl de decemberupdate al is aangekondigd",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Meet een update pas met een volle week schone data erna, en noteer wat er in die week nog meer speelde.",
+                       "bron":  {
+                                    "titel":  "Google Search Central: Stay informed about Google Search ranking updates",
+                                    "url":  "https://developers.google.com/search/docs/ranking/stay-informed"
+                                },
+                       "video":  {
+                                     "titel":  "Recover From ANY Google Algorithm Update",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-eerst-interview-dan-spec",
+                       "titel":  "Je wilt een tool, maar weet nog niet precies wat erin moet",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een taak in vaste stappen: eerst verkennen en vastleggen, dan bouwen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.1.1",
+                                      "coderen-met-ai:6.1.2"
+                                  ],
+                       "kernpunt":  "Is de klus nog vaag, laat Claude je dan eerst interviewen en bouw pas daarna, in een nieuwe sessie.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-ga4-funnel-direct-of-indirect",
+                       "titel":  "Volgens de funnel legt 0,4% iets in het mandje. Klopt dat?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Funnelverkenning in GA4: direct of indirect gevolgd door",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.1.3",
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Is een funnelstap onverwacht klein, kijk dan eerst of hij op \u0027direct gevolgd door\u0027 staat.",
+                       "bron":  {
+                                    "titel":  "[GA4] Funnel exploration - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/9327974"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-gsc-export-search-type-filter",
+                       "titel":  "BigQuery telt 412.000 klikken, Search Console 268.000",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "SQL op de Search Console-export: filteren op zoektype (search_type)",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "5.3.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Bouw je een Search Console-rapport na in BigQuery, zet dan eerst dezelfde filters als in de interface, te beginnen met het zoektype.",
+                       "bron":  {
+                                    "titel":  "Table guidelines and reference - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/12917991"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-klaar-melding-bewijs-en-diff",
+                       "titel":  "\u0027Klaar, alle tests slagen.\u0027 Mag je nu committen?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Werk van de agent controleren: bewijs vragen en de wijzigingen (diff) lezen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.3.1",
+                                      "coderen-met-ai:3.3.4"
+                                  ],
+                       "kernpunt":  "Was je er niet bij, vraag dan om de uitvoer van de check en lees de diff voordat je commit.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-paywall-markup-geen-cloaking",
+                       "titel":  "Hele artikel voor Google, twee alinea\u0027s voor bezoekers: cloaking?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Article-markup bij betaalde artikelen: paywall-markup tegen cloaking",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "2.2.7",
+                                      "2.2.9"
+                                  ],
+                       "kernpunt":  "Zie je bij een betaalmuur meer tekst in de HTML dan bezoekers te zien krijgen, controleer dan of er paywall-markup op staat.",
+                       "bron":  {
+                                    "titel":  "Paywalled content structured data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/paywalled-content"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-reviewer-subagent-alleen-lezen",
+                       "titel":  "Een reviewer die alleen mag kijken, niet mag verbouwen",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een subagent maken met beperkte tools en een duidelijk resultaat",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.3.2",
+                                      "coderen-met-ai:3.3.2"
+                                  ],
+                       "kernpunt":  "Mag een subagent iets niet doen, haal dan de tool weg in plaats van het in de prompt te verbieden.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-shopify-robots-na-themawissel",
+                       "titel":  "Nieuw Shopify-thema live, en je robots.txt-regel is weg",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Shopify: robots.txt.liquid na een themawissel",
+                       "type":  "herhaling",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.1.6",
+                                      "1.1.8"
+                                  ],
+                       "kernpunt":  "Wisselt een Shopify-klant van thema, vergelijk dan /robots.txt vóór en na de livegang.",
+                       "bron":  {
+                                    "titel":  "Editing robots.txt.liquid | Shopify Help Center",
+                                    "url":  "https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-skill-delen-via-teamrepo",
+                       "titel":  "Je skill werkt goed. Hoe krijgt het hele team hem?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een skill delen met het team via de repo",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.2.3",
+                                      "coderen-met-ai:4.5.2"
+                                  ],
+                       "kernpunt":  "Deel je een skill via de repo, haal dan je persoonlijke kopie met dezelfde naam weg.",
+                       "bron":  {
+                                    "titel":  "Extend Claude with skills | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/skills"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator"
+                   },
+                   {
+                       "id":  "20261125-wekelijkse-taak-laptop-dicht",
+                       "titel":  "Elke maandag om 7.00 uur een rapport, ook als je laptop dicht is",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een geplande taak maken die vanzelf draait",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:5.1.1",
+                                      "coderen-met-ai:2.2.2"
+                                  ],
+                       "kernpunt":  "Moet een taak draaien terwijl je computer uit staat, kies dan een cloud scheduled task.",
+                       "bron":  {
+                                    "titel":  "Automate work with scheduled tasks | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/routines"
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",

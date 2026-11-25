@@ -13,7 +13,7 @@
     "opties": [
       "Zet in robots.txt een groep voor Google-Agent met Allow: /, zodat de firewall ziet dat dit verkeer welkom is en het doorlaat.",
       "Laat alles door met 'Google-Agent' in de user-agent, zodat echte verzoeken nooit meer een CAPTCHA krijgen, ook niet op de winkelwagen.",
-      "Maak een regel die Google-Agent eerst controleert op user-agent en IP-lijst, en die vóór de brede blokkades staat, zonder CAPTCHA.",
+      "Controleer user-agent én IP-lijst in een regel vóór de brede blokkades, zodat echte Google-Agent-verzoeken zonder CAPTCHA doorkomen.",
       "Geef Google-Agent een strengere limiet per IP-adres, zodat één gebruiker van de agent de server niet kan overbelasten met verzoeken."
     ],
     "juist": 2
@@ -38,5 +38,7 @@
   "bron": {
     "titel": "Allow Google-Agent traffic | Google Crawling Infrastructure",
     "url": "https://developers.google.com/crawling/docs/crawlers-fetchers/allow-google-agent"
-  }
+  },
+  "herzien": "2026-11-25",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

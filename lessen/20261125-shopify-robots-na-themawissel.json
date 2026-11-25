@@ -1,0 +1,41 @@
+{
+  "id": "20261125-shopify-robots-na-themawissel",
+  "type": "herhaling",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Shopify: robots.txt.liquid na een themawissel",
+  "matrix": ["5.1.6", "1.1.8"],
+  "titel": "Nieuw Shopify-thema live, en je robots.txt-regel is weg",
+  "intro": "Een Shopify-winkel had in robots.txt.liquid één extra regel: Disallow: /pages/actie-. Vorige week heeft een bureau een nieuw thema geplaatst. Ze downloadden het als zip en uploadden het via Online Store → Themes. Sinds dat thema live staat, ontbreekt de extra regel in /robots.txt. De standaardregels van Shopify staan er nog wel.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de oorzaak, en wat doe je?",
+    "opties": [
+      "Shopify zet robots.txt na elke themawissel terug naar de standaard, dus regel je extra regels voortaan via Cloudflare.",
+      "Bij uploaden via Themes gaat robots.txt.liquid niet mee, dus maak je de template opnieuw aan in het nieuwe thema.",
+      "Google bewaart robots.txt tot 24 uur in de cache, dus staat de regel er nog, alleen nog niet zichtbaar in /robots.txt.",
+      "Het nieuwe thema heeft een eigen robots.txt die voorrang krijgt, dus verwijder je die, zodat de oude regel terugkomt."
+    ],
+    "juist": 1
+  },
+  "kern": "robots.txt.liquid hoort bij het thema. Komt een thema binnen via een upload in de admin, dan moet je de template daarin opnieuw maken.",
+  "afleiders": [
+    "**Via Cloudflare:** de regel is weg, dus een plek buiten het thema lijkt veiliger. Maar Shopify vraagt juist om zulke workarounds te verwijderen. Twee plekken die robots.txt bepalen, geven verwarring.",
+    "",
+    "**Cache van Google:** Google bewaart robots.txt inderdaad een tijd. Maar /robots.txt in je browser toont het actuele bestand. Ontbreekt de regel daar, dan is hij echt weg.",
+    "**Eigen robots.txt in het thema:** dan zou je andere regels zien, niet precies de standaard. En de oude regel stond in het oude thema, dus die komt niet vanzelf terug."
+  ],
+  "kort": "Denk aan een verhuizing waarbij alle meubels meegaan, maar het briefje met afspraken op de oude koelkast blijft hangen. In het nieuwe huis mis je opeens die ene afspraak. Bij Shopify hangt jouw robots.txt-regel aan het thema, net als dat briefje aan de koelkast. Plaats je een nieuw thema via een upload, dan gaat het briefje niet mee. Je moet het zelf opnieuw ophangen.",
+  "begrippen": [
+    { "term": "robots.txt.liquid", "uitleg": "de template in een Shopify-thema waarmee je regels toevoegt aan de robots.txt van de winkel." },
+    { "term": "Thema", "uitleg": "het ontwerp en de templates van een Shopify-winkel. Een winkel heeft één gepubliceerd thema." },
+    { "term": "Disallow", "uitleg": "een regel in robots.txt die zoekmachines vraagt bepaalde adressen niet op te halen." }
+  ],
+  "uitleg": "**Wat Shopify zegt:** robots.txt.liquid is een template in je gepubliceerde thema. Upload je een thema via het onderdeel Themes in de admin, dan wordt die template niet meegenomen. Werk je met ThemeKit of de command line, dan blijft hij wel bewaard.\n\n**Zo herstel je het:**\n- open in het nieuwe thema Edit code → Add a new template → robots;\n- voeg de regel met Liquid toe aan de standaardregels, in plaats van alles te vervangen door vaste tekst;\n- controleer /robots.txt in de browser en daarna het robots.txt-rapport in Search Console.\n\n**Voorkomen:** zet in je checklist voor een themawissel dat je robots.txt vóór en na vergelijkt. Doe dat ook voor andere aanpassingen in het thema, zoals structured data.\n\n**Let op:** Shopify Support helpt niet bij dit bestand. Een fout kan volgens Shopify al het verkeer kosten.",
+  "kernpunt": "Wisselt een Shopify-klant van thema, vergelijk dan /robots.txt vóór en na de livegang.",
+  "toepassing": "Open vandaag bij een Shopify-klant /robots.txt en noteer welke regels afwijken van de standaard. Zet die lijst in het klantdossier, zodat je ze na een themawissel kunt terugzetten.",
+  "bron": {
+    "titel": "Editing robots.txt.liquid | Shopify Help Center",
+    "url": "https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt"
+  }
+}

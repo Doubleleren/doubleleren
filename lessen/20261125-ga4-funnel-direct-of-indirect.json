@@ -1,0 +1,41 @@
+{
+  "id": "20261125-ga4-funnel-direct-of-indirect",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "Analytics",
+  "onderwerp": "Funnelverkenning in GA4: direct of indirect gevolgd door",
+  "matrix": ["3.1.3", "7.1.1"],
+  "titel": "Volgens de funnel legt 0,4% iets in het mandje. Klopt dat?",
+  "intro": "Een webshop in sportschoenen wil weten hoeveel bezoekers iets in het winkelmandje leggen nadat ze een productpagina bekeken. Je collega maakt in GA4 een funnelverkenning over vorige maand: stap 1 view_item, stap 2 add_to_cart. Daar komt 0,4% uit. Volgens de e-commercerapporten ligt die verhouding rond de 8%.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat verklaart het grote verschil het best?",
+    "opties": [
+      "De funnel is gesloten, dus mist hij bezoekers die via een advertentie meteen op een productpagina landen.",
+      "Verkenningen gebruiken steekproeven, dus is 0,4% een schatting die met meer data vanzelf richting 8% schuift.",
+      "Stap 2 staat op 'direct gevolgd door', dus telt alleen wie zonder enige tussenactie meteen iets toevoegt.",
+      "add_to_cart wordt in verkenningen pas na 48 uur verwerkt, dus ontbreken de meeste toevoegingen nog in de funnel."
+    ],
+    "juist": 2
+  },
+  "kern": "Bij 'direct gevolgd door' moet de volgende stap meteen na de vorige komen. Zit er een andere actie tussen, zoals scrollen, dan valt de bezoeker al uit de funnel.",
+  "afleiders": [
+    "**Gesloten funnel:** dat speelt wel bij mensen die halverwege instappen. Maar wie via een advertentie op een productpagina landt, triggert view_item en zit dus gewoon in stap 1.",
+    "**Steekproeven:** bij veel data kan GA4 in een verkenning een steekproef nemen. Maar die schat het hele getal. Hij maakt het niet twintig keer kleiner.",
+    "",
+    "**Verwerkingstijd:** nieuwe data in GA4 kan even op zich laten wachten. Maar het gaat om vorige maand, en die data is allang verwerkt."
+  ],
+  "kort": "Vergelijk het met een sollicitant die je pas meetelt als hij direct na het gesprek tekent, zonder eerst koffie te halen. Bijna niemand haalt dat, terwijl veel mensen wel tekenen. Zo werkt 'direct gevolgd door'. Er mag niets tussen de twee stappen zitten. In een webshop klikken mensen eerst rond, bekijken ze maten of scrollen ze. Dan telt hun toevoeging niet meer mee.",
+  "begrippen": [
+    { "term": "Funnelverkenning", "uitleg": "een rapport in GA4 dat laat zien hoeveel gebruikers elke stap van een route halen, bijvoorbeeld van product naar winkelmandje." },
+    { "term": "Event", "uitleg": "een actie die GA4 meet, zoals een productpagina bekijken (view_item) of iets in het mandje leggen (add_to_cart)." },
+    { "term": "Direct gevolgd door", "uitleg": "een instelling per funnelstap: de stap telt alleen als hij meteen na de vorige stap komt." }
+  ],
+  "uitleg": "**De instelling:** vanaf stap 2 kies je per stap tussen 'indirect gevolgd door' en 'direct gevolgd door'.\n- **Indirect:** er mogen andere acties tussen de stappen zitten.\n- **Direct:** de stap moet meteen na de vorige komen.\n\n**Wanneer kies je 'direct'?** Alleen als de tweede stap echt meteen moet volgen, bijvoorbeeld een bedankscherm na het versturen van een formulier. Voor winkelgedrag past 'indirect' bijna altijd beter.\n\n**Nog een knop:** met 'Binnen' stel je een maximale tijd tussen twee stappen in. Ook dat maakt een funnel strenger.\n\n**Tip:** zet in je rapport bij elke funnel welke instellingen aanstaan: open of gesloten, direct of indirect, en een eventuele tijdslimiet. Anders vergelijkt de klant getallen die niet te vergelijken zijn.",
+  "kernpunt": "Is een funnelstap onverwacht klein, kijk dan eerst of hij op 'direct gevolgd door' staat.",
+  "toepassing": "Open vandaag een funnelverkenning van een klant en controleer bij elke stap of er 'direct' of 'indirect gevolgd door' staat. Noteer het in je rapport.",
+  "bron": {
+    "titel": "[GA4] Funnel exploration - Analytics Help",
+    "url": "https://support.google.com/analytics/answer/9327974"
+  }
+}
