@@ -1,0 +1,43 @@
+{
+  "id": "20261126-canonical-ads-landingspagina",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "rel=canonical voor een landingspagina van Google Ads",
+  "matrix": ["1.3.3"],
+  "cel": "leadgen",
+  "titel": "De Ads-landingspagina verdringt de dienstpagina in Google",
+  "intro": "Een installateur van warmtepompen stuurt Google Ads naar /lp/warmtepomp-offerte/. Die pagina is een kopie van de dienstpagina /diensten/warmtepomp/, zonder menu en met een korter formulier. Sinds een maand staat bij 'warmtepomp laten installeren' de /lp/-pagina in de gewone zoekresultaten, niet de dienstpagina. De Ads-specialist wil de /lp/-pagina houden.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je, zodat de dienstpagina weer in de gewone zoekresultaten komt zonder dat de advertenties stukgaan?",
+    "opties": [
+      "Zet /lp/ in robots.txt op Disallow, zodat Google de kopie niet meer leest en alleen de dienstpagina overhoudt.",
+      "Zet op de /lp/-pagina een canonical naar de dienstpagina, zodat Google de signalen bundelt bij de dienstpagina.",
+      "Stuur /lp/ met een 301 door naar de dienstpagina, zodat er nog maar één URL over is die Google kan tonen.",
+      "Vraag de /lp/-URL weg via Verwijderingen in Search Console, zodat Google hem niet meer in de resultaten zet."
+    ],
+    "juist": 1
+  },
+  "kern": "De /lp/-pagina is een kopie. Met een canonical vertel je Google welke versie hij moet tonen, terwijl bezoekers van de advertentie gewoon op /lp/ blijven landen.",
+  "afleiders": [
+    "**Robots.txt:** dat voelt als de kopie wegzetten. Maar dan kan Google de pagina niet meer lezen, ook de canonical niet. De URL kan dan zelfs zonder inhoud in de resultaten blijven staan.",
+    "",
+    "**301-redirect:** zo blijft er inderdaad één URL over. Maar dan komt ook de bezoeker van de advertentie op de dienstpagina terecht, en de Ads-specialist wilde zijn eigen pagina houden.",
+    "**Verwijderingen:** dat werkt snel, maar het is tijdelijk, ongeveer zes maanden. Google zegt zelf dat je die tool niet gebruikt om de juiste versie te laten kiezen."
+  ],
+  "kort": "Denk aan een bedrijf met een hoofdingang en een zij-ingang naar dezelfde hal. Je wilt dat de post op het hoofdadres binnenkomt, maar de zij-ingang blijft open voor wie daar parkeert. Een canonical is het bordje 'post graag naar het hoofdadres'. Google ziet twee bijna gelijke pagina's en kiest er zelf één. Met het bordje kiest hij de pagina die jij wilt, en gaan de links en signalen ook daarheen.",
+  "begrippen": [
+    { "term": "Canonical", "uitleg": "een tag in de code van een pagina die zegt: van deze inhoud is die andere URL de hoofdversie. Google neemt dat sterk mee, maar beslist zelf." },
+    { "term": "Gewone (organische) zoekresultaten", "uitleg": "de resultaten in Google waar niet voor betaald is, onder of naast de advertenties." },
+    { "term": "301-redirect", "uitleg": "een permanente doorverwijzing: wie de oude URL opvraagt, komt automatisch op een andere URL uit." },
+    { "term": "Verwijderingen", "uitleg": "een tool in Search Console die een URL tijdelijk uit de zoekresultaten van Google haalt." }
+  ],
+  "uitleg": "**Hoe Google kiest.** Google groepeert pagina's met (bijna) dezelfde hoofdinhoud en kiest er één als canonieke URL. Die toont hij in de resultaten; de rest crawlt hij minder vaak. Een korter formulier of een ontbrekend menu maakt de /lp/-pagina geen andere pagina.\n\n**Signalen en hun gewicht** volgens Google:\n- 301-redirect: sterk signaal;\n- rel=canonical: sterk signaal;\n- opname in de sitemap: zwak signaal.\nZe versterken elkaar. Zet de dienstpagina dus ook in de sitemap en link intern alleen naar de dienstpagina.\n\n**Wat Google afraadt** om de canonieke versie te sturen: robots.txt, de tool Verwijderingen, noindex binnen één site, en verschillende canonieke URL's via verschillende methodes.\n\n**Controle.** Bekijk na een paar weken in de URL-inspectie de 'door Google geselecteerde canonieke URL' van de /lp/-pagina. Kiest Google nog steeds /lp/, kijk dan of interne links of de sitemap nog naar /lp/ wijzen.",
+  "kernpunt": "Moet een kopie blijven bestaan, gebruik dan een canonical. Mag hij weg, gebruik dan een 301.",
+  "toepassing": "Zoek vandaag bij één leadgen-klant met Google Ads de landingspagina's op. Controleer met de URL-inspectie welke canonieke URL Google voor één ervan gekozen heeft.",
+  "bron": {
+    "titel": "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+  }
+}

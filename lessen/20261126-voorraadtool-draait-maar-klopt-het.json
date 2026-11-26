@@ -1,0 +1,41 @@
+{
+  "id": "20261126-voorraadtool-draait-maar-klopt-het",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Werk van AI beoordelen: draaien is nog geen kloppen",
+  "matrix": ["coderen-met-ai:6.1.3"],
+  "cel": "ecom",
+  "titel": "De voorraadtool draait in drie seconden. Kun je hem opleveren?",
+  "intro": "Voor een webshop in fietsonderdelen bouwde je met Claude Code een tool. Die haalt elke ochtend de producten met weinig voorraad uit de Shopify-export en zet ze op een pagina. Bij de demo draait alles in drie seconden en staan er 38 producten op de lijst. Morgen wil de inkoper hem gaan gebruiken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je voordat je de tool oplevert?",
+    "opties": [
+      "Opleveren, want het script draait zonder foutmeldingen en de lijst ziet er logisch uit, dus fouten waren al opgevallen.",
+      "Een paar producten naast de export leggen en checken of varianten goed tellen, want draaien zegt nog niet dat het klopt.",
+      "Dezelfde sessie vragen of alles goed is, want Claude kent de code het best en weet dus zelf waar nog fouten zitten.",
+      "Claude de code netter laten maken met uitleg bij elke regel, want leesbare code is de belangrijkste maatstaf voor kwaliteit."
+    ],
+    "juist": 1
+  },
+  "kern": "Dat een script draait, is het begin van je beoordeling, niet het einde. Je controleert of de uitkomst klopt en past bij hoe de klant werkt.",
+  "afleiders": [
+    "**Geen foutmeldingen:** dat voelt als een goedkeuring. Maar een script kan foutloos draaien en toch verkeerd tellen. Een foutmelding komt alleen als het script vastloopt, niet als de uitkomst niet klopt.",
+    "",
+    "**Dezelfde sessie vragen:** Claude kent de code inderdaad. Maar het kijkt dan met dezelfde aannames waarmee het de code schreef. Een verkeerde aanname over varianten ziet het zo niet terug.",
+    "**Nettere code:** leesbaarheid telt mee. Maar het is maar één kant van kwaliteit. Een nette tool die de verkeerde producten toont, helpt de inkoper niet."
+  ],
+  "kort": "Vergelijk het met een nieuwe kassa in een winkel. Dat hij aangaat en bonnetjes print, zegt nog niet dat de prijzen kloppen. Je rekent een paar bonnetjes na en kijkt of hij kortingen geeft zoals de winkel dat doet. Bij een tool van Claude is het net zo: draaien is pas de eerste toets.",
+  "begrippen": [
+    { "term": "Shopify-export", "uitleg": "een bestand uit de webshop met alle producten en hun gegevens, zoals prijs en voorraad." },
+    { "term": "Variant", "uitleg": "een uitvoering van één product, zoals een maat of kleur, vaak met een eigen voorraad." }
+  ],
+  "uitleg": "In de cursus AI Fluency for builders heet dit **Discernment** (onderscheiden): AI-werk kritisch beoordelen. 'Het werkt' is daarbij niet de lat. De cursus noemt vijf invalshoeken. Voor deze tool kun je ze zo invullen:\n\n- **Juistheid:** klopt de lijst met de export? Neem drie producten, waaronder een randgeval met voorraad precies op de grens.\n- **Kwaliteit:** kan een collega het script over drie maanden nog aanpassen?\n- **Passendheid:** telt de klant voorraad per variant of per product? Welke grens gebruikt de inkoper?\n- **Ervaring:** begrijpt de inkoper de pagina zonder uitleg?\n- **Verantwoordelijkheid:** wie merkt het als de export verandert, en staan er gegevens op die niet gedeeld mogen worden?\n\nBegin bij juistheid en passendheid. Daar zitten de fouten die een demo niet laat zien.",
+  "kernpunt": "'Het draait' is geen oordeel. Leg een paar uitkomsten naast de bron voordat je iets oplevert.",
+  "toepassing": "Pak vandaag een script of tool die Claude voor je maakte. Leg drie uitkomsten naast de bron, waaronder één randgeval, en noteer of ze kloppen.",
+  "bron": {
+    "titel": "AI Fluency for builders | Claude Academy",
+    "url": "https://academy.claude.com/courses/ai-fluency-for-builders"
+  }
+}

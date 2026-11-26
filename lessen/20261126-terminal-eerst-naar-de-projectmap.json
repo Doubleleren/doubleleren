@@ -1,0 +1,42 @@
+{
+  "id": "20261126-terminal-eerst-naar-de-projectmap",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "In de terminal naar een map gaan en kijken wat erin staat",
+  "matrix": ["coderen-met-ai:2.1.1"],
+  "cel": "ecom",
+  "titel": "'Ik kan feed.csv niet vinden', zegt Claude. Het bestand bestaat echt",
+  "intro": "Je hebt een map 'feed-controle' met de productfeed van een webshop. Je opent de terminal, typt claude en vraagt: 'Controleer feed.csv op lege prijzen.' Claude antwoordt dat het geen feed.csv kan vinden. Voor je cursor stond alleen je gebruikersmap, zoals C:\\Users\\naam>.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je?",
+    "opties": [
+      "Claude vragen je hele computer te doorzoeken naar feed.csv, want het kan veel sneller zoeken dan jij zelf met de hand.",
+      "Het bestand naar je bureaublad slepen en het opnieuw vragen, want Claude kijkt altijd eerst op het bureaublad.",
+      "Claude afsluiten, met cd naar de map feed-controle gaan, met ls kijken of feed.csv er staat en dan claude starten.",
+      "Claude Code opnieuw installeren, want het hoort elk bestand op je computer te zien en dat lukt nu kennelijk niet."
+    ],
+    "juist": 2
+  },
+  "kern": "Claude Code werkt in de map waarin je het start. Start je in de projectmap, dan zoekt het op de goede plek en blijft het bij dat project.",
+  "afleiders": [
+    "**Hele computer doorzoeken:** dat lijkt handig. Maar dan gaat Claude door veel meer dan dit project, en dat duurt lang. Start liever meteen op de goede plek.",
+    "**Bureaublad:** dat klinkt als een vaste plek. Maar Claude kijkt niet eerst op je bureaublad. Het kijkt in de map waarin je het startte.",
+    "",
+    "**Opnieuw installeren:** de installatie werkt prima. Claude kijkt bewust in de map waar je het startte en in de mappen daaronder. Andere plekken alleen als jij dat toestaat."
+  ],
+  "kort": "Vergelijk het met een schoonmaker die je in één kamer zet. Daar pakt hij alles op wat er ligt. Wat in een andere kamer staat, ziet hij niet, en daar hoort hij ook niet te komen. De map waarin je claude start, is die kamer. Zet hem dus eerst in de goede kamer.",
+  "begrippen": [
+    { "term": "Terminal", "uitleg": "een venster waarin je de computer opdrachten geeft door ze te typen. Op Windows is dat meestal PowerShell." },
+    { "term": "cd", "uitleg": "het commando om naar een andere map te gaan, zoals cd Documents\\feed-controle. Met cd .. ga je een map terug." },
+    { "term": "ls", "uitleg": "het commando dat laat zien welke bestanden in de huidige map staan. Werkt op Mac en in PowerShell. In de oude Windows-opdrachtprompt heet het dir." }
+  ],
+  "uitleg": "**Waar ben ik?** De regel voor je cursor laat de huidige map zien. Typ pwd om het volledige pad te zien.\n\n**Naar een map gaan:**\n- cd Documents gaat één map dieper\n- cd .. gaat één map terug\n- typ cd en een spatie en sleep de map uit Finder of Verkenner naar het venster: het hele pad staat er dan\n- met Tab vult de terminal een begonnen mapnaam aan\n\n**Kijken wat er staat:** ls laat de bestanden zien. Staat feed.csv er niet bij, dan ben je in de verkeerde map of heet het bestand anders.\n\n**Waarom het uitmaakt:** volgens de documentatie krijgt Claude Code bij het starten toegang tot de bestanden in die map en de mappen daaronder. Bestanden elders alleen met jouw toestemming. Start je in je gebruikersmap, dan ligt bijna alles van je computer binnen bereik. Start je in de projectmap, dan blijft Claude bij het project en leest het ook de CLAUDE.md van dat project.",
+  "kernpunt": "Eerst cd naar de projectmap, dan ls om te checken, dan pas claude.",
+  "toepassing": "Open vandaag de terminal, ga met cd naar een projectmap, bekijk met ls wat erin staat en start daar claude. Vraag Claude welke bestanden het ziet.",
+  "bron": {
+    "titel": "How Claude Code works | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/how-claude-code-works"
+  }
+}

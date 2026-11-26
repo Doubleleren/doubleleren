@@ -1,0 +1,42 @@
+{
+  "id": "20261126-maandagcheck-eerst-samen-dan-inplannen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een controle automatiseren die je nu met de hand doet",
+  "matrix": ["coderen-met-ai:7.1.2", "coderen-met-ai:5.1.1"],
+  "cel": "ecom",
+  "titel": "Elke maandag drie kwartier afgekeurde producten tellen: automatiseren?",
+  "intro": "Elke maandag download je voor een webshop in sportkleding een export uit Merchant Center. Je filtert de afgekeurde producten, groepeert ze per reden en mailt de lijst naar de klant. Dat kost je drie kwartier. Je wilt dit met Claude Code automatiseren, zodat het straks vanzelf gaat.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste eerste stap?",
+    "opties": [
+      "In een sessie je stappen uitleggen, Claude er een script van laten maken en de uitkomst naast je lijst van vorige week leggen.",
+      "Meteen een geplande taak maken met 'controleer Merchant Center', want Claude weet zelf wel welke stappen daarvoor nodig zijn.",
+      "Elke maandag de export in Claude plakken en om de lijst vragen, want dan hoef je geen script te laten bouwen of te onderhouden.",
+      "Claude vragen het hele Merchant Center-account te koppelen, want met meer gegevens maakt het vanzelf een betere rapportage."
+    ],
+    "juist": 0
+  },
+  "kern": "Automatiseer pas wat je één keer samen goed hebt gekregen. Leg de eerste uitkomst naast je eigen lijst en plan het daarna in.",
+  "afleiders": [
+    "",
+    "**Meteen inplannen:** dat lijkt de snelste route. Maar een geplande taak draait zonder jou en kan niets vragen. Met een vage opdracht weet je niet of de lijst klopt.",
+    "**Elke week plakken:** dat werkt wel, maar het blijft handwerk. Je bespaart weinig tijd en de uitkomst kan elke week net iets anders zijn.",
+    "**Alles koppelen:** meer gegevens voelen als meer kwaliteit. Maar de klus wordt er niet duidelijker van. Claude weet nog steeds niet hoe jouw lijst eruit moet zien."
+  ],
+  "kort": "Vergelijk het met een nieuwe collega die jouw maandagklus overneemt. De eerste keer doe je het samen. Daarna doet hij het zelf en controleer jij. Pas als zijn lijst gelijk is aan de jouwe, laat je hem alleen. Een geplande taak is die collega op de dagen dat jij er niet bent: hij kan je niets meer vragen.",
+  "begrippen": [
+    { "term": "Merchant Center", "uitleg": "de omgeving van Google waarin een webshop zijn productgegevens beheert voor Google Shopping." },
+    { "term": "Script", "uitleg": "een klein programma dat vaste stappen uitvoert, zoals filteren en groeperen." },
+    { "term": "Geplande taak", "uitleg": "een opdracht die Claude Code vanzelf uitvoert op een vast moment, bijvoorbeeld elke maandag om 8.00 uur." }
+  ],
+  "uitleg": "**Werk in drie stappen:**\n- **Samen doen:** beschrijf in een sessie wat je nu met de hand doet: welke export, welke kolommen, hoe je groepeert en hoe de mail eruitziet. Geef de export van vorige week mee.\n- **Vergelijken:** laat Claude er een script van maken en leg de uitkomst naast je eigen lijst. Verschillen zijn leerzaam. Vaak zit er een regel in je hoofd die je niet had genoemd.\n- **Inplannen:** pas als de uitkomst klopt, maak je er een geplande taak van.\n\n**Waar draait het?** Volgens de documentatie draait een geplande taak in de cloud ook als je computer uit staat. Een geplande taak in de desktop-app kan bij je lokale bestanden. GitHub Actions past als de klus bij een repository hoort.\n\n**Schrijf de opdracht voor de taak volledig uit.** De documentatie zegt: wees expliciet over wanneer het gelukt is en wat er met de uitkomst moet gebeuren. De taak draait zelfstandig en kan geen vragen stellen.",
+  "kernpunt": "Plan pas in wat je één keer samen goed hebt gekregen. Een geplande taak kan niets meer vragen.",
+  "toepassing": "Kies vandaag een controle die je elke week met de hand doet voor een klant. Schrijf de stappen op zoals je ze aan een nieuwe collega zou uitleggen. Dat is de opdracht voor je eerste sessie.",
+  "bron": {
+    "titel": "Common workflows | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/common-workflows"
+  }
+}

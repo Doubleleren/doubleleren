@@ -1,0 +1,42 @@
+{
+  "id": "20261126-repository-clonen-niet-zip",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een repository clonen om mee te werken",
+  "matrix": ["coderen-met-ai:2.3.1"],
+  "cel": "ecom",
+  "titel": "Meewerken aan de feedcheck van je collega: hoe begin je?",
+  "intro": "Een collega heeft op GitHub een repository 'feedcheck' met een script dat productfeeds van webshops controleert. Je mag meewerken en wilt er met Claude Code een controle op verzendkosten aan toevoegen. Daarna stuur je je wijziging terug als pull request. Op je laptop staat nog niets van het project.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe haal je het project naar je laptop?",
+    "opties": [
+      "Via de Code-knop de ZIP downloaden en uitpakken, want dan heb je alle bestanden en kan Claude er meteen in werken.",
+      "Een eigen nieuwe repository aanmaken en de bestanden erin uploaden, zodat je een eigen versie hebt om in te werken.",
+      "De URL via de Code-knop kopiëren en in de terminal git clone met die URL typen, zodat de koppeling met GitHub meekomt.",
+      "De bestanden één voor één openen op github.com en de inhoud aan Claude geven, zodat je niets hoeft te installeren."
+    ],
+    "juist": 2
+  },
+  "kern": "Met git clone krijg je de hele repository, met de geschiedenis en de koppeling met GitHub. Zo kun je later pullen, pushen en een pull request openen.",
+  "afleiders": [
+    "**ZIP downloaden:** je hebt dan wel alle bestanden. Maar een ZIP is een momentopname zonder geschiedenis en zonder koppeling met GitHub. Je wijziging terugsturen wordt dan omslachtig.",
+    "**Eigen nieuwe repository:** dan heb je wel een eigen plek. Maar die heeft geen band met het project van je collega. Je wijziging komt niet als pull request bij hem terecht.",
+    "",
+    "**Bestanden via de website:** dat lijkt licht. Maar Claude Code werkt in een map op je computer. Zonder eigen kopie kan het niets aanpassen of testen."
+  ],
+  "kort": "Vergelijk het met een gedeeld document. Een ZIP is een uitgeprinte kopie: je kunt erin schrijven, maar je wijzigingen komen nooit in het origineel. Clonen is het gedeelde document openen. Je werkt aan hetzelfde stuk, ziet de geschiedenis en kunt je wijzigingen terugsturen.",
+  "begrippen": [
+    { "term": "Repository", "uitleg": "een projectmap met versiegeschiedenis, vaak op GitHub, waar het team samen aan werkt." },
+    { "term": "Clonen", "uitleg": "een volledige kopie van een repository naar je computer halen, met de geschiedenis en de koppeling met GitHub." },
+    { "term": "Pull request", "uitleg": "een voorstel om jouw wijzigingen in het project op te nemen, dat een collega eerst bekijkt." }
+  ],
+  "uitleg": "**Zo clone je volgens GitHub Docs:**\n- ga op GitHub naar de repository en klik op **Code**;\n- kopieer de HTTPS-URL;\n- ga in de terminal met cd naar de map waar het project moet komen;\n- typ git clone en plak de URL, bijvoorbeeld git clone https://github.com/team/feedcheck.\n\nGit maakt dan een nieuwe map met de naam van de repository. Ga daarna met cd feedcheck die map in en start daar claude.\n\n**Met de GitHub CLI** kan het ook: gh repo clone team/feedcheck.\n\n**ZIP of clone?** GitHub zegt zelf dat een gedownload archief een momentopname is, zonder de volledige geschiedenis. Om even rond te kijken is dat prima. Om mee te werken, clone je.\n\n**Mag je niet schrijven in de repository?** Maak dan eerst een fork, een eigen kopie op GitHub, en clone die.",
+  "kernpunt": "Wil je meewerken aan een project, clone het dan. Een ZIP is alleen om naar te kijken.",
+  "toepassing": "Clone vandaag een repository van je team naar een map voor projecten. Ga erin met cd en vraag Claude om in drie zinnen uit te leggen wat het project doet.",
+  "bron": {
+    "titel": "Cloning a repository | GitHub Docs",
+    "url": "https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository"
+  }
+}

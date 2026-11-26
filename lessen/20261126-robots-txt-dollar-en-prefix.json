@@ -1,0 +1,43 @@
+{
+  "id": "20261126-robots-txt-dollar-en-prefix",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "robots.txt: hoe Google paden matcht ($, * en het begin van het pad)",
+  "matrix": ["1.1.8", "1.3.6"],
+  "cel": "leadgen",
+  "titel": "Drie nieuwe Disallow-regels: welke URL glipt er toch doorheen?",
+  "intro": "Een advocatenkantoor wil drie soorten URL's uit de crawl houden: de interne zoekresultaten, URL's met een sessiecode en de bedankpagina na een offerteaanvraag. De developer zet dit in robots.txt:\n\nUser-agent: *\nDisallow: /zoeken\nDisallow: /*?sessie=\nDisallow: /offerte/bedankt$",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke van deze URL's mag Googlebot met deze regels nog steeds crawlen?",
+    "opties": [
+      "/zoeken-advocaat-arbeidsrecht/",
+      "/diensten/letselschade?sessie=8f2a91",
+      "/offerte/bedankt/?dienst=huurrecht",
+      "/zoeken?q=ontslag+op+staande+voet"
+    ],
+    "juist": 2
+  },
+  "kern": "Het dollarteken betekent: hier eindigt de URL. /offerte/bedankt/ heeft daarna nog een slash en een parameter, dus de regel geldt niet.",
+  "afleiders": [
+    "**/zoeken-advocaat-arbeidsrecht/:** het lijkt een heel andere pagina, dus je verwacht dat hij vrij is. Maar een regel geldt voor alles wat zo begint. Deze dienstpagina is dus per ongeluk geblokkeerd.",
+    "**De sessie-URL:** het sterretje staat voor 'wat dan ook'. Elke URL met ?sessie= erin valt dus onder de regel, in welke map hij ook staat.",
+    "",
+    "**De zoek-URL met ?q=:** de parameter staat niet in de regel, dus het lijkt alsof hij erdoor komt. Maar /zoeken?q=... begint met /zoeken, en dat is genoeg."
+  ],
+  "kort": "Denk aan een bord bij de post: 'geen reclame voor straten die beginnen met Kerk'. Dan krijgt de Kerkstraat geen reclame, maar de Kerkhoflaan ook niet. Zo leest Google elke Disallow-regel: als het begin van een adres. Het dollarteken werkt als een punt achter de straatnaam: alleen precies dit adres. Staat er nog iets achter, zoals een slash, dan geldt de regel niet.",
+  "begrippen": [
+    { "term": "Disallow", "uitleg": "een regel in robots.txt die zegt welke adressen een crawler niet mag ophalen." },
+    { "term": "Dollarteken ($)", "uitleg": "in robots.txt het teken voor 'hier eindigt de URL'. Alles wat daarna nog komt, valt buiten de regel." },
+    { "term": "Sterretje (*)", "uitleg": "in robots.txt het teken voor 'nul of meer willekeurige tekens', dus een stuk URL dat van alles mag zijn." },
+    { "term": "Parameter", "uitleg": "het stuk van een URL na het vraagteken, zoals ?sessie=8f2a91 of ?q=ontslag." }
+  ],
+  "uitleg": "Google past een regel toe op het **begin van het pad**, en hoofdletters tellen mee. Uit de documentatie van Google:\n- /fish blokkeert ook /fish.html, /fishheads en /fish.php?id=..., maar niet /Fish.asp of /catfish.\n- /*.php$ blokkeert /filename.php, maar niet /filename.php?parameters of /filename.php/.\n- Een sterretje aan het eind doet niets: /fish* is hetzelfde als /fish.\n\n**Betere regels voor dit kantoor:**\n- Disallow: /zoeken? en, als die map bestaat, Disallow: /zoeken/. Zo blijft /zoeken-advocaat-arbeidsrecht/ vrij.\n- Disallow: /*?sessie= blijft, maar vangt geen &sessie= midden in een URL. Voeg dan ook Disallow: /*&sessie= toe.\n- Disallow: /offerte/bedankt zonder dollarteken, zodat varianten met een slash of parameter ook onder de regel vallen.\n\n**Controle:** test de regels vóór livegang tegen een lijst echte URL's uit je crawl, en kijk na livegang in het robots.txt-rapport van Search Console of Google de nieuwe versie heeft opgehaald.",
+  "kernpunt": "Lees elke Disallow-regel als 'alles wat zo begint'. Gebruik het dollarteken alleen als je echt één exacte URL bedoelt.",
+  "toepassing": "Open vandaag de robots.txt van één klant. Zoek per Disallow-regel één echte URL die er onbedoeld onder valt, of één URL die er onbedoeld buiten valt.",
+  "bron": {
+    "titel": "How Google interprets the robots.txt specification | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
+  }
+}

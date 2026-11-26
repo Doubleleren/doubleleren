@@ -1,0 +1,41 @@
+{
+  "id": "20261126-orderexport-persoonsgegevens-eerst-eruit",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Veilig werken met klantdata en persoonsgegevens",
+  "matrix": ["coderen-met-ai:6.2.2"],
+  "cel": "ecom",
+  "titel": "De orderexport heeft namen en adressen. Mag Claude hem lezen?",
+  "intro": "Een webshop in babyspullen stuurt een orderexport van een jaar. Je wilt met Claude Code uitzoeken hoeveel klanten een tweede keer kopen. Per order staan er een ordernummer, een klantnummer, de datum en het bedrag in. Maar ook naam, e-mailadres, adres en telefoonnummer.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je voordat Claude het bestand leest?",
+    "opties": [
+      "De kolommen met naam, e-mail, adres en telefoon eruit halen, zodat alleen meegaat wat de analyse echt nodig heeft.",
+      "Niets aanpassen, want Claude Code draait op je eigen laptop en dus verlaat de inhoud van het bestand je computer niet.",
+      "In je opdracht zetten dat Claude de persoonsgegevens niet mag gebruiken, zodat het die kolommen gewoon overslaat.",
+      "Het bestand in de privérepository van het project zetten, zodat Claude het vindt en niemand anders erbij kan."
+    ],
+    "juist": 0
+  },
+  "kern": "Wat Claude leest, wordt meegestuurd naar het model bij Anthropic. Haal daarom persoonsgegevens eruit die je voor de vraag niet nodig hebt.",
+  "afleiders": [
+    "",
+    "**Draait op je laptop:** het programma staat inderdaad lokaal. Maar het denkwerk gebeurt bij Anthropic. Wat Claude leest, wordt daarheen gestuurd.",
+    "**Verbod in de opdracht:** dat voelt als een afspraak. Maar Claude moet het bestand al gelezen hebben om de kolommen over te slaan. Dan zijn ze al meegestuurd.",
+    "**Privérepository:** privé klinkt veilig. Maar klantgegevens horen niet in een repository. Iedereen met toegang ziet ze, en de geschiedenis bewaart ze, ook als je ze later weghaalt."
+  ],
+  "kort": "Vergelijk het met een boekhouder die je kassabonnen nakijkt. Om de omzet te tellen, heeft hij de bedragen nodig. Je pinpas en je huisadres hoeven er niet bij. Wat je niet meegeeft, kan ook nergens rondslingeren. Bij Claude werkt het net zo: alles wat het leest, reist mee.",
+  "begrippen": [
+    { "term": "Persoonsgegevens", "uitleg": "alles waarmee je een persoon kunt herkennen, zoals naam, e-mailadres, adres of telefoonnummer." },
+    { "term": "Repository", "uitleg": "een projectmap met versiegeschiedenis, vaak op GitHub, waar collega's bij kunnen." }
+  ],
+  "uitleg": "**Wat de documentatie zegt:** Claude Code draait lokaal, maar stuurt je opdrachten en de antwoorden van het model over het netwerk naar Anthropic. Bestanden die Claude leest, worden zo deel van het gesprek.\n\n**Hoe lang en waarvoor?**\n- Zakelijke accounts (Team, Enterprise, API): standaard 30 dagen bewaard en niet gebruikt om modellen te trainen.\n- Persoonlijke accounts (Free, Pro, Max): de gebruiker kiest of gegevens voor training gebruikt mogen worden. Staat dat aan, dan geldt een bewaartermijn van 5 jaar.\n- Op je eigen computer bewaart Claude Code gesprekken standaard 30 dagen.\n\n**Praktisch:** haal de kolommen eruit in Excel of Google Sheets, voordat het bestand in de projectmap komt. Het klantnummer is genoeg om herhaalaankopen te tellen. Zet de map met ruwe exports in een deny-regel, zodat Claude alleen de opgeschoonde versie kan lezen. En volg de afspraken van je bureau met de klant.",
+  "kernpunt": "Geef Claude alleen de kolommen die de vraag nodig heeft. Wat het niet leest, reist ook niet mee.",
+  "toepassing": "Open vandaag de map met exports van één klantproject. Kijk welke bestanden namen of e-mailadressen bevatten, en maak van één daarvan een versie zonder die kolommen.",
+  "bron": {
+    "titel": "Data usage | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/data-usage"
+  }
+}

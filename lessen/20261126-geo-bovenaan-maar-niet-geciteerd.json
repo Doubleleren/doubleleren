@@ -1,0 +1,47 @@
+{
+  "id": "20261126-geo-bovenaan-maar-niet-geciteerd",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO / AI-search",
+  "onderwerp": "Klassieke SEO en GEO: ranken of geciteerd worden",
+  "matrix": ["12.1.2"],
+  "cel": "ecom",
+  "titel": "Plek 1 in Google, maar niet genoemd in de AI Overview",
+  "intro": "Een webshop in koffiemachines staat op plek 1 voor 'beste bonenmachine'. Een AI Overview is de samenvatting die Google met AI boven de resultaten zet. In die samenvatting staat de webshop niet als bron. Wel genoemd: een kleinere concurrent met de pagina 'Bonenmachine voor een klein huishouden: waar let je op?'. De eigenaar vraagt hoe dat kan.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste uitleg voor de eigenaar?",
+    "opties": [
+      "De AI Overview toont alleen bronnen die niet al bovenaan staan, zodat de zoeker meer verschillende websites te zien krijgt.",
+      "De AI Overview gebruikt wat het model tijdens zijn training leerde, dus een nieuwe ranking telt pas mee na een volgende update.",
+      "De AI Overview noemt alleen pagina's met speciale AI-markup, dus de webshop moet eerst die structured data toevoegen.",
+      "De AI Overview zoekt ook op deelvragen en noemt de pagina die zo'n deel het best beantwoordt, dus plek 1 is geen garantie."
+    ],
+    "juist": 3
+  },
+  "kern": "Een AI Overview zoekt verder dan de zoekopdracht zelf. Hij stelt deelvragen en noemt de pagina's die een stuk van het antwoord onderbouwen.",
+  "afleiders": [
+    "**Alleen bronnen die niet bovenaan staan:** Google zegt wel dat hij een gevarieerde set bronnen wil tonen. Maar een pagina die bovenaan staat, is daarmee niet uitgesloten. De gewone ranking is juist het startpunt.",
+    "**Trainingsdata:** zo werkt een losse chatbot soms. De AI Overview zoekt live in de index van Google en gebruikt de ranking van dat moment.",
+    "**Speciale AI-markup:** het klinkt als een technische knop die je kunt omzetten. Maar Google zegt dat er geen speciale structured data of extra optimalisatie nodig is.",
+    ""
+  ],
+  "kort": "Denk aan een journalist die een stuk schrijft over de beste bonenmachine. Hij belt niet alleen de grootste winkel. Per deelvraag zoekt hij wie het best kan uitleggen: wat past in een kleine keuken, wat kost onderhoud? Wie zo'n deelvraag het helderst beantwoordt, komt in het stuk. Klassieke SEO gaat over je plek in de lijst. GEO gaat over de vraag of jouw pagina een stuk van het antwoord levert.",
+  "begrippen": [
+    { "term": "AI Overview", "uitleg": "een samenvatting die Google met AI boven de zoekresultaten zet, met links naar de pagina's waar de informatie vandaan komt." },
+    { "term": "GEO", "uitleg": "Generative Engine Optimization: je content zo maken dat AI-zoekfuncties hem gebruiken en als bron noemen, niet alleen dat hij hoog staat." },
+    { "term": "Deelvragen (query fan-out)", "uitleg": "de extra zoekopdrachten die Google achter de schermen uitvoert om verschillende kanten van één vraag te beantwoorden." }
+  ],
+  "uitleg": "Google beschrijft hoe AI Overviews en AI Mode bronnen kiezen:\n- Eerst kijkt het systeem naar de gewone, gerankte resultaten. Stukjes tekst van die pagina's gaan naar het model.\n- Het model kan daarna **extra, verwante zoekopdrachten** doen om andere delen van de vraag te dekken.\n- Het noemt en linkt de pagina's die de informatie in het antwoord **onderbouwen**.\n- Bij het tonen weegt het relevantie en kwaliteit, maar ook opmaak en een gevarieerde set bronnen.\n\n**Voorwaarden:** een pagina moet geïndexeerd zijn en met een snippet getoond mogen worden. Extra eisen of speciale schema-markup zijn er niet.\n\n**Wat betekent dit voor een webshop?** Een categoriepagina met alleen producten beantwoordt zelden deelvragen als 'welke machine past bij twee koppen per dag?'. Een duidelijke koopgids of een blok met heldere antwoorden in tekst maakt meer kans.\n\nLet op: genoemd worden is niet hetzelfde als klikken krijgen. Verkeer uit AI-functies staat in Search Console gewoon onder het zoektype Web.",
+  "kernpunt": "Sta je bovenaan maar word je niet genoemd, zoek dan uit welke deelvragen achter de zoekopdracht zitten en of jouw pagina die beantwoordt.",
+  "toepassing": "Zoek vandaag één zoekopdracht van een webshopklant die een AI Overview geeft. Schrijf op welke deelvragen de genoemde pagina's beantwoorden die de pagina van je klant overslaat.",
+  "bron": {
+    "titel": "Attribution and factuality in Search generative AI features | Google Search Central",
+    "url": "https://developers.google.com/search/docs/fundamentals/gen-ai-attribution-factuality"
+  },
+  "video": {
+    "titel": "Why Generative Engine Optimisation (GEO) is the FUTURE of SEO",
+    "kanaal": "Exposure Ninja",
+    "url": "https://www.youtube.com/watch?v=FoIc8LkSETo"
+  }
+}
