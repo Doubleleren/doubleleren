@@ -103,7 +103,7 @@ function metKopie(ruw) {
       const k = kopie.get(p), sha = shas.get(p);
       if (k && sha && k.sha === sha) return k.b.slice();
       if (offline) { if (paden && !sha) return null; throw new LaadFout('GitHub is even niet bereikbaar en dit bestand is niet bewaard. Probeer het over een paar minuten opnieuw.'); }
-      const b = await ruw.bytes(p); if (b && sha) bewaar(p, sha, b);
+      const b = await ruw.bytes(p, sha); if (b && sha) bewaar(p, sha, b);
       return b;
     },
     // Nieuwste versie en sha ophalen (na een conflict: een andere laptop schreef net)
@@ -146,6 +146,7 @@ function apiBron(eigenaar, repo, token) {
   // Elke leesactie een eigen adres: een bedrijfsproxy (bijv. Cisco Umbrella) negeert 'Vary: Accept' en gaf anders het ruwe
   // bestand terug waar JSON werd verwacht, of een verouderde versie (oude sha → steeds 'conflict')
   const vers = (p, ref = '') => `${url(p)}?${ref}t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`;
+  const blobUrl = (sha) => `https://api.github.com/repos/${eigenaar}/${repo}/git/blobs/${encodeURIComponent(sha)}?t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`;
   // Neutrale commit onder één algemene naam: geen namen, pseudoniemen of lestitels in de geschiedenis
   const wie = { name: 'doubleleren', email: 'sync@doubleleren.invalid' };
   const verstuur = async (methode, p, body) => {
@@ -164,14 +165,17 @@ function apiBron(eigenaar, repo, token) {
       const blobs = (await r.json()).tree.filter((t) => t.type === 'blob');
       return { paden: blobs.map((t) => t.path), shas: new Map(blobs.map((t) => [t.path, t.sha])) };
     },
-    async bytes(p) { return leesBytes(await haal(vers(p), { headers: kop, cache: 'no-store' }), p); },
+    // Met bekende sha via de git-blob-API: de contents-API houdt sommige versleutelde bestanden voor UTF-16-tekst en
+    // levert ze dan omgezet naar UTF-8 (andere bytes, 'Geen DL1-bestand'); een blob komt altijd byte voor byte terug
+    async bytes(p, sha) { return leesBytes(await haal(sha ? blobUrl(sha) : vers(p), { headers: kop, cache: 'no-store' }), p); },
     async ververs(p) {
       const r = await haal(vers(p, 'ref=main&'), { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (r.status === 404) return null;
       if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (!r.ok) throw new Error(`${p}: ${r.status}`);
       const j = await r.json();
-      return { sha: j.sha, b: K.b64u.dec(String(j.content).replace(/\s/g, '').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')) };
+      const b = K.b64u.dec(String(j.content).replace(/\s/g, '').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+      return { sha: j.sha, b: b.length === j.size ? b : await this.bytes(p, j.sha) };   // omgezet: opnieuw als blob
     },
     async schrijf(p, b, sha) { return (await verstuur('PUT', p, { content: b64(b), ...(sha ? { sha } : {}) })).content.sha; },
     async verwijder(p, sha) { await verstuur('DELETE', p, { sha }); }
