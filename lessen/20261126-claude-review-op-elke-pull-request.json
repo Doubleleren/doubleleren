@@ -1,0 +1,43 @@
+{
+  "id": "20261126-claude-review-op-elke-pull-request",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Claude laten reviewen via GitHub Actions",
+  "matrix": ["coderen-met-ai:5.1.3"],
+  "cel": "ecom",
+  "titel": "Claude moet elke pull request nakijken. Hoe zet je dat op?",
+  "intro": "Het team bouwt in een GitHub-repository een script dat de productfeed van een webshop controleert. Er komen elke week een paar pull requests bij. Jullie willen dat Claude elke pull request automatisch nakijkt en zijn bevindingen erbij zet. Je bent beheerder van de repository en Claude Code draait op je laptop.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de snelste juiste manier om dat in te richten?",
+    "opties": [
+      "In de CLAUDE.md van de repository zetten dat Claude elke pull request moet reviewen, want die leest het bij elke sessie.",
+      "In Claude Code /install-github-app draaien en de pull request die volgt mergen, want dat regelt app, sleutel en workflow.",
+      "Je API-sleutel in het workflowbestand in .github/workflows plakken, want GitHub Actions heeft die nodig om Claude te starten.",
+      "In je eigen Claude Code automatische review aanzetten, want dan kijkt Claude alles na wat iemand naar GitHub pusht."
+    ],
+    "juist": 1
+  },
+  "kern": "Deze opdracht installeert de Claude GitHub App, bewaart de sleutel als geheime waarde in GitHub en maakt een pull request met de workflow. Mergen zet het aan.",
+  "afleiders": [
+    "**CLAUDE.md:** dat bestand stuurt hoe Claude werkt als het al draait. Maar het start Claude niet. Zonder workflow gebeurt er bij een nieuwe pull request niets.",
+    "",
+    "**Sleutel in het workflowbestand:** de workflow heeft hem inderdaad nodig. Maar een sleutel hoort nooit in de repository. Je bewaart hem als secret en verwijst ernaar.",
+    "**Eigen instelling:** je eigen Claude Code draait alleen op jouw laptop. De review moet op GitHub draaien, ook als jouw laptop dicht is."
+  ],
+  "kort": "Vergelijk het met een nieuwe collega die pull requests gaat nakijken. Hij heeft een toegangspas nodig, een sleutel die veilig bewaard wordt en een rooster dat zegt wanneer hij kijkt. Een briefje 'kijk alles na' op zijn bureau is niet genoeg. De installatieopdracht regelt die drie dingen in één keer.",
+  "begrippen": [
+    { "term": "Pull request", "uitleg": "een voorstel om wijzigingen in het project op te nemen, dat eerst bekeken wordt." },
+    { "term": "GitHub Actions", "uitleg": "de automatisering van GitHub: taken die vanzelf draaien bij een gebeurtenis, zoals een nieuwe pull request." },
+    { "term": "Workflow", "uitleg": "een bestand in .github/workflows dat beschrijft wat GitHub Actions doet en wanneer." },
+    { "term": "Secret", "uitleg": "een geheime waarde, zoals een API-sleutel, die GitHub versleuteld bewaart en alleen aan workflows geeft." }
+  ],
+  "uitleg": "**Snelle installatie volgens de documentatie:**\n- je hebt beheerrechten op de repository nodig en de GitHub CLI (log in met gh auth login);\n- start claude in de repository en typ /install-github-app;\n- installeer de Claude GitHub App in de browser en kies de workflows: reageren op @claude, de review van pull requests of allebei;\n- kies een API-sleutel of een token van je abonnement. Claude Code bewaart die als secret, zoals ANTHROPIC_API_KEY;\n- Claude Code zet de workflowbestanden op een branch. Pas als je die pull request merget, staan de workflows aan.\n\n**Daarna** plaatst Claude zijn review op de pull request: een opmerking per probleem, of één samenvatting als het niets vindt. Concepten slaat het over.\n\n**Blijf zelf kijken.** De documentatie raadt aan Claudes wijzigingen te bekijken voordat je merget. Een review van Claude is een extra paar ogen, geen vervanging van het jouwe. En elke run kost GitHub Actions-minuten en tokens.",
+  "kernpunt": "Wil je dat Claude op GitHub reviewt, begin dan met /install-github-app. De sleutel komt in een secret, nooit in een bestand.",
+  "toepassing": "Open vandaag een repository waar je beheerder bent. Kijk onder Settings, Secrets and variables, Actions welke secrets er zijn, en zoek in .github/workflows of er ergens een sleutel letterlijk in staat.",
+  "bron": {
+    "titel": "Claude Code GitHub Actions | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/github-actions"
+  }
+}

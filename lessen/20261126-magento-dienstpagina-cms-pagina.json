@@ -1,0 +1,43 @@
+{
+  "id": "20261126-magento-dienstpagina-cms-pagina",
+  "type": "herhaling",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Magento: een dienstpagina als CMS-pagina",
+  "matrix": ["5.1.7"],
+  "cel": "leadgen",
+  "titel": "Een pagina over onderhoudscontracten in Magento: waar maak je die?",
+  "intro": "Een groothandel in industriële pompen gebruikt Magento als online catalogus. Klanten bestellen niet online, maar vragen een offerte aan. Nu wil de klant een pagina 'Onderhoudscontracten' over zijn onderhoudsdienst. Die pagina moet in Google gevonden worden en krijgt een offerteformulier. De developer vraagt waar hij die pagina in Magento het best maakt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat raad je de developer aan?",
+    "opties": [
+      "Maak hem als product zonder prijs, zodat de pagina in de catalogus staat en klanten hem tussen de pompen vinden.",
+      "Maak een URL-rewrite naar de contactpagina, zodat /onderhoudscontracten bestaat zonder dat je een pagina bouwt.",
+      "Maak hem als CMS-pagina onder Content > Elements > Pages, zodat hij een eigen URL key, meta title en tekst krijgt.",
+      "Maak hem als CMS-blok onder Content > Elements > Blocks, zodat je de tekst kunt tonen op elke pagina waar hij past."
+    ],
+    "juist": 2
+  },
+  "kern": "Informatie die geen product is, zoals een dienst, hoort in Magento in een CMS-pagina. Die heeft zijn eigen URL en eigen SEO-velden.",
+  "afleiders": [
+    "**Product zonder prijs:** zo staat de dienst tussen het aanbod, dat lijkt handig. Maar een productpagina is gemaakt voor iets wat je koopt, met voorraad en een winkelmandje. De dienst komt dan ook tussen de echte producten terecht, bijvoorbeeld in productfeeds.",
+    "**URL-rewrite:** zo bestaat het adres snel. Maar een rewrite stuurt alleen door naar een andere pagina. Er komt geen eigen tekst over onderhoud, dus er is niets om in Google te laten zien.",
+    "",
+    "**CMS-blok:** een blok bevat ook tekst die je zelf schrijft. Maar een blok heeft geen eigen URL: het is een stukje inhoud dat je in andere pagina's zet. Handig voor het formulier, niet als pagina zelf."
+  ],
+  "kort": "Denk aan een bouwmarkt. In de schappen liggen producten met een prijskaartje. Wie wil weten hoe een onderhoudscontract werkt, loopt naar de servicebalie, niet naar het schap met pompen. Magento werkt net zo. Producten en categorieën zijn de schappen. CMS-pagina's zijn de servicebalie: de plek voor alles wat je uitlegt in plaats van verkoopt.",
+  "begrippen": [
+    { "term": "CMS-pagina", "uitleg": "een losse pagina in Magento met eigen tekst, zoals 'Over ons' of 'Klantenservice'. Hij hoort niet bij de productcatalogus." },
+    { "term": "CMS-blok", "uitleg": "een stukje inhoud, zoals een tekstvak of formulier, dat je in andere pagina's kunt plaatsen. Een blok heeft geen eigen URL." },
+    { "term": "URL key", "uitleg": "het laatste stuk van het webadres van een pagina in Magento, bijvoorbeeld onderhoudscontracten." },
+    { "term": "URL-rewrite", "uitleg": "een regel in Magento die een adres doorstuurt naar een ander adres." }
+  ],
+  "uitleg": "Magento heeft grofweg vier bouwstenen:\n- **Producten**: wat je verkoopt, met prijs, voorraad en eigenschappen.\n- **Categorieën**: overzichten van producten.\n- **CMS-pagina's**: losse inhoudspagina's, zoals de homepage, klantenservice of een pagina over een dienst.\n- **CMS-blokken en widgets**: stukken inhoud die je in pagina's plaatst.\n\nEen CMS-pagina maak je onder **Content > Elements > Pages > Add New Page**. Onder *Search Engine Optimization* staan de velden die je als SEO'er controleert:\n- **URL Key**: kleine letters, streepjes in plaats van spaties;\n- **Meta Title**: Adobe adviseert minder dan 70 tekens;\n- **Meta Description**: Adobe adviseert 150 tot 160 tekens, met een maximum van 255.\n\nHet offerteformulier zet je in de pagina, bijvoorbeeld als blok of widget van een formulierextensie. Een paginahiërarchie (een pagina onder een andere pagina) zit alleen in Adobe Commerce, niet in Magento Open Source.",
+  "kernpunt": "Is iets geen product, maak het in Magento dan als CMS-pagina en niet als product of categorie.",
+  "toepassing": "Kijk vandaag bij een klant op Magento onder Content > Elements > Pages welke pagina's er zijn. Controleer bij één ervan de URL key en de meta title.",
+  "bron": {
+    "titel": "Add a new page | Adobe Commerce Admin Guide (Experience League)",
+    "url": "https://experienceleague.adobe.com/en/docs/commerce-admin/content-design/elements/pages/page-add"
+  }
+}

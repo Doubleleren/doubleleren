@@ -1,0 +1,42 @@
+{
+  "id": "20261126-pageburst-in-de-logs",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Pageburst en andere speciale Google-crawlers in de serverlogs",
+  "matrix": ["1.1.3", "1.3.6"],
+  "cel": "alle",
+  "titel": "'pageburst' in de logs, ook op URL's die in robots.txt dicht staan",
+  "intro": "Een developer ziet in de serverlogs duizenden verzoeken met 'compatible; pageburst' in de user-agent. Ze komen ook op URL's die in robots.txt voor alle bots op Disallow staan. De IP-adressen horen bij Google. De klant adverteert met Google Ads. Op 23 november zette Google Pageburst en elf andere bots in zijn documentatie over crawlers.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat zeg je tegen de developer?",
+    "opties": [
+      "Pageburst is een nieuwe Googlebot voor de zoekresultaten, dus Disallow werkt niet meer en je moet op die URL's noindex zetten.",
+      "Pageburst bekijkt pagina's voor Google Ads en negeert robots.txt, dus dit is verwacht en zegt niets over de zoekresultaten.",
+      "Pageburst is een nepbot die zich voordoet als Google, dus je blokkeert alle verzoeken met die user-agent in de firewall.",
+      "Pageburst luistert alleen naar een eigen groep in robots.txt, dus je zet er User-agent: pageburst met Disallow: / bij."
+    ],
+    "juist": 1
+  },
+  "kern": "Pageburst hoort bij Google Ads, niet bij Google Zoeken. Dit soort speciale crawlers mag robots.txt negeren, omdat de site zelf iets met dat product heeft afgesproken.",
+  "afleiders": [
+    "**Een nieuwe Googlebot:** de bot komt van Google en is nieuw in de documentatie, dus dat lijkt logisch. Maar Pageburst werkt voor Google Ads. Voor Google Zoeken verandert er niets, en robots.txt werkt voor Googlebot gewoon nog.",
+    "",
+    "**Een nepbot:** onbekende bots zijn vaak nep, dus wantrouwen is gezond. Maar de IP-adressen horen bij Google. Blokkeer je hem, dan kan Google Ads de landingspagina niet meer beoordelen.",
+    "**Een eigen groep in robots.txt:** zo werkt het bij de meeste bots. Maar Google schrijft dat Pageburst robots.txt helemaal negeert, ook een groep met zijn eigen naam."
+  ],
+  "kort": "Denk aan een bedrijfspand met een bordje 'geen verkopers'. De keurmeester met wie je zelf een afspraak hebt gemaakt, loopt toch naar binnen. Het bordje is niet voor hem bedoeld. Pageburst is zo'n keurmeester voor Google Ads. Wie adverteert, laat Google zijn landingspagina's controleren op kwaliteit en veiligheid. Met je plek in de zoekresultaten heeft dat niets te maken.",
+  "begrippen": [
+    { "term": "Serverlogs", "uitleg": "de lijst die een server bijhoudt van elk verzoek: welk adres, wanneer, door welke browser of bot en vanaf welk IP-adres." },
+    { "term": "User-agent", "uitleg": "de naam die een browser of bot bij elk verzoek meestuurt. Die naam is makkelijk na te maken." },
+    { "term": "Speciale crawler (special-case crawler)", "uitleg": "een bot van Google voor een product waarmee de site iets heeft afgesproken, zoals Google Ads. Zulke bots mogen robots.txt negeren." }
+  ],
+  "uitleg": "**Wat er veranderde.** Op 23 november 2026 heeft Google twaalf bestaande bots aan zijn crawlerdocumentatie toegevoegd. Ze zijn niet nieuw, alleen nu beschreven:\n- zes speciale crawlers: Pageburst, Google-analytics-postbacks, Google-Calendar-Importer, GoogleDocs, Google-Edu en PlayStore-Google;\n- zes fetchers die een gebruiker start, zoals Google-Apps-Script, GoogleImageProxy, Google Web Preview en de fetcher van PageSpeed Insights.\n\n**Pageburst** rendert pagina's voor de kwaliteit van Google Ads, de veiligheid van landingspagina's en het begrijpen van pagina's. Google schrijft dat hij robots.txt negeert. Zijn user-agent lijkt op een gewone Chrome-browser en bevat geen 'Googlebot'. Een groep voor Googlebot in robots.txt geldt dus ook niet voor hem.\n\n**Echtheid controleren.** Een user-agent is na te maken. Controleer of het IP-adres in special-crawlers.json van Google staat, of doe een reverse DNS-lookup: die eindigt op google.com met rate-limited-proxy ervoor.\n\n**Voor je loganalyse:** haal deze bots uit je cijfers als je wilt weten hoe Googlebot voor Zoeken je site crawlt.",
+  "kernpunt": "Zie je een onbekende Google-bot in de logs, zoek dan eerst op voor welk product hij werkt voordat je iets blokkeert of conclusies trekt over Google Zoeken.",
+  "toepassing": "Zoek vandaag in de serverlogs van één klant met Google Ads op 'pageburst'. Filter die regels uit je overzicht van Googlebot-crawls.",
+  "bron": {
+    "titel": "Google's special-case crawlers | Google Crawling Infrastructure",
+    "url": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-special-case-crawlers"
+  }
+}

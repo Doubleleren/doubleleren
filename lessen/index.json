@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-25T14:00:09",
+    "bijgewerkt":  "2026-11-26T05:29:10",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -1296,7 +1296,7 @@
                                       "7.2.2",
                                       "7.2.1"
                                   ],
-                       "kernpunt":  "Wie een A/B-test stopt zodra het dashboard \u0027winnaar\u0027 zegt, vergroot de kans op een vals positief resultaat sterk. Leg steekproef en looptijd vooraf vast, of kies een methode die tussentijds beslissen toestaat.",
+                       "kernpunt":  "Leg bij elke A/B-test vooraf de looptijd in hele weken vast, en beslis pas op de einddatum.",
                        "bron":  {
                                     "titel":  "How Not To Run an A/B Test – Evan Miller",
                                     "url":  "https://www.evanmiller.org/how-not-to-run-an-ab-test.html"
@@ -1304,7 +1304,8 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
-                       "cel":  "ecom"
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-26"
                    },
                    {
                        "id":  "20261022-product-snippet-of-merchant-listing",
@@ -1404,7 +1405,7 @@
                        "matrix":  [
                                       "5.3.3"
                                   ],
-                       "kernpunt":  "Google rendert JavaScript, maar klikt niet. Wat pas na een klik wordt opgehaald, bestaat voor Google niet; zet het bij het laden al in de pagina.",
+                       "kernpunt":  "Zie je een knop als \u0027Lees meer\u0027 of \u0027Toon reviews\u0027, controleer dan of de tekst al bij het laden in de pagina staat.",
                        "bron":  {
                                     "titel":  "Fix lazy-loaded content | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading"
@@ -1416,7 +1417,8 @@
                                  },
                        "soort":  "open",
                        "herkomst":  "generator",
-                       "cel":  "ecom"
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-26"
                    },
                    {
                        "id":  "20261023-magento-canonical-categoriepad",
@@ -6671,6 +6673,357 @@
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
                        "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261126-canonical-ads-landingspagina",
+                       "titel":  "De Ads-landingspagina verdringt de dienstpagina in Google",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "rel=canonical voor een landingspagina van Google Ads",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "Moet een kopie blijven bestaan, gebruik dan een canonical. Mag hij weg, gebruik dan een 301.",
+                       "bron":  {
+                                    "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-claude-review-op-elke-pull-request",
+                       "titel":  "Claude moet elke pull request nakijken. Hoe zet je dat op?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Claude laten reviewen via GitHub Actions",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:5.1.3"
+                                  ],
+                       "kernpunt":  "Wil je dat Claude op GitHub reviewt, begin dan met /install-github-app. De sleutel komt in een secret, nooit in een bestand.",
+                       "bron":  {
+                                    "titel":  "Claude Code GitHub Actions | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/github-actions"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-fotolijst-al-weken-leeg-na-livegang",
+                       "titel":  "De lijst met producten zonder foto is al drie weken leeg",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Zorgvuldig zijn: achter je werk staan, ook na de livegang",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.1.4"
+                                  ],
+                       "kernpunt":  "Lever geen script op zonder te weten hoe je merkt dat het stuk is.",
+                       "bron":  {
+                                    "titel":  "AI Fluency for builders | Claude Academy",
+                                    "url":  "https://academy.claude.com/courses/ai-fluency-for-builders"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "vormAfwijkend":  true
+                   },
+                   {
+                       "id":  "20261126-foutmelding-laatste-regel-eerst",
+                       "titel":  "Een rood blok tekst na je commando: waar zit het probleem?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een commando uitvoeren en een foutmelding lezen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.1.2"
+                                  ],
+                       "kernpunt":  "Lees bij een foutmelding eerst de laatste regel. Die zegt meestal wat er mis is.",
+                       "bron":  {
+                                    "titel":  "Built-in Exceptions | Python documentation",
+                                    "url":  "https://docs.python.org/3/library/exceptions.html"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-ga4-bestemmingspagina-leads",
+                       "titel":  "Alle aanvragen staan bij /contact/: leveren de blogs dan niets op?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: welke pagina\u0027s leveren aanvragen op",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.1.3"
+                                  ],
+                       "kernpunt":  "Wil je weten welke pagina\u0027s aanvragen opleveren, kijk dan waar het bezoek begon, niet waar het formulier staat.",
+                       "bron":  {
+                                    "titel":  "[GA4] Landing page report | Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/12931766"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-geo-bovenaan-maar-niet-geciteerd",
+                       "titel":  "Plek 1 in Google, maar niet genoemd in de AI Overview",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Klassieke SEO en GEO: ranken of geciteerd worden",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.2"
+                                  ],
+                       "kernpunt":  "Sta je bovenaan maar word je niet genoemd, zoek dan uit welke deelvragen achter de zoekopdracht zitten en of jouw pagina die beantwoordt.",
+                       "bron":  {
+                                    "titel":  "Attribution and factuality in Search generative AI features | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/gen-ai-attribution-factuality"
+                                },
+                       "video":  {
+                                     "titel":  "Why Generative Engine Optimisation (GEO) is the FUTURE of SEO",
+                                     "kanaal":  "Exposure Ninja",
+                                     "url":  "https://www.youtube.com/watch?v=FoIc8LkSETo"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-maandagcheck-eerst-samen-dan-inplannen",
+                       "titel":  "Elke maandag drie kwartier afgekeurde producten tellen: automatiseren?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een controle automatiseren die je nu met de hand doet",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:7.1.2",
+                                      "coderen-met-ai:5.1.1"
+                                  ],
+                       "kernpunt":  "Plan pas in wat je één keer samen goed hebt gekregen. Een geplande taak kan niets meer vragen.",
+                       "bron":  {
+                                    "titel":  "Common workflows | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/common-workflows"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "vormAfwijkend":  true
+                   },
+                   {
+                       "id":  "20261126-magento-dienstpagina-cms-pagina",
+                       "titel":  "Een pagina over onderhoudscontracten in Magento: waar maak je die?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Magento: een dienstpagina als CMS-pagina",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.7"
+                                  ],
+                       "kernpunt":  "Is iets geen product, maak het in Magento dan als CMS-pagina en niet als product of categorie.",
+                       "bron":  {
+                                    "titel":  "Add a new page | Adobe Commerce Admin Guide (Experience League)",
+                                    "url":  "https://experienceleague.adobe.com/en/docs/commerce-admin/content-design/elements/pages/page-add"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-orderexport-persoonsgegevens-eerst-eruit",
+                       "titel":  "De orderexport heeft namen en adressen. Mag Claude hem lezen?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Veilig werken met klantdata en persoonsgegevens",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.2.2"
+                                  ],
+                       "kernpunt":  "Geef Claude alleen de kolommen die de vraag nodig heeft. Wat het niet leest, reist ook niet mee.",
+                       "bron":  {
+                                    "titel":  "Data usage | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/data-usage"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-pageburst-in-de-logs",
+                       "titel":  "\u0027pageburst\u0027 in de logs, ook op URL\u0027s die in robots.txt dicht staan",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Pageburst en andere speciale Google-crawlers in de serverlogs",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.3",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "Zie je een onbekende Google-bot in de logs, zoek dan eerst op voor welk product hij werkt voordat je iets blokkeert of conclusies trekt over Google Zoeken.",
+                       "bron":  {
+                                    "titel":  "Google\u0027s special-case crawlers | Google Crawling Infrastructure",
+                                    "url":  "https://developers.google.com/crawling/docs/crawlers-fetchers/google-special-case-crawlers"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261126-plugin-onbekende-marketplace-eerst-lezen",
+                       "titel":  "Een plugin die productfeeds \u0027optimaliseert\u0027: meteen installeren?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een plugin installeren: eerst kijken wat erin zit",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:4.5.3"
+                                  ],
+                       "kernpunt":  "Installeer geen plugin die je niet hebt bekeken. Hij krijgt dezelfde sleutels als jij.",
+                       "bron":  {
+                                    "titel":  "Plugin security and trust | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/plugins/security"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-repository-clonen-niet-zip",
+                       "titel":  "Meewerken aan de feedcheck van je collega: hoe begin je?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een repository clonen om mee te werken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.3.1"
+                                  ],
+                       "kernpunt":  "Wil je meewerken aan een project, clone het dan. Een ZIP is alleen om naar te kijken.",
+                       "bron":  {
+                                    "titel":  "Cloning a repository | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-robots-txt-dollar-en-prefix",
+                       "titel":  "Drie nieuwe Disallow-regels: welke URL glipt er toch doorheen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "robots.txt: hoe Google paden matcht ($, * en het begin van het pad)",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.1.8",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "Lees elke Disallow-regel als \u0027alles wat zo begint\u0027. Gebruik het dollarteken alleen als je echt één exacte URL bedoelt.",
+                       "bron":  {
+                                    "titel":  "How Google interprets the robots.txt specification | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-terminal-eerst-naar-de-projectmap",
+                       "titel":  "\u0027Ik kan feed.csv niet vinden\u0027, zegt Claude. Het bestand bestaat echt",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "In de terminal naar een map gaan en kijken wat erin staat",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.1.1"
+                                  ],
+                       "kernpunt":  "Eerst cd naar de projectmap, dan ls om te checken, dan pas claude.",
+                       "bron":  {
+                                    "titel":  "How Claude Code works | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/how-claude-code-works"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "vormAfwijkend":  true
+                   },
+                   {
+                       "id":  "20261126-uitlopers-opruimen-wat-delegeer-je",
+                       "titel":  "600 producten al maanden uitverkocht: wat laat je Claude doen?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Delegeren: wat geef je uit handen en welk oordeel houd je zelf",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.1.1"
+                                  ],
+                       "kernpunt":  "Vraag bij elke stap: staat het antwoord in de data? Zo ja, laat Claude het doen. Zo nee, beslis je zelf.",
+                       "bron":  {
+                                    "titel":  "AI Fluency for builders | Claude Academy",
+                                    "url":  "https://academy.claude.com/courses/ai-fluency-for-builders"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-vestigingsfilters-welke-crawlbaar",
+                       "titel":  "40 praktijken, vier filters en 70% van de crawls op filter-URL\u0027s",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Filters op een overzicht van vestigingen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.4",
+                                      "1.1.10"
+                                  ],
+                       "kernpunt":  "Geef alleen filters waar mensen echt op zoeken een vaste pagina. Houd de andere filtercombinaties met robots.txt uit de crawl.",
+                       "bron":  {
+                                    "titel":  "Managing crawling of faceted navigation URLs | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-voorraadtool-draait-maar-klopt-het",
+                       "titel":  "De voorraadtool draait in drie seconden. Kun je hem opleveren?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Werk van AI beoordelen: draaien is nog geen kloppen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.1.3"
+                                  ],
+                       "kernpunt":  "\u0027Het draait\u0027 is geen oordeel. Leg een paar uitkomsten naast de bron voordat je iets oplevert.",
+                       "bron":  {
+                                    "titel":  "AI Fluency for builders | Claude Academy",
+                                    "url":  "https://academy.claude.com/courses/ai-fluency-for-builders"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    }
                ]
 }

@@ -1,0 +1,41 @@
+{
+  "id": "20261126-foutmelding-laatste-regel-eerst",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een commando uitvoeren en een foutmelding lezen",
+  "matrix": ["coderen-met-ai:2.1.2"],
+  "cel": "ecom",
+  "titel": "Een rood blok tekst na je commando: waar zit het probleem?",
+  "intro": "Claude schreef een script dat de retouren in een webshopexport telt. Je draait het zelf in de terminal met: python retouren.py retouren-okt.csv. Je krijgt een rood blok tekst. De laatste regel is: FileNotFoundError: [Errno 2] No such file or directory: 'retouren-okt.csv'.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak?",
+    "opties": [
+      "Python vindt het bestand niet, want je staat in een andere map dan de export of de bestandsnaam wijkt net iets af.",
+      "Python is niet goed geïnstalleerd, want de terminal kan het script zonder werkende Python niet starten of uitvoeren.",
+      "Er zit een fout in het script, want de rode tekst laat zien dat Claude een regel code verkeerd heeft geschreven.",
+      "Het bestand is te groot voor het script, want een export van een hele maand bevat te veel regels om in één keer te lezen."
+    ],
+    "juist": 0
+  },
+  "kern": "De melding zegt het zelf: het bestand bestaat niet op de plek waar het script zoekt. Python draait dus wel, het adres klopt niet.",
+  "afleiders": [
+    "",
+    "**Python niet geïnstalleerd:** dan krijg je een andere melding, zoals 'command not found' of 'is not recognized'. Hier draait Python al, want het meldt zelf de fout.",
+    "**Fout in het script:** rode tekst voelt als kapotte code. Maar de melding noemt geen fout in de code. Het gaat om een bestand dat niet gevonden wordt.",
+    "**Te groot bestand:** dan zou je geen melding krijgen dat het bestand niet bestaat. Python heeft het bestand nog niet eens kunnen openen."
+  ],
+  "kort": "Vergelijk het met een pakketbezorger die belt: 'Ik sta op nummer 12, maar daar woont niemand met die naam.' De bezorger en de bus doen het prima. Alleen het adres klopt niet. Een foutmelding werkt net zo. De laatste regel vertelt meestal wat er mis is, dus die lees je eerst.",
+  "begrippen": [
+    { "term": "Foutmelding (traceback)", "uitleg": "de tekst die Python toont als er iets misgaat. Bovenaan staat waar het gebeurde, onderaan wat er misging." },
+    { "term": "FileNotFoundError", "uitleg": "de melding van Python dat een bestand of map niet bestaat op de plek waar gezocht wordt." }
+  ],
+  "uitleg": "**Lees van onder naar boven.** Bij Python staat de kern op de laatste regel: het soort fout en een korte uitleg. De regels erboven laten zien in welke regel code het misging.\n\n**Twee meldingen die op elkaar lijken:**\n- **command not found** (Mac) of **is not recognized** (Windows): de terminal vindt het programma zelf niet. Het is niet geïnstalleerd of staat niet in het PATH.\n- **FileNotFoundError**: het programma draait, maar het bestand dat het moet openen, staat er niet.\n\n**Zo los je het op:** kijk met ls of het bestand in de huidige map staat. Vergelijk de naam teken voor teken: een spatie, een streepje of een dubbele extensie zoals .csv.csv valt snel weg. Of geef het volledige pad naar het bestand mee.\n\n**Met Claude:** plak de volledige foutmelding in je opdracht, samen met het commando dat je gaf. Dat werkt beter dan de fout in je eigen woorden beschrijven.",
+  "kernpunt": "Lees bij een foutmelding eerst de laatste regel. Die zegt meestal wat er mis is.",
+  "toepassing": "Draai vandaag een script uit een klantproject met een bestandsnaam die niet bestaat. Lees de melding van onder naar boven en wijs de regel aan die het probleem noemt.",
+  "bron": {
+    "titel": "Built-in Exceptions | Python documentation",
+    "url": "https://docs.python.org/3/library/exceptions.html"
+  }
+}

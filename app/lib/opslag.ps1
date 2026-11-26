@@ -15,11 +15,11 @@ function New-DlOpslag([string]$Eigenaar, [string]$Repo, [string]$Token, [string]
     @{ soort = 'github'; eigenaar = $Eigenaar; repo = $Repo; token = $Token; auteur = $Auteur; tak = $Tak }
 }
 
-function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body) {
+function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body, [string]$Api = 'contents') {
     $kop = @{ 'User-Agent' = 'DoubleLeren'; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' }
     if ($O.token) { $kop.Authorization = "Bearer $($O.token)" }
-    $url = "https://api.github.com/repos/$($O.eigenaar)/$($O.repo)/contents/$Pad"
-    if ($Methode -eq 'GET') { $url += "?ref=$($O.tak)&t=$([DateTime]::UtcNow.Ticks)" }   # eigen adres per keer: een bedrijfsproxy geeft anders een verouderde versie
+    $url = "https://api.github.com/repos/$($O.eigenaar)/$($O.repo)/$Api/$Pad"
+    if ($Methode -eq 'GET') { $url += "?$(if ($Api -eq 'contents') { "ref=$($O.tak)&" })t=$([DateTime]::UtcNow.Ticks)" }   # eigen adres per keer: een bedrijfsproxy geeft anders een verouderde versie
     $p = @{ Uri = $url; Method = $Methode; Headers = $kop; UseBasicParsing = $true; TimeoutSec = 30 }
     if ($Body) { $p.Body = $script:DlUtf8.GetBytes(($Body | ConvertTo-Json -Depth 5 -Compress)); $p.ContentType = 'application/json' }
     # Lezen bij een storing van GitHub (5xx, rate limit 429 of geen verbinding) twee keer opnieuw proberen; schrijven niet (kan al gelukt zijn)
@@ -58,7 +58,11 @@ function Read-DlOpslag($O, [string]$Pad) {
     $r = Invoke-DlGitHub $O 'GET' $Pad
     if (-not $r) { return $null }
     if ($r -is [array]) { throw "$Pad is een map" }
-    @{ bytes = [Convert]::FromBase64String(($r.content -replace '\s', '')); sha = $r.sha }
+    $b = [Convert]::FromBase64String(($r.content -replace '\s', ''))
+    # De contents-API houdt sommige versleutelde bestanden voor UTF-16-tekst en levert ze omgezet naar UTF-8 (andere
+    # bytes, 'Geen DL1-bestand'). Klopt de lengte niet, dan opnieuw via de git-blob-API: die geeft altijd de echte bytes.
+    if ($b.Length -ne [int]$r.size) { $b = [Convert]::FromBase64String(((Invoke-DlGitHub $O 'GET' "$($r.sha)" -Api 'git/blobs').content -replace '\s', '')) }
+    @{ bytes = $b; sha = $r.sha }
 }
 
 function Write-DlOpslag($O, [string]$Pad, [byte[]]$Bytes, [string]$Sha) {

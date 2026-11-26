@@ -1,0 +1,43 @@
+{
+  "id": "20261126-vestigingsfilters-welke-crawlbaar",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Filters op een overzicht van vestigingen",
+  "matrix": ["1.2.4", "1.1.10"],
+  "cel": "leadgen",
+  "titel": "40 praktijken, vier filters en 70% van de crawls op filter-URL's",
+  "intro": "Een keten van fysiotherapiepraktijken heeft 40 vestigingen. Op /locaties/ kun je filteren op stad, op behandeling (zoals dry needling), op 'open op zaterdag' en sorteren op afstand. Elke keuze maakt een nieuwe URL met parameters. In de serverlogs gaat 70% van de bezoeken van Googlebot naar die filter-URL's. Nieuwe behandelpagina's worden traag gevonden.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is het beste advies voor deze filters?",
+    "opties": [
+      "Zet op alle filter-URL's een canonical naar /locaties/, zodat Google ze snel minder crawlt en zich op de vestigingen richt.",
+      "Laat alle combinaties crawlen en indexeren, zodat Google voor elke zoekvraag met stad en behandeling een pagina heeft.",
+      "Zet nofollow op de filterlinks in het overzicht, zodat Googlebot de filter-URL's overslaat en tijd houdt voor nieuwe pagina's.",
+      "Maak per stad een vaste pagina als /locaties/utrecht/ en blokkeer de rest in robots.txt, zodat Googlebot echte pagina's crawlt."
+    ],
+    "juist": 3
+  },
+  "kern": "Mensen zoeken op 'fysiotherapeut Utrecht', niet op 'open op zaterdag, gesorteerd op afstand'. Geef de stad een vaste pagina en houd de rest uit de crawl.",
+  "afleiders": [
+    "**Canonical naar /locaties/:** dat lijkt netjes op te ruimen. Maar volgens Google zakt het crawlen daardoor pas langzaam. En je zegt tegen Google dat de stadspagina's kopieën zijn, terwijl daar juist op gezocht wordt.",
+    "**Alles laten indexeren:** meer pagina's lijkt meer kansen te geven. Maar de meeste combinaties tonen dezelfde praktijken in een andere volgorde. Googlebot verspilt er zijn tijd aan, en dat is precies het probleem van nu.",
+    "**Nofollow op de filterlinks:** dat klinkt als een simpele knop. Maar het werkt alleen als élke link naar die URL's nofollow heeft. Google noemt het op de lange termijn minder effectief dan robots.txt.",
+    ""
+  ],
+  "kort": "Denk aan een bibliotheek waar elke combinatie van zoekfilters een nieuwe kast oplevert, met steeds dezelfde boeken in een andere volgorde. Een bibliothecaris die elke kast langsloopt, komt niet meer toe aan de nieuwe boeken. Googlebot heeft ook maar beperkt tijd per site. Een vaste kast per stad is handig, want daar zoeken mensen op. De rest hoeft hij niet te zien.",
+  "begrippen": [
+    { "term": "Filternavigatie (faceted navigation)", "uitleg": "filters op een overzichtspagina waarmee je de lijst smaller maakt, zoals op stad of behandeling. Elke keuze maakt vaak een eigen URL." },
+    { "term": "Parameter", "uitleg": "het stuk van een URL na het vraagteken, zoals ?stad=utrecht&zaterdag=ja." },
+    { "term": "Canonical", "uitleg": "een tag die zegt welke URL de hoofdversie is van een pagina met dezelfde inhoud." },
+    { "term": "Nofollow", "uitleg": "een label op een link dat Google vraagt die link niet te volgen of mee te tellen." }
+  ],
+  "uitleg": "Google schreef eind 2024 een eigen pagina over het crawlen van filter-URL's. De kern:\n- Hoeven filter-URL's niet in Google te staan, blokkeer ze dan met **robots.txt**. Houd het ongefilterde overzicht wel crawlbaar.\n- Filters via een **URL-fragment** (#stad=utrecht) hebben geen invloed op het crawlen.\n- **Canonical en nofollow** kunnen het crawlen op den duur verminderen, maar werken minder goed en trager.\n- Levert een combinatie geen resultaten op, geef dan een **404**.\n\nWil je sommige filterpagina's wél in Google, zoals een pagina per stad:\n- Maak er een vaste URL van, liefst in het pad: /locaties/utrecht/.\n- Geef die pagina eigen inhoud: welke praktijken, adressen, behandelingen en openingstijden.\n- Link er vanuit het menu of het overzicht naar.\n\nHoudt een stad maar één praktijk over, dan is de vestigingspagina zelf vaak de beste landingspagina.",
+  "kernpunt": "Geef alleen filters waar mensen echt op zoeken een vaste pagina. Houd de andere filtercombinaties met robots.txt uit de crawl.",
+  "toepassing": "Kijk vandaag bij een leadgen-klant met een overzicht van vestigingen of diensten welke filters een eigen URL maken. Noteer per filter of iemand daar in Google op zou zoeken.",
+  "bron": {
+    "titel": "Managing crawling of faceted navigation URLs | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+  }
+}
