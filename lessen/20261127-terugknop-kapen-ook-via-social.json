@@ -1,0 +1,42 @@
+{
+  "id": "20261127-terugknop-kapen-ook-via-social",
+  "type": "nieuws",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Spambeleid: back button hijacking geldt ook voor bezoek via social",
+  "matrix": ["10.1.1"],
+  "cel": "alle",
+  "titel": "De terugknop leidt naar aanbiedingen: 'maar dit bezoek komt van social'",
+  "intro": "Een klant met een blog over verbouwen haalt veel bezoek uit Facebook en Instagram. Een script van een advertentiepartner zorgt ervoor dat wie op 'terug' tikt, eerst op een pagina met aanbiedingen belandt. De klant zegt: 'Google maakt dat niet uit, deze bezoekers komen niet uit de zoekresultaten.' Op 23 november 2026 publiceerde Google nieuwe vragen en antwoorden over dit soort scripts.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat adviseer je de klant?",
+    "opties": [
+      "Het script laten staan, want het beleid telt alleen bezoeken die vanuit de zoekresultaten van Google binnenkomen.",
+      "Afscheid nemen van de advertentiepartner, want Google straft elke site die code van een advertentieplatform laadt.",
+      "Het script voor Googlebot uitzetten, want Google beoordeelt de pagina op wat zijn eigen crawler te zien krijgt.",
+      "De terugknop-truc laten uitzetten, want het beleid geldt voor elk bezoek in de browser, ook als het via social komt."
+    ],
+    "juist": 3
+  },
+  "kern": "Google kijkt naar wat er in de browser gebeurt, niet naar waar de bezoeker vandaan kwam. De partner mag blijven, het gedrag niet.",
+  "afleiders": [
+    "**Script laten staan:** het is een regel van Google, dus het lijkt alleen over zoekbezoekers te gaan. Google schreef er juist bij dat het ook geldt voor bezoek via social en andere kanalen.",
+    "**Afscheid van de partner:** dat voelt veilig. Maar Google schrijft dat je met advertentieplatforms mag blijven werken. Het gaat alleen om pagina's waar de terugknop echt gekaapt wordt.",
+    "**Uitzetten voor Googlebot:** dan ziet Google een nette pagina. Maar bezoekers krijgen dan iets anders dan Google. Dat heet cloaking, en dat is ook spam.",
+    ""
+  ],
+  "kort": "Denk aan een winkel waar de uitgang ineens langs een kraam met aanbiedingen loopt, en je er niet omheen kunt. Of je met de auto of de bus kwam, maakt niet uit: je voelt je vastgehouden. Google kijkt net zo naar een site. Het gaat om wat iemand in de browser meemaakt. Waar hij vandaan kwam, verandert daar niets aan.",
+  "begrippen": [
+    { "term": "Back button hijacking", "uitleg": "een site verandert de terugknop van de browser, zodat je niet meer gewoon terug kunt naar de vorige pagina." },
+    { "term": "Spambeleid", "uitleg": "de regels van Google over wat niet mag. Wie ze overtreedt, kan lager komen te staan of uit de zoekresultaten verdwijnen." },
+    { "term": "Cloaking", "uitleg": "zoekmachines andere inhoud laten zien dan bezoekers. Volgens Google is dat spam." }
+  ],
+  "uitleg": "**Wat er nieuw is**\nGoogle kondigde het beleid tegen back button hijacking aan op 13 april 2026. Sinds 15 juni 2026 handhaaft Google het, met handmatige acties of automatisch lagere posities. Op 23 november 2026 kwamen er vragen en antwoorden bij:\n- Het beleid geldt zodra het gebeurt terwijl iemand in een browser surft, ook na een klik vanaf social media.\n- Discover hoort bij Google Search, dus ook daar gelden de spamregels.\n- Een app openen ('open in app') valt er niet onder.\n- Werken met advertentieplatforms en hun code mag. Google treedt alleen op tegen pagina's waar het gedrag echt optreedt.\n\n**Aanpak**\n- Test de terugknop op pagina's met advertentiecode, ook na een klik vanaf social.\n- Komt het van een script of instelling van een partner, laat die dan uitzetten of aanpassen.\n- Bezoekers kunnen verdachte sites melden via het spamformulier van Google.",
+  "kernpunt": "Laadt een klant scripts van advertentiepartners, test dan of de terugknop nog gewoon terug gaat, ongeacht waar het bezoek vandaan komt.",
+  "toepassing": "Open vandaag bij één klant met advertentiecode een artikel via een link op social media, tik op 'terug' en kijk of je echt terugkomt waar je was.",
+  "bron": {
+    "titel": "Spam policies for Google web search | Google Search Central",
+    "url": "https://developers.google.com/search/docs/essentials/spam-policies"
+  }
+}

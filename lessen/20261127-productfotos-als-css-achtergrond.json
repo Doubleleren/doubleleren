@@ -1,0 +1,42 @@
+{
+  "id": "20261127-productfotos-als-css-achtergrond",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "CSS: productfoto's als achtergrond en Google Afbeeldingen",
+  "matrix": ["5.3.6", "2.1.14"],
+  "cel": "ecom",
+  "titel": "Scherpe productfoto's, en toch nauwelijks iets in Google Afbeeldingen",
+  "intro": "Een webshop in designlampen wil meer bezoek uit Google Afbeeldingen. Het nieuwe thema toont de productfoto's in de categorie en op de productpagina als achtergrond van een blok, met background-image in een style-attribuut. De foto's zijn scherp, in WebP opgeslagen en hebben een duidelijke bestandsnaam. Toch vindt Google Afbeeldingen bijna geen foto's van de shop.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de belangrijkste oorzaak?",
+    "opties": [
+      "De foto's hebben geen alt-tekst, want Google Afbeeldingen neemt alleen foto's met een alt-tekst op.",
+      "De foto's staan als achtergrond in CSS, want Google indexeert geen afbeeldingen die alleen in CSS staan.",
+      "De foto's zijn in WebP opgeslagen, want Google Afbeeldingen ondersteunt dat formaat niet voor productfoto's.",
+      "De foto's staan niet in een afbeeldingssitemap, want zonder sitemap komt geen enkele foto in de index."
+    ],
+    "juist": 1
+  },
+  "kern": "Google indexeert geen afbeeldingen uit CSS. Een foto die alleen als achtergrond in de opmaak staat, bestaat voor Google Afbeeldingen dus niet.",
+  "afleiders": [
+    "**Alt-tekst:** die helpt Google begrijpen wat er op een foto staat. Maar een foto zonder alt kan nog steeds in de index komen.",
+    "",
+    "**WebP:** een modern formaat lijkt een risico. Maar Google ondersteunt WebP gewoon, net als JPEG, PNG en AVIF.",
+    "**Afbeeldingssitemap:** die helpt Google foto's te ontdekken. Maar hij is niet verplicht: veel foto's komen zonder sitemap in de index, via img-elementen op de pagina."
+  ],
+  "kort": "Denk aan een museum dat een catalogus maakt. Elk schilderij aan de muur met een bordje erbij komt erin. Een print op het behang telt niet mee, ook al is hij net zo mooi. Google werkt net zo. Een img-element is het schilderij met bordje: dat neemt Google op. Een achtergrond in CSS is behang, en dat slaat Google over.",
+  "begrippen": [
+    { "term": "CSS", "uitleg": "de opmaakregels van een website: kleuren, lettertypen, afstanden en achtergronden." },
+    { "term": "background-image", "uitleg": "een CSS-regel die een afbeelding als achtergrond achter een blok op de pagina zet." },
+    { "term": "img-element", "uitleg": "de gewone HTML-code voor een afbeelding op de pagina, met een adres (src) en een alt-tekst." }
+  ],
+  "uitleg": "Google schrijft in de richtlijnen voor Google Afbeeldingen dat het geen CSS-afbeeldingen indexeert. Standaard HTML-afbeeldingselementen helpen crawlers juist om afbeeldingen te vinden en te verwerken.\n\n**Wanneer is CSS prima?**\n- Voor decoratie: patronen, sfeerbanden en iconen zonder eigen betekenis.\n- Niet voor productfoto's, want die wil je terugzien in Google Afbeeldingen en bij producten in de zoekresultaten.\n\n**Wat je de developer vraagt**\n- Zet productfoto's als img in de HTML, eventueel binnen een picture-element, met srcset voor verschillende schermen.\n- Geef ze een beschrijvende alt-tekst en een duidelijke bestandsnaam.\n- Gebruik in de productmarkup dezelfde foto-URL, zodat alles naar dezelfde afbeelding wijst.\n\nEen afbeeldingssitemap kan helpen om foto's te ontdekken, bijvoorbeeld als ze via een script laden. Maar begin bij de basis: echte img-elementen.",
+  "kernpunt": "Moet een foto gevonden worden in Google, zet hem dan als img in de HTML. CSS is voor decoratie.",
+  "toepassing": "Klik vandaag op een productpagina van één klant met de rechtermuisknop op de hoofdfoto en kies Inspecteren. Zie je een img-element of een background-image?",
+  "bron": {
+    "titel": "Google image SEO best practices | Google Search Central",
+    "url": "https://developers.google.com/search/docs/appearance/google-images"
+  }
+}

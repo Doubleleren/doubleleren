@@ -1,0 +1,42 @@
+{
+  "id": "20261127-ontdubbelen-productexport-controleren",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een export laten opschonen en het resultaat controleren",
+  "matrix": ["coderen-met-ai:7.1.1"],
+  "cel": "ecom",
+  "titel": "'6.300 dubbele producten verwijderd.' Kan het bestand naar de klant?",
+  "intro": "Je vraagt Claude Code een productexport van een webshop in kinderkleding op te schonen: 'haal dubbele producten eruit.' Het script draait. Van de 8.400 regels blijven er 2.100 over. Claude meldt: 'Klaar, 6.300 dubbele producten verwijderd.' In de export heeft elke maat van een product een eigen regel.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je voordat je het bestand naar de klant stuurt?",
+    "opties": [
+      "Een paar verwijderde regels bekijken en vragen op welke kolom Claude ontdubbelde, want het aantal is verdacht hoog.",
+      "Het bestand meteen versturen, want Claude meldt zelf hoeveel regels er weg zijn en de export is nu veel overzichtelijker.",
+      "Claude vragen het script nog een keer te draaien, want bij een tweede keer vindt het ook de laatste dubbele regels.",
+      "Het originele bestand weggooien, want zo voorkom je dat iemand per ongeluk weer met de oude versie gaat werken."
+    ],
+    "juist": 0
+  },
+  "kern": "Ontdubbelen op de verkeerde kolom gooit echte producten weg. Kijk wat eruit ging en controleer waarop het script vergeleek.",
+  "afleiders": [
+    "",
+    "**Meteen versturen:** Claude geeft netjes een aantal. Maar dat aantal zegt niet óf de regels echt dubbel waren. Drie van de vier regels weg is bij een kledingshop verdacht.",
+    "**Nog een keer draaien:** dat lijkt grondiger. Maar het script doet dan precies hetzelfde. Was de kolomkeuze fout, dan blijft hij fout.",
+    "**Origineel weggooien:** opruimen voelt netjes. Maar dan kun je niet meer vergelijken of terug als er iets misging. Bewaar het origineel altijd."
+  ],
+  "kort": "Vergelijk het met een la vol sokken die je uitzoekt. Gooi je alles weg wat dezelfde kleur heeft, dan raak je ook sokken kwijt die alleen een andere maat hebben. Je moet eerst afspreken wanneer twee sokken écht hetzelfde zijn. Bij een export is dat de kolom waarop je vergelijkt. Kijk daarom even in de vuilniszak voordat je hem buiten zet.",
+  "begrippen": [
+    { "term": "Ontdubbelen", "uitleg": "dubbele regels uit een bestand halen, zodat elk item één keer voorkomt." },
+    { "term": "Kolom", "uitleg": "één soort gegeven in een export, zoals de titel, de maat of de EAN-code." },
+    { "term": "EAN-code", "uitleg": "het unieke nummer onder de streepjescode. Elke maat en kleur heeft meestal een eigen EAN." }
+  ],
+  "uitleg": "**Hoe ontdubbelen werkt:** in pandas, de Python-bibliotheek die Claude hier vaak voor gebruikt, doet drop_duplicates() dit. Met subset kies je op welke kolommen het vergelijkt. Standaard houdt het de eerste regel en gooit het de rest weg. Vergelijkt het script alleen op producttitel, dan zijn alle maten van hetzelfde shirt ineens 'dubbel'.\n\n**Zo controleer je een opgeschoonde export:**\n- tel de regels voor en na, en vraag je af of het verschil logisch is;\n- laat Claude de verwijderde regels in een apart bestand zetten en bekijk er een paar;\n- vraag op welke kolom of kolommen het vergeleek; voor producten is dat meestal een unieke code zoals SKU of EAN;\n- laat het origineel staan en schrijf de uitkomst naar een nieuw bestand.\n\n**Zeg het vooraf:** 'dubbel betekent: dezelfde EAN-code'. Dan hoeft Claude niet te raden.",
+  "kernpunt": "Zeg vooraf wat 'dubbel' betekent, en bekijk na het opschonen altijd een paar regels die eruit gingen.",
+  "toepassing": "Pak vandaag een export die je onlangs met Claude opschoonde. Vraag op welke kolom het ontdubbelde en bekijk tien regels die verdwenen.",
+  "bron": {
+    "titel": "pandas.DataFrame.drop_duplicates | pandas documentation",
+    "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html"
+  }
+}

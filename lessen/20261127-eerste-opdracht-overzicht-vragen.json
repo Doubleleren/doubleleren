@@ -1,0 +1,41 @@
+{
+  "id": "20261127-eerste-opdracht-overzicht-vragen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een eerste opdracht geven in een projectmap",
+  "matrix": ["coderen-met-ai:1.2.2"],
+  "cel": "ecom",
+  "titel": "Je neemt de feedcheck van een collega over. Wat vraag je eerst?",
+  "intro": "Een collega gaat op vakantie en draagt de map 'feedcheck' aan je over. Daarin staan scripts die elke nacht de productfeed van een webshop in babyspullen controleren. Je hebt de map op je laptop gezet, bent er met cd naartoe gegaan en hebt claude gestart. Morgen moet je één controle aanpassen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is je beste eerste opdracht in deze map?",
+    "opties": [
+      "'Verbeter de scripts in deze map', zodat Claude meteen de zwakke plekken aanpakt voordat jij er zelf aan begint.",
+      "Alle scripts kopiëren en in de chat plakken, zodat Claude zeker weet welke bestanden er in de map staan.",
+      "'Geef me een overzicht van dit project en hoe de controles werken', zodat je weet waar je straks iets aanpast.",
+      "'Negeer CLAUDE.md en begin blanco', zodat Claude niet wordt beïnvloed door de afspraken van je collega."
+    ],
+    "juist": 2
+  },
+  "kern": "Begin in een onbekend project met vragen, niet met wijzigingen. Claude leest de bestanden zelf en kan je uitleggen hoe het werkt.",
+  "afleiders": [
+    "**Meteen verbeteren:** dat lijkt efficiënt. Maar Claude kiest dan zelf wat 'beter' is, in code die jij nog niet kent. Je weet daarna niet wat er veranderde en waarom.",
+    "**Alles in de chat plakken:** dat voelt grondig. Maar Claude Code leest de bestanden in de map zelf. Plakken kost alleen ruimte in het gesprek.",
+    "",
+    "**CLAUDE.md negeren:** een frisse blik klinkt objectief. Maar in CLAUDE.md staan juist de afspraken die je collega vastlegde, zoals hoe je de controles test. Die wil je hebben."
+  ],
+  "kort": "Vergelijk het met een overdracht op je werk. Je begint niet met het herschrijven van het werk van je collega. Je vraagt eerst: hoe zit het in elkaar en waar moet ik op letten? Claude kan die rondleiding geven, omdat het alle bestanden zelf kan lezen. Pas daarna weet je waar je iets moet veranderen.",
+  "begrippen": [
+    { "term": "Projectmap", "uitleg": "de map met alle bestanden van één project. Daarin start je Claude Code." },
+    { "term": "CLAUDE.md", "uitleg": "een tekstbestand met afspraken over het project, dat Claude aan het begin van elke sessie leest." }
+  ],
+  "uitleg": "**Wat de documentatie aanraadt:** start Claude in de hoofdmap van het project en vraag eerst om een overzicht, zoals 'give me an overview of this codebase'. Daarna ga je dieper in op één onderdeel.\n\n**Goede vervolgvragen:**\n- 'Welke bestanden horen bij de controle op prijzen?'\n- 'Hoe werken deze bestanden samen?'\n- 'Welke afspraken en gewoontes zie je in dit project?'\n- 'Maak een lijstje van de begrippen die hier gebruikt worden.'\n\n**Begin breed, dan smal.** Eerst het geheel, dan het stukje dat je morgen aanpast. Stelt Claude voor iets te veranderen terwijl je nog aan het verkennen bent, zeg dan dat je nu alleen wilt begrijpen. Wil je het zeker weten, start dan in plan mode: dan wijzigt Claude niets.",
+  "kernpunt": "Nieuw in een project? Laat Claude eerst uitleggen hoe het werkt, en wijzig pas als je weet waar.",
+  "toepassing": "Open vandaag een project dat je niet zelf bouwde, start claude in de hoofdmap en vraag om een overzicht. Kijk of je daarna weet welk bestand je zou aanpassen.",
+  "bron": {
+    "titel": "Common workflows | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/common-workflows"
+  }
+}

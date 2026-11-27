@@ -1,0 +1,41 @@
+{
+  "id": "20261127-gsc-koppeling-totaal-lager-dan-rapport",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een API-koppeling testen tegen het rapport",
+  "matrix": ["coderen-met-ai:7.2.2"],
+  "cel": "ecom",
+  "titel": "Het script telt 41.000 klikken, Search Console zegt 52.000",
+  "intro": "Je laat Claude Code een koppeling met de Search Console API bouwen voor een webshop in tuinmeubelen. Het script vraagt de klikken per pagina én per zoekopdracht op en telt alles bij elkaar op. Bij je test komt oktober uit op 41.000 klikken. Het rapport Prestaties in Search Console toont voor oktober 52.000.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe test je of de koppeling het totaal goed ophaalt?",
+    "opties": [
+      "Claude het verschil laten wegwerken met een correctiefactor, want dan sluit het script voortaan aan op het rapport.",
+      "Het script over een week opnieuw draaien, want Search Console werkt de cijfers van oktober nog dagenlang bij.",
+      "Het totaal opvragen zonder pagina en zoekopdracht als indeling, want alleen dan telt de API alle klikken mee.",
+      "De API-sleutel vervangen door een nieuwe, want een oudere sleutel krijgt van Google maar een deel van de data."
+    ],
+    "juist": 2
+  },
+  "kern": "Deel je op per pagina of zoekopdracht, dan laat de API gegevens weg. Een betrouwbaar totaal vraag je op zonder die twee indelingen.",
+  "afleiders": [
+    "**Correctiefactor:** dan klopt het totaal op papier. Maar je verstopt de oorzaak, en het verschil is niet elke maand even groot. Je rapport wordt er onbetrouwbaarder van.",
+    "**Week later opnieuw:** nieuwe cijfers komen inderdaad met vertraging binnen, meestal na 2 tot 3 dagen. Maar oktober is allang compleet. Wachten verandert hier niets.",
+    "",
+    "**Nieuwe sleutel:** een sleutel geeft toegang of niet. Met een ongeldige sleutel krijg je een foutmelding, geen lager getal."
+  ],
+  "kort": "Vergelijk het met de kassa van een drukke winkel. Wil je de dagomzet weten, dan kijk je naar het kassatotaal. Ga je alle bonnetjes los optellen en zijn er een paar zoek, dan kom je te laag uit. Search Console werkt ongeveer zo: in een lijst per pagina of zoekopdracht vallen rijen weg. Het totaal zelf is wel compleet.",
+  "begrippen": [
+    { "term": "Dimensie", "uitleg": "de indeling waarin je gegevens opvraagt, zoals per pagina, per zoekopdracht of per dag." },
+    { "term": "API", "uitleg": "een vaste manier waarop een script gegevens opvraagt bij een ander systeem, hier Search Console." }
+  ],
+  "uitleg": "**Wat de documentatie zegt:** deel je op per page of query, dan kan Google gegevens weglaten om de uitkomst op tijd te berekenen. Cijfers per pagina worden ook anders berekend dan voor de hele property. Voor exacte totalen laat je de dimensies page en query weg.\n\n**Zo test je een API-koppeling:**\n- vraag eerst het totaal op met alleen date als dimensie en leg het naast het rapport, met dezelfde periode en hetzelfde zoektype;\n- klopt dat, test dan de uitsplitsing apart: welk deel van het totaal komt terug in de lijst per pagina?\n- zet in de rapportage dat de lijst per pagina of zoekopdracht niet optelt tot het totaal.\n\n**Laat Claude het checken:** geef als klaar-criterium mee dat het totaal per dag (vrijwel) gelijk is aan het rapport. Dan test Claude zelf, in plaats van alleen te melden dat het script draait.",
+  "kernpunt": "Test een koppeling eerst op het totaal, zonder pagina of zoekopdracht. Een lijst per pagina telt nooit helemaal op tot dat totaal.",
+  "toepassing": "Vraag vandaag in een eigen Search Console-script het totaal van vorige week op met alleen datum als dimensie. Leg het naast het rapport Prestaties.",
+  "bron": {
+    "titel": "Getting all your data | Search Console API | Google for Developers",
+    "url": "https://developers.google.com/webmaster-tools/v1/how-tos/all-your-data"
+  }
+}
