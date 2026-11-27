@@ -8,16 +8,41 @@ $script:DlUtf8 = New-Object System.Text.UTF8Encoding($false)
 # Expliciet TLS 1.2 (+1.3): de standaard van Windows PowerShell 5.1 biedt ook oude protocollen aan, waarop GitHub de verbinding sluit
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor [Net.SecurityProtocolType]'Tls13' } catch { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 }
 
-function New-DlOpslag([string]$Eigenaar, [string]$Repo, [string]$Token, [string]$Map, [string]$Auteur = 'doubleleren', [string]$Tak = 'main', [switch]$Raw) {
+function New-DlOpslag([string]$Eigenaar, [string]$Repo, [string]$Token, [string]$Map, [string]$Auteur = 'doubleleren', [string]$Tak = 'main', [switch]$Raw, [string]$Portier, [string]$LidId) {
     if ($Map) { if (-not (Test-Path $Map)) { New-Item -ItemType Directory $Map -Force | Out-Null }; return @{ soort = 'map'; map = (Resolve-Path $Map).Path } }
     # Raw: alleen lezen van een publieke repo via raw.githubusercontent.com (geen API-limiet per kantoor-IP)
     if ($Raw) { return @{ soort = 'raw'; eigenaar = $Eigenaar; repo = $Repo; tak = $Tak } }
+    # Nieuwe uitnodigingscode (dl1_…): geen eigen GitHub-token, maar een geheim waarmee de portier een token geeft (een uur geldig)
+    if ($Token -cmatch '^dl1_[A-Za-z0-9]{48}$') {
+        if (-not $Portier -or -not $LidId) { throw 'Deze uitnodigingscode werkt via de portier, maar die is niet ingesteld. Werk DoubleLeren bij of vraag de beheerder.' }
+        return @{ soort = 'github'; eigenaar = $Eigenaar; repo = $Repo; token = $null; verloopt = [DateTime]::MinValue; auteur = $Auteur; tak = $Tak; portier = @{ adres = $Portier.TrimEnd('/'); id = $LidId; geheim = $Token } }
+    }
     @{ soort = 'github'; eigenaar = $Eigenaar; repo = $Repo; token = $Token; auteur = $Auteur; tak = $Tak }
 }
 
-function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body) {
+# Aanroep naar de portier (POST met JSON); de foutmelding van de portier komt mee
+function Invoke-DlPortier([string]$Adres, [string]$Pad, $Body) {
+    try { Invoke-RestMethod -Uri "$Adres$Pad" -Method Post -Body ($Body | ConvertTo-Json -Compress) -ContentType 'application/json' -Headers @{ 'User-Agent' = 'DoubleLeren' } -UseBasicParsing -TimeoutSec 30 }
+    catch {
+        $tekst = $null; try { $tekst = (New-Object IO.StreamReader($_.Exception.Response.GetResponseStream())).ReadToEnd() | ConvertFrom-Json } catch {}
+        if ($tekst.fout) { throw [string]$tekst.fout }
+        throw "De portier is even niet bereikbaar ($($_.Exception.Message)). Probeer het over een paar minuten opnieuw."
+    }
+}
+# Token voor GitHub: vast (oude code) of van de portier, vernieuwd vijf minuten voor het verloopt of als GitHub 401 gaf
+function Get-DlToken($O, [switch]$Vernieuw) {
+    if (-not $O.portier) { return $O.token }
+    if ($Vernieuw -or -not $O.token -or ($O.verloopt - [DateTime]::UtcNow).TotalMinutes -lt 5) {
+        $t = Invoke-DlPortier $O.portier.adres '/token' @{ id = $O.portier.id; geheim = $O.portier.geheim }
+        $O.token = [string]$t.token; $O.verloopt = ([DateTimeOffset]::Parse([string]$t.verloopt)).UtcDateTime
+    }
+    $O.token
+}
+
+function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body, [switch]$Opnieuw) {
     $kop = @{ 'User-Agent' = 'DoubleLeren'; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' }
-    if ($O.token) { $kop.Authorization = "Bearer $($O.token)" }
+    $tk = Get-DlToken $O -Vernieuw:$Opnieuw
+    if ($tk) { $kop.Authorization = "Bearer $tk" }
     $url = "https://api.github.com/repos/$($O.eigenaar)/$($O.repo)/contents/$Pad"
     if ($Methode -eq 'GET') { $url += "?ref=$($O.tak)&t=$([DateTime]::UtcNow.Ticks)" }   # eigen adres per keer: een bedrijfsproxy geeft anders een verouderde versie
     $p = @{ Uri = $url; Method = $Methode; Headers = $kop; UseBasicParsing = $true; TimeoutSec = 30 }
@@ -28,6 +53,8 @@ function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body) {
         catch {
             $status = 0; try { $status = [int]$_.Exception.Response.StatusCode } catch {}
             if ($status -eq 404) { return $null }
+            # Token van de portier verlopen of ingetrokken: één keer een nieuw vragen en opnieuw proberen
+            if ($status -eq 401 -and $O.portier -and -not $Opnieuw) { return (Invoke-DlGitHub $O $Methode $Pad $Body -Opnieuw) }
             if ($status -eq 409 -or $status -eq 422) { throw 'conflict' }
             if ($Methode -eq 'GET' -and ($status -ge 500 -or $status -eq 0 -or $status -eq 429) -and $poging -lt 2) { Start-Sleep -Milliseconds (700 * [math]::Pow(3, $poging)); $p.Uri = $url -replace 't=\d+$', "t=$([DateTime]::UtcNow.Ticks)"; continue }
             throw "GitHub ($Methode $Pad): $status $($_.Exception.Message)"

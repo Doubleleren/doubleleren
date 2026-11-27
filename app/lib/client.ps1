@@ -11,7 +11,10 @@ function Get-DlClient([string]$Thuis) {
     $g = Read-DlGeheim (Join-Path $Thuis 'geheim.dpapi')
     if (-not $g -or -not $cfg.vertrouwd) { return $null }
     $app = if ($cfg.appMap) { New-DlOpslag -Map $cfg.appMap } else { New-DlOpslag -Eigenaar $cfg.eigenaar -Repo $cfg.appRepo -Raw }
-    $data = if ($cfg.dataMap) { New-DlOpslag -Map $cfg.dataMap } else { New-DlOpslag -Eigenaar $cfg.eigenaar -Repo $cfg.dataRepo -Token $g.token }
+    # Portier (voor nieuwe codes): uit de config van de installatie, anders uit instellingen.json van het programma
+    $portier = $cfg.portier
+    if (-not $portier) { $ip = Join-Path $PSScriptRoot '..\..\instellingen.json'; if (Test-Path $ip) { $portier = (Get-Content $ip -Raw -Encoding UTF8 | ConvertFrom-Json).portier } }
+    $data = if ($cfg.dataMap) { New-DlOpslag -Map $cfg.dataMap } else { New-DlOpslag -Eigenaar $cfg.eigenaar -Repo $cfg.dataRepo -Token $g.token -Portier $portier -LidId $cfg.id }
     @{ id = $cfg.id; prive = $g.prive; app = $app; data = $data; vertrouwd = $cfg.vertrouwd; thuis = $Thuis; cfg = $cfg
        publiek = (New-DlSleutelbron $data $cfg.vertrouwd $cfg.id $g.prive) }
 }

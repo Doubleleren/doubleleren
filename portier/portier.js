@@ -140,7 +140,13 @@ export class Kluis {
     if (!R.ID_VORM.test(door) || !org.leden?.[door]) throw new Fout(403, 'Onbekende afzender');
     const s = await this.beheerJson(`sleutels/${door}.json`);
     if (!s?.publiek || !K.sleutelVorm(s.publiek)) throw new Fout(403, 'Afzender is nog niet goedgekeurd');
-    // Alleen de huidige sleutel (niet 'eerdere'): een sleutel van vóór "code kwijt" telt niet meer
+    // Alleen de huidige sleutel (niet 'eerdere'): een sleutel van vóór "code kwijt" telt niet meer. De portier onthoudt
+    // de vervangen sleutels, zodat ook een teruggezet ouder sleutelbestand niet meer helpt.
+    const oud = (await this.s.get(`eerdere:${door}`)) || [];
+    const erbij = await Promise.all((Array.isArray(s.eerdere) ? s.eerdere : []).filter((k) => K.sleutelVorm(k)).map(vingerafdrukHex));
+    const alleOude = [...new Set([...oud, ...erbij])];
+    if (alleOude.length !== oud.length) await this.s.put(`eerdere:${door}`, alleOude);
+    if (alleOude.includes(await vingerafdrukHex(s.publiek))) throw new Fout(403, 'Deze sleutel is vervangen (code kwijt) en telt niet meer');
     if (!(await K.verifieer(s.publiek, context, door, verzoek.inhoud, verzoek.sig))) throw new Fout(403, 'Handtekening klopt niet');
     let inhoud; try { inhoud = JSON.parse(verzoek.inhoud); } catch { throw new Fout(400, 'Ongeldige inhoud'); }
     const t = Date.parse(inhoud.datum);
@@ -163,7 +169,7 @@ export class Kluis {
     const oud = await this.s.get(`uitn:${id}`);
     const record = goedgekeurd
       // Al goedgekeurd (code kwijt, tweede laptop): een extra code erbij; de bestaande blijft werken
-      ? { ...(oud || {}), door, goedgekeurd: true, geheimHashes: [...(oud?.geheimHashes || []), hash].slice(-5) }
+      ? { ...(oud || {}), door, goedgekeurd: true, geheimHashes: [...(oud?.geheimHashes || []), hash].slice(-10) }
       // Nog niet goedgekeurd: een nieuwe uitnodiging vervangt de oude (en de binding)
       : { door, datum: new Date(this.nu()).toISOString(), geldigTot: this.nu() + GELDIG, geheimHashes: [hash], vingerafdruk: null, goedgekeurd: false };
     await this.s.put(`uitn:${id}`, record);
@@ -220,8 +226,24 @@ export class Kluis {
     const u = await this.s.get(`uitn:${id}`);
     const hash = await sha256(geheim);
     if (!u || !(u.geheimHashes || []).includes(hash)) { await this.s.put(sleutel, { n: fouten.n + 1, t: this.nu() }); throw new Fout(403, 'Deze uitnodigingscode klopt niet (meer)'); }
+    // Wie niet (meer) in het organogram staat (vertrokken), krijgt geen toegang meer; een nieuwe collega die de cloud nog
+    // moet toevoegen wel. Het organogram wordt hooguit 10 minuten onthouden.
+    let leden = await this.ledenKort();
+    if (!leden.ids.includes(id) && !(await this.s.get(`nieuw:${id}`))) {
+      leden = await this.ledenKort(true);          // net toegevoegd (bijv. op de laptop): eerst opnieuw kijken
+      if (!leden.ids.includes(id)) throw new Fout(403, 'Je staat niet (meer) in het organogram. Vraag de beheerder.');
+    }
+    if (!u.goedgekeurd && leden.goedgekeurd.includes(id)) { u.goedgekeurd = true; await this.s.put(`uitn:${id}`, u); }      // bijv. door de beheerder op de laptop goedgekeurd
     if (!u.goedgekeurd && this.nu() > u.geldigTot) throw new Fout(403, 'Deze uitnodiging is verlopen: vraag om een nieuwe');
     return u;
+  }
+  async ledenKort(vers = false) {
+    const c = await this.s.get('leden');
+    if (!vers && c && this.nu() - c.t < 10 * 60 * 1000) return c;
+    const org = await this.organogram(); const ids = Object.keys(org.leden || {});
+    const n = { t: this.nu(), ids, goedgekeurd: ids.filter((k) => org.leden[k]?.goedgekeurd) };
+    await this.s.put('leden', n);
+    return n;
   }
   async token({ id, geheim }, ip) {
     await this.metGeheim(id, geheim, ip);
@@ -241,14 +263,17 @@ export class Kluis {
   async stand() {
     const nieuw = {}, bindingen = {};
     for (const [k, v] of await this.s.list({ prefix: 'nieuw:' })) nieuw[k.slice(6)] = v;
-    for (const [k, v] of await this.s.list({ prefix: 'uitn:' })) if (!v.goedgekeurd && v.vingerafdruk) bindingen[k.slice(5)] = v.vingerafdruk;
-    return { orgversie: Number((await this.s.get('orgversie')) || 0), nieuw, bindingen };
+    const open = [];      // uitgenodigd en nog niet goedgekeurd: de cloud eist dan altijd een koppeling
+    for (const [k, v] of await this.s.list({ prefix: 'uitn:' })) if (!v.goedgekeurd) { open.push(k.slice(5)); if (v.vingerafdruk) bindingen[k.slice(5)] = v.vingerafdruk; }
+    return { orgversie: Number((await this.s.get('orgversie')) || 0), nieuw, bindingen, open };
   }
   async afgehandeld({ id, soort }) {
     if (!R.ID_VORM.test(String(id))) throw new Fout(400, 'Ongeldig id');
     if (soort === 'nieuw') await this.s.delete(`nieuw:${id}`);
+    else if (soort === 'geweigerd') { await this.s.delete(`nieuw:${id}`); await this.s.delete(`uitn:${id}`); }      // de code werkt dan ook niet meer
     else if (soort === 'goedgekeurd') { const u = await this.s.get(`uitn:${id}`); if (u) await this.s.put(`uitn:${id}`, { ...u, goedgekeurd: true }); }
     else throw new Fout(400, 'Onbekende soort');
+    await this.s.delete('leden');      // het organogram is veranderd
     return { ok: true };
   }
   async orgversie({ versie }) {

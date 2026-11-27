@@ -1,5 +1,6 @@
 # DoubleLeren: nieuwe aanmeldingen goedkeuren in de cloud, zodat de laptop van de beheerder uit mag.
-# Sjabloon: cloud-beheer-inrichten.ps1 vult {{OMGEVING}} in (live of staging) en zet het resultaat, gelezen van het vaste
+# Sjabloon: cloud-beheer-inrichten.ps1 vult {{OMGEVING}} (live/staging), {{P}} (DL_/STAGING_) en {{DATA}} (data-repo) in en
+# zet het resultaat, gelezen van het vaste
 # commit, in de privé-repo Doubleleren/doubleleren-beheer als .github/workflows/goedkeuren-{{OMGEVING}}.yml. Zo raakt een
 # test op staging nooit de workflow van live. Alleen de beheerder heeft schrijfrecht op die repo, er staan geen deploy
 # keys op en er draait geen Claude: de beheersleutel staat alleen hier.
@@ -36,16 +37,27 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2, vast (deze repo heeft de beheersleutel)
         with:
-          repository: Doubleleren/${{ '{{OMGEVING}}' == 'live' && 'doubleleren-data' || 'doubleleren-data-staging' }}
-          ssh-key: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_DEPLOY_DATA || secrets.STAGING_DEPLOY_DATA }}
-          sparse-checkout: aanvragen
+          repository: Doubleleren/{{DATA}}
+          ssh-key: ${{ secrets.{{P}}DEPLOY_DATA }}
+          sparse-checkout: |
+            aanvragen
+            uitnodigingen
           persist-credentials: false
       - id: k
+        env:
+          PORTIER: ${{ vars.{{P}}PORTIER_URL }}
+          PORTIER_GEHEIM: ${{ secrets.{{P}}PORTIER_GEHEIM }}
         run: |
           shopt -s nullglob
-          f=(aanvragen/*.json)
-          echo "aantal=${#f[@]}" >> "$GITHUB_OUTPUT"
-          echo "Openstaande aanvragen: ${#f[@]}" >> "$GITHUB_STEP_SUMMARY"
+          f=(aanvragen/*.json uitnodigingen/*.json)
+          n=${#f[@]}
+          # Ook als een seintje ontbreekt (mislukt, of gewist): de portier zelf vragen of er nieuwe collega's wachten
+          if [ -n "$PORTIER" ] && [ -n "$PORTIER_GEHEIM" ]; then
+            m=$(curl -fsS --max-time 20 -H "Authorization: Bearer $PORTIER_GEHEIM" "$PORTIER/stand" | jq '(.nieuw // {}) | length') || m=1
+            n=$((n + m))
+          fi
+          echo "aantal=$n" >> "$GITHUB_OUTPUT"
+          echo "Openstaande aanvragen en nieuwe collega's: $n" >> "$GITHUB_STEP_SUMMARY"
 
   goedkeuren:
     needs: kijk
@@ -57,19 +69,13 @@ jobs:
         id: v
         shell: powershell
         env:
-          LIVE_COMMIT: ${{ vars.DL_APP_COMMIT }}
-          STAGING_COMMIT: ${{ vars.STAGING_APP_COMMIT }}
-          LIVE_VERSIE: ${{ vars.DL_ORG_VERSIE }}
-          STAGING_VERSIE: ${{ vars.STAGING_ORG_VERSIE }}
+          COMMIT: ${{ vars.{{P}}APP_COMMIT }}
+          VERSIE: ${{ vars.{{P}}ORG_VERSIE }}
         run: |
-          # Bewust in PowerShell gekozen en niet met && en || in een expressie: een lege live-variabele mag nooit op staging terugvallen
-          $live = '{{OMGEVING}}' -eq 'live'
-          $c = if ($live) { $env:LIVE_COMMIT } else { $env:STAGING_COMMIT }
-          $m = if ($live) { $env:LIVE_VERSIE } else { $env:STAGING_VERSIE }
-          if ($c -notmatch '^[0-9a-f]{40}$') { "Geen geldig vast commit voor {{OMGEVING}} (variabele DL_APP_COMMIT / STAGING_APP_COMMIT)." | Tee-Object -Append -FilePath $env:GITHUB_STEP_SUMMARY; exit 1 }
-          if ($m -and $m -notmatch '^\d+$') { "Ongeldige ondergrens voor het organogram: $m" | Tee-Object -Append -FilePath $env:GITHUB_STEP_SUMMARY; exit 1 }
-          "commit=$c" | Out-File -Append -Encoding ascii $env:GITHUB_OUTPUT
-          "versie=$m" | Out-File -Append -Encoding ascii $env:GITHUB_OUTPUT
+          if ($env:COMMIT -notmatch '^[0-9a-f]{40}$') { "Geen geldig vast commit voor {{OMGEVING}} (variabele {{P}}APP_COMMIT)." | Tee-Object -Append -FilePath $env:GITHUB_STEP_SUMMARY; exit 1 }
+          if ($env:VERSIE -and $env:VERSIE -notmatch '^\d+$') { "Ongeldige ondergrens voor het organogram: $env:VERSIE" | Tee-Object -Append -FilePath $env:GITHUB_STEP_SUMMARY; exit 1 }
+          "commit=$env:COMMIT" | Out-File -Append -Encoding ascii $env:GITHUB_OUTPUT
+          "versie=$env:VERSIE" | Out-File -Append -Encoding ascii $env:GITHUB_OUTPUT
 
       - name: App-repo ophalen (openbaar, op het vaste commit)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2
@@ -93,23 +99,27 @@ jobs:
       - name: Data-repo ophalen (privé, met geschiedenis voor de versiecontrole van het organogram)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2
         with:
-          repository: Doubleleren/${{ '{{OMGEVING}}' == 'live' && 'doubleleren-data' || 'doubleleren-data-staging' }}
+          repository: Doubleleren/{{DATA}}
           path: thuis/data-kloon
-          ssh-key: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_DEPLOY_DATA || secrets.STAGING_DEPLOY_DATA }}
+          ssh-key: ${{ secrets.{{P}}DEPLOY_DATA }}
           fetch-depth: 0
           persist-credentials: false
 
       - name: Goedkeuren
         shell: powershell
         env:
-          DL_BEHEER_SLEUTEL: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_BEHEER_SLEUTEL || secrets.STAGING_BEHEER_SLEUTEL }}
-          DL_GENERATOR_SLEUTEL: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_GENERATOR_SLEUTEL || secrets.STAGING_GENERATOR_SLEUTEL }}
-          DL_DEPLOY_DATA: ${{ '{{OMGEVING}}' == 'live' && secrets.DL_DEPLOY_DATA || secrets.STAGING_DEPLOY_DATA }}
+          DL_BEHEER_SLEUTEL: ${{ secrets.{{P}}BEHEER_SLEUTEL }}
+          DL_GENERATOR_SLEUTEL: ${{ secrets.{{P}}GENERATOR_SLEUTEL }}
+          DL_DEPLOY_DATA: ${{ secrets.{{P}}DEPLOY_DATA }}
           DL_ORG_VERSIE_MIN: ${{ steps.v.outputs.versie }}
+          DL_PORTIER: ${{ vars.{{P}}PORTIER_URL }}
+          DL_PORTIER_GEHEIM: ${{ secrets.{{P}}PORTIER_GEHEIM }}
         run: |
           $ErrorActionPreference = 'Stop'
           if (-not $env:DL_BEHEER_SLEUTEL -or -not $env:DL_GENERATOR_SLEUTEL -or -not $env:DL_DEPLOY_DATA) { throw 'Sleutels voor {{OMGEVING}} ontbreken (secrets).' }
           if (-not $env:DL_ORG_VERSIE_MIN) { Remove-Item Env:\DL_ORG_VERSIE_MIN }
+          if (-not $env:DL_PORTIER) { Remove-Item Env:\DL_PORTIER, Env:\DL_PORTIER_GEHEIM -ErrorAction SilentlyContinue }      # fase 1: nog zonder portier
+          elseif ($env:DL_PORTIER -notmatch '^https://[\w.-]+$' -or -not $env:DL_PORTIER_GEHEIM) { throw 'Portier voor {{OMGEVING}} half ingesteld ({{P}}PORTIER_URL / {{P}}PORTIER_GEHEIM).' }
           $T = "$env:GITHUB_WORKSPACE\thuis"; $k = Join-Path $env:RUNNER_TEMP 'data.key'
           try {
             [IO.File]::WriteAllText($k, ($env:DL_DEPLOY_DATA -replace "`r", '').Trim() + "`n")

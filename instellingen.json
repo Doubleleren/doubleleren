@@ -4,6 +4,8 @@
   "appRepo": "doubleleren",
   "dataRepo": "doubleleren-data",
   "vakgebied": "seo",
+  "portier": "",
+  "uitnodigers": "beheerders",
   "vakken": [
     { "id": "seo", "naam": "SEO" },
     { "id": "cro", "naam": "CRO" },

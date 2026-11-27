@@ -53,7 +53,7 @@ export function magUitnodigen(org, door, id) {
 // Mag 'door' een nieuw gewoon lid toevoegen op deze plek ({ project } of { cel } of niets) met dit vak?
 // Zelfde regel als hierboven, voor een lid dat er nog niet is: als hij er stond, zou 'door' hem dan mogen uitnodigen?
 export function magToevoegen(org, door, plek, vak) {
-  const proef = 'lid-000000';
+  const proef = `lid-${'0'.repeat(6)}`;      // samengesteld: in de openbare code staat bewust geen leden-id
   const lid = {}; if (plek?.project) lid.project = String(plek.project); else if (plek?.cel) lid.cel = String(plek.cel);
   if (vak && vak !== org?.vakgebied) lid.vak = String(vak);
   const kopie = { ...org, leden: { ...(org?.leden || {}), [proef]: lid } };

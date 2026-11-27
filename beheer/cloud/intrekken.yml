@@ -1,0 +1,33 @@
+# DoubleLeren: de toegang van een collega via de portier meteen intrekken (bijv. bij vertrek). Zijn uitnodigingscodes
+# werken daarna niet meer, en het gedeelde token van de app wordt vervangen. Pas daarna op de laptop het organogram aan
+# (wie er niet meer in staat, krijgt van de portier ook geen nieuw token meer).
+# Sjabloon: cloud-beheer-inrichten.ps1 vult {{OMGEVING}} en {{P}} in; staat in doubleleren-beheer als
+# .github/workflows/intrekken-{{OMGEVING}}.yml. Starten: Actions → Toegang intrekken → Run workflow.
+name: Toegang intrekken ({{OMGEVING}})
+run-name: Toegang intrekken ({{OMGEVING}}, ${{ inputs.id }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'Lid-id (lid-xxxxxx)'
+        type: string
+        required: true
+
+permissions: {}
+
+jobs:
+  intrekken:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - env:
+          ID: ${{ inputs.id }}
+          PORTIER: ${{ vars.{{P}}PORTIER_URL }}
+          PORTIER_GEHEIM: ${{ secrets.{{P}}PORTIER_GEHEIM }}
+        run: |
+          set -euo pipefail
+          [[ "$ID" =~ ^lid-[0-9a-f]{6}$ ]] || { echo "Geen geldig lid-id: gebruik de vorm lid-xxxxxx." | tee -a "$GITHUB_STEP_SUMMARY"; exit 1; }
+          [ -n "$PORTIER" ] && [ -n "$PORTIER_GEHEIM" ] || { echo "Portier niet ingesteld ({{P}}PORTIER_URL / {{P}}PORTIER_GEHEIM)."; exit 1; }
+          curl -fsS --max-time 20 -X POST -H "Authorization: Bearer $PORTIER_GEHEIM" -H 'Content-Type: application/json' -d "{\"id\":\"$ID\"}" "$PORTIER/intrekken" > /dev/null
+          echo "Toegang van $ID ingetrokken ({{OMGEVING}}). Pas nu ook op de laptop het organogram aan." >> "$GITHUB_STEP_SUMMARY"

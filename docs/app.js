@@ -2,6 +2,7 @@
 // in de browser, voortgang en team tonen. Je code en sleutels verlaten de browser nooit.
 import * as K from './krypto.js';
 import { WOORDEN } from './woorden.js';
+import * as R from './regels.js';
 
 // Nooit in een frame draaien (een andere pagina zou anders mee kunnen kijken)
 if (window.top !== window.self) { document.documentElement.innerHTML = ''; throw new Error('DoubleLeren mag niet in een frame draaien'); }
@@ -140,8 +141,13 @@ function lokaleBron(basis) {
   return metKopie(ruw);
 }
 const b64 = (bytes) => { const s = K.b64u.enc(bytes).replace(/-/g, '+').replace(/_/g, '/'); return s + '==='.slice((s.length + 3) % 4); };
+// token: een vaste token (oude uitnodigingscode) of een functie die er een geeft (nieuwe code, via de portier); bij een
+// 401 vraagt de site dan één keer een nieuw token (het vorige is verlopen of ingetrokken)
 function apiBron(eigenaar, repo, token) {
-  const kop = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.raw+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  const geefToken = typeof token === 'function' ? token : async () => token;
+  const basis = { Accept: 'application/vnd.github.raw+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  const metToken = async (opties = {}, vernieuw = false) => ({ ...opties, headers: { ...basis, ...(opties.headers || {}), Authorization: `Bearer ${await geefToken(vernieuw)}` } });
+  const vraag = async (u, opties, fn = haal) => { let r = await fn(u, await metToken(opties)); if (r.status === 401 && typeof token === 'function') r = await fn(u, await metToken(opties, true)); return r; };
   const url = (p) => `https://api.github.com/repos/${eigenaar}/${repo}/contents/${p.split('/').map(encodeURIComponent).join('/')}`;
   // Elke leesactie een eigen adres: een bedrijfsproxy (bijv. Cisco Umbrella) negeert 'Vary: Accept' en gaf anders het ruwe
   // bestand terug waar JSON werd verwacht, of een verouderde versie (oude sha → steeds 'conflict')
@@ -149,7 +155,7 @@ function apiBron(eigenaar, repo, token) {
   // Neutrale commit onder één algemene naam: geen namen, pseudoniemen of lestitels in de geschiedenis
   const wie = { name: 'doubleleren', email: 'sync@doubleleren.invalid' };
   const verstuur = async (methode, p, body) => {
-    const r = await fetch(url(p), { method: methode, headers: { ...kop, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' }, body: JSON.stringify({ message: 'sync', branch: 'main', committer: wie, author: wie, ...body }) });
+    const r = await vraag(url(p), { method: methode, headers: { Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' }, body: JSON.stringify({ message: 'sync', branch: 'main', committer: wie, author: wie, ...body }) }, fetch);
     if (r.status === 409 || r.status === 422) throw new Error('conflict');
     if (r.status === 401 || r.status === 403) throw new Error('Je uitnodigingscode mag niet (meer) schrijven. Vraag de beheerder om een nieuwe.');
     if (!r.ok) throw new Error(`Opslaan mislukt (${r.status})`);
@@ -157,16 +163,16 @@ function apiBron(eigenaar, repo, token) {
   };
   return metKopie({
     async boom() {
-      const r = await haal(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1&t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`, { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+      const r = await vraag(`https://api.github.com/repos/${eigenaar}/${repo}/git/trees/main?recursive=1&t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`, { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (r.status === 401 || r.status === 403 || r.status === 404) throw new Error('UITNODIGING');
       if (!r.ok) throw new Error(`GitHub gaf een onverwachte fout (${r.status}). Neem contact op met de beheerder.`);
       const blobs = (await r.json()).tree.filter((t) => t.type === 'blob');
       return { paden: blobs.map((t) => t.path), shas: new Map(blobs.map((t) => [t.path, t.sha])) };
     },
-    async bytes(p) { return leesBytes(await haal(vers(p), { headers: kop, cache: 'no-store' }), p); },
+    async bytes(p) { return leesBytes(await vraag(vers(p), { cache: 'no-store' }), p); },
     async ververs(p) {
-      const r = await haal(vers(p, 'ref=main&'), { headers: { ...kop, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+      const r = await vraag(vers(p, 'ref=main&'), { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (r.status === 404) return null;
       if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (!r.ok) throw new Error(`${p}: ${r.status}`);
@@ -176,6 +182,28 @@ function apiBron(eigenaar, repo, token) {
     async schrijf(p, b, sha) { return (await verstuur('PUT', p, { content: b64(b), ...(sha ? { sha } : {}) })).content.sha; },
     async verwijder(p, sha) { await verstuur('DELETE', p, { sha }); }
   });
+}
+// Portier: nieuwe uitnodigingscodes (lid-xxxxxx:dl1_…) krijgen hun GitHub-token van de portier (een uur geldig, namens
+// de GitHub App). Oude codes (een persoonlijk token) werken zoals altijd.
+const PORTIER_CODE = /^dl1_[A-Za-z0-9]{48}$/;
+const hexVan = (b) => [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
+async function portier(pad, body) {
+  const adres = S.inst?.portier;
+  // Echt: een https-adres. Lokaal testen (test\portier-lokaal.mjs): "/portier" op hetzelfde adres als de site
+  if (!adres || !(/^https:\/\/[\w.-]+$/.test(adres) || (LOKAAL && adres === '/portier'))) throw new Error('De portier is (nog) niet ingesteld. Neem contact op met de beheerder.');
+  let r; try { r = await fetch(`${adres}${pad}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), cache: 'no-store' }); }
+  catch (e) { throw new LaadFout(`De portier is even niet bereikbaar (${e.message}). Probeer het over een paar minuten opnieuw.`); }
+  const j = await r.json().catch(() => ({}));
+  if (r.status >= 500) throw new LaadFout('De portier is even niet bereikbaar. Probeer het over een paar minuten opnieuw.');
+  if (!r.ok) throw new Error(typeof j.fout === 'string' ? j.fout : `Portier: ${r.status}`);
+  return j;
+}
+function portierTokens(id, geheim) {
+  let t = null;
+  return async (vernieuw = false) => {
+    if (vernieuw || !t || Date.parse(t.verloopt) - Date.now() < 5 * 60e3) t = await portier('/token', { id, geheim });
+    return t.token;
+  };
 }
 function rawBron(eigenaar, repo) {
   return { paden: null, async init() {}, async bytes(p) { return leesBytes(await haal(`https://raw.githubusercontent.com/${eigenaar}/${repo}/main/${p}`, { cache: 'no-cache' }), p); } };
@@ -247,7 +275,7 @@ const ingevuld = (lid, vak) => itemsVan(lid, vak).some((it) => lid?.matrix?.has(
 async function verbind(uitnodiging, bewaren = false) {
   const m = UITNODIGING.exec(uitnodiging.trim());
   if (!m) throw new Error('De uitnodigingscode klopt niet. Je vindt hem in het Teams-bericht van de beheerder.');
-  S.data = LOKAAL ? lokaleBron(params.get('data')) : apiBron(S.eigenaar, S.inst.dataRepo, m[2]);
+  S.data = LOKAAL ? lokaleBron(params.get('data')) : apiBron(S.eigenaar, S.inst.dataRepo, PORTIER_CODE.test(m[2]) ? portierTokens(m[1], m[2]) : m[2]);
   try { await S.data.init(bewaren); }
   catch (e) { if (e.message === 'UITNODIGING') throw new Error('Deze uitnodigingscode heeft geen toegang (meer). Vraag de beheerder om een nieuwe.'); throw e; }
   return m[1];
@@ -1296,7 +1324,8 @@ async function welkomVerbind() {
   W.id = await verbind(uitnodiging); W.uitnodiging = uitnodiging;
   const org = await beheerJson('organisatie.json');
   const lid = org?.leden?.[W.id];
-  if (!lid) throw new Error('Deze uitnodiging is (nog) niet bekend. Vraag de beheerder om je toe te voegen.');
+  // Nieuwe code van een net toegevoegde collega: de cloud zet hem binnen een paar minuten in het organogram
+  if (!lid) throw new Error(PORTIER_CODE.test(uitnodiging.split(':')[1] || '') ? 'Je uitnodiging wordt nog verwerkt. Probeer het over een paar minuten opnieuw.' : 'Deze uitnodiging is (nog) niet bekend. Vraag de beheerder om je toe te voegen.');
   W.leren = lid.leren === 'optioneel' ? 'optioneel' : 'verplicht'; W.naam = String(lid.naam || '');
   W.vak = typeof lid.vak === 'string' && VAK_VORM.test(lid.vak) ? lid.vak : S.inst.vakgebied;
   W.handmatig = heeftRol(org, W.id);
@@ -1343,6 +1372,10 @@ async function welkomMaak() {
   status('Sleutels maken…');
   let kp = await K.nieuwSleutelpaar(3072);
   if (!K.sleutelVorm(kp.publiek)) kp = await K.nieuwSleutelpaar(3072);
+  // Nieuwe code (via de portier): eerst de aanmelding aan deze sleutel koppelen, vóór er iets wordt weggeschreven. De cloud
+  // keurt alleen een aanvraag met precies deze sleutel goed, zodat niemand met alleen een token zich voor jou aanmeldt.
+  const geheim = UITNODIGING.exec(W.uitnodiging || '')?.[2];
+  if (!W.herstel && geheim && PORTIER_CODE.test(geheim)) await portier('/aanmelden', { id: W.id, geheim, vingerafdruk: hexVan(await K.vingerafdruk(kp.publiek)) });
   const code = K.nieuweCode(WOORDEN);
   status('Code beveiligen…');
   const kluis = await K.sluitKluis(W.id, kp.prive, code);
@@ -1753,8 +1786,87 @@ $('maak-knop').addEventListener('click', async () => {
   try { await stuurLesIn(); } catch (e) { $('maak-fout').textContent = e.message; } finally { k.disabled = false; }
 });
 
+// ---------------------------------------------------------------- collega uitnodigen (via de portier)
+// Wie de knop ziet: beheerders altijd; heads en leiders volgens instellingen.uitnodigers ("heads-en-leiders", of een
+// lijst met ids als proef). De portier controleert alles opnieuw met dezelfde regels (docs/regels.js).
+function magUitnodigenTab() {
+  if (!S.inst?.portier || !S.teken || !S.org?.leden?.[S.mij]) return false;
+  if (R.isBeheerder(S.org, S.mij)) return true;
+  const u = S.inst.uitnodigers;
+  return (u === 'heads-en-leiders' || (Array.isArray(u) && u.includes(S.mij))) && R.heeftRol(S.org, S.mij);
+}
+const isGoedgekeurd = (id) => !!S.org?.leden?.[id]?.goedgekeurd || !!S.data?.paden?.includes(`beheer/sleutels/${id}.json`);
+const wachtOpGoedkeuring = (id) => !!S.data?.paden?.includes(`aanvragen/${id}.json`);
+const plekTekst = (l) => l?.project || (l?.cel ? `cel ${l.cel}` : '–');
+const siteAdres = () => `${location.origin}${location.pathname}${LOKAAL ? location.search : ''}`;
+async function ondertekendVerzoek(context, gegevens) {
+  const inhoud = JSON.stringify({ ...gegevens, datum: new Date().toISOString(), nonce: K.b64u.enc(K.willekeurig(18)) });
+  return { v: 2, door: S.mij, inhoud, sig: await K.onderteken(S.teken, context, S.mij, inhoud) };
+}
+function toonUitnodigen() {
+  const ids = Object.keys(S.org?.leden || {}).filter((id) => R.magUitnodigen(S.org, S.mij, id))
+    .sort((a, b) => String(S.org.leden[a].naam || a).localeCompare(String(S.org.leden[b].naam || b), 'nl'));
+  const status = (id) => (isGoedgekeurd(id) ? 'Doet mee' : wachtOpGoedkeuring(id) ? 'Wacht op goedkeuring' : 'Nog niet aangemeld');
+  $('ui-lijst').innerHTML = ids.length
+    ? `<thead><tr><th>Naam</th><th>Plek</th><th>Vak</th><th>Status</th><th></th></tr></thead><tbody>${ids.map((id) => `<tr><td>${esc(S.org.leden[id].naam || id)}</td><td>${esc(plekTekst(S.org.leden[id]))}</td><td>${esc(vakNaam(eigenVak(id)))}</td><td>${status(id)}</td><td><button type="button" class="knop" data-uitnodig="${esc(id)}">${isGoedgekeurd(id) ? 'Nieuwe code' : 'Uitnodigen'}</button></td></tr>`).join('')}</tbody>`
+    : '<tbody><tr><td class="leeg">Er zijn (nog) geen collega\'s die je kunt uitnodigen.</td></tr></tbody>';
+  vulNieuwFormulier();
+}
+// Plekken en vakken waar je een nieuwe collega mag toevoegen (zelfde regel als de portier)
+function vulNieuwFormulier() {
+  const cellen = Array.isArray(S.org?.cellen) ? S.org.cellen : [];
+  const plekken = [['', 'Geen plek'], ...cellen.flatMap((c) => [[`c:${c.id}`, `Cel ${c.naam || c.id}`], ...(c.projecten || []).map((p) => [`p:${p.id}`, p.naam || p.id])])];
+  const vakken = S.alleVakken.filter((v) => v.soort !== 'onderwerp');
+  const plekVan = (w) => (w.startsWith('p:') ? { project: w.slice(2) } : w.startsWith('c:') ? { cel: w.slice(2) } : null);
+  const mag = (w, v) => R.magToevoegen(S.org, S.mij, plekVan(w), v);
+  const okPlekken = plekken.filter(([w]) => vakken.some((v) => mag(w, v.id)));
+  $('ui-nieuw-paneel').hidden = !okPlekken.length;
+  if (!okPlekken.length) return;
+  const ik = S.org.leden[S.mij] || {};
+  const voorkeurPlek = ik.project ? `p:${ik.project}` : ik.cel ? `c:${ik.cel}` : '';
+  $('ui-plek').innerHTML = okPlekken.map(([w, t]) => `<option value="${esc(w)}"${w === voorkeurPlek ? ' selected' : ''}>${esc(t)}</option>`).join('');
+  const headVak = S.alleVakken.find((v) => headVanVak(v.id) === S.mij)?.id;
+  const voorkeurVak = headVak || eigenVak(S.mij);
+  $('ui-vak').innerHTML = vakken.map((v) => `<option value="${esc(v.id)}"${v.id === voorkeurVak ? ' selected' : ''}>${esc(v.naam)}</option>`).join('');
+}
+function toonUitnodigingsbericht(naam, code, goedgekeurd) {
+  $('ui-bericht').textContent = goedgekeurd
+    ? `Hoi ${naam}, hier is een nieuwe uitnodigingscode voor DoubleLeren (bijvoorbeeld voor een tweede laptop):\n${code}\n\nLog in op ${siteAdres()} met deze code en je eigen code van zes woorden.`
+    : `Hoi ${naam}, je bent uitgenodigd voor DoubleLeren: elke werkdag een korte les over je vak.\n\n1. Ga naar ${siteAdres()}#welkom\n2. Plak deze uitnodigingscode: ${code}\n\nDe code is persoonlijk en werkt 14 dagen.`;
+  $('ui-res-kop').textContent = goedgekeurd ? `Nieuwe code voor ${naam}` : `Uitnodiging voor ${naam}`;
+  $('ui-kopieer').textContent = 'Kopieer bericht';
+  $('ui-resultaat').hidden = false; $('ui-resultaat').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+async function nodigUit(id) {
+  const j = await portier('/uitnodigen', { verzoek: await ondertekendVerzoek(`uitnodiging|${id}`, { id }) });
+  toonUitnodigingsbericht(S.org.leden[id]?.naam || id, j.code, !!j.goedgekeurd);
+}
+async function voegNieuwToe() {
+  const naam = $('ui-naam').value.trim(), w = $('ui-plek').value, vak = $('ui-vak').value;
+  const plek = w.startsWith('p:') ? { project: w.slice(2) } : w.startsWith('c:') ? { cel: w.slice(2) } : {};
+  if (naam.length < 2) throw new Error('Vul de naam in.');
+  if (!R.magToevoegen(S.org, S.mij, plek, vak)) throw new Error('Op deze plek en met dit vak mag je geen collega toevoegen.');
+  const j = await portier('/nieuw', { verzoek: await ondertekendVerzoek('nieuw', { naam, ...plek, vak, leren: $('ui-optioneel').checked ? 'optioneel' : 'verplicht' }) });
+  $('ui-nieuw-form').reset(); vulNieuwFormulier();
+  toonUitnodigingsbericht(naam, j.code, false);
+}
+$('ui-lijst').addEventListener('click', async (e) => {
+  const b = e.target.closest('button[data-uitnodig]'); if (!b) return;
+  b.disabled = true; $('ui-fout').textContent = '';
+  try { await nodigUit(b.dataset.uitnodig); } catch (err) { $('ui-fout').textContent = err.message; } finally { b.disabled = false; }
+});
+$('ui-nieuw-form').addEventListener('submit', (e) => e.preventDefault());
+$('ui-nieuw-knop').addEventListener('click', async () => {
+  const b = $('ui-nieuw-knop'); b.disabled = true; $('ui-nieuw-fout').textContent = '';
+  try { await voegNieuwToe(); } catch (err) { $('ui-nieuw-fout').textContent = err.message; } finally { b.disabled = false; }
+});
+$('ui-kopieer').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText($('ui-bericht').textContent); $('ui-kopieer').textContent = 'Gekopieerd'; }
+  catch { $('ui-kopieer').textContent = 'Kopiëren lukte niet: selecteer de tekst'; }
+});
+
 // ---------------------------------------------------------------- navigatie en start
-const TABS = ['vandaag', 'mij', 'scorebord', 'team', 'kennisbank', 'maken', 'instellingen'];
+const TABS = ['vandaag', 'mij', 'scorebord', 'team', 'kennisbank', 'maken', 'uitnodigen', 'instellingen'];
 const VIEWS = [...TABS, 'lesdetail', 'feedback'];
 function toonView(naam) {
   for (const v of VIEWS) $(v).hidden = v !== naam;
@@ -1764,7 +1876,8 @@ function toonView(naam) {
 function magTab(t) {
   const ik = S.leden[S.mij];
   return t === 'mij' || t === 'kennisbank' || t === 'instellingen' || (t === 'skilllijst' && !!ik?.sl) || (t === 'vandaag' && magLessen())
-    || (t === 'scorebord' && magLessen() && SB.zichtbaar) || (t === 'team' && teamLeden().length > 0) || (t === 'maken' && magLesMaken());
+    || (t === 'scorebord' && magLessen() && SB.zichtbaar) || (t === 'team' && teamLeden().length > 0) || (t === 'maken' && magLesMaken())
+    || (t === 'uitnodigen' && magUitnodigenTab());
 }
 // Eerste keer (nog geen les gedaan en instellingen niet afgerond): eerst naar Instellingen
 const moetInrichten = () => { const ik = S.leden[S.mij]; return !!ik?.sl && magLessen() && !ik.logs.length && ik.profiel?.ingericht !== true; };
@@ -1776,6 +1889,7 @@ function tab(naam, sub) {
   if (naam === 'instellingen') sub = toonInstellingen(sub || INST_SUBS[0]);
   const hash = naam === 'instellingen' && sub !== INST_SUBS[0] ? `instellingen/${sub}` : naam;
   if (location.hash !== '#' + hash) history.replaceState(null, '', location.pathname + location.search + '#' + hash);
+  if (naam === 'uitnodigen') toonUitnodigen();
   if (naam === 'scorebord') toonScorebord().catch((e) => { $('sb-tabel').innerHTML = `<tbody><tr><td class="fout">Scorebord laden mislukt: ${esc(e.message)}</td></tr></tbody>`; });
 }
 // Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback of een tab
@@ -1805,7 +1919,7 @@ async function naInloggen() {
   if (teamLeden().length) toonTeam();
   toonKennisbank();
   const lessen = magLessen();
-  for (const t of ['vandaag', 'scorebord', 'maken']) $('tab-' + t).hidden = !magTab(t);
+  for (const t of ['vandaag', 'scorebord', 'maken', 'uitnodigen']) $('tab-' + t).hidden = !magTab(t);
   $('m-cel').innerHTML = '<option value="alle">Alle cellen</option>' + (S.org.cellen || []).map((c) => `<option value="${esc(c.id)}">${esc(c.naam)}</option>`).join('');
   if (lessen) { L.status = await kiesLes().catch(() => ({ leeg: true })); toonLesStatus(); startMiddagWekker(); }
   toonRonde();

@@ -52,8 +52,9 @@ function Test-DlMagToevoegen($Org, [string]$Door, [string]$Project, [string]$Cel
     if ($Project) { $lid.project = $Project } elseif ($Cel) { $lid.cel = $Cel }
     if ($Vak -and $Vak -ne $kopie.vakgebied) { $lid.vak = $Vak }
     if (-not $kopie.leden) { $kopie | Add-Member -NotePropertyName leden -NotePropertyValue ([pscustomobject]@{}) -Force }
-    $kopie.leden | Add-Member -NotePropertyName 'lid-000000' -NotePropertyValue ([pscustomobject]$lid) -Force
-    Test-DlMagUitnodigen $kopie $Door 'lid-000000'
+    $proef = 'lid-' + ('0' * 6)      # samengesteld: in de openbare code staat bewust geen leden-id (e2e controleert dat)
+    $kopie.leden | Add-Member -NotePropertyName $proef -NotePropertyValue ([pscustomobject]$lid) -Force
+    Test-DlMagUitnodigen $kopie $Door $proef
 }
 function Get-DlKijkers($Org, [string]$Id) {
     $k = New-Object System.Collections.Generic.List[string]

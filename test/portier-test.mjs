@@ -38,7 +38,7 @@ async function nepGitHub(url, opties = {}) {
 
 // ---------------------------------------------------------------- testorganogram en sleutels
 let nu = Date.parse('2026-11-20T10:00:00Z');
-const [beheer, B, P, O, H, Pnieuw] = await Promise.all([1, 2, 3, 4, 5, 6].map(() => K.nieuwSleutelpaar(3072)));
+let [beheer, B, P, O, H, Pnieuw] = await Promise.all([1, 2, 3, 4, 5, 6].map(() => K.nieuwSleutelpaar(3072)));
 const ids = { B: 'lid-0000b1', P: 'lid-0000d1', O: 'lid-0000d2', L: 'lid-0000e1', H: 'lid-0000a2', N: 'lid-0000e9' };
 const org = {
   v: 1, vakgebied: 'seo', versie: 5, head: null, heads: { sea: ids.H }, beheerders: [ids.B],
@@ -87,7 +87,10 @@ r = await nodig(ids.P, P, ids.N, { nonce: 'nonce-herhaling-0001' }); controleer(
 // Een oude sleutel (van vóór "code kwijt") telt niet meer
 await zetBeheer(`sleutels/${ids.P}.json`, { v: 2, id: ids.P, publiek: Pnieuw.publiek, eerdere: [P.publiek], kluis: {} });
 r = await nodig(ids.P, P, ids.L); controleer(r.status === 403, "Ondertekend met een 'eerdere' sleutel: geweigerd");
-await zetBeheer(`sleutels/${ids.P}.json`, { v: 2, id: ids.P, publiek: P.publiek, kluis: {} });
+const nieuwSleutelbestand = bestanden.get(`beheer/sleutels/${ids.P}.json`);
+await zetBeheer(`sleutels/${ids.P}.json`, { v: 2, id: ids.P, publiek: P.publiek, kluis: {} });      // iemand zet het oude sleutelbestand terug
+r = await nodig(ids.P, P, ids.L); controleer(r.status === 403, 'Teruggezet ouder sleutelbestand: de vervangen sleutel blijft geweigerd');
+bestanden.set(`beheer/sleutels/${ids.P}.json`, nieuwSleutelbestand); P = Pnieuw;      // verder met de nieuwe sleutel van P
 env.UITNODIGERS = 'beheerders'; r = await nodig(ids.P, P, ids.L); controleer(r.status === 403, 'Schakelaar "beheerders": projectleider mag (nog) niet');
 env.UITNODIGERS = JSON.stringify([ids.P]); r = await nodig(ids.P, P, ids.L); controleer(r.status === 200, 'Schakelaar met proeflijst: deze projectleider mag wel');
 const codeL2 = r.j.code;
@@ -126,6 +129,15 @@ controleer(r.status === 429 && r3.status === 403, 'Na 20 foute pogingen: even ge
 r = await nodig(ids.B, B, ids.N); const [idN, gN] = r.j.code.split(':');
 nu += 15 * 24 * 3600e3; r = await vraag('/token', { id: idN, geheim: gN }); controleer(r.status === 403, 'Ongebruikte uitnodiging verloopt na 14 dagen'); nu -= 15 * 24 * 3600e3;
 
+// Wie niet in het organogram staat, krijgt geen token; op de laptop goedgekeurd = verloopt niet
+r = await nodig(ids.B, B, ids.O); const [idO, gO] = r.j.code.split(':');
+const orgZonderO = structuredClone(org); delete orgZonderO.leden[ids.O]; orgZonderO.versie = 6; await zetBeheer('organisatie.json', orgZonderO); await s.delete('leden');
+r = await vraag('/token', { id: idO, geheim: gO }); controleer(r.status === 403, 'Lid uit het organogram gehaald (vertrokken): geen token meer');
+const orgGoed = structuredClone(org); orgGoed.leden[ids.O].goedgekeurd = '2026-11-20'; orgGoed.versie = 7; await zetBeheer('organisatie.json', orgGoed); await s.delete('leden');
+nu += 15 * 24 * 3600e3; r = await vraag('/token', { id: idO, geheim: gO }); nu -= 15 * 24 * 3600e3;
+controleer(r.status === 200, 'Op de laptop goedgekeurd (markering in het organogram): de code verloopt niet na 14 dagen');
+await zetBeheer('organisatie.json', { ...org, versie: 7 }); await s.delete('leden');
+
 console.log('4. Nieuwe collega');
 const nieuwVerzoek = (door, kp, gegevens, opties) => verzoek(door, kp, 'nieuw', gegevens, opties).then((v) => vraag('/nieuw', { verzoek: v }));
 r = await nieuwVerzoek(ids.P, P, { naam: 'Nieuwe Collega', project: 'ecom-b2b', vak: 'seo' });
@@ -138,8 +150,16 @@ r = await nieuwVerzoek(ids.H, H, { naam: 'Geen Sea', project: 'lg-b2c', vak: 'se
 r = await nieuwVerzoek(ids.P, P, { naam: 'Onderwerp', project: 'ecom-b2b', vak: 'coderen-met-ai' }); controleer(r.status === 400, 'Een onderwerp is geen vak: geweigerd');
 r = await nieuwVerzoek(ids.P, P, { naam: 'X', project: 'ecom-b2b', vak: 'seo' }); controleer(r.status === 400, 'Te korte naam: geweigerd');
 r = await nieuwVerzoek(ids.B, B, { naam: 'Onbekend', project: 'bestaat-niet', vak: 'seo' }); controleer(r.status === 400, 'Onbekend project: geweigerd');
+r = await vraag('/token', { id: nieuwId, geheim: r.j?.code?.split(':')[1] });
+const codeNieuw = (await vraag('/stand', undefined, beheerKop)).j;
+controleer(codeNieuw.open.includes(nieuwId), 'De stand noemt open uitnodigingen (de cloud eist dan altijd een koppeling)');
 r = await vraag('/afgehandeld', { id: nieuwId, soort: 'nieuw' }, beheerKop); st = await vraag('/stand', undefined, beheerKop);
 controleer(!st.j.nieuw[nieuwId], '/afgehandeld haalt het verzoek uit de stand');
+r = await nieuwVerzoek(ids.P, P, { naam: 'Te Weigeren', project: 'ecom-b2b', vak: 'seo' }); const [idW, gW] = r.j.code.split(':');
+r = await vraag('/token', { id: idW, geheim: gW }); const voorWeigeren = r.status;
+await vraag('/afgehandeld', { id: idW, soort: 'geweigerd' }, beheerKop);
+r = await vraag('/token', { id: idW, geheim: gW });
+controleer(voorWeigeren === 200 && r.status === 403, 'Nieuwe collega: token zolang de cloud hem nog moet toevoegen; na weigeren werkt de code niet meer');
 
 console.log('5. Beheer en intrekken');
 r = await vraag('/stand'); controleer(r.status === 401, '/stand zonder beheergeheim: geweigerd');

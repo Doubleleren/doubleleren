@@ -23,13 +23,14 @@ function Split-Uitnodiging([string]$U) {
 }
 function Get-Opslagen($u) {
     $app = if ($AppMap) { New-DlOpslag -Map $AppMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.appRepo -Raw }
-    $data = if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $u.token }
+    $data = if ($DataMap) { New-DlOpslag -Map $DataMap } else { New-DlOpslag -Eigenaar $inst.eigenaar -Repo $inst.dataRepo -Token $u.token -Portier $inst.portier -LidId $u.id }
     $v = Read-DlJson $app 'vertrouwd.json'
     if (-not $v -or -not $v.beheer) { throw 'De beheerder heeft DoubleLeren nog niet ingericht (geen vertrouwd.json).' }
     @{ app = $app; data = $data; vertrouwd = $v.beheer }
 }
 function Save-Lokaal($u, $o, $prive, [bool]$lessen = $true) {
     $cfg = [ordered]@{ v = 2; id = $u.id; eigenaar = $inst.eigenaar; appRepo = $inst.appRepo; dataRepo = $inst.dataRepo; lessen = $lessen; vertrouwd = $o.vertrouwd }
+    if ($inst.portier) { $cfg.portier = [string]$inst.portier }
     if ($AppMap) { $cfg.appMap = (Resolve-Path $AppMap).Path }
     if ($DataMap) { $cfg.dataMap = (Resolve-Path $DataMap).Path }
     Save-DlClient $Thuis $cfg $u.id $prive $u.token
@@ -39,8 +40,11 @@ function Get-Leren($u) {
     $o = Get-Opslagen $u
     $org = Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd
     # Het organogram bestaat altijd; ontbreekt het, dan geeft GitHub 'niet gevonden' omdat de token geen toegang heeft
-    if (-not $org) { throw 'Deze uitnodigingscode heeft geen toegang tot de gegevens. Gebruik je de nieuwste token? Die moet als Resource owner "Doubleleren" hebben en toegang tot doubleleren-data (Contents: Read and write). Anders: vraag de beheerder om een nieuwe.' }
-    if (-not $org.leden.($u.id)) { throw 'Dit lidnummer is niet bekend. Controleer het deel vóór de dubbele punt (lid-......) of vraag de beheerder.' }
+    if (-not $org) { throw 'Deze uitnodigingscode heeft geen toegang tot de gegevens. Vraag de beheerder om een nieuwe uitnodiging.' }
+    if (-not $org.leden.($u.id)) {
+        if ($u.token -cmatch '^dl1_') { throw 'Je uitnodiging wordt nog verwerkt. Probeer het over een paar minuten opnieuw.' }
+        throw 'Dit lidnummer is niet bekend. Controleer het deel vóór de dubbele punt (lid-......) of vraag de beheerder.'
+    }
     if ($org.leden.($u.id).leren -eq 'optioneel') { 'optioneel' } else { 'verplicht' }
 }
 
@@ -77,6 +81,12 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
 
     $kp = New-DlSleutelpaar 3072
     if (-not (Test-DlSleutelVorm $kp.publiek)) { $kp = New-DlSleutelpaar 3072 }
+    # Nieuwe code (via de portier): eerst de aanmelding aan deze sleutel koppelen, vóór er iets wordt weggeschreven. De cloud
+    # keurt alleen een aanvraag met precies deze sleutel goed, zodat niemand met alleen een token zich voor jou kan aanmelden.
+    if (-not $herstel -and $u.token -cmatch '^dl1_[A-Za-z0-9]{48}$') {
+        if (-not $inst.portier) { throw 'Deze uitnodigingscode werkt via de portier, maar die is niet ingesteld. Vraag de beheerder.' }
+        Invoke-DlPortier ([string]$inst.portier).TrimEnd('/') '/aanmelden' @{ id = $u.id; geheim = $u.token; vingerafdruk = (Get-DlVingerafdrukHex $kp.publiek) } | Out-Null
+    }
     $code = New-DlCode
     $kluis = Lock-DlKluis $u.id $kp.prive $code
     $aanvraag = [ordered]@{ v = 1; id = $u.id; publiek = $kp.publiek; kluis = $kluis; aangevraagd = (Get-Date).ToString('s') }
