@@ -6,7 +6,7 @@
   "vakgebied": "seo",
   "beheerRepo": "doubleleren-beheer",
   "portier": "https://portier.green-feather-b83e.workers.dev",
-  "uitnodigers": ["lid-127ff5", "lid-e96c7d"],
+  "uitnodigers": "heads",
   "vakken": [
     { "id": "seo", "naam": "SEO" },
     { "id": "cro", "naam": "CRO" },

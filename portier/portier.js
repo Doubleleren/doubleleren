@@ -161,6 +161,7 @@ export class Kluis {
     if (R.isBeheerder(org, door)) return true;
     const u = String(this.env.UITNODIGERS || 'beheerders');
     if (u === 'heads-en-leiders') return true;
+    if (u === 'heads') return R.heads(org).includes(door);
     if (u.startsWith('[')) { try { return JSON.parse(u).includes(door); } catch { return false; } }
     return false;
   }

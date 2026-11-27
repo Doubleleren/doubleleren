@@ -9,6 +9,7 @@
 #   beheer.ps1 -Verplaats lid-xxxxxx -Project ecom-nationaal     (of -Cel leadgen, en/of -Vak cro) en toegang meteen bijwerken
 #   beheer.ps1 -Head lid-xxxxxx -Vak cro                         head van een vak maken (ziet de voortgang van dat vak)
 #   beheer.ps1 -Wijzig lid-xxxxxx -Leren verplicht|optioneel
+#   beheer.ps1 -Verwijder lid-xxxxxx                             iemand die nooit meedeed eruit halen (bijv. vertrokken)
 #   beheer.ps1 -Bijwerken                                        toegang opnieuw berekenen
 #   beheer.ps1 -Controleer                                       overzicht: wie ziet wie
 #   beheer.ps1 -NieuweGeneratorsleutel                           aparte sleutel voor de lesgenerator (hervatbaar)
@@ -30,7 +31,9 @@ param(
     [string]$DataMap, [string]$Thuis, [string]$Wachtzin,      # tests: lokale map i.p.v. GitHub, wachtzin zonder vragen
     [switch]$OokOpLaptop,     # -AutoGoedkeuren op de laptop terwijl de cloud het doet (terugval)
     [switch]$HerstelVersie,   # laptop vergeet een te hoge onthouden organogramversie (bijv. na een weggegooide lokale commit)
-    [switch]$VulOrganogram, [switch]$Doorvoeren      # eenmalig het concept-organogram (-Bestand) overnemen; zonder -Doorvoeren alleen tonen
+    [switch]$VulOrganogram, [switch]$Doorvoeren,     # eenmalig het concept-organogram (-Bestand) overnemen; zonder -Doorvoeren alleen tonen
+    [string]$Verwijder,       # iemand die nooit heeft meegedaan uit het organogram halen (bijv. vertrokken)
+    [switch]$MetKoppeling     # intern (cloud): -AutoGoedkeuren controleerde de koppeling aan een portier-uitnodiging
 )
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
@@ -98,7 +101,7 @@ function Get-Omgeving {
     $ErrorActionPreference = 'Continue'
     if ((git -C $kl remote get-url origin 2>$null) -match 'doubleleren-data-staging') { 'staging' } else { 'live' }
 }
-$schrijft = $Uitnodigen -or $Goedkeuren -or $AutoGoedkeuren -or $Verplaats -or $Head -or $Wijzig -or $Bijwerken -or $NieuweGeneratorsleutel -or $Migreer -or $HerstelVersie -or ($VulOrganogram -and $Doorvoeren)
+$schrijft = $Uitnodigen -or $Goedkeuren -or $AutoGoedkeuren -or $Verplaats -or $Head -or $Wijzig -or $Bijwerken -or $NieuweGeneratorsleutel -or $Migreer -or $HerstelVersie -or ($VulOrganogram -and $Doorvoeren) -or $Verwijder
 if (-not $Cloud -and -not $DataMap -and $schrijft -and $inst.beheerRepo -and -not $env:DL_CLOUD_GEPAUZEERD) {
     if ($AutoGoedkeuren -and -not $OokOpLaptop) { return }
     $gh = Get-Gh; $repo = "$($inst.eigenaar)/$($inst.beheerRepo)"; $wf = "goedkeuren-$(Get-Omgeving).yml"
@@ -527,6 +530,21 @@ elseif ($Wijzig) {
     Write-Host "$(Naam $Wijzig): lessen $Leren. De pop-up en website pakken het bij de volgende start op."
 }
 
+elseif ($Verwijder) {
+    # Alleen wie nooit heeft meegedaan (geen sleutel, nooit goedgekeurd): dan is er geen data en geen toegang om op te ruimen.
+    # Wie wel meedeed, eerst via Actions -> Toegang intrekken; dat vraagt een sleutelwissel en blijft handwerk.
+    if (-not $org.leden.$Verwijder) { throw "Onbekend: $Verwijder" }
+    if ((Test-Goedgekeurd $Verwijder) -or (Read-DlBeheer $d "sleutels/$Verwijder.json" $V)) { throw "$(Naam $Verwijder) doet al mee: trek eerst de toegang in (Actions -> Toegang intrekken)." }
+    $wie = Naam $Verwijder
+    foreach ($c in @($org.cellen)) { if ($c.leider -eq $Verwijder) { $c.leider = $null }; foreach ($p in @($c.projecten)) { if ($p.leider -eq $Verwijder) { $p.leider = $null } } }
+    if ($org.head -eq $Verwijder) { $org.head = $null }
+    foreach ($h in @($(if ($org.heads) { $org.heads.PSObject.Properties }))) { if ($h.Value -eq $Verwijder) { $org.heads.PSObject.Properties.Remove($h.Name) } }
+    $org.leden.PSObject.Properties.Remove($Verwijder)
+    Save-Org
+    $ab = Read-DlOpslag $d "aanvragen/$Verwijder.json"; if ($ab) { Remove-DlOpslag $d "aanvragen/$Verwijder.json" $ab.sha }
+    Write-Host "$wie uit het organogram gehaald. Trek ook zijn uitnodigingstoken in op GitHub (Settings -> Personal access tokens)."
+}
+
 elseif ($Aanvragen) {
     $lijst = @(Get-DlOpslagLijst $d 'aanvragen')
     if (-not $lijst.Count) { Write-Host 'Geen openstaande aanvragen.' }
@@ -605,7 +623,9 @@ elseif ($AutoGoedkeuren) {
         try { $a = Read-DlJson $d "aanvragen/$f" } catch { Write-Host "Overgeslagen: $f is geen geldige aanvraag"; $script:wacht++; continue }
         if (-not $a -or $f -ne "$($a.id).json" -or -not $org.leden.($a.id)) { Write-Host "Overgeslagen: $f hoort niet bij een lid uit het organogram"; $script:wacht++; continue }
         if ($a.herstel) { Write-Host "Wacht op handmatige controle (code kwijt): $(Naam $a.id)  controlewoorden: $(Get-DlControlewoorden $a)"; $script:wacht++; continue }
-        if (Test-DlRolhouder $org $a.id) { Write-Host "Wacht op goedkeuring door de beheerder (head, leider of beheerder): $(Naam $a.id). Op de laptop: beheer.ps1 -Goedkeuren $($a.id)"; $script:wacht++; continue }
+        # Een projectleider die via de portier is uitgenodigd (koppeling aan de code, hieronder gecontroleerd) mag wel
+        $plMetBand = (Test-DlAlleenProjectleider $org $a.id) -and $script:stand -and $script:stand.bindingen -and [string]$script:stand.bindingen.($a.id)
+        if ((Test-DlRolhouder $org $a.id) -and -not $plMetBand) { Write-Host "Wacht op goedkeuring door de beheerder (head, leider of beheerder): $(Naam $a.id). Op de laptop: beheer.ps1 -Goedkeuren $($a.id)"; $script:wacht++; continue }
         if (Test-Goedgekeurd $a.id) { Write-Host "Geweigerd: $(Naam $a.id) is al eens goedgekeurd; een nieuwe aanmelding kan alleen als herstel met controlewoorden (mogelijk overname)"; $script:wacht++; continue }
         if (Read-DlBeheer $d "sleutels/$($a.id).json" $V) { Write-Host "Overgeslagen: $(Naam $a.id) is al goedgekeurd"; $script:wacht++; continue }
         # Uitgenodigd via de portier (label 'uitgenodigd: false'): alleen goedkeuren als de aanmelding aan de uitnodigingscode
@@ -623,6 +643,7 @@ elseif ($AutoGoedkeuren) {
             }
         }
         $extra = @('-Thuis', $Thuis); if ($DataMap) { $extra += @('-DataMap', $DataMap) }
+        if ($plMetBand) { $extra += '-MetKoppeling' }
         $voor = if ($script:kloon) { Get-DlKloonCommit $script:kloon }
         & powershell -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath -Goedkeuren $a.id -Controlewoorden (Get-DlControlewoorden $a) @extra
         $code = $LASTEXITCODE
@@ -654,7 +675,7 @@ elseif ($Goedkeuren) {
         if ($gegeven -ne $echt) { throw "Controlewoorden komen NIET overeen. Niet goedkeuren: vraag $(Naam $id) opnieuw aan te melden en de woorden opnieuw door te geven." }
     }
     if ($Cloud -and $aanvraag.herstel) { throw 'Herstel (code kwijt) kan alleen op de laptop.' }
-    if ($Cloud -and (Test-DlRolhouder $org $id)) { throw 'Heads, leiders en beheerders keurt de beheerder zelf goed op de laptop.' }
+    if ($Cloud -and (Test-DlRolhouder $org $id) -and -not ($MetKoppeling -and (Test-DlAlleenProjectleider $org $id))) { throw 'Heads, leiders en beheerders keurt de beheerder zelf goed op de laptop.' }
     if (-not $aanvraag.herstel -and (Test-Goedgekeurd $id)) { throw "$(Naam $id) is al eens goedgekeurd ($($org.leden.$id.goedgekeurd)). Een nieuwe aanmelding kan alleen als herstel (code kwijt): mogelijk overname." }
     $sleutelsObj = [ordered]@{ v = 2; id = $id; publiek = $aanvraag.publiek; kluis = $aanvraag.kluis }
     $oudS = Read-DlBeheer $d "sleutels/$id.json" $V

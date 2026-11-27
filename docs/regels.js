@@ -2,8 +2,8 @@
 // de portier; dezelfde regels staan in PowerShell in app/lib/organisatie.ps1 (test\regelstest.ps1 vergelijkt ze).
 //   kijkers van een lid: het lid zelf · projectleider van het project · celleider van de cel · head van het vak · generator
 //   uitnodigen: de beheerder iedereen; een kijker (projectleider, celleider, head) alleen gewone leden die hij ziet.
-//   Heads, leiders en beheerders nodigt alleen de beheerder uit: wie uitnodigt, ziet de code en kan zich anders als
-//   een leider aanmelden en dan diens hele cel of vak zien.
+//   Een head ook de projectleiders van zijn vak (Thijs, 2026-11-27: bewuste ruil, de head ziet de code en zou zich als
+//   die projectleider kunnen aanmelden). Heads, celleiders en beheerders nodigt alleen de beheerder uit.
 export const ID_VORM = /^lid-[0-9a-f]{6}$/;
 const lijst = (x) => (Array.isArray(x) ? x : []);
 
@@ -32,6 +32,13 @@ export function heeftRol(org, id) {
   for (const c of lijst(org?.cellen)) { if (c.leider === id) return true; for (const p of lijst(c.projecten)) if (p.leider === id) return true; }
   return isBeheerder(org, id);
 }
+// Projectleider en verder niets (geen head, celleider of beheerder)
+export function alleenProjectleider(org, id) {
+  if (heads(org).includes(id) || isBeheerder(org, id)) return false;
+  let pl = false;
+  for (const c of lijst(org?.cellen)) { if (c.leider === id) return false; for (const p of lijst(c.projecten)) if (p.leider === id) pl = true; }
+  return pl;
+}
 export function kijkers(org, id) {
   const k = [];
   const voeg = (x) => { if (x && !k.includes(x)) k.push(x); };
@@ -47,7 +54,7 @@ export function magUitnodigen(org, door, id) {
   if (!ID_VORM.test(String(door)) || !ID_VORM.test(String(id)) || door === id) return false;
   if (!org?.leden?.[door] || !org?.leden?.[id]) return false;
   if (isBeheerder(org, door)) return true;
-  if (heeftRol(org, id)) return false;
+  if (heeftRol(org, id)) return alleenProjectleider(org, id) && headVanVak(org, vakVanLid(org, id)) === door;
   return kijkers(org, id).includes(door);
 }
 // Mag 'door' een nieuw gewoon lid toevoegen op deze plek ({ project } of { cel } of niets) met dit vak?

@@ -1334,7 +1334,8 @@ async function welkomVerbind() {
   if (!lid) throw new Error(PORTIER_CODE.test(uitnodiging.split(':')[1] || '') ? 'Je uitnodiging wordt nog verwerkt. Probeer het over een paar minuten opnieuw.' : 'Deze uitnodiging is (nog) niet bekend. Vraag de beheerder om je toe te voegen.');
   W.leren = lid.leren === 'optioneel' ? 'optioneel' : 'verplicht'; W.naam = String(lid.naam || '');
   W.vak = typeof lid.vak === 'string' && VAK_VORM.test(lid.vak) ? lid.vak : S.inst.vakgebied;
-  W.handmatig = heeftRol(org, W.id);
+  // Een projectleider met een code van de portier keurt de cloud wel goed (zie beheer.ps1 -AutoGoedkeuren)
+  W.handmatig = heeftRol(org, W.id) && !(PORTIER_CODE.test(uitnodiging.split(':')[1] || '') && R.alleenProjectleider(org, W.id));
   if ($('w-onthoud').checked) { try { localStorage.setItem('dl-uitnodiging', uitnodiging); } catch {} }
   if (await beheerJson(`sleutels/${W.id}.json`)) { welkomStap('w-bestaand'); return; }
   const a = await json(S.data, `aanvragen/${W.id}.json`);
@@ -1797,12 +1798,13 @@ $('maak-knop').addEventListener('click', async () => {
 });
 
 // ---------------------------------------------------------------- collega uitnodigen (via de portier)
-// Wie de knop ziet: beheerders altijd; heads en leiders volgens instellingen.uitnodigers ("heads-en-leiders", of een
-// lijst met ids als proef). De portier controleert alles opnieuw met dezelfde regels (docs/regels.js).
+// Wie de knop ziet: beheerders altijd; heads en leiders volgens instellingen.uitnodigers ("heads-en-leiders", "heads",
+// of een lijst met ids als proef: niet op live, de app-repo is openbaar). De portier controleert alles opnieuw.
 function magUitnodigenTab() {
   if (!S.inst?.portier || !S.teken || !S.org?.leden?.[S.mij]) return false;
   if (R.isBeheerder(S.org, S.mij)) return true;
   const u = S.inst.uitnodigers;
+  if (u === 'heads') return R.heads(S.org).includes(S.mij);
   return (u === 'heads-en-leiders' || (Array.isArray(u) && u.includes(S.mij))) && R.heeftRol(S.org, S.mij);
 }
 const isGoedgekeurd = (id) => !!S.org?.leden?.[id]?.goedgekeurd || !!S.data?.paden?.includes(`beheer/sleutels/${id}.json`);
@@ -1814,12 +1816,20 @@ async function ondertekendVerzoek(context, gegevens) {
   return { v: 2, door: S.mij, inhoud, sig: await K.onderteken(S.teken, context, S.mij, inhoud) };
 }
 function toonUitnodigen() {
+  // Eerst wie nog niet meedoet (per vak, dan op naam); wie al meedoet ingeklapt eronder
+  const naam = (id) => String(S.org.leden[id].naam || id);
   const ids = Object.keys(S.org?.leden || {}).filter((id) => R.magUitnodigen(S.org, S.mij, id))
-    .sort((a, b) => String(S.org.leden[a].naam || a).localeCompare(String(S.org.leden[b].naam || b), 'nl'));
-  const status = (id) => (isGoedgekeurd(id) ? 'Doet mee' : wachtOpGoedkeuring(id) ? 'Wacht op goedkeuring' : 'Nog niet aangemeld');
-  $('ui-lijst').innerHTML = ids.length
-    ? `<thead><tr><th>Naam</th><th>Plek</th><th>Vak</th><th>Status</th><th></th></tr></thead><tbody>${ids.map((id) => `<tr><td>${esc(S.org.leden[id].naam || id)}</td><td>${esc(plekTekst(S.org.leden[id]))}</td><td>${esc(vakNaam(eigenVak(id)))}</td><td>${status(id)}</td><td><button type="button" class="knop" data-uitnodig="${esc(id)}">${isGoedgekeurd(id) ? 'Nieuwe code' : 'Uitnodigen'}</button></td></tr>`).join('')}</tbody>`
-    : '<tbody><tr><td class="leeg">Er zijn (nog) geen collega\'s die je kunt uitnodigen.</td></tr></tbody>';
+    .sort((a, b) => vakNaam(eigenVak(a)).localeCompare(vakNaam(eigenVak(b)), 'nl') || naam(a).localeCompare(naam(b), 'nl'));
+  const open = ids.filter((id) => !isGoedgekeurd(id)), mee = ids.filter((id) => isGoedgekeurd(id));
+  const rol = (id) => (R.heeftRol(S.org, id) ? ' <span class="sub">(leider)</span>' : '');
+  const rij = (id, knop, extra = '') => `<tr><td>${esc(naam(id))}${rol(id)}</td><td>${esc(vakNaam(eigenVak(id)))}</td><td>${esc(plekTekst(S.org.leden[id]))}</td>${extra}<td><button type="button" class="knop" data-uitnodig="${esc(id)}">${knop}</button></td></tr>`;
+  $('ui-open-kop').textContent = `Nog uit te nodigen (${open.length})`;
+  $('ui-lijst').innerHTML = open.length
+    ? `<thead><tr><th>Naam</th><th>Vak</th><th>Plek</th><th>Status</th><th></th></tr></thead><tbody>${open.map((id) => rij(id, 'Uitnodigen', `<td>${wachtOpGoedkeuring(id) ? 'Wacht op goedkeuring' : 'Nog niet aangemeld'}</td>`)).join('')}</tbody>`
+    : '<tbody><tr><td class="leeg">Iedereen die je kunt uitnodigen, doet al mee. Staat iemand er niet bij? Voeg hem hieronder toe.</td></tr></tbody>';
+  $('ui-mee').hidden = !mee.length;
+  $('ui-mee-kop').textContent = `Doet al mee (${mee.length})`;
+  $('ui-lijst-mee').innerHTML = `<thead><tr><th>Naam</th><th>Vak</th><th>Plek</th><th></th></tr></thead><tbody>${mee.map((id) => rij(id, 'Nieuwe code')).join('')}</tbody>`;
   vulNieuwFormulier();
 }
 // Plekken en vakken waar je een nieuwe collega mag toevoegen (zelfde regel als de portier)
@@ -1860,7 +1870,7 @@ async function voegNieuwToe() {
   $('ui-nieuw-form').reset(); vulNieuwFormulier();
   toonUitnodigingsbericht(naam, j.code, false);
 }
-$('ui-lijst').addEventListener('click', async (e) => {
+$('uitnodigen').addEventListener('click', async (e) => {
   const b = e.target.closest('button[data-uitnodig]'); if (!b) return;
   b.disabled = true; $('ui-fout').textContent = '';
   try { await nodigUit(b.dataset.uitnodig); } catch (err) { $('ui-fout').textContent = err.message; } finally { b.disabled = false; }

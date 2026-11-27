@@ -575,8 +575,12 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
 
   <div id="uitnodigen" hidden>
     <section class="paneel" style="margin-top:0">
-      <div class="paneel-kop"><div><h2>Collega uitnodigen</h2><p class="sub">Kies een collega en stuur het bericht dat verschijnt via Teams. Je ziet alleen de collega's die je mag uitnodigen: gewone leden van je eigen project, cel of vak. Heads en leiders nodigt de beheerder uit.</p></div></div>
+      <div class="paneel-kop"><div><h2>Collega uitnodigen</h2><p class="sub">Klik op <b>Uitnodigen</b> en stuur het bericht dat verschijnt via Teams. Je ziet alleen wie je mag uitnodigen.</p></div></div>
+      <h3 id="ui-open-kop" style="margin:4px 0 8px;font-size:16px">Nog uit te nodigen</h3>
       <div class="tabel"><table id="ui-lijst"></table></div>
+      <details id="ui-mee" style="margin-top:14px" hidden><summary id="ui-mee-kop" style="cursor:pointer;font-weight:600">Doet al mee</summary>
+        <p class="sub" style="margin:6px 0">Nieuwe code nodig, bijvoorbeeld voor een tweede laptop? Klik op Nieuwe code.</p>
+        <div class="tabel"><table id="ui-lijst-mee"></table></div></details>
       <p class="fout" id="ui-fout" role="alert"></p>
     </section>
     <section class="paneel" id="ui-resultaat" hidden>

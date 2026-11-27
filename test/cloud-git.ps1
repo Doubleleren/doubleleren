@@ -103,7 +103,9 @@ $L = Join-Path $TB 'data-kloon'; G clone -q $O $L | Out-Null
 [IO.File]::WriteAllText("$L\data\lokaal.txt", 'nog niet verstuurd'); G -C $L add -A | Out-Null; G -C $L -c user.name=test -c user.email=test@test.invalid commit -q -m lokaal | Out-Null
 $env:DL_TEST_FOUT_NA_SLEUTEL = $ids.Vier
 $ErrorActionPreference = 'Continue'
-try { $uitL = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\beheer.ps1" -AutoGoedkeuren -Thuis $TB 2>&1 | ForEach-Object { "$_" }; $codeL = $LASTEXITCODE } finally { Remove-Item Env:\DL_TEST_FOUT_NA_SLEUTEL; $ErrorActionPreference = 'Stop' }
+# -OokOpLaptop en geen gh-pauze: instellingen.json noemt (live) een beheerRepo, dan laat de laptop het anders aan de cloud
+$env:DL_CLOUD_GEPAUZEERD = '1'
+try { $uitL = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\beheer.ps1" -AutoGoedkeuren -OokOpLaptop -Thuis $TB 2>&1 | ForEach-Object { "$_" }; $codeL = $LASTEXITCODE } finally { Remove-Item Env:\DL_TEST_FOUT_NA_SLEUTEL, Env:\DL_CLOUD_GEPAUZEERD; $ErrorActionPreference = 'Stop' }
 Controleer ($codeL -eq 1 -and (Origin 'data\lokaal.txt') -and -not (Origin "beheer\sleutels\$($ids.Vier).json") -and (Origin "aanvragen\$($ids.Vier).json")) 'Mislukte goedkeuring op de laptop: eerder lokaal werk blijft bewaard en gaat alsnog mee; niets half van Vier'
 Controleer (-not (G -C $L status --porcelain)) 'Laptopkopie daarna schoon'
 

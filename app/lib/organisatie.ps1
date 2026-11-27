@@ -34,14 +34,25 @@ function Test-DlRolhouder($Org, [string]$Id) {
     }
     @($Org.beheerders) -contains $Id
 }
+# Projectleider en verder niets (geen head, celleider of beheerder)
+function Test-DlAlleenProjectleider($Org, [string]$Id) {
+    if ((Get-DlHeads $Org) -contains $Id -or @($Org.beheerders) -contains $Id) { return $false }
+    $pl = $false
+    foreach ($c in @($Org.cellen)) {
+        if ($c.leider -eq $Id) { return $false }
+        foreach ($p in @($c.projecten)) { if ($p.leider -eq $Id) { $pl = $true } }
+    }
+    $pl
+}
 # Mag $Door het bestaande lid $Id uitnodigen? De beheerder iedereen; een kijker (projectleider, celleider, head) alleen
-# gewone leden die hij ziet. Heads, leiders en beheerders alleen de beheerder: wie uitnodigt, ziet de code.
+# gewone leden die hij ziet; een head ook de projectleiders van zijn vak (bewuste ruil: hij ziet de code). Heads,
+# celleiders en beheerders alleen de beheerder.
 # Dezelfde regels staan in docs/regels.js (magUitnodigen, magToevoegen); test\regelstest.ps1 vergelijkt ze.
 function Test-DlMagUitnodigen($Org, [string]$Door, [string]$Id) {
     if ($Door -cnotmatch '^lid-[0-9a-f]{6}$' -or $Id -cnotmatch '^lid-[0-9a-f]{6}$' -or $Door -eq $Id) { return $false }
     if (-not $Org.leden.$Door -or -not $Org.leden.$Id) { return $false }
     if (@($Org.beheerders) -contains $Door) { return $true }
-    if (Test-DlRolhouder $Org $Id) { return $false }
+    if (Test-DlRolhouder $Org $Id) { return ((Test-DlAlleenProjectleider $Org $Id) -and (Get-DlHeadVanVak $Org (Get-DlVakVanLid $Org $Id)) -eq $Door) }
     @(Get-DlKijkers $Org $Id) -contains $Door
 }
 # Mag $Door een nieuw gewoon lid toevoegen op deze plek (-Project of -Cel of geen) met dit vak? Zelfde regel als

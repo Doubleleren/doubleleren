@@ -77,7 +77,8 @@ function Install-Nieuw($u, [string]$naam, [string]$xlsx, [switch]$herstel, [bool
     # Heads, leiders en beheerders keurt de beheerder zelf goed (niet automatisch). Vóór het wegschrijven bepalen; lukt het
     # lezen niet, dan voorzichtig 'zelf goedkeuren' melden
     $handmatig = $false
-    if (-not $herstel) { try { $handmatig = Test-DlRolhouder (Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd) $u.id } catch { $handmatig = $true } }
+    # (een projectleider met een code van de portier keurt de cloud wel goed)
+    if (-not $herstel) { try { $og = Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd; $handmatig = (Test-DlRolhouder $og $u.id) -and -not ($u.token -cmatch '^dl1_' -and (Test-DlAlleenProjectleider $og $u.id)) } catch { $handmatig = $true } }
 
     $kp = New-DlSleutelpaar 3072
     if (-not (Test-DlSleutelVorm $kp.publiek)) { $kp = New-DlSleutelpaar 3072 }
