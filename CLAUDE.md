@@ -38,6 +38,7 @@ Is dit de eerste sessie in deze map, of staat er nog geen `%TEMP%\doubleleren-de
   powershell -ExecutionPolicy Bypass -File test\e2e.ps1
   ```
   De e2e moet **0 fouten** geven. Zonder `-Xlsx` gebruikt hij een nep-skilllijst. Draai nooit twee e2e's (of een e2e en `test\demo.ps1`) tegelijk.
+- Tijdens het bouwen hoeft de volledige e2e (ruim twintig minuten) niet na elke wijziging. Draai dan de snelle tests die bij je wijziging horen (`test\regelstest.ps1`, `node test\portier-test.mjs`, `test\cloud-git.ps1`, de kruistest) en eventueel `test\e2e.ps1 -VanafCloud` (alleen de cloud- en portierblokken, vanaf het bewaarpunt van de laatste volledige run). De volledige e2e draai je één keer, vlak voor je pull request.
 - Commit met je eigen GitHub-account en een duidelijk Nederlands commitbericht.
 - Schrijf in de stijl van de bestaande code: Nederlandse namen en commentaar, korte functies.
 

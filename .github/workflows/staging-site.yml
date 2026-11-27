@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           cp staging/vertrouwd.json vertrouwd.json
-          jq '.appRepo = "doubleleren-staging" | .dataRepo = "doubleleren-data-staging" | .omgeving = "staging"' instellingen.json > instellingen.tmp
+          jq '.appRepo = "doubleleren-staging" | .dataRepo = "doubleleren-data-staging" | .omgeving = "staging" | .portier = "https://portier-staging.green-feather-b83e.workers.dev" | .uitnodigers = "heads-en-leiders"' instellingen.json > instellingen.tmp
           mv instellingen.tmp instellingen.json
           test "$(jq -r .dataRepo instellingen.json)" = doubleleren-data-staging
 

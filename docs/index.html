@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com/repos/doubleleren/ https://raw.githubusercontent.com/doubleleren/; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com/repos/doubleleren/ https://raw.githubusercontent.com/doubleleren/ https://*.green-feather-b83e.workers.dev; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
 <title>DoubleLeren</title>
 <style>
 :root {
@@ -282,6 +282,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <button type="button" role="tab" data-tab="team" aria-selected="false" id="tab-team" hidden>Mijn team</button>
       <button type="button" role="tab" data-tab="kennisbank" aria-selected="false">Kennisbank</button>
       <button type="button" role="tab" data-tab="maken" aria-selected="false" id="tab-maken" hidden>Les toevoegen</button>
+      <button type="button" role="tab" data-tab="uitnodigen" aria-selected="false" id="tab-uitnodigen" hidden>Collega uitnodigen</button>
     </div>
     <div class="banner" id="ronde-banner" role="status" hidden></div>
   </div>
@@ -294,7 +295,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
       <p class="sub" style="margin:0">Met je uitnodigingscode (uit het Teams-bericht) en je persoonlijke code van zes woorden uit je wachtwoordkluis.</p>
       <div id="uitnodiging-rij" style="display:grid;gap:8px">
         <label for="uitnodiging" class="sub" style="margin:0">Uitnodigingscode</label>
-        <input id="uitnodiging" class="veld" type="password" autocomplete="off" spellcheck="false" placeholder="lid-xxxxxx:github_pat_…">
+        <input id="uitnodiging" class="veld" type="password" autocomplete="off" spellcheck="false" placeholder="lid-xxxxxx:…">
       </div>
       <p id="vergeet-rij" class="sub" style="margin:0" hidden>Uitnodigingscode is onthouden op deze computer. <button type="button" id="vergeet" class="knop" style="padding:2px 10px;font-size:13px;background:var(--cool-50)">Vergeten</button></p>
       <label for="code" class="sub" style="margin:0">Je code van zes woorden</label>
@@ -313,7 +314,7 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
         <h2>Aanmelden bij DoubleLeren</h2>
         <p class="sub" style="margin:0">Je hebt van de beheerder een uitnodigingscode gekregen in Teams. Plak die hieronder.</p>
         <label for="w-uitnodiging" class="sub" style="margin:0">Uitnodigingscode</label>
-        <input id="w-uitnodiging" class="veld" type="password" autocomplete="off" spellcheck="false" placeholder="lid-xxxxxx:github_pat_…">
+        <input id="w-uitnodiging" class="veld" type="password" autocomplete="off" spellcheck="false" placeholder="lid-xxxxxx:…">
         <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="w-onthoud" checked> Onthoud de uitnodigingscode op deze computer (niet op een gedeelde computer)</label>
         <button class="knop zwart" type="button" id="w-verder">Verder</button>
         <p class="sub" style="margin:0"><a href="#" id="w-terug">Terug naar inloggen</a></p>
@@ -571,6 +572,32 @@ footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
     </section>
   </div>
 
+
+  <div id="uitnodigen" hidden>
+    <section class="paneel" style="margin-top:0">
+      <div class="paneel-kop"><div><h2>Collega uitnodigen</h2><p class="sub">Kies een collega en stuur het bericht dat verschijnt via Teams. Je ziet alleen de collega's die je mag uitnodigen: gewone leden van je eigen project, cel of vak. Heads en leiders nodigt de beheerder uit.</p></div></div>
+      <div class="tabel"><table id="ui-lijst"></table></div>
+      <p class="fout" id="ui-fout" role="alert"></p>
+    </section>
+    <section class="paneel" id="ui-resultaat" hidden>
+      <div class="paneel-kop"><div><h2 id="ui-res-kop">Uitnodiging klaar</h2><p class="sub">Kopieer dit bericht en stuur het via Teams. De code werkt 14 dagen, of tot de collega zich heeft aangemeld. Je ziet de code maar één keer.</p></div></div>
+      <pre class="veld" id="ui-bericht" style="white-space:pre-wrap;margin:0"></pre>
+      <div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="knop zwart" id="ui-kopieer">Kopieer bericht</button></div>
+    </section>
+    <section class="paneel" id="ui-nieuw-paneel">
+      <div class="paneel-kop"><div><h2>Nieuwe collega</h2><p class="sub">Staat iemand nog niet in de lijst? Vul de naam, plek en het vak in. De collega staat een paar minuten later in het organogram; de uitnodiging kun je meteen versturen.</p></div></div>
+      <form id="ui-nieuw-form" class="stappen" autocomplete="off">
+        <label class="veld-label">Naam<input id="ui-naam" class="veld" maxlength="60" placeholder="Voor- en achternaam"></label>
+        <div class="velden-rij">
+          <label class="veld-label">Plek<select id="ui-plek" class="veld"></select></label>
+          <label class="veld-label">Vak<select id="ui-vak" class="veld"></select></label>
+        </div>
+        <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="ui-optioneel"> Lessen optioneel (zelf kiezen of iemand meedoet)</label>
+        <button type="button" class="knop zwart" id="ui-nieuw-knop">Toevoegen en uitnodigen</button>
+        <p class="fout" id="ui-nieuw-fout" role="alert"></p>
+      </form>
+    </section>
+  </div>
 
   <div id="maken" hidden>
     <section class="paneel les-kaart" style="margin-top:0">

@@ -1,0 +1,91 @@
+# DoubleLeren: de portier (portier/portier.js) uitrollen naar Cloudflare, van het vaste commit van de app-repo.
+# Sjabloon: cloud-beheer-inrichten.ps1 vult {{OMGEVING}} (live/staging), {{P}} (DL_/STAGING_), {{DATA}} (data-repo) en
+# {{WORKER}} (portier / portier-staging) in en zet het resultaat in Doubleleren/doubleleren-beheer als
+# .github/workflows/portier-{{OMGEVING}}.yml. Met de hand starten (Actions → Run workflow), na elke "zet live".
+# Geheimen (alleen hier): CF_API_TOKEN (alleen Workers bewerken), APP_SLEUTEL (privésleutel van de GitHub App, PKCS#8),
+# {{P}}PORTIER_GEHEIM. Variabelen: CF_ACCOUNT_ID, APP_ID, INSTALLATIE_ID, {{P}}APP_COMMIT.
+name: Portier uitrollen ({{OMGEVING}})
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portier-{{OMGEVING}}
+  cancel-in-progress: false
+
+jobs:
+  uitrollen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Vast commit
+        id: v
+        env:
+          COMMIT: ${{ vars.{{P}}APP_COMMIT }}
+        run: |
+          [[ "$COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo "Geen geldig vast commit ({{P}}APP_COMMIT)." | tee -a "$GITHUB_STEP_SUMMARY"; exit 1; }
+          echo "commit=$COMMIT" >> "$GITHUB_OUTPUT"
+
+      - name: App-repo ophalen (openbaar, op het vaste commit)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2, vast
+        with:
+          repository: Doubleleren/doubleleren
+          ref: ${{ steps.v.outputs.commit }}
+          path: app
+          persist-credentials: false
+
+      - name: Instellingen en configuratie van de worker
+        run: |
+          set -euo pipefail
+          cd app
+          if [ '{{OMGEVING}}' = staging ]; then
+            cp staging/vertrouwd.json vertrouwd.json
+            jq '.portier = "https://{{WORKER}}.green-feather-b83e.workers.dev" | .uitnodigers = "heads-en-leiders"' instellingen.json > instellingen.tmp
+            mv instellingen.tmp instellingen.json
+          fi
+          beheer=$(jq -c '.beheer' vertrouwd.json)
+          vakken=$(jq -c '[(.vakken // [{id: .vakgebied}])[] | {id, soort}]' instellingen.json)
+          uitnodigers=$(jq -r 'if (.uitnodigers | type) == "array" then (.uitnodigers | tojson) else (.uitnodigers // "beheerders") end' instellingen.json)
+          for w in "$beheer" "$vakken" "$uitnodigers"; do case "$w" in *\'*) echo "Onverwacht teken in de configuratie"; exit 1 ;; esac; done
+          cat > portier/wrangler.toml <<EOF
+          name = "{{WORKER}}"
+          main = "portier.js"
+          compatibility_date = "2026-10-01"
+          workers_dev = true
+
+          [[durable_objects.bindings]]
+          name = "KLUIS"
+          class_name = "Kluis"
+
+          [[migrations]]
+          tag = "v1"
+          new_sqlite_classes = ["Kluis"]
+
+          [vars]
+          EIGENAAR = "Doubleleren"
+          DATA_REPO = "{{DATA}}"
+          TOEGESTAAN = "https://doubleleren.github.io"
+          UITNODIGERS = '$uitnodigers'
+          VAKKEN = '$vakken'
+          BEHEER_PUBLIEK = '$beheer'
+          EOF
+          echo "Worker {{WORKER}} voor {{DATA}}, commit ${{ steps.v.outputs.commit }}, uitnodigers: $uitnodigers" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Uitrollen en geheimen zetten
+        working-directory: app/portier
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CF_ACCOUNT_ID }}
+          APP_ID: ${{ vars.APP_ID }}
+          INSTALLATIE_ID: ${{ vars.INSTALLATIE_ID }}
+          APP_SLEUTEL: ${{ secrets.APP_SLEUTEL }}
+          PORTIER_GEHEIM: ${{ secrets.{{P}}PORTIER_GEHEIM }}
+        run: |
+          set -euo pipefail
+          for v in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID APP_ID INSTALLATIE_ID APP_SLEUTEL PORTIER_GEHEIM; do [ -n "${!v}" ] || { echo "$v ontbreekt"; exit 1; }; done
+          npx --yes wrangler@4.155.0 deploy
+          for g in APP_ID INSTALLATIE_ID APP_SLEUTEL PORTIER_GEHEIM; do printf '%s' "${!g}" | npx --yes wrangler@4.155.0 secret put "$g" > /dev/null; done
+          echo "Portier uitgerold: https://{{WORKER}}.green-feather-b83e.workers.dev" >> "$GITHUB_STEP_SUMMARY"

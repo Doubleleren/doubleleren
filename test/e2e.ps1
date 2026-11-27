@@ -2,18 +2,27 @@
 # aanvalsscenario's, herstel, organogramwijziging, dagcyclus en optioneel leren. Testpersonen hebben neutrale namen.
 #   powershell -NoProfile -ExecutionPolicy Bypass -File test\e2e.ps1 [-Xlsx "C:\...\skilllijst.xlsx"]
 # Zonder -Xlsx gebruikt de test een nep-skilllijst uit het sjabloon (test\nep-skilllijst.ps1).
-param([string]$Xlsx, [string]$Werk = (Join-Path $env:TEMP 'doubleleren-e2e'))
+# -VanafCloud: alleen de cloud- en portierblokken, vanaf het bewaarpunt dat de laatste volledige run maakte (<Werk>-bewaarpunt),
+# met de nieuwste code. Een paar minuten in plaats van ruim twintig; vóór een pull request draai je altijd de volledige test.
+param([string]$Xlsx, [string]$Werk = (Join-Path $env:TEMP 'doubleleren-e2e'), [switch]$VanafCloud)
 $ErrorActionPreference = 'Stop'
 $bron = Split-Path $PSScriptRoot -Parent
-if (-not $Xlsx) {
-    $Xlsx = Join-Path $env:TEMP 'doubleleren-nep-skilllijst.xlsx'
-    & powershell -NoProfile -ExecutionPolicy Bypass -File "$PSScriptRoot\nep-skilllijst.ps1" -Uit $Xlsx | Out-Null
-    if (-not (Test-Path $Xlsx)) { throw 'Nep-skilllijst maken mislukt' }
-}
-Remove-Item $Werk -Recurse -Force -ErrorAction SilentlyContinue
+$bewaarpunt = "$Werk-bewaarpunt"
 $A = Join-Path $Werk 'app'; $D = Join-Path $Werk 'data'; $T = Join-Path $Werk 'thuis'
-New-Item -ItemType Directory $A, $D, $T -Force | Out-Null
-Copy-Item (Join-Path $bron '*') $A -Recurse -Exclude '.git', 'test'
+Remove-Item $Werk -Recurse -Force -ErrorAction SilentlyContinue
+if ($VanafCloud) {
+    if (-not (Test-Path "$bewaarpunt\stand.xml")) { throw "Geen bewaarpunt in $bewaarpunt. Draai eerst één keer de volledige e2e (zonder -VanafCloud)." }
+    Copy-Item $bewaarpunt $Werk -Recurse
+    foreach ($m in 'app', 'beheer', 'docs', 'portier') { Copy-Item (Join-Path $bron $m) $A -Recurse -Force }   # nieuwste code, testdata blijft
+} else {
+    if (-not $Xlsx) {
+        $Xlsx = Join-Path $env:TEMP 'doubleleren-nep-skilllijst.xlsx'
+        & powershell -NoProfile -ExecutionPolicy Bypass -File "$PSScriptRoot\nep-skilllijst.ps1" -Uit $Xlsx | Out-Null
+        if (-not (Test-Path $Xlsx)) { throw 'Nep-skilllijst maken mislukt' }
+    }
+    New-Item -ItemType Directory $A, $D, $T -Force | Out-Null
+    Copy-Item (Join-Path $bron '*') $A -Recurse -Exclude '.git', 'test'
+}
 $TOKEN = 'github_pat_TESTTOKEN_alleen_lokaal_0000'
 $fouten = 0
 function Controleer([bool]$ok, [string]$wat) { if ($ok) { Write-Host "  OK    $wat" } else { Write-Host "  FOUT  $wat" -ForegroundColor Red; $script:fouten++ } }
@@ -26,6 +35,7 @@ foreach ($l in 'krypto', 'opslag', 'lid', 'geheim', 'client', 'organisatie') { .
 $dO = New-DlOpslag -Map $D
 $maand = (Get-Date).ToString('yyyy-MM')
 
+if (-not $VanafCloud) {   # blokken 1 t/m 19 (niet ingesprongen); daarna het bewaarpunt
 Write-Host '1. Inrichten en uitnodigen'
 Beheer -Init | Out-Null
 $V = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer
@@ -223,7 +233,8 @@ Controleer ($prioF.'9' -eq 3 -and $prioF.'2' -eq 1 -and -not $prioF.x -and -not 
 # Feedback: versleuteld naar de beheerder, met naam alleen voor de beheerder
 $cd = Get-DlClient -Thuis "$T\Delta"
 $fb1 = New-DlFeedback $dO $ids.Delta $cd.prive @{ beheer = $V } 'bug' 'De knop Afronden reageert niet op mijn laptop' ''
-Controleer (-not ([IO.File]::ReadAllText("$D\feedback\$fb1.json") -match 'Afronden|Delta|bug')) 'Feedbackbestand verraadt geen naam, soort of tekst'
+# Hoofdlettergevoelig en met aanhalingstekens bij "bug": in versleutelde (base64) tekst komt "bUg" anders toevallig voor
+Controleer (-not ([IO.File]::ReadAllText("$D\feedback\$fb1.json") -cmatch 'Afronden|Delta|"bug"')) 'Feedbackbestand verraadt geen naam, soort of tekst'
 $fbUit1 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
 $fbUit2 = (& powershell -NoProfile -ExecutionPolicy Bypass -File "$A\beheer\feedback.ps1" -Nieuw -DataMap $D -Thuis "$T\beheer") -join "`n"
 Controleer ($fbUit1 -match '1 nieuw' -and $fbUit1 -match 'Delta' -and $fbUit1 -match 'Afronden reageert niet' -and $fbUit2 -match 'niets nieuws') 'Beheerder ziet nieuwe feedback met naam, één keer'
@@ -452,6 +463,15 @@ $ctxK = Get-Content "$T\beheer\generator\context.json" -Raw | ConvertFrom-Json
 Controleer ($ctxK.leden.($ids.Kilo).vak -eq 'trainee' -and -not @($ctxK.leden.($ids.Kilo).vakken.PSObject.Properties).Count) 'Context: trainee zonder gekozen vak krijgt (nog) geen lessen'
 Remove-Item "$T\beheer\generator\context.json", "$T\beheer\generator\werk.json", "$T\beheer\generator\regelaar.json" -ErrorAction SilentlyContinue
 
+# Bewaarpunt voor -VanafCloud: de testmap en wie wie is (alleen tijdelijke testgegevens)
+Remove-Item $bewaarpunt -Recurse -Force -ErrorAction SilentlyContinue
+Copy-Item $Werk $bewaarpunt -Recurse
+@{ ids = $ids; res = $res; h = $h } | Export-Clixml "$bewaarpunt\stand.xml"
+} else {
+    $stand = Import-Clixml "$Werk\stand.xml"; $ids = $stand.ids; $res = $stand.res; $h = $stand.h
+    Write-Host "Vanaf het bewaarpunt ($bewaarpunt): blokken 1-19 overgeslagen"
+}
+
 Write-Host '18. Beheer in de cloud: sleutels uit de omgeving, alleen gewone leden, nooit een sleutelwissel'
 $CB = Join-Path $Werk 'cloud-beheer'; New-Item -ItemType Directory $CB -Force | Out-Null      # geen beheer.dpapi: zoals op een runner
 $gb = Read-DlGeheim "$T\beheer\beheer.dpapi"; $V = (Get-Content "$A\vertrouwd.json" -Raw | ConvertFrom-Json).beheer
@@ -533,6 +553,77 @@ Controleer (($uitO -join ' ') -match 'oudere versie' -and $script:codeCloud -ne 
 # Wat alleen op de laptop mag
 $uitL = BeheerCloud -Bijwerken
 Controleer ($script:codeCloud -ne 0 -and ($uitL -join ' ') -match 'alleen op de laptop') 'Cloud weigert acties die alleen op de laptop mogen'
+
+Write-Host '19. Portier: een projectleider voegt een collega toe, die meldt zich aan met de nieuwe code en de cloud keurt goed'
+# De echte portier lokaal (test\portier-lokaal.mjs), met de testdata in deze map
+$PP = 8791; $PG = 'e2e-portiergeheim'
+$instA = Get-Content "$A\instellingen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+$instA | Add-Member -NotePropertyName portier -NotePropertyValue "http://localhost:$PP/portier" -Force
+$instA | Add-Member -NotePropertyName uitnodigers -NotePropertyValue 'heads-en-leiders' -Force
+[IO.File]::WriteAllText("$A\instellingen.json", ($instA | ConvertTo-Json -Depth 6), (New-Object Text.UTF8Encoding($false)))
+$node = Start-Process node -ArgumentList "`"$PSScriptRoot\portier-lokaal.mjs`"", '--poort', $PP, '--werk', "`"$Werk`"", '--geheim', $PG -PassThru -WindowStyle Hidden
+try {
+    for ($i = 0; $i -lt 50; $i++) { try { Invoke-WebRequest "http://localhost:$PP/portier/stand" -Headers @{ Authorization = "Bearer $PG" } -UseBasicParsing -TimeoutSec 2 | Out-Null; break } catch { Start-Sleep -Milliseconds 200 } }
+    $env:DL_PORTIER = "http://localhost:$PP/portier"; $env:DL_PORTIER_GEHEIM = $PG
+    function Verzoek($wie, [string]$context, $gegevens) {
+        $cw = Get-DlClient -Thuis "$T\$wie"
+        $g = [ordered]@{}; foreach ($k in $gegevens.Keys) { $g[$k] = $gegevens[$k] }
+        $g.datum = (Get-Date).ToUniversalTime().ToString('o'); $g.nonce = ConvertTo-B64u (Get-DlWillekeurig 18)
+        $inhoud = $g | ConvertTo-Json -Compress
+        @{ verzoek = [ordered]@{ v = 2; door = $cw.id; inhoud = $inhoud; sig = (New-DlHandtekening $cw.prive $context $cw.id $inhoud) } }
+    }
+    function Portier([string]$pad, $body) { Invoke-RestMethod "http://localhost:$PP/portier$pad" -Method Post -Body ($body | ConvertTo-Json -Depth 5 -Compress) -ContentType 'application/json' -UseBasicParsing }
+    function AanmeldenMetCode([string]$code, [string]$naam) {
+        $ErrorActionPreference = 'Continue'
+        $j = & powershell -NoProfile -ExecutionPolicy Bypass -File "$A\app\installeer.ps1" -Stil -Uitnodiging $code -Naam $naam -Thuis "$T\$naam" -AppMap $A -DataMap $D -GeenTaak 2>&1 | ForEach-Object { "$_" }
+        $j | Select-Object -Last 1
+    }
+    # Delta (projectleider ecom-b2b) voegt Oscar toe
+    $rO = Portier '/nieuw' (Verzoek 'Delta' 'nieuw' ([ordered]@{ naam = 'Oscar'; project = 'ecom-b2b'; vak = 'seo'; leren = 'verplicht' }))
+    $ids.Oscar = $rO.id
+    Controleer ($rO.code -cmatch "^$($rO.id):dl1_[A-Za-z0-9]{48}$" -and (Test-Path "$D\uitnodigingen\$($rO.id).json")) 'Portier: code voor de nieuwe collega en een seintje voor de cloud'
+    $fout = $null; try { Portier '/nieuw' (Verzoek 'Delta' 'nieuw' ([ordered]@{ naam = 'Elders'; project = 'leadgen-b2c'; vak = 'seo' })) | Out-Null } catch { $fout = $_ }
+    Controleer ([bool]$fout) 'Portier: Delta voegt niemand toe in een ander project'
+    BeheerCloud -AutoGoedkeuren | Out-Null
+    $orgP = Read-DlBeheer $dO 'organisatie.json' $V
+    $standP = Invoke-RestMethod "http://localhost:$PP/portier/stand" -Headers @{ Authorization = "Bearer $PG" } -UseBasicParsing
+    Controleer ($orgP.leden.($ids.Oscar).uitgenodigd -eq $false -and $orgP.leden.($ids.Oscar).project -eq 'ecom-b2b' -and -not $standP.nieuw.($ids.Oscar) -and -not (Test-Path "$D\uitnodigingen\$($ids.Oscar).json") -and [int]$standP.orgversie -eq [int]$orgP.versie) 'Cloud zet Oscar in het organogram (label uitgenodigd), ruimt het seintje op en meldt de versie aan de portier'
+    # Iemand met alleen een (oud) token meldt zich als Oscar aan, zonder de code: geen koppeling, dus geen goedkeuring
+    Installeer $ids.Oscar 'Oscar-aanvaller' @() | Out-Null
+    BeheerCloud -AutoGoedkeuren | Out-Null
+    Controleer (-not (Test-Path "$D\beheer\toegang\$($ids.Oscar).json") -and (Test-Path "$D\aanvragen\$($ids.Oscar).json")) 'Aanmelding zonder de uitnodigingscode: niet goedgekeurd (wacht op een koppeling)'
+    # Oscar zelf meldt zich aan met de code (pop-up): koppeling met zijn sleutel, en de aanvraag van de aanvaller is vervangen
+    $resO = AanmeldenMetCode $rO.code 'Oscar' | ConvertFrom-Json
+    BeheerCloud -AutoGoedkeuren | Out-Null
+    $orgP = Read-DlBeheer $dO 'organisatie.json' $V
+    Controleer ((Test-Path "$D\beheer\toegang\$($ids.Oscar).json") -and $orgP.leden.($ids.Oscar).goedgekeurd -and $null -eq $orgP.leden.($ids.Oscar).uitgenodigd) 'Oscar meldt zich aan met de code en wordt goedgekeurd; het label verdwijnt'
+    Controleer ((KanOpenen 'Oscar' 'Oscar' 'profiel') -and (KanOpenen 'Delta' 'Oscar' 'profiel')) 'Oscar leest zijn eigen gegevens, en Delta (projectleider) ziet hem'
+    # Tweede nieuwe collega: na de koppeling zet iemand anders een aanvraag met een andere sleutel neer
+    $rQ = Portier '/nieuw' (Verzoek 'Delta' 'nieuw' ([ordered]@{ naam = 'Quinn'; project = 'ecom-b2b'; vak = 'seo' }))
+    $ids.Quinn = $rQ.id
+    BeheerCloud -AutoGoedkeuren | Out-Null
+    AanmeldenMetCode $rQ.code 'Quinn' | Out-Null
+    Installeer $ids.Quinn 'Quinn-aanvaller' @() | Out-Null
+    BeheerCloud -AutoGoedkeuren | Out-Null
+    Controleer (-not (Test-Path "$D\beheer\toegang\$($ids.Quinn).json") -and -not (Test-Path "$D\aanvragen\$($ids.Quinn).json")) 'Aanvraag met een andere sleutel dan de gekoppelde: weggegooid, niet goedgekeurd'
+    # Bestaand lid zonder label (op de oude manier toegevoegd), via de portier uitgenodigd: ook dan geldt de koppeling
+    $uR = Beheer -Uitnodigen -Naam Romeo -Rol lid -Project ecom-b2b; $ids.Romeo = ([regex]::Match(($uR -join "`n"), 'lid-[0-9a-f]{6}')).Value
+    $rR = Portier '/uitnodigen' (Verzoek 'Delta' "uitnodiging|$($ids.Romeo)" ([ordered]@{ id = $ids.Romeo }))
+    Installeer $ids.Romeo 'Romeo-aanvaller' @() | Out-Null
+    BeheerCloud -AutoGoedkeuren | Out-Null
+    Controleer (-not (Test-Path "$D\beheer\toegang\$($ids.Romeo).json")) 'Lid zonder label met een open uitnodiging: zonder koppeling geen goedkeuring'
+    AanmeldenMetCode $rR.code 'Romeo' | Out-Null
+    BeheerCloud -AutoGoedkeuren | Out-Null
+    Controleer ((Test-Path "$D\beheer\toegang\$($ids.Romeo).json") -and (KanOpenen 'Romeo' 'Romeo' 'profiel')) 'Met de code aangemeld: goedgekeurd'
+    # Delta nodigt een bestaand gewoon lid uit (India, al goedgekeurd): een extra code voor bijv. een tweede laptop
+    $rI = Portier '/uitnodigen' (Verzoek 'Delta' "uitnodiging|$($ids.India)" ([ordered]@{ id = $ids.India }))
+    Controleer ($rI.goedgekeurd -eq $true -and $rI.code -like "$($ids.India):dl1_*") 'Bestaand, goedgekeurd lid: extra code via de portier'
+    $fout = $null; try { Portier '/uitnodigen' (Verzoek 'Golf' "uitnodiging|$($ids.India)" ([ordered]@{ id = $ids.India })) | Out-Null } catch { $fout = $_ }
+    Controleer ([bool]$fout) 'Een gewoon lid kan niemand uitnodigen'
+} finally {
+    Remove-Item Env:\DL_PORTIER, Env:\DL_PORTIER_GEHEIM -ErrorAction SilentlyContinue
+    if ($node -and -not $node.HasExited) { Stop-Process -Id $node.Id -Force -ErrorAction SilentlyContinue }
+}
 
 # Voor test\site-demo.ps1: testcodes (alleen in de tijdelijke testmap)
 $res.Golf = $h

@@ -29,7 +29,8 @@ param(
     [switch]$Exporteer, [switch]$Importeer, [string]$Bestand,
     [string]$DataMap, [string]$Thuis, [string]$Wachtzin,      # tests: lokale map i.p.v. GitHub, wachtzin zonder vragen
     [switch]$OokOpLaptop,     # -AutoGoedkeuren op de laptop terwijl de cloud het doet (terugval)
-    [switch]$HerstelVersie    # laptop vergeet een te hoge onthouden organogramversie (bijv. na een weggegooide lokale commit)
+    [switch]$HerstelVersie,   # laptop vergeet een te hoge onthouden organogramversie (bijv. na een weggegooide lokale commit)
+    [switch]$VulOrganogram, [switch]$Doorvoeren      # eenmalig het concept-organogram (-Bestand) overnemen; zonder -Doorvoeren alleen tonen
 )
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
@@ -97,7 +98,7 @@ function Get-Omgeving {
     $ErrorActionPreference = 'Continue'
     if ((git -C $kl remote get-url origin 2>$null) -match 'doubleleren-data-staging') { 'staging' } else { 'live' }
 }
-$schrijft = $Uitnodigen -or $Goedkeuren -or $AutoGoedkeuren -or $Verplaats -or $Head -or $Wijzig -or $Bijwerken -or $NieuweGeneratorsleutel -or $Migreer -or $HerstelVersie
+$schrijft = $Uitnodigen -or $Goedkeuren -or $AutoGoedkeuren -or $Verplaats -or $Head -or $Wijzig -or $Bijwerken -or $NieuweGeneratorsleutel -or $Migreer -or $HerstelVersie -or ($VulOrganogram -and $Doorvoeren)
 if (-not $Cloud -and -not $DataMap -and $schrijft -and $inst.beheerRepo -and -not $env:DL_CLOUD_GEPAUZEERD) {
     if ($AutoGoedkeuren -and -not $OokOpLaptop) { return }
     $gh = Get-Gh; $repo = "$($inst.eigenaar)/$($inst.beheerRepo)"; $wf = "goedkeuren-$(Get-Omgeving).yml"
@@ -222,9 +223,25 @@ if ($HerstelVersie) {
 $script:hoogste = [int]$(if ($geheim -and $geheim.orgVersie) { $geheim.orgVersie } else { 0 })
 if ($script:kloon) { $script:hoogste = [Math]::Max($script:hoogste, (Get-DlHoogsteOrgVersie $script:kloon $V 'HEAD' $(if (-not $Cloud) { Join-Path $Thuis 'orgversie-cache.json' }))) }
 if ($env:DL_ORG_VERSIE_MIN) { $script:hoogste = [Math]::Max($script:hoogste, [int]$env:DL_ORG_VERSIE_MIN) }
+# Portier (fase 2): staat DL_PORTIER (adres) met DL_PORTIER_GEHEIM in de omgeving, dan haalt het script daar de stand op:
+# nieuwe collega's, de koppelingen van aanmeldingen aan uitnodigingen, en de hoogste organogramversie die de portier zag.
+function Invoke-Portier([string]$Methode, [string]$Pad, $Body) {
+    $p = @{ Uri = "$($env:DL_PORTIER)$Pad"; Method = $Methode; Headers = @{ Authorization = "Bearer $env:DL_PORTIER_GEHEIM" }; UseBasicParsing = $true; TimeoutSec = 30 }
+    if ($null -ne $Body) { $p.Body = ($Body | ConvertTo-Json -Compress); $p.ContentType = 'application/json' }
+    Invoke-RestMethod @p
+}
+$script:stand = $null; $script:naPush = @()      # naPush: meldingen aan de portier die pas mogen na een geslaagde push
+if ($env:DL_PORTIER -and -not $Migreer) {
+    if (-not $env:DL_PORTIER_GEHEIM) { throw 'DL_PORTIER staat ingesteld, maar DL_PORTIER_GEHEIM ontbreekt.' }
+    $script:stand = Invoke-Portier 'GET' '/stand' $null
+    $script:hoogste = [Math]::Max($script:hoogste, [int]$script:stand.orgversie)
+}
 if (-not $Migreer -and $script:orgVersie -lt $script:hoogste) {
     throw "Het organogram is teruggezet naar een oudere versie ($($script:orgVersie); bekend is $($script:hoogste)). Niets gedaan: zet eerst de nieuwste versie terug."
 }
+# De portier hoort de hoogste versie die hier bekend is (ook van wijzigingen op de laptop), zodat hij een teruggezet
+# organogram ook weigert
+if ($script:stand -and [Math]::Max($script:orgVersie, $script:hoogste) -gt [int]$script:stand.orgversie) { Invoke-Portier 'POST' '/orgversie' @{ versie = [Math]::Max($script:orgVersie, $script:hoogste) } | Out-Null }
 # Onthouden wat er al op GitHub staat (de laptop): pas als het echt verstuurd is, anders kan een mislukte push of een
 # weggegooide lokale commit alles blokkeren. Leest de beheergeheimen opnieuw in, zodat niets van een ander proces verdwijnt.
 function Save-OrgVersie([int]$Versie) {
@@ -389,6 +406,95 @@ elseif ($Uitnodigen) {
     $Bijwerken = $true      # vervangt de nieuwe rol een goedgekeurde leider of head, dan meteen de sleutelwissel (hier op de laptop)
 }
 
+elseif ($VulOrganogram) {
+    # Eenmalig het concept-organogram overnemen (zie plan, onderdeel F). Zonder -Doorvoeren alleen tonen wat er gebeurt.
+    #   nieuwe mensen (zonder id) erbij met het label 'uitgenodigd: false', volledige namen bij wie nu alleen een voornaam
+    #   heeft, rollen op lege plekken of bij iemand zonder sleutel, en het label bij iedereen die nog niet meedoet.
+    #   Nooit: een goedgekeurde leider of head vervangen (sleutelwissel), of iemand verplaatsen (dat blijft -Verplaats).
+    if ($Cloud) { throw 'Alleen op de laptop.' }
+    if (-not $Bestand -or -not (Test-Path $Bestand)) { throw 'Geef -Bestand met het concept-organogram (organogram-concept.json)' }
+    $concept = Get-Content $Bestand -Raw -Encoding UTF8 | ConvertFrom-Json
+    $alleProjecten = @($org.cellen | ForEach-Object { $_.projecten })
+    $onderwerpen = @($inst.vakken | Where-Object { $_.soort -eq 'onderwerp' } | ForEach-Object { $_.id })
+    # 'Doet mee' = een sleutel óf de markering goedgekeurd (een gewist sleutelbestand mag een leider niet vervangbaar maken)
+    $heeftSleutel = @{}; foreach ($lidId in @($org.leden.PSObject.Properties.Name)) { $heeftSleutel[$lidId] = [bool]$org.leden.$lidId.goedgekeurd -or [bool](Read-DlBeheer $d "sleutels/$lidId.json" $V) }
+    $acties = New-Object Collections.Generic.List[string]; $verschillen = New-Object Collections.Generic.List[string]
+    $naarId = @{}; $idsTerug = @{}
+    # 1. Leden
+    foreach ($c in @($concept.leden)) {
+        $cNaam = [string]$c.naam
+        $vakC = if ($c.vak) { [string]$c.vak } else { [string]$org.vakgebied }
+        if ($vakIds -notcontains $vakC -or $onderwerpen -contains $vakC) { $verschillen.Add("$($cNaam): onbekend vak '$vakC', overgeslagen"); continue }
+        $plek = [string]$c.plek
+        $proj = $null; $celC = $null
+        if ($plek -like 'cel:*') { $celC = $plek.Substring(4); if (-not @($org.cellen | Where-Object id -eq $celC).Count) { $verschillen.Add("$($cNaam): onbekende cel '$celC', overgeslagen"); continue } }
+        elseif ($plek -and $plek -ne 'base') { $proj = $plek; if (-not @($alleProjecten | Where-Object id -eq $proj).Count) { $verschillen.Add("$($cNaam): onbekend project '$proj', overgeslagen"); continue } }
+        if ($naarId.ContainsKey($cNaam)) { $verschillen.Add("$($cNaam): staat twee keer in het concept, overgeslagen"); continue }
+        # Zonder id, maar staat hij al in het organogram (volledige naam, of een unieke voornaam)? Dan dat lid, geen nieuw lid
+        if (-not $c.id) {
+            $gebruikt = @($naarId.Values)
+            $zelfde = @($org.leden.PSObject.Properties | Where-Object { $gebruikt -notcontains $_.Name -and ([string]$_.Value.naam -eq $cNaam -or ($cNaam -like "$([string]$_.Value.naam) *" -and [string]$_.Value.naam)) })
+            if ($zelfde.Count -eq 1) { $c | Add-Member -NotePropertyName id -NotePropertyValue $zelfde[0].Name -Force; $idsTerug[$cNaam] = $zelfde[0].Name; $verschillen.Add("$($cNaam): had geen id in het concept; gekoppeld aan bestaand lid $(Naam $zelfde[0].Name)") }
+            elseif ($zelfde.Count -gt 1) { $verschillen.Add("$($cNaam): lijkt op meerdere leden ($(($zelfde | ForEach-Object { Naam $_.Name }) -join ', ')), overgeslagen; zet het id in het concept"); continue }
+        }
+        if ($c.id) {
+            $lid = $org.leden.($c.id); if (-not $lid) { $verschillen.Add("$($cNaam): id $($c.id) staat niet in het organogram, overgeslagen"); continue }
+            $naarId[$cNaam] = [string]$c.id
+            if ([string]$lid.naam -ne $cNaam -and $cNaam.StartsWith([string]$lid.naam)) { $acties.Add("Naam: $($lid.naam) wordt $cNaam"); $lid | Add-Member -NotePropertyName naam -NotePropertyValue $cNaam -Force }
+            $plekNu = if ($lid.project) { [string]$lid.project } elseif ($lid.cel) { "cel:$($lid.cel)" } else { '' }
+            $plekConcept = if ($proj) { $proj } elseif ($celC) { "cel:$celC" } else { '' }
+            if ($plekNu -ne $plekConcept) { $verschillen.Add("$($cNaam): plek in het organogram '$plekNu', in het concept '$plekConcept' (niet aangepast; gebruik -Verplaats)") }
+            if ((Get-DlVakVanLid $org $c.id) -ne $vakC) { $verschillen.Add("$($cNaam): vak in het organogram '$(Get-DlVakVanLid $org $c.id)', in het concept '$vakC' (niet aangepast; gebruik -Verplaats -Vak)") }
+        } else {
+            do { $nid = 'lid-' + (-join ((Get-DlWillekeurig 3) | ForEach-Object { $_.ToString('x2') })) } while ($org.leden.$nid)
+            $nieuwLid = [ordered]@{ naam = $cNaam; uitgenodigd = $false }
+            if ($proj) { $nieuwLid.project = $proj } elseif ($celC) { $nieuwLid.cel = $celC }
+            if ($vakC -ne $org.vakgebied) { $nieuwLid.vak = $vakC }
+            $org.leden | Add-Member -NotePropertyName $nid -NotePropertyValue ([pscustomobject]$nieuwLid)
+            $naarId[$cNaam] = $nid; $idsTerug[$cNaam] = $nid; $heeftSleutel[$nid] = $false
+            $acties.Add("Nieuw: $cNaam ($nid, $(if ($proj) { $proj } elseif ($celC) { "cel $celC" } else { 'geen plek' }), $vakC)")
+        }
+    }
+    # 2. Rollen: alleen op een lege plek of bij iemand zonder sleutel; nooit een goedgekeurde leider of head vervangen
+    function Set-ConceptRol([string]$Soort, [string]$Waar, [string]$Naam, $Nu, [scriptblock]$Zet) {
+        if (-not $naarId.ContainsKey($Naam)) { $verschillen.Add("$Soort ${Waar}: '$Naam' staat niet (goed) in het concept"); return }
+        $nieuwId = $naarId[$Naam]
+        if ($Nu -eq $nieuwId) { return }
+        if ($Nu -and $heeftSleutel[$Nu]) { $verschillen.Add("$Soort ${Waar}: nu $(Naam $Nu), in het concept $Naam. Niet vervangen: $(Naam $Nu) doet al mee (sleutelwissel, doe dit apart)"); return }
+        & $Zet $nieuwId
+        $acties.Add("$Soort ${Waar}: $Naam$(if ($Nu) { " (in plaats van $(Naam $Nu), die nog niet meedoet)" })")
+    }
+    foreach ($p in @($(if ($concept.heads) { $concept.heads.PSObject.Properties }))) {
+        if ($vakIds -notcontains $p.Name) { $verschillen.Add("Head: onbekend vak '$($p.Name)'"); continue }
+        $vakH = $p.Name; Set-ConceptRol 'Head' $vakH ([string]$p.Value) (Get-DlHeadVanVak $org $vakH) { param($x) Set-Head $x $vakH }
+    }
+    foreach ($p in @($(if ($concept.celleiders) { $concept.celleiders.PSObject.Properties }))) {
+        $celObj = @($org.cellen | Where-Object id -eq $p.Name)[0]; if (-not $celObj) { $verschillen.Add("Celleider: onbekende cel '$($p.Name)'"); continue }
+        Set-ConceptRol 'Celleider' $p.Name ([string]$p.Value) $celObj.leider { param($x) $celObj.leider = $x }
+    }
+    foreach ($p in @($(if ($concept.projectleiders) { $concept.projectleiders.PSObject.Properties }))) {
+        $pr = @($alleProjecten | Where-Object id -eq $p.Name)[0]; if (-not $pr) { $verschillen.Add("Projectleider: onbekend project '$($p.Name)'"); continue }
+        Set-ConceptRol 'Projectleider' $p.Name ([string]$p.Value) $pr.leider { param($x) $pr.leider = $x }
+    }
+    # 3. Label bij iedereen die nog niet meedoet: alleen goedkeuren met een uitnodiging van de portier (of door de beheerder)
+    $label = @($org.leden.PSObject.Properties | Where-Object { -not $heeftSleutel[$_.Name] -and -not $_.Value.goedgekeurd -and $_.Value.uitgenodigd -ne $false })
+    foreach ($l in $label) { $l.Value | Add-Member -NotePropertyName uitgenodigd -NotePropertyValue $false -Force }
+    if ($label.Count) { $acties.Add("Label 'nog niet uitgenodigd' bij $($label.Count) bestaande deelnemer(s) die nog niet meedoen: $(($label | ForEach-Object { Naam $_.Name }) -join ', ')") }
+    Write-Host "Acties ($($acties.Count)):" -ForegroundColor Green; $acties | ForEach-Object { Write-Host "  $_" }
+    Write-Host "Verschillen die je zelf moet bekijken ($($verschillen.Count)):" -ForegroundColor Yellow; $verschillen | ForEach-Object { Write-Host "  $_" }
+    if (-not $Doorvoeren) { Write-Host "`nNiets gewijzigd. Draai opnieuw met -Doorvoeren om de acties uit te voeren."; return }
+    if (-not $acties.Count) { Write-Host 'Niets te doen.'; return }
+    Save-Org
+    # Nieuwe ids terug in het concept (met een kopie van het oude bestand ernaast)
+    if ($idsTerug.Count) {
+        Copy-Item $Bestand "$Bestand.voor-vullen-$(Get-Date -Format yyyyMMdd-HHmm)"
+        foreach ($c in @($concept.leden)) { if ($idsTerug.ContainsKey([string]$c.naam)) { $c | Add-Member -NotePropertyName id -NotePropertyValue $idsTerug[[string]$c.naam] -Force } }
+        [IO.File]::WriteAllText($Bestand, ($concept | ConvertTo-Json -Depth 8), $Utf8)
+    }
+    Write-Host "Organogram bijgewerkt ($($acties.Count) acties)." -ForegroundColor Green
+    $Bijwerken = $true
+}
+
 elseif ($Verplaats) {
     $l = $org.leden.$Verplaats; if (-not $l) { throw "Onbekend: $Verplaats" }
     if ($Project) {
@@ -432,6 +538,12 @@ elseif ($Aanvragen) {
 }
 
 elseif ($AutoGoedkeuren) {
+    # Leeftijd van een aanvraag in dagen: uit git (of het bestand), niet uit het veld 'aangevraagd' (dat kiest de aanvrager zelf)
+    function Get-AanvraagLeeftijd([string]$Bestand) {
+        if ($script:kloon) { $ErrorActionPreference = 'Continue'; $t = git -C $script:kloon log -1 --format=%ct -- "aanvragen/$Bestand" 2>$null; if ($t -match '^\d+$') { return ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$t) / 86400 } }
+        if ($DataMap) { $pad = Join-Path $DataMap "aanvragen\$Bestand"; if (Test-Path $pad) { return ((Get-Date) - (Get-Item $pad).LastWriteTime).TotalDays } }
+        0
+    }
     # Nieuwe aanmeldingen van gewone leden zonder controlewoorden goedkeuren: het wachtwoord van zes woorden is genoeg.
     # Handwerk blijft: "code kwijt" (herstel, met controlewoorden), en heads, leiders en beheerders (die zien anderen;
     # de beheerder keurt hen zelf goed, zodat niemand met een token zich als een nieuwe leider kan aanmelden).
@@ -444,7 +556,51 @@ elseif ($AutoGoedkeuren) {
         Save-Org; Write-Host "Markering 'goedgekeurd' gezet bij $($nieuw.Count) bestaande deelnemer(s)."
         if ($script:kloon) { Push-DlKloon $script:kloon; Save-OrgVersie $script:orgVersie }
     }
-    $fouten = 0
+    # Nieuwe collega's die een head of leider via de portier toevoegde: opnieuw controleren met het organogram van nu en
+    # toevoegen met het label 'uitgenodigd: false' (dan alleen goedkeuren met een koppeling aan de uitnodigingscode).
+    # Meteen versturen, net als de markering hierboven. Pas daarna de portier laten weten dat het verwerkt is.
+    if ($script:stand) {
+        $verwerkt = @(); $geweigerd = @(); $erbij = 0
+        $onderwerpen = @($inst.vakken | Where-Object { $_.soort -eq 'onderwerp' } | ForEach-Object { $_.id })
+        foreach ($p in @($(if ($script:stand.nieuw) { $script:stand.nieuw.PSObject.Properties }))) {
+            $nid = $p.Name; $verzoek = $p.Value; $nl = $verzoek.lid
+            if ($org.leden.$nid) {
+                # Een eerdere run zette hem er al in (zelfde naam); anders is het id al van een ander: weigeren
+                if ([string]$org.leden.$nid.naam -eq [string]$nl.naam) { $verwerkt += $nid } else { Write-Host "Nieuwe collega $nid geweigerd: het id is al van $(Naam $nid)"; $script:wacht++; $geweigerd += $nid }
+                continue
+            }
+            $vakNieuw = if ($nl.vak) { [string]$nl.vak } else { [string]$org.vakgebied }
+            $reden = $null
+            if ($nid -cnotmatch '^lid-[0-9a-f]{6}$') { $reden = 'ongeldig id' }
+            elseif (-not $nl -or [string]$nl.naam -notmatch '^[^\x00-\x1f<>"\\]{2,60}$') { $reden = 'ongeldige naam' }
+            elseif ($vakIds -notcontains $vakNieuw -or $onderwerpen -contains $vakNieuw) { $reden = "onbekend vak '$vakNieuw'" }
+            elseif ($nl.project -and -not @($org.cellen | ForEach-Object { $_.projecten } | Where-Object id -eq $nl.project).Count) { $reden = "onbekend project '$($nl.project)'" }
+            elseif ($nl.cel -and -not @($org.cellen | Where-Object id -eq $nl.cel).Count) { $reden = "onbekende cel '$($nl.cel)'" }
+            elseif (-not (Test-DlMagToevoegen $org ([string]$verzoek.door) ([string]$nl.project) ([string]$nl.cel) $vakNieuw)) { $reden = "$(Naam $verzoek.door) mag daar geen collega toevoegen" }
+            elseif ((Read-DlOpslag $d "beheer/sleutels/$nid.json") -or (Read-DlOpslag $d "beheer/toegang/$nid.json") -or @(Get-DlOpslagLijst $d "data/$nid").Count) { $reden = 'het id is niet vrij' }
+            if ($reden) { Write-Host "Nieuwe collega $nid geweigerd: $reden"; $script:wacht++; $geweigerd += $nid; continue }
+            $nieuwLid = [ordered]@{ naam = [string]$nl.naam; uitgenodigd = $false }
+            if ($nl.project) { $nieuwLid.project = [string]$nl.project } elseif ($nl.cel) { $nieuwLid.cel = [string]$nl.cel }
+            if ($vakNieuw -ne $org.vakgebied) { $nieuwLid.vak = $vakNieuw }
+            if ($nl.leren -eq 'optioneel') { $nieuwLid.leren = 'optioneel' }
+            $org.leden | Add-Member -NotePropertyName $nid -NotePropertyValue ([pscustomobject]$nieuwLid)
+            Write-Host "Nieuwe collega toegevoegd: $($nieuwLid.naam) ($nid), door $(Naam $verzoek.door)"; $erbij++; $verwerkt += $nid
+        }
+        if ($erbij) { Save-Org }
+        # Seintjes opruimen: van wat nu verwerkt is, en oude seintjes waar de portier niets meer van weet
+        $open = @($(if ($script:stand.nieuw) { $script:stand.nieuw.PSObject.Properties.Name }))
+        foreach ($sf in @(Get-DlOpslagLijst $d 'uitnodigingen')) {
+            $sid = $sf -replace '\.json$', ''
+            if ($verwerkt -contains $sid -or $geweigerd -contains $sid -or $open -notcontains $sid) { $sb = Read-DlOpslag $d "uitnodigingen/$sf"; if ($sb) { Remove-DlOpslag $d "uitnodigingen/$sf" $sb.sha } }
+        }
+        if ($script:kloon) { Push-DlKloon $script:kloon; if ($erbij) { Save-OrgVersie $script:orgVersie } }
+        foreach ($nid in $verwerkt) { Invoke-Portier 'POST' '/afgehandeld' @{ id = $nid; soort = 'nieuw' } | Out-Null }
+        foreach ($nid in $geweigerd) { Invoke-Portier 'POST' '/afgehandeld' @{ id = $nid; soort = 'geweigerd' } | Out-Null }      # de code werkt dan niet meer
+        # Op de laptop goedgekeurd (bijv. een head): de portier bijwerken, zodat de uitnodiging niet meer 'open' staat
+        foreach ($oid in @($script:stand.open)) { if (Test-Goedgekeurd $oid) { Invoke-Portier 'POST' '/afgehandeld' @{ id = $oid; soort = 'goedgekeurd' } | Out-Null } }
+        if ($erbij) { Invoke-Portier 'POST' '/orgversie' @{ versie = $script:orgVersie } | Out-Null }
+    }
+    $fouten = 0; $wegTeGooien = @()
     foreach ($f in $lijst) {
         try { $a = Read-DlJson $d "aanvragen/$f" } catch { Write-Host "Overgeslagen: $f is geen geldige aanvraag"; $script:wacht++; continue }
         if (-not $a -or $f -ne "$($a.id).json" -or -not $org.leden.($a.id)) { Write-Host "Overgeslagen: $f hoort niet bij een lid uit het organogram"; $script:wacht++; continue }
@@ -452,6 +608,20 @@ elseif ($AutoGoedkeuren) {
         if (Test-DlRolhouder $org $a.id) { Write-Host "Wacht op goedkeuring door de beheerder (head, leider of beheerder): $(Naam $a.id). Op de laptop: beheer.ps1 -Goedkeuren $($a.id)"; $script:wacht++; continue }
         if (Test-Goedgekeurd $a.id) { Write-Host "Geweigerd: $(Naam $a.id) is al eens goedgekeurd; een nieuwe aanmelding kan alleen als herstel met controlewoorden (mogelijk overname)"; $script:wacht++; continue }
         if (Read-DlBeheer $d "sleutels/$($a.id).json" $V) { Write-Host "Overgeslagen: $(Naam $a.id) is al goedgekeurd"; $script:wacht++; continue }
+        # Uitgenodigd via de portier (label 'uitgenodigd: false'): alleen goedkeuren als de aanmelding aan de uitnodigingscode
+        # gekoppeld is, met precies deze sleutel. Een aanvraag met een andere sleutel (van iemand met alleen een token) gaat
+        # weg; zonder koppeling blijft hij liggen (de koppeling kan net onderweg zijn), tot hij ouder is dan 7 dagen.
+        # Ook zonder label: staat er bij de portier een open uitnodiging (of een koppeling) voor dit lid, dan geldt hetzelfde.
+        $band = if ($script:stand -and $script:stand.bindingen) { [string]$script:stand.bindingen.($a.id) } else { '' }
+        if ($org.leden.($a.id).uitgenodigd -eq $false -or $band -or ($script:stand -and @($script:stand.open) -contains $a.id)) {
+            $teOud = (Get-AanvraagLeeftijd $f) -gt 7
+            if ($band -and $band -ne (Get-DlVingerafdrukHex $a.publiek)) { Write-Host "Weggegooid: de aanvraag voor $(Naam $a.id) hoort niet bij de uitnodiging (andere sleutel)"; $wegTeGooien += $f; continue }
+            if (-not $band) {
+                if ($teOud) { Write-Host "Weggegooid: aanvraag voor $(Naam $a.id) zonder koppeling aan de uitnodiging, ouder dan 7 dagen"; $wegTeGooien += $f }
+                else { Write-Host "Wacht: $(Naam $a.id) is uitgenodigd, maar de aanmelding is (nog) niet aan de uitnodiging gekoppeld" }
+                continue
+            }
+        }
         $extra = @('-Thuis', $Thuis); if ($DataMap) { $extra += @('-DataMap', $DataMap) }
         $voor = if ($script:kloon) { Get-DlKloonCommit $script:kloon }
         & powershell -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath -Goedkeuren $a.id -Controlewoorden (Get-DlControlewoorden $a) @extra
@@ -464,6 +634,8 @@ elseif ($AutoGoedkeuren) {
             if ($script:kloon -and $voor) { Reset-DlKloon $script:kloon $voor }
         }
     }
+    # Pas na alle kindprocessen (die werken in dezelfde git-kopie)
+    foreach ($f in $wegTeGooien) { $wb = Read-DlOpslag $d "aanvragen/$f"; if ($wb) { Remove-DlOpslag $d "aanvragen/$f" $wb.sha } }
     if ($fouten) { if ($script:kloon) { Push-DlKloon $script:kloon }; exit 1 }
 }
 
@@ -500,7 +672,10 @@ elseif ($Goedkeuren) {
         Write-Toegang $id (New-Toegang $id $dk 1)
     }
     Remove-DlOpslag $d "aanvragen/$id.json" $a.sha
-    if (Set-Goedgekeurd $id) { Save-Org }
+    $labelWeg = $org.leden.$id.uitgenodigd -eq $false
+    if ($labelWeg) { $org.leden.$id.PSObject.Properties.Remove('uitgenodigd') }
+    if ((Set-Goedgekeurd $id) -or $labelWeg) { Save-Org }
+    if ($env:DL_PORTIER) { $script:naPush += @{ id = $id; soort = 'goedgekeurd' } }
     $t = Read-DlBeheer $d "toegang/$id.json" $V
     Write-Host "Goedgekeurd: $(Naam $id). Zichtbaar voor: $((@($t.kopieen.PSObject.Properties.Name) | ForEach-Object { Naam $_ }) -join ', ')" -ForegroundColor Green
     $Bijwerken = $true
@@ -548,5 +723,13 @@ if ($script:kloon) {
     # Pas nu staat alles op GitHub: afgeronde sleutelwissels uit de beheergeheimen halen en de organogramversie onthouden
     if ($script:rotatiesNaPush.Count) { foreach ($p in $script:rotatiesNaPush) { $geheim.rotaties.PSObject.Properties.Remove($p) }; Save-Geheim }
     if (Test-DlKloonVerstuurd $script:kloon) { Save-OrgVersie $script:orgVersie; Publish-OrgVersie $script:orgVersie }
+}
+# Pas nu (alles staat op GitHub) de portier laten weten wat er goedgekeurd is. Lukt dat niet, dan is er niets stuk: de
+# markering 'goedgekeurd' in het organogram houdt een tweede aanmelding toch tegen. Wel melden (exitcode 2).
+if ($env:DL_PORTIER -and $script:naPush.Count) {
+    try {
+        foreach ($m in $script:naPush) { Invoke-Portier 'POST' '/afgehandeld' $m | Out-Null }
+        Invoke-Portier 'POST' '/orgversie' @{ versie = $script:orgVersie } | Out-Null
+    } catch { Write-Host "Kon de portier niet bijwerken ($($_.Exception.Message)); de goedkeuring zelf is gelukt."; $script:wacht++ }
 }
 if ($script:wacht) { exit 2 }

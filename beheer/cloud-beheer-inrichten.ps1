@@ -12,7 +12,9 @@ param(
     [Parameter(Mandatory)][ValidateSet('staging', 'live')][string]$Omgeving,
     [Parameter(Mandatory)][string]$Versie,
     [switch]$AlleenVersie,
-    [string]$BeheerRepo = 'Doubleleren/doubleleren-beheer'
+    [string]$BeheerRepo = 'Doubleleren/doubleleren-beheer',
+    # Fase 2 (portier): eenmalig per omgeving, nadat de GitHub App en het Cloudflare-account er zijn
+    [switch]$MetPortier, [string]$AppId, [string]$InstallatieId, [string]$AppSleutelBestand, [string]$CfAccountId
 )
 $ErrorActionPreference = 'Stop'
 $App = Split-Path $PSScriptRoot -Parent
@@ -76,8 +78,11 @@ function Zet-Workflow([string]$Repo, [string]$Tekst, [string]$Doel) {
     Write-Host "  workflow $Doel ($Repo)"
 }
 Write-Host 'Workflows'
-Zet-Workflow $BeheerRepo ((Get-Versiebestand 'beheer/cloud/goedkeuren.yml').Replace('{{OMGEVING}}', $Omgeving)) ".github/workflows/goedkeuren-$Omgeving.yml"
+Zet-Workflow $BeheerRepo ((Get-Versiebestand 'beheer/cloud/goedkeuren.yml').Replace('{{OMGEVING}}', $Omgeving).Replace('{{P}}', $P).Replace('{{DATA}}', ($dataRepo -split '/')[1])) ".github/workflows/goedkeuren-$Omgeving.yml"
 Zet-Workflow $dataRepo (Get-Versiebestand 'beheer/cloud/beheer-starten.yml') '.github/workflows/beheer-starten.yml'
+$worker = if ($live) { 'portier' } else { 'portier-staging' }
+Zet-Workflow $BeheerRepo ((Get-Versiebestand 'beheer/cloud/portier.yml').Replace('{{OMGEVING}}', $Omgeving).Replace('{{P}}', $P).Replace('{{DATA}}', ($dataRepo -split '/')[1]).Replace('{{WORKER}}', $worker)) ".github/workflows/portier-$Omgeving.yml"
+Zet-Workflow $BeheerRepo ((Get-Versiebestand 'beheer/cloud/intrekken.yml').Replace('{{OMGEVING}}', $Omgeving).Replace('{{P}}', $P)) ".github/workflows/intrekken-$Omgeving.yml"
 if ($AlleenVersie) { return }
 
 # 2. Sleutels uit de beheergeheimen van deze omgeving (nooit met elkaar verwisselen: het script controleert vertrouwd.json)
@@ -121,6 +126,35 @@ try {
 & $gh variable set DL_OMGEVING --body $Omgeving --repo $dataRepo | Out-Null
 if ($LASTEXITCODE) { throw "Variabele DL_OMGEVING zetten mislukt ($dataRepo)." }
 Write-Host "  DL_OMGEVING = $Omgeving ($dataRepo)"
+
+# 4b. Portier (fase 2): geheimen en variabelen. De app-sleutel komt van GitHub als PKCS#1; Cloudflare wil PKCS#8 (openssl
+#     uit Git for Windows zet hem om). Het beheergeheim van de portier maakt het script zelf en zet het alleen bij GitHub.
+if ($MetPortier) {
+    if ($AppId -notmatch '^\d+$' -or $InstallatieId -notmatch '^\d+$' -or -not $AppSleutelBestand -or -not (Test-Path $AppSleutelBestand) -or $CfAccountId -notmatch '^[0-9a-f]{32}$') {
+        throw 'Geef -AppId, -InstallatieId, -AppSleutelBestand (het .pem-bestand van de app) en -CfAccountId (32 tekens, uit het Cloudflare-dashboard).'
+    }
+    Write-Host 'Portier'
+    $openssl = @((Get-Command openssl -ErrorAction SilentlyContinue).Source, 'C:\Program Files\Git\usr\bin\openssl.exe', 'C:\Program Files\Git\mingw64\bin\openssl.exe') | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+    if (-not $openssl) { throw 'openssl niet gevonden (zit in Git for Windows).' }
+    $tmp8 = Join-Path $env:TEMP ('dl-app-' + [guid]::NewGuid().ToString('N') + '.pem')
+    try {
+        $ErrorActionPreference = 'Continue'      # Windows PowerShell maakt van stderr anders een stoppende fout
+        & $openssl pkcs8 -topk8 -nocrypt -in $AppSleutelBestand -out $tmp8 2>$null
+        $ErrorActionPreference = 'Stop'
+        if ($LASTEXITCODE -or -not (Test-Path $tmp8)) { throw 'De app-sleutel omzetten naar PKCS#8 mislukt.' }
+        Zet-Secret 'APP_SLEUTEL' ([IO.File]::ReadAllText($tmp8))
+    } finally { Remove-Item $tmp8 -ErrorAction SilentlyContinue }
+    $tekens = [char[]]'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    Zet-Secret "$($P)PORTIER_GEHEIM" (-join ((Get-DlWillekeurig 48) | ForEach-Object { $tekens[$_ % 62] }))
+    foreach ($kv in @(@('APP_ID', $AppId), @('INSTALLATIE_ID', $InstallatieId), @('CF_ACCOUNT_ID', $CfAccountId), @("$($P)PORTIER_URL", "https://$worker.green-feather-b83e.workers.dev"))) {
+        & $gh variable set $kv[0] --body $kv[1] --repo $BeheerRepo | Out-Null; if ($LASTEXITCODE) { throw "Variabele $($kv[0]) zetten mislukt." }
+        Write-Host "  $($kv[0]) = $($kv[1])"
+    }
+    Write-Host 'Plak nu je Cloudflare API-token (alleen "Workers bewerken"; je ziet niets verschijnen) en druk op Enter:'
+    & $gh secret set CF_API_TOKEN --repo $BeheerRepo
+    if ($LASTEXITCODE) { throw 'CF_API_TOKEN zetten mislukt.' }
+    Write-Host "Rol daarna de portier uit: Actions → Portier uitrollen ($Omgeving) → Run workflow." -ForegroundColor Green
+}
 
 # 5. Het starttoken (fine-grained, alleen doubleleren-beheer, Actions: Read and write)
 Write-Host "Plak nu je token DL_START (je ziet niets verschijnen) en druk op Enter:"
