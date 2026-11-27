@@ -27,7 +27,8 @@ jobs:
           # lijsten weg (null): dan telt de commit mee, want het pad-filter hierboven liet hem al door
           n=$(jq '[.commits[]? | if .added == null and .modified == null then "onbekend" else ((.added // []) + (.modified // []))[] | select(test("^(aanvragen|uitnodigingen)/")) end] | length' "$GITHUB_EVENT_PATH")
           if [ "$n" -eq 0 ]; then echo "Niets nieuws (bijv. een goedgekeurde aanvraag weggehaald)." >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
-          if gh workflow run "goedkeuren-$OMGEVING.yml" --repo Doubleleren/doubleleren-beheer -f bron=aanvraag; then
+          # --ref: anders vraagt gh eerst de standaardbranch op, en dat mag DL_START (alleen Actions) niet
+          if gh workflow run "goedkeuren-$OMGEVING.yml" --repo Doubleleren/doubleleren-beheer --ref main -f bron=aanvraag; then
             echo "Goedkeuring gestart ($OMGEVING)." >> "$GITHUB_STEP_SUMMARY"
           else
             # Bijv. gepauzeerd omdat de beheerder op de laptop bezig is: die start de cloud daarna zelf; anders het vangnet
