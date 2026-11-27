@@ -258,7 +258,6 @@ async function laadOpenbaar() {
     }
     S.vakken.push({ id: v.id, naam: String(v.naam || String(v.id).toUpperCase()) });
   });
-  $('vak').textContent = vakNaam(S.inst.vakgebied);
 }
 
 // ---------------------------------------------------------------- vakken
@@ -1930,7 +1929,7 @@ async function naInloggen() {
   SB.zichtbaar = ik?.profiel?.scorebord !== false;
   $('wie').hidden = false; $('tabs').hidden = false;
   $('wie-naam').textContent = `Ingelogd als ${ik?.naam || S.mij}`;
-  $('vak').textContent = vakNaam(eigenVak(S.mij));
+  $('vak').textContent = vakNaam(eigenVak(S.mij)); $('vak').hidden = false;      // vóór het inloggen alleen 'doubleleren'
   $('feedback-knop').hidden = !S.teken;
   $('tab-team').hidden = !magTab('team');
   if (ik) { toonMij(); toonSkilllijst(); }
