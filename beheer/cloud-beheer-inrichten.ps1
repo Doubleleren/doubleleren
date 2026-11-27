@@ -154,7 +154,6 @@ if ($MetPortier) {
     & $gh secret set CF_API_TOKEN --repo $BeheerRepo
     if ($LASTEXITCODE) { throw 'CF_API_TOKEN zetten mislukt.' }
     Write-Host "Rol daarna de portier uit: Actions → Portier uitrollen ($Omgeving) → Run workflow." -ForegroundColor Green
-    return
 }
 
 # 5. Het starttoken (fine-grained, alleen doubleleren-beheer, Actions: Read and write)
