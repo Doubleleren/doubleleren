@@ -6,7 +6,10 @@
 # Opzet sheet: A = hoofdgebied, B = onderwerp, C = vaardigheid (of een inleidende zin zonder score),
 # D..I = maand 1..6 (D1 = datum van maand 1), J = huidige score.
 
-function Read-DlXlsx([string]$Pad) {
+# Meer tabbladen (bijv. uitleg + een blad per persoon): alleen een blad met vaardigheden ("- ..." in kolom C) telt;
+# zijn dat er meer, dan het blad met de voornaam uit -Naam in de bladnaam, anders het blad met de meeste scores,
+# anders het eerste (in tabbladvolgorde). Spiegelbeeld van leesXlsx in docs/xlsx.js.
+function Read-DlXlsx([string]$Pad, [string]$Naam) {
     Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
     $zip = [IO.Compression.ZipFile]::OpenRead($Pad)
     try {
@@ -17,20 +20,51 @@ function Read-DlXlsx([string]$Pad) {
             $ss = [xml]$ssXml
             foreach ($si in $ss.sst.si) { $gedeeld += (($si.SelectNodes('.//*[local-name()="t"]') | ForEach-Object { $_.InnerText }) -join '') }
         }
-        $blad = $zip.Entries | Where-Object { $_.FullName -match '^xl/worksheets/sheet\d+\.xml$' } | Sort-Object FullName | Select-Object -First 1
-        $x = [xml](& $lees $blad.FullName)
-        $rijen = @{}
-        foreach ($rij in $x.worksheet.sheetData.row) {
-            $cellen = @{}
-            foreach ($c in $rij.c) {
-                if ($null -eq $c.v -and -not $c.is) { continue }
-                $kol = ($c.r -replace '\d', '')
-                $w = if ($c.t -eq 's') { $gedeeld[[int]$c.v] } elseif ($c.t -eq 'inlineStr') { $c.is.InnerText } else { [string]$c.v }
-                $cellen[$kol] = $w
+        $leesBlad = {
+            param($pad)
+            $x = [xml](& $lees $pad)
+            $rijen = @{}
+            foreach ($rij in $x.worksheet.sheetData.row) {
+                $cellen = @{}
+                foreach ($c in $rij.c) {
+                    if ($null -eq $c.v -and -not $c.is) { continue }
+                    $kol = ($c.r -replace '\d', '')
+                    $w = if ($c.t -eq 's') { $gedeeld[[int]$c.v] } elseif ($c.t -eq 'inlineStr') { $c.is.InnerText } else { [string]$c.v }
+                    $cellen[$kol] = $w
+                }
+                $rijen[[int]$rij.r] = $cellen
             }
-            $rijen[[int]$rij.r] = $cellen
+            $rijen
         }
-        $rijen
+        # Werkbladen in tabbladvolgorde (workbook.xml + rels); zonder workbook.xml op bestandsnaam
+        $bestanden = @($zip.Entries | Where-Object { $_.FullName -match '^xl/worksheets/sheet\d+\.xml$' } | ForEach-Object FullName | Sort-Object)
+        $bladen = @()
+        $wbXml = & $lees 'xl/workbook.xml'; $relsXml = & $lees 'xl/_rels/workbook.xml.rels'
+        if ($wbXml -and $relsXml) {
+            $doel = @{}
+            foreach ($r in ([xml]$relsXml).SelectNodes('//*[local-name()="Relationship"]')) { $t = $r.GetAttribute('Target'); $doel[$r.GetAttribute('Id')] = if ($t.StartsWith('/')) { $t.Substring(1) } else { "xl/$t" } }
+            foreach ($s in ([xml]$wbXml).SelectNodes('//*[local-name()="sheet"]')) {
+                $p = $doel[$s.GetAttribute('id', 'http://schemas.openxmlformats.org/officeDocument/2006/relationships')]
+                if ($p -and $bestanden -contains $p) { $bladen += [pscustomobject]@{ naam = $s.GetAttribute('name'); pad = $p } }
+            }
+        }
+        if (-not $bladen.Count) { $bladen = @($bestanden | ForEach-Object { [pscustomobject]@{ naam = $_; pad = $_ } }) }
+        if (-not $bladen.Count) { throw 'Geen werkblad gevonden in het Excel-bestand.' }
+        if ($bladen.Count -eq 1) { return (& $leesBlad $bladen[0].pad) }
+        $woorden = { param($t) @([regex]::Matches("$t".ToLower(), '\p{L}+') | ForEach-Object Value) }
+        $voornaam = @(& $woorden $Naam)[0]
+        $kandidaten = @(foreach ($b in $bladen) {
+            $rijen = & $leesBlad $b.pad; $n = 0; $scores = 0
+            foreach ($c in $rijen.Values) {
+                if ("$($c.C)" -notmatch '^\s*[-–•]') { continue }
+                $n++; foreach ($k in 'D', 'E', 'F', 'G', 'H', 'I') { if ("$($c[$k])" -match '^[1-5](\.0+)?$') { $scores++ } }
+            }
+            if ($n) { [pscustomobject]@{ naam = $b.naam; rijen = $rijen; scores = $scores } }
+        })
+        if (-not $kandidaten.Count) { return (& $leesBlad $bladen[0].pad) }
+        $keuze = if ("$voornaam".Length -gt 1) { $kandidaten | Where-Object { (& $woorden $_.naam) -contains $voornaam } | Select-Object -First 1 }
+        if (-not $keuze) { $keuze = $kandidaten[0]; foreach ($k in $kandidaten) { if ($k.scores -gt $keuze.scores) { $keuze = $k } } }
+        $keuze.rijen
     } finally { $zip.Dispose() }
 }
 
@@ -41,11 +75,11 @@ function Repair-DlTekst([string]$T) {
 }
 function Get-DlSleutelTekst([string]$T) { ((Repair-DlTekst $T).ToLower() -replace '^[-\s]+', '' -replace '[^a-z0-9ëïéèäöü]+', ' ').Trim() }
 
-function Import-DlSkilllijst([string]$Xlsx, [string]$Sjabloon, [string]$Vak) {
+function Import-DlSkilllijst([string]$Xlsx, [string]$Sjabloon, [string]$Vak, [string]$Naam) {
     $sj = @(Import-Csv $Sjabloon -Delimiter ';' -Encoding UTF8)
     $index = @{}; foreach ($s in $sj) { $index["$(Get-DlSleutelTekst $s.onderwerp)|$(Get-DlSleutelTekst $s.vaardigheid)"] = $s.id }
 
-    $rijen = Read-DlXlsx $Xlsx
+    $rijen = Read-DlXlsx $Xlsx $Naam
     # Maand 1 uit D1 (Excel-datum); E..I zijn de maanden erna
     $start = (Get-Date -Day 1).Date
     $d1 = $rijen[1].D

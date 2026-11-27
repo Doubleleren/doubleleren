@@ -748,7 +748,7 @@ async function uploadSkilllijst() {
   const vak = S.formVak; $('mx-xlsx-info').textContent = 'Skilllijst lezen…';
   try {
     const { leesXlsx, importeerSkilllijst } = await import('./xlsx.js');
-    const res = importeerSkilllijst(await leesXlsx(f), new Map(itemsVan(null, vak).map((i) => [i.id, i])), S.inst.vakgebied);
+    const res = importeerSkilllijst(await leesXlsx(f, S.org.leden[S.mij]?.naam), new Map(itemsVan(null, vak).map((i) => [i.id, i])), S.inst.vakgebied);
     if (!res.gekoppeld) throw new Error(`Geen vaardigheden met een score (1–5) gevonden. Is dit je skilllijst${meerVakken() ? ` van ${vakNaam(vak)}` : ''}?`);
     $('mx-xlsx-info').textContent = 'Opslaan…';
     await bewaarScores(res.matrix.scores, `Opgeslagen uit je Excel: ${res.gekoppeld} van ${res.totaal} vaardigheden${meerVakken() ? ` voor ${vakNaam(vak)}` : ''}.`);
@@ -1333,7 +1333,7 @@ async function welkomLeesXlsx() {
   $('w-xlsx-info').textContent = 'Skilllijst lezen…';
   try {
     const { leesXlsx, importeerSkilllijst } = await import('./xlsx.js');
-    const res = importeerSkilllijst(await leesXlsx(f), new Map(welkomItems().map((i) => [i.id, i])), S.inst.vakgebied);
+    const res = importeerSkilllijst(await leesXlsx(f, $('w-naam').value.trim() || W.naam), new Map(welkomItems().map((i) => [i.id, i])), S.inst.vakgebied);
     if (!res.gekoppeld) throw new Error('Geen vaardigheden met een score (1–5) gevonden. Is dit de skilllijst?');
     W.matrix = res.matrix;
     $('w-xlsx-info').textContent = `${res.gekoppeld} van ${res.totaal} vaardigheden herkend.` + (res.nietGevonden.length ? ` ${res.nietGevonden.length} regel(s) op volgorde gekoppeld.` : '');

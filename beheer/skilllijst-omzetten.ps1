@@ -3,6 +3,7 @@
 #   beheer\skilllijst-omzetten.ps1 -Xlsx ... -Vak cro -Toon                              alleen laten zien, niets schrijven
 # Opzet sheet: rij 1 = kop; A = hoofdgebied, B = onderwerp, C = vaardigheid met een streepje ervoor ("- met GA4"),
 # of zonder streepje een inleidende zin (wordt de context van de vaardigheden eronder). Scores in de sheet doen niet mee.
+# Meer tabbladen (uitleg, een blad per persoon, zoals bij SEA) mag: een blad met vaardigheden telt, bij meer de meeste scores, anders het eerste (zie Read-DlXlsx).
 # Id's: hoofdgebied.onderwerp.vaardigheid (1.2.3), op volgorde. Bestaat de csv al, dan blijven notities bij dezelfde
 # vaardigheid staan; let op dat id's verschuiven als je in het midden iets toevoegt (oude scores en lessen verwijzen naar id's).
 param([Parameter(Mandatory)][string]$Xlsx, [Parameter(Mandatory)][string]$Vak, [switch]$Toon)

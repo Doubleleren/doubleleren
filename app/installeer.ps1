@@ -48,7 +48,7 @@ function Get-Leren($u) {
 function Get-EigenSjabloon($o, $u) {
     $org = Read-DlBeheer $o.data 'organisatie.json' $o.vertrouwd
     $vak = if ($org.leden.($u.id).vak) { [string]$org.leden.($u.id).vak } else { [string]$inst.vakgebied }
-    [pscustomobject]@{ vak = $vak; pad = (Join-Path $App "sjablonen\$vak\skilllijst.csv") }
+    [pscustomobject]@{ vak = $vak; pad = (Join-Path $App "sjablonen\$vak\skilllijst.csv"); naam = [string]$org.leden.($u.id).naam }
 }
 
 # Skilllijst importeren en versleuteld + ondertekend opslaan (het standaardvak heeft kale id's, andere vakken 'vak:1.1.1')
@@ -56,7 +56,7 @@ function Save-Skilllijst($o, $u, $s, $prive, [string]$xlsx) {
     if (-not (Get-Command Import-DlSkilllijst -ErrorAction SilentlyContinue)) { throw 'Excel inlezen kan hier niet (geblokkeerd door een webfilter). Meld je aan via de website; daarna kun je hier de pop-up toevoegen.' }
     $e = Get-EigenSjabloon $o $u; $vak = $e.vak; $sjabloon = $e.pad
     if (-not (Test-Path $sjabloon)) { throw "Voor jouw vak ($vak) is er nog geen skilllijst. Meld je aan zonder Excel-bestand; je vult hem later in op de website." }
-    $import = Import-DlSkilllijst -Xlsx $xlsx -Sjabloon $sjabloon -Vak $(if ($vak -ne $inst.vakgebied) { $vak })
+    $import = Import-DlSkilllijst -Xlsx $xlsx -Sjabloon $sjabloon -Vak $(if ($vak -ne $inst.vakgebied) { $vak }) -Naam $e.naam
     $b = Read-DlOpslag $o.data (Get-DlLidPad $u.id 'matrix')
     Write-DlVersleuteld $o.data $u.id 'matrix' $s $import.matrix $(if ($b) { $b.sha }) $u.id $prive | Out-Null
     "$($import.gekoppeld) van $($import.totaal)"
