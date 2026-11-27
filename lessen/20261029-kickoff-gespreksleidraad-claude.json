@@ -8,6 +8,7 @@
     "6.1.3",
     "6.2.2"
   ],
+  "cel": "leadgen",
   "titel": "Drie gesprekken op de kick-off: laat Claude je leidraad maken",
   "intro": "Volgende week heb je een kick-off op locatie bij een nieuwe klant, een installatiebedrijf met een website die leads moet opleveren. Je spreekt de marketingmanager, de developer en de directeur, elk een half uur apart. Je kent alleen de website en de offerteaanvraag.",
   "opdracht": {

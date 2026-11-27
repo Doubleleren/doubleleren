@@ -8,6 +8,7 @@
     "3.2.3",
     "7.1.5"
   ],
+  "cel": "alle",
   "titel": "Clarity installeren zonder developer: welke route kies je in GTM?",
   "volgorde": "uitleg-eerst",
   "intro": "Je wilt voor een CRO-traject heatmaps en session recordings van een klantsite. De developer heeft pas over drie weken tijd, maar je hebt wel toegang tot de GTM-container van de klant.",

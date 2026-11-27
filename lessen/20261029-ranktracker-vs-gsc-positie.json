@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Rank tracker vs. gemiddelde positie in Search Console",
   "matrix": ["4.1.4", "4.1.2"],
+  "cel": "alle",
   "titel": "Positie 7 in de rank tracker, 3,2 in Search Console: wie liegt er?",
   "intro": "Je rapporteert elke maand posities uit een rank tracker (zoals STAT). Die controleert elke dag één keer, vanaf één locatie en zonder zoekgeschiedenis. Voor 'zonnepanelen installateur' staat de klant daar op positie 7. Search Console geeft voor dezelfde zoekopdracht over dezelfde maand een gemiddelde positie van 3,2.",
   "opdracht": {

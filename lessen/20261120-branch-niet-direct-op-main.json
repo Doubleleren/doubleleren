@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Werken op een branch in plaats van direct op main",
   "matrix": ["coderen-met-ai:2.2.2", "coderen-met-ai:2.3.2"],
+  "cel": "alle",
   "titel": "'Zal ik het direct op main zetten?' vraagt Claude",
   "intro": "Een collega laat Claude Code een nieuwe filterknop bouwen in de interne rapportagetool. Het hele team gebruikt die tool elke dag. De knop werkt op zijn eigen laptop. Claude vraagt: 'Zal ik de wijziging direct op main committen en pushen?'",
   "opdracht": {

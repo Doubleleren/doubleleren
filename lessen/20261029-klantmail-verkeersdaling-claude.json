@@ -5,6 +5,7 @@
   "vakgebied": "SEO × Claude",
   "onderwerp": "Klantcommunicatie per e-mail bij een verkeersdaling",
   "matrix": ["6.1.1", "10.1.1"],
+  "cel": "ecom",
   "titel": "\"Ons verkeer is 18% gedaald!\" Laat Claude het antwoord voorbereiden",
   "intro": "Een online fietsenwinkel mailt maandagochtend: 'Ons organisch verkeer is vorige week 18% gedaald. Wat is er aan de hand en wat gaan jullie doen?' De klant is zichtbaar geschrokken. Je hebt Claude met een koppeling naar Search Console tot je beschikking, en de klant wil vandaag nog een antwoord.",
   "opdracht": {

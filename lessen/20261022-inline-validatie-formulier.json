@@ -7,6 +7,7 @@
   "matrix": [
     "7.1.1"
   ],
+  "cel": "leadgen",
   "titel": "Foutmelding pas na 'Verstuur': hoe valideer je een formulier wél?",
   "intro": "Een leadgen-klant heeft een offerteformulier met 7 velden. In Clarity zie je veel bezoekers die op 'Verstuur' klikken, bovenaan een foutmelding krijgen en dan afhaken. De developer wil inline validatie toevoegen: elk veld wordt gecontroleerd terwijl het formulier wordt ingevuld, met een melding direct bij dat veld.",
   "opdracht": {

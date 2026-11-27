@@ -1,6 +1,6 @@
 {
     "v":  1,
-    "bijgewerkt":  "2026-11-20T05:28:12",
+    "bijgewerkt":  "2026-11-27T05:32:20",
     "lessen":  [
                    {
                        "id":  "20261019-chatgpt-verkeer-als-direct",
@@ -25,7 +25,8 @@
                                      "url":  "https://www.youtube.com/watch?v=9TpyYFcAhmk"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261019-inp",
@@ -50,6 +51,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -70,6 +72,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -94,7 +97,8 @@
                                      "url":  "https://www.youtube.com/watch?v=rtrLA42XRog"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261019-srm",
@@ -115,6 +119,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -140,6 +145,7 @@
                                  },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -159,7 +165,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-bert-taalbegrip",
@@ -178,7 +185,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-clarity-bewijs-verzamelen",
@@ -201,7 +209,8 @@
                                      "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261020-cls-controleren",
@@ -225,6 +234,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -249,6 +259,7 @@
                                  },
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-10-30",
                        "actief":  false
                    },
@@ -270,6 +281,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-10"
                    },
                    {
@@ -290,6 +302,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -314,6 +327,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -334,6 +348,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -353,7 +368,10 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle",
+                       "herzien":  "2026-11-24",
+                       "actief":  false
                    },
                    {
                        "id":  "20261020-gtm-voordelen",
@@ -373,6 +391,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-13"
                    },
                    {
@@ -393,6 +412,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-16"
                    },
                    {
@@ -416,7 +436,8 @@
                                      "url":  "https://www.youtube.com/watch?v=-Qgly4DRWeE"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261020-m-dot-site",
@@ -439,7 +460,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-og-tags-deelpreview",
@@ -459,6 +481,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -480,6 +503,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -500,6 +524,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -519,7 +544,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-panda-kwaliteit",
@@ -543,6 +569,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -563,6 +590,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-13"
                    },
                    {
@@ -583,7 +611,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261020-rankbrain",
@@ -603,6 +632,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -623,6 +653,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -643,6 +674,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -662,7 +694,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261020-robots-txt-voorrang",
@@ -682,6 +715,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -706,6 +740,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -730,6 +765,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -750,6 +786,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -769,7 +806,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261021-clarity-via-gtm",
@@ -793,7 +831,8 @@
                                      "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261021-core-vs-spam-update",
@@ -817,6 +856,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -842,6 +882,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -862,6 +903,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -883,6 +925,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-10-30"
                    },
                    {
@@ -906,7 +949,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261021-html-vs-xml-sitemap",
@@ -927,6 +971,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-11"
                    },
                    {
@@ -951,7 +996,8 @@
                                      "url":  "https://www.youtube.com/watch?v=0fONene3OIA"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261021-links-verbergen-javascript",
@@ -975,6 +1021,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -999,7 +1046,8 @@
                                      "url":  "https://www.youtube.com/watch?v=xUyGAbwuTas"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261022-503-bij-php-onderhoud",
@@ -1019,6 +1067,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1032,14 +1081,16 @@
                                       "1.5.4",
                                       "1.1.1"
                                   ],
-                       "kernpunt":  "Het Crawlstatistieken-rapport (Instellingen → Crawlstatistieken) laat zien of Google problemen heeft met je server en waar het zijn crawltijd aan besteedt. Begin bij hoststatus en crawlreacties.",
+                       "kernpunt":  "Blijven nieuwe pagina\u0027s lang liggen, open dan eerst de Crawlstatistieken en begin bij hoststatus en crawlreacties.",
                        "bron":  {
                                     "titel":  "Crawl Stats report - Search Console Help",
                                     "url":  "https://support.google.com/webmasters/answer/9679690"
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-27"
                    },
                    {
                        "id":  "20261022-eeat-ymyl-prioriteren",
@@ -1065,6 +1116,7 @@
                                  },
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1090,6 +1142,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1115,6 +1168,7 @@
                                  },
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1135,6 +1189,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1159,7 +1214,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261022-mobile-first-pariteit",
@@ -1183,7 +1239,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261022-noindex-geblokkeerd-door-robots",
@@ -1204,6 +1261,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1225,6 +1283,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1238,14 +1297,16 @@
                                       "7.2.2",
                                       "7.2.1"
                                   ],
-                       "kernpunt":  "Wie een A/B-test stopt zodra het dashboard \u0027winnaar\u0027 zegt, vergroot de kans op een vals positief resultaat sterk. Leg steekproef en looptijd vooraf vast, of kies een methode die tussentijds beslissen toestaat.",
+                       "kernpunt":  "Leg bij elke A/B-test vooraf de looptijd in hele weken vast, en beslis pas op de einddatum.",
                        "bron":  {
                                     "titel":  "How Not To Run an A/B Test – Evan Miller",
                                     "url":  "https://www.evanmiller.org/how-not-to-run-an-ab-test.html"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-26"
                    },
                    {
                        "id":  "20261022-product-snippet-of-merchant-listing",
@@ -1265,6 +1326,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1285,6 +1347,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -1305,6 +1368,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1329,7 +1393,8 @@
                                      "url":  "https://www.youtube.com/watch?v=S5hcOZmslBw"
                                  },
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261023-javascript-inhoud-na-klik",
@@ -1341,7 +1406,7 @@
                        "matrix":  [
                                       "5.3.3"
                                   ],
-                       "kernpunt":  "Google rendert JavaScript, maar klikt niet. Wat pas na een klik wordt opgehaald, bestaat voor Google niet; zet het bij het laden al in de pagina.",
+                       "kernpunt":  "Zie je een knop als \u0027Lees meer\u0027 of \u0027Toon reviews\u0027, controleer dan of de tekst al bij het laden in de pagina staat.",
                        "bron":  {
                                     "titel":  "Fix lazy-loaded content | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading"
@@ -1352,7 +1417,9 @@
                                      "url":  "https://www.youtube.com/watch?v=nwGY-9lwTF4"
                                  },
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-26"
                    },
                    {
                        "id":  "20261023-magento-canonical-categoriepad",
@@ -1372,6 +1439,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1391,7 +1459,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261023-python-redirectcheck-claude",
@@ -1410,7 +1479,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261023-robots-txt-ai-gebruik",
@@ -1431,6 +1501,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1451,6 +1522,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -1472,6 +1544,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-09"
                    },
                    {
@@ -1492,6 +1565,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1516,7 +1590,8 @@
                                      "url":  "https://www.youtube.com/watch?v=D9hyyjQ-t90"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261026-checkout-account-uitstellen",
@@ -1536,6 +1611,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1556,7 +1632,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261026-googlebot-desktop-in-logs",
@@ -1581,6 +1658,7 @@
                                  },
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-12"
                    },
                    {
@@ -1601,6 +1679,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1621,6 +1700,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-18"
                    },
                    {
@@ -1641,7 +1721,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261026-shopify-robots-txt-liquid",
@@ -1662,6 +1743,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1682,6 +1764,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1702,7 +1785,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261027-breadcrumbs-hierarchie",
@@ -1723,6 +1807,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1744,6 +1829,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1769,6 +1855,7 @@
                                  },
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-11"
                    },
                    {
@@ -1790,6 +1877,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1810,7 +1898,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261027-mobiel-crawlen-vergelijken-claude",
@@ -1830,7 +1919,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261027-nep-googlebot-geblokkeerd",
@@ -1850,6 +1940,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1870,6 +1961,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1890,7 +1982,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261027-title-link-herschreven",
@@ -1911,6 +2004,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-18"
                    },
                    {
@@ -1930,7 +2024,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261028-faq-rich-results-verdwenen",
@@ -1950,6 +2045,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -1969,7 +2065,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261028-heuristische-analyse-claude",
@@ -1988,7 +2085,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261028-hostingverhuizing-dns-ttl",
@@ -2008,6 +2106,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2028,6 +2127,7 @@
                        "video":  null,
                        "soort":  "maak-met-claude",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-02"
                    },
                    {
@@ -2049,6 +2149,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2069,7 +2170,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261028-meta-descriptions-40000-producten",
@@ -2088,7 +2190,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261028-rich-results-test-vs-validator",
@@ -2108,7 +2211,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261028-wordpress-zoekmachines-ontmoedigen",
@@ -2129,6 +2233,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2149,7 +2254,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261029-ankerteksten-interne-links",
@@ -2168,7 +2274,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-article-markup-auteurs-claude",
@@ -2187,7 +2294,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261029-audit-opleveren-prioriteren",
@@ -2207,6 +2315,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2226,7 +2335,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-categorietekst-keyword-stuffing",
@@ -2246,6 +2356,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2266,7 +2377,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-dashboard-geanonimiseerde-zoekopdrachten",
@@ -2287,6 +2399,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2307,7 +2420,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-externe-links-naar-bronnen",
@@ -2327,6 +2441,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-16"
                    },
                    {
@@ -2351,6 +2466,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2371,7 +2487,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-klant-belt-urls-wijzigen",
@@ -2391,7 +2508,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-klantmail-verkeersdaling-claude",
@@ -2411,7 +2529,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-kopstructuur-volgorde-aantal",
@@ -2432,6 +2551,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-18"
                    },
                    {
@@ -2451,7 +2571,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-lightspeed-kleurvarianten-canonical",
@@ -2472,6 +2593,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2491,7 +2613,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261029-non-branded-rapporteren",
@@ -2512,6 +2635,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2533,6 +2657,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2553,6 +2678,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2574,6 +2700,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2595,6 +2722,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2608,14 +2736,16 @@
                                       "6.3.1",
                                       "6.3.2"
                                   ],
-                       "kernpunt":  "Goed delegeren = doel, input, format, regels, prioriteit en een vroeg controlemoment. Bij een redirectmap: elke URL naar de best passende pagina, permanent, zonder ketens en niet alles naar de homepage.",
+                       "kernpunt":  "Draag je een taak over, geef dan de regels mee en plan een vroeg moment om samen te kijken.",
                        "bron":  {
                                     "titel":  "Site moves with URL changes | Google Search Central",
                                     "url":  "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-27"
                    },
                    {
                        "id":  "20261029-robots-txt-spoedfix-recrawl",
@@ -2636,6 +2766,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2656,7 +2787,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261029-url-inspectie-live-test",
@@ -2676,6 +2808,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-12"
                    },
                    {
@@ -2700,7 +2833,8 @@
                                      "url":  "https://www.youtube.com/watch?v=9TpyYFcAhmk"
                                  },
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261030-betaalvelden-voelen-onveilig",
@@ -2720,6 +2854,7 @@
                        "video":  null,
                        "soort":  "open",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-09"
                    },
                    {
@@ -2740,7 +2875,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261030-core-update-analysemoment",
@@ -2764,6 +2900,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2785,6 +2922,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2805,7 +2943,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261030-localbusiness-vestigingen-claude",
@@ -2825,7 +2964,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261030-uit-assortiment-404-410",
@@ -2845,6 +2985,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2865,7 +3006,8 @@
                                 },
                        "video":  null,
                        "soort":  "zoek-op",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261102-ai-overviews-in-search-console",
@@ -2886,6 +3028,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2905,7 +3048,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261102-canonical-signalen-tegenstrijdig",
@@ -2926,6 +3070,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2946,6 +3091,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2966,6 +3112,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -2987,6 +3134,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3007,6 +3155,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3032,6 +3181,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3052,6 +3202,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3073,6 +3224,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3093,6 +3245,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3114,6 +3267,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3135,6 +3289,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3156,6 +3311,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3176,6 +3332,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3197,6 +3354,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3217,7 +3375,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261102-ttfb-redirects-velddata",
@@ -3242,6 +3401,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3263,6 +3423,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3284,6 +3445,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3305,6 +3467,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3325,6 +3488,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3346,6 +3510,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3367,6 +3532,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3392,6 +3558,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3412,6 +3579,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-19"
                    },
                    {
@@ -3433,6 +3601,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3453,7 +3622,8 @@
                                 },
                        "video":  null,
                        "soort":  "maak-met-claude",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261104-gtm-versie-terugzetten",
@@ -3474,6 +3644,7 @@
                        "video":  null,
                        "soort":  "zoek-op",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-19"
                    },
                    {
@@ -3495,6 +3666,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3516,6 +3688,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3536,7 +3709,8 @@
                                 },
                        "video":  null,
                        "soort":  "open",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261104-perplexity-bots-robots-txt",
@@ -3557,6 +3731,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3577,6 +3752,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3598,6 +3774,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3620,6 +3797,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3642,6 +3820,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3667,6 +3846,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3692,6 +3872,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-09"
                    },
                    {
@@ -3713,6 +3894,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3737,6 +3919,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3758,6 +3941,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3779,6 +3963,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3800,6 +3985,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3821,6 +4007,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3846,6 +4033,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-10"
                    },
                    {
@@ -3867,6 +4055,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3888,6 +4077,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3908,6 +4098,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3928,6 +4119,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3949,6 +4141,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3969,6 +4162,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "leadgen",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -3989,6 +4183,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-06"
                    },
                    {
@@ -4008,7 +4203,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261109-canonical-naar-andere-categorie",
@@ -4027,7 +4223,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261109-clarity-dead-clicks-dienstblokken",
@@ -4051,7 +4248,8 @@
                                      "url":  "https://www.youtube.com/watch?v=7YyFnEQjmtM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-cwv-75e-percentiel",
@@ -4071,7 +4269,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261109-ga4-parameter-aangepaste-dimensie",
@@ -4094,7 +4293,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-gtm-preview-niet-gepubliceerd",
@@ -4114,7 +4314,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-ranktracker-losse-woorden-goto",
@@ -4134,7 +4335,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261109-review-markup-winkelscore",
@@ -4154,7 +4356,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261109-reviews-alleen-positief-acm",
@@ -4173,7 +4376,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-ga4-user-id-voor-inloggen",
@@ -4192,7 +4396,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-hamburgermenu-desktop",
@@ -4212,7 +4417,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-lege-filtercombinatie-404",
@@ -4232,7 +4438,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-logs-googlebot-echt-of-nep",
@@ -4256,7 +4463,8 @@
                                      "url":  "https://www.youtube.com/watch?v=-Qgly4DRWeE"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261110-productmarkup-b2b-prijs-na-inloggen",
@@ -4276,7 +4484,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-core-update-november-2026",
@@ -4300,7 +4509,8 @@
                                      "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-fcp-webfont-tekst-onzichtbaar",
@@ -4320,7 +4530,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261111-ga4-bounce-engaged-sessie",
@@ -4340,7 +4551,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261111-gtm-formulier-alleen-geslaagd",
@@ -4360,7 +4572,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261111-noindex-alleen-mobiele-versie",
@@ -4385,7 +4598,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-tikdoelen-mobiel-winkelmand",
@@ -4405,7 +4619,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261111-utm-in-interne-links",
@@ -4425,7 +4640,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-bezorgdatum-in-plaats-van-levertijd",
@@ -4444,7 +4660,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-cdn-overstap-crawlpiek",
@@ -4465,7 +4682,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-ga4-filter-intern-verkeer-testen",
@@ -4485,7 +4703,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261112-json-ld-in-de-body",
@@ -4509,7 +4728,8 @@
                                      "url":  "https://www.youtube.com/watch?v=vJEygBWs80A"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-mixed-content-script-geblokkeerd",
@@ -4529,7 +4749,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-robots-txt-googlebot-groep-negeert-ster",
@@ -4549,7 +4770,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261112-url-inspectie-gecrawld-als",
@@ -4573,7 +4795,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-ab-test-minstens-een-week",
@@ -4592,7 +4815,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-chatgpt-business-hub",
@@ -4612,7 +4836,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-clarity-scrollmap-per-apparaat",
@@ -4631,7 +4856,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261113-fietsfilters-welke-crawlbaar",
@@ -4650,7 +4876,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-gsc-positie-door-ai-overview",
@@ -4671,7 +4898,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-licentie-metadata-weggecomprimeerd",
@@ -4691,7 +4919,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-mobiel-toetsenbord-checkout",
@@ -4710,7 +4939,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261113-paid-organic-meer-organische-vertoningen",
@@ -4730,7 +4960,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-productreview-wie-hoe-waarom",
@@ -4754,7 +4985,8 @@
                                      "url":  "https://www.youtube.com/watch?v=D9hyyjQ-t90"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261113-sitemap-per-paginatype-indexering",
@@ -4779,6 +5011,7 @@
                                  },
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "ecom",
                        "herzien":  "2026-11-16"
                    },
                    {
@@ -4799,7 +5032,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261116-featured-snippet-niet-af-te-dwingen",
@@ -4819,7 +5053,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261116-geciteerd-in-ai-overview-weinig-klikken",
@@ -4843,7 +5078,8 @@
                                      "url":  "https://www.youtube.com/watch?v=xUyGAbwuTas"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261116-google-verwijzer-logs-vs-search-console",
@@ -4864,7 +5100,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261116-json-ld-gekrulde-aanhalingstekens",
@@ -4884,7 +5121,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261116-snippet-wissen-eigen-pagina",
@@ -4903,7 +5141,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261116-validator-groen-rich-results-test-leeg",
@@ -4924,6 +5163,7 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
+                       "cel":  "alle",
                        "herzien":  "2026-11-17"
                    },
                    {
@@ -4944,7 +5184,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-bijgewerkt-datum-elke-nacht",
@@ -4963,7 +5204,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-checkout-toetsenbord-toegankelijkheid",
@@ -4983,7 +5225,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-cls-uitklappen-na-klik",
@@ -5003,7 +5246,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-content-in-hapjes-voor-ai",
@@ -5023,7 +5267,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261117-ga4-eventnaam-hoofdletter",
@@ -5043,7 +5288,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261117-gtm-scrolldiepte-halverwege",
@@ -5067,7 +5313,8 @@
                                      "url":  "https://www.youtube.com/watch?v=HyFZhvPZUNM"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-lcp-achtergrondfoto-in-css",
@@ -5087,7 +5334,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-linkspam-update-geen-straf",
@@ -5107,7 +5355,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-redirectketen-drie-migraties",
@@ -5127,7 +5376,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-search-analytics-api-merkfilter",
@@ -5147,7 +5397,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261117-sitemap-te-veel-urls",
@@ -5167,7 +5418,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261117-ttfb-bezoekers-ver-van-server",
@@ -5187,7 +5439,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-bronlinks-niet-allemaal-nofollow",
@@ -5207,7 +5460,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-domeinverhuizing-verwachting-directie",
@@ -5228,7 +5482,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-dynamic-serving-crawlen-als-smartphone",
@@ -5252,7 +5507,8 @@
                                      "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-eeat-vertrouwen-belangrijkste",
@@ -5276,7 +5532,8 @@
                                      "url":  "https://www.youtube.com/watch?v=4YhJH5VOF3w"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-lighthouse-groen-velddata-rood",
@@ -5300,7 +5557,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-optimizely-snippet-gehackt",
@@ -5320,7 +5578,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-optimizely-via-gtm-flikkering",
@@ -5340,7 +5599,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261118-productvarianten-productgroup",
@@ -5360,7 +5620,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261118-ymyl-giftige-kamerplanten",
@@ -5380,7 +5641,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-ab-test-weinig-verkeer-welk-idee",
@@ -5399,7 +5661,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-blogarchief-klikdiepte",
@@ -5419,7 +5682,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-donatieformulier-voorgestelde-bedragen",
@@ -5438,7 +5702,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-ga4-dubbele-aankopen-transaction-id",
@@ -5458,7 +5723,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-ga4-other-rij-landingspaginas",
@@ -5478,7 +5744,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-gtm-rechten-freelancer",
@@ -5497,7 +5764,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261119-hreflang-en-uk-landcode",
@@ -5517,7 +5785,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-kleine-site-sitemap-nodig",
@@ -5537,7 +5806,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-lcp-veld-sneller-dan-lab-cookiemelding",
@@ -5561,7 +5831,8 @@
                                      "url":  "https://www.youtube.com/watch?v=_FpAvQkjlco"
                                  },
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261119-retourbeleid-organization-markup",
@@ -5581,7 +5852,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261119-srm-redirecttest-aanvraagpagina",
@@ -5601,7 +5873,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
                    },
                    {
                        "id":  "20261119-van-voor-prijs-laagste-30-dagen",
@@ -5620,7 +5893,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261120-agent-of-chatassistent",
@@ -5640,7 +5914,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-api-sleutel-in-openbare-repo",
@@ -5660,7 +5935,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-branch-niet-direct-op-main",
@@ -5680,7 +5956,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-chrome-xslt-sitemap-kale-xml",
@@ -5700,7 +5977,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    },
                    {
                        "id":  "20261120-claude-md-regel-of-deny-regel",
@@ -5720,7 +5998,9 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle",
+                       "herzien":  "2026-11-27"
                    },
                    {
                        "id":  "20261120-claude-md-wat-erin-hoort",
@@ -5740,7 +6020,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-review-door-frisse-sessie",
@@ -5760,7 +6041,8 @@
                                 },
                        "video":  null,
                        "soort":  "meerkeuze",
-                       "herkomst":  "generator"
+                       "herkomst":  "generator",
+                       "cel":  "alle"
                    },
                    {
                        "id":  "20261120-sessie-opnieuw-na-twee-correcties",
@@ -5781,7 +6063,1327 @@
                        "video":  null,
                        "soort":  "meerkeuze",
                        "herkomst":  "generator",
-                       "vormAfwijkend":  true
+                       "cel":  "alle",
+                       "herzien":  "2026-11-23"
+                   },
+                   {
+                       "id":  "20261123-claude-controle-die-slaagt-of-zakt",
+                       "titel":  "\u0027Klaar, het script werkt.\u0027 Maar de klikken kloppen niet",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Claude een controle geven die slaagt of zakt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.3.3",
+                                      "coderen-met-ai:3.1.3"
+                                  ],
+                       "kernpunt":  "Geef Claude bij elke klus iets wat \u0027goed\u0027 of \u0027fout\u0027 zegt, en vraag om de uitkomst in plaats van om \u0027klaar\u0027.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261123-magento-url-key-redirect",
+                       "titel":  "40 producten hernoemd, 40 keer een 404: wat zet je in Magento aan?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Magento: automatische redirect bij een gewijzigde URL-key",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.7"
+                                  ],
+                       "kernpunt":  "Gaan er veel URL\u0027s veranderen, regel dan eerst dat het systeem zelf doorstuurt. Met de hand achteraf repareren is foutgevoelig.",
+                       "bron":  {
+                                    "titel":  "Automatic product redirects | Adobe Commerce (Experience League)",
+                                    "url":  "https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/url-rewrites/url-redirect-product-automatic"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261123-mcp-servers-kosten-context",
+                       "titel":  "Acht koppelingen aan, één nodig: kan dat kwaad?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "MCP-servers: gekoppeld is niet gratis",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:4.4.1",
+                                      "coderen-met-ai:4.4.2"
+                                  ],
+                       "kernpunt":  "Koppel wat je deze week gebruikt en zet de rest uit. Elke server die aan staat, reist mee in elke sessie.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261123-mergeconflict-zelf-kiezen",
+                       "titel":  "GitHub meldt een conflict in je pull request. Wat nu?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een mergeconflict: wat het is en wat je doet",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.2.3",
+                                      "coderen-met-ai:2.3.2"
+                                  ],
+                       "kernpunt":  "Een conflict is een vraag, geen fout: Git vraagt jou welke versie blijft. Kies bewust, en overleg bij twijfel.",
+                       "bron":  {
+                                    "titel":  "About merge conflicts | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261123-plan-mode-eerst-voorstel",
+                       "titel":  "Eerst zien hoe Claude het aanpakt, zonder dat er iets verandert",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "De juiste stand kiezen: eerst een plan, nog niets wijzigen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:1.2.3",
+                                      "coderen-met-ai:3.2.1"
+                                  ],
+                       "kernpunt":  "Weet je nog niet hoe het moet, laat Claude dan eerst een plan maken. Bouwen komt pas na jouw akkoord.",
+                       "bron":  {
+                                    "titel":  "Permission modes | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/permission-modes"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261123-skill-met-gevolgen-zelf-starten",
+                       "titel":  "Je vroeg om een concept, de klant kreeg het rapport al",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een skill met gevolgen alleen zelf laten starten",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.2.2",
+                                      "coderen-met-ai:4.2.1"
+                                  ],
+                       "kernpunt":  "Stuurt een skill iets naar buiten, laat hem dan alleen starten als jij de opdracht typt.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261123-subagent-geen-slimmer-antwoord",
+                       "titel":  "\u0027Laat een subagent het overdoen, die snapt het vast beter\u0027",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Wanneer een subagent wel en niet helpt",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.3.3",
+                                      "coderen-met-ai:4.3.1"
+                                  ],
+                       "kernpunt":  "Is een antwoord fout omdat er informatie ontbreekt, geef dan die informatie. Een extra agent kent hem ook niet.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261123-terugspoelen-herstelt-geen-commando",
+                       "titel":  "Teruggespoeld, maar drie CSV-bestanden blijven weg",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Terugspoelen (rewind): wat komt er wel en niet terug?",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:3.2.3"
+                                  ],
+                       "kernpunt":  "Terugspoelen is een vangnet voor Claudes bewerkingen, niet voor wat er in de terminal gebeurt. Commit eerst als er iets verwijderd kan worden.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261123-wordpress-7-2-random-redirect",
+                       "titel":  "WordPress 7.2 komt op 8 december: wat moet de developer vooraf weten?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "WordPress 7.2 zet /random/ standaard aan, ook voor eigen berichttypes",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.4",
+                                      "1.3.1"
+                                  ],
+                       "kernpunt":  "Komt er een nieuwe standaardfunctie in het CMS, kijk dan welke pagina\u0027s die bereikt. Wat je SEO-plugin instelt, is niet genoeg.",
+                       "bron":  {
+                                    "titel":  "Make WordPress Core: Your content is going to get more random",
+                                    "url":  "https://make.wordpress.org/core/2026/11/05/your-content-is-going-to-get-more-random/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261124-canonical-in-body-genegeerd",
+                       "titel":  "Alle SEO-tags in een blok onderaan de pagina: werkt dat?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Wat in de body mag en wat in de head moet: JSON-LD en canonical",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.3.2",
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "Zet je SEO-tags buiten de head, check dan per tag of Google hem daar leest. JSON-LD mag overal, de canonical alleen in de head.",
+                       "bron":  {
+                                    "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261124-claude-p-script-mag-niet-schrijven",
+                       "titel":  "Het maandagscript draait, maar samenvatting.md komt er nooit",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Claude zonder venster draaien (claude -p) en toestemming vooraf geven",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:5.1.2",
+                                      "coderen-met-ai:6.2.3"
+                                  ],
+                       "kernpunt":  "Draait Claude zonder venster, bedenk dan vooraf wat het mag. Geef precies die toestemming mee, niet meer.",
+                       "bron":  {
+                                    "titel":  "Run Claude Code programmatically | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/headless"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261124-commitbericht-waarom",
+                       "titel":  "Drie maanden later: \u0027update\u0027 zegt niemand iets meer",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Repository, commit en een goed commitbericht",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.2.1"
+                                  ],
+                       "kernpunt":  "Schrijf in een commitbericht waarom je iets veranderde. Wat er veranderde, laat Git zelf al zien.",
+                       "bron":  {
+                                    "titel":  "Hello World | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261124-ga4-funnel-open-of-gesloten",
+                       "titel":  "Twee funnels, dezelfde stappen, toch meer mensen in stap 3",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Funnelverkenning in GA4: open of gesloten funnel",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "3.1.7",
+                                      "3.1.3"
+                                  ],
+                       "kernpunt":  "Geven twee funnels met dezelfde stappen andere getallen, kijk dan eerst of de één open en de ander gesloten is.",
+                       "bron":  {
+                                    "titel":  "[GA4] Funnel exploration - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/9327974"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261124-github-pages-prive-repo-openbaar",
+                       "titel":  "Het klantdashboard staat in een privérepo. Kan het op GitHub Pages?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Iets live zetten met GitHub Pages, en wanneer dat niet verstandig is",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:7.2.3",
+                                      "coderen-met-ai:2.3.3"
+                                  ],
+                       "kernpunt":  "Staat er iets in de repository wat niet openbaar mag, zet dan geen GitHub Pages aan. Privé geldt voor de repo, niet voor de site.",
+                       "bron":  {
+                                    "titel":  "Creating a GitHub Pages site | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261124-google-agent-bot-bescherming",
+                       "titel":  "Google-Agent krijgt een CAPTCHA in de webshop: wat adviseer je?",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Google-Agent doorlaten in firewall en bot-bescherming",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.6",
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "Wil je een bot van Google doorlaten, controleer dan wie hij is via de IP-lijst. Vertrouw nooit alleen op de naam in de user-agent.",
+                       "bron":  {
+                                    "titel":  "Allow Google-Agent traffic | Google Crawling Infrastructure",
+                                    "url":  "https://developers.google.com/crawling/docs/crawlers-fetchers/allow-google-agent"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-25"
+                   },
+                   {
+                       "id":  "20261124-hook-altijd-controlescript",
+                       "titel":  "\u0027Draai na elke wijziging het controlescript\u0027 wordt soms vergeten",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een hook voor iets wat altijd moet gebeuren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:4.5.1",
+                                      "coderen-met-ai:4.5.2"
+                                  ],
+                       "kernpunt":  "Moet iets altijd gebeuren, gebruik dan een hook. Merk je dat je een regel in CLAUDE.md steeds harder formuleert, dan is dat het signaal.",
+                       "bron":  {
+                                    "titel":  "Automate actions with hooks | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/hooks-guide"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261124-shopify-within-collectie-urls",
+                       "titel":  "Shopify linkt naar /collections/.../products/: hoe ruim je dit op?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Shopify: productlinks binnen collecties en canonicals",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "5.1.6",
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "Laat je interne links naar dezelfde URL wijzen als je canonical. Een canonical die tegen je eigen links in praat, is een zwak verhaal.",
+                       "bron":  {
+                                    "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261124-specifieke-opdracht-bestand-symptoom-klaar",
+                       "titel":  "\u0027Fix de export\u0027 leverde drie rondes correcties op. Wat had geholpen?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een goede opdracht schrijven: bestand, symptoom en wanneer het klaar is",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.1.2",
+                                      "coderen-met-ai:6.1.2"
+                                  ],
+                       "kernpunt":  "Schrijf in je opdracht waar het zit, wat er misgaat en waaraan je ziet dat het klaar is.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-auto-mode-in-plaats-van-blind-klikken",
+                       "titel":  "Na de tiende toestemmingsvraag klik je alleen nog op \u0027ja\u0027",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "De juiste permissiestand per klus: Manual, auto mode of bypassPermissions",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.2.4",
+                                      "coderen-met-ai:6.2.3"
+                                  ],
+                       "kernpunt":  "Merk je dat je toestemmingen goedkeurt zonder te lezen, stap dan over op auto mode en zet wat nooit mag in een deny-regel.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-core-update-december-aangekondigd",
+                       "titel":  "Novemberupdate klaar, decemberupdate op komst: wanneer meet je?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core updates: de novemberupdate meten terwijl de decemberupdate al is aangekondigd",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Meet een update pas met een volle week schone data erna, en noteer wat er in die week nog meer speelde.",
+                       "bron":  {
+                                    "titel":  "Google Search Central: Stay informed about Google Search ranking updates",
+                                    "url":  "https://developers.google.com/search/docs/ranking/stay-informed"
+                                },
+                       "video":  {
+                                     "titel":  "Recover From ANY Google Algorithm Update",
+                                     "kanaal":  "Rank Math SEO",
+                                     "url":  "https://www.youtube.com/watch?v=Qcd_2W5na60"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-eerst-interview-dan-spec",
+                       "titel":  "Je wilt een tool, maar weet nog niet precies wat erin moet",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een taak in vaste stappen: eerst verkennen en vastleggen, dan bouwen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.1.1",
+                                      "coderen-met-ai:6.1.2"
+                                  ],
+                       "kernpunt":  "Is de klus nog vaag, laat Claude je dan eerst interviewen en bouw pas daarna, in een nieuwe sessie.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-ga4-funnel-direct-of-indirect",
+                       "titel":  "Volgens de funnel legt 0,4% iets in het mandje. Klopt dat?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "Funnelverkenning in GA4: direct of indirect gevolgd door",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.1.3",
+                                      "7.1.1"
+                                  ],
+                       "kernpunt":  "Is een funnelstap onverwacht klein, kijk dan eerst of hij op \u0027direct gevolgd door\u0027 staat.",
+                       "bron":  {
+                                    "titel":  "[GA4] Funnel exploration - Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/9327974"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261125-gsc-export-search-type-filter",
+                       "titel":  "BigQuery telt 412.000 klikken, Search Console 268.000",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "SQL op de Search Console-export: filteren op zoektype (search_type)",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "5.3.1",
+                                      "4.1.2"
+                                  ],
+                       "kernpunt":  "Bouw je een Search Console-rapport na in BigQuery, zet dan eerst dezelfde filters als in de interface, te beginnen met het zoektype.",
+                       "bron":  {
+                                    "titel":  "Table guidelines and reference - Search Console Help",
+                                    "url":  "https://support.google.com/webmasters/answer/12917991"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-klaar-melding-bewijs-en-diff",
+                       "titel":  "\u0027Klaar, alle tests slagen.\u0027 Mag je nu committen?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Werk van de agent controleren: bewijs vragen en de wijzigingen (diff) lezen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:3.3.1",
+                                      "coderen-met-ai:3.3.4"
+                                  ],
+                       "kernpunt":  "Was je er niet bij, vraag dan om de uitvoer van de check en lees de diff voordat je commit.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-paywall-markup-geen-cloaking",
+                       "titel":  "Hele artikel voor Google, twee alinea\u0027s voor bezoekers: cloaking?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Article-markup bij betaalde artikelen: paywall-markup tegen cloaking",
+                       "type":  "verdieping",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "2.2.7",
+                                      "2.2.9"
+                                  ],
+                       "kernpunt":  "Zie je bij een betaalmuur meer tekst in de HTML dan bezoekers te zien krijgen, controleer dan of er paywall-markup op staat.",
+                       "bron":  {
+                                    "titel":  "Paywalled content structured data | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/structured-data/paywalled-content"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-reviewer-subagent-alleen-lezen",
+                       "titel":  "Een reviewer die alleen mag kijken, niet mag verbouwen",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een subagent maken met beperkte tools en een duidelijk resultaat",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.3.2",
+                                      "coderen-met-ai:3.3.2"
+                                  ],
+                       "kernpunt":  "Mag een subagent iets niet doen, haal dan de tool weg in plaats van het in de prompt te verbieden.",
+                       "bron":  {
+                                    "titel":  "Best practices for Claude Code | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/best-practices"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-shopify-robots-na-themawissel",
+                       "titel":  "Nieuw Shopify-thema live, en je robots.txt-regel is weg",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Shopify: robots.txt.liquid na een themawissel",
+                       "type":  "herhaling",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.1.6",
+                                      "1.1.8"
+                                  ],
+                       "kernpunt":  "Wisselt een Shopify-klant van thema, vergelijk dan /robots.txt vóór en na de livegang.",
+                       "bron":  {
+                                    "titel":  "Editing robots.txt.liquid | Shopify Help Center",
+                                    "url":  "https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261125-skill-delen-via-teamrepo",
+                       "titel":  "Je skill werkt goed. Hoe krijgt het hele team hem?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een skill delen met het team via de repo",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:4.2.3",
+                                      "coderen-met-ai:4.5.2"
+                                  ],
+                       "kernpunt":  "Deel je een skill via de repo, haal dan je persoonlijke kopie met dezelfde naam weg.",
+                       "bron":  {
+                                    "titel":  "Extend Claude with skills | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/skills"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261125-wekelijkse-taak-laptop-dicht",
+                       "titel":  "Elke maandag om 7.00 uur een rapport, ook als je laptop dicht is",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een geplande taak maken die vanzelf draait",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:5.1.1",
+                                      "coderen-met-ai:2.2.2"
+                                  ],
+                       "kernpunt":  "Moet een taak draaien terwijl je computer uit staat, kies dan een cloud scheduled task.",
+                       "bron":  {
+                                    "titel":  "Automate work with scheduled tasks | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/routines"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261126-canonical-ads-landingspagina",
+                       "titel":  "De Ads-landingspagina verdringt de dienstpagina in Google",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "rel=canonical voor een landingspagina van Google Ads",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.3.3"
+                                  ],
+                       "kernpunt":  "Moet een kopie blijven bestaan, gebruik dan een canonical. Mag hij weg, gebruik dan een 301.",
+                       "bron":  {
+                                    "titel":  "How to specify a canonical URL with rel=\"canonical\" and other methods | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-claude-review-op-elke-pull-request",
+                       "titel":  "Claude moet elke pull request nakijken. Hoe zet je dat op?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Claude laten reviewen via GitHub Actions",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:5.1.3"
+                                  ],
+                       "kernpunt":  "Wil je dat Claude op GitHub reviewt, begin dan met /install-github-app. De sleutel komt in een secret, nooit in een bestand.",
+                       "bron":  {
+                                    "titel":  "Claude Code GitHub Actions | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/github-actions"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-fotolijst-al-weken-leeg-na-livegang",
+                       "titel":  "De lijst met producten zonder foto is al drie weken leeg",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Zorgvuldig zijn: achter je werk staan, ook na de livegang",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.1.4"
+                                  ],
+                       "kernpunt":  "Lever geen script op zonder te weten hoe je merkt dat het stuk is.",
+                       "bron":  {
+                                    "titel":  "AI Fluency for builders | Claude Academy",
+                                    "url":  "https://academy.claude.com/courses/ai-fluency-for-builders"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-27"
+                   },
+                   {
+                       "id":  "20261126-foutmelding-laatste-regel-eerst",
+                       "titel":  "Een rood blok tekst na je commando: waar zit het probleem?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een commando uitvoeren en een foutmelding lezen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.1.2"
+                                  ],
+                       "kernpunt":  "Lees bij een foutmelding eerst de laatste regel. Die zegt meestal wat er mis is.",
+                       "bron":  {
+                                    "titel":  "Built-in Exceptions | Python documentation",
+                                    "url":  "https://docs.python.org/3/library/exceptions.html"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-ga4-bestemmingspagina-leads",
+                       "titel":  "Alle aanvragen staan bij /contact/: leveren de blogs dan niets op?",
+                       "vakgebied":  "Analytics",
+                       "onderwerp":  "GA4: welke pagina\u0027s leveren aanvragen op",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "3.1.3"
+                                  ],
+                       "kernpunt":  "Wil je weten welke pagina\u0027s aanvragen opleveren, kijk dan waar het bezoek begon, niet waar het formulier staat.",
+                       "bron":  {
+                                    "titel":  "[GA4] Landing page report | Analytics Help",
+                                    "url":  "https://support.google.com/analytics/answer/12931766"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-geo-bovenaan-maar-niet-geciteerd",
+                       "titel":  "Plek 1 in Google, maar niet genoemd in de AI Overview",
+                       "vakgebied":  "SEO / AI-search",
+                       "onderwerp":  "Klassieke SEO en GEO: ranken of geciteerd worden",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "12.1.2"
+                                  ],
+                       "kernpunt":  "Sta je bovenaan maar word je niet genoemd, zoek dan uit welke deelvragen achter de zoekopdracht zitten en of jouw pagina die beantwoordt.",
+                       "bron":  {
+                                    "titel":  "Attribution and factuality in Search generative AI features | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/fundamentals/gen-ai-attribution-factuality"
+                                },
+                       "video":  {
+                                     "titel":  "Why Generative Engine Optimisation (GEO) is the FUTURE of SEO",
+                                     "kanaal":  "Exposure Ninja",
+                                     "url":  "https://www.youtube.com/watch?v=FoIc8LkSETo"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-maandagcheck-eerst-samen-dan-inplannen",
+                       "titel":  "Elke maandag drie kwartier afgekeurde producten tellen: automatiseren?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een controle automatiseren die je nu met de hand doet",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:7.1.2",
+                                      "coderen-met-ai:5.1.1"
+                                  ],
+                       "kernpunt":  "Plan pas in wat je één keer samen goed hebt gekregen. Een geplande taak kan niets meer vragen.",
+                       "bron":  {
+                                    "titel":  "Common workflows | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/common-workflows"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-27"
+                   },
+                   {
+                       "id":  "20261126-magento-dienstpagina-cms-pagina",
+                       "titel":  "Een pagina over onderhoudscontracten in Magento: waar maak je die?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Magento: een dienstpagina als CMS-pagina",
+                       "type":  "herhaling",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.1.7"
+                                  ],
+                       "kernpunt":  "Is iets geen product, maak het in Magento dan als CMS-pagina en niet als product of categorie.",
+                       "bron":  {
+                                    "titel":  "Add a new page | Adobe Commerce Admin Guide (Experience League)",
+                                    "url":  "https://experienceleague.adobe.com/en/docs/commerce-admin/content-design/elements/pages/page-add"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-orderexport-persoonsgegevens-eerst-eruit",
+                       "titel":  "De orderexport heeft namen en adressen. Mag Claude hem lezen?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Veilig werken met klantdata en persoonsgegevens",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.2.2"
+                                  ],
+                       "kernpunt":  "Geef Claude alleen de kolommen die de vraag nodig heeft. Wat het niet leest, reist ook niet mee.",
+                       "bron":  {
+                                    "titel":  "Data usage | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/data-usage"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-pageburst-in-de-logs",
+                       "titel":  "\u0027pageburst\u0027 in de logs, ook op URL\u0027s die in robots.txt dicht staan",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Pageburst en andere speciale Google-crawlers in de serverlogs",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.3",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "Zie je een onbekende Google-bot in de logs, zoek dan eerst op voor welk product hij werkt voordat je iets blokkeert of conclusies trekt over Google Zoeken.",
+                       "bron":  {
+                                    "titel":  "Google\u0027s special-case crawlers | Google Crawling Infrastructure",
+                                    "url":  "https://developers.google.com/crawling/docs/crawlers-fetchers/google-special-case-crawlers"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261126-plugin-onbekende-marketplace-eerst-lezen",
+                       "titel":  "Een plugin die productfeeds \u0027optimaliseert\u0027: meteen installeren?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een plugin installeren: eerst kijken wat erin zit",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:4.5.3"
+                                  ],
+                       "kernpunt":  "Installeer geen plugin die je niet hebt bekeken. Hij krijgt dezelfde sleutels als jij.",
+                       "bron":  {
+                                    "titel":  "Plugin security and trust | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/plugins/security"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-repository-clonen-niet-zip",
+                       "titel":  "Meewerken aan de feedcheck van je collega: hoe begin je?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een repository clonen om mee te werken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.3.1"
+                                  ],
+                       "kernpunt":  "Wil je meewerken aan een project, clone het dan. Een ZIP is alleen om naar te kijken.",
+                       "bron":  {
+                                    "titel":  "Cloning a repository | GitHub Docs",
+                                    "url":  "https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-robots-txt-dollar-en-prefix",
+                       "titel":  "Drie nieuwe Disallow-regels: welke URL glipt er toch doorheen?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "robots.txt: hoe Google paden matcht ($, * en het begin van het pad)",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "1.1.8",
+                                      "1.3.6"
+                                  ],
+                       "kernpunt":  "Lees elke Disallow-regel als \u0027alles wat zo begint\u0027. Gebruik het dollarteken alleen als je echt één exacte URL bedoelt.",
+                       "bron":  {
+                                    "titel":  "How Google interprets the robots.txt specification | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-terminal-eerst-naar-de-projectmap",
+                       "titel":  "\u0027Ik kan feed.csv niet vinden\u0027, zegt Claude. Het bestand bestaat echt",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "In de terminal naar een map gaan en kijken wat erin staat",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:2.1.1"
+                                  ],
+                       "kernpunt":  "Eerst cd naar de projectmap, dan ls om te checken, dan pas claude.",
+                       "bron":  {
+                                    "titel":  "How Claude Code works | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/how-claude-code-works"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom",
+                       "herzien":  "2026-11-27"
+                   },
+                   {
+                       "id":  "20261126-uitlopers-opruimen-wat-delegeer-je",
+                       "titel":  "600 producten al maanden uitverkocht: wat laat je Claude doen?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Delegeren: wat geef je uit handen en welk oordeel houd je zelf",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.1.1"
+                                  ],
+                       "kernpunt":  "Vraag bij elke stap: staat het antwoord in de data? Zo ja, laat Claude het doen. Zo nee, beslis je zelf.",
+                       "bron":  {
+                                    "titel":  "AI Fluency for builders | Claude Academy",
+                                    "url":  "https://academy.claude.com/courses/ai-fluency-for-builders"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261126-vestigingsfilters-welke-crawlbaar",
+                       "titel":  "40 praktijken, vier filters en 70% van de crawls op filter-URL\u0027s",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Filters op een overzicht van vestigingen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.2.4",
+                                      "1.1.10"
+                                  ],
+                       "kernpunt":  "Geef alleen filters waar mensen echt op zoeken een vaste pagina. Houd de andere filtercombinaties met robots.txt uit de crawl.",
+                       "bron":  {
+                                    "titel":  "Managing crawling of faceted navigation URLs | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261126-voorraadtool-draait-maar-klopt-het",
+                       "titel":  "De voorraadtool draait in drie seconden. Kun je hem opleveren?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Werk van AI beoordelen: draaien is nog geen kloppen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:6.1.3"
+                                  ],
+                       "kernpunt":  "\u0027Het draait\u0027 is geen oordeel. Leg een paar uitkomsten naast de bron voordat je iets oplevert.",
+                       "bron":  {
+                                    "titel":  "AI Fluency for builders | Claude Academy",
+                                    "url":  "https://academy.claude.com/courses/ai-fluency-for-builders"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-agents-md-naast-claude-md",
+                       "titel":  "Codex volgt de afspraken in AGENTS.md, Claude ineens niet meer",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Claude Code en andere agents zoals Codex in één project",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:1.1.5",
+                                      "coderen-met-ai:4.1.1"
+                                  ],
+                       "kernpunt":  "Werkt het team met meer agents, houd de afspraken dan in AGENTS.md en importeer dat bestand in CLAUDE.md.",
+                       "bron":  {
+                                    "titel":  "How Claude remembers your project | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/memory"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-claude-code-installeren-welke-versie",
+                       "titel":  "De exports staan op je laptop. Waar begin je met Claude Code?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Claude Code installeren: welke versie past bij je start?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:1.2.1"
+                                  ],
+                       "kernpunt":  "Kies de versie die bij je bestanden kan. Staan ze op je laptop, begin dan lokaal: in de desktop-app of in VS Code.",
+                       "bron":  {
+                                    "titel":  "Overview | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/overview"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-cls-webfont-kop-verspringt",
+                       "titel":  "De kop springt van twee naar drie regels en duwt de offerteknop weg",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Core Web Vitals: CLS verbeteren als een webfont de tekst laat verspringen",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.7",
+                                      "5.2.6"
+                                  ],
+                       "kernpunt":  "Verspringt tekst zodra het eigen lettertype laadt, maak dan de reserveletter even groot in plaats van het lettertype later te laden.",
+                       "bron":  {
+                                    "titel":  "Optimize Cumulative Layout Shift | web.dev",
+                                    "url":  "https://web.dev/articles/optimize-cls"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261127-dashboard-leeg-na-dubbelklik",
+                       "titel":  "Het voorraaddashboard opent, maar de tabel blijft leeg",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een eenvoudige tool lokaal bekijken",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:7.2.1"
+                                  ],
+                       "kernpunt":  "Leest een pagina zelf een bestand in, open hem dan via een lokale server en niet met een dubbelklik.",
+                       "bron":  {
+                                    "titel":  "Reason: CORS request not HTTP | MDN",
+                                    "url":  "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSRequestNotHttp"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-eerste-opdracht-overzicht-vragen",
+                       "titel":  "Je neemt de feedcheck van een collega over. Wat vraag je eerst?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een eerste opdracht geven in een projectmap",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:1.2.2"
+                                  ],
+                       "kernpunt":  "Nieuw in een project? Laat Claude eerst uitleggen hoe het werkt, en wijzig pas als je weet waar.",
+                       "bron":  {
+                                    "titel":  "Common workflows | Claude Code Docs",
+                                    "url":  "https://code.claude.com/docs/en/common-workflows"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-gsc-koppeling-precies-1000-rijen",
+                       "titel":  "De Search Console-koppeling werkt: precies 1.000 pagina\u0027s",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een API-koppeling testen: is dit alles?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:7.2.2"
+                                  ],
+                       "kernpunt":  "Een rond aantal rijen is een grens, geen uitkomst. Laat het script doorvragen tot er niets meer komt.",
+                       "bron":  {
+                                    "titel":  "Search Analytics: query | Search Console API | Google for Developers",
+                                    "url":  "https://developers.google.com/webmaster-tools/v1/searchanalytics/query"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-gsc-koppeling-totaal-lager-dan-rapport",
+                       "titel":  "Het script telt 41.000 klikken, Search Console zegt 52.000",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een API-koppeling testen tegen het rapport",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "coderen-met-ai:7.2.2"
+                                  ],
+                       "kernpunt":  "Test een koppeling eerst op het totaal, zonder pagina of zoekopdracht. Een lijst per pagina telt nooit helemaal op tot dat totaal.",
+                       "bron":  {
+                                    "titel":  "Getting all your data | Search Console API | Google for Developers",
+                                    "url":  "https://developers.google.com/webmaster-tools/v1/how-tos/all-your-data"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-headless-cms-slug-redirects",
+                       "titel":  "Elke nieuwe slug in het headless CMS levert een rij 404\u0027s op",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Headless CMS: wie geeft de redirect als een slug verandert?",
+                       "type":  "basis",
+                       "niveau":  "expert",
+                       "matrix":  [
+                                      "5.1.3",
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "Werkt een klant met een headless CMS, vraag dan altijd wie de redirects geeft. Het CMS doet het niet vanzelf.",
+                       "bron":  {
+                                    "titel":  "Managing Redirects with a Headless CMS | Storyblok",
+                                    "url":  "https://www.storyblok.com/tp/managing-redirects-with-a-headless-cms"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-lightspeed-redirect-standaard-tijdelijk",
+                       "titel":  "Drie maanden na de verhuizing toont Google nog de oude dienstpagina\u0027s",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Lightspeed: redirects voor verhuisde dienstpagina\u0027s",
+                       "type":  "verdieping",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.1.5",
+                                      "5.1.2"
+                                  ],
+                       "kernpunt":  "Zet je in Lightspeed een redirect voor een verhuisde pagina, zet hem dan meteen op permanent en controleer de statuscode.",
+                       "bron":  {
+                                    "titel":  "Setting up redirects | Lightspeed eCom (C-Series) Help Center",
+                                    "url":  "https://ecom-support.lightspeedhq.com/hc/en-us/articles/220319928-Setting-up-redirects"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261127-mobiel-menu-minder-dienstpaginas",
+                       "titel":  "Desktopcrawl: 60 dienstpagina\u0027s. Smartphonecrawl: 38. Wat nu?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Crawlen als mobiele user-agent: links die alleen in het desktopmenu staan",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "8.2.1",
+                                      "8.1.2"
+                                  ],
+                       "kernpunt":  "Vind je bij een mobiele crawl minder pagina\u0027s dan bij een desktopcrawl, zorg dan dat die links ook in de mobiele versie staan.",
+                       "bron":  {
+                                    "titel":  "Mobile site and mobile-first indexing best practices | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+                                },
+                       "video":  {
+                                     "titel":  "Mobile-First Indexing",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261127-noindex-weghalen-met-javascript",
+                       "titel":  "Vijf nieuwe vestigingspagina\u0027s, en na zes weken staat er geen in Google",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "JavaScript: een noindex die pas in de browser verdwijnt",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.3",
+                                      "1.3.1"
+                                  ],
+                       "kernpunt":  "Moet een pagina in Google, zorg dan dat de HTML van de server geen noindex bevat. Vertrouw niet op een script dat hem later weghaalt.",
+                       "bron":  {
+                                    "titel":  "Understand JavaScript SEO Basics | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+                                },
+                       "video":  {
+                                     "titel":  "Essential JavaScript SEO tips - JavaScript SEO",
+                                     "kanaal":  "Google Search Central",
+                                     "url":  "https://www.youtube.com/watch?v=nwGY-9lwTF4"
+                                 },
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261127-offertecalculator-urls-crawlen",
+                       "titel":  "Googlebot zit vast in de offertecalculator: zijn knoppen zonder href genoeg?",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Crawl sturen: links verbergen met JavaScript of robots.txt?",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "1.1.9",
+                                      "1.1.8"
+                                  ],
+                       "kernpunt":  "Wil je dat Google bepaalde URL\u0027s niet meer crawlt, gebruik dan robots.txt. Links verbergen voorkomt alleen dat het nieuwe vindt.",
+                       "bron":  {
+                                    "titel":  "Managing crawling of faceted navigation URLs | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261127-ontdubbelen-productexport-controleren",
+                       "titel":  "\u00276.300 dubbele producten verwijderd.\u0027 Kan het bestand naar de klant?",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Een export laten opschonen en het resultaat controleren",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:7.1.1"
+                                  ],
+                       "kernpunt":  "Zeg vooraf wat \u0027dubbel\u0027 betekent, en bekijk na het opschonen altijd een paar regels die eruit gingen.",
+                       "bron":  {
+                                    "titel":  "pandas.DataFrame.drop_duplicates | pandas documentation",
+                                    "url":  "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-productfotos-als-css-achtergrond",
+                       "titel":  "Scherpe productfoto\u0027s, en toch nauwelijks iets in Google Afbeeldingen",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "CSS: productfoto\u0027s als achtergrond en Google Afbeeldingen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "5.3.6",
+                                      "2.1.14"
+                                  ],
+                       "kernpunt":  "Moet een foto gevonden worden in Google, zet hem dan als img in de HTML. CSS is voor decoratie.",
+                       "bron":  {
+                                    "titel":  "Google image SEO best practices | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/appearance/google-images"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
+                   },
+                   {
+                       "id":  "20261127-terugknop-kapen-ook-via-social",
+                       "titel":  "De terugknop leidt naar aanbiedingen: \u0027maar dit bezoek komt van social\u0027",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Spambeleid: back button hijacking geldt ook voor bezoek via social",
+                       "type":  "nieuws",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "10.1.1"
+                                  ],
+                       "kernpunt":  "Laadt een klant scripts van advertentiepartners, test dan of de terugknop nog gewoon terug gaat, ongeacht waar het bezoek vandaan komt.",
+                       "bron":  {
+                                    "titel":  "Spam policies for Google web search | Google Search Central",
+                                    "url":  "https://developers.google.com/search/docs/essentials/spam-policies"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "alle"
+                   },
+                   {
+                       "id":  "20261127-ttfb-partnerlinks-geen-cache",
+                       "titel":  "Via de vergelijkingssite 1,6 seconde TTFB, via Google 0,2 seconde",
+                       "vakgebied":  "SEO",
+                       "onderwerp":  "Time to First Byte (TTFB): een parameter in de URL omzeilt de paginacache",
+                       "type":  "basis",
+                       "niveau":  "gevorderd",
+                       "matrix":  [
+                                      "5.2.11",
+                                      "5.2.10"
+                                  ],
+                       "kernpunt":  "Is een pagina alleen traag via bepaalde links, vergelijk dan de URL met en zonder parameters. Vaak zit het verschil in de cache.",
+                       "bron":  {
+                                    "titel":  "Caching query strings | WP Rocket",
+                                    "url":  "https://wp-rocket.me/docs/caching-query-strings/"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "leadgen"
+                   },
+                   {
+                       "id":  "20261127-verzonnen-api-veld-documentatie-meegeven",
+                       "titel":  "Claude gebruikte vol vertrouwen een veld dat niet bestaat",
+                       "vakgebied":  "Coderen met AI",
+                       "onderwerp":  "Waar AI voorspelbaar de mist in gaat: minder bekende systemen",
+                       "type":  "basis",
+                       "niveau":  "basis",
+                       "matrix":  [
+                                      "coderen-met-ai:1.1.4"
+                                  ],
+                       "kernpunt":  "Werkt Claude met een systeem dat weinig mensen gebruiken, geef dan de documentatie mee voordat het code schrijft.",
+                       "bron":  {
+                                    "titel":  "AI capabilities and limitations | Claude Academy",
+                                    "url":  "https://academy.claude.com/courses/ai-capabilities-and-limitations"
+                                },
+                       "video":  null,
+                       "soort":  "meerkeuze",
+                       "herkomst":  "generator",
+                       "cel":  "ecom"
                    }
                ]
 }

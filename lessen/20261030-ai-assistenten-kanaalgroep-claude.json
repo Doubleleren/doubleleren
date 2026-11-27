@@ -8,6 +8,7 @@
     "12.1.6",
     "3.1.4"
   ],
+  "cel": "leadgen",
   "titel": "Hoeveel leads komen uit ChatGPT? Bouw met Claude een eigen GA4-kanaal",
   "intro": "Een installatiebedrijf wil elke maand weten hoeveel bezoekers en offerteaanvragen uit AI-assistenten komen, zoals ChatGPT, Perplexity, Gemini, Copilot en Claude. Nu staat dat verkeer verspreid tussen tientallen andere bronnen in het kanaal Referral. De klant heeft een gewone GA4-property, zonder 360.",
   "opdracht": {

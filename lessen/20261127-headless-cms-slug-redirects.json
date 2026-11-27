@@ -1,0 +1,43 @@
+{
+  "id": "20261127-headless-cms-slug-redirects",
+  "type": "basis",
+  "niveau": "expert",
+  "vakgebied": "SEO",
+  "onderwerp": "Headless CMS: wie geeft de redirect als een slug verandert?",
+  "matrix": ["5.1.3", "5.1.2"],
+  "cel": "ecom",
+  "titel": "Elke nieuwe slug in het headless CMS levert een rij 404's op",
+  "intro": "Een webshop in outdoorkleding beheert de teksten van categorie- en merkpagina's in Storyblok, een headless CMS. De site zelf is een statisch gebouwde frontend. Het contentteam past regelmatig URL-slugs aan op nieuw zoekwoordonderzoek. Na elke ronde ziet Search Console nieuwe 404's. De developer heeft één sprint voor een structurele oplossing.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke oplossing kies je?",
+    "opties": [
+      "Bij elke 404 een JavaScript-redirect naar de nieuwe slug laten uitvoeren, zodat ook Google bij de nieuwe pagina uitkomt.",
+      "De oude slug als canonical laten staan op de nieuwe pagina, zodat Google de linkwaarde van het oude adres meeneemt.",
+      "Redirects in het CMS bijhouden en de site na elke publicatie opnieuw laten bouwen, zodat elke slugwijziging een 301 krijgt.",
+      "De oude URL's in de XML-sitemap laten staan tot ze uit de index zijn, zodat Google de 404's sneller verwerkt en vergeet."
+    ],
+    "juist": 2
+  },
+  "kern": "Een headless CMS maakt zelf geen redirects: de frontend moet ze geven. Houd ze bij in het CMS en laat de site ze bij elke publicatie meenemen.",
+  "afleiders": [
+    "**JavaScript-redirect op de 404:** voor bezoekers werkt het. Maar bij een pagina met een 404-status slaat Google het renderen mogelijk over, en dan ziet het de redirect niet.",
+    "**Oude slug als canonical:** dan wijs je naar een adres dat een 404 geeft. Een canonical hoort naar de pagina te wijzen die je wél in Google wilt.",
+    "",
+    "**Oude URL's in de sitemap:** dat helpt Google soms om redirects sneller op te merken. Maar hier is nog geen redirect, dus Google ziet alleen sneller dat de pagina's weg zijn."
+  ],
+  "kort": "Vergelijk een headless CMS met een uitgever die teksten aanlevert bij een drukker. Verandert de uitgever een hoofdstuktitel, dan past de drukker niet vanzelf de verwijzingen in andere boeken aan. Dat moet iemand hem apart vertellen. Bij een headless CMS is de frontend die drukker. Het CMS weet niet onder welk adres een pagina live staat, dus het stuurt ook niemand door.",
+  "begrippen": [
+    { "term": "Headless CMS", "uitleg": "een systeem waarin je alleen de inhoud beheert. Een aparte website, de frontend, haalt die op en bouwt er pagina's van." },
+    { "term": "Slug", "uitleg": "het laatste stuk van een URL dat een pagina aanduidt, zoals /regenjassen-heren." },
+    { "term": "Frontend", "uitleg": "het deel van de site dat bezoekers en Google te zien krijgen: de HTML, de opmaak en de scripts." },
+    { "term": "301", "uitleg": "de statuscode van een permanente doorverwijzing: de pagina is voorgoed verhuisd naar een nieuw adres." }
+  ],
+  "uitleg": "**Waarom het misgaat**\nIn Shopify, Lightspeed of Magento kent het systeem zowel de inhoud als de URL's. Bij een nieuwe URL kan het daardoor vaak zelf een redirect maken. In een headless opzet beheert het CMS alleen inhoud. Welke URL's bestaan en welke statuscode de server geeft, bepaalt de frontend of de hosting. Verandert een slug, dan geeft het oude adres een 404, tenzij iemand dat regelt.\n\n**Zo regel je het**\n- Leg redirects vast als content in het CMS, bijvoorbeeld in één lijst met oud adres, nieuw adres en type. Storyblok beschrijft die aanpak.\n- Laat de frontend die lijst bij het bouwen ophalen en in de redirectconfiguratie van de site of de hosting zetten.\n- Start het opnieuw bouwen met een webhook bij elke publicatie.\n- Nog robuuster: bewaar de oude slug automatisch bij een wijziging, zodat niemand een redirect kan vergeten.\n\nTest na publicatie een oude URL: krijg je meteen een 301 naar de nieuwe, zonder tussenstap?",
+  "kernpunt": "Werkt een klant met een headless CMS, vraag dan altijd wie de redirects geeft. Het CMS doet het niet vanzelf.",
+  "toepassing": "Zoek vandaag bij één klant met een headless CMS een pagina waarvan de slug ooit is veranderd. Test de oude URL met een redirectchecker: krijg je een 301 of een 404?",
+  "bron": {
+    "titel": "Managing Redirects with a Headless CMS | Storyblok",
+    "url": "https://www.storyblok.com/tp/managing-redirects-with-a-headless-cms"
+  }
+}

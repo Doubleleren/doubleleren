@@ -8,6 +8,7 @@
     "5.3.1",
     "4.1.2"
   ],
+  "cel": "leadgen",
   "titel": "Je eerste SQL-query op Search Console-data, samen met Claude",
   "intro": "Een grote klant heeft de bulk data export van Search Console naar BigQuery aanstaan. Jij wilt per maand de klikken en de gemiddelde positie van alle zoekwoorden met 'offerte' erin, zonder de limiet van 1.000 rijen in de interface.",
   "opdracht": {

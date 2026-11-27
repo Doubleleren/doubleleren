@@ -7,6 +7,7 @@
   "matrix": [
     "2.1.14"
   ],
+  "cel": "ecom",
   "titel": "Alle productfoto's naar JPEG XL nu Chrome het ondersteunt?",
   "intro": "De developer van een modewebshop is enthousiast: sinds begin oktober toont ook Chrome JPEG XL-afbeeldingen, na Safari en Firefox. In een test zijn de productfoto's als .jxl gemiddeld 40% kleiner dan de huidige JPEG's. Hij wil alle foto's omzetten en alleen nog .jxl serveren: in de img src, in og:image en in de Product-markup.",
   "opdracht": {

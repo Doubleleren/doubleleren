@@ -1,0 +1,43 @@
+{
+  "id": "20261127-offertecalculator-urls-crawlen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawl sturen: links verbergen met JavaScript of robots.txt?",
+  "matrix": ["1.1.9", "1.1.8"],
+  "cel": "leadgen",
+  "titel": "Googlebot zit vast in de offertecalculator: zijn knoppen zonder href genoeg?",
+  "intro": "Een schoonmaakbedrijf voor kantoren heeft een offertecalculator. Elke keuze (vierkante meters, aantal keer per week, extra diensten) maakt een eigen URL met parameters. In de serverlogs zie je dat Googlebot al maanden vooral die calculator-URL's ophaalt. De developer wil de keuzes ombouwen tot knoppen zonder href, die alleen via JavaScript werken.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Is dat genoeg om Googlebot bij die URL's weg te houden?",
+    "opties": [
+      "Ja, want zonder echte link kan Google de calculator-URL's nergens anders meer vinden of opvragen.",
+      "Nee, voeg ook een Disallow in robots.txt toe, want Google kent de oude URL's al en vraagt ze opnieuw op.",
+      "Nee, zet liever nofollow op de bestaande links, want dat blokkeert ook URL's die Google al kent.",
+      "Nee, zet de calculator-URL's beter op noindex, want dan stopt Google direct met het ophalen ervan."
+    ],
+    "juist": 1
+  },
+  "kern": "Knoppen zonder href voorkomen dat Google nieuwe calculator-URL's ontdekt. De URL's die Google al kent, houd je alleen met robots.txt tegen.",
+  "afleiders": [
+    "**Alleen knoppen:** zonder link ontdekt Google inderdaad geen nieuwe URL's. Maar de oude staan al in Googles lijst, en die blijft het opvragen.",
+    "",
+    "**Nofollow:** dat klinkt als een stopbord. Maar Google ziet nofollow als hint, en het helpt alleen als élke link naar die URL het heeft.",
+    "**Noindex:** dat houdt pagina's uit de zoekresultaten. Maar om de noindex te lezen, moet Google de pagina juist ophalen."
+  ],
+  "kort": "Stel dat je een oude kortingsfolder uit de winkel haalt. Nieuwe klanten zien hem niet meer, maar wie hem al thuis heeft, komt er toch mee aan de kassa. Een knop zonder link werkt als dat weghalen: Google vindt geen nieuwe adressen meer. De adressen die het al kent, blijft het proberen. Daarvoor heb je een bordje bij de deur nodig, en dat is robots.txt.",
+  "begrippen": [
+    { "term": "href", "uitleg": "het deel van een link waarin het webadres staat. Alleen zo'n link volgt Google." },
+    { "term": "robots.txt", "uitleg": "een bestand in de hoofdmap van de site dat crawlers vertelt welke URL's ze niet mogen ophalen." },
+    { "term": "Disallow", "uitleg": "de regel in robots.txt die een pad of patroon van URL's uitsluit van crawlen." },
+    { "term": "Parameter", "uitleg": "het stuk na het vraagteken in een URL, zoals ?m2=400, dat een keuze doorgeeft." }
+  ],
+  "uitleg": "Google ontdekt links alleen via a-elementen met een href. Een knop die via JavaScript een URL opent, levert dus geen nieuwe calculator-URL's op. Maar Google onthoudt URL's die het al kent, en kan ze ook via sitemaps of externe links vinden.\n\nVoor filter- en keuze-URL's zegt Google:\n- **robots.txt:** sluit de URL's uit met een Disallow-regel, bijvoorbeeld op de parameter. Zo houd je crawlen tegen en spaar je de server.\n- **nofollow:** kan helpen, maar alleen als elke link naar die URL het heeft. Op lange termijn werkt het minder goed.\n- **canonical:** kan het crawlen van niet-canonieke varianten op den duur verminderen.\n\nLet op met noindex: Google moet de pagina ophalen om de tag te lezen. Zet noindex en een Disallow dus niet op dezelfde URL.\n\nControleer de regel voordat hij live gaat, zodat er geen dienstpagina's onder vallen. Kijk daarna in de serverlogs of het aandeel calculator-URL's daalt.",
+  "kernpunt": "Wil je dat Google bepaalde URL's niet meer crawlt, gebruik dan robots.txt. Links verbergen voorkomt alleen dat het nieuwe vindt.",
+  "toepassing": "Kijk vandaag in de serverlogs of de Crawlstatistieken van één klant welke parameter-URL's Googlebot het vaakst ophaalt. Staan ze al in robots.txt?",
+  "bron": {
+    "titel": "Managing crawling of faceted navigation URLs | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
+  }
+}

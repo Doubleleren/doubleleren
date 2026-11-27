@@ -1,0 +1,42 @@
+{
+  "id": "20261125-reviewer-subagent-alleen-lezen",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een subagent maken met beperkte tools en een duidelijk resultaat",
+  "matrix": ["coderen-met-ai:4.3.2", "coderen-met-ai:3.3.2"],
+  "cel": "alle",
+  "titel": "Een reviewer die alleen mag kijken, niet mag verbouwen",
+  "intro": "Je bouwt met Claude Code een tool die een Search Console-export per paginatype samenvat. De eisen staan in SPEC.md. Je wilt een vaste reviewer die na elke wijziging de code naast SPEC.md legt en meldt wat ontbreekt. Vorige keer begon een review-sessie zelf code te herschrijven, en toen klopte er niets meer van je eigen wijzigingen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe richt je die reviewer het best in?",
+    "opties": [
+      "Een subagent met in zijn prompt 'pas nooit iets aan', zodat hij weet dat hij alleen mag lezen en rapporteren.",
+      "Een subagent die een groter model gebruikt, zodat hij beter oordeelt en minder snel iets wil herschrijven.",
+      "De review in je hoofdsessie laten doen, zodat Claude zijn eigen redenering kent en sneller ziet wat ontbreekt.",
+      "Een subagent met alleen de tools Read, Grep en Glob, zodat Claude Code bewerken voor hem onmogelijk maakt."
+    ],
+    "juist": 3
+  },
+  "kern": "Geef je een subagent alleen leestools, dan kan hij niets aanpassen. Dat dwingt Claude Code af. Een zin in de prompt is alleen een verzoek.",
+  "afleiders": [
+    "**'Pas nooit iets aan' in de prompt:** dat is duidelijk geformuleerd. Maar een instructie in een prompt volgt het model bijna altijd, niet gegarandeerd. Wil je zeker zijn, dan haal je de bewerktools weg.",
+    "**Een groter model:** slimmer klinkt veiliger. Maar een slimmer model heeft nog steeds bewerktools. Het probleem was niet het oordeel, maar wat hij mocht doen.",
+    "**In de hoofdsessie reviewen:** die kent de context al. Maar juist daardoor kijkt hij niet fris. Een reviewer die niet zag hoe de code ontstond, wordt niet meegesleept door de redenering erachter.",
+    ""
+  ],
+  "kort": "Denk aan een keurmeester bij de APK. Je wilt dat hij de auto controleert, niet dat hij zelf onderdelen gaat vervangen. Je kunt hem vragen niets aan te raken. Maar het werkt beter als hij geen gereedschap bij zich heeft, alleen een lamp en een checklist. Zo werkt een subagent met alleen leestools: hij kán niets aanpassen, dus hij rapporteert alleen.",
+  "begrippen": [
+    { "term": "Subagent", "uitleg": "een aparte hulpsessie van Claude die een deeltaak doet en het resultaat terugmeldt aan je hoofdsessie." },
+    { "term": "Tools", "uitleg": "de acties die Claude mag uitvoeren, zoals bestanden lezen (Read), zoeken (Grep, Glob) of bewerken (Edit)." },
+    { "term": "SPEC.md", "uitleg": "een bestand waarin staat wat een tool precies moet kunnen. De reviewer legt de code daarnaast." }
+  ],
+  "uitleg": "**Zo ziet het eruit:** een bestand .claude/agents/reviewer.md met bovenaan:\n- name: reviewer\n- description: wanneer Claude hem inzet, bijvoorbeeld na het bouwen van een functie, vóór de pull request\n- tools: Read, Grep, Glob\n\nDaaronder de opdracht: vergelijk de gewijzigde bestanden met de spec, controleer of elke eis erin zit en meld alleen gaten die de werking raken. Sla stijl over.\n\n**Waarom 'sla stijl over':** een reviewer die problemen moet vinden, vindt altijd iets. Los je elke opmerking op, dan krijg je extra lagen en tests voor gevallen die niet kunnen voorkomen.\n\n**Kosten:** elke subagent gebruikt eigen tokens. Vraag om een korte samenvatting terug, en kies voor simpel werk eventueel model: haiku.\n\n**Gebruik:** vraag in je sessie 'laat de reviewer de tool vergelijken met SPEC.md'.",
+  "kernpunt": "Mag een subagent iets niet doen, haal dan de tool weg in plaats van het in de prompt te verbieden.",
+  "toepassing": "Maak vandaag in een eigen project .claude/agents/reviewer.md aan met tools: Read, Grep, Glob en laat hem één bestaand script naast je eisen leggen.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

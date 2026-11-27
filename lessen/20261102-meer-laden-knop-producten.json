@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Een 'Meer laden'-knop in plaats van paginering: vindt Google de producten nog?",
   "matrix": ["1.1.9", "1.3.4"],
+  "cel": "ecom",
   "titel": "Sinds de knop 'Meer laden' verdwijnen producten uit Google",
   "intro": "Een webshop in kinderkleding heeft de genummerde pagina's op categoriepagina's (?page=2, ?page=3) vervangen door een knop 'Meer laden'. Die haalt met JavaScript telkens 24 producten op. De oude paginalinks zijn weg. Twee maanden later krijgen producten die diep in de categorieën staan bijna geen vertoningen meer.",
   "opdracht": {

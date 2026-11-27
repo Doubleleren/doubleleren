@@ -1,0 +1,43 @@
+{
+  "id": "20261123-plan-mode-eerst-voorstel",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "De juiste stand kiezen: eerst een plan, nog niets wijzigen",
+  "matrix": ["coderen-met-ai:1.2.3", "coderen-met-ai:3.2.1"],
+  "cel": "alle",
+  "titel": "Eerst zien hoe Claude het aanpakt, zonder dat er iets verandert",
+  "intro": "Je wilt het rapportagescript van een klant laten ombouwen, maar je weet nog niet precies hoe. Het script wordt elke maandag gebruikt. Claude Code staat in de terminal op auto mode. Je wilt eerst zien hoe Claude het zou aanpakken, zonder dat er al bestanden veranderen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke stand kies je met Shift+Tab?",
+    "opties": [
+      "Auto mode laten staan, want de veiligheidscontrole houdt wijzigingen tegen tot jij akkoord geeft.",
+      "acceptEdits, want dan zie je elke wijziging voorbijkomen en kun je die achteraf nog terugdraaien.",
+      "Default (manual), want dan schrijft Claude eerst een plan en vraagt pas daarna om toestemming.",
+      "Plan mode, want dan leest Claude de bestanden en schrijft een plan, zonder je code al aan te passen."
+    ],
+    "juist": 3
+  },
+  "kern": "In plan mode verkent Claude en schrijft een plan, maar past de code niet aan. Pas na jouw akkoord gaat het bouwen.",
+  "afleiders": [
+    "**Auto mode:** de veiligheidscontrole klinkt als een rem. Maar die houdt alleen riskante acties tegen, zoals iets verwijderen. Gewone wijzigingen in je script gaan gewoon door.",
+    "**acceptEdits:** terugdraaien kan, maar dan zijn de bestanden al veranderd. Je wilde juist eerst kijken voordat er iets gebeurt.",
+    "**Default (manual):** Claude vraagt dan per actie om toestemming. Een plan van de hele aanpak krijg je zo niet vooraf, wel een reeks losse vragen.",
+    ""
+  ],
+  "kort": "Vergelijk het met een aannemer die eerst een tekening maakt voordat hij gaat breken. Je bekijkt de tekening, stuurt bij, en pas dan gaat de hamer erin. Plan mode is die tekening: Claude kijkt rond, bedenkt de aanpak en wacht op jouw akkoord.",
+  "begrippen": [
+    { "term": "Plan mode", "uitleg": "een stand waarin Claude bestanden leest en een plan schrijft, maar je code nog niet aanpast." },
+    { "term": "Auto mode", "uitleg": "een stand waarin Claude alles zonder vragen doet, met een veiligheidscontrole op de achtergrond voor riskante acties." },
+    { "term": "acceptEdits", "uitleg": "een stand waarin Claude bestanden mag aanpassen zonder per wijziging te vragen." },
+    { "term": "Shift+Tab", "uitleg": "de toetscombinatie waarmee je in de terminal door de standen van Claude Code bladert." }
+  ],
+  "uitleg": "**De standen op een rij:**\n- **auto:** alles mag, met een veiligheidscontrole op de achtergrond. In de terminal en VS Code is dit de startstand.\n- **default (manual):** Claude vraagt bij de meeste acties om toestemming.\n- **acceptEdits:** bestanden aanpassen en simpele mapopdrachten mogen zonder vragen.\n- **plan:** lezen en verkennen, en een plan schrijven. Je broncode blijft onaangeroerd tot je het plan goedkeurt.\n\n**Wisselen:** met Shift+Tab ga je vanuit auto eerst naar default, daarna naar acceptEdits en dan naar plan. Je kunt ook meteen starten met claude --permission-mode plan. In VS Code en de desktop-app kies je de stand onder het invoervak.\n\n**Wanneer plan mode?** Bij een klus die je nog niet helemaal overziet, of in code die je niet kent. Bij een kleine, duidelijke wijziging is plannen vaak overbodig.",
+  "kernpunt": "Weet je nog niet hoe het moet, laat Claude dan eerst een plan maken. Bouwen komt pas na jouw akkoord.",
+  "toepassing": "Start vandaag Claude Code in een project en druk een paar keer op Shift+Tab. Kijk onderin welke stand er staat, en eindig in plan mode bij je volgende vraag.",
+  "bron": {
+    "titel": "Permission modes | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/permission-modes"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "20261127-cls-webfont-kop-verspringt",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Core Web Vitals: CLS verbeteren als een webfont de tekst laat verspringen",
+  "matrix": ["5.2.7", "5.2.6"],
+  "cel": "leadgen",
+  "titel": "De kop springt van twee naar drie regels en duwt de offerteknop weg",
+  "intro": "Een hoveniersbedrijf heeft op elke dienstpagina een grote kop in een eigen lettertype, met daaronder de knop 'Vraag een offerte aan'. Na een eerdere snelheidsronde staat font-display op swap: de tekst is er meteen. Maar de CLS op mobiel is nu 0,19. Op een opname zie je de kop van twee naar drie regels springen zodra het lettertype binnen is.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Welke aanpassing pak je als eerste aan?",
+    "opties": [
+      "Het lettertype met loading=\"lazy\" laden, zodat het pas binnenkomt als de rest van de pagina klaar is.",
+      "De maten van het reservelettertype gelijktrekken met size-adjust, zodat de kop niet meer verspringt.",
+      "Het lettertype onderaan de body laden in plaats van in de head, zodat het de eerste weergave niet ophoudt.",
+      "De offerteknop vast onderaan het scherm zetten, zodat bezoekers hem zien, ook als de kop verspringt."
+    ],
+    "juist": 1
+  },
+  "kern": "De kop springt omdat de reserveletter een andere maat heeft dan het eigen lettertype. Maak je die maten gelijk, dan blijft alles staan.",
+  "afleiders": [
+    "**loading=\"lazy\":** dat werkt voor afbeeldingen en iframes, niet voor lettertypen. En later laden geeft een latere sprong, geen kleinere.",
+    "",
+    "**Onderaan de body:** dan komt het lettertype later binnen. De tekst staat langer in de reserveletter, en de sprong komt alsnog.",
+    "**Knop vastzetten:** de knop is dan wel zichtbaar. Maar de kop en alles eronder springen nog steeds, dus de CLS blijft hoog."
+  ],
+  "kort": "Denk aan een tijdelijk naambordje op een deur, terwijl het echte nog besteld is. Is het tijdelijke bordje kleiner, dan moet alles eromheen opschuiven als het echte komt. Is het precies even groot, dan merkt niemand de wissel. Zo werkt het met lettertypen. De browser toont eerst een reserveletter, en heeft die dezelfde maat, dan verschuift er niets.",
+  "begrippen": [
+    { "term": "CLS (Cumulative Layout Shift)", "uitleg": "een maat voor hoeveel de pagina onverwacht verspringt tijdens het bekijken. Goed is 0,1 of lager." },
+    { "term": "font-display: swap", "uitleg": "een CSS-instelling: toon tekst meteen in een standaardletter en wissel naar het eigen lettertype zodra dat binnen is." },
+    { "term": "Reserveletter", "uitleg": "het lettertype dat de browser gebruikt zolang het eigen lettertype nog niet geladen is. Ook wel fallback genoemd." },
+    { "term": "size-adjust", "uitleg": "een CSS-instelling die een lettertype groter of kleiner maakt, zodat het even breed loopt als een ander lettertype." }
+  ],
+  "uitleg": "Met font-display: swap toont de browser tekst meteen in een reserveletter en wisselt hij later naar het eigen lettertype. Dat is goed voor de snelheid. Maar is de reserveletter breder of smaller, dan lopen regels anders af en verschuift alles eronder.\n\nweb.dev noemt deze oplossingen:\n- **Maten gelijktrekken:** geef de reserveletter met size-adjust, ascent-override, descent-override en line-gap-override dezelfde maat als het eigen lettertype.\n- **Vroeg laden:** laad belangrijke lettertypen zo vroeg mogelijk met link rel=preload. Is het lettertype er vóór de eerste weergave, dan verschuift er niets.\n- **font-display: optional:** de browser gebruikt het eigen lettertype alleen als het er bij de eerste opbouw al is. Anders blijft de reserveletter staan.\n\nControleer het effect eerst in het lab, bijvoorbeeld in PageSpeed Insights. De velddata in Search Console lopen een paar weken achter.",
+  "kernpunt": "Verspringt tekst zodra het eigen lettertype laadt, maak dan de reserveletter even groot in plaats van het lettertype later te laden.",
+  "toepassing": "Open vandaag één dienstpagina van een klant in Chrome DevTools met een trage mobiele verbinding. Kijk of koppen verspringen als het lettertype binnenkomt.",
+  "bron": {
+    "titel": "Optimize Cumulative Layout Shift | web.dev",
+    "url": "https://web.dev/articles/optimize-cls"
+  }
+}

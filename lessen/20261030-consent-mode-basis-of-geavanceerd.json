@@ -8,6 +8,7 @@
     "3.1.1",
     "3.1.4"
   ],
+  "cel": "ecom",
   "titel": "Sinds de nieuwe cookiebanner mist GA4 een derde van de bestellingen",
   "intro": "Een webshop heeft een nieuwe cookiebanner. Die is zo ingesteld dat Google-tags pas laden nadat een bezoeker op 'Accepteren' klikt. Sindsdien telt GA4 ongeveer een derde minder aankopen dan het webshopsysteem. De marketingmanager vraagt of 'die Consent Mode' daar iets aan kan doen, en of dat dan wel mag.",
   "opdracht": {

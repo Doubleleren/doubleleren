@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Core Web Vitals: wanneer is een pagina 'goed'? (het 75e percentiel)",
   "matrix": ["5.2.1", "5.2.2"],
+  "cel": "alle",
   "titel": "70% van de bezoekers zit goed. Haalt de site de Core Web Vitals?",
   "intro": "Een klant stuurt een screenshot uit zijn velddata van echte bezoekers. LCP is de tijd tot het grootste stuk inhoud in beeld staat. Bij 70% van de bezoeken op mobiel is dat binnen 2,5 seconden. Bij de rest duurt het langer, soms meer dan 5 seconden. De klant concludeert: 'De meeste bezoekers zitten goed, dus we halen de Core Web Vitals.'",
   "opdracht": {

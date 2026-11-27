@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Werk van de agent laten reviewen door een frisse sessie",
   "matrix": ["coderen-met-ai:3.3.2", "coderen-met-ai:3.3.4"],
+  "cel": "alle",
   "titel": "Claude reviewde zijn eigen werk en vond alleen twee stijlpunten",
   "intro": "Claude Code heeft in één lange sessie een tool gebouwd die productfeeds controleert. Aan het eind vraag je in diezelfde sessie: 'Review je werk kritisch.' Claude meldt twee kleine stijlpunten. Een dag later blijkt dat de tool producten met een leeg prijsveld gewoon overslaat.",
   "opdracht": {

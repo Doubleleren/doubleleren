@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Meta description: waarom Google soms andere tekst toont",
   "matrix": ["2.1.9"],
+  "cel": "leadgen",
   "titel": "Google toont niet de meta description die we schreven. Kapot?",
   "intro": "Een tandartspraktijk heeft voor elke pagina zelf een meta description geschreven. Bij de pagina over een wortelkanaalbehandeling toont Google toch een zin uit de tekst: 'Een wortelkanaalbehandeling duurt meestal twee afspraken van een uur.' De meta description staat gewoon in de head van de pagina. De praktijkhouder vraagt of er iets stuk is.",
   "opdracht": {

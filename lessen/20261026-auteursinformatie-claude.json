@@ -8,6 +8,7 @@
     "11.1.6",
     "11.1.5"
   ],
+  "cel": "alle",
   "titel": "120 artikelen van 'Redactie': laat Claude een auteursplan maken",
   "intro": "Een vergelijkingssite voor zorgverzekeringen heeft 120 artikelen over vergoedingen. Bij allemaal staat 'Redactie' als auteur. In werkelijkheid zijn ze geschreven door twee freelance journalisten en nagekeken door een gecertificeerde zorgadviseur. De marketingmanager stelt voor om bij elk artikel een bedachte 'expert' met een stockfoto te zetten, 'want dat oogt betrouwbaarder'.",
   "opdracht": {

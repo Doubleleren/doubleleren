@@ -1,0 +1,43 @@
+{
+  "id": "20261127-ttfb-partnerlinks-geen-cache",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Time to First Byte (TTFB): een parameter in de URL omzeilt de paginacache",
+  "matrix": ["5.2.11", "5.2.10"],
+  "cel": "leadgen",
+  "titel": "Via de vergelijkingssite 1,6 seconde TTFB, via Google 0,2 seconde",
+  "intro": "Een energieadviesbureau op WordPress met WP Rocket krijgt veel aanvragen via een vergelijkingssite. Die linkt naar de dienstpagina's met ?partner=vergelijker&utm_source=vergelijker. In de eigen snelheidsmeting hebben die bezoekers een TTFB van 1,6 seconde. Wie via Google of een advertentie met gclid binnenkomt, heeft 0,2 seconde. Het is dezelfde pagina, en bijna alle bezoekers komen uit Nederland.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke verklaring?",
+    "opties": [
+      "De parameter partner staat niet op de negeerlijst van de cache, dus de server bouwt elke pagina opnieuw op.",
+      "De bezoekers van de vergelijkingssite wonen verder van de server, dus hun verzoeken reizen langer heen en weer.",
+      "De utm_source in de link zet de paginacache uit, dus ook alle campagnes met utm-codes zijn net zo traag.",
+      "De vergelijkingssite opent de pagina in een eigen iframe, dus de browser haalt eerst die hele site op."
+    ],
+    "juist": 0
+  },
+  "kern": "WP Rocket bewaart geen pagina's met onbekende parameters. Eén onbekende parameter, en de server bouwt de pagina voor elke bezoeker opnieuw.",
+  "afleiders": [
+    "",
+    "**Verder van de server:** afstand kan de TTFB verhogen. Maar deze bezoekers komen net als de rest uit Nederland, en het verschil is acht keer zo groot.",
+    "**utm_source:** utm-codes staan juist op de lijst die WP Rocket negeert, net als gclid. Die bezoekers krijgen gewoon de bewaarde pagina.",
+    "**Iframe:** dan zou de pagina binnen een andere site laden. Maar de vergelijkingssite linkt gewoon door naar de pagina van de klant."
+  ],
+  "kort": "Denk aan een bakker die 's ochtends broden vooruit bakt. Vraag je om een gewoon brood, dan krijg je er meteen een van de plank. Vraag je om een brood 'voor de partner', dan bakt hij een nieuw, want dat ligt niet op de plank. Een paginacache werkt net zo. Een onbekend stukje in de URL betekent opnieuw bakken, en dat kost tijd voordat de eerste byte vertrekt.",
+  "begrippen": [
+    { "term": "TTFB (Time to First Byte)", "uitleg": "de tijd tussen het opvragen van een pagina en het moment dat het eerste stukje antwoord binnenkomt." },
+    { "term": "Paginacache", "uitleg": "een opgeslagen, kant-en-klare versie van een pagina, zodat de server hem niet elke keer opnieuw hoeft te bouwen." },
+    { "term": "Parameter", "uitleg": "het stuk na het vraagteken in een URL, zoals ?partner=vergelijker." },
+    { "term": "Negeerlijst", "uitleg": "de lijst met parameters waarbij WP Rocket gewoon de bewaarde pagina geeft, zoals utm-codes en gclid." }
+  ],
+  "uitleg": "**Hoe WP Rocket met parameters omgaat**\n- Pagina's met een parameter in de URL worden standaard niet gecachet.\n- Uitzondering: parameters op de negeerlijst. Dan krijgt de bezoeker gewoon de gecachete pagina. Op die lijst staan onder meer de utm-codes, gclid, fbclid en msclkid.\n- Staat er naast zo'n parameter ook een onbekende in de URL, dan wordt de pagina niet gecachet. Alle parameters moeten op de lijst staan.\n\n**Wat je doet**\n- Laat de developer de partnerparameter aan de negeerlijst toevoegen. WP Rocket heeft daar een handleiding voor.\n- Doe dat alleen als de parameter de inhoud niet verandert. Toont de pagina per partner iets anders, dan hoort elke waarde een eigen cachebestand te krijgen.\n- Of vraag de partner om alleen utm-codes te gebruiken.\n\n**Controleren**\nVergelijk de wachttijd van de URL met en zonder de parameter, bijvoorbeeld in de Network-tab van DevTools. Gebruikt een klant een andere cacheplugin of een CDN, kijk dan in die documentatie hoe parameters worden behandeld.",
+  "kernpunt": "Is een pagina alleen traag via bepaalde links, vergelijk dan de URL met en zonder parameters. Vaak zit het verschil in de cache.",
+  "toepassing": "Open vandaag één dienstpagina van een klant twee keer in DevTools: zonder parameter en met ?test=1. Vergelijk in de Network-tab de wachttijd tot de eerste byte.",
+  "bron": {
+    "titel": "Caching query strings | WP Rocket",
+    "url": "https://wp-rocket.me/docs/caching-query-strings/"
+  }
+}

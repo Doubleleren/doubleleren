@@ -7,6 +7,7 @@
   "matrix": [
     "3.2.4"
   ],
+  "cel": "leadgen",
   "titel": "Klikken op 'Download brochure' meten: tag, trigger en event",
   "volgorde": "uitleg-eerst",
   "intro": "Een B2B-klant wil weten hoeveel bezoekers de productbrochure (pdf) downloaden via de knop 'Download brochure'. GA4 staat al via Google Tag Manager op de site.",

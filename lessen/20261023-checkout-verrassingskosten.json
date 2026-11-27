@@ -7,6 +7,7 @@
   "matrix": [
     "7.1.1"
   ],
+  "cel": "ecom",
   "titel": "62% haakt af bij 'Verzending': waar ligt dat aan?",
   "intro": "Een webshop in tuinmeubelen ziet in een GA4-funnel dat 62% van de bezoekers die de checkout starten, afhaakt op de stap 'Verzending'. Daar worden de bezorgkosten berekend: € 49 voor grote meubels. Op productpagina's en in het winkelmandje staat 'Bezorging: berekend bij afrekenen'. Mobiel en desktop laten hetzelfde beeld zien.",
   "opdracht": {

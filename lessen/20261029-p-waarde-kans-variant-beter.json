@@ -8,6 +8,7 @@
     "7.2.2",
     "7.2.1"
   ],
+  "cel": "ecom",
   "titel": "p = 0,03, dus '97% kans dat B beter is'? Lees het testresultaat goed",
   "intro": "Een A/B-test op een productpagina is afgerond. De testtool meldt voor variant B: conversie +3,1% ten opzichte van A, p = 0,03. De accountmanager schrijft in het klantrapport: 'Er is 97% kans dat variant B beter is.'",
   "opdracht": {

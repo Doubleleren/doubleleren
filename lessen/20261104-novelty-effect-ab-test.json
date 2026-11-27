@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Nieuwigheidseffect (novelty effect) in A/B-tests",
   "matrix": ["7.2.2", "7.2.1"],
+  "cel": "ecom",
   "titel": "+25%, +19%, +12%, +8%, +6%: uitrollen na vijf dagen?",
   "intro": "Een webshop test een nieuw ontwerp voor de productpagina. Na vijf dagen staat de variant op +14% add-to-cart, en de testtool noemt dat significant. Per dag was het verschil: +25%, +19%, +12%, +8% en +6%. Zo'n 70% van de bezoekers komt vaker terug. De klant wil vandaag stoppen en het nieuwe ontwerp uitrollen.",
   "opdracht": {

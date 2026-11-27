@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Het Core Web Vitals-rapport: waarom een fix niet meteen groen wordt",
   "matrix": ["5.2.2", "5.2.1"],
+  "cel": "ecom",
   "titel": "LCP-fix maandag live, woensdag nog steeds rood in Search Console",
   "intro": "De developer van een webshop heeft maandag de hero-afbeelding op productpagina's sneller gemaakt. PageSpeed Insights meet in de labtest nu een LCP van 1,9 seconde. Woensdag belt de klant: in Search Console staat de groep productpagina's nog steeds op 'Slecht' voor LCP. 'Werkt de fix dan niet?'",
   "opdracht": {

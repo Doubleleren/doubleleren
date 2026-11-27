@@ -8,6 +8,7 @@
     "5.2.4",
     "5.2.5"
   ],
+  "cel": "alle",
   "titel": "Welke Core Web Vital meet hoe snel je site reageert?",
   "intro": "Een klant zegt: \"Onze pagina laadt in 1,2 seconde, dus Core Web Vitals zijn prima.\" Klopt dat?",
   "opdracht": {

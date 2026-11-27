@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Orphan pages: pagina's die wel in de sitemap staan, maar niet in de crawl",
   "matrix": ["1.2.1", "1.2.6"],
+  "cel": "alle",
   "titel": "120 cursussen in de sitemap, 85 in de crawl: waar zijn de rest?",
   "intro": "Een opleidingsinstituut heeft 120 cursuspagina's in de XML-sitemap. Een crawl met Screaming Frog, gestart op de homepage, vindt er maar 85. De andere 35 geven gewoon een 200 (de pagina werkt) en krijgen ook vertoningen in Search Console.",
   "opdracht": {

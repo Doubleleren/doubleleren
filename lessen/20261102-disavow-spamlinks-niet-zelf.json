@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Linkspam na Penguin: wanneer disavow je links (en meestal niet)?",
   "matrix": ["10.1.2"],
+  "cel": "alle",
   "titel": "400 casinolinks uit het niets: vandaag nog een disavow-bestand?",
   "intro": "Een klant ziet in Ahrefs opeens 400 nieuwe backlinks van onbekende buitenlandse sites vol casinoteksten. Hij heeft er zelf niets voor gedaan en nooit links gekocht of laten plaatsen. Rankings en verkeer zijn stabiel, en in Search Console staat geen handmatige actie. Hij wil 'voor de zekerheid' vandaag een disavow-bestand indienen.",
   "opdracht": {

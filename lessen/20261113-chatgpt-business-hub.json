@@ -5,6 +5,7 @@
   "vakgebied": "SEO / AI-search",
   "onderwerp": "Businesses in ChatGPT: wat een geclaimd profiel wel en niet oplevert",
   "matrix": ["12.1.6", "12.1.3"],
+  "cel": "ecom",
   "titel": "Een eigen profiel in ChatGPT: koop je daarmee aanbevelingen?",
   "intro": "Sinds 10 november test OpenAI 'Businesses in ChatGPT' (bèta). Via Business Hub kan een bedrijf een profiel in ChatGPT claimen. Een klant met een webshop in tuinmeubelen vraagt of jullie dat meteen moeten regelen. De marketingmanager hoopt dat ChatGPT de shop dan vaker aanraadt bij vragen als 'welke loungeset is weerbestendig?'.",
   "opdracht": {

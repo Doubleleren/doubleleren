@@ -7,6 +7,7 @@
   "matrix": [
     "5.1.1"
   ],
+  "cel": "alle",
   "titel": "Maandag naar een nieuwe hoster, dezelfde dag de oude opzeggen?",
   "intro": "Een webshop verhuist volgende week maandag naar een nieuwe hostingpartij. Domein en URL's blijven precies hetzelfde. Het plan van de developer: maandagochtend de DNS-records omzetten naar het nieuwe IP-adres en het oude hostingpakket dezelfde middag opzeggen, 'want dan betalen we niet dubbel'.",
   "opdracht": {

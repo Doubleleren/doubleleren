@@ -1,0 +1,43 @@
+{
+  "id": "20261126-plugin-onbekende-marketplace-eerst-lezen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een plugin installeren: eerst kijken wat erin zit",
+  "matrix": ["coderen-met-ai:4.5.3"],
+  "cel": "ecom",
+  "titel": "Een plugin die productfeeds 'optimaliseert': meteen installeren?",
+  "intro": "Een collega vond op GitHub een plugin die Shopify-productfeeds 'automatisch optimaliseert'. Hij staat in een marketplace van een onbekende ontwikkelaar. Volgens de beschrijving zitten er een skill, twee hooks en een MCP-server in. Je collega wil hem vandaag voor het hele team installeren.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je eerst?",
+    "opties": [
+      "Gewoon installeren, want plugins in een marketplace zijn door Anthropic gecontroleerd voordat ze erin mogen staan.",
+      "Installeren met deny-regels aan, want je permissieregels houden ook tegen wat de hooks van de plugin uitvoeren.",
+      "Installeren op projectniveau, want dan kan de plugin alleen bij die repository en niet bij de rest van je computer.",
+      "Eerst in /plugin bekijken wat hij installeert en de hooks lezen, want een plugin draait code met jouw rechten."
+    ],
+    "juist": 3
+  },
+  "kern": "Een plugin kan code draaien met dezelfde rechten als jij. Kijk daarom eerst wat erin zit, vooral wat de hooks en servers uitvoeren.",
+  "afleiders": [
+    "**Door Anthropic gecontroleerd:** een marketplace oogt als een winkel met een keurmerk. Maar het is een catalogus. Anthropic controleert niet wat er in de plugins van anderen zit.",
+    "**Deny-regels:** die gelden voor wat Claude zelf doet. Maar hooks en MCP-servers van een plugin draaien buiten die regels, met jouw volledige rechten.",
+    "**Projectniveau:** dat bepaalt voor wie de plugin aanstaat, niet wat hij mag. Een hook draait nog steeds met jouw rechten en kan overal bij waar jij bij kunt.",
+    ""
+  ],
+  "kort": "Vergelijk het met een schoonmaker die een sleutel van je huis krijgt. Een kennis raadt hem aan, maar je kent hem zelf niet. Dan kijk je eerst wie het is en wat hij precies gaat doen. Een plugin krijgt ook een sleutel: hij werkt met jouw rechten op jouw computer.",
+  "begrippen": [
+    { "term": "Plugin", "uitleg": "een pakket met bijvoorbeeld skills, subagents, hooks of MCP-servers dat je in één keer installeert." },
+    { "term": "Marketplace", "uitleg": "een catalogus die plugins opsomt en zegt waar je ze ophaalt. Iedereen kan er een maken." },
+    { "term": "Hook", "uitleg": "een commando dat Claude Code automatisch draait op een vast moment, bijvoorbeeld na elke bewerking." },
+    { "term": "MCP-server", "uitleg": "een koppeling die Claude extra tools geeft, bijvoorbeeld voor Shopify of Search Console." }
+  ],
+  "uitleg": "**Wat de documentatie zegt:** een plugin kan willekeurige code uitvoeren op je computer, met jouw gebruikersrechten. Permissieregels en de sandbox gelden voor wat Claude doet. Ze gelden niet voor code die de plugin zelf draait, zoals hooks en MCP-servers.\n\n**Zo controleer je een plugin:**\n- typ /plugin en open de plugin: onder *Will install* zie je de commands, skills, hooks en servers;\n- lees in de bron hooks/hooks.json (wat elke hook draait), .mcp.json (welke server of URL) en alles in de map bin/;\n- kijk met claude plugin marketplace list waar de marketplace vandaan komt.\n\n**Let op updates:** staat automatisch bijwerken aan, dan kan de plugin later veranderen. Wat jij las, is dan niet meer wat er draait.\n\n**Herken de bron:** de eigen marketplaces van Anthropic hebben vaste namen, zoals claude-plugins-official. Een marketplace van een collega of een onbekende is altijd van derden.",
+  "kernpunt": "Installeer geen plugin die je niet hebt bekeken. Hij krijgt dezelfde sleutels als jij.",
+  "toepassing": "Typ vandaag /plugin in Claude Code en open het tabblad met geïnstalleerde plugins. Kijk bij één plugin wat hij installeert, en zet uit wat je niet gebruikt.",
+  "bron": {
+    "titel": "Plugin security and trust | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/plugins/security"
+  }
+}

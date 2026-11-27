@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GTM-beheer: gebruikersrechten per container",
   "matrix": ["3.2.1"],
+  "cel": "alle",
   "titel": "De freelancer bouwt de tags, een collega zet ze live",
   "intro": "Een bureau laat een freelancer nieuwe tags bouwen in Google Tag Manager voor een klant. De afspraak: de freelancer bouwt de tags, en een vaste collega controleert alles en zet het live. Jij moet de freelancer nu toegang geven tot de container van de klant.",
   "opdracht": {

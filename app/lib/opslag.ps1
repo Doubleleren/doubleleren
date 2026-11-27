@@ -39,12 +39,12 @@ function Get-DlToken($O, [switch]$Vernieuw) {
     $O.token
 }
 
-function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body, [switch]$Opnieuw) {
+function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body, [string]$Api = 'contents', [switch]$Opnieuw) {
     $kop = @{ 'User-Agent' = 'DoubleLeren'; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' }
     $tk = Get-DlToken $O -Vernieuw:$Opnieuw
     if ($tk) { $kop.Authorization = "Bearer $tk" }
-    $url = "https://api.github.com/repos/$($O.eigenaar)/$($O.repo)/contents/$Pad"
-    if ($Methode -eq 'GET') { $url += "?ref=$($O.tak)&t=$([DateTime]::UtcNow.Ticks)" }   # eigen adres per keer: een bedrijfsproxy geeft anders een verouderde versie
+    $url = "https://api.github.com/repos/$($O.eigenaar)/$($O.repo)/$Api/$Pad"
+    if ($Methode -eq 'GET') { $url += "?$(if ($Api -eq 'contents') { "ref=$($O.tak)&" })t=$([DateTime]::UtcNow.Ticks)" }   # eigen adres per keer: een bedrijfsproxy geeft anders een verouderde versie
     $p = @{ Uri = $url; Method = $Methode; Headers = $kop; UseBasicParsing = $true; TimeoutSec = 30 }
     if ($Body) { $p.Body = $script:DlUtf8.GetBytes(($Body | ConvertTo-Json -Depth 5 -Compress)); $p.ContentType = 'application/json' }
     # Lezen bij een storing van GitHub (5xx, rate limit 429 of geen verbinding) twee keer opnieuw proberen; schrijven niet (kan al gelukt zijn)
@@ -54,7 +54,7 @@ function Invoke-DlGitHub($O, [string]$Methode, [string]$Pad, $Body, [switch]$Opn
             $status = 0; try { $status = [int]$_.Exception.Response.StatusCode } catch {}
             if ($status -eq 404) { return $null }
             # Token van de portier verlopen of ingetrokken: één keer een nieuw vragen en opnieuw proberen
-            if ($status -eq 401 -and $O.portier -and -not $Opnieuw) { return (Invoke-DlGitHub $O $Methode $Pad $Body -Opnieuw) }
+            if ($status -eq 401 -and $O.portier -and -not $Opnieuw) { return (Invoke-DlGitHub $O $Methode $Pad $Body $Api -Opnieuw) }
             if ($status -eq 409 -or $status -eq 422) { throw 'conflict' }
             if ($Methode -eq 'GET' -and ($status -ge 500 -or $status -eq 0 -or $status -eq 429) -and $poging -lt 2) { Start-Sleep -Milliseconds (700 * [math]::Pow(3, $poging)); $p.Uri = $url -replace 't=\d+$', "t=$([DateTime]::UtcNow.Ticks)"; continue }
             throw "GitHub ($Methode $Pad): $status $($_.Exception.Message)"
@@ -85,7 +85,11 @@ function Read-DlOpslag($O, [string]$Pad) {
     $r = Invoke-DlGitHub $O 'GET' $Pad
     if (-not $r) { return $null }
     if ($r -is [array]) { throw "$Pad is een map" }
-    @{ bytes = [Convert]::FromBase64String(($r.content -replace '\s', '')); sha = $r.sha }
+    $b = [Convert]::FromBase64String(($r.content -replace '\s', ''))
+    # De contents-API houdt sommige versleutelde bestanden voor UTF-16-tekst en levert ze omgezet naar UTF-8 (andere
+    # bytes, 'Geen DL1-bestand'). Klopt de lengte niet, dan opnieuw via de git-blob-API: die geeft altijd de echte bytes.
+    if ($b.Length -ne [int]$r.size) { $b = [Convert]::FromBase64String(((Invoke-DlGitHub $O 'GET' "$($r.sha)" -Api 'git/blobs').content -replace '\s', '')) }
+    @{ bytes = $b; sha = $r.sha }
 }
 
 function Write-DlOpslag($O, [string]$Pad, [byte[]]$Bytes, [string]$Sha) {

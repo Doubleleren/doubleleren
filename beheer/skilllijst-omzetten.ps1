@@ -3,6 +3,9 @@
 #   beheer\skilllijst-omzetten.ps1 -Xlsx ... -Vak cro -Toon                              alleen laten zien, niets schrijven
 # Opzet sheet: rij 1 = kop; A = hoofdgebied, B = onderwerp, C = vaardigheid met een streepje ervoor ("- met GA4"),
 # of zonder streepje een inleidende zin (wordt de context van de vaardigheden eronder). Scores in de sheet doen niet mee.
+# Kolommen na J met de kop Niveau, Wat je concreet kunt, Bewijs, Ontwikkelactie, Uitleg of Toelichting worden de uitleg
+# bij die vaardigheid (csv-kolom uitleg; niet notitie, want een notitie betekent "verouderd").
+# Meer tabbladen (uitleg, een blad per persoon, zoals bij SEA) mag: een blad met vaardigheden telt, bij meer de meeste scores, anders het eerste (zie Read-DlXlsx).
 # Id's: hoofdgebied.onderwerp.vaardigheid (1.2.3), op volgorde. Bestaat de csv al, dan blijven notities bij dezelfde
 # vaardigheid staan; let op dat id's verschuiven als je in het midden iets toevoegt (oude scores en lessen verwijzen naar id's).
 param([Parameter(Mandatory)][string]$Xlsx, [Parameter(Mandatory)][string]$Vak, [switch]$Toon)
@@ -20,6 +23,10 @@ if (Test-Path $uit) { foreach ($r in Import-Csv $uit -Delimiter ';' -Encoding UT
 
 $schoon = { param($t) ((Repair-DlTekst "$t") -replace ';', ',' -replace '\s+', ' ').Trim() }
 $rijen = Read-DlXlsx (Resolve-Path $Xlsx).Path
+# Uitlegkolommen (na J, zoals bij CRO): kop Niveau, Wat je concreet kunt, Bewijs, Ontwikkelactie, Uitleg of Toelichting.
+# Per vaardigheid worden ze "Kop: tekst", gescheiden door " | ", in de kolom uitleg (de website toont ze als uitleg).
+$uitlegKol = @($rijen[1].Keys | Where-Object { $_ -notmatch '^[A-J]$' -and "$($rijen[1][$_])" -match '^\s*(niveau|wat je|bewijs|ontwikkel|uitleg|toelichting)' } |
+    Sort-Object { $_.Length }, { $_ })
 $lijst = @(); $hg = ''; $ond = ''; $ctx = ''; $nHg = 0; $nOnd = 0; $nIt = 0; $zonderPlek = 0
 foreach ($r in ($rijen.Keys | Sort-Object)) {
     if ($r -eq 1) { continue }
@@ -35,6 +42,7 @@ foreach ($r in ($rijen.Keys | Sort-Object)) {
     $lijst += [pscustomobject][ordered]@{
         id = "$nHg.$nOnd.$nIt"; hoofdgebied = $hg; onderwerp = $ond; context = $ctx; vaardigheid = $vaardigheid
         notitie = [string]$notities["$(Get-DlSleutelTekst $ond)|$(Get-DlSleutelTekst $vaardigheid)"]
+        uitleg = (@($uitlegKol | Where-Object { $c[$_] } | ForEach-Object { "$(& $schoon $rijen[1][$_]): $(& $schoon $c[$_])" -replace '\s*\|\s*', ' / ' }) -join ' | ')
     }
 }
 if (-not $lijst.Count) { throw 'Geen vaardigheden gevonden. Staan ze in kolom C met een streepje ervoor ("- ...")?' }
@@ -43,10 +51,13 @@ if ($zonderPlek) { Write-Warning "$zonderPlek vaardigheid(en) overgeslagen: geen
 $hgs = @($lijst | Group-Object hoofdgebied)
 Write-Host "$($lijst.Count) vaardigheden in $($hgs.Count) hoofdgebieden, $(@($lijst | Select-Object -Unique onderwerp).Count) onderwerpen:"
 foreach ($g in $hgs) { Write-Host ("  {0,-40} {1,4}" -f $g.Name, $g.Count) }
-if ($Toon) { $lijst | Format-Table id, onderwerp, context, vaardigheid -AutoSize | Out-String -Width 220 | Write-Host; return }
+$metUitleg = [bool]@($lijst | Where-Object uitleg).Count
+if ($metUitleg) { Write-Host "Met uitleg per vaardigheid uit: $(@($uitlegKol | ForEach-Object { $rijen[1][$_] }) -join ', ')" }
+if ($Toon) { $lijst | Format-Table id, onderwerp, context, vaardigheid, uitleg -AutoSize | Out-String -Width 220 | Write-Host; return }
 
 New-Item -ItemType Directory (Split-Path $uit) -Force | Out-Null
-$tekst = (@('id;hoofdgebied;onderwerp;context;vaardigheid;notitie') + @($lijst | ForEach-Object { ($_.id, $_.hoofdgebied, $_.onderwerp, $_.context, $_.vaardigheid, $_.notitie) -join ';' })) -join "`n"
+$velden = @('id', 'hoofdgebied', 'onderwerp', 'context', 'vaardigheid', 'notitie') + @(if ($metUitleg) { 'uitleg' })
+$tekst = (@($velden -join ';') + @($lijst | ForEach-Object { $it = $_; ($velden | ForEach-Object { $it.$_ }) -join ';' })) -join "`n"
 [IO.File]::WriteAllText($uit, $tekst + "`n", (New-Object Text.UTF8Encoding($false)))
 Write-Host "Geschreven: $uit" -ForegroundColor Green
 Write-Host "Daarna: committen op staging, testen in de demo, en een head aanwijzen: beheer\beheer.ps1 -Head lid-xxxxxx -Vak $Vak"

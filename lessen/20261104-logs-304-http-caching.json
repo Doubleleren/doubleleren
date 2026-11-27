@@ -8,6 +8,7 @@
     "1.1.3",
     "5.1.2"
   ],
+  "cel": "alle",
   "titel": "Googlebot haalt elke dag 18.000 artikelen op, terwijl er 300 wijzigen",
   "intro": "Een kennisbank heeft 50.000 artikelen. In de serverlogs zie je dat Googlebot elke dag zo'n 20.000 URL's opvraagt. 90% krijgt een 200 met de volledige HTML. Volgens het CMS wijzigen er maar zo'n 300 artikelen per dag. De server wordt 's ochtends traag. In de responses staan geen ETag- of Last-Modified-headers.",
   "opdracht": {

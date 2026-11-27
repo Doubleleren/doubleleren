@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "GA4: een event als key event markeren",
   "matrix": ["3.1.6", "3.1.4"],
+  "cel": "leadgen",
   "titel": "Het event generate_lead komt binnen, maar het rapport toont geen leads",
   "intro": "Een klant meet in GA4 sinds twee weken het event generate_lead als iemand het offerteformulier verstuurt. In DebugView kwam het netjes binnen, en in het rapport Gebeurtenissen staat het met zo'n 180 keer. Toch mailt de klant: 'In het acquisitierapport zie ik nergens hoeveel leads elk kanaal oplevert.'",
   "opdracht": {

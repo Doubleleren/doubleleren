@@ -8,6 +8,7 @@
     "2.1.8",
     "2.1.10"
   ],
+  "cel": "ecom",
   "titel": "Google toont 'Wintercollectie 2024' terwijl het 2026 is",
   "intro": "Een modewebshop klaagt dat Google bij drie typen pagina's een andere titel toont dan de title-tag:\n\n- categoriepagina's: title 'Wintercollectie 2024 | Merk', H1 'Wintercollectie 2026'\n- 140 merkpagina's met allemaal de title 'Merken | Merk'\n- blogartikelen met drie even grote koppen bovenaan, waarvan geen enkele de H1 is",
   "opdracht": {

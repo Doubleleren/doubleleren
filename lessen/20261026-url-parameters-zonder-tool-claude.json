@@ -8,6 +8,7 @@
     "1.5.6",
     "1.1.8"
   ],
+  "cel": "ecom",
   "titel": "De URL Parameters-tool is weg: laat Claude per parameter beslissen",
   "intro": "In een oud auditsjabloon staat: 'Stel in Search Console bij URL-parameters in welke parameters Google moet negeren.' Die tool kun je nergens meer vinden. Uit een Screaming Frog-crawl van een webshop heb je een export met 18.000 URL's, met parameters als ?kleur=, ?maat=, ?sort=, ?utm_source=, ?sessionid= en ?page=.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "A/B-testtool via Google Tag Manager: flikkering en vertekende tests",
   "matrix": ["3.2.3", "7.2.1"],
+  "cel": "leadgen",
   "titel": "Bezoekers zien eerst de oude hero, en dan pas de variant",
   "intro": "Een installateur test met Optimizely Web Experimentation een nieuwe hero op de homepage. Een marketeer heeft het script van Optimizely via Google Tag Manager geplaatst, als tag die op alle pagina's afgaat. In sessie-opnames zie je dat bezoekers in de variant eerst even de oude hero zien, die daarna verspringt. De variant converteert slechter dan verwacht.",
   "opdracht": {

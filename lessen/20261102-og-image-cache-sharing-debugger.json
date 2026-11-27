@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "OG-tags: een nieuwe deelafbeelding die niet verschijnt",
   "matrix": ["2.1.11"],
+  "cel": "ecom",
   "titel": "Nieuwe Black Friday-afbeelding, maar Facebook toont nog de oude",
   "intro": "Een webwinkel heeft voor de Black Friday-actie een nieuwe deelafbeelding laten maken. De developer heeft het bestand /img/share.jpg op de server overschreven met de nieuwe versie; de og:image-tag is niet veranderd. Wie de actiepagina nu op Facebook deelt, ziet nog steeds de oude afbeelding. De actie start overmorgen.",
   "opdracht": {

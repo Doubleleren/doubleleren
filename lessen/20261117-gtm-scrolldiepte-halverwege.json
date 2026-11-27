@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "Event tracking in GTM: scrolldiepte meten met een eigen trigger",
   "matrix": ["3.2.4", "3.1.6"],
+  "cel": "alle",
   "titel": "'31% leest de helft van het recept': klopt dat?",
   "intro": "Een receptensite wil weten hoeveel bezoekers minstens de helft van een recept lezen. In GA4 staat de verbeterde meting aan, met het standaardevent scroll. De marketeer deelt het aantal scroll-events door het aantal paginaweergaven en zet in het maandrapport: '31% leest minstens de helft'.",
   "opdracht": {

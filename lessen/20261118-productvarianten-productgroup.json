@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Structured data voor productvarianten: ProductGroup en hasVariant",
   "matrix": ["2.2.1", "2.2.9"],
+  "cel": "ecom",
   "titel": "Eén jas, zes kleuren, één URL: hoe zet je de varianten in de markup?",
   "intro": "Een kledingwebshop verkoopt een regenjas in zes kleuren en vier maten. Alles staat op één pagina; een kleur kiezen verandert de URL naar ?kleur=rood, zonder dat de pagina herlaadt. De canonical wijst altijd naar de URL zonder kleur. Nu staat er één Product-blok met de prijs van de goedkoopste variant. Sommige kleuren zijn duurder en soms uitverkocht.",
   "opdracht": {

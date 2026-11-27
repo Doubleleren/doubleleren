@@ -5,6 +5,7 @@
   "vakgebied": "SEO × Claude",
   "onderwerp": "Content maken met Claude zonder verzonnen feiten",
   "matrix": ["2.1.5"],
+  "cel": "leadgen",
   "titel": "'68% van de huiseigenaren bespaart binnen drie jaar': waar komt dat vandaan?",
   "intro": "Je liet Claude een tekst schrijven voor de landingspagina 'warmtepomp laten installeren' van een installateur. Het concept leest goed, maar bevat cijfers als '68% van de huiseigenaren bespaart binnen drie jaar' en een subsidiebedrag. In je prompt zat geen enkele bron. Je hebt wel het productblad van de fabrikant en de subsidiepagina van de overheid als pdf.",
   "opdracht": {

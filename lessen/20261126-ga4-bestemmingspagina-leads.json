@@ -1,0 +1,42 @@
+{
+  "id": "20261126-ga4-bestemmingspagina-leads",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "Analytics",
+  "onderwerp": "GA4: welke pagina's leveren aanvragen op",
+  "matrix": ["3.1.3"],
+  "cel": "leadgen",
+  "titel": "Alle aanvragen staan bij /contact/: leveren de blogs dan niets op?",
+  "intro": "Een B2B-adviesbureau meet offerteaanvragen in GA4 met het key event generate_lead. Het formulier staat alleen op /contact/. Een collega opent het rapport Pagina's en schermen en ziet bijna alle key events bij /contact/. Zijn conclusie: 'De blogs en dienstpagina's leveren geen aanvragen op, daar kan minder tijd in.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Met welk rapport zie je beter welke pagina's de aanvragen binnenhalen?",
+    "opties": [
+      "Bestemmingspagina met generate_lead als key event, omdat dat rapport het event telt bij de eerste pagina van het bezoek.",
+      "Pagina's en schermen gefilterd op /contact/, omdat je dan in de tabel ziet via welke pagina's bezoekers het formulier bereikten.",
+      "Verkeersacquisitie per standaardkanaal, omdat het kanaal van de sessie laat zien welke pagina de aanvraag heeft opgeleverd.",
+      "Pagina's en schermen gesorteerd op weergaven, omdat de pagina's met de meeste weergaven ook de meeste aanvragen opleveren."
+    ],
+    "juist": 0
+  },
+  "kern": "Pagina's en schermen geeft het key event aan de pagina waar het formulier staat. Het rapport Bestemmingspagina kijkt naar de pagina waar het bezoek begon.",
+  "afleiders": [
+    "",
+    "**Filteren op /contact/:** dat lijkt een slimme manier om de weg ernaartoe te zien. Maar dit rapport toont per pagina alleen cijfers van die pagina zelf, niet de vorige pagina. Voor de route heb je een padverkenning nodig.",
+    "**Verkeersacquisitie:** dit rapport zegt waar bezoekers vandaan kwamen, zoals Organic Search of Paid Search. Het zegt niets over op welke pagina ze binnenkwamen.",
+    "**Meeste weergaven:** veel bezoek voelt als veel waarde. Maar een veelgelezen blog kan bezoekers trekken die nooit een offerte vragen. Weergaven en aanvragen moet je naast elkaar zetten, niet gelijkstellen."
+  ],
+  "kort": "Denk aan een doelpunt bij voetbal. Wie alleen naar de scorer kijkt, vergeet wie de aanval opzette. In Pagina's en schermen krijgt de contactpagina alle doelpunten, omdat daar het formulier staat. Het rapport Bestemmingspagina kijkt naar waar de aanval begon: de eerste pagina van het bezoek. Zo zie je of een blog of dienstpagina mensen binnenhaalt die later een aanvraag doen.",
+  "begrippen": [
+    { "term": "Key event", "uitleg": "een actie die je in GA4 als belangrijk hebt gemarkeerd, zoals een verstuurd offerteformulier. Vroeger heette dat een conversie." },
+    { "term": "Bestemmingspagina", "uitleg": "de eerste pagina die iemand in een bezoek (sessie) ziet. In het Engels: landing page." },
+    { "term": "Padverkenning", "uitleg": "een verkenning in GA4 die laat zien welke pagina's mensen na elkaar bekeken." }
+  ],
+  "uitleg": "**Waarom de rapporten verschillen.** In Pagina's en schermen hoort elk event bij de pagina waar het gebeurde. Een formulier dat alleen op /contact/ staat, levert dus altijd key events voor /contact/ op. Het rapport Bestemmingspagina werkt per sessie: de dimensie is de eerste pagina van het bezoek, en alles in dat bezoek telt mee voor die pagina.\n\n**Zo zet je het op:**\n- Ga naar Rapporten > Betrokkenheid > Bestemmingspagina.\n- Kies in de kolom Key events alleen generate_lead.\n- Voeg het percentage sessies met een key event toe als metric (als editor).\n- Voeg als secundaire dimensie Sessiebron/-medium toe om organisch verkeer apart te zien.\n\n**Grenzen.** Ook dit rapport geeft de eer aan één pagina: de eerste. Iemand die eerst een blog leest en een week later via de homepage terugkomt, telt bij de homepage. Wil je de hele route zien, gebruik dan een padverkenning vanaf de bestemmingspagina.",
+  "kernpunt": "Wil je weten welke pagina's aanvragen opleveren, kijk dan waar het bezoek begon, niet waar het formulier staat.",
+  "toepassing": "Open vandaag bij een leadgen-klant het rapport Bestemmingspagina, kies het key event voor aanvragen en noteer de drie pagina's met de meeste aanvragen.",
+  "bron": {
+    "titel": "[GA4] Landing page report | Analytics Help",
+    "url": "https://support.google.com/analytics/answer/12931766"
+  }
+}

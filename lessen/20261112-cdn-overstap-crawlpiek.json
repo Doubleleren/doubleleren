@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Overstap naar een CDN: crawlpiek, koude cache en botbescherming",
   "matrix": ["1.5.4", "5.1.1", "1.1.1"],
+  "cel": "ecom",
   "titel": "Nieuw CDN, en de eigen server bezwijkt onder Googlebot",
   "intro": "Een webshop met 60.000 URL's zet maandagavond een CDN voor de site. Dinsdag ligt de eigen server twee keer kort plat. In de serverlogs zie je dat Googlebot drie keer zoveel verzoeken doet als vorige week. De hostingpartij wil Googlebot 'voorlopig maar even blokkeren'.",
   "opdracht": {

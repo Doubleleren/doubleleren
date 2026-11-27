@@ -8,6 +8,7 @@
     "12.1.2",
     "12.1.4"
   ],
+  "cel": "leadgen",
   "titel": "Een 'GEO-pakket' van € 2.500 per maand: wat adviseer je de klant?",
   "intro": "Een ander bureau biedt je klant een 'GEO-pakket' aan van € 2.500 per maand: een llms.txt-bestand, speciale 'AI-schema-markup' en het herschrijven van alle teksten in vraag-antwoordvorm. De klant wil vaker in AI Overviews staan. Uit je eigen audit weet je dat een deel van de belangrijkste dienstpagina's niet geïndexeerd is door foute canonicals, en dat de blog een nosnippet-tag heeft.",
   "opdracht": {

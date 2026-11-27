@@ -5,6 +5,7 @@
   "vakgebied": "Coderen met AI",
   "onderwerp": "Wat hoort er in CLAUDE.md?",
   "matrix": ["coderen-met-ai:4.1.2", "coderen-met-ai:4.1.1"],
+  "cel": "alle",
   "titel": "Vier ideeën voor de CLAUDE.md, ruimte voor één: welke kies je?",
   "intro": "Een collega maakt een CLAUDE.md voor de rapportagetool van het team. Hij wil het bestand kort houden en heeft vier ideeën voor de eerste regel. Hij vraagt jou welke het meeste oplevert.",
   "opdracht": {

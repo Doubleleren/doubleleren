@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "BERT: waarom kleine woorden in koppen en titles ertoe doen",
   "matrix": ["10.1.4"],
+  "cel": "alle",
   "titel": "'Vliegen Lissabon overstap': stopwoorden schrappen, nog steeds slim?",
   "intro": "Een reisbureau laat koppen en titles schrijven door een copywriter die kleine woorden weglaat, zoals 'naar', 'zonder' en 'met'. Hij noemt dat 'stopwoorden' die Google 'toch negeert'. Zo wordt 'Vliegen naar Lissabon zonder overstap' de kop 'Vliegen Lissabon overstap'. De klant vraagt of dat nog steeds slim is.",
   "opdracht": {

@@ -1,0 +1,42 @@
+{
+  "id": "20261127-claude-code-installeren-welke-versie",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Claude Code installeren: welke versie past bij je start?",
+  "matrix": ["coderen-met-ai:1.2.1"],
+  "cel": "ecom",
+  "titel": "De exports staan op je laptop. Waar begin je met Claude Code?",
+  "intro": "Een collega maakt elke week rapportages voor een webshop in fietsonderdelen. De CSV-exports staan in een map op de laptop. De collega heeft nog nooit een terminal gebruikt en wil met Claude Code aan die bestanden gaan werken. Er is nog niets geïnstalleerd.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Waarmee kan deze collega het best beginnen?",
+    "opties": [
+      "Claude Code op het web via claude.ai/code, want daar hoeft niets te worden geïnstalleerd en ziet het je laptop.",
+      "Eerst de terminalversie installeren, want alleen vanuit de terminal kan Claude Code bij je lokale bestanden.",
+      "De gewone chat op claude.ai gebruiken, want Claude Code is alleen bedoeld voor mensen die kunnen programmeren.",
+      "De desktop-app installeren en het tabblad Code openen, want die werkt gewoon met mappen op je eigen laptop."
+    ],
+    "juist": 3
+  },
+  "kern": "In de desktop-app zit Claude Code al ingebouwd, en hij werkt met de mappen op je laptop. Een terminal heb je er niet voor nodig.",
+  "afleiders": [
+    "**Op het web:** niets installeren klinkt ideaal. Maar een websessie draait in de cloud, op een kopie van een GitHub-repository. Bestanden op je laptop ziet hij niet.",
+    "**Eerst de terminal:** de terminal is de meest complete versie. Maar de desktop-app en de VS Code-extensie werken ook met lokale bestanden. Voor een eerste start is dat een drempel minder.",
+    "**De gewone chat:** die werkt zonder installatie. Maar dan plak je zelf gegevens heen en weer. Claude Code is juist gemaakt om zelf in je bestanden te werken, ook voor wie niet programmeert.",
+    ""
+  ],
+  "kort": "Vergelijk het met een klusser. Je kunt hem in je eigen huis laten werken, of je stuurt een kopie van je plattegrond naar zijn werkplaats. In de werkplaats kan hij niet bij de spullen in je huis. De desktop-app werkt in je eigen huis: op je laptop. De webversie werkt in de werkplaats: in de cloud.",
+  "begrippen": [
+    { "term": "Terminal", "uitleg": "een venster waarin je de computer opdrachten geeft door ze te typen. Op Windows is dat meestal PowerShell." },
+    { "term": "Desktop-app", "uitleg": "het programma Claude voor Mac of Windows. Op het tabblad Code zit Claude Code ingebouwd." },
+    { "term": "Cloud", "uitleg": "computers op afstand van een aanbieder. Wat daar draait, kan niet zomaar bij de bestanden op je laptop." }
+  ],
+  "uitleg": "**De manieren volgens de documentatie:**\n- **Terminal:** de volledigste versie. Je installeert met één commando, op Windows in PowerShell.\n- **VS Code-extensie:** handig als je al in die editor werkt. Je ziet de wijzigingen direct naast de bestanden.\n- **Desktop-app:** downloaden, inloggen en het tabblad Code openen. Claude Code zit erin, je hoeft niets apart te installeren. Je hebt wel een betaald abonnement nodig.\n- **Web (claude.ai/code):** geen installatie. Fijn voor lange taken en voor repositories die je niet lokaal hebt. Het werkt op een verse kopie van een GitHub-repository in de cloud.\n\n**Welke kies je?** Staan je bestanden lokaal en ben je nieuw, begin dan met de desktop-app. Alle versies gebruiken dezelfde CLAUDE.md en instellingen uit je repository, dus je kunt later makkelijk wisselen.",
+  "kernpunt": "Kies de versie die bij je bestanden kan. Staan ze op je laptop, begin dan lokaal: in de desktop-app of in VS Code.",
+  "toepassing": "Bepaal vandaag waar de bestanden staan waarmee je wilt werken: op je laptop of in een GitHub-repository. Installeer de versie die daarbij past en vraag Claude welke bestanden het ziet.",
+  "bron": {
+    "titel": "Overview | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/overview"
+  }
+}

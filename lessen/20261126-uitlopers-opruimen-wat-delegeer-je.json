@@ -1,0 +1,41 @@
+{
+  "id": "20261126-uitlopers-opruimen-wat-delegeer-je",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Delegeren: wat geef je uit handen en welk oordeel houd je zelf",
+  "matrix": ["coderen-met-ai:6.1.1"],
+  "cel": "ecom",
+  "titel": "600 producten al maanden uitverkocht: wat laat je Claude doen?",
+  "intro": "Een webshop in tuinmeubelen heeft 600 producten die al maanden niet op voorraad zijn. De klant wil opruimen. Sommige producten komen volgend voorjaar terug, andere niet meer. Je wilt Claude Code inzetten om dit sneller te doen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe verdeel je het werk tussen jou en Claude?",
+    "opties": [
+      "Claude alles laten doen, ook kiezen welke pagina's offline gaan, want het leest de hele export veel sneller dan jij.",
+      "Alles met de hand doen, want AI maakt fouten met productdata en dan kun je beter niets uit handen geven.",
+      "Claude de lijst met kandidaten laten maken en zelf met de klant kiezen wat terugkomt, want dat staat niet in de data.",
+      "Claude laten kiezen en achteraf in Search Console kijken of het verkeer daalde, want dan zie je of het goed ging."
+    ],
+    "juist": 2
+  },
+  "kern": "Geef Claude het werk dat in de data zit. Houd de keuzes zelf die kennis vragen die alleen jij of de klant heeft.",
+  "afleiders": [
+    "**Alles uit handen:** snelheid lijkt het grootste voordeel. Maar of een product volgend voorjaar terugkomt, staat niet in de export. Claude gaat dan raden.",
+    "**Alles zelf:** voorzichtig klinkt verstandig. Maar 600 regels sorteren is precies waar een agent goed in is. En de keuze houd je dan toch zelf.",
+    "",
+    "**Achteraf controleren:** meten lijkt een goede check. Maar als het verkeer daalt, zijn de pagina's al weg. Dan heb je de keuze uitbesteed en draag je zelf de schade."
+  ],
+  "kort": "Denk aan een verhuizing met een verhuisbedrijf. Zij sjouwen de dozen, snel en zonder klagen. Maar welke spullen meegaan en welke naar de kringloop, beslis jij. Zij weten niet dat die oude stoel van je oma is. Werk uit handen geven aan Claude gaat net zo.",
+  "begrippen": [
+    { "term": "Delegeren", "uitleg": "werk uit handen geven aan een ander, hier een AI-agent, terwijl jij verantwoordelijk blijft voor het resultaat." },
+    { "term": "Export", "uitleg": "een bestand met gegevens uit een systeem, zoals alle producten met hun voorraad en laatste verkoopdatum." }
+  ],
+  "uitleg": "In het 4D-framework van Anthropic is **Delegation** de eerste D: kiezen wat je aan AI geeft en welk oordeel van jou blijft. De cursus deelt dat op in drie vragen:\n\n- **Probleem:** wat moet er eigenlijk gebeuren? Hier: opruimen zonder pagina's kwijt te raken die terugkomen of nog bezoekers trekken.\n- **Hulpmiddel:** wat kan het wel en niet? Claude Code kan de export filteren, combineren met verkeerscijfers en per product een advies geven. Het weet niet wat de inkoper van plan is.\n- **Verdeling:** Claude maakt de lijst met per product de laatste verkoop en het verkeer. Jij en de klant markeren wat terugkomt. Daarna verwerkt Claude die keuzes.\n\nEen handige toets: geef vooral werk uit handen dat je achteraf kunt nakijken. Beslissingen die lastig terug te draaien zijn, neem je zelf.",
+  "kernpunt": "Vraag bij elke stap: staat het antwoord in de data? Zo ja, laat Claude het doen. Zo nee, beslis je zelf.",
+  "toepassing": "Neem vandaag een klus die je aan Claude wilt geven. Schrijf op welke stappen in de data zitten en welke keuze bij jou of de klant blijft.",
+  "bron": {
+    "titel": "AI Fluency for builders | Claude Academy",
+    "url": "https://academy.claude.com/courses/ai-fluency-for-builders"
+  }
+}

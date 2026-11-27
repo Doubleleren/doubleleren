@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Checkout: minder formuliervelden zonder minder gegevens",
   "matrix": ["7.1.1"],
+  "cel": "ecom",
   "titel": "16 velden in de checkout en één sprint developertijd",
   "intro": "Een webshop in tuinmeubelen heeft een checkout met 16 velden: voornaam, tussenvoegsel en achternaam apart, bedrijfsnaam, twee adresregels, een volledig uitgeklapt factuuradres, twee telefoonnummers en een veld voor een kortingscode. In GA4 haakt een groot deel van de bezoekers af op deze stap. De klant heeft één sprint developertijd.",
   "opdracht": {

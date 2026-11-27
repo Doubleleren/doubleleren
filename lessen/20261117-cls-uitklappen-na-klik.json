@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Core Web Vitals: wanneer telt een verschuiving na een klik mee voor CLS?",
   "matrix": ["5.2.6", "5.2.7"],
+  "cel": "ecom",
   "titel": "De knop 'Toon specificaties' weghalen voor een betere CLS?",
   "intro": "Op de productpagina's van een B2B-webshop staat een knop 'Toon specificaties'. Na een klik klapt een tabel open en schuift alles eronder omlaag. De CLS in de velddata is 0,22. Opnames laten zien dat de tabel na de klik pas bij de server wordt opgehaald en na ongeveer 1,5 seconde verschijnt. De developer wil de knop weghalen.",
   "opdracht": {

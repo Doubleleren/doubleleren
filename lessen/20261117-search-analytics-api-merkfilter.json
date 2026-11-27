@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Search Console-API: nieuwe merkindeling (branded/non-branded), multimodaal en filterlijsten (november 2026)",
   "matrix": ["4.1.2", "4.1.1"],
+  "cel": "alle",
   "titel": "Het nieuwe merkfilter in de Search Console-API geeft nul rijen",
   "intro": "Google breidde op 16 november de Search Analytics API van Search Console uit. Je kunt zoekopdrachten nu ook via de API laten indelen in branded en non-branded. Een collega probeert het bij twee klanten. Bij een grote webshop komen er rijen terug. Bij een kleine klant, waarvoor het team alleen een property voor de map /blog/ heeft, komt niets terug: geen branded en geen non-branded rijen.",
   "opdracht": {

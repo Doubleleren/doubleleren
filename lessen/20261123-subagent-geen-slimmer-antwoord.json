@@ -1,0 +1,42 @@
+{
+  "id": "20261123-subagent-geen-slimmer-antwoord",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Wanneer een subagent wel en niet helpt",
+  "matrix": ["coderen-met-ai:4.3.3", "coderen-met-ai:4.3.1"],
+  "cel": "alle",
+  "titel": "'Laat een subagent het overdoen, die snapt het vast beter'",
+  "intro": "Een collega laat Claude Code een regex schrijven die merkzoekwoorden uit een Search Console-export filtert. Het eerste antwoord mist twee schrijfwijzen van het merk: met een spatie en met een tikfout die klanten vaak maken. Hij stelt voor: 'Laat het opnieuw doen door een subagent, die geeft vast een beter antwoord.'",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat klopt er van dat idee?",
+    "opties": [
+      "Het helpt, omdat een subagent een eigen, slimmer model krijgt dat zulke regex-fouten beter herkent.",
+      "Het helpt weinig, omdat een subagent standaard hetzelfde of een kleiner model is, dus niet slimmer.",
+      "Het helpt, omdat een subagent de opdracht opknipt en elk deel apart door Claude laat controleren.",
+      "Het helpt weinig, omdat subagents alleen bestanden mogen lezen en dus zelf geen regex schrijven."
+    ],
+    "juist": 1
+  },
+  "kern": "Een subagent is geen slimmere versie van Claude. Wat hier ontbreekt, is informatie: de schrijfwijzen die alleen jullie kennen.",
+  "afleiders": [
+    "**Slimmer model:** het woord 'agent' klinkt als een specialist. Maar standaard krijgt een subagent hetzelfde of een kleiner model. Je krijgt een extra paar handen, geen beter brein.",
+    "",
+    "**Opknippen en controleren:** dat klinkt grondig. Maar een subagent werkt aan één taak, net als de hoofdsessie. De ontbrekende schrijfwijzen kent hij ook niet.",
+    "**Alleen lezen:** je kúnt een subagent beperken tot lezen, en dat is handig voor een reviewer. Maar dat is een keuze die je zelf maakt. Een subagent kan ook gewoon schrijven."
+  ],
+  "kort": "Stel: je vraagt een collega de weg naar een adres dat hij niet kent. Zijn antwoord klopt niet. Een tweede collega met dezelfde kaart gaat niet ineens de goede route weten. Wat helpt, is het juiste adres geven. Zo werkt het ook hier: geef Claude de schrijfwijzen die het niet kan weten, en een lijstje zoekwoorden om op te testen.",
+  "begrippen": [
+    { "term": "Subagent", "uitleg": "een losse hulpsessie die Claude start voor een deeltaak. Die werkt met een eigen context en geeft alleen het resultaat terug." },
+    { "term": "Regex", "uitleg": "een zoekpatroon dat tekst filtert, bijvoorbeeld alle zoekwoorden waarin de merknaam in een van zijn schrijfwijzen staat." },
+    { "term": "Context", "uitleg": "alles wat Claude op dat moment voor zich heeft: je opdrachten, zijn antwoorden en de bestanden die hij las." }
+  ],
+  "uitleg": "Volgens de best practices van Claude Code levert een subagent standaard hetzelfde model (of een kleiner) op dezelfde taak. Een nieuwe subagent moet bovendien eerst context verzamelen die je gesprek al had. Dan is hij soms zelfs trager, en hij kost extra tokens.\n\n**Wanneer helpt een subagent wel?**\n- onafhankelijke klussen tegelijk laten lopen;\n- lange uitvoer, zoals een grote zoekactie, buiten je hoofdgesprek houden;\n- een reviewer die niet zag hoe de code ontstond;\n- een taak met minder rechten, zoals een reviewer die alleen mag lezen.\n\n**Wat helpt hier dan?** Geef wat Claude niet kan zien: de schrijfwijzen van het merk en een korte lijst zoekwoorden die wel en niet moeten matchen. Laat Claude de regex daartegen testen en de uitkomst tonen.",
+  "kernpunt": "Is een antwoord fout omdat er informatie ontbreekt, geef dan die informatie. Een extra agent kent hem ook niet.",
+  "toepassing": "Schrijf vandaag voor één klant alle schrijfwijzen van de merknaam op, ook tikfouten uit Search Console. Bewaar de lijst bij je opdrachten voor Claude.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

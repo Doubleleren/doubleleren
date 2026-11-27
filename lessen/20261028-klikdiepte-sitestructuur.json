@@ -8,6 +8,7 @@
     "1.2.2",
     "1.1.10"
   ],
+  "cel": "ecom",
   "titel": "Producten op 12 klikken van de homepage: wat helpt echt?",
   "intro": "Klikdiepte (crawl depth) is het aantal klikken dat nodig is om vanaf de homepage bij een pagina te komen. Een webshop heeft 12.000 producten. Categoriepagina's tonen 24 producten en linken alleen naar 'Volgende pagina'. In Screaming Frog zitten de meeste producten op klikdiepte 9 tot 14. Veel ervan staan in Search Console als 'Gevonden, momenteel niet geïndexeerd'.",
   "opdracht": {

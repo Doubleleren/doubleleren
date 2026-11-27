@@ -21,6 +21,8 @@ const REACTIES = { meer: 'Hier wil ik meer over', makkelijk: 'Te makkelijk', 'ni
 const chip = (r) => (RES[r] ? `<span class="chip ${r}"><i></i>${RES[r]}</span>` : '');
 const SIG = { bevestigd: 'Bevestigd', overschat: 'Mogelijk overschat', onderschat: 'Mogelijk onderschat', groeit: 'Groeit' };
 const sigChip = (s) => (SIG[s] ? `<span class="chip ${s}">${SIG[s]}</span>` : '');
+// Uitleg bij een vaardigheid uit de skilllijst (kolom uitleg, delen gescheiden door ' | '), dichtgeklapt
+const skillUitleg = (i) => (i.uitleg ? `<details class="skill-uitleg"><summary>Wat houdt dit in?</summary><ul>${i.uitleg.split(' | ').map((d) => `<li>${esc(d)}</li>`).join('')}</ul></details>` : '');
 const veiligeLink = (u) => { try { const x = new URL(String(u)); return x.protocol === 'https:' && String(u).length <= 500 ? x.href : null; } catch { return null; } };
 const UITNODIGING = /^(lid-[0-9a-f]{6}):([A-Za-z0-9_]{20,255})$/;
 
@@ -104,7 +106,7 @@ function metKopie(ruw) {
       const k = kopie.get(p), sha = shas.get(p);
       if (k && sha && k.sha === sha) return k.b.slice();
       if (offline) { if (paden && !sha) return null; throw new LaadFout('GitHub is even niet bereikbaar en dit bestand is niet bewaard. Probeer het over een paar minuten opnieuw.'); }
-      const b = await ruw.bytes(p); if (b && sha) bewaar(p, sha, b);
+      const b = await ruw.bytes(p, sha); if (b && sha) bewaar(p, sha, b);
       return b;
     },
     // Nieuwste versie en sha ophalen (na een conflict: een andere laptop schreef net)
@@ -152,6 +154,7 @@ function apiBron(eigenaar, repo, token) {
   // Elke leesactie een eigen adres: een bedrijfsproxy (bijv. Cisco Umbrella) negeert 'Vary: Accept' en gaf anders het ruwe
   // bestand terug waar JSON werd verwacht, of een verouderde versie (oude sha → steeds 'conflict')
   const vers = (p, ref = '') => `${url(p)}?${ref}t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`;
+  const blobUrl = (sha) => `https://api.github.com/repos/${eigenaar}/${repo}/git/blobs/${encodeURIComponent(sha)}?t=${Date.now()}${Math.random().toString(36).slice(2, 8)}`;
   // Neutrale commit onder één algemene naam: geen namen, pseudoniemen of lestitels in de geschiedenis
   const wie = { name: 'doubleleren', email: 'sync@doubleleren.invalid' };
   const verstuur = async (methode, p, body) => {
@@ -170,14 +173,17 @@ function apiBron(eigenaar, repo, token) {
       const blobs = (await r.json()).tree.filter((t) => t.type === 'blob');
       return { paden: blobs.map((t) => t.path), shas: new Map(blobs.map((t) => [t.path, t.sha])) };
     },
-    async bytes(p) { return leesBytes(await vraag(vers(p), { cache: 'no-store' }), p); },
+    // Met bekende sha via de git-blob-API: de contents-API houdt sommige versleutelde bestanden voor UTF-16-tekst en
+    // levert ze dan omgezet naar UTF-8 (andere bytes, 'Geen DL1-bestand'); een blob komt altijd byte voor byte terug
+    async bytes(p, sha) { return leesBytes(await vraag(sha ? blobUrl(sha) : vers(p), { cache: 'no-store' }), p); },
     async ververs(p) {
       const r = await vraag(vers(p, 'ref=main&'), { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
       if (r.status === 404) return null;
       if (isStoring(r)) throw new LaadFout(`GitHub is even niet bereikbaar (${p}: ${r.status}). Probeer het over een paar minuten opnieuw.`);
       if (!r.ok) throw new Error(`${p}: ${r.status}`);
       const j = await r.json();
-      return { sha: j.sha, b: K.b64u.dec(String(j.content).replace(/\s/g, '').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')) };
+      const b = K.b64u.dec(String(j.content).replace(/\s/g, '').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+      return { sha: j.sha, b: b.length === j.size ? b : await this.bytes(p, j.sha) };   // omgezet: opnieuw als blob
     },
     async schrijf(p, b, sha) { return (await verstuur('PUT', p, { content: b64(b), ...(sha ? { sha } : {}) })).content.sha; },
     async verwijder(p, sha) { await verstuur('DELETE', p, { sha }); }
@@ -664,7 +670,7 @@ function toonSkilllijst() {
     const nuG = gem(its.map((i) => laatste(i.scores)?.s)), startG = gem(its.map((i) => eerste(i.scores)));
     return `<details class="mx"><summary><span class="mx-naam"><i class="pijl"></i>${esc(o)}</span><span class="balk" data-tip="${esc(`${o}: ${komma(nuG)}${maanden.length > 1 ? ` (eerste meting ${komma(startG)})` : ''}`)}"><i style="width:${((nuG / 5) * 100).toFixed(1)}%"></i>${maanden.length > 1 ? `<b style="left:calc(${((startG / 5) * 100).toFixed(1)}% - 1px)"></b>` : ''}</span><span class="mx-score num">${komma(nuG)}</span></summary><div class="mx-items">${its.map((i) => {
       const hist = Object.keys(i.scores).sort().map((m) => Number(i.scores[m])).join(' → '); const bi = b.get(i.id);
-      return `<div class="mx-item"><span class="id num">${esc(i.nr || i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
+      return `<div class="mx-item"><span class="id num">${esc(i.nr || i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}${skillUitleg(i)}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
     }).join('')}</div></details>`;
   }).join('')}</div>`).join('');
   $('matrix').innerHTML = nogDoen + (klaar.length > 1
@@ -697,7 +703,7 @@ function toonSkillFormulier(vak, modus) {
     let context = '';
     const rijen = its.map((i) => {
       const kop = i.context && i.context !== context ? `<div class="mx-context">${esc(i.context)}</div>` : ''; context = i.context;
-      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.nr || i.id)}</span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" value="${nuScore(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
+      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.nr || i.id)}</span><span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label>${skillUitleg(i)}</span><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" value="${nuScore(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
     }).join('');
     return `<div class="mx-onderwerp"><h4>${esc(o)}</h4>${rijen}</div>`;
   }).join('')}</div>`).join('');
@@ -772,7 +778,7 @@ async function uploadSkilllijst() {
   const vak = S.formVak; $('mx-xlsx-info').textContent = 'Skilllijst lezen…';
   try {
     const { leesXlsx, importeerSkilllijst } = await import('./xlsx.js');
-    const res = importeerSkilllijst(await leesXlsx(f), new Map(itemsVan(null, vak).map((i) => [i.id, i])), S.inst.vakgebied);
+    const res = importeerSkilllijst(await leesXlsx(f, S.org.leden[S.mij]?.naam), new Map(itemsVan(null, vak).map((i) => [i.id, i])), S.inst.vakgebied);
     if (!res.gekoppeld) throw new Error(`Geen vaardigheden met een score (1–5) gevonden. Is dit je skilllijst${meerVakken() ? ` van ${vakNaam(vak)}` : ''}?`);
     $('mx-xlsx-info').textContent = 'Opslaan…';
     await bewaarScores(res.matrix.scores, `Opgeslagen uit je Excel: ${res.gekoppeld} van ${res.totaal} vaardigheden${meerVakken() ? ` voor ${vakNaam(vak)}` : ''}.`);
@@ -1358,7 +1364,7 @@ async function welkomLeesXlsx() {
   $('w-xlsx-info').textContent = 'Skilllijst lezen…';
   try {
     const { leesXlsx, importeerSkilllijst } = await import('./xlsx.js');
-    const res = importeerSkilllijst(await leesXlsx(f), new Map(welkomItems().map((i) => [i.id, i])), S.inst.vakgebied);
+    const res = importeerSkilllijst(await leesXlsx(f, $('w-naam').value.trim() || W.naam), new Map(welkomItems().map((i) => [i.id, i])), S.inst.vakgebied);
     if (!res.gekoppeld) throw new Error('Geen vaardigheden met een score (1–5) gevonden. Is dit de skilllijst?');
     W.matrix = res.matrix;
     $('w-xlsx-info').textContent = `${res.gekoppeld} van ${res.totaal} vaardigheden herkend.` + (res.nietGevonden.length ? ` ${res.nietGevonden.length} regel(s) op volgorde gekoppeld.` : '');
@@ -1604,12 +1610,16 @@ function lesAfronding() {
   h += gewoneTaal(les) + tekstHtml(les.toelichting) + afleidersHtml(les, L.keuze) + begrippenHtml(les);
   if (!L.uitlegGetoond) h += uitlegHtml(les);
   h += kader(les.kernpunt, 'onthoud', 'Onthoud') + kader(les.toepassing, 'probeer', 'Probeer vandaag') + bronHtml(les.bron) + videoHtml(les.video);
+  // Hoe ging het, reactie en feedback in een eigen kaart vlak boven Afronden, zodat je ziet dat het kan (zelfde opbouw als de pop-up)
+  h += '<div class="reactie-kaart">';
   if (o.soort !== 'meerkeuze') {
-    h += lesLabel('Hoe ging het?') + `<div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
+    h += `<b>Hoe ging het?</b><span class="sub">Kies er één om af te ronden.</span><div class="zelf" role="radiogroup">${[['goed', 'Wist ik goed'], ['deels', 'Deels'], ['fout', 'Wist ik niet']].map(([w, t]) => `<button type="button" class="knop" data-zelf="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
   }
-  h += lesLabel('Wat vind je ervan? (optioneel)') + `<div class="zelf" role="group" aria-label="Reactie op deze les">${Object.entries(REACTIES).map(([w, t]) => `<button type="button" class="knop" data-reactie="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`;
+  h += `<b>Wat vind je van deze les?</b><span class="sub">Eén tik is genoeg. Zo kiest de generator je volgende lessen beter.</span>`
+    + `<div class="zelf" role="group" aria-label="Reactie op deze les">${Object.entries(REACTIES).map(([w, t]) => `<button type="button" class="knop" data-reactie="${w}" aria-pressed="false">${t}</button>`).join('')}</div>`
+    + `<p class="sub">Klopt er iets niet, is de vraag onduidelijk of heb je een idee? ${knop('feedback-les', 'Geef feedback over deze les')}</p></div>`;
   $('les-inhoud').innerHTML = h;
-  $('les-knoppen').innerHTML = knop('afronden', 'Afronden', 'zwart') + knop('feedback-les', 'Feedback over deze les');
+  $('les-knoppen').innerHTML = knop('afronden', 'Afronden', 'zwart');
   $('les-knoppen').querySelector('button').disabled = o.soort !== 'meerkeuze';
   $('les-inhoud').scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
@@ -1892,11 +1902,12 @@ function tab(naam, sub) {
   if (naam === 'uitnodigen') toonUitnodigen();
   if (naam === 'scorebord') toonScorebord().catch((e) => { $('sb-tabel').innerHTML = `<tbody><tr><td class="fout">Scorebord laden mislukt: ${esc(e.message)}</td></tr></tbody>`; });
 }
-// Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback of een tab
+// Adresbalk volgen (ook terug/vooruit): #les/<id>, #feedback, #feedback/<les-id> (vanuit de pop-up) of een tab
 function route() {
   let h = ''; try { h = decodeURIComponent(location.hash.slice(1)); } catch { /* kapot adres: standaardtab */ }
   if (h.startsWith('les/') && LES_ID.test(h.slice(4))) { if (NAV.huidig !== 'lesdetail' && NAV.huidig !== 'feedback') NAV.vorige = NAV.huidig; toonLesDetail(h.slice(4)); }
   else if (h === 'feedback') openFeedback();
+  else if (h.startsWith('feedback/') && LES_ID.test(h.slice(9))) openFeedback(h.slice(9));
   else if (h.startsWith('instellingen/')) tab('instellingen', h.slice(13));
   else tab(magTab(h) && !(moetInrichten() && ['vandaag', 'mij', ''].includes(h)) ? h : standaardTab());
 }

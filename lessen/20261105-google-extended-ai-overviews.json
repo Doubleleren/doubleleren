@@ -5,6 +5,7 @@
   "vakgebied": "SEO / AI-search",
   "onderwerp": "Uit AI Overviews blijven: wat werkt wel en wat niet",
   "matrix": ["12.1.1", "12.1.6"],
+  "cel": "alle",
   "titel": "Google-Extended geblokkeerd, toch nog in AI Overviews",
   "intro": "Een receptensite krijgt minder klikken sinds Google bovenaan veel recepten samenvat in AI Overviews (de AI-samenvattingen boven de zoekresultaten). De eigenaar wil niet meer in die samenvattingen staan, maar wel gewoon in de zoekresultaten. De developer heeft daarom in robots.txt gezet:\n\nUser-agent: Google-Extended\nDisallow: /\n\nTwee weken later staan de recepten nog steeds als bron in AI Overviews.",
   "opdracht": {

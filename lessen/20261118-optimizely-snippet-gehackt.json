@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Beveiligingsincident Optimizely Web Experimentation (november 2026)",
   "matrix": ["3.2.3", "7.2.1"],
+  "cel": "ecom",
   "titel": "Kwaadaardige code in het A/B-testscript: wat doe je nu?",
   "intro": "Een webshop test al maanden met Optimizely Web Experimentation. Het script van Optimizely staat op elke pagina. Op 17 november meldt Optimizely dat een aanvaller via een lek kwaadaardige JavaScript in projecten van klanten heeft gezet. Die code is inmiddels weg. De klant mailt: 'Onze beveiligingsregels laten alleen scripts van Optimizely toe. Dan zitten wij toch goed?'",
   "opdracht": {

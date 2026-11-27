@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Checkout: bezorgdatum tonen in plaats van levertijd",
   "matrix": ["7.1.1"],
+  "cel": "ecom",
   "titel": "'3-5 werkdagen' en klanten die een kalender openen",
   "intro": "Een webshop in tuinmeubelen biedt in de checkout drie verzendopties: 'Standaard (3-5 werkdagen)', 'Snel (1-2 werkdagen)' en 'Ophalen'. In sessie-opnames zie je dat bezoekers lang stilstaan bij die keuze. Sommigen openen een ander tabblad met een kalender. Bestellingen na 15:00 gaan pas de volgende werkdag de deur uit.",
   "opdracht": {

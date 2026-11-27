@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Statuscodes: 404, 410, soft 404 en redirects bij verdwenen pagina's",
   "matrix": ["5.1.2"],
+  "cel": "ecom",
   "titel": "1.400 producten uit het assortiment: wat doe je met de oude URL's?",
   "intro": "Een webshop in fietsonderdelen haalt 1.400 producten definitief uit het assortiment. Voor ongeveer 300 ervan is er een directe opvolger, zoals een nieuwer model van hetzelfde onderdeel. Voor de rest is er niets vergelijkbaars. De developer vraagt wat er met de oude URL's moet gebeuren.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "De tool Verwijderingen: alleen de snippet wissen bij je eigen pagina",
   "matrix": ["1.5.2"],
+  "cel": "leadgen",
   "titel": "Privénummer van de pagina gehaald, maar het staat nog in Google",
   "intro": "Een installatiebedrijf had per ongeluk het mobiele nummer van een monteur op de contactpagina gezet. Het nummer is er vanochtend af gehaald. In Google staat het nog in de tekst onder het zoekresultaat van de contactpagina. De klant wil het nummer zo snel mogelijk uit Google, maar de contactpagina moet vindbaar blijven.",
   "opdracht": {

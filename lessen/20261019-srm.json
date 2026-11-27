@@ -8,6 +8,7 @@
     "7.2.1",
     "7.2.2"
   ],
+  "cel": "ecom",
   "titel": "Variant B wint significant: morgen uitrollen?",
   "intro": "Een webshop test een nieuwe productpagina met een 50/50-verdeling. Na drie weken meldt de testtool: 'Variant B wint, 97% significant'. De productowner wil morgen uitrollen. Variant A had 50.000 bezoekers, variant B 48.500.",
   "opdracht": {

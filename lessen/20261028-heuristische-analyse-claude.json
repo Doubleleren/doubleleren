@@ -7,6 +7,7 @@
   "matrix": [
     "7.1.1"
   ],
+  "cel": "leadgen",
   "titel": "Offerteformulier converteert 1,8%: laat Claude een heuristische analyse doen",
   "intro": "Een installateur van warmtepompen krijgt via Google Ads verkeer naar een landingspagina met een offerteformulier van 11 velden. De conversie is 1,8%. Op mobiel staat het formulier pas na drie schermen tekst. Je hebt screenshots (desktop en mobiel), de HTML en de advertentieteksten. Gebruikersonderzoek is er nog niet.",
   "opdracht": {

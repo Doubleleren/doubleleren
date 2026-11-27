@@ -1,0 +1,42 @@
+{
+  "id": "20261125-klaar-melding-bewijs-en-diff",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Werk van de agent controleren: bewijs vragen en de wijzigingen (diff) lezen",
+  "matrix": ["coderen-met-ai:3.3.1", "coderen-met-ai:3.3.4"],
+  "cel": "alle",
+  "titel": "'Klaar, alle tests slagen.' Mag je nu committen?",
+  "intro": "Je liet Claude Code twintig minuten werken aan een script dat Google Ads-kosten koppelt aan landingspagina's. Je was intussen in een overleg en keek niet mee. Als je terugkomt, staat er: 'Klaar. Het script koppelt nu alle kosten en alle tests slagen.' Je wilt de wijziging committen en naar je collega sturen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je eerst?",
+    "opties": [
+      "Meteen committen, want Claude heeft de tests zelf gedraaid en meldt duidelijk dat ze allemaal slagen.",
+      "Claude vragen 'weet je het zeker?', want dan controleert het zijn werk nog een keer extra grondig.",
+      "Om het commando en de uitvoer vragen en de diff lezen, want een samenvatting alleen is geen bewijs.",
+      "Alle tests zelf opnieuw draaien en de diff overslaan, want als de tests slagen, klopt de code ook."
+    ],
+    "juist": 2
+  },
+  "kern": "Een samenvatting zegt wat Claude denkt dat het deed. De uitvoer van de check en de diff laten zien wat er echt gebeurde, en dat telt extra als je niet meekeek.",
+  "afleiders": [
+    "**Meteen committen:** Claude draaide de tests, dus het lijkt geregeld. Maar 'alle tests slagen' zegt niet welke tests, en ook niet of er tests zijn die deze koppeling raken.",
+    "**'Weet je het zeker?':** dat voelt als een extra controle. Maar je krijgt dan weer een samenvatting, geen bewijs. Je weet nog steeds niet wat er draaide.",
+    "",
+    "**Zelf de tests draaien, diff overslaan:** dat is grondig, maar het kost je tijd en je mist iets. Tests vangen alleen wat ze testen. In de diff zie je ook wat Claude veranderde buiten de tests om."
+  ],
+  "kort": "Vergelijk het met een aannemer die belt: 'De badkamer is klaar, alles is gekeurd.' Je betaalt pas als je de foto's van de keuring hebt gezien en zelf even bent gaan kijken. Niet omdat hij liegt, maar omdat 'klaar' voor hem iets anders kan betekenen dan voor jou. Zo werkt het ook met Claude: vraag de uitvoer van de check en kijk zelf naar wat er veranderd is.",
+  "begrippen": [
+    { "term": "Diff", "uitleg": "het overzicht van precies welke regels in welke bestanden zijn toegevoegd, verwijderd of veranderd." },
+    { "term": "Commit", "uitleg": "een opgeslagen momentopname van je wijzigingen in Git, met een korte beschrijving." },
+    { "term": "Uitvoer", "uitleg": "wat een commando op het scherm teruggeeft, zoals welke tests slaagden en welke niet." }
+  ],
+  "uitleg": "**Wat de documentatie aanraadt:** vraag Claude om bewijs: het commando dat draaide en de uitvoer, of een screenshot. 'Alle tests slagen' zegt op zichzelf weinig. De uitvoer lezen is sneller dan de check zelf opnieuw draaien. Bij een sessie waar je niet bij was, is het het enige bewijs dat je hebt.\n\n**De diff lezen:** bekijk vóór je commit welke bestanden zijn aangepast. Let vooral op:\n- bestanden die je niet verwachtte;\n- tests die zijn aangepast of verwijderd om ze te laten slagen;\n- vaste waarden die er eerst niet stonden.\n\n**Hoe minder je meekeek, hoe meer je controleert.** Keek je elke stap mee, dan volstaat een snelle blik. Was je weg, dan lees je de diff echt door.\n\n**Wie heeft het laatste woord:** niet de samenvatting van Claude, maar een mens die de wijziging goedkeurt.",
+  "kernpunt": "Was je er niet bij, vraag dan om de uitvoer van de check en lees de diff voordat je commit.",
+  "toepassing": "Typ vandaag na je volgende klus met Claude Code: 'laat het commando en de uitvoer van je laatste check zien' en open daarna de diff, voordat je commit.",
+  "bron": {
+    "titel": "Best practices for Claude Code | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/best-practices"
+  }
+}

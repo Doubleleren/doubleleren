@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Mobiele UX: te kleine tikdoelen in de winkelmand",
   "matrix": ["7.1.1", "7.1.5"],
+  "cel": "ecom",
   "titel": "Mobiel haakt af in de winkelmand, desktop niet",
   "intro": "Een webshop in diervoeding ziet in GA4 dat mobiele bezoekers veel vaker afhaken in de winkelmand dan desktopbezoekers. In Clarity zie je op mobiel veel snelle, herhaalde tikken rond de aantal-knoppen. De knoppen '+' en '−' zijn 6 bij 6 millimeter en staan direct naast de knop 'Verwijderen'.",
   "opdracht": {

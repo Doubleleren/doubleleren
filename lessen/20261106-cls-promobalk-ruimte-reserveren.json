@@ -5,6 +5,7 @@
   "vakgebied": "SEO",
   "onderwerp": "Core Web Vitals: CLS verbeteren bij een balk die later verschijnt",
   "matrix": ["5.2.7", "5.2.6"],
+  "cel": "ecom",
   "titel": "De promobalk duwt de koopknop weg: hoe los je dat op?",
   "intro": "Een webshop in tuinmeubelen heeft volgens Search Console een CLS van 0,24 op mobiel. CLS (Cumulative Layout Shift) meet hoeveel de inhoud verspringt terwijl je kijkt. Bij het openen van een productpagina verschijnt na een seconde bovenaan een balk met 'Gratis bezorging vanaf € 50'. Productfoto en koopknop schuiven dan een stuk naar beneden. Lighthouse geeft dezelfde pagina een CLS van 0,02.",
   "opdracht": {

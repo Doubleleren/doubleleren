@@ -5,6 +5,7 @@
   "vakgebied": "SEO × Claude",
   "onderwerp": "Article-markup: auteurs en datums goed opgeven",
   "matrix": ["2.2.7"],
+  "cel": "alle",
   "titel": "Twee auteurs in één veld: laat Claude de Article-markup herschrijven",
   "intro": "Een platform over hypotheken publiceert artikelen die vaak door twee mensen zijn geschreven. Boven een artikel staat: 'Door Sanne de Vries, hypotheekadviseur, en Ahmed Bakker'. Het CMS zet in de JSON-LD nu één author met als name: 'Sanne de Vries, hypotheekadviseur en Ahmed Bakker | Hypotheekwijzer'. datePublished staat er als '12-10-2026'.",
   "opdracht": {

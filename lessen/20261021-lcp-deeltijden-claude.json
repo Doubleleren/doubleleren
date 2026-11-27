@@ -8,6 +8,7 @@
     "5.2.3",
     "5.2.2"
   ],
+  "cel": "ecom",
   "titel": "LCP van 4,1 seconde: laat Claude de vier deeltijden ontleden",
   "volgorde": "uitleg-eerst",
   "intro": "De productpagina's van een klant hebben bij echte gebruikers een LCP van 4,1 seconde. Het LCP-element is de hoofdfoto van het product. De developer wil 'alles een beetje sneller maken'. Jij wilt weten wáár de tijd zit.",

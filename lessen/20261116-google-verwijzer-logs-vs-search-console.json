@@ -5,6 +5,7 @@
   "vakgebied": "Analytics",
   "onderwerp": "Google-verkeer herkennen in analytics en serverlogs (nieuwe helppagina van Google)",
   "matrix": ["3.1.2", "4.1.2", "1.1.3"],
+  "cel": "alle",
   "titel": "14.000 Google-bezoeken in de logs, maar 9.000 klikken in Search Console",
   "intro": "Google publiceerde deze maand een nieuwe helppagina over hoe je Google-verkeer herkent in analytics en serverlogs. Een klant telt in zijn serverlogs over oktober alle verzoeken met google.com of google.nl als verwijzer: 14.000. Search Console geeft voor oktober, zoektype Web, 9.000 klikken. De klant vraagt welk getal klopt.",
   "opdracht": {

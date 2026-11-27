@@ -8,6 +8,7 @@
     "7.2.2",
     "7.2.1"
   ],
+  "cel": "ecom",
   "titel": "Geen winnaar, behalve op de iPad: alleen daar uitrollen?",
   "intro": "Een A/B-test op de productpagina van een webshop is na vier weken klaar: geen significant verschil. De analist splitst de resultaten daarna uit in 20 segmenten, zoals apparaat, browser, kanaal en nieuw of terugkerend. In één segment, Safari op iPad, wint de variant met p = 0,04. Het voorstel: de variant alleen voor iPad-gebruikers uitrollen.",
   "opdracht": {

@@ -5,6 +5,7 @@
   "vakgebied": "CRO",
   "onderwerp": "Automatisch wisselende sliders (carrousels) bovenaan de homepage",
   "matrix": ["7.1.1"],
+  "cel": "ecom",
   "titel": "Vijf banners die elke vier seconden wisselen: 'zo krijgt alles een plekje'",
   "intro": "Een fietsenwinkel wil bovenaan de homepage een slider met vijf banners die elke vier seconden automatisch wisselen: de najaarsactie, gratis bezorging, een nieuwe e-bike, de werkplaats en een vacature. 'Zo krijgt alles een plekje bovenaan,' zegt de marketeer. Jij wordt gevraagd om mee te kijken voordat de developer begint.",
   "opdracht": {

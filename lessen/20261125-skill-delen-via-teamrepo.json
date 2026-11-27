@@ -1,0 +1,42 @@
+{
+  "id": "20261125-skill-delen-via-teamrepo",
+  "type": "basis",
+  "niveau": "gevorderd",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een skill delen met het team via de repo",
+  "matrix": ["coderen-met-ai:4.2.3", "coderen-met-ai:4.5.2"],
+  "cel": "alle",
+  "titel": "Je skill werkt goed. Hoe krijgt het hele team hem?",
+  "intro": "Je hebt een skill 'maandrapport' gemaakt in ~/.claude/skills/maandrapport/SKILL.md. Hij zet een Search Console-export om in een vast rapport voor de klant. Drie collega's in je klantteam willen hem ook gebruiken. Jullie werken allemaal in dezelfde repo voor deze klant, en je wilt dat verbeteringen bij iedereen terechtkomen.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je?",
+    "opties": [
+      "Hem in .claude/skills/ van de teamrepo committen en je eigen kopie weghalen, zodat ook jij de teamversie draait.",
+      "De inhoud in CLAUDE.md van de teamrepo plakken, zodat iedereen hem bij elke sessie automatisch meekrijgt.",
+      "De SKILL.md naar elke collega mailen, zodat iedereen hem in zijn eigen ~/.claude/skills zet en kan aanpassen.",
+      "Hem in de teamrepo zetten en je eigen kopie laten staan, zodat jij bij gelijke namen vanzelf de nieuwste krijgt."
+    ],
+    "juist": 0
+  },
+  "kern": "Een skill in .claude/skills/ van de repo krijgt iedereen die in die repo werkt. Je persoonlijke kopie met dezelfde naam zou die teamversie bij jou overschrijven.",
+  "afleiders": [
+    "",
+    "**In CLAUDE.md plakken:** dan heeft iedereen het, dat klopt. Maar CLAUDE.md wordt bij elke taak geladen, ook als je geen rapport maakt. Een skill wordt pas helemaal gelezen als hij nodig is.",
+    "**Mailen:** zo heeft iedereen hem snel. Maar dan heeft straks iedereen een eigen versie. Een verbetering bij de één komt niet bij de ander terecht.",
+    "**Eigen kopie laten staan:** het lijkt onschuldig. Maar bij gelijke namen wint je persoonlijke skill van die in de repo, niet de nieuwste. Jij draait dan nog de oude versie."
+  ],
+  "kort": "Vergelijk het met een recept. Hangt het in de gedeelde keuken, dan kookt iedereen ermee, en past iemand het aan, dan ziet iedereen de nieuwe versie. Een kopie in je eigen la blijft oud. En pak je uit gewoonte je eigen kopie, dan kook jij nog steeds het oude recept, terwijl de rest al verder is. Zo werkt het met skills in de repo en in je eigen map.",
+  "begrippen": [
+    { "term": "Skill", "uitleg": "een opgeslagen werkwijze voor Claude in een SKILL.md-bestand, die Claude gebruikt als een taak erom vraagt of als jij hem start." },
+    { "term": "Repo", "uitleg": "een gedeelde projectmap in Git waarin het team samen bestanden bijhoudt." },
+    { "term": "~/.claude/skills", "uitleg": "je persoonlijke map met skills. Die werken in al jouw projecten op deze computer, maar alleen bij jou." }
+  ],
+  "uitleg": "**Waar een skill kan staan:**\n- **Persoonlijk:** ~/.claude/skills/<naam>/SKILL.md, voor al je eigen projecten op deze computer.\n- **Project:** .claude/skills/<naam>/SKILL.md in de repo. Commit hem, dan krijgt je team hem ook.\n- **Plugin:** voor gebruik over meerdere repo's heen. Je start hem dan als /pluginnaam:skillnaam.\n- **Organisatie:** via beheerde instellingen voor iedereen in de organisatie.\n\n**Bij gelijke namen:** organisatie wint van persoonlijk, en persoonlijk wint van project. Een plugin-skill botst niet, omdat die de pluginnaam ervoor krijgt.\n\n**Waarom niet in CLAUDE.md:** een skill neemt minder ruimte in. Claude ziet alleen de naam en beschrijving, en leest de rest pas als de taak erom vraagt.\n\n**Let op bij skills van anderen:** controleer de allowed-tools van een skill in een repo voordat je daar Claude Code draait.",
+  "kernpunt": "Deel je een skill via de repo, haal dan je persoonlijke kopie met dezelfde naam weg.",
+  "toepassing": "Kijk vandaag in ~/.claude/skills welke skills je hebt. Kies er één die je collega's ook zouden gebruiken en noteer in welke repo hij thuishoort.",
+  "bron": {
+    "titel": "Extend Claude with skills | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/skills"
+  }
+}

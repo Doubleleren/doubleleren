@@ -1,0 +1,43 @@
+{
+  "id": "20261126-fotolijst-al-weken-leeg-na-livegang",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Zorgvuldig zijn: achter je werk staan, ook na de livegang",
+  "matrix": ["coderen-met-ai:6.1.4"],
+  "cel": "ecom",
+  "titel": "De lijst met producten zonder foto is al drie weken leeg",
+  "intro": "Twee maanden geleden bouwde je met Claude een script voor een webshop in keukenspullen. Het maakt elke nacht een lijst van producten zonder foto voor het contentteam. Het werkte goed. Nu blijkt de lijst al drie weken leeg. De klant had de export aangepast, met andere kolomnamen. Niemand had het gemerkt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat had dit het beste voorkomen?",
+    "opties": [
+      "Na de oplevering niets meer aan het script doen, want elke wijziging aan werkende code geeft weer nieuwe kansen op fouten.",
+      "Claude elke maand het script opnieuw laten schrijven, zodat het altijd past bij de nieuwste versie van de export.",
+      "Het contentteam vragen de lijst elke ochtend goed te lezen, zodat zij zien wanneer er iets vreemds in staat.",
+      "Een check laten waarschuwen als de lijst leeg is of een kolom mist, zodat een vaste collega het meteen merkt."
+    ],
+    "juist": 3
+  },
+  "kern": "Je bent verantwoordelijk voor wat je oplevert, ook na de livegang. Zorg dat een fout zichzelf meldt, bij iemand die er iets mee doet.",
+  "afleiders": [
+    "**Niet meer aankomen:** dat voelt veilig. Maar de fout kwam niet uit het script. De export veranderde. Een script dat stilstaat, past zich daar niet op aan.",
+    "**Elke maand opnieuw:** dat lijkt bij te blijven. Maar je merkt nog steeds niet wanneer het misgaat. En elke nieuwe versie moet je opnieuw controleren.",
+    "**Het team laten opletten:** zij kijken er toch elke dag naar. Maar een lege lijst ziet eruit als goed nieuws: alle producten hebben een foto. Niemand slaat dan alarm.",
+    ""
+  ],
+  "kort": "Denk aan een rookmelder. Een stil huis kan betekenen dat er geen brand is. Het kan ook betekenen dat de batterij leeg is. Daarom piept een goede melder als zijn batterij bijna op is. Een goede check doet hetzelfde: hij meldt ook wanneer hij zelf niet meer kan werken.",
+  "begrippen": [
+    { "term": "Livegang", "uitleg": "het moment dat iets echt in gebruik gaat bij de klant." },
+    { "term": "Kolomnaam", "uitleg": "de kop boven een kolom in een export, zoals 'image_url'. Een script zoekt de gegevens vaak op die naam." }
+  ],
+  "uitleg": "**Wat de cursus zegt:** in het 4D-framework gaat **Diligence** (zorgvuldigheid) over eigenaarschap van wat je oplevert. Dat loopt van de vraag of iets moet bestaan tot de vraag of het na de livegang nog goed werkt voor de gebruikers. Je kiest steeds opnieuw: laten draaien, repareren of stoppen. Terugkoppeling en tests zijn je vangnet.\n\n**Een stille fout vangen:**\n- laat het script controleren of de kolommen bestaan die het nodig heeft, en stoppen met een duidelijke fout als ze ontbreken;\n- vergelijk de uitkomst met de vorige keer: van 40 naar 0 in één nacht is verdacht;\n- stuur de melding naar een plek waar iemand kijkt, zoals mail of een teamkanaal, niet alleen naar een logbestand.\n\n**Leg vast wie eigenaar is.** Zet in de README wie het script beheert en wat er moet gebeuren als de melding komt. Dan blijft het werken als jij op vakantie bent.",
+  "kernpunt": "Lever geen script op zonder te weten hoe je merkt dat het stuk is.",
+  "toepassing": "Kies vandaag een script dat voor een klant draait. Bedenk wat er gebeurt als de export verandert, en laat Claude een check toevoegen die dan een duidelijke melding geeft.",
+  "bron": {
+    "titel": "AI Fluency for builders | Claude Academy",
+    "url": "https://academy.claude.com/courses/ai-fluency-for-builders"
+  },
+  "herzien": "2026-11-27",
+  "wijziging": "Opties dezelfde vorm gegeven."
+}
