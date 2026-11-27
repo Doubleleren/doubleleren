@@ -1,0 +1,42 @@
+{
+  "id": "20261127-lightspeed-redirect-standaard-tijdelijk",
+  "type": "verdieping",
+  "niveau": "gevorderd",
+  "vakgebied": "SEO",
+  "onderwerp": "Lightspeed: redirects voor verhuisde dienstpagina's",
+  "matrix": ["5.1.5", "5.1.2"],
+  "cel": "leadgen",
+  "titel": "Drie maanden na de verhuizing toont Google nog de oude dienstpagina's",
+  "intro": "Een installateur van warmtepompen verkoopt onderdelen via Lightspeed eCom, maar de meeste omzet komt uit offerteaanvragen op vier dienstpagina's. Bij een herindeling kregen die pagina's een nieuw adres. Een collega maakte voor elk oud adres een redirect aan onder Settings > Redirects. Drie maanden later toont Google nog steeds de oude adressen. Bezoekers komen wel op de goede pagina uit.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat controleer je eerst in Lightspeed?",
+    "opties": [
+      "Of de vier redirects op permanent staan, want Lightspeed maakt een nieuwe redirect standaard tijdelijk aan.",
+      "Of de robots.txt de oude adressen blokkeert, want Google moet die oude adressen niet meer kunnen bezoeken.",
+      "Of de nieuwe pagina's een noindex hebben, want dan blijft Google de oude adressen in de resultaten tonen.",
+      "Of de doelen als volledige URL zijn ingevuld, want met een half adres komt de redirect niet goed aan."
+    ],
+    "juist": 0
+  },
+  "kern": "Een tijdelijke redirect zegt tegen Google: het oude adres blijft het echte. Daarom blijft dat in de zoekresultaten staan.",
+  "afleiders": [
+    "",
+    "**Oude adressen blokkeren:** dat lijkt opruimen. Maar dan kan Google de redirect niet meer zien, en blijft het oude adres juist langer hangen.",
+    "**Noindex op de nieuwe pagina's:** dat zou een probleem zijn, want dan verdwijnen ze uit Google. Maar het verklaart niet waarom Google het oude adres blijft tonen.",
+    "**Volledige URL als doel:** Lightspeed vraagt daar inderdaad om. Maar bezoekers komen al op de goede pagina uit, dus de doelen kloppen."
+  ],
+  "kort": "Denk aan een briefje op de winkeldeur: 'Wij zitten tijdelijk om de hoek.' Klanten lopen gewoon door, maar in de gids blijft het oude adres staan. Staat er 'Wij zijn verhuisd', dan past de gids het adres aan. Google werkt net zo. Bij een tijdelijke redirect houdt het het oude adres aan, bij een permanente neemt het het nieuwe over.",
+  "begrippen": [
+    { "term": "Redirect", "uitleg": "een automatische doorverwijzing van een oud adres naar een nieuw." },
+    { "term": "Tijdelijke redirect (302)", "uitleg": "een doorverwijzing die zegt: de pagina staat even ergens anders, maar komt terug." },
+    { "term": "Permanente redirect (301)", "uitleg": "een doorverwijzing die zegt: de pagina is voorgoed verhuisd naar dit nieuwe adres." }
+  ],
+  "uitleg": "**Lightspeed eCom (C-Series)**\n- Eigen redirects maak je onder Settings > Website Settings > Redirects. Bij URL vul je het deel na het domein in, bij Target het volledige nieuwe adres.\n- Een nieuwe redirect is **standaard tijdelijk**. Permanent maken doe je door de redirect te openen en de instelling om te zetten.\n- Wijzig je de URL van een **product**, dan maakt Lightspeed zelf een verborgen redirect. De help noemt dat alleen voor producten, dus controleer het bij tekstpagina's altijd zelf.\n- Redirects vanaf een oud platform werken alleen als je hetzelfde domein houdt.\n\n**Wat Google ermee doet**\n- Permanent (301, 308): Google ziet het doel als de canonieke URL en toont het nieuwe adres.\n- Tijdelijk (302): Google toont het oude adres, want de redirect telt dan niet als signaal voor het nieuwe.\n\n**Na het omzetten**\nControleer met een redirectchecker of de statuscode 301 is. Pas interne links en de sitemap aan, en kijk met de URL-inspectie in Search Console welke URL Google als canoniek kiest.",
+  "kernpunt": "Zet je in Lightspeed een redirect voor een verhuisde pagina, zet hem dan meteen op permanent en controleer de statuscode.",
+  "toepassing": "Open vandaag bij één Lightspeed-klant Settings > Redirects. Kijk welke redirects nog tijdelijk staan en noteer welke bij een echte verhuizing horen.",
+  "bron": {
+    "titel": "Setting up redirects | Lightspeed eCom (C-Series) Help Center",
+    "url": "https://ecom-support.lightspeedhq.com/hc/en-us/articles/220319928-Setting-up-redirects"
+  }
+}

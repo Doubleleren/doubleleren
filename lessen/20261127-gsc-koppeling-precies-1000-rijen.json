@@ -1,0 +1,42 @@
+{
+  "id": "20261127-gsc-koppeling-precies-1000-rijen",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een API-koppeling testen: is dit alles?",
+  "matrix": ["coderen-met-ai:7.2.2"],
+  "cel": "ecom",
+  "titel": "De Search Console-koppeling werkt: precies 1.000 pagina's",
+  "intro": "Claude Code heeft voor een webshop met ruim 9.000 productpagina's een script gebouwd. Het haalt via de Search Console API de klikken per pagina van vorige maand op. Het script draait zonder foutmelding. De uitkomst telt precies 1.000 pagina's.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat concludeer je uit deze eerste test?",
+    "opties": [
+      "De koppeling werkt goed, want zonder foutmelding heeft de API alle pagina's met klikken in die maand gegeven.",
+      "Het script haalt waarschijnlijk maar één blok resultaten op, want een rond getal als 1.000 wijst op een limiet.",
+      "De meeste productpagina's kregen geen klikken, want Search Console toont alleen pagina's waar veel op gezocht wordt.",
+      "De API-sleutel heeft te weinig rechten, want met beperkte toegang laat Google maar een deel van de pagina's zien."
+    ],
+    "juist": 1
+  },
+  "kern": "Precies 1.000 rijen is de standaardgrens per verzoek van deze API. Het script moet doorvragen tot er niets meer komt.",
+  "afleiders": [
+    "**Geen foutmelding, dus goed:** een script dat draait, voelt als een script dat klopt. Maar de API geeft zonder fout gewoon de eerste 1.000 rijen. Nergens staat dat er meer was.",
+    "",
+    "**Weinig pagina's met klikken:** dat kan bij een grote webshop best. Maar dan kom je op een toevallig aantal uit, niet op precies 1.000. Een rond getal wijst op een grens in het verzoek.",
+    "**Te weinig rechten:** zonder toegang tot de property weigert de API het verzoek met een foutmelding. Rechten bepalen niet hoeveel rijen je terugkrijgt."
+  ],
+  "kort": "Vergelijk het met een webshop die 20 producten per pagina toont. Zie je er precies 20, dan weet je nog niet of dat alles is. Je moet doorklikken naar pagina 2. De API werkt net zo: hij geeft per verzoek een vast aantal rijen. Wie niet doorvraagt, ziet alleen de eerste bladzijde.",
+  "begrippen": [
+    { "term": "API", "uitleg": "een vaste manier waarop een script gegevens opvraagt bij een ander systeem, hier Search Console." },
+    { "term": "rowLimit", "uitleg": "de instelling die zegt hoeveel rijen de API per verzoek teruggeeft. Standaard 1.000, maximaal 25.000." },
+    { "term": "Pagineren", "uitleg": "een lange lijst in delen ophalen: eerst het eerste blok, dan het volgende, tot er niets meer komt." }
+  ],
+  "uitleg": "**Wat de documentatie zegt:** een Search Analytics-query geeft standaard 1.000 rijen terug. Met rowLimit vraag je er maximaal 25.000 per keer. Met startRow vraag je het volgende blok op. Google raadt aan startRow telkens met 25.000 te verhogen, tot een antwoord nul rijen bevat.\n\n**Nog een grens:** per dag en per zoektype geeft de API hooguit 50.000 rijen, gesorteerd op klikken. Haal je veel gegevens op, vraag dan per dag op.\n\n**Zo test je een koppeling:**\n- let op ronde getallen zoals 1.000, 25.000 of 50.000: dat is bijna altijd een grens;\n- leg een week naast het rapport Prestaties in Search Console, met dezelfde filters;\n- vraag Claude te melden hoeveel verzoeken en rijen het script ophaalde.\n\n**Zeg het vooraf:** geef in je opdracht mee dat het script moet pagineren en hoeveel pagina's je ongeveer verwacht.",
+  "kernpunt": "Een rond aantal rijen is een grens, geen uitkomst. Laat het script doorvragen tot er niets meer komt.",
+  "toepassing": "Draai vandaag een script dat gegevens uit een API haalt en kijk naar het aantal rijen. Is dat een rond getal, vraag Claude dan of het script pagineert.",
+  "bron": {
+    "titel": "Search Analytics: query | Search Console API | Google for Developers",
+    "url": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query"
+  }
+}

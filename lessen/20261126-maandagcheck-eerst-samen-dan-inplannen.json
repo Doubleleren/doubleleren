@@ -12,7 +12,7 @@
     "soort": "meerkeuze",
     "vraag": "Wat is de beste eerste stap?",
     "opties": [
-      "In een sessie je stappen uitleggen, Claude er een script van laten maken en de uitkomst naast je lijst van vorige week leggen.",
+      "Eerst in een sessie je stappen uitleggen en het script naast je eigen lijst leggen, want dan weet je zeker dat het klopt.",
       "Meteen een geplande taak maken met 'controleer Merchant Center', want Claude weet zelf wel welke stappen daarvoor nodig zijn.",
       "Elke maandag de export in Claude plakken en om de lijst vragen, want dan hoef je geen script te laten bouwen of te onderhouden.",
       "Claude vragen het hele Merchant Center-account te koppelen, want met meer gegevens maakt het vanzelf een betere rapportage."
@@ -38,5 +38,7 @@
   "bron": {
     "titel": "Common workflows | Claude Code Docs",
     "url": "https://code.claude.com/docs/en/common-workflows"
-  }
+  },
+  "herzien": "2026-11-27",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

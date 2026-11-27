@@ -32,11 +32,13 @@
     { "term": ".env-bestand", "uitleg": "een bestand met geheime instellingen, zoals API-sleutels, dat niet in de repository hoort." },
     { "term": "Deny-regel", "uitleg": "een instelling die Claude Code verbiedt iets te doen, bijvoorbeeld een bestand lezen. Claude Code houdt zich daar zelf aan, wat Claude ook wil." }
   ],
-  "uitleg": "De documentatie van Claude Code maakt onderscheid tussen twee soorten instructies:\n- **Niet afgedwongen:** je opdracht, CLAUDE.md en skills. Claude leest ze en volgt ze bijna altijd, maar beslist zelf.\n- **Afgedwongen:** hooks, deny-regels en beheerde instellingen. Claude Code voert die altijd uit.\n\nEen deny-regel staat in `.claude/settings.json`, onder permissions, bijvoorbeeld `\"deny\": [\"Read(./.env)\"]`. Die geldt in elke permissiestand, ook in de stand waarin Claude zonder vragen doorwerkt. Hij blokkeert het lezen via de leestool en ook via een commando als `cat .env`.\n\nHoud het afgedwongen deel klein. Gebruik het alleen voor regels zonder uitzonderingen. Voorkeuren, zoals een schrijfstijl, blijven in CLAUDE.md.",
+  "uitleg": "De documentatie van Claude Code maakt onderscheid tussen twee soorten instructies:\n- **Niet afgedwongen:** je opdracht, CLAUDE.md en skills. Claude leest ze en volgt ze bijna altijd, maar beslist zelf.\n- **Afgedwongen:** hooks, deny-regels en beheerde instellingen. Claude Code voert die altijd uit.\n\nEen deny-regel staat in `.claude/settings.json`, onder permissions, bijvoorbeeld `\"deny\": [\"Read(./.env)\"]`. Die geldt in elke permissiestand, ook in de stand waarin Claude zonder vragen doorwerkt. Hij blokkeert het lezen via de leestool en ook via een commando als `cat .env`. Een script dat zelf bestanden opent, valt er niet onder.\n\n**En .gitignore?** Zet .env daar ook in: dan neemt Git het bestand niet mee naar GitHub. Maar .gitignore gaat alleen over Git. Claude Code kan het bestand dan nog gewoon lezen. Je hebt dus beide nodig: .gitignore houdt de sleutel uit de repository, de deny-regel houdt hem uit de sessie.\n\nHoud het afgedwongen deel klein. Gebruik het alleen voor regels zonder uitzonderingen. Voorkeuren, zoals een schrijfstijl, blijven in CLAUDE.md.",
   "kernpunt": "Moet iets echt nooit gebeuren, zet het dan in een deny-regel of hook. CLAUDE.md is voor richtlijnen.",
   "toepassing": "Kijk vandaag in een eigen project of `.claude/settings.json` een deny-regel voor .env heeft. Zo niet, laat Claude Code hem toevoegen en test hem door te vragen wat er in .env staat.",
   "bron": {
     "titel": "Best practices for Claude Code | Claude Code Docs",
     "url": "https://code.claude.com/docs/en/best-practices"
-  }
+  },
+  "herzien": "2026-11-27",
+  "wijziging": "Uitleg aangevuld: .gitignore houdt .env uit GitHub maar blokkeert het lezen door Claude niet; je hebt beide nodig."
 }

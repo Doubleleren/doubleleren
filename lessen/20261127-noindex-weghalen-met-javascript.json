@@ -1,0 +1,47 @@
+{
+  "id": "20261127-noindex-weghalen-met-javascript",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "JavaScript: een noindex die pas in de browser verdwijnt",
+  "matrix": ["5.3.3", "1.3.1"],
+  "cel": "leadgen",
+  "titel": "Vijf nieuwe vestigingspagina's, en na zes weken staat er geen in Google",
+  "intro": "Een fysiotherapiepraktijk opende vijf nieuwe vestigingen. De developer bouwde de vestigingspagina's zo: de HTML bevat standaard een noindex, en een script haalt die weg zodra de openingstijden uit het systeem zijn geladen. In de browser staat er daarna geen noindex meer. Na zes weken staat geen enkele vestigingspagina in Google.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de meest waarschijnlijke oorzaak?",
+    "opties": [
+      "Google voert geen JavaScript uit, dus het ziet de openingstijden en de rest van de pagina helemaal niet.",
+      "Google ziet de noindex in de eerste HTML en kan dan het renderen overslaan, dus het script draait nooit.",
+      "Google heeft in zes weken te weinig tijd gehad, dus nieuwe pagina's van een kleine site staan er nog niet in.",
+      "Google wantrouwt pagina's waarvan de tags veranderen, dus het straft de vestigingspagina's tijdelijk af."
+    ],
+    "juist": 1
+  },
+  "kern": "Staat er een noindex in de HTML die de server stuurt, dan kan Google stoppen voordat het JavaScript uitvoert. Het script dat de noindex weghaalt, komt dan niet aan de beurt.",
+  "afleiders": [
+    "**Geen JavaScript:** dat was vroeger een zorg. Maar Google rendert pagina's met JavaScript wel, zolang er geen noindex of foutcode in de weg zit.",
+    "",
+    "**Te weinig tijd:** nieuwe pagina's hebben soms even nodig. Maar zes weken zonder één vestiging is lang, en de noindex verklaart het al.",
+    "**Straf voor veranderende tags:** zo'n straf bestaat niet. Google kan tags die JavaScript toevoegt of aanpast gewoon lezen, als het de pagina rendert."
+  ],
+  "kort": "Denk aan een winkel met een bordje 'Gesloten' op de deur. Binnen hangt een briefje: 'Zodra de koffie klaar is, halen we het bordje weg.' Een voorbijganger leest alleen het bordje op de deur en loopt door. Google doet hetzelfde. Ziet het meteen een noindex, dan kan het stoppen voordat het de scripts draait die het bordje weghalen.",
+  "begrippen": [
+    { "term": "noindex", "uitleg": "een tag die tegen zoekmachines zegt: neem deze pagina niet op in de zoekresultaten." },
+    { "term": "Renderen", "uitleg": "de pagina opbouwen zoals een browser dat doet, inclusief het uitvoeren van JavaScript." },
+    { "term": "Paginabron", "uitleg": "de HTML zoals de server hem stuurt, vóór er scripts hebben gedraaid. In Chrome open je die met Ctrl+U." }
+  ],
+  "uitleg": "Google verwerkt JavaScript-pagina's in drie stappen: crawlen, renderen en indexeren. Eerst leest Google de HTML die de server stuurt. Daarna kan de pagina in de wachtrij voor renderen, waar het JavaScript draait.\n\nGoogle schrijft: staat er in de oorspronkelijke HTML een noindex, dan kan Google het renderen en het JavaScript overslaan. Een script dat de noindex weghaalt of verandert, werkt dan mogelijk niet. Wil je dat een pagina geïndexeerd wordt, zet dan geen noindex in de oorspronkelijke HTML.\n\nAndersom mag wel: met JavaScript een noindex toevoegen, bijvoorbeeld als een API geen inhoud teruggeeft.\n\n**Zo controleer je het**\n- Bekijk de paginabron, niet het venster Elements in DevTools. Staat daar de noindex?\n- Gebruik de URL-inspectie in Search Console. Die meldt het als een noindex indexering tegenhoudt.\n- Vraag de developer de noindex alleen vanaf de server te zetten, op pagina's die echt nog niet klaar zijn.",
+  "kernpunt": "Moet een pagina in Google, zorg dan dat de HTML van de server geen noindex bevat. Vertrouw niet op een script dat hem later weghaalt.",
+  "toepassing": "Open vandaag bij één klant de paginabron (Ctrl+U) van een nieuwe pagina en zoek op 'noindex'. Vergelijk dat met wat je in DevTools onder Elements ziet.",
+  "bron": {
+    "titel": "Understand JavaScript SEO Basics | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+  },
+  "video": {
+    "titel": "Essential JavaScript SEO tips - JavaScript SEO",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=nwGY-9lwTF4"
+  }
+}

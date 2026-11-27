@@ -1,0 +1,42 @@
+{
+  "id": "20261127-verzonnen-api-veld-documentatie-meegeven",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Waar AI voorspelbaar de mist in gaat: minder bekende systemen",
+  "matrix": ["coderen-met-ai:1.1.4"],
+  "cel": "ecom",
+  "titel": "Claude gebruikte vol vertrouwen een veld dat niet bestaat",
+  "intro": "Een webshop draait op een klein Nederlands webshopplatform. Je laat Claude Code een script schrijven dat de voorraad ophaalt via de API van dat platform. Het script geeft een fout: het veld 'stock_level' bestaat niet. Claude had dat veld zonder twijfel gebruikt.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat is de beste volgende stap?",
+    "opties": [
+      "Claude vragen of het zeker weet dat het veld bestaat, want dan controleert het zijn eigen antwoord nog een keer.",
+      "Overstappen op een groter model, want een slimmer model kent de velden van elke API wel uit zijn hoofd.",
+      "Het script in een nieuwe sessie laten schrijven, want een frisse sessie maakt deze fout meestal niet nog eens.",
+      "De actuele API-documentatie van het platform meegeven, want over een minder bekend systeem weet Claude weinig."
+    ],
+    "juist": 3
+  },
+  "kern": "Over minder bekende of nieuwe systemen weet Claude weinig. Het vult de gaten dan op met iets wat logisch klinkt. Geef het daarom de echte bron.",
+  "afleiders": [
+    "**Vragen of het zeker is:** dat lijkt een controle. Maar Claude krijgt geen nieuwe informatie. Het antwoord komt uit dezelfde kennis, en die mist hier juist.",
+    "**Groter model:** een sterker model helpt bij veel taken. Maar ook dat kent de velden van een klein platform niet uit zijn hoofd. Wat nauwelijks in de trainingsdata stond, kent geen enkel model goed.",
+    "**Nieuwe sessie:** een frisse start helpt als een gesprek vastloopt. Maar de nieuwe sessie weet net zo weinig over dit platform. Grote kans dat het weer een veld verzint.",
+    ""
+  ],
+  "kort": "Vergelijk het met een ervaren collega die alle bekende webshopsystemen kent. Vraag je naar een klein systeem, dan gaat hij redeneren: 'dat zal wel net zo heten als bij de rest.' Dat klinkt logisch, maar het klopt niet altijd. Geef je hem de handleiding, dan zoekt hij het gewoon op. Bij Claude werkt het net zo.",
+  "begrippen": [
+    { "term": "API", "uitleg": "een vaste manier waarop een script gegevens opvraagt bij een ander systeem, zoals een webshopplatform." },
+    { "term": "Veld", "uitleg": "één gegeven in de API met een vaste naam, zoals de voorraad of de prijs." },
+    { "term": "Trainingsdata", "uitleg": "de teksten waarvan het model heeft geleerd. Wat daar weinig in stond, kent het slecht." }
+  ],
+  "uitleg": "**Wat de cursus zegt:** een taalmodel schrijft zijn antwoord stukje voor stukje, op basis van wat waarschijnlijk volgt. Bij veelvoorkomende onderwerpen gaat dat goed. Bij zeldzame, recente of minder bekende onderwerpen vult het gaten op met iets wat aannemelijk klinkt. Dan helpen zoeken op het web, documentatie of tools.\n\n**Waar je dit herkent:**\n- API's van kleinere platforms, of een nieuwe versie van een API;\n- interne systemen van een klant;\n- recente wijzigingen, zoals een nieuwe naam voor een rapport.\n\n**Wat werkt:**\n- geef de link naar de documentatie, of plak het deel dat ertoe doet;\n- laat Claude eerst één echt verzoek doen en de uitkomst bekijken, voordat het het hele script schrijft;\n- zet de link naar de documentatie in CLAUDE.md, dan staat hij er de volgende keer al.",
+  "kernpunt": "Werkt Claude met een systeem dat weinig mensen gebruiken, geef dan de documentatie mee voordat het code schrijft.",
+  "toepassing": "Kies vandaag een tool of API die een klant gebruikt en die niet heel bekend is. Zoek de link naar de documentatie op en zet die in de CLAUDE.md van je project.",
+  "bron": {
+    "titel": "AI capabilities and limitations | Claude Academy",
+    "url": "https://academy.claude.com/courses/ai-capabilities-and-limitations"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "20261127-dashboard-leeg-na-dubbelklik",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Een eenvoudige tool lokaal bekijken",
+  "matrix": ["coderen-met-ai:7.2.1"],
+  "cel": "ecom",
+  "titel": "Het voorraaddashboard opent, maar de tabel blijft leeg",
+  "intro": "Claude Code heeft voor een webshop in huisdierspullen een klein voorraaddashboard gemaakt: index.html en voorraad.csv, samen in één map. Je dubbelklikt op index.html. De browser toont de kop en de knoppen, maar de tabel blijft leeg. In de console van de browser staat een melding over CORS.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat doe je?",
+    "opties": [
+      "Claude een lokale webserver in de map laten starten, want via een dubbelklik mag de pagina de CSV niet lezen.",
+      "voorraad.csv openen en opslaan in Excel, want de browser kan het bestand pas lezen als het netjes is opgemaakt.",
+      "Een andere browser proberen, want de melding komt van een instelling die alleen in deze ene browser aan staat.",
+      "De pagina online zetten met GitHub Pages, want een dashboard met data werkt alleen als het op internet staat."
+    ],
+    "juist": 0
+  },
+  "kern": "Open je een pagina met een dubbelklik, dan mag het script op die pagina geen ander bestand inlezen. Via een lokale webserver mag dat wel.",
+  "afleiders": [
+    "",
+    "**Opslaan in Excel:** een rommelig bestand geeft soms een rare tabel. Maar dan zie je foute gegevens, geen lege tabel met een CORS-melding. Excel kan het bestand zelfs verknoeien.",
+    "**Andere browser:** Chrome en Firefox blokkeren dit allebei. Het is geen losse instelling, maar een vaste veiligheidsregel.",
+    "**GitHub Pages:** online werkt het wel. Maar dan staan de voorraadgegevens van de klant openbaar. Om het op je eigen laptop te bekijken, is een lokale server genoeg."
+  ],
+  "kort": "Denk aan een hotel. Met je kamerpas kom je overal in je eigen hotel, maar niet in het hotel ernaast. Een pagina die van een lokale server komt, hoort bij hetzelfde hotel als het CSV-bestand en mag het dus ophalen. Een dubbelgeklikt bestand krijgt van de browser geen hotel. Het mag dan niets anders openen.",
+  "begrippen": [
+    { "term": "Lokale webserver", "uitleg": "een klein programma op je eigen laptop dat bestanden aan de browser geeft, net als een echte website. Je opent dan een adres met localhost." },
+    { "term": "CORS", "uitleg": "de regels in de browser die bepalen welke pagina gegevens van welk adres mag ophalen." },
+    { "term": "Console", "uitleg": "een venster in de browser met meldingen voor ontwikkelaars. Je opent het met F12." }
+  ],
+  "uitleg": "**Wat MDN zegt:** browsers als Chrome en Firefox behandelen lokale bestanden standaard als een 'opaque origin': ze horen nergens bij. Een fetch() naar een ander lokaal bestand (een adres dat begint met file://) geeft dan een CORS-fout. De oplossing volgens MDN is een lokale server. Alle bestanden komen dan van localhost en horen bij elkaar.\n\n**Zo doe je het:**\n- vraag Claude: 'Start een lokale server in deze map en geef me het adres';\n- Claude gebruikt hiervoor vaak python -m http.server 8000;\n- open daarna http://localhost:8000 in je browser;\n- stop de server met Ctrl+C als je klaar bent.\n\n**Tip voor je opdracht:** zeg vooraf dat je de tool lokaal wilt bekijken. Dan regelt Claude de server meteen, of zet het de gegevens in de pagina zelf.",
+  "kernpunt": "Leest een pagina zelf een bestand in, open hem dan via een lokale server en niet met een dubbelklik.",
+  "toepassing": "Open vandaag een HTML-tool die je met Claude maakte via een lokale server. Vraag Claude om de server te starten en je het adres te geven.",
+  "bron": {
+    "titel": "Reason: CORS request not HTTP | MDN",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSRequestNotHttp"
+  }
+}

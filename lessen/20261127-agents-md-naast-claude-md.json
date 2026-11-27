@@ -1,0 +1,42 @@
+{
+  "id": "20261127-agents-md-naast-claude-md",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "Coderen met AI",
+  "onderwerp": "Claude Code en andere agents zoals Codex in één project",
+  "matrix": ["coderen-met-ai:1.1.5", "coderen-met-ai:4.1.1"],
+  "cel": "ecom",
+  "titel": "Codex volgt de afspraken in AGENTS.md, Claude ineens niet meer",
+  "intro": "Het team bouwt een tool die productteksten van een webshop controleert. Een collega werkt met Codex en zette de afspraken in AGENTS.md, zoals 'draai na elke wijziging de tests'. Jij werkt met Claude Code en voegde een eigen CLAUDE.md toe met twee regels. Sindsdien houdt Claude zich niet meer aan de afspraken uit AGENTS.md.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Hoe zorg je dat Claude en Codex dezelfde afspraken volgen?",
+    "opties": [
+      "In CLAUDE.md de zin 'lees ook AGENTS.md' zetten, want dan opent Claude dat bestand zodra het aan het werk gaat.",
+      "Bovenaan CLAUDE.md de regel @AGENTS.md zetten, want dan laadt Claude die afspraken mee en houd je één bron.",
+      "Dezelfde afspraken in AGENTS.md en in CLAUDE.md typen, want dan heeft elke agent een eigen complete kopie.",
+      "Niets doen, want Claude Code leest AGENTS.md altijd automatisch mee, ook als er een CLAUDE.md naast staat."
+    ],
+    "juist": 1
+  },
+  "kern": "Staat er een CLAUDE.md, dan leest Claude AGENTS.md standaard niet meer. Met de import @AGENTS.md houd je één bestand voor allebei.",
+  "afleiders": [
+    "**Een zin in gewone woorden:** dat lijkt hetzelfde als een import. Maar dan ziet Claude AGENTS.md alleen als het zelf besluit het bestand te openen. Dat gebeurt dus niet altijd.",
+    "",
+    "**Twee kopieën:** dat werkt op de eerste dag. Maar na een paar wijzigingen lopen de twee bestanden uit elkaar, en weet niemand meer welke versie klopt.",
+    "**Niets doen:** Claude Code kan AGENTS.md inderdaad lezen. Maar standaard alleen als er geen CLAUDE.md is. Door jouw CLAUDE.md viel AGENTS.md weg."
+  ],
+  "kort": "Vergelijk het met twee collega's die elk een eigen handboek gebruiken. Schrijf je de teamafspraken in beide handboeken, dan lopen ze na een paar maanden uit elkaar. Zet je in het ene alleen 'zie ook het andere', dan bladert niet iedereen door. Beter is één gedeeld hoofdstuk dat in beide handboeken zit ingebonden. Een import doet dat: de inhoud komt er echt bij.",
+  "begrippen": [
+    { "term": "AGENTS.md", "uitleg": "een bestand met projectafspraken dat andere codeeragents, zoals Codex, aan het begin van hun werk lezen." },
+    { "term": "CLAUDE.md", "uitleg": "het bestand met projectafspraken dat Claude Code aan het begin van elke sessie leest." },
+    { "term": "Import (@)", "uitleg": "een regel als @AGENTS.md in CLAUDE.md. Claude Code laadt de inhoud van dat bestand dan mee, alsof het er zelf in staat." }
+  ],
+  "uitleg": "**Wat de documentatie zegt:** Claude Code kan AGENTS.md lezen als projectinstructies. Standaard doet het dat alleen als er geen CLAUDE.md of CLAUDE.local.md in je map of erboven staat. Is die er wel, dan leest Claude alleen CLAUDE.md.\n\n**Je opties:**\n- **Import:** zet @AGENTS.md bovenaan CLAUDE.md, en daaronder wat alleen voor Claude geldt. Dit raadt de documentatie aan als je project ook een CLAUDE.md heeft.\n- **Instelling:** zet Project instructions in /config op claude-md-and-agents-md. Dan leest Claude beide bestanden.\n- **Geen verwijzing in woorden:** 'lees AGENTS.md' werkt alleen als Claude besluit het bestand te openen.\n\n**Claude Code en Codex** zijn allebei agents die bestanden lezen, aanpassen en commando's uitvoeren. Een verschil dat je in een gedeeld project meteen merkt, is het instructiebestand dat elk standaard leest.",
+  "kernpunt": "Werkt het team met meer agents, houd de afspraken dan in AGENTS.md en importeer dat bestand in CLAUDE.md.",
+  "toepassing": "Kijk vandaag in een teamrepository of er een AGENTS.md naast een CLAUDE.md staat. Zo ja, zet @AGENTS.md bovenaan CLAUDE.md en vraag in een nieuwe sessie welke afspraken Claude kent.",
+  "bron": {
+    "titel": "How Claude remembers your project | Claude Code Docs",
+    "url": "https://code.claude.com/docs/en/memory"
+  }
+}

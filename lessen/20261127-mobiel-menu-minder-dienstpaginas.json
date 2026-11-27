@@ -1,0 +1,47 @@
+{
+  "id": "20261127-mobiel-menu-minder-dienstpaginas",
+  "type": "basis",
+  "niveau": "basis",
+  "vakgebied": "SEO",
+  "onderwerp": "Crawlen als mobiele user-agent: links die alleen in het desktopmenu staan",
+  "matrix": ["8.2.1", "8.1.2"],
+  "cel": "leadgen",
+  "titel": "Desktopcrawl: 60 dienstpagina's. Smartphonecrawl: 38. Wat nu?",
+  "intro": "Een advocatenkantoor heeft 60 dienstpagina's, zoals 'ontslag aanvechten' en 'echtscheiding met kinderen'. Op desktop staan ze allemaal in een groot uitklapmenu. Op een telefoon toont het menu alleen de vijf rechtsgebieden. Je crawlt de site twee keer met JavaScript aan: als desktop vind je 60 dienstpagina's, als Googlebot Smartphone maar 38.",
+  "opdracht": {
+    "soort": "meerkeuze",
+    "vraag": "Wat concludeer je?",
+    "opties": [
+      "Er is niets aan de hand, want Google telt de links van de desktopversie en de mobiele versie bij elkaar op.",
+      "De mobiele crawl mist links, want een crawler ziet op een smal scherm niet alle links die in de pagina staan.",
+      "De 22 pagina's zijn voor Google lastiger te vinden, want Google kijkt naar de links in de mobiele versie.",
+      "Het menu moet op mobiel net zo uitklappen, want Google eist dat mobiel en desktop er hetzelfde uitzien."
+    ],
+    "juist": 2
+  },
+  "kern": "Google gebruikt de mobiele versie van de site. Wat alleen in het desktopmenu staat, ziet Google dus niet in de versie die telt.",
+  "afleiders": [
+    "**Links optellen:** het voelt logisch dat Google beide versies kent. Maar Google gebruikt voor de index alleen wat op de mobiele versie staat.",
+    "**Smal scherm:** een crawler leest de HTML, ook wat buiten beeld valt. Ontbreken links in de mobiele crawl, dan staan ze niet in de mobiele pagina.",
+    "",
+    "**Hetzelfde uiterlijk:** Google vraagt dezelfde inhoud, niet hetzelfde ontwerp. Een compact menu mag, als de links op mobiel ergens in de pagina staan."
+  ],
+  "kort": "Denk aan een groot gebouw. Op de kaart in de hal staan alle zestig kamers, in de folder maar vijf afdelingen. Google krijgt alleen de folder mee. De kamers die daar niet in staan, vindt het veel lastiger. Daarom crawl je een site ook zoals een telefoon hem krijgt: dan zie je wat er in de folder ontbreekt.",
+  "begrippen": [
+    { "term": "Googlebot Smartphone", "uitleg": "de crawler van Google die zich voordoet als telefoon. Met die versie bepaalt Google wat er in de zoekresultaten komt." },
+    { "term": "Mobile-first indexing", "uitleg": "Google gebruikt de mobiele versie van een pagina om die te indexeren en te ranken." },
+    { "term": "Crawlen", "uitleg": "pagina's bezoeken en lezen, en via de links daarop nieuwe pagina's vinden." }
+  ],
+  "uitleg": "Google gebruikt de mobiele versie van een pagina voor indexering en ranking, en raadt aan dat die dezelfde content heeft als de desktopversie. Inhoud die pas na een tik, veeg of klik laadt, laadt Google niet.\n\n**Zo crawl je als mobiel**\n- Zet in je crawler de user-agent op Googlebot Smartphone.\n- Zet JavaScript-rendering aan, want mobiele menu's worden vaak met scripts gebouwd.\n- Crawl ook als desktop en vergelijk het aantal pagina's en interne links per paginatype.\n\n**Wat je adviseert**\n- Zet de ontbrekende links in de mobiele HTML. Een compact menu met uitklapbare rechtsgebieden mag, als de links al in de pagina staan.\n- Of link vanaf elke rechtsgebiedpagina naar alle dienstpagina's die erbij horen.\n- Controleer losse pagina's met de URL-inspectie in Search Console. Die toont de pagina zoals Google hem rendert.\n\nEen XML-sitemap helpt Google pagina's ontdekken, maar vervangt geen interne links.",
+  "kernpunt": "Vind je bij een mobiele crawl minder pagina's dan bij een desktopcrawl, zorg dan dat die links ook in de mobiele versie staan.",
+  "toepassing": "Crawl vandaag één leadgen-klant als Googlebot Smartphone met JavaScript aan. Vergelijk het aantal gevonden dienstpagina's met het aantal in de XML-sitemap.",
+  "bron": {
+    "titel": "Mobile site and mobile-first indexing best practices | Google Search Central",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+  },
+  "video": {
+    "titel": "Mobile-First Indexing",
+    "kanaal": "Google Search Central",
+    "url": "https://www.youtube.com/watch?v=TTUzxHdx2jY"
+  }
+}

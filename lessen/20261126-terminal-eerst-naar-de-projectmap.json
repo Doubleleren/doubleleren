@@ -14,7 +14,7 @@
     "opties": [
       "Claude vragen je hele computer te doorzoeken naar feed.csv, want het kan veel sneller zoeken dan jij zelf met de hand.",
       "Het bestand naar je bureaublad slepen en het opnieuw vragen, want Claude kijkt altijd eerst op het bureaublad.",
-      "Claude afsluiten, met cd naar de map feed-controle gaan, met ls kijken of feed.csv er staat en dan claude starten.",
+      "Claude afsluiten, met cd naar de map feed-controle gaan en daar claude opnieuw starten, want het werkt vanuit de startmap.",
       "Claude Code opnieuw installeren, want het hoort elk bestand op je computer te zien en dat lukt nu kennelijk niet."
     ],
     "juist": 2
@@ -38,5 +38,7 @@
   "bron": {
     "titel": "How Claude Code works | Claude Code Docs",
     "url": "https://code.claude.com/docs/en/how-claude-code-works"
-  }
+  },
+  "herzien": "2026-11-27",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }

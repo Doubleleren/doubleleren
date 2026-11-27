@@ -15,7 +15,7 @@
       "Na de oplevering niets meer aan het script doen, want elke wijziging aan werkende code geeft weer nieuwe kansen op fouten.",
       "Claude elke maand het script opnieuw laten schrijven, zodat het altijd past bij de nieuwste versie van de export.",
       "Het contentteam vragen de lijst elke ochtend goed te lezen, zodat zij zien wanneer er iets vreemds in staat.",
-      "Een check inbouwen die waarschuwt als de lijst leeg is of een kolom ontbreekt, en afspreken wie die melding leest."
+      "Een check laten waarschuwen als de lijst leeg is of een kolom mist, zodat een vaste collega het meteen merkt."
     ],
     "juist": 3
   },
@@ -37,5 +37,7 @@
   "bron": {
     "titel": "AI Fluency for builders | Claude Academy",
     "url": "https://academy.claude.com/courses/ai-fluency-for-builders"
-  }
+  },
+  "herzien": "2026-11-27",
+  "wijziging": "Opties dezelfde vorm gegeven."
 }
