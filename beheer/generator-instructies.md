@@ -26,6 +26,7 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die
 Elke les hoort bij één vak; `matrix` gebruikt de id's van dat vak (`cro:1.3.3` voor CRO). De regelaar verdeelt de lessen over iemands vakken (gewicht 3 voor focus, 1 voor meeleren).
 - **Nieuw vak zonder scores**: de regelaar vraagt dan lessen op `basis`-niveau. Schrijf de fundamenten; de resultaten sturen het niveau daarna bij.
 - **Bronnen per vak**: elk vak heeft eigen betrouwbare bronnen. Gebruik voor een vak zonder `curriculum.md` de gangbare vakliteratuur en officiële documentatie (bijv. Google Ads-help voor SEA, Meta-hulpcentrum voor social ads, GitHub Docs voor GitHub).
+  - **SEA**: Google Ads-help (support.google.com/google-ads) en **Analytics Mania** (https://www.analyticsmania.com, door het team aangeraden) voor conversietracking, Google Tag Manager en GA4 rond advertenties.
 - Het SEO-curriculum (CRO als ongeveer een kwart, werken met Claude hooguit 1 op de 10 SEO-lessen) geldt voor de SEO-voorraad.
 
 ## Cel: de case past bij je werk
