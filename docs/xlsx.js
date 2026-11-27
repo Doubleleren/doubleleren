@@ -49,34 +49,64 @@ async function leesZip(buf, wil) {
 const xml = (t) => { const d = new DOMParser().parseFromString(t, 'application/xml'); if (d.getElementsByTagName('parsererror').length) throw new Error('Het Excel-bestand kon niet gelezen worden.'); return d; };
 const kind = (el, naam) => [...el.childNodes].find((n) => n.localName === naam);
 
-/** Rijen als Map(rijnummer -> { A: tekst, B: tekst, ... }) van het eerste werkblad. */
-export async function leesXlsx(bestand) {
+/** Werkbladen in de volgorde van de tabbladen: [{ naam, pad }]. Zonder workbook.xml: op bestandsnaam. */
+function bladenOpVolgorde(zip) {
+  const bestanden = [...zip.keys()].filter((n) => /^xl\/worksheets\/sheet\d+\.xml$/.test(n)).sort();
+  if (!zip.has('xl/workbook.xml') || !zip.has('xl/_rels/workbook.xml.rels')) return bestanden.map((pad) => ({ naam: pad, pad }));
+  const doel = new Map([...xml(zip.get('xl/_rels/workbook.xml.rels')).getElementsByTagNameNS('*', 'Relationship')]
+    .map((r) => { const t = r.getAttribute('Target') || ''; return [r.getAttribute('Id'), t.startsWith('/') ? t.slice(1) : `xl/${t}`]; }));
+  const lijst = [...xml(zip.get('xl/workbook.xml')).getElementsByTagNameNS('*', 'sheet')]
+    .map((s) => ({ naam: s.getAttribute('name') || '', pad: doel.get(s.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id') || s.getAttribute('r:id')) }))
+    .filter((b) => zip.has(b.pad));
+  return lijst.length ? lijst : bestanden.map((pad) => ({ naam: pad, pad }));
+}
+
+/**
+ * Rijen als Map(rijnummer -> { A: tekst, B: tekst, ... }) van het werkblad met de skilllijst. Heeft het bestand meer
+ * tabbladen (bijv. uitleg + een blad per persoon), dan telt alleen een blad met vaardigheden ("- ..." in kolom C);
+ * zijn dat er meer, dan het blad met de voornaam uit `naam` in de bladnaam, anders het blad met de meeste scores,
+ * anders het eerste. Spiegelbeeld van Read-DlXlsx in app/lib/skilllijst.ps1.
+ */
+export async function leesXlsx(bestand, naam = '') {
   if (bestand.size > MAX_BESTAND) throw new Error('Dit Excel-bestand is te groot (max. 10 MB).');
-  const bladen = [];
-  const zip = await leesZip(await bestand.arrayBuffer(), (n) => {
-    if (/^xl\/worksheets\/sheet\d+\.xml$/.test(n)) { bladen.push(n); return true; }
-    return n === 'xl/sharedStrings.xml';
-  });
+  const zip = await leesZip(await bestand.arrayBuffer(), (n) => /^xl\/worksheets\/sheet\d+\.xml$/.test(n)
+    || ['xl/sharedStrings.xml', 'xl/workbook.xml', 'xl/_rels/workbook.xml.rels'].includes(n));
   const gedeeld = [];
   if (zip.has('xl/sharedStrings.xml')) {
     for (const si of xml(zip.get('xl/sharedStrings.xml')).getElementsByTagNameNS('*', 'si'))
       gedeeld.push([...si.getElementsByTagNameNS('*', 't')].map((t) => t.textContent).join(''));
   }
-  bladen.sort();   // zelfde keuze als PowerShell: op naam gesorteerd, de eerste
-  if (!bladen.length) throw new Error('Geen werkblad gevonden in het Excel-bestand.');
-  const rijen = new Map();
-  for (const rij of xml(zip.get(bladen[0])).getElementsByTagNameNS('*', 'row')) {
-    const cellen = {};
-    for (const c of rij.getElementsByTagNameNS('*', 'c')) {
-      const v = kind(c, 'v'), is = kind(c, 'is');
-      if (!v && !is) continue;
-      const kol = (c.getAttribute('r') || '').replace(/\d/g, '');
-      const t = c.getAttribute('t');
-      cellen[kol] = t === 's' ? (gedeeld[Number(v.textContent)] ?? '') : t === 'inlineStr' ? (is?.textContent ?? '') : (v?.textContent ?? '');
+  const leesBlad = (pad) => {
+    const rijen = new Map();
+    for (const rij of xml(zip.get(pad)).getElementsByTagNameNS('*', 'row')) {
+      const cellen = {};
+      for (const c of rij.getElementsByTagNameNS('*', 'c')) {
+        const v = kind(c, 'v'), is = kind(c, 'is');
+        if (!v && !is) continue;
+        const kol = (c.getAttribute('r') || '').replace(/\d/g, '');
+        const t = c.getAttribute('t');
+        cellen[kol] = t === 's' ? (gedeeld[Number(v.textContent)] ?? '') : t === 'inlineStr' ? (is?.textContent ?? '') : (v?.textContent ?? '');
+      }
+      rijen.set(Number(rij.getAttribute('r')), cellen);
     }
-    rijen.set(Number(rij.getAttribute('r')), cellen);
-  }
-  return rijen;
+    return rijen;
+  };
+  const bladen = bladenOpVolgorde(zip);
+  if (!bladen.length) throw new Error('Geen werkblad gevonden in het Excel-bestand.');
+  if (bladen.length === 1) return leesBlad(bladen[0].pad);
+  const woorden = (t) => String(t).toLowerCase().match(/\p{L}+/gu) || [];
+  const voornaam = woorden(naam)[0] || '';
+  const kandidaten = bladen.map((b) => {
+    const rijen = leesBlad(b.pad); let n = 0, scores = 0;
+    for (const c of rijen.values()) {
+      if (!/^\s*[-–•]/.test(c.C || '')) continue;
+      n++; scores += ['D', 'E', 'F', 'G', 'H', 'I'].filter((k) => /^[1-5](\.0+)?$/.test(String(c[k] ?? ''))).length;
+    }
+    return { ...b, rijen, n, scores };
+  }).filter((b) => b.n);
+  if (!kandidaten.length) return leesBlad(bladen[0].pad);
+  const metNaam = voornaam.length > 1 && kandidaten.find((b) => woorden(b.naam).includes(voornaam));
+  return (metNaam || kandidaten.reduce((a, b) => (b.scores > a.scores ? b : a))).rijen;
 }
 
 const herstel = (t) => String(t).replaceAll('ici�n', 'iciën').replaceAll('be�nvl', 'beïnvl').replaceAll('ge�nd', 'geïnd').trim();
