@@ -70,7 +70,7 @@ if ($Stap -eq 'plan') {
         foreach ($r in @([IO.File]::ReadAllText($pad, [Text.Encoding]::UTF8) | ConvertFrom-Csv -Delimiter ';')) {
             if (-not $r.id) { continue }
             $id = if ($vak -eq $standaard) { $r.id } else { "${vak}:$($r.id)" }
-            $items[$id] = [pscustomobject]@{ id = $id; vak = $vak; hoofdgebied = $id -replace '^(([a-z-]+:)?\d+).*$', '$1'; naam = $r.hoofdgebied; onderwerp = $r.onderwerp; omschrijving = (("$($r.context) $($r.vaardigheid)").Trim() -replace '\s+', ' '); notitie = $r.notitie }
+            $items[$id] = [pscustomobject]@{ id = $id; vak = $vak; hoofdgebied = $id -replace '^(([a-z-]+:)?\d+).*$', '$1'; naam = $r.hoofdgebied; onderwerp = $r.onderwerp; omschrijving = (("$($r.context) $($r.vaardigheid)").Trim() -replace '\s+', ' '); notitie = $r.notitie; uitleg = $r.uitleg }
             $perVak[$vak] += $id
         }
     }
@@ -192,7 +192,7 @@ if ($Stap -eq 'plan') {
             foreach ($x in $wacht) { if ($x.reden -eq 'cel') { $celBepalen[$x.les] = $true } else { $herzien[$x.les] = $(if ($lesVan[$x.les].juistLangst) { 'juistLangst' } else { 'vormAfwijkend' }) } }
             if (-not $wacht.Count) {
                 $k = "$($pl.vak)|$($pl.vaardigheid)|$($pl.niveau)|$(if ($pl.cel) { $pl.cel } else { 'alle' })"
-                if (-not $bestel.Contains($k)) { $it = $items[$pl.vaardigheid]; $bestel[$k] = [ordered]@{ vak = $pl.vak; vaardigheid = $pl.vaardigheid; hoofdgebied = $it.naam; onderwerp = $it.onderwerp; omschrijving = $it.omschrijving; notitie = $it.notitie; type = $pl.type; niveau = $pl.niveau; cel = $(if ($pl.cel) { $pl.cel } else { 'alle' }); aantal = 0 } }
+                if (-not $bestel.Contains($k)) { $it = $items[$pl.vaardigheid]; $bestel[$k] = [ordered]@{ vak = $pl.vak; vaardigheid = $pl.vaardigheid; hoofdgebied = $it.naam; onderwerp = $it.onderwerp; omschrijving = $it.omschrijving; notitie = $it.notitie; uitleg = $it.uitleg; type = $pl.type; niveau = $pl.niveau; cel = $(if ($pl.cel) { $pl.cel } else { 'alle' }); aantal = 0 } }
                 $bestel[$k].aantal++
             }
         }

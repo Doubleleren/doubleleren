@@ -20,6 +20,8 @@ const REACTIES = { meer: 'Hier wil ik meer over', makkelijk: 'Te makkelijk', 'ni
 const chip = (r) => (RES[r] ? `<span class="chip ${r}"><i></i>${RES[r]}</span>` : '');
 const SIG = { bevestigd: 'Bevestigd', overschat: 'Mogelijk overschat', onderschat: 'Mogelijk onderschat', groeit: 'Groeit' };
 const sigChip = (s) => (SIG[s] ? `<span class="chip ${s}">${SIG[s]}</span>` : '');
+// Uitleg bij een vaardigheid uit de skilllijst (kolom uitleg, delen gescheiden door ' | '), dichtgeklapt
+const skillUitleg = (i) => (i.uitleg ? `<details class="skill-uitleg"><summary>Wat houdt dit in?</summary><ul>${i.uitleg.split(' | ').map((d) => `<li>${esc(d)}</li>`).join('')}</ul></details>` : '');
 const veiligeLink = (u) => { try { const x = new URL(String(u)); return x.protocol === 'https:' && String(u).length <= 500 ? x.href : null; } catch { return null; } };
 const UITNODIGING = /^(lid-[0-9a-f]{6}):([A-Za-z0-9_]{20,255})$/;
 
@@ -640,7 +642,7 @@ function toonSkilllijst() {
     const nuG = gem(its.map((i) => laatste(i.scores)?.s)), startG = gem(its.map((i) => eerste(i.scores)));
     return `<details class="mx"><summary><span class="mx-naam"><i class="pijl"></i>${esc(o)}</span><span class="balk" data-tip="${esc(`${o}: ${komma(nuG)}${maanden.length > 1 ? ` (eerste meting ${komma(startG)})` : ''}`)}"><i style="width:${((nuG / 5) * 100).toFixed(1)}%"></i>${maanden.length > 1 ? `<b style="left:calc(${((startG / 5) * 100).toFixed(1)}% - 1px)"></b>` : ''}</span><span class="mx-score num">${komma(nuG)}</span></summary><div class="mx-items">${its.map((i) => {
       const hist = Object.keys(i.scores).sort().map((m) => Number(i.scores[m])).join(' → '); const bi = b.get(i.id);
-      return `<div class="mx-item"><span class="id num">${esc(i.nr || i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
+      return `<div class="mx-item"><span class="id num">${esc(i.nr || i.id)}</span><span>${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${bi ? ` <span class="tag">${Number(bi.n)} les${bi.n === 1 ? '' : 'sen'}</span>` : ''}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}${skillUitleg(i)}</span><span class="num" style="font-weight:600">${esc(hist || '–')}</span></div>`;
     }).join('')}</div></details>`;
   }).join('')}</div>`).join('');
   $('matrix').innerHTML = nogDoen + (klaar.length > 1
@@ -673,7 +675,7 @@ function toonSkillFormulier(vak, modus) {
     let context = '';
     const rijen = its.map((i) => {
       const kop = i.context && i.context !== context ? `<div class="mx-context">${esc(i.context)}</div>` : ''; context = i.context;
-      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.nr || i.id)}</span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" value="${nuScore(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
+      return `${kop}<div class="mx-rij"><span class="id num">${esc(i.nr || i.id)}</span><span><label for="s-${esc(i.id)}">${esc(i.vaardigheid)} ${sigChip(sigPer.get(i.id))}${i.notitie ? `<span class="noot">${esc(i.notitie)}</span>` : ''}</label>${skillUitleg(i)}</span><input class="score-veld num" id="s-${esc(i.id)}" data-id="${esc(i.id)}" value="${nuScore(i.id)}" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${esc(`Score 1 tot 5 voor ${i.id} ${i.vaardigheid}`)}"></div>`;
     }).join('');
     return `<div class="mx-onderwerp"><h4>${esc(o)}</h4>${rijen}</div>`;
   }).join('')}</div>`).join('');

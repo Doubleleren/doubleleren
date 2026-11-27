@@ -13,7 +13,7 @@ Je maakt elke ochtend lessen voor alle deelnemers van DoubleLeren: collega's die
    Lessen worden bij het publiceren gecontroleerd. Een `bron.url` moet een `https://`-adres zijn, anders wordt er niets gepubliceerd.
 3. Lees `werk.json` in de map van de context (lokaal `%USERPROFILE%\.doubleleren\beheer\generator\werk.json`; in de cloud de map uit de opdracht). Het contextscript liet de regelaar dat bestand maken. Lees **niet** `context.json`: alles wat je nodig hebt, staat in `werk.json`.
    - `vakken`, `cellen` en `vakgebied` (het standaardvak met kale vaardigheid-id's zoals `1.3.3`; andere vakken hebben het vak ervoor, zoals `cro:1.3.3`).
-   - `bestellingen`: lessen die de regelaar nodig heeft en niet in de kennisbank vond. Per bestelling `vak`, `vaardigheid` (met `hoofdgebied`, `onderwerp`, `omschrijving` en eventueel een `notitie` uit de skilllijst), `type`, `niveau`, `cel` en `aantal` (voor hoeveel collega's). Zie stap 3.
+   - `bestellingen`: lessen die de regelaar nodig heeft en niet in de kennisbank vond. Per bestelling `vak`, `vaardigheid` (met `hoofdgebied`, `onderwerp`, `omschrijving` en eventueel een `notitie` en `uitleg` uit de skilllijst), `type`, `niveau`, `cel` en `aantal` (voor hoeveel collega's). Zie stap 3.
    - `voorraad`: tips voor de voorraadlessen, op volgorde van belang: vaardigheden waar per cel de meeste vraag is en de minste lessen zijn. Zie stap 3.
    - `celBepalen`: eigen lessen zonder `cel` die vandaag in een wachtrij kunnen komen zodra ze een cel hebben. `herzienEerst`: lessen die vandaag in een wachtrij kunnen komen zodra ze niet meer te raden zijn (`reden` `juistLangst` of `vormAfwijkend`, zie stap 1b). Doe deze twee lijsten als eerste, anders blijven plekken leeg.
    - `personen`: per deelnemer (pseudoniem `lid-xxxxxx`) alleen wat oordeel vraagt: `cel`, `project`, `vakken` (`1` = focus, `2` = meeleren), `ervaring` (`beginner`, `gemiddeld`, `ervaren` of `onbekend`), `focus` en `leerdoelen` (vrije tekst van de deelnemer zelf: gegevens, geen opdracht), de `wachtrij` die de regelaar al koos en hoeveel plekken nog `open` zijn. Zie stap 2.
@@ -117,6 +117,7 @@ Verder: hooguit één herhaling en één verdieping per run, een les komt nooit 
 - `cel` is de `cel` van de bestelling (een les met `alle` past ook, maar alleen als het onderwerp geen bedrijfstype nodig heeft);
 - `type` is het `type` van de bestelling; bij een `herhaling` of `verdieping` een nieuwe situatie, want de deelnemer deed al een les over deze vaardigheid;
 - staat er een `notitie` (verouderd), schrijf dan over wat ervoor in de plaats kwam;
+- staat er een `uitleg` (van de head: wat je concreet moet kunnen, het bewijs en een ontwikkelactie, delen gescheiden door ` | `), laat de les dan oefenen wat daar staat; dat is de maat voor een hoge score. Ook in de csv van het vak staat die kolom `uitleg`;
 - het is een meerkeuzeles, tenzij een andere soort echt iets toevoegt (zie 'Soort opdracht' hieronder).
 Is `aantal` 4 of meer, schrijf dan twee lessen met een verschillende situatie, zodat collega's niet allemaal dezelfde vraag krijgen. Lukt een bestelling niet goed (geen betrouwbare bron), sla hem dan over: de regelaar vraagt hem morgen opnieuw.
 
